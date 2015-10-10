@@ -8,7 +8,7 @@ Bienvenue, ami(e) développeur(euse)!
 :authors: Morgan
 :summary: Bienvenue, ami(e) développeur(euse)!
 
-Tu trouveras sur sur blog tout un tas de trucs concernant le développement en général.
+Tu trouveras sur ce blog tout un tas de trucs concernant le développement en général.
 
 J'y aborderai principalement tout ce qui touche de près ou de loin à l'univers de `python <https://www.python.org/>`_ et `django <https://www.djangoproject.com/>`_, en présentant des outils et librairies sympas et des trucs et astuces.
 

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="http://dotmobo.github.io/pelican.html" />
+
+    <title>  DotMobo &mdash; Générer son site statique grâce à Pelican
+</title>
+
+
+
+      <link type="application/atom+xml" rel="alternate" href="/feeds/all.atom.xml"  title="DotMobo Atom Feed">
+
+    <link rel="stylesheet" href="http://dotmobo.github.io/theme/css/style.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <meta name="author" content="Morgan">
+    <meta name="description" content="Générer son site statique grâce à Pelican">
+  <meta name="tags" contents="pelican, python, jekyll, blog, github, ">
+</head>
+
+<body>
+<header class="header">
+  <div class="container">
+      <div class="header-image pull-left">
+        <a class="nodec" href="http://dotmobo.github.io"><img src=https://pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg></a>
+      </div>
+    <div class="header-inner">
+      <h1 class="header-name">
+        <a class="nodec" href="http://dotmobo.github.io">DotMobo</a>
+      </h1>
+      <h3 class="header-text">Blog d'un Pythoniste Djangonaute</h3>
+      <ul class="header-menu list-inline">
+          <li><a class="nodec" href="http://dotmobo.github.io/categories.html">Cat&eacute;gories</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/tags.html">Tags</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/archives.html">Archives</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec icon-github" href="https://github.com/dotmobo"></a></li>
+          <li><a class="nodec icon-twitter" href="https://twitter.com/dotmobo"></a></li>
+          <li><a class="nodec icon-rss" href="/feeds/all.atom.xml"></a></li>
+      </ul>
+    </div>
+  </div>
+</header> <!-- /.header -->  <div class="container">
+  <div class="post full-post">
+    <h1 class="post-title">
+      <a href="/pelican.html" title="Permalink to Générer son site statique grâce à Pelican">Générer son site statique grâce à Pelican</a>
+    </h1>
+    <ul class="list-inline">
+      <li class="post-date">
+        <a class="text-muted" href="/pelican.html" title="2015-10-11T00:00:00+02:00">dim. 11 octobre 2015</a>
+      </li>
+      <li class="muted">&middot;</li>
+      <li class="post-category">
+        <a href="http://dotmobo.github.io/category/python.html">Python</a>
+      </li>
+        <li class="muted">&middot;</li>
+        <li>
+            <a href="/tag/pelican.html">pelican</a>,             <a href="/tag/python.html">python</a>,             <a href="/tag/jekyll.html">jekyll</a>,             <a href="/tag/blog.html">blog</a>,             <a href="/tag/github.html">github</a>        </li>
+    </ul>
+    <div class="post-content">
+      <p><a class="reference external" href="http://blog.getpelican.com/">Pelican</a> est un outil vraiment chouette pour
+générer son blog en statique afin de le publier via
+<a class="reference external" href="https://pages.github.com://pages.github.com/">Github Pages</a> par exemple.</p>
+<p>C'est une alternative Python à <a class="reference external" href="https://jekyllrb.com/">Jekyll</a> (qui lui est
+écrit en Ruby), permettant de rédiger ces articles en Markdown. La
+principale force de Pelican, c'est de proposer également le <a class="reference external" href="http://sphinx-doc.org/rest.html">reStructuredText</a> comme format d'écriture, ce qui rendra
+heureux tous les amoureux de Sphinx.</p>
+<p>Pour l'installer, rien de plus simple, l'outil est dispo sur <a class="reference external" href="https://pypi.python.org/pypi">Pypi</a>:</p>
+<div class="highlight"><pre>pip install pelican
+</pre></div>
+<p>Il propose une commande de génération automatique de projet :</p>
+<div class="highlight"><pre>mkdir ~/dev/myblog <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ~/dev/myblog <span class="o">&amp;&amp;</span> pelican-quickstart
+</pre></div>
+<p>N'oublie pas de dire oui aux deux questions concernant Github Pages,
+et ... c'est tout! Pour proposer des articles, il te suffit de les créer en .rst
+dans le dossier <em>content</em>:</p>
+<div class="highlight"><pre>vi ~/dev/myblog/content/mon-article.rst
+</pre></div>
+<p>Celui-ci devrait ressembler à ça:</p>
+<div class="highlight"><pre><span class="gh">Mon article</span>
+<span class="gh">###########</span>
+
+<span class="nc">:date:</span> <span class="nf">2015-10-11 10:20</span>
+<span class="nc">:modified:</span> <span class="nf">2015-11-04 18:40</span>
+<span class="nc">:tags:</span> <span class="nf">python,django</span>
+<span class="nc">:category:</span> <span class="nf">Développement</span>
+<span class="nc">:slug:</span> <span class="nf">mon-article</span>
+<span class="nc">:authors:</span> <span class="nf">Toi</span>
+<span class="nc">:summary:</span> <span class="nf">Mon article concerne blablabla</span>
+
+blablabla ...
+</pre></div>
+<p>Jetons un coup d'oeil aux deux fichiers de configuration.</p>
+<p>Le premier, <em>pelicanconf.py</em> , est utilisé pour la configuration générale du site:</p>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*- #</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="n">AUTHOR</span> <span class="o">=</span> <span class="s">&#39;myusername&#39;</span>
+<span class="n">SITENAME</span> <span class="o">=</span> <span class="s">&quot;myblog&quot;</span>
+<span class="n">SITEURL</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+
+<span class="n">PATH</span> <span class="o">=</span> <span class="s">&#39;content&#39;</span>
+
+<span class="n">TIMEZONE</span> <span class="o">=</span> <span class="s">&#39;Europe/Paris&#39;</span>
+
+<span class="n">DEFAULT_LANG</span> <span class="o">=</span> <span class="s">&#39;fr&#39;</span>
+
+<span class="c"># Feed generation is usually not desired when developing</span>
+<span class="n">FEED_ALL_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">CATEGORY_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">TRANSLATION_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">AUTHOR_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">AUTHOR_FEED_RSS</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="c"># Blogroll</span>
+<span class="n">LINKS</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="c"># Social widget</span>
+<span class="n">SOCIAL</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="n">DEFAULT_PAGINATION</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c"># Uncomment following line if you want document-relative URLs when developing</span>
+<span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="c"># Theme</span>
+<span class="c"># THEME = &quot;simple&quot;</span>
+</pre></div>
+<p>Tu remarqueras une partie <em>Theme</em>, on y reviendra plus tard.
+Le reste est relativement compréhensible pour se passer d'explication.</p>
+<p>Le second, <em>publishconf.py</em> , rajoute les spécificités pour la production:</p>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*- #</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="c"># This file is only used if you use `make publish` or</span>
+<span class="c"># explicitly specify it as your config file.</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">curdir</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pelicanconf</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">SITEURL</span> <span class="o">=</span> <span class="s">&#39;http://myusername.github.io&#39;</span>
+<span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">FEED_ATOM</span> <span class="o">=</span> <span class="s">&#39;feeds/all.atom.xml&#39;</span>
+
+<span class="n">DELETE_OUTPUT_DIRECTORY</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="c"># Following items are often useful when publishing</span>
+
+<span class="c">#DISQUS_SITENAME = &quot;&quot;</span>
+<span class="c">#GOOGLE_ANALYTICS = &quot;&quot;</span>
+</pre></div>
+<p>Il est important ici de définir <strong>SITEURL</strong> et <strong>FEED_ATOM</strong>.
+En effet, en mode dev, on n'a pas besoin de générer les flux atom et on utilise
+des urls relatives.</p>
+<p>Si besoin, tu noteras une compatibilité avec Google Analytics.
+Et concernant Disqus, on y reviendra également plus tard.</p>
+<p>Pelican propose alors tout un tas de commandes pour générer et déployer ton site.
+Au choix, on va pouvoir utiliser <a class="reference external" href="http://www.fabfile.org">Fabric</a>
+(malheureusement non disponible en Python 3) ou <strong>make</strong>.</p>
+<p>Pour générer ton site en mode dev (utilise <em>pelicanconf.py</em>):</p>
+<div class="highlight"><pre>make html
+</pre></div>
+<p>Utilisation d'un watcher pour automatiser la re-génération de ton site à chaque modification:</p>
+<div class="highlight"><pre>make regenerate
+</pre></div>
+<p>Pour servir ton site en mode dev sur <a class="reference external" href="http://localhost:8000/">http://localhost:8000/</a>:</p>
+<div class="highlight"><pre>make serve
+</pre></div>
+<p>Pour générer ton site pour la production (utilise <em>publishconf.py</em>):</p>
+<div class="highlight"><pre>make publish
+</pre></div>
+<p>Enfin, pour le diffuser sur le master de ton dépôt Github Pages:</p>
+<div class="highlight"><pre>make github
+</pre></div>
+<p>Concernant le dépôt Github, je te recommande de commiter le code Pelican sur une
+branche à part, et de garder master pour la diffusion du site.</p>
+<p>Par défaut, le design peut sembler austère.
+C'est pourquoi on va installer un <a class="reference external" href="http://pelicanthemes.com/">thème</a> un peu
+plus moderne utilisant <a class="reference external" href="http://getbootstrap.com/">Bootstrap</a>, comme
+<a class="reference external" href="https://github.com/nairobilug/pelican-alchemy">alchemy</a> par exemple.</p>
+<p>La plupart des thèmes disponibles sont sous licence MIT, donc n'hésite pas à les
+forker pour y apporter des spécificités.</p>
+<p>Pour les habitués de <a class="reference external" href="https://www.djangoproject.com/">django</a> et
+<a class="reference external" href="http://flask.pocoo.org/">flask</a>, Pelican utilise <a class="reference external" href="http://jinja.pocoo.org/">jinja2</a>
+comme moteur de template. Et ça c'est carrément cool.</p>
+<p>On installe donc alchemy:</p>
+<div class="highlight"><pre>git clone git@github.com:nairobilug/pelican-alchemy.git ~/dev/pelican-alchemy
+pelican-themes -i ~/dev/pelican-alchemy/alchemy
+</pre></div>
+<p>Et on définit la variable <strong>THEME</strong> de notre fichier de conf <em>pelicanconf.py</em>:</p>
+<div class="highlight"><pre><span class="n">THEME</span> <span class="o">=</span> <span class="s">&quot;alchemy&quot;</span>
+<span class="n">SITE_SUBTEXT</span> <span class="o">=</span> <span class="s">&quot;Blabla&quot;</span>
+<span class="n">PROFILE_IMAGE</span> <span class="o">=</span> <span class="s">&quot;profil.jpeg&quot;</span>
+<span class="n">GITHUB_ADDRESS</span> <span class="o">=</span> <span class="s">&quot;https://github.com/myusername&quot;</span>
+<span class="n">TWITTER_ADDRESS</span> <span class="o">=</span> <span class="s">&quot;https://twitter.com/myusername&quot;</span>
+<span class="n">EXTRA_FAVICON</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">LICENSE_NAME</span> <span class="o">=</span> <span class="s">&quot;MIT&quot;</span>
+<span class="n">LICENSE_URL</span> <span class="o">=</span> <span class="s">&quot;https://opensource.org/licenses/MIT&quot;</span>
+<span class="n">MENU_ITEMS</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">META_DESCRIPTION</span> <span class="o">=</span> <span class="s">&quot;Blabla</span>
+<span class="n">PAGES_ON_MENU</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">CATEGORIES_ON_MENU</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">TAGS_ON_MENU</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">ARCHIVES_ON_MENU</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">SHOW_ARTICLE_AUTHOR</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+<p>Concernant les paramètres optionnels, je t'invite à regarder la doc d'alchemy.</p>
+<p>&quot;Ok, avoir un blog statique, c'est bien sympa, mais comment je fais pour avoir
+des commentaires? Il me faut bien une partie dynamique non ?&quot;. Pas de panique,
+<a class="reference external" href="https://disqus.com">Disqus</a> est là pour ça.</p>
+<p>Il te suffit de te créer un compte sur Disqus et d'y enregistrer ton site en
+utilisant le paramétrage <strong>universal-embed-code</strong>. À partir de la, tu vas pouvoir
+le configurer via <em>http://&lt;username&gt;.disqus.com/admin/settings</em>.</p>
+<p>Enfin, tu l'actives via ton fichier de conf de prod <em>publishconf.py/</em>:</p>
+<div class="highlight"><pre><span class="n">DISQUS_SITENAME</span> <span class="o">=</span> <span class="s">&quot;myusername&quot;</span>
+</pre></div>
+<p>Tu commites tout ça, tu publies et hop! Ton blog est complètement prêt!</p>
+
+    </div>
+  </div>
+  <hr class="separator">
+  <div class="col-md-8 col-md-offset-2">
+  <div id="disqus_thread">
+    <script>
+      var disqus_shortname = 'dotmobo';
+      (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] ||
+         document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>
+      Activez Javascript pour voir 
+      <a href="https://disqus.com/?ref_noscript=dotmobo">
+        les commentaires Disqus.
+      </a>
+    </noscript>
+    <a href="https://disqus.com" class="dsq-brlink">
+      Commentaires de blog par <span class="logo-disqus">Disqus</span>
+    </a>
+  </div>
+  </div>
+  </div>
+<footer class="footer">
+  <div class="container">
+    <p class="text-center">
+      dotmobo, <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>.
+    </p>
+    <div class="text-center">
+      G&eacute;n&eacute;r&eacute; par <a href="http://getpelican.com" target="_blank">Pelican</a> avec le th&egrave;me <a href="https://github.com/dotmobo/pelican-alchemy">alchemy</a>.
+    </div>
+  </div>
+</footer> <!-- /.footer -->
+  <script src="http://dotmobo.github.io/theme/js/jquery.min.js"></script>
+  <script src="http://dotmobo.github.io/theme/js/bootstrap.min.js"></script>
+</body> <!-- 42 -->
+
+</html>

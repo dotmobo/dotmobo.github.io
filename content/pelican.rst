@@ -8,6 +8,10 @@ Générer son site statique grâce à Pelican
 :authors: Morgan
 :summary: Générer son site statique grâce à Pelican
 
+.. image:: https://avatars0.githubusercontent.com/u/2043492?v=3&s=200
+    :alt: Pelican
+    :align: right
+
 `Pelican <http://blog.getpelican.com/>`_ est un outil vraiment chouette pour
 générer rapidement un site statique comme un blog, afin de le publier via
 `Github Pages <https://pages.github.com>`_ par exemple.
@@ -231,3 +235,6 @@ Enfin, tu l'actives via ton fichier de conf de prod *publishconf.py*:
     DISQUS_SITENAME = "myusername"
 
 Tu commites tout ça, tu publies et hop! Ton blog est complètement prêt!
+
+Et si tu veux pousser un peu plus loin l'outil, il y a énormément de
+`plugins <https://github.com/getpelican/pelican-plugins>`_ disponibles.

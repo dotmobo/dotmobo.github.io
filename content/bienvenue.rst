@@ -12,7 +12,7 @@ Tu trouveras sur ce blog tout un tas de trucs concernant le développement en g�
 
 J'y aborderai principalement tout ce qui touche de près ou de loin à l'univers de `python <https://www.python.org/>`_ et `django <https://www.djangoproject.com/>`_, en présentant des outils et librairies sympas et des trucs et astuces.
 
-Mais ça ne m'empèchera pas, de temps à autres, de lorgner du côté d'autres langages si je tombe sur d'intéressantes découvertes.
+Mais ça ne m’empêchera pas, de temps à autres, de lorgner du côté d'autres langages si je tombe sur d'intéressantes découvertes.
 
 Bonne lecture à tous.
 

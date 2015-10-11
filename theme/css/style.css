@@ -7361,3 +7361,9 @@ a:hover {
   margin-bottom: 30px;
   margin-top: 30px;
 }
+.align-left {
+    float: left;
+}
+.align-right {
+    float: right;
+}

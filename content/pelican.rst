@@ -9,11 +9,11 @@ Générer son site statique grâce à Pelican
 :summary: Générer son site statique grâce à Pelican
 
 `Pelican <http://blog.getpelican.com/>`_ est un outil vraiment chouette pour
-générer son blog en statique afin de le publier via
-`Github Pages <https://pages.github.com://pages.github.com/>`_ par exemple.
+générer rapidement un site statique comme un blog, afin de le publier via
+`Github Pages <https://pages.github.com>`_ par exemple.
 
 C'est une alternative Python à `Jekyll <https://jekyllrb.com/>`_ (qui lui est
-écrit en Ruby), permettant de rédiger ces articles en Markdown. La
+écrit en Ruby), permettant de rédiger ses articles en Markdown. La
 principale force de Pelican, c'est de proposer également le `reStructuredText
 <http://sphinx-doc.org/rest.html>`_ comme format d'écriture, ce qui rendra
 heureux tous les amoureux de Sphinx.
@@ -39,7 +39,7 @@ dans le dossier *content*:
 
     vi ~/dev/myblog/content/mon-article.rst
 
-Celui-ci devrait ressembler à ça:
+Ils devront ressembler à ça:
 
 .. code-block:: rst
 
@@ -56,7 +56,7 @@ Celui-ci devrait ressembler à ça:
 
     blablabla ...
 
-Jetons un coup d'oeil aux deux fichiers de configuration.
+Jetons maintenant un coup d'oeil aux deux fichiers de configuration.
 
 Le premier, *pelicanconf.py* , est utilisé pour la configuration générale du site:
 
@@ -145,7 +145,7 @@ Pour générer ton site en mode dev (utilise *pelicanconf.py*):
 
     make html
 
-Utilisation d'un watcher pour automatiser la re-génération de ton site à chaque modification:
+Tu peux aussi utiliser un watcher pour automatiser la génération de ton site à chaque modification:
 
 .. code-block:: bash
 
@@ -170,15 +170,18 @@ Enfin, pour le diffuser sur le master de ton dépôt Github Pages:
    make github
 
 Concernant le dépôt Github, je te recommande de commiter le code Pelican sur une
-branche à part, et de garder master pour la diffusion du site.
+branche à part, et de garder la branche *master* pour la diffusion du site.
+Ton dépôt devra s'appeler *<username>.github.io* pour être compatbile avec
+Github Pages.
 
 Par défaut, le design peut sembler austère.
+
 C'est pourquoi on va installer un `thème <http://pelicanthemes.com/>`_ un peu
 plus moderne utilisant `Bootstrap <http://getbootstrap.com/>`_, comme
 `alchemy <https://github.com/nairobilug/pelican-alchemy>`_ par exemple.
 
 La plupart des thèmes disponibles sont sous licence MIT, donc n'hésite pas à les
-forker pour y apporter des spécificités.
+forker pour y apporter tes customisations.
 
 Pour les habitués de `django <https://www.djangoproject.com/>`_ et
 `flask <http://flask.pocoo.org/>`_, Pelican utilise `jinja2 <http://jinja.pocoo.org/>`_
@@ -221,7 +224,7 @@ Il te suffit de te créer un compte sur Disqus et d'y enregistrer ton site en
 utilisant le paramétrage **universal-embed-code**. À partir de la, tu vas pouvoir
 le configurer via *http://<username>.disqus.com/admin/settings*.
 
-Enfin, tu l'actives via ton fichier de conf de prod *publishconf.py/*:
+Enfin, tu l'actives via ton fichier de conf de prod *publishconf.py*:
 
 .. code-block:: python
 

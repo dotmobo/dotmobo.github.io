@@ -6925,11 +6925,11 @@ button.close {
   /*text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 .icon-stackoverflow:before {
-  content: '\e032';
+  content: '\e801';
 }
 /* '' */
 .icon-twitter:before {
-  content: '\e801';
+  content: '\e800';
 }
 /* '' */
 .icon-facebook:before {
@@ -6937,17 +6937,20 @@ button.close {
 }
 /* '' */
 .icon-rss:before {
-  content: '\e800';
+  content: '\e803';
 }
 /* '' */
 .icon-mail-alt:before {
-  content: '\f0e0';
+  content: '\e805';
 }
 /* '' */
 .icon-github:before {
-  content: '\f113';
+  content: '\e804';
 }
 /* '' */
+.icon-gplus:before {
+  content: '\e806';
+}
 /*
 Solarized Dark (http://ethanschoonover.com/solarized)
 

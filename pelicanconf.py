@@ -46,6 +46,7 @@ CATEGORIES_ON_MENU = True
 TAGS_ON_MENU = True
 ARCHIVES_ON_MENU = True
 SHOW_ARTICLE_AUTHOR = False
+GOOGLEPLUS_ADDRESS = "https://www.google.com/+DotmoboGithubIo6"
 
 # Plugins
 PLUGIN_PATHS = ['../pelican-plugins']

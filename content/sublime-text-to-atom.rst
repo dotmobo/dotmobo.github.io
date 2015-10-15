@@ -64,7 +64,7 @@ de développer dans de bonnes conditions. Ces plugins vont être:
   virtualenv.
 * `linter <https://github.com/atom-community/linter>`_, qui permet de visualiser
   les erreurs de syntaxe `de nombreux langages <http://atomlinter.github.io/>`_.
-* `linter-pep8 <https://github.com/AtomLinter/linter-pep8>`_ comme linter python.
+* `linter-flake8 <https://github.com/AtomLinter/linter-flake8>`_ comme linter python.
   On aurait pu en utiliser un autre, comme
   `linter-pylint <https://github.com/AtomLinter/linter-pylint>`_, mais je
   le trouve trop verbeux.
@@ -109,8 +109,8 @@ commande, **apm**, qui permet d'installer des plugins sans passer par le menu
     pip install jedi
     apm install autocomplete-python
     apm install linter
-    pip install pep8
-    apm install linter-pep8
+    pip install flake8
+    apm install linter-flake8
     apm install emmet
     apm install git-plus
     apm install merge-conflicts

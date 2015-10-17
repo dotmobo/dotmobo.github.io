@@ -1,5 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>DotMobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2015-10-11T00:00:00+02:00</updated><entry><title>Générer son site statique grâce à Pelican</title><link href="http://dotmobo.github.io/pelican.html" rel="alternate"></link><updated>2015-10-11T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-10-11:pelican.html</id><summary type="html">&lt;img alt="Pelican" class="align-right" src="https://avatars0.githubusercontent.com/u/2043492?v=3&amp;amp;s=200" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>DotMobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2015-10-17T00:00:00+02:00</updated><entry><title>Passer de Sublime Text à Atom pour développer en Python</title><link href="http://dotmobo.github.io/sublime-text-to-atom.html" rel="alternate"></link><updated>2015-10-17T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-10-17:sublime-text-to-atom.html</id><summary type="html">&lt;img alt="Pelican" class="align-right" src="https://avatars0.githubusercontent.com/u/1089146?v=3&amp;amp;s=200" /&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;&lt;em&gt;&amp;quot;Sublime Text, c'est vraiment pas mal mais bon, c'est pas libre.&amp;quot;&lt;/em&gt;&lt;/div&gt;
+&lt;div class="line"&gt;&lt;em&gt;&amp;quot;Eclipse, c'est lourd, trop lourd.&amp;quot;&lt;/em&gt;&lt;/div&gt;
+&lt;div class="line"&gt;&lt;em&gt;&amp;quot;Vim, j'ai pas le temps de m'y investir.&amp;quot;&lt;/em&gt;&lt;/div&gt;
+&lt;div class="line"&gt;&lt;em&gt;&amp;quot;Emacs, j'y comprends rien.&amp;quot;&lt;/em&gt;&lt;/div&gt;
+&lt;div class="line"&gt;&lt;em&gt;&amp;quot;Pycharm, ce n'est qu'à moitié gratuit.&amp;quot;&lt;/em&gt;&lt;/div&gt;
+&lt;div class="line"&gt;&lt;em&gt;&amp;quot;Atom, y paraît que c'est buggé et lent.&amp;quot;&lt;/em&gt;&lt;/div&gt;
+&lt;div class="line"&gt;&lt;br /&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Bon, je vois que tu es un difficile concernant le choix de ton éditeur de code,
+et tu as bien raison ! Je t'arrêtes tout de suite en ce qui concerne
+&lt;a class="reference external" href="https://atom.io/"&gt;Atom&lt;/a&gt;. Pour les autres, je ne vais pas rentrer dans le
+troll!&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&amp;quot;C'était&amp;quot;&lt;/em&gt; buggé et lent, mais ça ne l'est plus depuis la sortie de la version
+stable 1.0 cet été. La version actuelle (1.0.19) marche plutôt bien et
+est enfin devenue une alternative viable à
+&lt;a class="reference external" href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Comme ST, tu vas pouvoir bénificier:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;des curseurs multiples.&lt;/li&gt;
+&lt;li&gt;de la palette de commandes via &lt;em&gt;ctrl+shift+p&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;de la recherche de fichiers via &lt;em&gt;ctrl+p&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;d'une intégration Git très poussée.&lt;/li&gt;
+&lt;li&gt;d'une vue permettant de parcourir tes fichiers.&lt;/li&gt;
+&lt;li&gt;d'onglets, de panels.&lt;/li&gt;
+&lt;li&gt;de la coloration syntaxique, de la complétion.&lt;/li&gt;
+&lt;li&gt;d'une tonnes de plugins.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Il n'y a évidemment pas encore autant de plugins que pour ST, mais ça
+vient comme tu peux le voir &lt;a class="reference external" href="https://atom.io/packages"&gt;ici&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Convaincu ? Prêt pour l'installation ? C'est parti.&lt;/p&gt;
+&lt;p&gt;Installe-le tout d'abord via les paquets proposés sur le
+&lt;a class="reference external" href="https://atom.io/"&gt;site officiel&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Avant de l'exécuter, on va installer une série de plugins qui va te permettre
+de développer dans de bonnes conditions. Ces plugins vont être:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/atom-minimap/minimap"&gt;minimap&lt;/a&gt;, qui est un
+aperçu du code sous forme de minimap à la manière de ST.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/atom-community/autocomplete-paths"&gt;autocomplete-paths&lt;/a&gt;,
+qui permet d'activer la complétion des chemins des dossiers et fichiers de ton
+système.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/sadovnychyi/autocomplete-python"&gt;autocomplete-python&lt;/a&gt;,
+qui est le plugin le plus fiable pour la complétion Python, basé sur
+&lt;a class="reference external" href="http://jedi.jedidjah.ch/en/latest/"&gt;jedi&lt;/a&gt;. Pour activer la complétion des
+librairies présentes dans ton virtualenv, il suffit de lancer atom depuis ton
+virtualenv.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/atom-community/linter"&gt;linter&lt;/a&gt;, qui permet de visualiser
+les erreurs de syntaxe &lt;a class="reference external" href="http://atomlinter.github.io/"&gt;de nombreux langages&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/AtomLinter/linter-flake8"&gt;linter-flake8&lt;/a&gt; comme linter python.
+On aurait pu en utiliser un autre, comme
+&lt;a class="reference external" href="https://github.com/AtomLinter/linter-pylint"&gt;linter-pylint&lt;/a&gt;, mais je
+le trouve trop verbeux.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/emmetio/emmet-atom"&gt;emmet&lt;/a&gt; pour le développement HTML et
+CSS.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/akonwi/git-plus"&gt;git-plus&lt;/a&gt;, qui permet d'utiliser toutes
+les commandes git depuis Atom.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/smashwilson/merge-conflicts"&gt;merge-conflicts&lt;/a&gt;, qui est un
+bon helper lors des &lt;em&gt;git merge&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/tombell/travis-ci-status"&gt;travis-ci-status&lt;/a&gt;, pour
+afficher le status de &lt;a class="reference external" href="https://travis-ci.org/"&gt;travis&lt;/a&gt; dans la barre de
+status d'Atom.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/kevinsawicki/monokai"&gt;monokai&lt;/a&gt;, pour obtenir un thème
+proche de ST.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/abe33/atom-pigments"&gt;pigments&lt;/a&gt;, pour afficher les
+couleurs dans les fichiers CSS, LESS et autres.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/thomaslindstrom/color-picker"&gt;color-picker&lt;/a&gt;, pour choisir
+une couleur HTML via &lt;em&gt;ctrl+alt+c&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/richrace/highlight-selected"&gt;highlight-selected&lt;/a&gt;, qui,
+lors du double-clique sur un mot, met en surbrillance tous les mots
+correspondants, comme ST.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/Glavin001/atom-beautify"&gt;atom-beautify&lt;/a&gt;, qui permet
+d'indenter automatiquement le code de nombreux langages pour améliorer la
+lisibilité.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/Lukasa/language-restructuredtext"&gt;language-restructuredtext&lt;/a&gt;,
+qui active la coloration syntaxique des fichiers &lt;em&gt;.rst&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Il en existe d'autres qui pourrait t'intéresser, comme
+&lt;a class="reference external" href="https://github.com/atom/vim-mode"&gt;vim-mode&lt;/a&gt;,
+&lt;a class="reference external" href="https://github.com/jeremyramin/terminal-plus"&gt;terminal-plus&lt;/a&gt;, ou encore
+&lt;a class="reference external" href="https://github.com/danielbrodin/atom-project-manager"&gt;project-manager&lt;/a&gt;, à toi
+de faire ton marché!&lt;/p&gt;
+&lt;p&gt;Atom propose un outil en ligne de
+commande, &lt;strong&gt;apm&lt;/strong&gt;, qui permet d'installer des plugins sans passer par le menu
+&lt;em&gt;Settings&lt;/em&gt; d'Atom. On installe donc les plugins:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;apm install minimap
+apm install autocomplete-paths
+pip install jedi
+apm install autocomplete-python
+apm install linter
+pip install flake8
+apm install linter-flake8
+apm install emmet
+apm install git-plus
+apm install merge-conflicts
+apm install travis-ci-status
+apm install monokai
+apm install pigments
+apm install color-picker
+apm install highlight-selected
+apm install atom-beautify
+apm install language-restructuredtext
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu peux maintenant lancer Atom via la commande:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;atom
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;On commence par définir la tabulation comme étant 4 espaces pour être compatible
+&lt;a class="reference external" href="https://www.python.org/dev/peps/pep-0008/"&gt;pep8&lt;/a&gt; dans
+&lt;em&gt;Edit-&amp;gt;Preferences-&amp;gt;Settings&lt;/em&gt;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+Tab Length
+4
+&lt;/pre&gt;
+&lt;p&gt;Puis on active le thème Monokai installé précédemment via
+&lt;em&gt;Edit-&amp;gt;Preferences-&amp;gt;Theme&lt;/em&gt;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+Syntax Theme
+Monokai
+&lt;/pre&gt;
+&lt;p&gt;Et c'est fini! Tout est prêt pour commencer le développement de tes applications
+Python et Django.&lt;/p&gt;
+&lt;p&gt;Tu peux alors créer tes propres
+&lt;a class="reference external" href="https://atom.io/docs/latest/using-atom-snippets"&gt;snippets&lt;/a&gt; en éditant le
+fichier &lt;em&gt;snippets.cson&lt;/em&gt; du répertoire &lt;em&gt;~/.atom&lt;/em&gt; de cette manière par exemple:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="s1"&gt;&amp;#39;.source.js&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+  &lt;span class="s1"&gt;&amp;#39;console.log&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;prefix&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;log&amp;#39;&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;body&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;console.log(${1:&amp;quot;crash&amp;quot;});$2&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Utilise &lt;em&gt;alt+shift+s&lt;/em&gt; pour rechercher tes snippets.&lt;/p&gt;
+&lt;p&gt;Enfin tu vas également pouvoir sauvegarder ta configuration sur Github de &lt;a class="reference external" href="https://github.com/dotmobo/dotatom"&gt;cette
+manière&lt;/a&gt; par exemple.&lt;/p&gt;
+</summary><category term="sublime text"></category><category term="python"></category><category term="atom"></category><category term="éditeur"></category><category term="github"></category><category term="code"></category></entry><entry><title>Générer son site statique grâce à Pelican</title><link href="http://dotmobo.github.io/pelican.html" rel="alternate"></link><updated>2015-10-11T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-10-11:pelican.html</id><summary type="html">&lt;img alt="Pelican" class="align-right" src="https://avatars0.githubusercontent.com/u/2043492?v=3&amp;amp;s=200" /&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt; est un outil vraiment chouette pour
 générer rapidement un site statique comme un blog, afin de le publier via
 &lt;a class="reference external" href="https://pages.github.com"&gt;Github Pages&lt;/a&gt; par exemple.&lt;/p&gt;

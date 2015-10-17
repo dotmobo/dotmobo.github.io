@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="http://dotmobo.github.io/sublime-text-to-atom.html" />
+
+    <title>  DotMobo &mdash; Passer de Sublime Text à Atom pour développer en Python
+</title>
+
+
+
+      <link type="application/atom+xml" rel="alternate" href="/feeds/all.atom.xml"  title="DotMobo Atom Feed">
+
+    <link rel="stylesheet" href="http://dotmobo.github.io/theme/css/style.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68852219-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+    <meta name="author" content="Morgan">
+    <meta name="description" content="Passer de Sublime Text à Atom pour développer en Python">
+  <meta name="tags" contents="sublime text, python, atom, éditeur, github, code, ">
+</head>
+
+<body>
+<header class="header">
+  <div class="container">
+      <div class="header-image pull-left">
+        <a class="nodec" href="http://dotmobo.github.io"><img src=https://pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg></a>
+      </div>
+    <div class="header-inner">
+      <h1 class="header-name">
+        <a class="nodec" href="http://dotmobo.github.io">DotMobo</a>
+      </h1>
+      <h3 class="header-text">Blog d'un Pythoniste Djangonaute</h3>
+      <ul class="header-menu list-inline">
+          <li><a class="nodec" href="http://dotmobo.github.io/categories.html">Cat&eacute;gories</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/tags.html">Tags</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/archives.html">Archives</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec icon-github" href="https://github.com/dotmobo"></a></li>
+          <li><a class="nodec icon-twitter" href="https://twitter.com/dotmobo"></a></li>
+          <li><a class="nodec icon-gplus" href="https://www.google.com/+DotmoboGithubIo6"></a></li>
+          <li><a class="nodec icon-rss" href="/feeds/all.atom.xml"></a></li>
+      </ul>
+    </div>
+  </div>
+</header> <!-- /.header -->  <div class="container">
+  <div class="post full-post">
+    <h1 class="post-title">
+      <a href="/sublime-text-to-atom.html" title="Permalink to Passer de Sublime Text à Atom pour développer en Python">Passer de Sublime Text à Atom pour développer en Python</a>
+    </h1>
+    <ul class="list-inline">
+      <li class="post-date">
+        <a class="text-muted" href="/sublime-text-to-atom.html" title="2015-10-17T00:00:00+02:00">sam. 17 octobre 2015</a>
+      </li>
+      <li class="muted">&middot;</li>
+      <li class="post-category">
+        <a href="http://dotmobo.github.io/category/python.html">Python</a>
+      </li>
+        <li class="muted">&middot;</li>
+        <li>
+            <a href="/tag/sublime text.html">sublime text</a>,             <a href="/tag/python.html">python</a>,             <a href="/tag/atom.html">atom</a>,             <a href="/tag/éditeur.html">éditeur</a>,             <a href="/tag/github.html">github</a>,             <a href="/tag/code.html">code</a>        </li>
+    </ul>
+    <div class="post-content">
+      <img alt="Pelican" class="align-right" src="https://avatars0.githubusercontent.com/u/1089146?v=3&amp;s=200" />
+<div class="line-block">
+<div class="line"><em>&quot;Sublime Text, c'est vraiment pas mal mais bon, c'est pas libre.&quot;</em></div>
+<div class="line"><em>&quot;Eclipse, c'est lourd, trop lourd.&quot;</em></div>
+<div class="line"><em>&quot;Vim, j'ai pas le temps de m'y investir.&quot;</em></div>
+<div class="line"><em>&quot;Emacs, j'y comprends rien.&quot;</em></div>
+<div class="line"><em>&quot;Pycharm, ce n'est qu'à moitié gratuit.&quot;</em></div>
+<div class="line"><em>&quot;Atom, y paraît que c'est buggé et lent.&quot;</em></div>
+<div class="line"><br /></div>
+</div>
+<p>Bon, je vois que tu es un difficile concernant le choix de ton éditeur de code,
+et tu as bien raison ! Je t'arrêtes tout de suite en ce qui concerne
+<a class="reference external" href="https://atom.io/">Atom</a>. Pour les autres, je ne vais pas rentrer dans le
+troll!</p>
+<p><em>&quot;C'était&quot;</em> buggé et lent, mais ça ne l'est plus depuis la sortie de la version
+stable 1.0 cet été. La version actuelle (1.0.19) marche plutôt bien et
+est enfin devenue une alternative viable à
+<a class="reference external" href="http://www.sublimetext.com/">Sublime Text</a>.</p>
+<p>Comme ST, tu vas pouvoir bénificier:</p>
+<ul class="simple">
+<li>des curseurs multiples.</li>
+<li>de la palette de commandes via <em>ctrl+shift+p</em>.</li>
+<li>de la recherche de fichiers via <em>ctrl+p</em>.</li>
+<li>d'une intégration Git très poussée.</li>
+<li>d'une vue permettant de parcourir tes fichiers.</li>
+<li>d'onglets, de panels.</li>
+<li>de la coloration syntaxique, de la complétion.</li>
+<li>d'une tonnes de plugins.</li>
+</ul>
+<p>Il n'y a évidemment pas encore autant de plugins que pour ST, mais ça
+vient comme tu peux le voir <a class="reference external" href="https://atom.io/packages">ici</a>.</p>
+<p>Convaincu ? Prêt pour l'installation ? C'est parti.</p>
+<p>Installe-le tout d'abord via les paquets proposés sur le
+<a class="reference external" href="https://atom.io/">site officiel</a>.</p>
+<p>Avant de l'exécuter, on va installer une série de plugins qui va te permettre
+de développer dans de bonnes conditions. Ces plugins vont être:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/atom-minimap/minimap">minimap</a>, qui est un
+aperçu du code sous forme de minimap à la manière de ST.</li>
+<li><a class="reference external" href="https://github.com/atom-community/autocomplete-paths">autocomplete-paths</a>,
+qui permet d'activer la complétion des chemins des dossiers et fichiers de ton
+système.</li>
+<li><a class="reference external" href="https://github.com/sadovnychyi/autocomplete-python">autocomplete-python</a>,
+qui est le plugin le plus fiable pour la complétion Python, basé sur
+<a class="reference external" href="http://jedi.jedidjah.ch/en/latest/">jedi</a>. Pour activer la complétion des
+librairies présentes dans ton virtualenv, il suffit de lancer atom depuis ton
+virtualenv.</li>
+<li><a class="reference external" href="https://github.com/atom-community/linter">linter</a>, qui permet de visualiser
+les erreurs de syntaxe <a class="reference external" href="http://atomlinter.github.io/">de nombreux langages</a>.</li>
+<li><a class="reference external" href="https://github.com/AtomLinter/linter-flake8">linter-flake8</a> comme linter python.
+On aurait pu en utiliser un autre, comme
+<a class="reference external" href="https://github.com/AtomLinter/linter-pylint">linter-pylint</a>, mais je
+le trouve trop verbeux.</li>
+<li><a class="reference external" href="https://github.com/emmetio/emmet-atom">emmet</a> pour le développement HTML et
+CSS.</li>
+<li><a class="reference external" href="https://github.com/akonwi/git-plus">git-plus</a>, qui permet d'utiliser toutes
+les commandes git depuis Atom.</li>
+<li><a class="reference external" href="https://github.com/smashwilson/merge-conflicts">merge-conflicts</a>, qui est un
+bon helper lors des <em>git merge</em>.</li>
+<li><a class="reference external" href="https://github.com/tombell/travis-ci-status">travis-ci-status</a>, pour
+afficher le status de <a class="reference external" href="https://travis-ci.org/">travis</a> dans la barre de
+status d'Atom.</li>
+<li><a class="reference external" href="https://github.com/kevinsawicki/monokai">monokai</a>, pour obtenir un thème
+proche de ST.</li>
+<li><a class="reference external" href="https://github.com/abe33/atom-pigments">pigments</a>, pour afficher les
+couleurs dans les fichiers CSS, LESS et autres.</li>
+<li><a class="reference external" href="https://github.com/thomaslindstrom/color-picker">color-picker</a>, pour choisir
+une couleur HTML via <em>ctrl+alt+c</em>.</li>
+<li><a class="reference external" href="https://github.com/richrace/highlight-selected">highlight-selected</a>, qui,
+lors du double-clique sur un mot, met en surbrillance tous les mots
+correspondants, comme ST.</li>
+<li><a class="reference external" href="https://github.com/Glavin001/atom-beautify">atom-beautify</a>, qui permet
+d'indenter automatiquement le code de nombreux langages pour améliorer la
+lisibilité.</li>
+<li><a class="reference external" href="https://github.com/Lukasa/language-restructuredtext">language-restructuredtext</a>,
+qui active la coloration syntaxique des fichiers <em>.rst</em>.</li>
+</ul>
+<p>Il en existe d'autres qui pourrait t'intéresser, comme
+<a class="reference external" href="https://github.com/atom/vim-mode">vim-mode</a>,
+<a class="reference external" href="https://github.com/jeremyramin/terminal-plus">terminal-plus</a>, ou encore
+<a class="reference external" href="https://github.com/danielbrodin/atom-project-manager">project-manager</a>, à toi
+de faire ton marché!</p>
+<p>Atom propose un outil en ligne de
+commande, <strong>apm</strong>, qui permet d'installer des plugins sans passer par le menu
+<em>Settings</em> d'Atom. On installe donc les plugins:</p>
+<div class="highlight"><pre>apm install minimap
+apm install autocomplete-paths
+pip install jedi
+apm install autocomplete-python
+apm install linter
+pip install flake8
+apm install linter-flake8
+apm install emmet
+apm install git-plus
+apm install merge-conflicts
+apm install travis-ci-status
+apm install monokai
+apm install pigments
+apm install color-picker
+apm install highlight-selected
+apm install atom-beautify
+apm install language-restructuredtext
+</pre></div>
+<p>Tu peux maintenant lancer Atom via la commande:</p>
+<div class="highlight"><pre>atom
+</pre></div>
+<p>On commence par définir la tabulation comme étant 4 espaces pour être compatible
+<a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">pep8</a> dans
+<em>Edit-&gt;Preferences-&gt;Settings</em>:</p>
+<pre class="literal-block">
+Tab Length
+4
+</pre>
+<p>Puis on active le thème Monokai installé précédemment via
+<em>Edit-&gt;Preferences-&gt;Theme</em>:</p>
+<pre class="literal-block">
+Syntax Theme
+Monokai
+</pre>
+<p>Et c'est fini! Tout est prêt pour commencer le développement de tes applications
+Python et Django.</p>
+<p>Tu peux alors créer tes propres
+<a class="reference external" href="https://atom.io/docs/latest/using-atom-snippets">snippets</a> en éditant le
+fichier <em>snippets.cson</em> du répertoire <em>~/.atom</em> de cette manière par exemple:</p>
+<div class="highlight"><pre><span class="s1">&#39;.source.js&#39;</span><span class="o">:</span>
+  <span class="s1">&#39;console.log&#39;</span><span class="o">:</span>
+    <span class="s1">&#39;prefix&#39;</span><span class="o">:</span> <span class="s1">&#39;log&#39;</span>
+    <span class="s1">&#39;body&#39;</span><span class="o">:</span> <span class="s1">&#39;console.log(${1:&quot;crash&quot;});$2&#39;</span>
+</pre></div>
+<p>Utilise <em>alt+shift+s</em> pour rechercher tes snippets.</p>
+<p>Enfin tu vas également pouvoir sauvegarder ta configuration sur Github de <a class="reference external" href="https://github.com/dotmobo/dotatom">cette
+manière</a> par exemple.</p>
+
+    </div>
+  </div>
+  <hr class="separator">
+  <div class="col-md-8 col-md-offset-2">
+  <div id="disqus_thread">
+    <script>
+      var disqus_shortname = 'dotmobo';
+      (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] ||
+         document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>
+      Activez Javascript pour voir 
+      <a href="https://disqus.com/?ref_noscript=dotmobo">
+        les commentaires Disqus.
+      </a>
+    </noscript>
+    <a href="https://disqus.com" class="dsq-brlink">
+      Commentaires de blog par <span class="logo-disqus">Disqus</span>
+    </a>
+  </div>
+  </div>
+  </div>
+<footer class="footer">
+  <div class="container">
+    <p class="text-center">
+      dotmobo, <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>.
+    </p>
+    <div class="text-center">
+      G&eacute;n&eacute;r&eacute; par <a href="http://getpelican.com" target="_blank">Pelican</a> avec le th&egrave;me <a href="https://github.com/dotmobo/pelican-alchemy">alchemy</a>.
+    </div>
+  </div>
+</footer> <!-- /.footer -->
+  <script src="http://dotmobo.github.io/theme/js/jquery.min.js"></script>
+  <script src="http://dotmobo.github.io/theme/js/bootstrap.min.js"></script>
+</body> <!-- 42 -->
+
+</html>

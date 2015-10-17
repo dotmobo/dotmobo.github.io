@@ -1,7 +1,7 @@
 Passer de Sublime Text à Atom pour développer en Python
 #######################################################
 
-:date: 2015-10-18
+:date: 2015-10-17
 :tags: sublime text,python,atom,éditeur,github,code
 :category: Python
 :slug: sublime-text-to-atom
@@ -13,10 +13,10 @@ Passer de Sublime Text à Atom pour développer en Python
     :align: right
 
 | *"Sublime Text, c'est vraiment pas mal mais bon, c'est pas libre."*
-| *"Eclipse, c'est vraiment trop lourd pour faire du Python."*
-| *"Vim, ça va deux minutes, mais pour les très gros projets c'est contraignant."*
-| *"Emacs j'y comprends rien."*
-| *"Pycharm, ce n'est qu'à moitié libre."*
+| *"Eclipse, c'est lourd, trop lourd."*
+| *"Vim, j'ai pas le temps de m'y investir."*
+| *"Emacs, j'y comprends rien."*
+| *"Pycharm, ce n'est qu'à moitié gratuit."*
 | *"Atom, y paraît que c'est buggé et lent."*
 |
 
@@ -26,7 +26,7 @@ et tu as bien raison ! Je t'arrêtes tout de suite en ce qui concerne
 troll!
 
 *"C'était"* buggé et lent, mais ça ne l'est plus depuis la sortie de la version
-stable 1.0 sortie cet été. La version actuelle (1.0.19) marche plutôt bien et
+stable 1.0 cet été. La version actuelle (1.0.19) marche plutôt bien et
 est enfin devenue une alternative viable à
 `Sublime Text <http://www.sublimetext.com/>`_.
 
@@ -80,13 +80,13 @@ de développer dans de bonnes conditions. Ces plugins vont être:
 * `monokai <https://github.com/kevinsawicki/monokai>`_, pour obtenir un thème
   proche de ST.
 * `pigments <https://github.com/abe33/atom-pigments>`_, pour afficher les
-  couleurs dans les CSS, LESS et autres.
+  couleurs dans les fichiers CSS, LESS et autres.
 * `color-picker <https://github.com/thomaslindstrom/color-picker>`_, pour choisir
-  une couleur HTML via *ctrl+shift+c*.
+  une couleur HTML via *ctrl+alt+c*.
 * `highlight-selected <https://github.com/richrace/highlight-selected>`_, qui,
   lors du double-clique sur un mot, met en surbrillance tous les mots
   correspondants, comme ST.
-* `atom-beautify <https://github.com/Glavin001/atom-beautify>`_, permet
+* `atom-beautify <https://github.com/Glavin001/atom-beautify>`_, qui permet
   d'indenter automatiquement le code de nombreux langages pour améliorer la
   lisibilité.
 * `language-restructuredtext <https://github.com/Lukasa/language-restructuredtext>`_,
@@ -146,7 +146,7 @@ Et c'est fini! Tout est prêt pour commencer le développement de tes applicatio
 Python et Django.
 
 Tu peux alors créer tes propres
-`snippets <https://atom.io/docs/latest/using-atom-snippets>`_ en éditer le
+`snippets <https://atom.io/docs/latest/using-atom-snippets>`_ en éditant le
 fichier *snippets.cson* du répertoire *~/.atom* de cette manière par exemple:
 
 .. code-block:: javascript

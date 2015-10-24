@@ -18,25 +18,25 @@ Elle permet de vérifier constamment son code via des tests unitaires,
 généralement à chaque *commit*. Ceci permet de tester la qualité et la robustesse
 du code et d'éviter toutes régressions.
 
-Dans ce post, tu vas voir comment faire de l'intégration continue pour une application
-python sous Github. À la fin de cette lecture, tu seras capable:
+Dans cet article, tu verras comment mettre en place l'intégration continue d'une application
+`python <https://www.python.org/>`_ sous `Github <https://github.com/>`_. À la fin de cette lecture, tu seras capable:
 
-* d'écrire un test unitaire simple
-* de vérifier la couverture de ton code
-* d'exécuter tes tests sous plusieurs versions de python
-* d'automatiser l’exécution des tests à chaque commit
-* d'automatiser la vérification de la couverture de code
-* d'automatiser l'analyse de la qualité de ton code
-* d'utiliser les badges github pour l'affichage des rapports
+* d'écrire un test unitaire simple.
+* de vérifier la couverture de ton code.
+* d'exécuter tes tests sous plusieurs versions de python.
+* d'automatiser l’exécution des tests à chaque *commit*.
+* d'automatiser la vérification de la couverture du code.
+* d'automatiser l'analyse de la qualité de ton code.
+* d'utiliser les badges github pour l'affichage des rapports.
 
-Tout ce que tu vas voir dans ce tuto est dispo `ici <https://github.com/dotmobo/demo-integration-continue>`_.
+L'application de démo de ce tuto est dispo `ici <https://github.com/dotmobo/demo-integration-continue>`_.
 
 
 1) Créer une application
 ------------------------
 
-Dans le répertoire de ton projet, tu vas créer un package *myapp* contenant le
-classique *__init__.py* ainsi qu'un fichier *maths.py*.
+Dans le répertoire de ton projet *myproject*, tu vas créer un package *myapp* contenant le
+classique *__init__.py*, ainsi qu'un fichier *maths.py*.
 Celui-ci contiendra une méthode d'addition et de soustraction:
 
 .. code-block:: python
@@ -58,7 +58,7 @@ Celui-ci contiendra une méthode d'addition et de soustraction:
         return a - b
 
 
-Tu vas donc faire de l'intégration continue sur ce petit bout de code.
+Tu vas donc mettre en place l'intégration continue sur ce petit bout de code.
 
 Tu ajoutes également dans le répertoire du projet le fichier *setup.py* suivant:
 
@@ -77,7 +77,7 @@ Tu ajoutes également dans le répertoire du projet le fichier *setup.py* suivan
       packages=[],
       )
 
-Puis tu exécutes la commande suivant afin d'ajouter ton application dans le *path*
+Puis, tu exécutes la commande suivante afin d'ajouter ton application dans le *path*
 python:
 
 .. code-block:: python
@@ -85,15 +85,15 @@ python:
     python setup.py develop
 
 
-2) Y ajouter des tests unitaires
+2) Ajouter des tests unitaires
 --------------------------------
 
 Tu vas maintenant créer des tests unitaires à l'aide de
-`unittest <https://docs.python.org/3/library/unittest.html>`_
+`unittest <https://docs.python.org/3/library/unittest.html>`_.
 
 Au même niveau que ton package *myapp*, tu vas créer un package *tests* qui sera
 dédié aux tests unitaires. Celui-ci doit contenir le fichier *__init__.py* et le
-fichier *test_maths*.py suivant:
+fichier *test_maths.py* suivant:
 
 .. code-block:: python
 
@@ -157,8 +157,8 @@ Premièrement, tu installes `coverage <https://bitbucket.org/ned/coveragepy>`_:
 
     pip install coverage
 
-Puis, tu crée le fichier de configuration de coverage appelé *.coveragerc*
-dans ton répertoire:
+Puis, tu crées le fichier de configuration de coverage appelé *.coveragerc*
+dans ton répertoire *myproject*:
 
 .. code-block:: bash
 
@@ -169,11 +169,11 @@ dans ton répertoire:
     [report]
     omit = */tests/*
 
-Tu y indiques donc d'exéctuer les tests de ton application *myapp* tout en
+Tu y indiques d'exéctuer les tests de ton application *myapp*, tout en
 ignorant d'analyser la couverture des fichiers de tests.
 Sinon, il faudrait faire des tests unitaires pour tester les tests unitaires !
 
-Tu lances les tests unitaire avec coverage:
+Tu lances les tests unitaires avec coverage:
 
 .. code-block:: bash
 
@@ -191,7 +191,7 @@ Ou un rapport html via:
 
     coverage html
 
-Celui-ci s'est créé dans le répertoire *htmlcov*. A l'aide de se rapport, tu
+Celui-ci s'est créé dans le répertoire *htmlcov*. A l'aide de ce rapport, tu
 vas pouvoir visualiser le pourcentage de code couvert, les zones de code couvertes
 ainsi que les zones de code non couvertes, fichier par fichier. Plutôt pratique non ?
 
@@ -200,7 +200,7 @@ ainsi que les zones de code non couvertes, fichier par fichier. Plutôt pratique
 
 `Tox <https://testrun.org/tox/latest/>`_ vise à standardiser l'exécution des tests
 unitaires en python. Il permet, à l'aide d'environnements virtuels, de tester ton
-code sous plusieurs interpréteurs python et sous plusieurs versions de librairie.
+code sous plusieurs interpréteurs python et sous plusieurs versions de librairies.
 
 Il est très simple d'utilisation et s’interface parfaitement avec Travis.
 
@@ -210,7 +210,7 @@ Tu peux l'installer via pip:
 
     pip install tox
 
-Ensuite, il te faut créer le fichier *tox.ini* dans le répertoire de ton projet:
+Ensuite, il te faut créer le fichier *tox.ini* dans le répertoire *myproject*:
 
 .. code-block:: python
 
@@ -229,7 +229,7 @@ Explication:
 * *deps* liste les dépendances à installer dans le virtualenv qui sera créé.
 * *commands* indique la commande à exécuter pour lancer les tests unitaires.
 * il y a plein d'autres paramètres utilisables, va voir dans la
-  `doc officielle <https://testrun.org/tox/latest/example/basic.html>`_
+  `doc officielle <https://testrun.org/tox/latest/example/basic.html>`_.
 
 Enfin, pour exécuter tes tests sous les différents environnements, lance la
 commande:
@@ -252,7 +252,7 @@ tests unitaires à chaque *commit*, et qui va t'envoyer un mail si un problème 
 
 Tu peux t'y connecter via ton compte Github et y ajouter ton dépôt git via le bouton *+*.
 
-Au préalable, il faut créer un fichier *.travis.yml* dans le répertoire de ton projet:
+Au préalable, il faut créer un fichier *.travis.yml* dans ton répertoire *myproject*:
 
 .. code-block:: yaml
 
@@ -302,9 +302,10 @@ Tu devras peut-être refaire un *commit* pour activer le bazar.
 7) Ajouter des badges sur github
 --------------------------------
 
-Tu va pouvoir te créer un fichier README.rst et y ajouter les badges travis,
-coveralls et landscape. Tu peux trouver ces badges sous différents formats, notamment en
-restructuredText, dans la configuration de ton projet sur ces 3 plate-forme.
+Tu va pouvoir te créer un fichier *README.rst* et y ajouter les badges *travis*,
+*coveralls* et *landscape*. Tu peux trouver ces badges sous différents formats, notamment en
+`restructuredText <http://sphinx-doc.org/rest.html>`_, dans la configuration de
+ton projet sur ces trois plate-formes.
 
 Exemple:
 
@@ -325,4 +326,5 @@ Exemple:
         :target: https://landscape.io/github/dotmobo/demo-integration-continue/master
         :alt: Code Health
 
-*Commit* et rend-toi sur ton dépôt github pour voir le résultat!
+*Commit* et rends-toi sur ton dépôt github pour voir
+`le résultat <https://github.com/dotmobo/demo-integration-continue>`_!

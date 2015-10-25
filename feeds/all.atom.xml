@@ -1,5 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>DotMobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2015-10-17T00:00:00+02:00</updated><entry><title>Passer de Sublime Text à Atom pour développer en Python</title><link href="http://dotmobo.github.io/sublime-text-to-atom.html" rel="alternate"></link><updated>2015-10-17T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-10-17:sublime-text-to-atom.html</id><summary type="html">&lt;img alt="Pelican" class="align-right" src="https://avatars0.githubusercontent.com/u/1089146?v=3&amp;amp;s=200" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>DotMobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2015-10-25T00:00:00+02:00</updated><entry><title>Intégration continue sous Github avec Tox et Travis</title><link href="http://dotmobo.github.io/integration-continue.html" rel="alternate"></link><updated>2015-10-25T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-10-25:integration-continue.html</id><summary type="html">&lt;img alt="Travis" class="align-right" src="https://travis-ci.com/img/travis-mascot-200px.png" /&gt;
+&lt;p&gt;L'&lt;a class="reference external" href="https://fr.wikipedia.org/wiki/Int%C3%A9gration_continue"&gt;intégration continue&lt;/a&gt;
+est une part très importante d'un projet, à ne surtout pas négliger.
+Elle permet de vérifier constamment son code via des tests unitaires,
+généralement à chaque &lt;em&gt;commit&lt;/em&gt;. Ceci permet de tester la qualité et la robustesse
+du code et d'éviter toutes régressions.&lt;/p&gt;
+&lt;p&gt;Dans cet article, tu verras comment mettre en place l'intégration continue d'une application
+&lt;a class="reference external" href="https://www.python.org/"&gt;python&lt;/a&gt; sous &lt;a class="reference external" href="https://github.com/"&gt;Github&lt;/a&gt;. À la fin de cette lecture, tu seras capable:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;d'écrire un test unitaire simple.&lt;/li&gt;
+&lt;li&gt;de vérifier la couverture de ton code.&lt;/li&gt;
+&lt;li&gt;d'exécuter tes tests sous plusieurs versions de python.&lt;/li&gt;
+&lt;li&gt;d'automatiser l’exécution des tests à chaque &lt;em&gt;commit&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;d'automatiser la vérification de la couverture du code.&lt;/li&gt;
+&lt;li&gt;d'automatiser l'analyse de la qualité de ton code.&lt;/li&gt;
+&lt;li&gt;d'utiliser les badges github pour l'affichage des rapports.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;L'application de démo de ce tuto est dispo &lt;a class="reference external" href="https://github.com/dotmobo/demo-integration-continue"&gt;ici&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="section" id="creer-une-application"&gt;
+&lt;h2&gt;1) Créer une application&lt;/h2&gt;
+&lt;p&gt;Dans le répertoire de ton projet &lt;em&gt;myproject&lt;/em&gt;, tu vas créer un package &lt;em&gt;myapp&lt;/em&gt; contenant le
+classique &lt;em&gt;__init__.py&lt;/em&gt;, ainsi qu'un fichier &lt;em&gt;maths.py&lt;/em&gt;.
+Celui-ci contiendra une méthode d'addition et de soustraction:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+
+&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;Provides an addition function and a subtraction function&lt;/span&gt;
+&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;addition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot; Méthode d&amp;#39;addition &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;subtraction&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot; Méthode de soustraction &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu vas donc mettre en place l'intégration continue sur ce petit bout de code.&lt;/p&gt;
+&lt;p&gt;Tu ajoutes également dans le répertoire du projet le fichier &lt;em&gt;setup.py&lt;/em&gt; suivant:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;setuptools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;
+
+&lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;myproject&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;1.0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;My project&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;author&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Me&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;author_email&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;me@noreply.com&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;http://myproject&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[],&lt;/span&gt;
+  &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Puis, tu exécutes la commande suivante afin d'ajouter ton application dans le &lt;em&gt;path&lt;/em&gt;
+python:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="n"&gt;develop&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ajouter-des-tests-unitaires"&gt;
+&lt;h2&gt;2) Ajouter des tests unitaires&lt;/h2&gt;
+&lt;p&gt;Tu vas maintenant créer des tests unitaires à l'aide de
+&lt;a class="reference external" href="https://docs.python.org/3/library/unittest.html"&gt;unittest&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Au même niveau que ton package &lt;em&gt;myapp&lt;/em&gt;, tu vas créer un package &lt;em&gt;tests&lt;/em&gt; qui sera
+dédié aux tests unitaires. Celui-ci doit contenir le fichier &lt;em&gt;__init__.py&lt;/em&gt; et le
+fichier &lt;em&gt;test_maths.py&lt;/em&gt; suivant:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;Tests unitaires&lt;/span&gt;
+&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;unittest&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;TestCase&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;myapp.maths&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;addition&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subtraction&lt;/span&gt;
+
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MathsTest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TestCase&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;    Classe qui va contenir nos test unitaires&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;setUp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot; Méthode qui permet d&amp;#39;initialiser des variables pour nos tests &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;25&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_addition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot; Test de l&amp;#39;addition &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;assertEqual&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;addition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;37&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_subtraction&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot; Test de la soustraction &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;assertEqual&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subtraction&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;tearDown&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot; Méthode appelée à la fin des tests &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et pour vérifier le bon fonctionnement de tes tests, tu peux les exécuter via:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;python tests/test_maths.py
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pour plus d'informations concernant les tests unitaires, je t'invite à te pencher
+sur le dossier de Sam&amp;amp;Max :&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://sametmax.com/un-gros-guide-bien-gras-sur-les-tests-unitaires-en-python-partie-1/"&gt;http://sametmax.com/un-gros-guide-bien-gras-sur-les-tests-unitaires-en-python-partie-1/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://sametmax.com/un-gros-guide-bien-gras-sur-les-tests-unitaires-en-python-partie-2/"&gt;http://sametmax.com/un-gros-guide-bien-gras-sur-les-tests-unitaires-en-python-partie-2/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://sametmax.com/un-gros-guide-bien-gras-sur-les-tests-unitaires-en-python-partie-3/"&gt;http://sametmax.com/un-gros-guide-bien-gras-sur-les-tests-unitaires-en-python-partie-3/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://sametmax.com/un-gros-guide-bien-gras-sur-les-tests-unitaires-en-python-partie-4/"&gt;http://sametmax.com/un-gros-guide-bien-gras-sur-les-tests-unitaires-en-python-partie-4/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="couvrir-son-code-avec-coverage"&gt;
+&lt;h2&gt;3) Couvrir son code avec Coverage&lt;/h2&gt;
+&lt;p&gt;Tu vas maintenant ajouter les utilitaires permettant la couverture de ton code.&lt;/p&gt;
+&lt;p&gt;Premièrement, tu installes &lt;a class="reference external" href="https://bitbucket.org/ned/coveragepy"&gt;coverage&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;pip install coverage
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Puis, tu crées le fichier de configuration de coverage appelé &lt;em&gt;.coveragerc&lt;/em&gt;
+dans ton répertoire &lt;em&gt;myproject&lt;/em&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;run&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nb"&gt;source&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+    myapp
+
+&lt;span class="o"&gt;[&lt;/span&gt;report&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;omit&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; */tests/*
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu y indiques d'exéctuer les tests de ton application &lt;em&gt;myapp&lt;/em&gt;, tout en
+ignorant d'analyser la couverture des fichiers de tests.
+Sinon, il faudrait faire des tests unitaires pour tester les tests unitaires !&lt;/p&gt;
+&lt;p&gt;Tu lances les tests unitaires avec coverage:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;coverage run -m unittest discover tests/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu peux désormais afficher un rapport simple via:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;coverage report
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ou un rapport html via:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;coverage html
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Celui-ci s'est créé dans le répertoire &lt;em&gt;htmlcov&lt;/em&gt;. A l'aide de ce rapport, tu
+vas pouvoir visualiser le pourcentage de code couvert ainsi que les zones de code
+couvertes et non couvertes, fichier par fichier. Plutôt pratique non ?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="utiliser-tox-pour-l-execution-des-tests"&gt;
+&lt;h2&gt;4) Utiliser Tox pour l'exécution des tests&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://testrun.org/tox/latest/"&gt;Tox&lt;/a&gt; vise à standardiser l'exécution des tests
+unitaires en python. Il permet, à l'aide d'environnements virtuels, de tester ton
+code sous plusieurs interpréteurs python et sous plusieurs versions de librairies.&lt;/p&gt;
+&lt;p&gt;Il est très simple d'utilisation et s’interface parfaitement avec Travis.&lt;/p&gt;
+&lt;p&gt;Tu peux l'installer via pip:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;pip install tox
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ensuite, il te faut créer le fichier &lt;em&gt;tox.ini&lt;/em&gt; dans le répertoire &lt;em&gt;myproject&lt;/em&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;tox&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;envlist&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;py27&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;py34&lt;/span&gt;
+
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;testenv&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;deps&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;coverage&lt;/span&gt;
+&lt;span class="n"&gt;commands&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;coverage&lt;/span&gt; &lt;span class="n"&gt;run&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="n"&gt;unittest&lt;/span&gt; &lt;span class="n"&gt;discover&lt;/span&gt; &lt;span class="n"&gt;tests&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Explication:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;em&gt;envlist&lt;/em&gt; permet de lister les interpréteurs python que l'on veut tester. Ici,
+tu vas tester ton application sous python 2.7 et python 3.4. Il faut évidemment
+les installer sur ton système si ce n'est pas déjà fait.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;deps&lt;/em&gt; liste les dépendances à installer dans le virtualenv qui sera créé.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;commands&lt;/em&gt; indique la commande à exécuter pour lancer les tests unitaires.&lt;/li&gt;
+&lt;li&gt;il y a plein d'autres paramètres utilisables, va voir dans la
+&lt;a class="reference external" href="https://testrun.org/tox/latest/example/basic.html"&gt;doc officielle&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Enfin, pour exécuter tes tests sous les différents environnements, lance la
+commande:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;tox
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Plutôt simple non ?&lt;/p&gt;
+&lt;p&gt;Crée-toi un dépôt sur Github et &lt;em&gt;commit&lt;/em&gt; tout ça.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="activer-l-integration-continue-de-notre-projet-sous-travis-et-coveralls"&gt;
+&lt;h2&gt;5) Activer l'intégration continue de notre projet sous Travis et Coveralls&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://travis-ci.org/"&gt;Travis&lt;/a&gt; est un outil d'intégration continue, à la
+manière de &lt;a class="reference external" href="https://jenkins-ci.org/"&gt;Jenkins&lt;/a&gt;. C'est lui qui va exécuter tes
+tests unitaires à chaque &lt;em&gt;commit&lt;/em&gt;, et qui va t'envoyer un mail si un problème a
+été rencontré.&lt;/p&gt;
+&lt;p&gt;Tu peux t'y connecter via ton compte Github et y ajouter ton dépôt git via le bouton &lt;em&gt;+&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Au préalable, il faut créer un fichier &lt;em&gt;.travis.yml&lt;/em&gt; dans ton répertoire &lt;em&gt;myproject&lt;/em&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="l-Scalar-Plain"&gt;language&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;python&lt;/span&gt;
+&lt;span class="l-Scalar-Plain"&gt;python&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2.7&amp;quot;&lt;/span&gt;
+&lt;span class="l-Scalar-Plain"&gt;env&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;TOX_ENV=py27&lt;/span&gt;
+&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;TOX_ENV=py34&lt;/span&gt;
+&lt;span class="l-Scalar-Plain"&gt;install&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;pip install tox&lt;/span&gt;
+&lt;span class="l-Scalar-Plain"&gt;script&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;tox -e $TOX_ENV&lt;/span&gt;
+&lt;span class="l-Scalar-Plain"&gt;after_success&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;pip install coveralls&lt;/span&gt;
+&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;coveralls&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;On y indique les environnements de tox à tester et le script tox à exécuter.&lt;/p&gt;
+&lt;p&gt;Tu peux maintenant &lt;em&gt;commiter&lt;/em&gt; tout ça sur ton dépôt Github, et te rendre sur le site
+de travis pour visualiser les rapports d'exécution de tes tests!&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&amp;quot;Attends un peu, c'est quoi la partie qui est dans le after_success, coveralls?&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Bien vu! &lt;a class="reference external" href="https://coveralls.io/"&gt;Coveralls&lt;/a&gt; est un outil qui permet de tester
+la couverture de code à chaque &lt;em&gt;commit&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Connecte-toi sur leur plate-forme via ton compte Github et active ton dépôt git via le bouton
+&lt;em&gt;add repos&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Tu vas ainsi pouvoir voir l'évolution de la couverture de code et analyser les rapports proposés.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="inspecter-la-qualite-du-code-avec-landscape-io"&gt;
+&lt;h2&gt;6) Inspecter la qualité du code avec Landscape.io&lt;/h2&gt;
+&lt;p&gt;Landscape.io est une plate-forme qui va inspecter la qualité de ton code à chaque &lt;em&gt;commit&lt;/em&gt;.
+Celle-ci est gratuite pour les projets open-source disponibles sur Github.&lt;/p&gt;
+&lt;p&gt;Elle se base sur &lt;a class="reference external" href="https://flake8.readthedocs.org/en/2.4.1/"&gt;flake8&lt;/a&gt; comme outil
+d'inspection de code.&lt;/p&gt;
+&lt;p&gt;Connecte-toi sur la plate-forme avec ton compte Github et ajoutes-y ton dépôt git
+via &lt;em&gt;Add repository&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Tu devras peut-être refaire un &lt;em&gt;commit&lt;/em&gt; pour activer le bazar.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ajouter-des-badges-sur-github"&gt;
+&lt;h2&gt;7) Ajouter des badges sur github&lt;/h2&gt;
+&lt;p&gt;Tu va pouvoir te créer un fichier &lt;em&gt;README.rst&lt;/em&gt; et y ajouter les badges &lt;em&gt;travis&lt;/em&gt;,
+&lt;em&gt;coveralls&lt;/em&gt; et &lt;em&gt;landscape&lt;/em&gt;. Tu peux trouver ces badges sous différents formats, notamment en
+&lt;a class="reference external" href="http://sphinx-doc.org/rest.html"&gt;restructuredText&lt;/a&gt;, dans la configuration de
+ton projet sur ces trois plate-formes.&lt;/p&gt;
+&lt;p&gt;Exemple:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="l-Scalar-Plain"&gt;demo-integration-continue&lt;/span&gt;
+&lt;span class="l-Scalar-Plain"&gt;-------------------------&lt;/span&gt;
+
+&lt;span class="l-Scalar-Plain"&gt;Application de démo d&amp;#39;intégration continue sous github&lt;/span&gt;
+
+&lt;span class="l-Scalar-Plain"&gt;.. image:&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;https://travis-ci.org/dotmobo/demo-integration-continue.svg&lt;/span&gt;
+    &lt;span class="l-Scalar-Plain"&gt;:target&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;https://travis-ci.org/dotmobo/demo-integration-continue&lt;/span&gt;
+
+&lt;span class="l-Scalar-Plain"&gt;.. image:&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;https://coveralls.io/repos/dotmobo/demo-integration-continue/badge.svg?branch=master&amp;amp;service=github&lt;/span&gt;
+    &lt;span class="l-Scalar-Plain"&gt;:target&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;https://coveralls.io/github/dotmobo/demo-integration-continue?branch=master&lt;/span&gt;
+
+&lt;span class="l-Scalar-Plain"&gt;.. image:&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;https://landscape.io/github/dotmobo/demo-integration-continue/master/landscape.svg?style=flat&lt;/span&gt;
+    &lt;span class="l-Scalar-Plain"&gt;:target&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;https://landscape.io/github/dotmobo/demo-integration-continue/master&lt;/span&gt;
+    &lt;span class="l-Scalar-Plain"&gt;:alt&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Code Health&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Commit&lt;/em&gt; et rends-toi sur ton dépôt github pour voir
+&lt;a class="reference external" href="https://github.com/dotmobo/demo-integration-continue"&gt;le résultat&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="python"></category><category term="github"></category><category term="travis"></category><category term="tox"></category><category term="intégration continue"></category><category term="coveralls"></category><category term="tests unitaires"></category><category term="landscape"></category><category term="coverage"></category></entry><entry><title>Passer de Sublime Text à Atom pour développer en Python</title><link href="http://dotmobo.github.io/sublime-text-to-atom.html" rel="alternate"></link><updated>2015-10-17T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-10-17:sublime-text-to-atom.html</id><summary type="html">&lt;img alt="Pelican" class="align-right" src="https://avatars0.githubusercontent.com/u/1089146?v=3&amp;amp;s=200" /&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;&lt;em&gt;&amp;quot;Sublime Text, c'est vraiment pas mal mais bon, c'est pas libre.&amp;quot;&lt;/em&gt;&lt;/div&gt;
 &lt;div class="line"&gt;&lt;em&gt;&amp;quot;Eclipse, c'est lourd, trop lourd.&amp;quot;&lt;/em&gt;&lt;/div&gt;

@@ -192,8 +192,8 @@ Ou un rapport html via:
     coverage html
 
 Celui-ci s'est créé dans le répertoire *htmlcov*. A l'aide de ce rapport, tu
-vas pouvoir visualiser le pourcentage de code couvert, les zones de code couvertes
-ainsi que les zones de code non couvertes, fichier par fichier. Plutôt pratique non ?
+vas pouvoir visualiser le pourcentage de code couvert ainsi que les zones de code
+couvertes et non couvertes, fichier par fichier. Plutôt pratique non ?
 
 4) Utiliser Tox pour l'exécution des tests
 ------------------------------------------

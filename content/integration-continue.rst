@@ -1,12 +1,12 @@
-Intégration continue sous Github avec Tox et Travis
-###################################################
+Intégration continue sous Github avec Tox, Travis, Coveralls et Landscape
+#########################################################################
 
 :date: 2015-10-25
 :tags: python,github,travis,tox,intégration continue,coveralls,tests unitaires,landscape,coverage
 :category: Python
 :slug: integration-continue
 :authors: Morgan
-:summary: Intégration continue sous Github avec Tox et Travis
+:summary: Intégration continue sous Github avec Tox, Travis, Coveralls et Landscape
 
 .. image:: https://travis-ci.com/img/travis-mascot-200px.png
     :alt: Travis

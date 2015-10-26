@@ -1,0 +1,128 @@
+Gestion des pays dans django avec django-countries
+##################################################
+
+:date: 2015-11-01
+:tags: python,django,django-countries,countries,pays
+:category: Django
+:slug: django-countries
+:authors: Morgan
+:summary: Gestion des pays dans django avec django-countries
+
+.. image:: http://media.django.es.s3.amazonaws.com/nuevo/images/djangopony.png              
+    :alt: Django
+    :align: right
+
+En développement web, on a souvent besoin de faire des formulaires. Et
+notamment des formulaires d'inscription, avec saisie du nom, prénom, adresse et
+donc pays.
+
+Tu m'accorderas que laisser le champs **Pays** libre risque de générer des
+erreurs de saisie, et que gérer manuellement une liste déroulante de pays, c'est
+ennuyeux à mourir.
+
+Rassure-toi, une solution existe, et c'est là qu'intervient
+`django-countries <https://github.com/SmileyChris/django-countries>`_.
+
+Django-countries, c'est la librairie qui ne paie pas mine mais qui, l'air de
+rien, est vachement pratique. Elle propose:
+
+* Une liste déroulante pour les formulaires, contenant la liste de tous les
+  pays avec leurs `codes iso 3166 <http://www.iso.org/iso/fr/country_codes.htm>`_,
+  traduite dans 25 langues.
+* Des widgets.
+* Des fichiers statiques correspondant aux icônes des drapeaux des pays.
+* Un champ pays pour les modèles.
+* Une compatibilité avec `Django Rest Framework <http://www.django-rest-framework.org/>`_.
+
+Tu l'installes via pip:
+
+.. code-block:: bash
+
+    pip install django-countries
+
+Et tu ajoutes **django_countries** dans la liste de tes **INSTALLED_APPS**
+dans le fichier *settings.py* de django.
+
+.. code-block:: python
+
+    INSTALLED_APPS = (...,
+                      django_countries
+    )
+
+
+Au niveau de ton modèle, tu peux maintenant utiliser le champ **CountryField**,
+qui est basé sur **CharField** et qui correspond au code iso 3166:
+
+.. code-block:: python
+
+    from django.db import models
+    from django_countries.fields import CountryField
+
+    class Person(models.Model):
+        name = models.CharField(max_length=100)
+        country = CountryField(blank_label='(select country)')
+
+Tu peux maintenant créer une personne avec un pays associé, et accéder aux
+différents attributs du pays comme son code, son icône, son nom et autres:
+
+.. code-block:: python
+
+    >>> person = Person(name='Chris', country='NZ')
+    >>> person.country
+    Country(code='NZ')
+    >>> person.country.name
+    'New Zealand'
+    >>> person.country.flag
+    '/static/flags/nz.gif'
+    >>> person.country.alpha3
+    'NZL'
+    >>> person.country.numeric
+    '554'
+    >>> person.country.numeric_padded
+    '554'
+
+Dans le formulaire associé à ton modèle, tu peux aussi utiliser un widget qui va
+afficher le drapeau du pays à côté de la liste déroulante:
+
+.. code-block:: python
+
+    from django_countries.widgets import CountrySelectWidget
+
+    class PersonForm(forms.ModelForm):
+        class Meta:
+            model = models.Person
+            fields = ('name', 'country')
+            widgets = {'country': CountrySelectWidget()}
+
+Dans le *settings.py*, on peut spécifier les pays à utiliser:
+
+.. code-block:: python
+
+    COUNTRIES_ONLY = ['NZ', 'AU']
+
+Ou carrément customiser la liste:
+
+.. code-block:: python
+
+    COUNTRIES_OVERRIDE = {
+        'NZ': _('Middle Earth'),
+        'AU': None
+    }
+
+Et on a donc également une compatibilité Django Rest Framework en modifiant
+le serializer de cette manière:
+
+.. code-block:: python
+
+    class PersonSerializer(serializers.ModelSerializer):
+        country = CountryField()
+
+        class Meta:
+            model = models.Person
+            fields = ('name', 'email', 'country')
+
+Je ne suis pas rentré dans le détail de la customisation pour rester simple,
+mais il est possible de modifier pas mal de chose au niveau de la liste,
+du champ, de l'affichage et du paramétrage.
+
+A voir dans la doc officielle si ça t'intéresse!

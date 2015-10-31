@@ -16,8 +16,8 @@ En développement web, on a souvent besoin de faire des formulaires. Et
 notamment des formulaires d'inscription, avec saisie du nom, prénom, adresse et
 donc pays.
 
-Tu m'accorderas que laisser le champs **Pays** libre risque de générer des
-erreurs de saisie, et que gérer manuellement une liste déroulante de pays, c'est
+Tu m'accorderas que laisser le champs pays libre risque de générer des
+erreurs de saisie, et que gérer manuellement une liste déroulante de pays est
 ennuyeux à mourir.
 
 Rassure-toi, une solution existe, et c'est là qu'intervient

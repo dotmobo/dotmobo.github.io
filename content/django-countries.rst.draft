@@ -1,14 +1,14 @@
 Gestion des pays dans django avec django-countries
 ##################################################
 
-:date: 2015-11-01
+:date: 2015-10-31
 :tags: python,django,django-countries,countries,pays
 :category: Django
 :slug: django-countries
 :authors: Morgan
 :summary: Gestion des pays dans django avec django-countries
 
-.. image:: http://media.django.es.s3.amazonaws.com/nuevo/images/djangopony.png              
+.. image:: ./images/djangopony.png
     :alt: Django
     :align: right
 

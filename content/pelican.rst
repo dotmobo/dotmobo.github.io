@@ -8,7 +8,7 @@ Générer son site statique grâce à Pelican
 :authors: Morgan
 :summary: Générer son site statique grâce à Pelican
 
-.. image:: https://avatars0.githubusercontent.com/u/2043492?v=3&s=200
+.. image:: ./images/pelican.png
     :alt: Pelican
     :align: right
 

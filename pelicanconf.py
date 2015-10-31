@@ -30,6 +30,9 @@ DEFAULT_PAGINATION = 10
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
+# static
+STATIC_PATHS = ['images']
+
 # Theme
 THEME = "alchemy"
 SITE_SUBTEXT = "Blog d'un Pythoniste Djangonaute"

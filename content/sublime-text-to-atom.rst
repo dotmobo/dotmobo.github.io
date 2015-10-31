@@ -8,7 +8,7 @@ Passer de Sublime Text à Atom pour développer en Python
 :authors: Morgan
 :summary: Passer de Sublime Text à Atom pour développer en Python
 
-.. image:: https://avatars0.githubusercontent.com/u/1089146?v=3&s=200
+.. image:: ./images/atom.png
     :alt: Pelican
     :align: right
 

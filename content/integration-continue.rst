@@ -8,7 +8,7 @@ Intégration continue sous Github avec Tox, Travis, Coveralls et Landscape
 :authors: Morgan
 :summary: Intégration continue sous Github avec Tox, Travis, Coveralls et Landscape
 
-.. image:: https://travis-ci.com/img/travis-mascot-200px.png
+.. image:: ./images/travis.png
     :alt: Travis
     :align: right
 

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="http://dotmobo.github.io/django-countries.html" />
+
+    <title>  DotMobo &mdash; Gestion des pays dans django avec django-countries
+</title>
+
+
+
+      <link type="application/atom+xml" rel="alternate" href="/feeds/all.atom.xml"  title="DotMobo Atom Feed">
+
+    <link rel="stylesheet" href="http://dotmobo.github.io/theme/css/style.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68852219-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+    <meta name="author" content="Morgan">
+    <meta name="description" content="Gestion des pays dans django avec django-countries">
+  <meta name="tags" contents="python, django, django-countries, countries, pays, ">
+</head>
+
+<body>
+<header class="header">
+  <div class="container">
+      <div class="header-image pull-left">
+        <a class="nodec" href="http://dotmobo.github.io"><img src=https://pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg></a>
+      </div>
+    <div class="header-inner">
+      <h1 class="header-name">
+        <a class="nodec" href="http://dotmobo.github.io">DotMobo</a>
+      </h1>
+      <h3 class="header-text">Blog d'un Pythoniste Djangonaute</h3>
+      <ul class="header-menu list-inline">
+          <li><a class="nodec" href="http://dotmobo.github.io/categories.html">Cat&eacute;gories</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/tags.html">Tags</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/archives.html">Archives</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec icon-github" href="https://github.com/dotmobo"></a></li>
+          <li><a class="nodec icon-twitter" href="https://twitter.com/dotmobo"></a></li>
+          <li><a class="nodec icon-gplus" href="https://www.google.com/+DotmoboGithubIo6"></a></li>
+          <li><a class="nodec icon-rss" href="/feeds/all.atom.xml"></a></li>
+      </ul>
+    </div>
+  </div>
+</header> <!-- /.header -->  <div class="container">
+  <div class="post full-post">
+    <h1 class="post-title">
+      <a href="/django-countries.html" title="Permalink to Gestion des pays dans django avec django-countries">Gestion des pays dans django avec django-countries</a>
+    </h1>
+    <ul class="list-inline">
+      <li class="post-date">
+        <a class="text-muted" href="/django-countries.html" title="2015-10-31T00:00:00+01:00">sam. 31 octobre 2015</a>
+      </li>
+      <li class="muted">&middot;</li>
+      <li class="post-category">
+        <a href="http://dotmobo.github.io/category/django.html">Django</a>
+      </li>
+        <li class="muted">&middot;</li>
+        <li>
+            <a href="/tag/python.html">python</a>,             <a href="/tag/django.html">django</a>,             <a href="/tag/django-countries.html">django-countries</a>,             <a href="/tag/countries.html">countries</a>,             <a href="/tag/pays.html">pays</a>        </li>
+    </ul>
+    <div class="post-content">
+      <img alt="Django" class="align-right" src="./images/djangopony.png" />
+<p>En développement web, on a souvent besoin de faire des formulaires. Et
+notamment des formulaires d'inscription, avec saisie du nom, prénom, adresse et
+donc pays.</p>
+<p>Tu m'accorderas que laisser le champs <strong>Pays</strong> libre risque de générer des
+erreurs de saisie, et que gérer manuellement une liste déroulante de pays, c'est
+ennuyeux à mourir.</p>
+<p>Rassure-toi, une solution existe, et c'est là qu'intervient
+<a class="reference external" href="https://github.com/SmileyChris/django-countries">django-countries</a>.</p>
+<p>Django-countries, c'est la librairie qui ne paie pas mine mais qui, l'air de
+rien, est vachement pratique. Elle propose:</p>
+<ul class="simple">
+<li>Une liste déroulante pour les formulaires, contenant la liste de tous les
+pays avec leurs <a class="reference external" href="http://www.iso.org/iso/fr/country_codes.htm">codes iso 3166</a>,
+traduite dans 25 langues.</li>
+<li>Des widgets.</li>
+<li>Des fichiers statiques correspondant aux icônes des drapeaux des pays.</li>
+<li>Un champ pays pour les modèles.</li>
+<li>Une compatibilité avec <a class="reference external" href="http://www.django-rest-framework.org/">Django Rest Framework</a>.</li>
+</ul>
+<p>Tu l'installes via pip:</p>
+<div class="highlight"><pre>pip install django-countries
+</pre></div>
+<p>Et tu ajoutes <strong>django_countries</strong> dans la liste de tes <strong>INSTALLED_APPS</strong>
+dans le fichier <em>settings.py</em> de django.</p>
+<div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span><span class="o">...</span><span class="p">,</span>
+                  <span class="n">django_countries</span>
+<span class="p">)</span>
+</pre></div>
+<p>Au niveau de ton modèle, tu peux maintenant utiliser le champ <strong>CountryField</strong>,
+qui est basé sur <strong>CharField</strong> et qui correspond au code iso 3166:</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">django_countries.fields</span> <span class="kn">import</span> <span class="n">CountryField</span>
+
+<span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">(</span><span class="n">blank_label</span><span class="o">=</span><span class="s">&#39;(select country)&#39;</span><span class="p">)</span>
+</pre></div>
+<p>Tu peux maintenant créer une personne avec un pays associé, et accéder aux
+différents attributs du pays comme son code, son icône, son nom et autres:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Chris&#39;</span><span class="p">,</span> <span class="n">country</span><span class="o">=</span><span class="s">&#39;NZ&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span>
+<span class="n">Country</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="s">&#39;NZ&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">name</span>
+<span class="s">&#39;New Zealand&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">flag</span>
+<span class="s">&#39;/static/flags/nz.gif&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">alpha3</span>
+<span class="s">&#39;NZL&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">numeric</span>
+<span class="s">&#39;554&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">numeric_padded</span>
+<span class="s">&#39;554&#39;</span>
+</pre></div>
+<p>Dans le formulaire associé à ton modèle, tu peux aussi utiliser un widget qui va
+afficher le drapeau du pays à côté de la liste déroulante:</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django_countries.widgets</span> <span class="kn">import</span> <span class="n">CountrySelectWidget</span>
+
+<span class="k">class</span> <span class="nc">PersonForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Person</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;country&#39;</span><span class="p">)</span>
+        <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;country&#39;</span><span class="p">:</span> <span class="n">CountrySelectWidget</span><span class="p">()}</span>
+</pre></div>
+<p>Dans le <em>settings.py</em>, on peut spécifier les pays à utiliser:</p>
+<div class="highlight"><pre><span class="n">COUNTRIES_ONLY</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;NZ&#39;</span><span class="p">,</span> <span class="s">&#39;AU&#39;</span><span class="p">]</span>
+</pre></div>
+<p>Ou carrément customiser la liste:</p>
+<div class="highlight"><pre><span class="n">COUNTRIES_OVERRIDE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;NZ&#39;</span><span class="p">:</span> <span class="n">_</span><span class="p">(</span><span class="s">&#39;Middle Earth&#39;</span><span class="p">),</span>
+    <span class="s">&#39;AU&#39;</span><span class="p">:</span> <span class="bp">None</span>
+<span class="p">}</span>
+</pre></div>
+<p>Et on a donc également une compatibilité Django Rest Framework en modifiant
+le serializer de cette manière:</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">PersonSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="n">country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">()</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Person</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;email&#39;</span><span class="p">,</span> <span class="s">&#39;country&#39;</span><span class="p">)</span>
+</pre></div>
+<p>Je ne suis pas rentré dans le détail de la customisation pour rester simple,
+mais il est possible de modifier pas mal de chose au niveau de la liste,
+du champ, de l'affichage et du paramétrage.</p>
+<p>A voir dans la doc officielle si ça t'intéresse!</p>
+
+    </div>
+  </div>
+  <hr class="separator">
+  <div class="col-md-8 col-md-offset-2">
+  <div id="disqus_thread">
+    <script>
+      var disqus_shortname = 'dotmobo';
+      (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] ||
+         document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>
+      Activez Javascript pour voir 
+      <a href="https://disqus.com/?ref_noscript=dotmobo">
+        les commentaires Disqus.
+      </a>
+    </noscript>
+    <a href="https://disqus.com" class="dsq-brlink">
+      Commentaires de blog par <span class="logo-disqus">Disqus</span>
+    </a>
+  </div>
+  </div>
+  </div>
+<footer class="footer">
+  <div class="container">
+    <p class="text-center">
+      dotmobo, <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>.
+    </p>
+    <div class="text-center">
+      G&eacute;n&eacute;r&eacute; par <a href="http://getpelican.com" target="_blank">Pelican</a> avec le th&egrave;me <a href="https://github.com/dotmobo/pelican-alchemy">alchemy</a>.
+    </div>
+  </div>
+</footer> <!-- /.footer -->
+  <script src="http://dotmobo.github.io/theme/js/jquery.min.js"></script>
+  <script src="http://dotmobo.github.io/theme/js/bootstrap.min.js"></script>
+</body> <!-- 42 -->
+
+</html>

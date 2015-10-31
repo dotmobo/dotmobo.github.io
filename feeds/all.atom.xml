@@ -1,5 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>DotMobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2015-10-25T00:00:00+02:00</updated><entry><title>Intégration continue sous Github avec Tox, Travis, Coveralls et Landscape</title><link href="http://dotmobo.github.io/integration-continue.html" rel="alternate"></link><updated>2015-10-25T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-10-25:integration-continue.html</id><summary type="html">&lt;img alt="Travis" class="align-right" src="https://travis-ci.com/img/travis-mascot-200px.png" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>DotMobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2015-10-31T00:00:00+01:00</updated><entry><title>Gestion des pays dans django avec django-countries</title><link href="http://dotmobo.github.io/django-countries.html" rel="alternate"></link><updated>2015-10-31T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-10-31:django-countries.html</id><summary type="html">&lt;img alt="Django" class="align-right" src="./images/djangopony.png" /&gt;
+&lt;p&gt;En développement web, on a souvent besoin de faire des formulaires. Et
+notamment des formulaires d'inscription, avec saisie du nom, prénom, adresse et
+donc pays.&lt;/p&gt;
+&lt;p&gt;Tu m'accorderas que laisser le champs &lt;strong&gt;Pays&lt;/strong&gt; libre risque de générer des
+erreurs de saisie, et que gérer manuellement une liste déroulante de pays, c'est
+ennuyeux à mourir.&lt;/p&gt;
+&lt;p&gt;Rassure-toi, une solution existe, et c'est là qu'intervient
+&lt;a class="reference external" href="https://github.com/SmileyChris/django-countries"&gt;django-countries&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Django-countries, c'est la librairie qui ne paie pas mine mais qui, l'air de
+rien, est vachement pratique. Elle propose:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Une liste déroulante pour les formulaires, contenant la liste de tous les
+pays avec leurs &lt;a class="reference external" href="http://www.iso.org/iso/fr/country_codes.htm"&gt;codes iso 3166&lt;/a&gt;,
+traduite dans 25 langues.&lt;/li&gt;
+&lt;li&gt;Des widgets.&lt;/li&gt;
+&lt;li&gt;Des fichiers statiques correspondant aux icônes des drapeaux des pays.&lt;/li&gt;
+&lt;li&gt;Un champ pays pour les modèles.&lt;/li&gt;
+&lt;li&gt;Une compatibilité avec &lt;a class="reference external" href="http://www.django-rest-framework.org/"&gt;Django Rest Framework&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tu l'installes via pip:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;pip install django-countries
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et tu ajoutes &lt;strong&gt;django_countries&lt;/strong&gt; dans la liste de tes &lt;strong&gt;INSTALLED_APPS&lt;/strong&gt;
+dans le fichier &lt;em&gt;settings.py&lt;/em&gt; de django.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;INSTALLED_APPS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                  &lt;span class="n"&gt;django_countries&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Au niveau de ton modèle, tu peux maintenant utiliser le champ &lt;strong&gt;CountryField&lt;/strong&gt;,
+qui est basé sur &lt;strong&gt;CharField&lt;/strong&gt; et qui correspond au code iso 3166:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.db&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django_countries.fields&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;CountryField&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CharField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;country&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CountryField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;blank_label&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;(select country)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu peux maintenant créer une personne avec un pays associé, et accéder aux
+différents attributs du pays comme son code, son icône, son nom et autres:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Chris&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;country&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;NZ&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;country&lt;/span&gt;
+&lt;span class="n"&gt;Country&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;NZ&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;country&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;
+&lt;span class="s"&gt;&amp;#39;New Zealand&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;country&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;flag&lt;/span&gt;
+&lt;span class="s"&gt;&amp;#39;/static/flags/nz.gif&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;country&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;alpha3&lt;/span&gt;
+&lt;span class="s"&gt;&amp;#39;NZL&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;country&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;numeric&lt;/span&gt;
+&lt;span class="s"&gt;&amp;#39;554&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;person&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;country&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;numeric_padded&lt;/span&gt;
+&lt;span class="s"&gt;&amp;#39;554&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Dans le formulaire associé à ton modèle, tu peux aussi utiliser un widget qui va
+afficher le drapeau du pays à côté de la liste déroulante:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django_countries.widgets&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;CountrySelectWidget&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;PersonForm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ModelForm&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Meta&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Person&lt;/span&gt;
+        &lt;span class="n"&gt;fields&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;country&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;widgets&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;country&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CountrySelectWidget&lt;/span&gt;&lt;span class="p"&gt;()}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Dans le &lt;em&gt;settings.py&lt;/em&gt;, on peut spécifier les pays à utiliser:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;COUNTRIES_ONLY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;NZ&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;AU&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ou carrément customiser la liste:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;COUNTRIES_OVERRIDE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;#39;NZ&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Middle Earth&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;#39;AU&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et on a donc également une compatibilité Django Rest Framework en modifiant
+le serializer de cette manière:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;PersonSerializer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;serializers&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ModelSerializer&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;country&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CountryField&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Meta&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Person&lt;/span&gt;
+        &lt;span class="n"&gt;fields&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;email&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;country&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Je ne suis pas rentré dans le détail de la customisation pour rester simple,
+mais il est possible de modifier pas mal de chose au niveau de la liste,
+du champ, de l'affichage et du paramétrage.&lt;/p&gt;
+&lt;p&gt;A voir dans la doc officielle si ça t'intéresse!&lt;/p&gt;
+</summary><category term="python"></category><category term="django"></category><category term="django-countries"></category><category term="countries"></category><category term="pays"></category></entry><entry><title>Intégration continue sous Github avec Tox, Travis, Coveralls et Landscape</title><link href="http://dotmobo.github.io/integration-continue.html" rel="alternate"></link><updated>2015-10-25T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-10-25:integration-continue.html</id><summary type="html">&lt;img alt="Travis" class="align-right" src="./images/travis.png" /&gt;
 &lt;p&gt;L'&lt;a class="reference external" href="https://fr.wikipedia.org/wiki/Int%C3%A9gration_continue"&gt;intégration continue&lt;/a&gt;
 est une part très importante d'un projet, à ne surtout pas négliger.
 Elle permet de vérifier constamment son code via des tests unitaires,
@@ -240,7 +326,7 @@ ton projet sur ces trois plate-formes.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Commit&lt;/em&gt; et rends-toi sur ton dépôt github pour voir
 &lt;a class="reference external" href="https://github.com/dotmobo/demo-integration-continue"&gt;le résultat&lt;/a&gt;!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="python"></category><category term="github"></category><category term="travis"></category><category term="tox"></category><category term="intégration continue"></category><category term="coveralls"></category><category term="tests unitaires"></category><category term="landscape"></category><category term="coverage"></category></entry><entry><title>Passer de Sublime Text à Atom pour développer en Python</title><link href="http://dotmobo.github.io/sublime-text-to-atom.html" rel="alternate"></link><updated>2015-10-17T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-10-17:sublime-text-to-atom.html</id><summary type="html">&lt;img alt="Pelican" class="align-right" src="https://avatars0.githubusercontent.com/u/1089146?v=3&amp;amp;s=200" /&gt;
+</summary><category term="python"></category><category term="github"></category><category term="travis"></category><category term="tox"></category><category term="intégration continue"></category><category term="coveralls"></category><category term="tests unitaires"></category><category term="landscape"></category><category term="coverage"></category></entry><entry><title>Passer de Sublime Text à Atom pour développer en Python</title><link href="http://dotmobo.github.io/sublime-text-to-atom.html" rel="alternate"></link><updated>2015-10-17T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-10-17:sublime-text-to-atom.html</id><summary type="html">&lt;img alt="Pelican" class="align-right" src="./images/atom.png" /&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;&lt;em&gt;&amp;quot;Sublime Text, c'est vraiment pas mal mais bon, c'est pas libre.&amp;quot;&lt;/em&gt;&lt;/div&gt;
 &lt;div class="line"&gt;&lt;em&gt;&amp;quot;Eclipse, c'est lourd, trop lourd.&amp;quot;&lt;/em&gt;&lt;/div&gt;
@@ -372,7 +458,7 @@ fichier &lt;em&gt;snippets.cson&lt;/em&gt; du répertoire &lt;em&gt;~/.atom&lt;/
 &lt;p&gt;Utilise &lt;em&gt;alt+shift+s&lt;/em&gt; pour rechercher tes snippets.&lt;/p&gt;
 &lt;p&gt;Enfin tu vas également pouvoir sauvegarder ta configuration sur Github de &lt;a class="reference external" href="https://github.com/dotmobo/dotatom"&gt;cette
 manière&lt;/a&gt; par exemple.&lt;/p&gt;
-</summary><category term="sublime text"></category><category term="python"></category><category term="atom"></category><category term="éditeur"></category><category term="github"></category><category term="code"></category></entry><entry><title>Générer son site statique grâce à Pelican</title><link href="http://dotmobo.github.io/pelican.html" rel="alternate"></link><updated>2015-10-11T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-10-11:pelican.html</id><summary type="html">&lt;img alt="Pelican" class="align-right" src="https://avatars0.githubusercontent.com/u/2043492?v=3&amp;amp;s=200" /&gt;
+</summary><category term="sublime text"></category><category term="python"></category><category term="atom"></category><category term="éditeur"></category><category term="github"></category><category term="code"></category></entry><entry><title>Générer son site statique grâce à Pelican</title><link href="http://dotmobo.github.io/pelican.html" rel="alternate"></link><updated>2015-10-11T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-10-11:pelican.html</id><summary type="html">&lt;img alt="Pelican" class="align-right" src="./images/pelican.png" /&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt; est un outil vraiment chouette pour
 générer rapidement un site statique comme un blog, afin de le publier via
 &lt;a class="reference external" href="https://pages.github.com"&gt;Github Pages&lt;/a&gt; par exemple.&lt;/p&gt;

@@ -23,14 +23,14 @@ ennuyeux à mourir.
 Rassure-toi, une solution existe, et c'est là qu'intervient
 `django-countries <https://github.com/SmileyChris/django-countries>`_.
 
-Django-countries, c'est la librairie qui ne paie pas mine mais qui, l'air de
+Django-countries, c'est la librairie qui ne paie pas de mine mais qui, l'air de
 rien, est vachement pratique. Elle propose:
 
 * Une liste déroulante pour les formulaires, contenant la liste de tous les
   pays avec leurs `codes iso 3166 <http://www.iso.org/iso/fr/country_codes.htm>`_,
   traduite dans 25 langues.
 * Des widgets.
-* Des fichiers statiques correspondant aux icônes des drapeaux des pays.
+* Des fichiers statiques correspondants aux icônes des drapeaux des pays.
 * Un champ pays pour les modèles.
 * Une compatibilité avec `Django Rest Framework <http://www.django-rest-framework.org/>`_.
 
@@ -109,7 +109,7 @@ Ou carrément customiser la liste:
         'AU': None
     }
 
-Et on a donc également une compatibilité Django Rest Framework en modifiant
+Et on a donc également une compatibilité avec Django Rest Framework en modifiant
 le serializer de cette manière:
 
 .. code-block:: python
@@ -122,7 +122,7 @@ le serializer de cette manière:
             fields = ('name', 'email', 'country')
 
 Je ne suis pas rentré dans le détail de la customisation pour rester simple,
-mais il est possible de modifier pas mal de chose au niveau de la liste,
+mais il est possible de modifier pas mal de choses au niveau de la liste,
 du champ, de l'affichage et du paramétrage.
 
 A voir dans la doc officielle si ça t'intéresse!

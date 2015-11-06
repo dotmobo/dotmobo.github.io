@@ -1,41 +1,41 @@
 TinyDB, la base de données pure python
-**************************************
+######################################
 
-:date: 2015-08-11
+:date: 2015-11-06
 :tags: tinydb,python,base de données,bdd,nosql
 :category: Python
 :slug: tinydb
 :authors: Morgan
 :summary: TinyDB, la base de données pure python
 
-.. image:: https://raw.githubusercontent.com/msiemens/tinydb/master/artwork/logo.png
+.. image:: ./images/tinydb.png
     :alt: TinyDB
     :align: right
 
 `TinyDB <https://github.com/msiemens/tinydb>`_, ce n'est pas la base de données qui va tout révolutionner, mais
 c'est le petit outil sympa à avoir à portée de main.
 
-Elle est orientée document, comme `MongoDB <https://www.mongodb.org/>`_, en se basant sur des fichiers `JSON <http://www.json.org/>`_.
+Elle est orientée *document*, comme `MongoDB <https://www.mongodb.org/>`_, en se basant sur des fichiers `JSON <http://www.json.org/>`_.
 
-Le code est écrit en pure python, sans besoin d'aucune dépendances, et est compatible
+Le code est écrit en pure python, sans besoin d'aucune dépendance, et est compatible
 python 2 et 3.
 
-Niveau utilisation, il ne faut espérer des perfs de malade, ce n'est pas fait
+Niveau utilisation, il ne faut pas espérer des perfs de malade ; ce n'est pas fait
 pour ça.
 
 Par contre, si tu as besoin d'une mini BDD pour afficher des news sur
-un site par exemple, ça fera l'affaire.
+un site, ça fera l'affaire.
 
 Personnellement, je l'utilise plutôt lors de la rédaction de tests unitaires,
 lorsque j'ai besoin d'une batterie de données de test.
 
-Pour l'utiliser, tu l'installes via pip:
+Pour l'utiliser, tu l'installes via *pip*:
 
 .. code-block:: bash
 
     pip install tinydb
 
-Tu crées par exemple, une base de données contenant des légumes:
+Tu crées, par exemple, une base de données contenant des légumes:
 
 .. code-block:: python
 
@@ -45,7 +45,7 @@ Tu crées par exemple, une base de données contenant des légumes:
 Le fichier *meslegumes.json* correspond à ta base de données et s'est créé dans
 le répertoire courant.
 
-Tu crée une table *legumes*. Évite les caractères spéciaux dans le nom de la table,
+Tu crées alors une table *legumes*. Évite les caractères spéciaux dans le nom de la table,
 ça peut poser problème:
 
 .. code-block:: python
@@ -78,7 +78,7 @@ Par exemple, si tu veux récupérer toutes les carottes:
     >>> table.search(where('type') == 'carotte')
     [{u'nombre': 5, u'type': u'carotte'}]
 
-Ou tous les légumes qui sont plus de 2:
+Ou tous les légumes qui sont plus de deux:
 
 .. code-block:: python
 
@@ -132,13 +132,13 @@ Tu peux également stocker les légumes en mémoire à la place du fichier json:
     >>> from tinydb.storages import MemoryStorage
     >>> db = TinyDB(storage=MemoryStorage)
 
-Et utilises des middlewares, pour faire du cache par exemple:
+Et utiliser des *middlewares*, pour faire du cache par exemple:
 
 .. code-block:: python
 
     >>> from tinydb.storages import JSONStorage
     >>> from tinydb.middlewares import CachingMiddleware
-    >>> db = TinyDB('/path/to/db.json', storage=CachingMiddleware(JSONStorage))
+    >>> db = TinyDB('meslegumes.json', storage=CachingMiddleware(JSONStorage))
 
 Enfin, il est également possible de customiser TinyDB en écrivant ton propre
 `Serializer <http://tinydb.readthedocs.org/en/latest/extend.html#write-a-serializer>`_,

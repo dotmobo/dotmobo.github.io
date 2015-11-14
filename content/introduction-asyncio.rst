@@ -39,7 +39,8 @@ un aggrégateur de données html performant. Le tutorial sera en python 3.5,
 ce qui te permettra d'utiliser les nouveaux mots clés **async** et **await**.
 
 Tu utiliseras la boucle d'évenement, les coroutines et les objets **Future**.
-L'idée, c'est surtout de passer en revue l'ensemble des concepts et mots clés utiles.
+L'idée n'est pas de faire le code le plus simple possible, mais surtout de passer
+en revue l'ensemble des concepts et mots-clés utiles.
 
 Pour Asyncio, rien besoin d'installer à part python 3.5. Par contre, il va te
 falloir aiohttp pour faire les requêtes html:
@@ -81,12 +82,12 @@ Plusieurs explications sont nécessaires ici:
    Ça vient remplacer le **@asyncio.coroutine** de python 3.4.
  * **async with**: Permet d'utiliser des *context managers* asynchrones.
  * **await**: Bloque l'exécution de la coroutine jusqu'à la fin du traitement
-   de l'instruction, ici **response.json()*. Ça vient remplacer le **yield from**
+   de l'instruction, ici **response.json()**. Ça vient remplacer le **yield from**
    de python 3.4.
  * **future.set_result**: Définit la valeur de l'objet **Future**.
 
  Ensuite, dans ton *main*, tu initalise ta boucle, ton client aiohttp, ta liste
- de tâches et ta liste de résultats
+ de tâches et ta liste de résultats:
 
 .. code-block:: python
 
@@ -129,7 +130,7 @@ des résultats sur la sortie standard:
     loop.run_until_complete(asyncio.wait(list_tasks))
     print(list_results)
 
-Enfin, tu peux fermer le client aiohttp et la boucle d'évenement.
+Enfin, tu peux fermer le client aiohttp et la boucle d'évenements:
 
 .. code-block:: python
 
@@ -197,7 +198,7 @@ Et hop, tu exécute tout ça:
     user	0m0.263s
     sys	0m0.033s
 
-"Ok c'est sympa mais est-ce que c'est vraiment plus rapide en asynchrone ?"
+*"Ok c'est sympa mais est-ce que c'est vraiment plus rapide en asynchrone ?"*
 
 Tu veux une preuve ? En voici une; le même programme sans asyncio:
 
@@ -234,5 +235,5 @@ Tu l'exécutes:
 
 Le double de temps ! Convaincu ?
 
-Alors évidemment, ce n'est qu'un simple cas d'usage. Il y a beaucoup plus à voir
-dans la doc officielle.
+Alors évidemment, ce n'est qu'un simple cas d'usage. Il y a beaucoup, mais
+vraiment beaucoup plus à voir dans la doc officielle.

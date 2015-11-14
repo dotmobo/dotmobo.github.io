@@ -31,13 +31,13 @@ et `la vidéo de Jonathan Worthington <https://www.youtube.com/watch?v=JpqnNCx7w
 Asyncio utilise une boucle d'événements qui va contenir l'ensemble de nos tâches
 à exécuter. Ces tâches devront être sous la forme de `coroutines <http://sametmax.com/quest-ce-quune-coroutine-en-python-et-a-quoi-ca-sert/>`_,
 qui sont des sortes de générateurs inversés, c'est-à-dire qu'on y envoie des données à la place
-d'en reçevoir. C'est le côté lazy des coroutines qui permet à Asyncio de les
+d'en reçevoir. C'est le côté *lazy* des coroutines qui permet à Asyncio de les
 exécuter en asynchrone.
 
 Trêve de blabla et passons à la pratique. Il y a déjà beaucoup d'articles sur le net
 traitant du fonctionnement d'Asyncio et ce n'est pas forcément facile
 de s'y retrouver. Tu vas donc voir ici un cas d'usage concret, qui est le développement
-d'un aggrégateur de données json performant. Le tutorial sera en python 3.5,
+d'un aggrégateur de données *json* performant. Le tutorial sera en python 3.5,
 ce qui te permettra d'utiliser les nouveaux mots clés **async** et **await**.
 
 Tu utiliseras la boucle d'événements, les coroutines et les objets **Future**.
@@ -85,7 +85,7 @@ Plusieurs explications sont nécessaires ici:
 * **await**: Bloque l'exécution de la coroutine jusqu'à la fin du traitement de l'instruction, ici **response.json()**. Ça vient remplacer le **yield from** de python 3.4.
 * **future.set_result**: Définit la valeur de l'objet **Future**.
 
-Ensuite, dans ton *main*, tu initalise ta boucle, ton client *aiohttp*, ta liste
+Ensuite, dans ton *main*, tu initalises ta boucle, ton client *aiohttp*, ta liste
 de tâches et ta liste de résultats:
 
 .. code-block:: python
@@ -121,7 +121,7 @@ Pour chaque url, tu vas:
 Puis, il suffit de lancer l'exécution des tâches de manière asynchrone via
 la boucle d'événements et sa méthode **run_until_complete**. Ton programme
 sera bloqué ici jusqu'à la fin du traitement de toutes les tâches et donc de la
-réception des objets **Future** via **asyncio.wait**. A la fin, il affiche la liste
+réception des objets **Future** via **asyncio.wait**. À la fin, il affiche la liste
 des résultats sur la sortie standard:
 
 .. code-block:: python
@@ -192,7 +192,9 @@ Et hop, tu exécutes tout ça:
 .. code-block:: bash
 
     $ time python asyncio35.py
-    [{'ip': '109.221.53.120'}, {'Host': 'headers.jsontest.com', 'User-Agent': 'Python/3.5 aiohttp/0.18.4', 'Accept': '*/*', 'Content-Length': '0'}, {'date': '11-14-2015', 'time': '03:16:45 PM', 'milliseconds_since_epoch': 1447514205836}]
+    [{'ip': '109.221.53.120'},
+    {'Host': 'headers.jsontest.com', 'User-Agent': 'Python/3.5 aiohttp/0.18.4', 'Accept': '*/*', 'Content-Length': '0'},
+    {'date': '11-14-2015', 'time': '03:16:45 PM', 'milliseconds_since_epoch': 1447514205836}]
 
     real	0m0.511s
     user	0m0.263s
@@ -227,7 +229,9 @@ Tu l'exécutes:
 .. code-block:: bash
 
     $ time python noasyncio35.py
-    [{'ip': '109.221.53.120'}, {'Host': 'headers.jsontest.com', 'User-Agent': 'python-requests/2.8.1', 'Accept': '*/*'}, {'date': '11-14-2015', 'time': '11:57:03 AM', 'milliseconds_since_epoch': 1447502223337}]
+    [{'ip': '109.221.53.120'},
+    {'Host': 'headers.jsontest.com', 'User-Agent': 'python-requests/2.8.1', 'Accept': '*/*'},
+    {'date': '11-14-2015', 'time': '11:57:03 AM', 'milliseconds_since_epoch': 1447502223337}]
 
     real	0m1.188s
     user	0m0.247s

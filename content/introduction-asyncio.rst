@@ -31,7 +31,7 @@ et `la vidéo de Jonathan Worthington <https://www.youtube.com/watch?v=JpqnNCx7w
 Asyncio utilise une boucle d'événements qui va contenir l'ensemble de nos tâches
 à exécuter. Ces tâches devront être sous la forme de `coroutines <http://sametmax.com/quest-ce-quune-coroutine-en-python-et-a-quoi-ca-sert/>`_,
 qui sont des sortes de générateurs inversés, c'est-à-dire qu'on y envoie des données à la place
-d'en reçevoir. C'est le côté lazy des coroutines qui permet à asyncio de les
+d'en reçevoir. C'est le côté lazy des coroutines qui permet à Asyncio de les
 exécuter en asynchrone.
 
 Trêve de blabla et passons à la pratique. Il y a déjà beaucoup d'articles sur le net
@@ -119,7 +119,7 @@ Pour chaque url, tu vas:
         future.add_done_callback(fill_results_list)
 
 Puis, il suffit de lancer l'exécution des tâches de manière asynchrone via
-la boucle d'événement et sa méthode **run_until_complete**. Ton programme
+la boucle d'événements et sa méthode **run_until_complete**. Ton programme
 sera bloqué ici jusqu'à la fin du traitement de toutes les tâches et donc de la
 réception des objets **Future** via **asyncio.wait**. A la fin, il affiche la liste
 des résultats sur la sortie standard:

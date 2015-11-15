@@ -225,7 +225,7 @@ des commentaires? Il me faut bien une partie dynamique non ?". Pas de panique,
 `Disqus <https://disqus.com>`_ est là pour ça.
 
 Il te suffit de te créer un compte sur Disqus et d'y enregistrer ton site en
-utilisant le paramétrage **universal-embed-code**. À partir de la, tu vas pouvoir
+utilisant le paramétrage **universal-embed-code**. À partir de là, tu vas pouvoir
 le configurer via *http://<username>.disqus.com/admin/settings*.
 
 Enfin, tu l'actives via ton fichier de conf de prod *publishconf.py*:

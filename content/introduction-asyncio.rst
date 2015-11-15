@@ -20,7 +20,7 @@ C'est la réponse aux `goroutines <https://gobyexample.com/goroutines>`_
 de `Go <https://golang.org/>`_, inscrivant ainsi Python dans la liste des
 langages permettant la programmation asynchrone. Ce type de programmation permet
 de ne pas bloquer son programme lors des opérations I/O qui peuvent durer un
-certain temps et de réagir lors la réception des informations au
+certain temps et de réagir lors de la réception des informations au
 lieu de les attendre. Ça permet ainsi d'optimiser et d'améliorer fortement les
 performances de son code.
 
@@ -53,8 +53,8 @@ falloir `aiohttp <https://github.com/KeepSafe/aiohttp>`_ pour faire les requête
 
 Et c'est là où le bât blesse. Tu ne pourras pas utiliser `requests <http://docs.python-requests.org/en/latest/>`_ par exemple, car
 il faut utiliser des outils compatibles avec Asyncio, c'est-à-dire écrit sous forme
-de coroutines. Sinon, le programme bloquera la boucle d'évenement et ça ne sera
-pas asynchrone. Pareil pour les accès bdd, il faut utiliser `aiopg <https://github.com/aio-libs/aiopg>`_ pour postgresql par exemple.
+de coroutines. Sinon, le programme bloquera la boucle d'événements et ça ne sera
+pas asynchrone. Pareil pour les accès *BDD*, il faut utiliser `aiopg <https://github.com/aio-libs/aiopg>`_ pour postgresql par exemple.
 
 Tu crées un fichier *asyncio35.py*, tu importes *aiohttp* et *asyncio* et tu déclares ta liste
 d'urls:

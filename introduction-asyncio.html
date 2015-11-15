@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="http://dotmobo.github.io/introduction-asyncio.html" />
+
+    <title>  DotMobo &mdash; Introduction à Asyncio
+</title>
+
+
+
+      <link type="application/atom+xml" rel="alternate" href="/feeds/all.atom.xml"  title="DotMobo Atom Feed">
+
+    <link rel="stylesheet" href="http://dotmobo.github.io/theme/css/style.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68852219-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+    <meta name="author" content="Morgan">
+    <meta name="description" content="Introduction à Asyncio">
+  <meta name="tags" contents="python, asychrone, asyncio, aiohttp, requests, json, http, async, await, coroutine, ">
+</head>
+
+<body>
+<header class="header">
+  <div class="container">
+      <div class="header-image pull-left">
+        <a class="nodec" href="http://dotmobo.github.io"><img src=https://pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg></a>
+      </div>
+    <div class="header-inner">
+      <h1 class="header-name">
+        <a class="nodec" href="http://dotmobo.github.io">DotMobo</a>
+      </h1>
+      <h3 class="header-text">Blog d'un Pythoniste Djangonaute</h3>
+      <ul class="header-menu list-inline">
+          <li><a class="nodec" href="http://dotmobo.github.io/categories.html">Cat&eacute;gories</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/tags.html">Tags</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/archives.html">Archives</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec icon-github" href="https://github.com/dotmobo"></a></li>
+          <li><a class="nodec icon-twitter" href="https://twitter.com/dotmobo"></a></li>
+          <li><a class="nodec icon-gplus" href="https://www.google.com/+DotmoboGithubIo6"></a></li>
+          <li><a class="nodec icon-rss" href="/feeds/all.atom.xml"></a></li>
+      </ul>
+    </div>
+  </div>
+</header> <!-- /.header -->  <div class="container">
+  <div class="post full-post">
+    <h1 class="post-title">
+      <a href="/introduction-asyncio.html" title="Permalink to Introduction à Asyncio">Introduction à Asyncio</a>
+    </h1>
+    <ul class="list-inline">
+      <li class="post-date">
+        <a class="text-muted" href="/introduction-asyncio.html" title="2015-11-15T00:00:00+01:00">dim. 15 novembre 2015</a>
+      </li>
+      <li class="muted">&middot;</li>
+      <li class="post-category">
+        <a href="http://dotmobo.github.io/category/python.html">Python</a>
+      </li>
+        <li class="muted">&middot;</li>
+        <li>
+            <a href="/tag/python.html">python</a>,             <a href="/tag/asychrone.html">asychrone</a>,             <a href="/tag/asyncio.html">asyncio</a>,             <a href="/tag/aiohttp.html">aiohttp</a>,             <a href="/tag/requests.html">requests</a>,             <a href="/tag/json.html">json</a>,             <a href="/tag/http.html">http</a>,             <a href="/tag/async.html">async</a>,             <a href="/tag/await.html">await</a>,             <a href="/tag/coroutine.html">coroutine</a>        </li>
+    </ul>
+    <div class="post-content">
+      <img alt="Django" class="align-right" src="./images/python.png" />
+<p>La librairie <a class="reference external" href="http://asyncio.org/">Asyncio</a>
+a fait beaucoup parler d'elle dernièrement, au point d'être
+intégrer dans la bibliothèque standard depuis la version 3.4 de Python.</p>
+<p>C'est la réponse aux <a class="reference external" href="https://gobyexample.com/goroutines">goroutines</a>
+de <a class="reference external" href="https://golang.org/">Go</a>, inscrivant ainsi Python dans la liste des
+langages permettant la programmation asynchrone. Ce type de programmation permet
+de ne pas bloquer son programme lors des opérations I/O qui peuvent durer un
+certain temps et de réagir lors de la réception des informations au
+lieu de les attendre. Ça permet ainsi d'optimiser et d'améliorer fortement les
+performances de son code.</p>
+<p>Je t'invite à te renseigner sur les différences entre programmation asynchrone,
+parallèle et concurrente via <a class="reference external" href="http://sametmax.com/la-difference-entre-la-programmation-asynchrone-parallele-et-concurrente/">l'article de Sam&amp;Max</a>
+et <a class="reference external" href="https://www.youtube.com/watch?v=JpqnNCx7wVY">la vidéo de Jonathan Worthington</a> du monde Perl.</p>
+<p>Asyncio utilise une boucle d'événements qui va contenir l'ensemble de nos tâches
+à exécuter. Ces tâches devront être sous la forme de <a class="reference external" href="http://sametmax.com/quest-ce-quune-coroutine-en-python-et-a-quoi-ca-sert/">coroutines</a>,
+qui sont des sortes de générateurs inversés, c'est-à-dire qu'on y envoie des données à la place
+d'en reçevoir. C'est le côté <em>lazy</em> des coroutines qui permet à Asyncio de les
+exécuter en asynchrone.</p>
+<p>Trêve de blabla et passons à la pratique. Il y a déjà beaucoup d'articles sur le net
+traitant du fonctionnement d'Asyncio et ce n'est pas forcément facile
+de s'y retrouver. Tu vas donc voir ici un cas d'usage concret, qui est le développement
+d'un aggrégateur de données <em>json</em> performant. Le tutorial sera en python 3.5,
+ce qui te permettra d'utiliser les nouveaux mots clés <strong>async</strong> et <strong>await</strong>.</p>
+<p>Tu utiliseras la boucle d'événements, les coroutines et les objets <strong>Future</strong>.
+L'idée n'est pas de faire le code le plus simple et performant possible, mais plutôt de passer
+en revue l'ensemble des concepts et mots-clés utiles.</p>
+<p>Pour Asyncio, il n'y a rien à installer à part python 3.5. Par contre, il va te
+falloir <a class="reference external" href="https://github.com/KeepSafe/aiohttp">aiohttp</a> pour faire les requêtes http:</p>
+<div class="highlight"><pre>pip install aiohttp
+</pre></div>
+<p>Et c'est là où le bât blesse. Tu ne pourras pas utiliser <a class="reference external" href="http://docs.python-requests.org/en/latest/">requests</a> par exemple, car
+il faut utiliser des outils compatibles avec Asyncio, c'est-à-dire écrit sous forme
+de coroutines. Sinon, le programme bloquera la boucle d'événements et ça ne sera
+pas asynchrone. Pareil pour les accès <em>BDD</em>, il faut utiliser <a class="reference external" href="https://github.com/aio-libs/aiopg">aiopg</a> pour postgresql par exemple.</p>
+<p>Tu crées un fichier <em>asyncio35.py</em>, tu importes <em>aiohttp</em> et <em>asyncio</em> et tu déclares ta liste
+d'urls:</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">aiohttp</span>
+
+<span class="n">URLS</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;http://ip.jsontest.com/&#39;</span><span class="p">,</span> <span class="s">&#39;http://headers.jsontest.com/&#39;</span><span class="p">,</span>
+        <span class="s">&#39;http://date.jsontest.com/&#39;</span><span class="p">]</span>
+</pre></div>
+<p>Tu vas alors créer ta coroutine qui va récupérer les données renvoyées par une
+url et les insérer dans un objet <strong>Future</strong>:</p>
+<div class="highlight"><pre><span class="n">async</span> <span class="k">def</span> <span class="nf">call_url</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Coroutine récupérant les données provenant d&#39;une url &quot;&quot;&quot;</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="n">future</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+<p>Plusieurs explications sont nécessaires ici:</p>
+<ul class="simple">
+<li><strong>async</strong>: Nouveau mot-clé introduit en python 3.5, à mettre avant le <strong>def</strong>, qui permet de spécifier que cette méthode est une coroutine asynchrone. Ça vient remplacer le <strong>&#64;asyncio.coroutine</strong> de python 3.4.</li>
+<li><strong>async with</strong>: Permet d'utiliser des <em>context managers</em> asynchrones.</li>
+<li><strong>await</strong>: Bloque l'exécution de la coroutine jusqu'à la fin du traitement de l'instruction, ici <strong>response.json()</strong>. Ça vient remplacer le <strong>yield from</strong> de python 3.4.</li>
+<li><strong>future.set_result</strong>: Définit la valeur de l'objet <strong>Future</strong>.</li>
+</ul>
+<p>Ensuite, dans ton <em>main</em>, tu initalises ta boucle, ton client <em>aiohttp</em>, ta liste
+de tâches et ta liste de résultats:</p>
+<div class="highlight"><pre><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c"># On initialise les variables</span>
+    <span class="n">list_results</span><span class="p">,</span> <span class="n">list_tasks</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientSession</span><span class="p">(</span><span class="n">loop</span><span class="o">=</span><span class="n">loop</span><span class="p">)</span>
+</pre></div>
+<p>Tu ajoutes ton <em>callback</em> pour les objets <strong>Future</strong>:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">fill_results_list</span><span class="p">(</span><span class="n">future</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Callback de l&#39;objet future qui ajoute sa valeur dans une liste &quot;&quot;&quot;</span>
+    <span class="n">list_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
+</pre></div>
+<p>Pour chaque url, tu vas:</p>
+<ul class="simple">
+<li>créer un objet <strong>Future</strong>.</li>
+<li>ajouter la méthode <strong>call_url</strong> à la liste des tâches à accomplir via la méthode <strong>ensure_future</strong>.</li>
+<li>ajouter ton <em>callback</em> <strong>fill_results_list</strong> à ton objet <strong>Future</strong> via la méthode <strong>add_done_callback</strong>.</li>
+</ul>
+<div class="highlight"><pre><span class="c"># On créé les objets Future et la liste des tâches</span>
+<span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">URLS</span><span class="p">:</span>
+    <span class="n">future</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Future</span><span class="p">()</span>
+    <span class="n">list_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">ensure_future</span><span class="p">(</span><span class="n">call_url</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="p">)))</span>
+    <span class="n">future</span><span class="o">.</span><span class="n">add_done_callback</span><span class="p">(</span><span class="n">fill_results_list</span><span class="p">)</span>
+</pre></div>
+<p>Puis, il suffit de lancer l'exécution des tâches de manière asynchrone via
+la boucle d'événements et sa méthode <strong>run_until_complete</strong>. Ton programme
+sera bloqué ici jusqu'à la fin du traitement de toutes les tâches et donc de la
+réception des objets <strong>Future</strong> via <strong>asyncio.wait</strong>. À la fin, il affiche la liste
+des résultats sur la sortie standard:</p>
+<div class="highlight"><pre><span class="c"># Exécution des tâches</span>
+<span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">list_tasks</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list_results</span><span class="p">)</span>
+</pre></div>
+<p>Enfin, tu peux fermer le client <em>aiohttp</em> et la boucle d'événements:</p>
+<div class="highlight"><pre><span class="c"># Ferme le client et la boucle</span>
+<span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">loop</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+<p>Encore une chose concernant la boucle. Celle-ci est unique pour tout le programme.
+Donc il faut faire attention quand tu la manipules à plusieurs endroits du code,
+et quand tu la fermes.</p>
+<p>Voici le résultat final :</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">aiohttp</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Aggrégation de données provenant d&#39;urls</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">URLS</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;http://ip.jsontest.com/&#39;</span><span class="p">,</span> <span class="s">&#39;http://headers.jsontest.com/&#39;</span><span class="p">,</span>
+        <span class="s">&#39;http://date.jsontest.com/&#39;</span><span class="p">]</span>
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">call_url</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Coroutine récupérant les données provenant d&#39;une url &quot;&quot;&quot;</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="n">future</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c"># On initialise les variables</span>
+    <span class="n">list_results</span><span class="p">,</span> <span class="n">list_tasks</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientSession</span><span class="p">(</span><span class="n">loop</span><span class="o">=</span><span class="n">loop</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">fill_results_list</span><span class="p">(</span><span class="n">future</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Callback de l&#39;objet future qui ajoute sa valeur dans une liste &quot;&quot;&quot;</span>
+        <span class="n">list_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
+
+    <span class="c"># On créé les objets Future et la liste des tâches</span>
+    <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">URLS</span><span class="p">:</span>
+        <span class="n">future</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Future</span><span class="p">()</span>
+        <span class="n">list_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">ensure_future</span><span class="p">(</span><span class="n">call_url</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="p">)))</span>
+        <span class="n">future</span><span class="o">.</span><span class="n">add_done_callback</span><span class="p">(</span><span class="n">fill_results_list</span><span class="p">)</span>
+
+    <span class="c"># Exécution des tâches</span>
+    <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">list_tasks</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">list_results</span><span class="p">)</span>
+
+    <span class="c"># Ferme le client et la boucle</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">loop</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+<p>Et hop, tu exécutes tout ça:</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">time </span>python asyncio35.py
+<span class="o">[{</span><span class="s1">&#39;ip&#39;</span>: <span class="s1">&#39;109.221.53.120&#39;</span><span class="o">}</span>,
+<span class="o">{</span><span class="s1">&#39;Host&#39;</span>: <span class="s1">&#39;headers.jsontest.com&#39;</span>, <span class="s1">&#39;User-Agent&#39;</span>: <span class="s1">&#39;Python/3.5 aiohttp/0.18.4&#39;</span>, <span class="s1">&#39;Accept&#39;</span>: <span class="s1">&#39;*/*&#39;</span>, <span class="s1">&#39;Content-Length&#39;</span>: <span class="s1">&#39;0&#39;</span><span class="o">}</span>,
+<span class="o">{</span><span class="s1">&#39;date&#39;</span>: <span class="s1">&#39;11-14-2015&#39;</span>, <span class="s1">&#39;time&#39;</span>: <span class="s1">&#39;03:16:45 PM&#39;</span>, <span class="s1">&#39;milliseconds_since_epoch&#39;</span>: 1447514205836<span class="o">}]</span>
+
+real        0m0.511s
+user        0m0.263s
+sys 0m0.033s
+</pre></div>
+<p><em>&quot;Ok c'est sympa mais est-ce que c'est vraiment plus rapide en asynchrone ?&quot;</em></p>
+<p>Tu veux une preuve ? En voici une; le même programme sans Asyncio:</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Aggrégation de données provenant d&#39;urls</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">URLS</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;http://ip.jsontest.com/&#39;</span><span class="p">,</span> <span class="s">&#39;http://headers.jsontest.com/&#39;</span><span class="p">,</span>
+        <span class="s">&#39;http://date.jsontest.com/&#39;</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">list_results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">URLS</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">list_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">list_results</span><span class="p">)</span>
+</pre></div>
+<p>Tu l'exécutes:</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">time </span>python noasyncio35.py
+<span class="o">[{</span><span class="s1">&#39;ip&#39;</span>: <span class="s1">&#39;109.221.53.120&#39;</span><span class="o">}</span>,
+<span class="o">{</span><span class="s1">&#39;Host&#39;</span>: <span class="s1">&#39;headers.jsontest.com&#39;</span>, <span class="s1">&#39;User-Agent&#39;</span>: <span class="s1">&#39;python-requests/2.8.1&#39;</span>, <span class="s1">&#39;Accept&#39;</span>: <span class="s1">&#39;*/*&#39;</span><span class="o">}</span>,
+<span class="o">{</span><span class="s1">&#39;date&#39;</span>: <span class="s1">&#39;11-14-2015&#39;</span>, <span class="s1">&#39;time&#39;</span>: <span class="s1">&#39;11:57:03 AM&#39;</span>, <span class="s1">&#39;milliseconds_since_epoch&#39;</span>: 1447502223337<span class="o">}]</span>
+
+real        0m1.188s
+user        0m0.247s
+sys 0m0.017s
+</pre></div>
+<p>Le double de temps ! Convaincu ?</p>
+<p>Alors évidemment, ce n'est qu'un simple cas d'usage. Il y a beaucoup, mais
+vraiment beaucoup plus à voir dans <a class="reference external" href="https://docs.python.org/3/library/asyncio.html">la doc officielle</a>.</p>
+
+    </div>
+  </div>
+  <hr class="separator">
+  <div class="col-md-8 col-md-offset-2">
+  <div id="disqus_thread">
+    <script>
+      var disqus_shortname = 'dotmobo';
+      (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] ||
+         document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>
+      Activez Javascript pour voir 
+      <a href="https://disqus.com/?ref_noscript=dotmobo">
+        les commentaires Disqus.
+      </a>
+    </noscript>
+    <a href="https://disqus.com" class="dsq-brlink">
+      Commentaires de blog par <span class="logo-disqus">Disqus</span>
+    </a>
+  </div>
+  </div>
+  </div>
+<footer class="footer">
+  <div class="container">
+    <p class="text-center">
+      dotmobo, <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>.
+    </p>
+    <div class="text-center">
+      G&eacute;n&eacute;r&eacute; par <a href="http://getpelican.com" target="_blank">Pelican</a> avec le th&egrave;me <a href="https://github.com/dotmobo/pelican-alchemy">alchemy</a>.
+    </div>
+  </div>
+</footer> <!-- /.footer -->
+  <script src="http://dotmobo.github.io/theme/js/jquery.min.js"></script>
+  <script src="http://dotmobo.github.io/theme/js/bootstrap.min.js"></script>
+</body> <!-- 42 -->
+
+</html>

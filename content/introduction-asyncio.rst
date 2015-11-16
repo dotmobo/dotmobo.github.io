@@ -52,7 +52,7 @@ falloir `aiohttp <https://github.com/KeepSafe/aiohttp>`_ pour faire les requête
     pip install aiohttp
 
 Et c'est là où le bât blesse. Tu ne pourras pas utiliser `requests <http://docs.python-requests.org/en/latest/>`_ par exemple, car
-il faut utiliser des outils compatibles avec Asyncio, c'est-à-dire écrit sous forme
+il faut utiliser des outils compatibles avec Asyncio, c'est-à-dire écrits sous forme
 de coroutines. Sinon, le programme bloquera la boucle d'événements et ça ne sera
 pas asynchrone. Pareil pour les accès *BDD*, il faut utiliser `aiopg <https://github.com/aio-libs/aiopg>`_ pour postgresql par exemple.
 

@@ -112,7 +112,7 @@ falloir <a class="reference external" href="https://github.com/KeepSafe/aiohttp"
 <div class="highlight"><pre>pip install aiohttp
 </pre></div>
 <p>Et c'est là où le bât blesse. Tu ne pourras pas utiliser <a class="reference external" href="http://docs.python-requests.org/en/latest/">requests</a> par exemple, car
-il faut utiliser des outils compatibles avec Asyncio, c'est-à-dire écrit sous forme
+il faut utiliser des outils compatibles avec Asyncio, c'est-à-dire écrits sous forme
 de coroutines. Sinon, le programme bloquera la boucle d'événements et ça ne sera
 pas asynchrone. Pareil pour les accès <em>BDD</em>, il faut utiliser <a class="reference external" href="https://github.com/aio-libs/aiopg">aiopg</a> pour postgresql par exemple.</p>
 <p>Tu crées un fichier <em>asyncio35.py</em>, tu importes <em>aiohttp</em> et <em>asyncio</em> et tu déclares ta liste

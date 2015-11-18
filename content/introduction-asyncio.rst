@@ -14,7 +14,7 @@ Introduction à Asyncio
 
 La librairie `Asyncio <http://asyncio.org/>`_
 a fait beaucoup parler d'elle dernièrement, au point d'être
-intégrer dans la bibliothèque standard depuis la version 3.4 de Python.
+intégrée dans la bibliothèque standard depuis la version 3.4 de Python.
 
 C'est la réponse aux `goroutines <https://gobyexample.com/goroutines>`_
 de `Go <https://golang.org/>`_, inscrivant ainsi Python dans la liste des

@@ -1,5 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2015-11-15T00:00:00+01:00</updated><entry><title>Introduction à Asyncio</title><link href="http://dotmobo.github.io/introduction-asyncio.html" rel="alternate"></link><updated>2015-11-15T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-11-15:introduction-asyncio.html</id><summary type="html">&lt;img alt="Django" class="align-right" src="./images/python.png" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2015-11-22T00:00:00+01:00</updated><entry><title>Upsert avec Postgresql</title><link href="http://dotmobo.github.io/upsert-postgresql.html" rel="alternate"></link><updated>2015-11-22T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-11-22:upsert-postgresql.html</id><summary type="html">&lt;img alt="Postgresql" class="align-right" src="./images/postgresql.png" /&gt;
+&lt;p&gt;Lorsque l'on commence à &lt;a class="reference external" href="http://dotmobo.github.io/introduction-asyncio.html"&gt;s'amuser avec asyncio&lt;/a&gt;
+pour faire des traitements asynchrones sur une base &lt;a class="reference external" href="http://www.postgresqlfr.org/"&gt;postgresql&lt;/a&gt;
+avec &lt;a class="reference external" href="https://github.com/aio-libs/aiopg"&gt;aiopg&lt;/a&gt;, on rencontre assez vite le problème des accès concurrents
+à une ressource partagée ; et notamment lorsqu'il s'agit d'appliquer de multiples &lt;em&gt;insert&lt;/em&gt; ou &lt;em&gt;update&lt;/em&gt;, appelés &lt;em&gt;upsert&lt;/em&gt; dans le monde de &lt;em&gt;mongodb&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Sous &lt;em&gt;mongodb&lt;/em&gt; avec &lt;a class="reference external" href="https://api.mongodb.org/python/current/"&gt;pymongo&lt;/a&gt; c'est facile,
+il suffit de passer le paramètre &lt;em&gt;upsert=True&lt;/em&gt; à la méthode &lt;em&gt;update_one&lt;/em&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pymongo&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;MongoClient&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;MongoClient&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;test_database&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update_one&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;x&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;$inc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;x&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;}},&lt;/span&gt; &lt;span class="n"&gt;upsert&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Mais sous &lt;em&gt;posgresql&lt;/em&gt;, il n'existe pas de mot-clé &lt;em&gt;upsert&lt;/em&gt;. Et c'est là que tu te demandes:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&amp;quot;Comment faire un upsert en postgresql, tout en évitant les problèmes d'accès concurrents ?&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Si tu n'es pas pressé, attends la sortie de postgresql 9.5 qui va inclure &lt;a class="reference external" href="https://wiki.postgresql.org/wiki/What's_new_in_PostgreSQL_9.5#INSERT_..._ON_CONFLICT_DO_NOTHING.2FUPDATE_.28.22UPSERT.22.29"&gt;la syntaxe du upsert&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;En imaginant une table qui ressemble à ça:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;logins&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;user_logins&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="n"&gt;username&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;logins&lt;/span&gt;
+&lt;span class="c1"&gt;----------+--------&lt;/span&gt;
+&lt;span class="n"&gt;James&lt;/span&gt;    &lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;4&lt;/span&gt;
+&lt;span class="n"&gt;Lois&lt;/span&gt;     &lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="k"&gt;rows&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et que tu veuilles ajouter deux nouveaux &lt;em&gt;logins&lt;/em&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;INSERT&lt;/span&gt; &lt;span class="k"&gt;INTO&lt;/span&gt; &lt;span class="n"&gt;user_logins&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;logins&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;VALUES&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Naomi&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;James&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;En temps normal, tu auras cette erreur si le &lt;em&gt;username&lt;/em&gt; existe déjà en base:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ERROR&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="n"&gt;duplicate&lt;/span&gt; &lt;span class="k"&gt;key&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="n"&gt;violates&lt;/span&gt; &lt;span class="k"&gt;unique&lt;/span&gt; &lt;span class="k"&gt;constraint&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;users_pkey&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;DETAIL&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="k"&gt;Key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;James&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;already&lt;/span&gt; &lt;span class="k"&gt;exists&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et bien en 9.5, tu pourras gérer ça de cette manière:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;INSERT&lt;/span&gt; &lt;span class="k"&gt;INTO&lt;/span&gt; &lt;span class="n"&gt;user_logins&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;logins&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;VALUES&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Naomi&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;James&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;CONFLICT&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;DO&lt;/span&gt; &lt;span class="k"&gt;UPDATE&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="n"&gt;logins&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;user_logins&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;logins&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;EXCLUDED&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;logins&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Génial non ?&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&amp;quot;Oui mais bon, de mon côté, en production, j'ai du postgresql 9.4 et c'est pas près de changer.&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Dans ce cas-là, je t'invite à lire &lt;a class="reference external" href="http://www.depesz.com/2012/06/10/why-is-upsert-so-complicated/"&gt;ce très bon article&lt;/a&gt;
+qui date un peu, mais qui résume très bien la situation.&lt;/p&gt;
+&lt;p&gt;Pour rester simple, l'idée est d'effectuer un &lt;em&gt;update&lt;/em&gt; si l'entrée existe déjà ou un &lt;em&gt;insert&lt;/em&gt; sinon.
+Mais lors d'accès concurrents, il se peut très bien que l'entrée ait été ajoutée par un autre processus entre
+ta tentative ratée d'&lt;em&gt;update&lt;/em&gt; et ton &lt;em&gt;insert&lt;/em&gt; qui suit. Et là, ça plante lamentablement.&lt;/p&gt;
+&lt;p&gt;Alors oui, il existe les &lt;em&gt;locks&lt;/em&gt; et les transactions, mais çe n'est pas suffisant et ça peut poser certains problèmes.
+Par exemple, &lt;em&gt;postgresql&lt;/em&gt; stoppe une transaction en cours lorsqu'il rencontre une erreur.
+Pour plus de détail, lis l'article que j'ai cité précédemment.&lt;/p&gt;
+&lt;p&gt;Du coup, la &lt;a class="reference external" href="http://stackoverflow.com/questions/1109061/insert-on-duplicate-update-in-postgresql?answertab=votes#tab-top"&gt;solution admise par la communauté stackoverflow&lt;/a&gt;
+est la suivante. Tu écris une fonction &lt;a class="reference external" href="https://fr.wikipedia.org/wiki/PL/SQL"&gt;pl/sql&lt;/a&gt; qui boucle sur le &lt;em&gt;update&lt;/em&gt; ou &lt;em&gt;insert&lt;/em&gt;, en utilisant l'exception &lt;em&gt;unique_violation&lt;/em&gt;.
+Du coup, cette fonction s'appelle à l'aide d'un seul &lt;em&gt;select&lt;/em&gt;, donc pas besoin de &lt;em&gt;lock&lt;/em&gt; ou de transaction:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;TABLE&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt; &lt;span class="k"&gt;PRIMARY&lt;/span&gt; &lt;span class="k"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;FUNCTION&lt;/span&gt; &lt;span class="n"&gt;merge_db&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;key&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;RETURNS&lt;/span&gt; &lt;span class="n"&gt;VOID&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt;
+&lt;span class="err"&gt;$$&lt;/span&gt;
+&lt;span class="k"&gt;BEGIN&lt;/span&gt;
+    &lt;span class="n"&gt;LOOP&lt;/span&gt;
+        &lt;span class="c1"&gt;-- first try to update the key&lt;/span&gt;
+        &lt;span class="c1"&gt;-- note that &amp;quot;a&amp;quot; must be unique&lt;/span&gt;
+        &lt;span class="k"&gt;UPDATE&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;key&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;IF&lt;/span&gt; &lt;span class="k"&gt;found&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt;
+            &lt;span class="k"&gt;RETURN&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;END&lt;/span&gt; &lt;span class="n"&gt;IF&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="c1"&gt;-- not there, so try to insert the key&lt;/span&gt;
+        &lt;span class="c1"&gt;-- if someone else inserts the same key concurrently,&lt;/span&gt;
+        &lt;span class="c1"&gt;-- we could get a unique-key failure&lt;/span&gt;
+        &lt;span class="k"&gt;BEGIN&lt;/span&gt;
+            &lt;span class="k"&gt;INSERT&lt;/span&gt; &lt;span class="k"&gt;INTO&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;VALUES&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+            &lt;span class="k"&gt;RETURN&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;EXCEPTION&lt;/span&gt; &lt;span class="k"&gt;WHEN&lt;/span&gt; &lt;span class="n"&gt;unique_violation&lt;/span&gt; &lt;span class="k"&gt;THEN&lt;/span&gt;
+            &lt;span class="c1"&gt;-- do nothing, and loop to try the UPDATE again&lt;/span&gt;
+        &lt;span class="k"&gt;END&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;END&lt;/span&gt; &lt;span class="n"&gt;LOOP&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;END&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="err"&gt;$$&lt;/span&gt;
+&lt;span class="k"&gt;LANGUAGE&lt;/span&gt; &lt;span class="n"&gt;plpgsql&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;merge_db&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;david&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;merge_db&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;dennis&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</summary><category term="base de données"></category><category term="postgres"></category><category term="psql"></category><category term="postgresql"></category></entry><entry><title>Introduction à Asyncio</title><link href="http://dotmobo.github.io/introduction-asyncio.html" rel="alternate"></link><updated>2015-11-15T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-11-15:introduction-asyncio.html</id><summary type="html">&lt;img alt="Django" class="align-right" src="./images/python.png" /&gt;
 &lt;p&gt;La librairie &lt;a class="reference external" href="http://asyncio.org/"&gt;Asyncio&lt;/a&gt;
 a fait beaucoup parler d'elle dernièrement, au point d'être
 intégrée dans la bibliothèque standard depuis la version 3.4 de Python.&lt;/p&gt;

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="http://dotmobo.github.io/upsert-postgresql.html" />
+
+    <title>  .mobo &mdash; Upsert avec Postgresql
+</title>
+
+
+
+      <link type="application/atom+xml" rel="alternate" href="/feeds/all.atom.xml"  title=".mobo Atom Feed">
+
+    <link rel="stylesheet" href="http://dotmobo.github.io/theme/css/style.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68852219-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+    <meta name="author" content="Morgan">
+    <meta name="description" content="Upsert avec Postgresql">
+  <meta name="tags" contents="base de données, postgres, psql, postgresql, ">
+</head>
+
+<body>
+<header class="header">
+  <div class="container">
+      <div class="header-image pull-left">
+        <a class="nodec" href="http://dotmobo.github.io"><img src=https://pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg></a>
+      </div>
+    <div class="header-inner">
+      <h1 class="header-name">
+        <a class="nodec" href="http://dotmobo.github.io">.mobo</a>
+      </h1>
+      <h3 class="header-text">Blog d'un Pythoniste Djangonaute</h3>
+      <ul class="header-menu list-inline">
+          <li><a class="nodec" href="http://dotmobo.github.io/categories.html">Cat&eacute;gories</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/tags.html">Tags</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/archives.html">Archives</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec icon-github" href="https://github.com/dotmobo"></a></li>
+          <li><a class="nodec icon-twitter" href="https://twitter.com/dotmobo"></a></li>
+          <li><a class="nodec icon-gplus" href="https://www.google.com/+DotmoboGithubIo6"></a></li>
+          <li><a class="nodec icon-rss" href="/feeds/all.atom.xml"></a></li>
+      </ul>
+    </div>
+  </div>
+</header> <!-- /.header -->  <div class="container">
+  <div class="post full-post">
+    <h1 class="post-title">
+      <a href="/upsert-postgresql.html" title="Permalink to Upsert avec Postgresql">Upsert avec Postgresql</a>
+    </h1>
+    <ul class="list-inline">
+      <li class="post-date">
+        <a class="text-muted" href="/upsert-postgresql.html" title="2015-11-22T00:00:00+01:00">Sun 22 November 2015</a>
+      </li>
+      <li class="muted">&middot;</li>
+      <li class="post-category">
+        <a href="http://dotmobo.github.io/category/postgresql.html">Postgresql</a>
+      </li>
+        <li class="muted">&middot;</li>
+        <li>
+            <a href="/tag/base de données.html">base de données</a>,             <a href="/tag/postgres.html">postgres</a>,             <a href="/tag/psql.html">psql</a>,             <a href="/tag/postgresql.html">postgresql</a>        </li>
+    </ul>
+    <div class="post-content">
+      <img alt="Postgresql" class="align-right" src="./images/postgresql.png" />
+<p>Lorsque l'on commence à <a class="reference external" href="http://dotmobo.github.io/introduction-asyncio.html">s'amuser avec asyncio</a>
+pour faire des traitements asynchrones sur une base <a class="reference external" href="http://www.postgresqlfr.org/">postgresql</a>
+avec <a class="reference external" href="https://github.com/aio-libs/aiopg">aiopg</a>, on rencontre assez vite le problème des accès concurrents
+à une ressource partagée ; et notamment lorsqu'il s'agit d'appliquer de multiples <em>insert</em> ou <em>update</em>, appelés <em>upsert</em> dans le monde de <em>mongodb</em>.</p>
+<p>Sous <em>mongodb</em> avec <a class="reference external" href="https://api.mongodb.org/python/current/">pymongo</a> c'est facile,
+il suffit de passer le paramètre <em>upsert=True</em> à la méthode <em>update_one</em> :</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span> <span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span>
+<span class="o">&gt;&gt;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">MongoClient</span><span class="p">()</span>
+<span class="o">&gt;&gt;</span> <span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">test_database</span>
+<span class="o">&gt;&gt;</span> <span class="n">db</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">update_one</span><span class="p">({</span><span class="s">&#39;x&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="s">&#39;$inc&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;x&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}},</span> <span class="n">upsert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+<p>Mais sous <em>posgresql</em>, il n'existe pas de mot-clé <em>upsert</em>. Et c'est là que tu te demandes:</p>
+<p><em>&quot;Comment faire un upsert en postgresql, tout en évitant les problèmes d'accès concurrents ?&quot;</em></p>
+<p>Si tu n'es pas pressé, attends la sortie de postgresql 9.5 qui va inclure <a class="reference external" href="https://wiki.postgresql.org/wiki/What's_new_in_PostgreSQL_9.5#INSERT_..._ON_CONFLICT_DO_NOTHING.2FUPDATE_.28.22UPSERT.22.29">la syntaxe du upsert</a>.</p>
+<p>En imaginant une table qui ressemble à ça:</p>
+<div class="highlight"><pre><span class="k">SELECT</span> <span class="n">username</span><span class="p">,</span> <span class="n">logins</span> <span class="k">FROM</span> <span class="n">user_logins</span><span class="p">;</span>
+
+<span class="n">username</span> <span class="o">|</span> <span class="n">logins</span>
+<span class="c1">----------+--------</span>
+<span class="n">James</span>    <span class="o">|</span>      <span class="mi">4</span>
+<span class="n">Lois</span>     <span class="o">|</span>      <span class="mi">2</span>
+<span class="p">(</span><span class="mi">2</span> <span class="k">rows</span><span class="p">)</span>
+</pre></div>
+<p>Et que tu veuilles ajouter deux nouveaux <em>logins</em>:</p>
+<div class="highlight"><pre><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">user_logins</span> <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">logins</span><span class="p">)</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;Naomi&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="s1">&#39;James&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+<p>En temps normal, tu auras cette erreur si le <em>username</em> existe déjà en base:</p>
+<div class="highlight"><pre><span class="n">ERROR</span><span class="p">:</span>  <span class="n">duplicate</span> <span class="k">key</span> <span class="n">value</span> <span class="n">violates</span> <span class="k">unique</span> <span class="k">constraint</span> <span class="ss">&quot;users_pkey&quot;</span>
+<span class="n">DETAIL</span><span class="p">:</span>  <span class="k">Key</span> <span class="p">(</span><span class="n">username</span><span class="p">)</span><span class="o">=</span><span class="p">(</span><span class="n">James</span><span class="p">)</span> <span class="n">already</span> <span class="k">exists</span><span class="p">.</span>
+</pre></div>
+<p>Et bien en 9.5, tu pourras gérer ça de cette manière:</p>
+<div class="highlight"><pre><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">user_logins</span> <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">logins</span><span class="p">)</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;Naomi&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="s1">&#39;James&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">ON</span> <span class="n">CONFLICT</span> <span class="p">(</span><span class="n">username</span><span class="p">)</span>
+<span class="k">DO</span> <span class="k">UPDATE</span> <span class="k">SET</span> <span class="n">logins</span> <span class="o">=</span> <span class="n">user_logins</span><span class="p">.</span><span class="n">logins</span> <span class="o">+</span> <span class="n">EXCLUDED</span><span class="p">.</span><span class="n">logins</span><span class="p">;</span>
+</pre></div>
+<p>Génial non ?</p>
+<p><em>&quot;Oui mais bon, de mon côté, en production, j'ai du postgresql 9.4 et c'est pas près de changer.&quot;</em></p>
+<p>Dans ce cas-là, je t'invite à lire <a class="reference external" href="http://www.depesz.com/2012/06/10/why-is-upsert-so-complicated/">ce très bon article</a>
+qui date un peu, mais qui résume très bien la situation.</p>
+<p>Pour rester simple, l'idée est d'effectuer un <em>update</em> si l'entrée existe déjà ou un <em>insert</em> sinon.
+Mais lors d'accès concurrents, il se peut très bien que l'entrée ait été ajoutée par un autre processus entre
+ta tentative ratée d'<em>update</em> et ton <em>insert</em> qui suit. Et là, ça plante lamentablement.</p>
+<p>Alors oui, il existe les <em>locks</em> et les transactions, mais çe n'est pas suffisant et ça peut poser certains problèmes.
+Par exemple, <em>postgresql</em> stoppe une transaction en cours lorsqu'il rencontre une erreur.
+Pour plus de détail, lis l'article que j'ai cité précédemment.</p>
+<p>Du coup, la <a class="reference external" href="http://stackoverflow.com/questions/1109061/insert-on-duplicate-update-in-postgresql?answertab=votes#tab-top">solution admise par la communauté stackoverflow</a>
+est la suivante. Tu écris une fonction <a class="reference external" href="https://fr.wikipedia.org/wiki/PL/SQL">pl/sql</a> qui boucle sur le <em>update</em> ou <em>insert</em>, en utilisant l'exception <em>unique_violation</em>.
+Du coup, cette fonction s'appelle à l'aide d'un seul <em>select</em>, donc pas besoin de <em>lock</em> ou de transaction:</p>
+<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">db</span> <span class="p">(</span><span class="n">a</span> <span class="nb">INT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">b</span> <span class="nb">TEXT</span><span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">FUNCTION</span> <span class="n">merge_db</span><span class="p">(</span><span class="k">key</span> <span class="nb">INT</span><span class="p">,</span> <span class="k">data</span> <span class="nb">TEXT</span><span class="p">)</span> <span class="k">RETURNS</span> <span class="n">VOID</span> <span class="k">AS</span>
+<span class="err">$$</span>
+<span class="k">BEGIN</span>
+    <span class="n">LOOP</span>
+        <span class="c1">-- first try to update the key</span>
+        <span class="c1">-- note that &quot;a&quot; must be unique</span>
+        <span class="k">UPDATE</span> <span class="n">db</span> <span class="k">SET</span> <span class="n">b</span> <span class="o">=</span> <span class="k">data</span> <span class="k">WHERE</span> <span class="n">a</span> <span class="o">=</span> <span class="k">key</span><span class="p">;</span>
+        <span class="n">IF</span> <span class="k">found</span> <span class="k">THEN</span>
+            <span class="k">RETURN</span><span class="p">;</span>
+        <span class="k">END</span> <span class="n">IF</span><span class="p">;</span>
+        <span class="c1">-- not there, so try to insert the key</span>
+        <span class="c1">-- if someone else inserts the same key concurrently,</span>
+        <span class="c1">-- we could get a unique-key failure</span>
+        <span class="k">BEGIN</span>
+            <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">db</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="k">key</span><span class="p">,</span> <span class="k">data</span><span class="p">);</span>
+            <span class="k">RETURN</span><span class="p">;</span>
+        <span class="k">EXCEPTION</span> <span class="k">WHEN</span> <span class="n">unique_violation</span> <span class="k">THEN</span>
+            <span class="c1">-- do nothing, and loop to try the UPDATE again</span>
+        <span class="k">END</span><span class="p">;</span>
+    <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="err">$$</span>
+<span class="k">LANGUAGE</span> <span class="n">plpgsql</span><span class="p">;</span>
+
+<span class="k">SELECT</span> <span class="n">merge_db</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;david&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span> <span class="n">merge_db</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;dennis&#39;</span><span class="p">);</span>
+</pre></div>
+
+    </div>
+  </div>
+  <hr class="separator">
+  <div class="col-md-8 col-md-offset-2">
+  <div id="disqus_thread">
+    <script>
+      var disqus_shortname = 'dotmobo';
+      (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] ||
+         document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>
+      Activez Javascript pour voir 
+      <a href="https://disqus.com/?ref_noscript=dotmobo">
+        les commentaires Disqus.
+      </a>
+    </noscript>
+    <a href="https://disqus.com" class="dsq-brlink">
+      Commentaires de blog par <span class="logo-disqus">Disqus</span>
+    </a>
+  </div>
+  </div>
+  </div>
+<footer class="footer">
+  <div class="container">
+    <p class="text-center">
+      dotmobo, <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>.
+    </p>
+    <div class="text-center">
+      G&eacute;n&eacute;r&eacute; par <a href="http://getpelican.com" target="_blank">Pelican</a> avec le th&egrave;me <a href="https://github.com/dotmobo/pelican-alchemy">alchemy</a>.
+    </div>
+  </div>
+</footer> <!-- /.footer -->
+  <script src="http://dotmobo.github.io/theme/js/jquery.min.js"></script>
+  <script src="http://dotmobo.github.io/theme/js/bootstrap.min.js"></script>
+</body> <!-- 42 -->
+
+</html>

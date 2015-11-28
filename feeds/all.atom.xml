@@ -1,9 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2015-11-22T00:00:00+01:00</updated><entry><title>Upsert avec Postgresql</title><link href="http://dotmobo.github.io/upsert-postgresql.html" rel="alternate"></link><updated>2015-11-22T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-11-22:upsert-postgresql.html</id><summary type="html">&lt;img alt="Postgresql" class="align-right" src="./images/postgresql.png" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2015-11-28T00:00:00+01:00</updated><entry><title>Ajouter un captcha dans un formulaire django</title><link href="http://dotmobo.github.io/django-simple-captcha.html" rel="alternate"></link><updated>2015-11-28T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-11-28:django-simple-captcha.html</id><summary type="html">&lt;img alt="Django" class="align-right" src="./images/djangopony.png" /&gt;
+&lt;p&gt;Suite à &lt;a class="reference external" href="http://dotmobo.github.io/django-countries.html"&gt;l'article sur django-countries&lt;/a&gt;,
+on va continuer notre parcours des petits outils simples et efficaces pour améliorer nos formulaires django.&lt;/p&gt;
+&lt;p&gt;Avant d'aborder le gros morceau qu'est &lt;a class="reference external" href="http://django-crispy-forms.readthedocs.org/en/latest/"&gt;django-cryspy&lt;/a&gt;
+(tu peux déjà y jeter un oeil si tu es curieux), on va parler de l'intégration de captchas sous django.&lt;/p&gt;
+&lt;p&gt;L'api de captcha la plus connue est sûrement &lt;a class="reference external" href="https://www.google.com/recaptcha"&gt;reCAPTCHA&lt;/a&gt; de google,
+et il en existe une implémentation sous django baptisée &lt;a class="reference external" href="https://github.com/praekelt/django-recaptcha"&gt;django-recaptcha&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Mais tu ne veux peut-être pas dépendre d'un service google pour diverses raisons, en préférant
+une solution autonome, simple, légère, efficace et maintenue.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/mbi/django-simple-captcha"&gt;Django-simple-captcha&lt;/a&gt; remplit haut la main toutes ces conditions
+et est même compatible python 3. Elle est customisable, s'intègre dans les formulaires django et sous
+&lt;em&gt;django-crispy&lt;/em&gt;. Différents types de captcha sont disponibles comme des caractères aléatoires,
+des calculs mathématiques, des dictionnaires de mots.&lt;/p&gt;
+&lt;p&gt;Captcha utilise &lt;em&gt;PIL&lt;/em&gt; et &lt;em&gt;Pillow&lt;/em&gt; qui nécessitent certaines librairies systèmes.
+Par exemple sous Ubuntu, tu fais:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;apt-get -y install libz-dev libjpeg-dev libfreetype6-dev
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu l'installes comme d'habitude avec pip:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;pip install django-simple-captcha
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et tu ajoutes &lt;strong&gt;captcha&lt;/strong&gt; dans la liste de tes &lt;strong&gt;INSTALLED_APPS&lt;/strong&gt;
+dans le fichier &lt;em&gt;settings.py&lt;/em&gt; de django:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;INSTALLED_APPS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                  &lt;span class="n"&gt;captcha&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu synchronises ta base de données:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;python manage.py migrate
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et tu ajoutes l'entrée suivante dans ton fichier &lt;strong&gt;urls.py&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;urlpatterns&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;patterns&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;r&amp;#39;^captcha/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;captcha.urls&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Il ne reste plus qu'à l'intégrer dans ton formulaire.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Soit dans un &lt;strong&gt;Form&lt;/strong&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;forms&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;captcha.fields&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;CaptchaField&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;CaptchaTestForm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Form&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;myfield&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;AnyOtherField&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;captcha&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CaptchaField&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Soit dans un &lt;strong&gt;ModelForm&lt;/strong&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;forms&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;captcha.fields&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;CaptchaField&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;CaptchaTestModelForm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ModelForm&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;captcha&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CaptchaField&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Meta&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;MyModel&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et sous &lt;em&gt;django-crispy&lt;/em&gt;, tu peux utiliser &lt;strong&gt;captcha&lt;/strong&gt; comme un &lt;strong&gt;Field&lt;/strong&gt; à déclarer dans le &lt;strong&gt;Layout&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;forms&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;captcha.fields&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;CaptchaField&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;crispy_forms.helper&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;FormHelper&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;crispy_forms.layout&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Layout&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Field&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Submit&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;CaptchaTestModelForm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ModelForm&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;captcha&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CaptchaField&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="nb"&gt;super&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;helper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FormHelper&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;helper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;layout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Layout&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="n"&gt;Field&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;placeholder&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Enter Full Name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+            &lt;span class="n"&gt;Field&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;captcha &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;placeholder&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Enter captcha&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+            &lt;span class="n"&gt;Submit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;valid&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Valid&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Meta&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;MyModel&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;La validation du formulaire se fait comme d'habitude. Si la réponse au captcha
+est mauvaise, une exception &lt;strong&gt;ValidationError&lt;/strong&gt; sera levée:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;some_view&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;POST&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;form&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CaptchaTestForm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;POST&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c"&gt;# Validate the form: the captcha field will automatically&lt;/span&gt;
+        &lt;span class="c"&gt;# check the input&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;form&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;is_valid&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+            &lt;span class="n"&gt;human&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;form&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CaptchaTestForm&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;render_to_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;template.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;locals&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Il est également possible de faire une validation
+&lt;a class="reference external" href="http://django-simple-captcha.readthedocs.org/en/latest/usage.html#example-usage-for-ajax-form"&gt;via ajax&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Il y a toute &lt;a class="reference external" href="http://django-simple-captcha.readthedocs.org/en/latest/advanced.html"&gt;une série de paramètres&lt;/a&gt;
+permettant la customisation du captcha, mais il y en a surtout deux à retenir.&lt;/p&gt;
+&lt;p&gt;Le premier permet de choisir le type de captcha que tu veux utiliser.
+Dans ton &lt;strong&gt;settings.py&lt;/strong&gt;, tu peux mettre au choix:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Random chars&lt;/span&gt;
+&lt;span class="n"&gt;CAPTCHA_CHALLENGE_FUNCT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;captcha.helpers.random_char_challenge&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;# Simple Math&lt;/span&gt;
+&lt;span class="n"&gt;CAPTCHA_CHALLENGE_FUNCT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;captcha.helpers.math_challenge&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;# Dictionary Word&lt;/span&gt;
+&lt;span class="n"&gt;CAPTCHA_CHALLENGE_FUNCT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;captcha.helpers.word_challenge&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu peux même créer &lt;a class="reference external" href="http://django-simple-captcha.readthedocs.org/en/latest/advanced.html#roll-your-own"&gt;ta propre fonction de captcha&lt;/a&gt;
+si celles proposées ne te conviennent pas.&lt;/p&gt;
+&lt;p&gt;Le second permet d'utiliser le captcha dans les tests unitaires. Si la chaîne de caractères &lt;strong&gt;PASSED&lt;/strong&gt;
+est renseignée comme valeur de réponse au captcha, le formulaire sera valide.
+À mettre dans ton fichier de configuration de tes tests unitaires:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;CAPTCHA_TEST_MODE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Le résultat final ressemble à ça :&lt;/p&gt;
+&lt;img alt="Django" class="align-left" src="http://django-simple-captcha.readthedocs.org/en/latest/_images/captcha3.png" /&gt;
+</summary><category term="python"></category><category term="django"></category><category term="django-simple-captcha"></category><category term="captcha"></category><category term="crispy"></category><category term="django-crispy"></category><category term="recaptcha"></category></entry><entry><title>Upsert avec Postgresql</title><link href="http://dotmobo.github.io/upsert-postgresql.html" rel="alternate"></link><updated>2015-11-22T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-11-22:upsert-postgresql.html</id><summary type="html">&lt;img alt="Postgresql" class="align-right" src="./images/postgresql.png" /&gt;
 &lt;p&gt;Lorsque l'on commence à &lt;a class="reference external" href="http://dotmobo.github.io/introduction-asyncio.html"&gt;s'amuser avec asyncio&lt;/a&gt;
 pour faire des traitements asynchrones sur une base &lt;a class="reference external" href="http://www.postgresqlfr.org/"&gt;postgresql&lt;/a&gt;
 avec &lt;a class="reference external" href="https://github.com/aio-libs/aiopg"&gt;aiopg&lt;/a&gt;, on rencontre assez vite le problème des accès concurrents
-à une ressource partagée ; et notamment lorsqu'il s'agit d'appliquer de multiples &lt;em&gt;insert&lt;/em&gt; ou &lt;em&gt;update&lt;/em&gt;, appelés &lt;em&gt;upsert&lt;/em&gt; dans le monde de &lt;em&gt;mongodb&lt;/em&gt;.&lt;/p&gt;
+à une ressource partagée.&lt;/p&gt;
+&lt;p&gt;Et notamment lorsqu'il s'agit d'appliquer de multiples &lt;em&gt;insert&lt;/em&gt; ou &lt;em&gt;update&lt;/em&gt;, appelés &lt;em&gt;upsert&lt;/em&gt; dans le monde de &lt;em&gt;mongodb&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Sous &lt;em&gt;mongodb&lt;/em&gt; avec &lt;a class="reference external" href="https://api.mongodb.org/python/current/"&gt;pymongo&lt;/a&gt; c'est facile,
 il suffit de passer le paramètre &lt;em&gt;upsert=True&lt;/em&gt; à la méthode &lt;em&gt;update_one&lt;/em&gt; :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pymongo&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;MongoClient&lt;/span&gt;

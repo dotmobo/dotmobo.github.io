@@ -69,7 +69,7 @@
     </h1>
     <ul class="list-inline">
       <li class="post-date">
-        <a class="text-muted" href="/upsert-postgresql.html" title="2015-11-22T00:00:00+01:00">Sun 22 November 2015</a>
+        <a class="text-muted" href="/upsert-postgresql.html" title="2015-11-22T00:00:00+01:00">dim. 22 novembre 2015</a>
       </li>
       <li class="muted">&middot;</li>
       <li class="post-category">
@@ -84,7 +84,8 @@
 <p>Lorsque l'on commence à <a class="reference external" href="http://dotmobo.github.io/introduction-asyncio.html">s'amuser avec asyncio</a>
 pour faire des traitements asynchrones sur une base <a class="reference external" href="http://www.postgresqlfr.org/">postgresql</a>
 avec <a class="reference external" href="https://github.com/aio-libs/aiopg">aiopg</a>, on rencontre assez vite le problème des accès concurrents
-à une ressource partagée ; et notamment lorsqu'il s'agit d'appliquer de multiples <em>insert</em> ou <em>update</em>, appelés <em>upsert</em> dans le monde de <em>mongodb</em>.</p>
+à une ressource partagée.</p>
+<p>Et notamment lorsqu'il s'agit d'appliquer de multiples <em>insert</em> ou <em>update</em>, appelés <em>upsert</em> dans le monde de <em>mongodb</em>.</p>
 <p>Sous <em>mongodb</em> avec <a class="reference external" href="https://api.mongodb.org/python/current/">pymongo</a> c'est facile,
 il suffit de passer le paramètre <em>upsert=True</em> à la méthode <em>update_one</em> :</p>
 <div class="highlight"><pre><span class="o">&gt;&gt;</span> <span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span>

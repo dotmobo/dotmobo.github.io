@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="http://dotmobo.github.io/httpie.html" />
+
+    <title>  .mobo &mdash; Httpie, le client http intuitif
+</title>
+
+
+
+      <link type="application/atom+xml" rel="alternate" href="/feeds/all.atom.xml"  title=".mobo Atom Feed">
+
+    <link rel="stylesheet" href="http://dotmobo.github.io/theme/css/style.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68852219-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+    <meta name="author" content="Morgan">
+    <meta name="description" content="Httpie, le client http intuitif">
+  <meta name="tags" contents="httpie, http, python, curl, json, ">
+</head>
+
+<body>
+<header class="header">
+  <div class="container">
+      <div class="header-image pull-left">
+        <a class="nodec" href="http://dotmobo.github.io"><img src=https://pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg></a>
+      </div>
+    <div class="header-inner">
+      <h1 class="header-name">
+        <a class="nodec" href="http://dotmobo.github.io">.mobo</a>
+      </h1>
+      <h3 class="header-text">Blog d'un Pythoniste Djangonaute</h3>
+      <ul class="header-menu list-inline">
+          <li><a class="nodec" href="http://dotmobo.github.io/categories.html">Cat&eacute;gories</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/tags.html">Tags</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/archives.html">Archives</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec icon-github" href="https://github.com/dotmobo"></a></li>
+          <li><a class="nodec icon-twitter" href="https://twitter.com/dotmobo"></a></li>
+          <li><a class="nodec icon-gplus" href="https://www.google.com/+DotmoboGithubIo6"></a></li>
+          <li><a class="nodec icon-rss" href="/feeds/all.atom.xml"></a></li>
+      </ul>
+    </div>
+  </div>
+</header> <!-- /.header -->  <div class="container">
+  <div class="post full-post">
+    <h1 class="post-title">
+      <a href="/httpie.html" title="Permalink to Httpie, le client http intuitif">Httpie, le client http intuitif</a>
+    </h1>
+    <ul class="list-inline">
+      <li class="post-date">
+        <a class="text-muted" href="/httpie.html" title="2015-12-08T00:00:00+01:00">mar. 08 décembre 2015</a>
+      </li>
+      <li class="muted">&middot;</li>
+      <li class="post-category">
+        <a href="http://dotmobo.github.io/category/python.html">Python</a>
+      </li>
+        <li class="muted">&middot;</li>
+        <li>
+            <a href="/tag/httpie.html">httpie</a>,             <a href="/tag/http.html">http</a>,             <a href="/tag/python.html">python</a>,             <a href="/tag/curl.html">curl</a>,             <a href="/tag/json.html">json</a>        </li>
+    </ul>
+    <div class="post-content">
+      <img alt="Httpie" class="align-right" src="./images/http.png" />
+<p><a class="reference external" href="http://httpie.org">Httpie</a> est un client http en ligne de commande plutôt
+bien foutu. C'est une alternative viable à <a class="reference external" href="http://curl.haxx.se/">curl</a> qui
+a été développée en python.</p>
+<p>Intuitif, simple, et prenant en charge la coloration syntaxique, c'est l'outil
+idéal pour requêter des APIs JSON par exemple.</p>
+<p>Tu l'installes avec pip :</p>
+<div class="highlight"><pre>pip install httpie
+</pre></div>
+<p>Tu disposes maintenant de la commande <strong>http</strong> dans ton terminal qui te
+permettra d'effectuer des requêtes très simplement de cette manière:</p>
+<div class="highlight"><pre>http <span class="o">[</span>flags<span class="o">]</span> <span class="o">[</span>METHOD<span class="o">]</span> URL <span class="o">[</span>ITEM <span class="o">[</span>ITEM<span class="o">]]</span>
+</pre></div>
+<p>Tu peux évidemment faire du GET:</p>
+<div class="highlight"><pre>http httpie.org
+http GET httpie.org
+</pre></div>
+<p>Du DELETE:</p>
+<div class="highlight"><pre>http DELETE example.org/todos/7
+</pre></div>
+<p>Ou mettre à jour les données d'une API via PUT:</p>
+<div class="highlight"><pre>http PUT example.org X-API-Token:123 <span class="nv">name</span><span class="o">=</span>John
+</pre></div>
+<p>Tu remarques ici qu'on a d'abord passé la méthode PUT, puis l'url, puis le token
+d'authentification dans l'entête de la requête, et enfin les données.</p>
+<p>Pas besoin d'utiliser des options pour spécifier chaque élément, tout se fait intuitivement !
+Les éléments de l'entête de la requête sont séparés par <strong>:</strong>, les données par
+<strong>=</strong>.</p>
+<p>Tu peux aussi utiliser l'option <strong>-a</strong> pour l'authentification type
+username/password.</p>
+<p>Par exemple, pour poster un commentaire sur un problème via l'api github:</p>
+<div class="highlight"><pre>http -a USERNAME POST https://api.github.com/repos/jkbrzt/httpie/issues/83/comments <span class="nv">body</span><span class="o">=</span><span class="s1">&#39;HTTPie is awesome!&#39;</span>
+</pre></div>
+<p>Tu peux utiliser les symboles de redirection pour uploader
+ou downloader des fichiers :</p>
+<div class="highlight"><pre>http example.org &lt; file.json
+http example.org &gt; file.json
+</pre></div>
+<p>L'outil est très complet (gestion des sessions, des certificats SSL) mais je
+l'apprécie surtout pour son côté simple et facile d'accès.</p>
+<p>Tu vas pouvoir manipuler et tester tes APIs très rapidement, sans te prendre la
+tête avec une documentation imbuvable!</p>
+
+    </div>
+  </div>
+  <hr class="separator">
+  <div class="col-md-8 col-md-offset-2">
+  <div id="disqus_thread">
+    <script>
+      var disqus_shortname = 'dotmobo';
+      (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] ||
+         document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>
+      Activez Javascript pour voir 
+      <a href="https://disqus.com/?ref_noscript=dotmobo">
+        les commentaires Disqus.
+      </a>
+    </noscript>
+    <a href="https://disqus.com" class="dsq-brlink">
+      Commentaires de blog par <span class="logo-disqus">Disqus</span>
+    </a>
+  </div>
+  </div>
+  </div>
+<footer class="footer">
+  <div class="container">
+    <p class="text-center">
+      dotmobo, <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>.
+    </p>
+    <div class="text-center">
+      G&eacute;n&eacute;r&eacute; par <a href="http://getpelican.com" target="_blank">Pelican</a> avec le th&egrave;me <a href="https://github.com/dotmobo/pelican-alchemy">alchemy</a>.
+    </div>
+  </div>
+</footer> <!-- /.footer -->
+  <script src="http://dotmobo.github.io/theme/js/jquery.min.js"></script>
+  <script src="http://dotmobo.github.io/theme/js/bootstrap.min.js"></script>
+</body> <!-- 42 -->
+
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="http://dotmobo.github.io/makefile-frontend.html" />
+
+    <title>  .mobo &mdash; Se passer de Grunt/Gulp/Brunch/Broccoli/Mimosa/Jake grâce à Make
+</title>
+
+
+
+      <link type="application/atom+xml" rel="alternate" href="/feeds/all.atom.xml"  title=".mobo Atom Feed">
+
+    <link rel="stylesheet" href="http://dotmobo.github.io/theme/css/style.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68852219-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+    <meta name="author" content="Morgan">
+    <meta name="description" content="Se passer de Grunt/Gulp/Brunch/Broccoli/Mimosa/Jake grâce à Make">
+  <meta name="tags" contents="frontend, make, makefile, javascript, livescript, less, css, compile, node.js, ">
+</head>
+
+<body>
+<header class="header">
+  <div class="container">
+      <div class="header-image pull-left">
+        <a class="nodec" href="http://dotmobo.github.io"><img src=https://pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg></a>
+      </div>
+    <div class="header-inner">
+      <h1 class="header-name">
+        <a class="nodec" href="http://dotmobo.github.io">.mobo</a>
+      </h1>
+      <h3 class="header-text">Blog d'un Pythoniste Djangonaute</h3>
+      <ul class="header-menu list-inline">
+          <li><a class="nodec" href="http://dotmobo.github.io/categories.html">Cat&eacute;gories</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/tags.html">Tags</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/archives.html">Archives</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec icon-github" href="https://github.com/dotmobo"></a></li>
+          <li><a class="nodec icon-twitter" href="https://twitter.com/dotmobo"></a></li>
+          <li><a class="nodec icon-gplus" href="https://www.google.com/+DotmoboGithubIo6"></a></li>
+          <li><a class="nodec icon-rss" href="/feeds/all.atom.xml"></a></li>
+      </ul>
+    </div>
+  </div>
+</header> <!-- /.header -->  <div class="container">
+  <div class="post full-post">
+    <h1 class="post-title">
+      <a href="/makefile-frontend.html" title="Permalink to Se passer de Grunt/Gulp/Brunch/Broccoli/Mimosa/Jake grâce à Make">Se passer de Grunt/Gulp/Brunch/Broccoli/Mimosa/Jake grâce à Make</a>
+    </h1>
+    <ul class="list-inline">
+      <li class="post-date">
+        <a class="text-muted" href="/makefile-frontend.html" title="2016-01-12T00:00:00+01:00">mar. 12 janvier 2016</a>
+      </li>
+      <li class="muted">&middot;</li>
+      <li class="post-category">
+        <a href="http://dotmobo.github.io/category/frontend.html">Frontend</a>
+      </li>
+        <li class="muted">&middot;</li>
+        <li>
+            <a href="/tag/frontend.html">frontend</a>,             <a href="/tag/make.html">make</a>,             <a href="/tag/makefile.html">makefile</a>,             <a href="/tag/javascript.html">javascript</a>,             <a href="/tag/livescript.html">livescript</a>,             <a href="/tag/less.html">less</a>,             <a href="/tag/css.html">css</a>,             <a href="/tag/compile.html">compile</a>,             <a href="/tag/node.js.html">node.js</a>        </li>
+    </ul>
+    <div class="post-content">
+      <img alt="Gnu" class="align-right" src="./images/gnu.png" />
+<p>La communauté <a class="reference external" href="https://nodejs.org">Node.js</a> a été plutôt productive ces deux
+dernières années, notamment au niveau de la création de <em>tasks runners</em>.</p>
+<p>Certains sont enthousiastes de cet essor et de cette profusion d'outils,
+mais d'autres le sont beaucoup moins <a class="reference external" href="https://medium.com/&#64;wob/the-sad-state-of-web-development-1603a861d29f#.nrikd9bai">et le font savoir</a>.</p>
+<p>Tu as forcément déjà lu un article ou vu un bout de code qui mentionnait au choix <a class="reference external" href="http://gruntjs.com/">grunt</a>,
+<a class="reference external" href="http://gulpjs.com/">gulp</a>, <a class="reference external" href="http://brunch.io/">brunch</a>, <a class="reference external" href="http://broccolijs.com/">broccoli</a>,
+<a class="reference external" href="http://mimosa.io/">mimosa</a>, <a class="reference external" href="http://jakejs.com/">jake</a> ou que sais-je.</p>
+<p>Mais lequel utiliser ? Pourquoi y en a-t-il autant ? Quel est le plus simple ? Le plus performant ? Le plus suivi ?
+Quel tuto suivre ?</p>
+<p>Franchement, devoir ré-apprendre un <em>tasks runners</em> tous les trois mois en fonction de la mode,
+c'est plutôt lourd. Et ça rappelle fortement le choix cornélien du framework ou de la librairie javascript (
+<a class="reference external" href="https://angularjs.org/">angular</a>, <a class="reference external" href="https://angular.io/">angular2</a>, <a class="reference external" href="https://facebook.github.io/react/">react</a>,
+<a class="reference external" href="https://www.polymer-project.org/1.0/">polymer</a>, <a class="reference external" href="https://jquery.com/">jquery</a>, <a class="reference external" href="http://vuejs.org/">vue.js</a>, etc...)</p>
+<p>N'y a-t-il pas un outil robuste, simple et pérenne ? Et qui pourrait te servir pour autre chose que du
+développement frontend tant qu'à faire ? Et ben si, ça existe depuis la création de <a class="reference external" href="https://www.gnu.org">GNU</a> en 1983 par Richard
+Stallman, et ça s'appelle <a class="reference external" href="https://www.gnu.org/software/make/">Make</a>.</p>
+<p><em>Make</em> est un outil qui permet d'automatiser la construction de fichiers et qui peut
+jouer le rôle de <em>tasks runners</em>.</p>
+<p>Concrètement, en développement web, de quoi est-ce qu'on a le plus besoin ?</p>
+<ul class="simple">
+<li>Compiler nos fichiers <a class="reference external" href="http://lesscss.org/">LESS</a> ou <a class="reference external" href="http://sass-lang.com/">Sass</a> en CSS.</li>
+<li>Minifier nos fichiers CSS.</li>
+<li>Compiler nos fichiers <a class="reference external" href="http://livescript.net/">LiveScript</a>, <a class="reference external" href="http://coffeescript.org/">CoffeeScript</a> ou <a class="reference external" href="http://www.typescriptlang.org/">TypeScript</a> en JavaScript.</li>
+<li>Minifier nos fichiers JavaScript.</li>
+<li>Avoir un <em>watcher</em> qui lance automatiquement toutes ces tâches lorsqu'un fichier source est modifié.</li>
+</ul>
+<p>On suppose que tu as :</p>
+<ul class="simple">
+<li>tes fichiers LESS dans <strong>static/src/less</strong></li>
+<li>tes fichiers LiveScript dans <strong>static/src/ls</strong></li>
+</ul>
+<p>Et que tu veux tes fichiers compilés et minifiés dans <strong>static/dist/css</strong> et <strong>static/dist/js</strong>.</p>
+<p>C'est parti, tu vas te créer un fichier <strong>Makefile</strong> qui fera tous ça !</p>
+<div class="highlight"><pre>vim Makefile
+</pre></div>
+<p>Tu y déclares tes répertoires de travail :</p>
+<div class="highlight"><pre>LESS_FOLDER :<span class="o">=</span> static/src/less
+LS_FOLDER :<span class="o">=</span> static/src/ls
+CSS_FOLDER :<span class="o">=</span> static/dist/css
+JS_FOLDER :<span class="o">=</span> static/dist/js
+</pre></div>
+<p>Ensuite, tu y listes les fichiers concernés :</p>
+<div class="highlight"><pre>LESS_FILES :<span class="o">=</span> <span class="si">${</span><span class="nv">shell</span><span class="p"> find </span><span class="si">${</span><span class="nv">LESS_FOLDER</span><span class="si">}</span><span class="p"> -type f -name </span><span class="s1">&#39;*.less&#39;</span><span class="si">}</span>
+LS_FILES :<span class="o">=</span> <span class="si">${</span><span class="nv">shell</span><span class="p"> find </span><span class="si">${</span><span class="nv">LS_FOLDER</span><span class="si">}</span><span class="p"> -type f -name </span><span class="s1">&#39;*.ls&#39;</span><span class="si">}</span>
+CSS_FILE :<span class="o">=</span> <span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span>/main.min.css
+JS_FILE :<span class="o">=</span> <span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span>/main.min.js
+</pre></div>
+<p>La commande <strong>find</strong> utilisée pour <em>LESS_FILES</em> et <em>LS_FILES</em> permet de récupérer le
+chemin de tous les fichiers LESS et LiveScript présents.</p>
+<p>Tu déclares une tâche <em>build</em> qui sera chargée de lancer la compilation des fichiers :</p>
+<div class="highlight"><pre>build: build-css build-js
+</pre></div>
+<p>Puis, tu commences par créer la tâche qui va compiler les fichiers LESS :</p>
+<div class="highlight"><pre>build-css: <span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span> <span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span>
+
+<span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span>: <span class="si">${</span><span class="nv">LESS_FILES</span><span class="si">}</span>
+    cat <span class="nv">$^</span> <span class="p">|</span> lessc - <span class="p">|</span> cleancss &gt; <span class="nv">$@</span>
+
+<span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span>:
+    mkdir -p <span class="nv">$@</span>
+</pre></div>
+<p>Ta tâche <em>build-css</em> va créer le répertoire <strong>static/dist/css</strong> via <strong>mkdir</strong>.
+Et elle va compiler tous les fichiers LESS à l'aide de <strong>lessc</strong> et les minifier à
+l'aide de <strong>cleancss</strong>.</p>
+<p>Dans une <strong>Makefile</strong>, <em>$^</em> correspond à la liste des dépendances. Il s'agit ici
+des fichiers contenus dans <em>LESS_FILES</em>. <em>$&#64;</em> correspond au nom de la cible, à
+savoir le fichier contenu dans <em>CSS_FILE</em>.</p>
+<p>De la même manière, tu crées la tâche qui va compiler les fichiers LiveScript :</p>
+<div class="highlight"><pre>build-js: <span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span> <span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>
+
+<span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>: <span class="si">${</span><span class="nv">LS_FILES</span><span class="si">}</span>
+cat <span class="nv">$^</span> <span class="p">|</span> lsc -sc <span class="p">|</span> uglifyjs - &gt; <span class="nv">$@</span>
+
+<span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span>:
+mkdir -p <span class="nv">$@</span>
+</pre></div>
+<p>Les fichiers LiveScript sont compilés à l'aide de <strong>lsc</strong> et minifiés à l'aide
+de <strong>uglifyjs</strong>.</p>
+<p>Tu rajoutes une méthode pour nettoyer le répertoire <em>dist</em> :</p>
+<div class="highlight"><pre>clean:
+    rm <span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span> <span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>
+</pre></div>
+<p>Et une méthode qui te permettra d'installer les librairies utilisées par ton <strong>Makefile</strong> via <strong>npm</strong> :</p>
+<div class="highlight"><pre>install-dependencies:
+    sudo npm install -g less clean-css livescript uglifyjs onchange
+</pre></div>
+<p>Enfin, tu vas mettre en place ton <em>watcher</em> à l'aide de <strong>onchange</strong> :</p>
+<div class="highlight"><pre>watch:
+    onchange <span class="s2">&quot;</span><span class="si">${</span><span class="nv">LESS_FILES</span><span class="si">}</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">LS_FILES</span><span class="si">}</span><span class="s2">&quot;</span> -- make build
+</pre></div>
+<p>La dernière instruction servira à dire à <strong>make</strong> que certaines tâches
+ne sont pas directement liées à des noms de fichiers :</p>
+<div class="highlight"><pre>.PHONY: build build-css build-js clean watch install-dependencies
+</pre></div>
+<p>Et c'est fini! Tu disposes désormais des commandes suivantes :</p>
+<ul class="simple">
+<li><strong>make install-dependencies</strong> : pour installer les dépendances.</li>
+<li><strong>make</strong> ou <strong>make build</strong> : pour compiler et minifier tous les fichiers.</li>
+<li><strong>make build-js</strong> : pour compiler et minifier les fichiers LiveScript.</li>
+<li><strong>make build-css</strong> : pour compiler et minifier les fichiers LESS.</li>
+<li><strong>make clean</strong> : pour effacer les fichiers compilés et minifiés.</li>
+<li><strong>make watch</strong> : pour relancer automatiquement la commande <strong>make build</strong> à chaque modifications de fichiers.</li>
+</ul>
+<p>Le résultat final :</p>
+<div class="highlight"><pre><span class="c">#################################################</span>
+<span class="c"># Compile and minify less and livescript files. #</span>
+<span class="c"># Require node.js and npm                       #</span>
+<span class="c">#################################################</span>
+
+LESS_FOLDER :<span class="o">=</span> static/src/less
+LS_FOLDER :<span class="o">=</span> static/src/ls
+CSS_FOLDER :<span class="o">=</span> static/dist/css
+JS_FOLDER :<span class="o">=</span> static/dist/js
+
+LESS_FILES :<span class="o">=</span> <span class="si">${</span><span class="nv">shell</span><span class="p"> find </span><span class="si">${</span><span class="nv">LESS_FOLDER</span><span class="si">}</span><span class="p"> -type f -name </span><span class="s1">&#39;*.less&#39;</span><span class="si">}</span>
+LS_FILES :<span class="o">=</span> <span class="si">${</span><span class="nv">shell</span><span class="p"> find </span><span class="si">${</span><span class="nv">LS_FOLDER</span><span class="si">}</span><span class="p"> -type f -name </span><span class="s1">&#39;*.ls&#39;</span><span class="si">}</span>
+CSS_FILE :<span class="o">=</span> <span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span>/main.min.css
+JS_FILE :<span class="o">=</span> <span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span>/main.min.js
+
+<span class="c">###############</span>
+<span class="c"># Build files #</span>
+<span class="c">###############</span>
+
+build: build-css build-js
+
+<span class="c">####################</span>
+<span class="c"># Build css files #</span>
+<span class="c">####################</span>
+
+build-css: <span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span> <span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span>
+
+<span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span>: <span class="si">${</span><span class="nv">LESS_FILES</span><span class="si">}</span>
+    cat <span class="nv">$^</span> <span class="p">|</span> lessc - <span class="p">|</span> cleancss &gt; <span class="nv">$@</span>
+
+<span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span>:
+    mkdir -p <span class="nv">$@</span>
+
+<span class="c">##################</span>
+<span class="c"># Build js files #</span>
+<span class="c">##################</span>
+
+build-js: <span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span> <span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>
+
+<span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>: <span class="si">${</span><span class="nv">LS_FILES</span><span class="si">}</span>
+    cat <span class="nv">$^</span> <span class="p">|</span> lsc -sc <span class="p">|</span> uglifyjs - &gt; <span class="nv">$@</span>
+
+<span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span>:
+    mkdir -p <span class="nv">$@</span>
+
+<span class="c">###############</span>
+<span class="c"># Clean files #</span>
+<span class="c">###############</span>
+
+clean:
+    rm <span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span> <span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>
+
+<span class="c">########################</span>
+<span class="c"># Install dépendencies #</span>
+<span class="c">########################</span>
+
+install-dependencies:
+    sudo npm install -g less clean-css livescript uglifyjs onchange
+
+<span class="c">###############</span>
+<span class="c"># Watch files #</span>
+<span class="c">###############</span>
+
+watch:
+    onchange <span class="s2">&quot;</span><span class="si">${</span><span class="nv">LESS_FILES</span><span class="si">}</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">LS_FILES</span><span class="si">}</span><span class="s2">&quot;</span> -- make build
+
+<span class="c">#########</span>
+<span class="c"># Phony #</span>
+<span class="c">#########</span>
+
+.PHONY: build build-css build-js clean watch install-dependencies
+</pre></div>
+<p>Evidemment, ça reste un exemple très simple. Mais rien ne t'empêche de faire
+évoluer ton <strong>Makefile</strong> selon tes besoins.</p>
+<p>En plus, tu viens d'apprendre un outil qui te sera utile pour faire de l'administration système.</p>
+<p>Bonne compilation !</p>
+
+    </div>
+  </div>
+  <hr class="separator">
+  <div class="col-md-8 col-md-offset-2">
+  <div id="disqus_thread">
+    <script>
+      var disqus_shortname = 'dotmobo';
+      (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] ||
+         document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>
+      Activez Javascript pour voir 
+      <a href="https://disqus.com/?ref_noscript=dotmobo">
+        les commentaires Disqus.
+      </a>
+    </noscript>
+    <a href="https://disqus.com" class="dsq-brlink">
+      Commentaires de blog par <span class="logo-disqus">Disqus</span>
+    </a>
+  </div>
+  </div>
+  </div>
+<footer class="footer">
+  <div class="container">
+    <p class="text-center">
+      dotmobo, <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>.
+    </p>
+    <div class="text-center">
+      G&eacute;n&eacute;r&eacute; par <a href="http://getpelican.com" target="_blank">Pelican</a> avec le th&egrave;me <a href="https://github.com/dotmobo/pelican-alchemy">alchemy</a>.
+    </div>
+  </div>
+</footer> <!-- /.footer -->
+  <script src="http://dotmobo.github.io/theme/js/jquery.min.js"></script>
+  <script src="http://dotmobo.github.io/theme/js/bootstrap.min.js"></script>
+</body> <!-- 42 -->
+
+</html>

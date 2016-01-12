@@ -1,5 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2015-12-23T00:00:00+01:00</updated><entry><title>Templating avec Mako</title><link href="http://dotmobo.github.io/mako.html" rel="alternate"></link><updated>2015-12-23T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-12-23:mako.html</id><summary type="html">&lt;img alt="Mako" class="align-right" src="./images/mako.png" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2016-01-12T00:00:00+01:00</updated><entry><title>Se passer de Grunt/Gulp/Brunch/Broccoli/Mimosa/Jake grâce à Make</title><link href="http://dotmobo.github.io/makefile-frontend.html" rel="alternate"></link><updated>2016-01-12T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2016-01-12:makefile-frontend.html</id><summary type="html">&lt;img alt="Gnu" class="align-right" src="./images/gnu.png" /&gt;
+&lt;p&gt;La communauté &lt;a class="reference external" href="https://nodejs.org"&gt;Node.js&lt;/a&gt; a été plutôt productive ces deux
+dernières années, notamment au niveau de la création de &lt;em&gt;tasks runners&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Certains sont enthousiastes de cet essor et de cette profusion d'outils,
+mais d'autres le sont beaucoup moins &lt;a class="reference external" href="https://medium.com/&amp;#64;wob/the-sad-state-of-web-development-1603a861d29f#.nrikd9bai"&gt;et le font savoir&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Tu as forcément déjà lu un article ou vu un bout de code qui mentionnait au choix &lt;a class="reference external" href="http://gruntjs.com/"&gt;grunt&lt;/a&gt;,
+&lt;a class="reference external" href="http://gulpjs.com/"&gt;gulp&lt;/a&gt;, &lt;a class="reference external" href="http://brunch.io/"&gt;brunch&lt;/a&gt;, &lt;a class="reference external" href="http://broccolijs.com/"&gt;broccoli&lt;/a&gt;,
+&lt;a class="reference external" href="http://mimosa.io/"&gt;mimosa&lt;/a&gt;, &lt;a class="reference external" href="http://jakejs.com/"&gt;jake&lt;/a&gt; ou que sais-je.&lt;/p&gt;
+&lt;p&gt;Mais lequel utiliser ? Pourquoi y en a-t-il autant ? Quel est le plus simple ? Le plus performant ? Le plus suivi ?
+Quel tuto suivre ?&lt;/p&gt;
+&lt;p&gt;Franchement, devoir ré-apprendre un &lt;em&gt;tasks runners&lt;/em&gt; tous les trois mois en fonction de la mode,
+c'est plutôt lourd. Et ça rappelle fortement le choix cornélien du framework ou de la librairie javascript (
+&lt;a class="reference external" href="https://angularjs.org/"&gt;angular&lt;/a&gt;, &lt;a class="reference external" href="https://angular.io/"&gt;angular2&lt;/a&gt;, &lt;a class="reference external" href="https://facebook.github.io/react/"&gt;react&lt;/a&gt;,
+&lt;a class="reference external" href="https://www.polymer-project.org/1.0/"&gt;polymer&lt;/a&gt;, &lt;a class="reference external" href="https://jquery.com/"&gt;jquery&lt;/a&gt;, &lt;a class="reference external" href="http://vuejs.org/"&gt;vue.js&lt;/a&gt;, etc...)&lt;/p&gt;
+&lt;p&gt;N'y a-t-il pas un outil robuste, simple et pérenne ? Et qui pourrait te servir pour autre chose que du
+développement frontend tant qu'à faire ? Et ben si, ça existe depuis la création de &lt;a class="reference external" href="https://www.gnu.org"&gt;GNU&lt;/a&gt; en 1983 par Richard
+Stallman, et ça s'appelle &lt;a class="reference external" href="https://www.gnu.org/software/make/"&gt;Make&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Make&lt;/em&gt; est un outil qui permet d'automatiser la construction de fichiers et qui peut
+jouer le rôle de &lt;em&gt;tasks runners&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Concrètement, en développement web, de quoi est-ce qu'on a le plus besoin ?&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Compiler nos fichiers &lt;a class="reference external" href="http://lesscss.org/"&gt;LESS&lt;/a&gt; ou &lt;a class="reference external" href="http://sass-lang.com/"&gt;Sass&lt;/a&gt; en CSS.&lt;/li&gt;
+&lt;li&gt;Minifier nos fichiers CSS.&lt;/li&gt;
+&lt;li&gt;Compiler nos fichiers &lt;a class="reference external" href="http://livescript.net/"&gt;LiveScript&lt;/a&gt;, &lt;a class="reference external" href="http://coffeescript.org/"&gt;CoffeeScript&lt;/a&gt; ou &lt;a class="reference external" href="http://www.typescriptlang.org/"&gt;TypeScript&lt;/a&gt; en JavaScript.&lt;/li&gt;
+&lt;li&gt;Minifier nos fichiers JavaScript.&lt;/li&gt;
+&lt;li&gt;Avoir un &lt;em&gt;watcher&lt;/em&gt; qui lance automatiquement toutes ces tâches lorsqu'un fichier source est modifié.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;On suppose que tu as :&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;tes fichiers LESS dans &lt;strong&gt;static/src/less&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;tes fichiers LiveScript dans &lt;strong&gt;static/src/ls&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Et que tu veux tes fichiers compilés et minifiés dans &lt;strong&gt;static/dist/css&lt;/strong&gt; et &lt;strong&gt;static/dist/js&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;C'est parti, tu vas te créer un fichier &lt;strong&gt;Makefile&lt;/strong&gt; qui fera tous ça !&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;vim Makefile
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu y déclares tes répertoires de travail :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;LESS_FOLDER :&lt;span class="o"&gt;=&lt;/span&gt; static/src/less
+LS_FOLDER :&lt;span class="o"&gt;=&lt;/span&gt; static/src/ls
+CSS_FOLDER :&lt;span class="o"&gt;=&lt;/span&gt; static/dist/css
+JS_FOLDER :&lt;span class="o"&gt;=&lt;/span&gt; static/dist/js
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ensuite, tu y listes les fichiers concernés :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;LESS_FILES :&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;shell&lt;/span&gt;&lt;span class="p"&gt; find &lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;LESS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt; -type f -name &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;*.less&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+LS_FILES :&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;shell&lt;/span&gt;&lt;span class="p"&gt; find &lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;LS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt; -type f -name &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;*.ls&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+CSS_FILE :&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CSS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/main.min.css
+JS_FILE :&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;JS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/main.min.js
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;La commande &lt;strong&gt;find&lt;/strong&gt; utilisée pour &lt;em&gt;LESS_FILES&lt;/em&gt; et &lt;em&gt;LS_FILES&lt;/em&gt; permet de récupérer le
+chemin de tous les fichiers LESS et LiveScript présents.&lt;/p&gt;
+&lt;p&gt;Tu déclares une tâche &lt;em&gt;build&lt;/em&gt; qui sera chargée de lancer la compilation des fichiers :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;build: build-css build-js
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Puis, tu commences par créer la tâche qui va compiler les fichiers LESS :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;build-css: &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CSS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CSS_FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+
+&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CSS_FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;: &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;LESS_FILES&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+    cat &lt;span class="nv"&gt;$^&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; lessc - &lt;span class="p"&gt;|&lt;/span&gt; cleancss &amp;gt; &lt;span class="nv"&gt;$@&lt;/span&gt;
+
+&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CSS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;:
+    mkdir -p &lt;span class="nv"&gt;$@&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ta tâche &lt;em&gt;build-css&lt;/em&gt; va créer le répertoire &lt;strong&gt;static/dist/css&lt;/strong&gt; via &lt;strong&gt;mkdir&lt;/strong&gt;.
+Et elle va compiler tous les fichiers LESS à l'aide de &lt;strong&gt;lessc&lt;/strong&gt; et les minifier à
+l'aide de &lt;strong&gt;cleancss&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Dans une &lt;strong&gt;Makefile&lt;/strong&gt;, &lt;em&gt;$^&lt;/em&gt; correspond à la liste des dépendances. Il s'agit ici
+des fichiers contenus dans &lt;em&gt;LESS_FILES&lt;/em&gt;. &lt;em&gt;$&amp;#64;&lt;/em&gt; correspond au nom de la cible, à
+savoir le fichier contenu dans &lt;em&gt;CSS_FILE&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;De la même manière, tu crées la tâche qui va compiler les fichiers LiveScript :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;build-js: &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;JS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;JS_FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+
+&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;JS_FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;: &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;LS_FILES&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+cat &lt;span class="nv"&gt;$^&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; lsc -sc &lt;span class="p"&gt;|&lt;/span&gt; uglifyjs - &amp;gt; &lt;span class="nv"&gt;$@&lt;/span&gt;
+
+&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;JS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;:
+mkdir -p &lt;span class="nv"&gt;$@&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Les fichiers LiveScript sont compilés à l'aide de &lt;strong&gt;lsc&lt;/strong&gt; et minifiés à l'aide
+de &lt;strong&gt;uglifyjs&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Tu rajoutes une méthode pour nettoyer le répertoire &lt;em&gt;dist&lt;/em&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;clean:
+    rm &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CSS_FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;JS_FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et une méthode qui te permettra d'installer les librairies utilisées par ton &lt;strong&gt;Makefile&lt;/strong&gt; via &lt;strong&gt;npm&lt;/strong&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;install-dependencies:
+    sudo npm install -g less clean-css livescript uglifyjs onchange
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enfin, tu vas mettre en place ton &lt;em&gt;watcher&lt;/em&gt; à l'aide de &lt;strong&gt;onchange&lt;/strong&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;watch:
+    onchange &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;LESS_FILES&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;LS_FILES&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; -- make build
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;La dernière instruction servira à dire à &lt;strong&gt;make&lt;/strong&gt; que certaines tâches
+ne sont pas directement liées à des noms de fichiers :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;.PHONY: build build-css build-js clean watch install-dependencies
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et c'est fini! Tu disposes désormais des commandes suivantes :&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;make install-dependencies&lt;/strong&gt; : pour installer les dépendances.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;make&lt;/strong&gt; ou &lt;strong&gt;make build&lt;/strong&gt; : pour compiler et minifier tous les fichiers.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;make build-js&lt;/strong&gt; : pour compiler et minifier les fichiers LiveScript.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;make build-css&lt;/strong&gt; : pour compiler et minifier les fichiers LESS.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;make clean&lt;/strong&gt; : pour effacer les fichiers compilés et minifiés.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;make watch&lt;/strong&gt; : pour relancer automatiquement la commande &lt;strong&gt;make build&lt;/strong&gt; à chaque modifications de fichiers.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Le résultat final :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#################################################&lt;/span&gt;
+&lt;span class="c"&gt;# Compile and minify less and livescript files. #&lt;/span&gt;
+&lt;span class="c"&gt;# Require node.js and npm                       #&lt;/span&gt;
+&lt;span class="c"&gt;#################################################&lt;/span&gt;
+
+LESS_FOLDER :&lt;span class="o"&gt;=&lt;/span&gt; static/src/less
+LS_FOLDER :&lt;span class="o"&gt;=&lt;/span&gt; static/src/ls
+CSS_FOLDER :&lt;span class="o"&gt;=&lt;/span&gt; static/dist/css
+JS_FOLDER :&lt;span class="o"&gt;=&lt;/span&gt; static/dist/js
+
+LESS_FILES :&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;shell&lt;/span&gt;&lt;span class="p"&gt; find &lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;LESS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt; -type f -name &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;*.less&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+LS_FILES :&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;shell&lt;/span&gt;&lt;span class="p"&gt; find &lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;LS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt; -type f -name &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;*.ls&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+CSS_FILE :&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CSS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/main.min.css
+JS_FILE :&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;JS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/main.min.js
+
+&lt;span class="c"&gt;###############&lt;/span&gt;
+&lt;span class="c"&gt;# Build files #&lt;/span&gt;
+&lt;span class="c"&gt;###############&lt;/span&gt;
+
+build: build-css build-js
+
+&lt;span class="c"&gt;####################&lt;/span&gt;
+&lt;span class="c"&gt;# Build css files #&lt;/span&gt;
+&lt;span class="c"&gt;####################&lt;/span&gt;
+
+build-css: &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CSS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CSS_FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+
+&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CSS_FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;: &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;LESS_FILES&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+    cat &lt;span class="nv"&gt;$^&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; lessc - &lt;span class="p"&gt;|&lt;/span&gt; cleancss &amp;gt; &lt;span class="nv"&gt;$@&lt;/span&gt;
+
+&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CSS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;:
+    mkdir -p &lt;span class="nv"&gt;$@&lt;/span&gt;
+
+&lt;span class="c"&gt;##################&lt;/span&gt;
+&lt;span class="c"&gt;# Build js files #&lt;/span&gt;
+&lt;span class="c"&gt;##################&lt;/span&gt;
+
+build-js: &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;JS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;JS_FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+
+&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;JS_FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;: &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;LS_FILES&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+    cat &lt;span class="nv"&gt;$^&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; lsc -sc &lt;span class="p"&gt;|&lt;/span&gt; uglifyjs - &amp;gt; &lt;span class="nv"&gt;$@&lt;/span&gt;
+
+&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;JS_FOLDER&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;:
+    mkdir -p &lt;span class="nv"&gt;$@&lt;/span&gt;
+
+&lt;span class="c"&gt;###############&lt;/span&gt;
+&lt;span class="c"&gt;# Clean files #&lt;/span&gt;
+&lt;span class="c"&gt;###############&lt;/span&gt;
+
+clean:
+    rm &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CSS_FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;JS_FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+
+&lt;span class="c"&gt;########################&lt;/span&gt;
+&lt;span class="c"&gt;# Install dépendencies #&lt;/span&gt;
+&lt;span class="c"&gt;########################&lt;/span&gt;
+
+install-dependencies:
+    sudo npm install -g less clean-css livescript uglifyjs onchange
+
+&lt;span class="c"&gt;###############&lt;/span&gt;
+&lt;span class="c"&gt;# Watch files #&lt;/span&gt;
+&lt;span class="c"&gt;###############&lt;/span&gt;
+
+watch:
+    onchange &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;LESS_FILES&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;LS_FILES&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; -- make build
+
+&lt;span class="c"&gt;#########&lt;/span&gt;
+&lt;span class="c"&gt;# Phony #&lt;/span&gt;
+&lt;span class="c"&gt;#########&lt;/span&gt;
+
+.PHONY: build build-css build-js clean watch install-dependencies
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Evidemment, ça reste un exemple très simple. Mais rien ne t'empêche de faire
+évoluer ton &lt;strong&gt;Makefile&lt;/strong&gt; selon tes besoins.&lt;/p&gt;
+&lt;p&gt;En plus, tu viens d'apprendre un outil qui te sera utile pour faire de l'administration système.&lt;/p&gt;
+&lt;p&gt;Bonne compilation !&lt;/p&gt;
+</summary><category term="frontend"></category><category term="make"></category><category term="makefile"></category><category term="javascript"></category><category term="livescript"></category><category term="less"></category><category term="css"></category><category term="compile"></category><category term="node.js"></category></entry><entry><title>Templating avec Mako</title><link href="http://dotmobo.github.io/mako.html" rel="alternate"></link><updated>2015-12-23T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2015-12-23:mako.html</id><summary type="html">&lt;img alt="Mako" class="align-right" src="./images/mako.png" /&gt;
 &lt;p&gt;&lt;em&gt;Python is a great scripting language. Don't reinvent the wheel...
 your templates can handle it !&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Je suis tombé sur &lt;a class="reference external" href="http://www.makotemplates.org/"&gt;mako&lt;/a&gt; suite à une discussion

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="http://dotmobo.github.io/fosdem2016.html" />
+
+    <title>  .mobo &mdash; Retour du FOSDEM 2016
+</title>
+
+
+
+      <link type="application/atom+xml" rel="alternate" href="/feeds/all.atom.xml"  title=".mobo Atom Feed">
+
+    <link rel="stylesheet" href="http://dotmobo.github.io/theme/css/style.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68852219-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+    <meta name="author" content="Morgan">
+    <meta name="description" content="Retour du FOSDEM 2016">
+  <meta name="tags" contents="fosdem, 2016, python, docker, containers, pulp, guix, tox, systemd, ">
+</head>
+
+<body>
+<header class="header">
+  <div class="container">
+      <div class="header-image pull-left">
+        <a class="nodec" href="http://dotmobo.github.io"><img src=https://pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg></a>
+      </div>
+    <div class="header-inner">
+      <h1 class="header-name">
+        <a class="nodec" href="http://dotmobo.github.io">.mobo</a>
+      </h1>
+      <h3 class="header-text">Blog d'un Pythoniste Djangonaute</h3>
+      <ul class="header-menu list-inline">
+          <li><a class="nodec" href="http://dotmobo.github.io/categories.html">Cat&eacute;gories</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/tags.html">Tags</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/archives.html">Archives</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec icon-github" href="https://github.com/dotmobo"></a></li>
+          <li><a class="nodec icon-twitter" href="https://twitter.com/dotmobo"></a></li>
+          <li><a class="nodec icon-gplus" href="https://www.google.com/+DotmoboGithubIo6"></a></li>
+          <li><a class="nodec icon-rss" href="/feeds/all.atom.xml"></a></li>
+      </ul>
+    </div>
+  </div>
+</header> <!-- /.header -->  <div class="container">
+  <div class="post full-post">
+    <h1 class="post-title">
+      <a href="/fosdem2016.html" title="Permalink to Retour du FOSDEM 2016">Retour du FOSDEM 2016</a>
+    </h1>
+    <ul class="list-inline">
+      <li class="post-date">
+        <a class="text-muted" href="/fosdem2016.html" title="2016-02-04T00:00:00+01:00">jeu. 04 février 2016</a>
+      </li>
+      <li class="muted">&middot;</li>
+      <li class="post-category">
+        <a href="http://dotmobo.github.io/category/evenements.html">Événements</a>
+      </li>
+        <li class="muted">&middot;</li>
+        <li>
+            <a href="/tag/fosdem.html">fosdem</a>,             <a href="/tag/2016.html">2016</a>,             <a href="/tag/python.html">python</a>,             <a href="/tag/docker.html">docker</a>,             <a href="/tag/containers.html">containers</a>,             <a href="/tag/pulp.html">pulp</a>,             <a href="/tag/guix.html">guix</a>,             <a href="/tag/tox.html">tox</a>,             <a href="/tag/systemd.html">systemd</a>        </li>
+    </ul>
+    <div class="post-content">
+      <img alt="FOSDEM" class="align-right" src="./images/fosdem.png" />
+<p>Le <a class="reference external" href="https://fosdem.org/">FOSDEM</a> est un événement qui a lieu chaque année à
+<a class="reference external" href="http://www.ulb.ac.be/">l'Université Libre de Bruxelles</a>.
+Il permet de rencontrer d'autres développeurs, d'animer et
+d'assister à des conférences, de partager des idées et des bières, et de
+découvrir les nouvelles technos sympas du moment.</p>
+<p>Cette année, c'était noir de monde ! Plus de 7900 développeurs et sysadmins étaient
+présents !</p>
+<p>Je vais te faire un bref petit retour des confs qui m'ont marqué et des technos
+à suivre.</p>
+<div class="section" id="systemd">
+<h2>Systemd</h2>
+<p><em>par Lennart Poettering</em></p>
+<p>Ça y est, <em>systemd</em> est officiellement installé par défaut dans toutes les plus
+grosses distros linux (sauf gentoo).</p>
+<p>Si tu es sous linux, tu vas obligatoirement devoir te pencher dessus.
+C'est grosso-modo un <em>daemon</em> qui va te permettre de gérer tes services
+(apache, postgres et autres) via la commande <strong>systemctl</strong>.</p>
+<p>Je ne vais pas m'éterniser dessus, car il y a déjà pas mal d'articles sur le sujet,
+comme <a class="reference external" href="http://linuxfr.org/news/systemd-l-init-martyrise-l-init-bafoue-mais-l-init-libere">celui-ci</a>.</p>
+</div>
+<div class="section" id="docker-for-developers">
+<h2>Docker for developers</h2>
+<p><em>par Michael Hrivnak</em></p>
+<p>Bon, n'y allons pas par quatres chemins, <a class="reference external" href="https://www.docker.com/">docker</a> est
+clairement <strong>LA</strong> techno en vogue du moment. La salle était pleine à craquer, et
+il y avait facilement autant de gens à l'intérieur qu'à l'extérieur. J'avais
+l'impression que les organisateurs ne s'attendaient pas à ça !</p>
+<p>C'est un outil écrit en go et développé par Solomon Kykes, qui permet de gérer
+des conteneurs LXC et d'y déployer des applications.</p>
+<p>On a pu voir ici l'utilisation quotidienne de docker pour un développeur, sans
+évoquer les questions de déploiement.</p>
+<p>Note : on me chuchote à l'oreille que <a class="reference external" href="https://github.com/fgrehm/vagrant-lxc">vagrant-lxc</a>
+pourrait également faire l'affaire. À méditer donc !</p>
+<div class="section" id="pour-les-tests-unitaires">
+<h3>Pour les tests unitaires</h3>
+<p>L'idée, c'est d'utiliser une image docker pour chaque combinaison
+d'environnements. En python, on a déjà les <em>virtualenvs</em> qui nous
+permettent de tester diverses combinaisons d'interpréteurs et de librairies
+python via <em>tox</em>.</p>
+<p>Grâce à docker, on va en plus pouvoir tester nos applications dans différents
+environnements linux (debian, gentoo, etc...).</p>
+<p>Il suffit de créer un <em>Dockerfile</em> qui va :</p>
+<ul class="simple">
+<li>utiliser la bonne distro.</li>
+<li>installer les paquets systèmes et les paquets python nécessaires.</li>
+<li>monter notre code dans <em>/code</em> par exemple.</li>
+<li>exécuter les tests unitaires depuis le conteneur.</li>
+</ul>
+</div>
+<div class="section" id="pour-la-base-de-donnees-de-dev">
+<h3>Pour la base de données de dev</h3>
+<p>En utilisant des conteneurs pour tes bases de données, tu peux facilement
+tester une migration de postgres 9.4 en 9.5 par exemple, sans pourrir ton système.
+Tu démarres un nouveau conteneur postgres 9.5, tu y fais tes tests de migration
+et tu la détruis, tout simplement.</p>
+<p>Tes tests unitaires pourront également utiliser une base de données dans un
+conteneur, ce qui te permettra d'éviter de manipuler du <em>sqlite</em> ou une base en
+mémoire.</p>
+</div>
+<div class="section" id="pour-diffuser-une-application-de-demo">
+<h3>Pour diffuser une application de démo</h3>
+<p>Ce n'est pas forcément évident de <em>containeriser</em> une application de prod.
+Il faut notamment penser à la gestion des mots de passe et des certificats.</p>
+<p>Mais pour diffuser une application de démo, tu peux passer outre ces questions !
+Tu vas ainsi éviter à tes utilisateurs d'installer toute une application sur leur
+système, en leur proposant juste de démarrer un conteneur.</p>
+</div>
+<div class="section" id="pour-les-serveurs-http">
+<h3>Pour les serveurs http</h3>
+<p>L'idée est la même que pour les bases de données. Tu peux installer et tester
+<em>nginx</em>, <em>apache</em> et <em>lighttpd</em> dans des conteneurs.</p>
+</div>
+<div class="section" id="pour-faker-des-api">
+<h3>Pour faker des API</h3>
+<p>À la place de <em>mocker</em> les réponses de tes API dans tes tests unitaires, tu
+peux déployer tes API de test dans un conteneur et les utiliser directement dans
+tes tests unitaires.</p>
+</div>
+</div>
+<div class="section" id="guix-tox">
+<h2>Guix-tox</h2>
+<p><em>par Cyril Roelandt</em></p>
+<p><a class="reference external" href="https://www.gnu.org/software/guix/">Guix</a> est un gestionnaire fonctionnel de
+paquets pour le système GNU.</p>
+<p>Il fonctionne pour tous les langages. Ainsi, il permettrait d'éviter d'utiliser
+des gestionnaires de paquets spécifiques aux langages, comme pip, npm, cpan.</p>
+<p>Il utilise le langage <a class="reference external" href="http://www.gnu.org/software/guile/">guile</a>, qui est
+une implémentation de <a class="reference external" href="http://schemers.org/">scheme</a>.</p>
+<p>Dans guix, on a entre autres la possibilité d'utiliser des conteneurs, de gérer
+des profils, de revenir en arrière.</p>
+<p>Je t'invite à lire <a class="reference external" href="http://matutine.cmoi.cc/2015/11/14/installer-guix-le-gestionnaire-de-paquets-distro-venv-universel-et-container.html">l'article de Matutine</a>
+qui explique bien l'idée générale.</p>
+<p>Et du coup, <a class="reference external" href="https://git.framasoft.org/Steap/guix-tox">guix-tox</a> est tout
+simplement un fork de tox qui remplace les <em>virtualenvs</em> python par guix.</p>
+<p>Tu vas ainsi pouvoir tester ton application dans un environnement système
+complet, ce qui rejoint l'idée précédemment évoquée avec docker.</p>
+<p>Le débat entre guix, docker et vagrant reste ouvert !</p>
+</div>
+<div class="section" id="pulp">
+<h2>Pulp</h2>
+<p><em>par Michael Hrivnak</em></p>
+<p><a class="reference external" href="http://www.pulpproject.org/">Pulp</a> est un projet qui permet de gérer ses propres
+dépôts. On va ainsi pouvoir héberger son propre pypi, synchroniser les dépôts
+entre eux et y uploader nos paquets.</p>
+<p>C'est compatible avec les paquets debian, rpm, python, docker et autres.
+Franchement, ça semble plutôt bien foutu et pratique!</p>
+<p>Pour finir, merci à toute l'équipe du FOSDEM et à l'année prochaine !</p>
+</div>
+
+    </div>
+  </div>
+  <hr class="separator">
+  <div class="col-md-8 col-md-offset-2">
+  <div id="disqus_thread">
+    <script>
+      var disqus_shortname = 'dotmobo';
+      (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] ||
+         document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>
+      Activez Javascript pour voir 
+      <a href="https://disqus.com/?ref_noscript=dotmobo">
+        les commentaires Disqus.
+      </a>
+    </noscript>
+    <a href="https://disqus.com" class="dsq-brlink">
+      Commentaires de blog par <span class="logo-disqus">Disqus</span>
+    </a>
+  </div>
+  </div>
+  </div>
+<footer class="footer">
+  <div class="container">
+    <p class="text-center">
+      dotmobo, <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>.
+    </p>
+    <div class="text-center">
+      G&eacute;n&eacute;r&eacute; par <a href="http://getpelican.com" target="_blank">Pelican</a> avec le th&egrave;me <a href="https://github.com/dotmobo/pelican-alchemy">alchemy</a>.
+    </div>
+  </div>
+</footer> <!-- /.footer -->
+  <script src="http://dotmobo.github.io/theme/js/jquery.min.js"></script>
+  <script src="http://dotmobo.github.io/theme/js/bootstrap.min.js"></script>
+</body> <!-- 42 -->
+
+</html>

@@ -1,5 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2016-01-12T00:00:00+01:00</updated><entry><title>Se passer de Grunt/Gulp/Brunch/Broccoli/Mimosa/Jake grâce à Make</title><link href="http://dotmobo.github.io/makefile-frontend.html" rel="alternate"></link><updated>2016-01-12T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2016-01-12:makefile-frontend.html</id><summary type="html">&lt;img alt="Gnu" class="align-right" src="./images/gnu.png" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2016-02-04T00:00:00+01:00</updated><entry><title>Retour du FOSDEM 2016</title><link href="http://dotmobo.github.io/fosdem2016.html" rel="alternate"></link><updated>2016-02-04T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2016-02-04:fosdem2016.html</id><summary type="html">&lt;img alt="FOSDEM" class="align-right" src="./images/fosdem.png" /&gt;
+&lt;p&gt;Le &lt;a class="reference external" href="https://fosdem.org/"&gt;FOSDEM&lt;/a&gt; est un événement qui a lieu chaque année à
+&lt;a class="reference external" href="http://www.ulb.ac.be/"&gt;l'Université Libre de Bruxelles&lt;/a&gt;.
+Il permet de rencontrer d'autres développeurs, d'animer et
+d'assister à des conférences, de partager des idées et des bières, et de
+découvrir les nouvelles technos sympas du moment.&lt;/p&gt;
+&lt;p&gt;Cette année, c'était noir de monde ! Plus de 7900 développeurs et sysadmins étaient
+présents !&lt;/p&gt;
+&lt;p&gt;Je vais te faire un bref petit retour des confs qui m'ont marqué et des technos
+à suivre.&lt;/p&gt;
+&lt;div class="section" id="systemd"&gt;
+&lt;h2&gt;Systemd&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;par Lennart Poettering&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Ça y est, &lt;em&gt;systemd&lt;/em&gt; est officiellement installé par défaut dans toutes les plus
+grosses distros linux (sauf gentoo).&lt;/p&gt;
+&lt;p&gt;Si tu es sous linux, tu vas obligatoirement devoir te pencher dessus.
+C'est grosso-modo un &lt;em&gt;daemon&lt;/em&gt; qui va te permettre de gérer tes services
+(apache, postgres et autres) via la commande &lt;strong&gt;systemctl&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Je ne vais pas m'éterniser dessus, car il y a déjà pas mal d'articles sur le sujet,
+comme &lt;a class="reference external" href="http://linuxfr.org/news/systemd-l-init-martyrise-l-init-bafoue-mais-l-init-libere"&gt;celui-ci&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="docker-for-developers"&gt;
+&lt;h2&gt;Docker for developers&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;par Michael Hrivnak&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Bon, n'y allons pas par quatres chemins, &lt;a class="reference external" href="https://www.docker.com/"&gt;docker&lt;/a&gt; est
+clairement &lt;strong&gt;LA&lt;/strong&gt; techno en vogue du moment. La salle était pleine à craquer, et
+il y avait facilement autant de gens à l'intérieur qu'à l'extérieur. J'avais
+l'impression que les organisateurs ne s'attendaient pas à ça !&lt;/p&gt;
+&lt;p&gt;C'est un outil écrit en go et développé par Solomon Kykes, qui permet de gérer
+des conteneurs LXC et d'y déployer des applications.&lt;/p&gt;
+&lt;p&gt;On a pu voir ici l'utilisation quotidienne de docker pour un développeur, sans
+évoquer les questions de déploiement.&lt;/p&gt;
+&lt;p&gt;Note : on me chuchote à l'oreille que &lt;a class="reference external" href="https://github.com/fgrehm/vagrant-lxc"&gt;vagrant-lxc&lt;/a&gt;
+pourrait également faire l'affaire. À méditer donc !&lt;/p&gt;
+&lt;div class="section" id="pour-les-tests-unitaires"&gt;
+&lt;h3&gt;Pour les tests unitaires&lt;/h3&gt;
+&lt;p&gt;L'idée, c'est d'utiliser une image docker pour chaque combinaison
+d'environnements. En python, on a déjà les &lt;em&gt;virtualenvs&lt;/em&gt; qui nous
+permettent de tester diverses combinaisons d'interpréteurs et de librairies
+python via &lt;em&gt;tox&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Grâce à docker, on va en plus pouvoir tester nos applications dans différents
+environnements linux (debian, gentoo, etc...).&lt;/p&gt;
+&lt;p&gt;Il suffit de créer un &lt;em&gt;Dockerfile&lt;/em&gt; qui va :&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;utiliser la bonne distro.&lt;/li&gt;
+&lt;li&gt;installer les paquets systèmes et les paquets python nécessaires.&lt;/li&gt;
+&lt;li&gt;monter notre code dans &lt;em&gt;/code&lt;/em&gt; par exemple.&lt;/li&gt;
+&lt;li&gt;exécuter les tests unitaires depuis le conteneur.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pour-la-base-de-donnees-de-dev"&gt;
+&lt;h3&gt;Pour la base de données de dev&lt;/h3&gt;
+&lt;p&gt;En utilisant des conteneurs pour tes bases de données, tu peux facilement
+tester une migration de postgres 9.4 en 9.5 par exemple, sans pourrir ton système.
+Tu démarres un nouveau conteneur postgres 9.5, tu y fais tes tests de migration
+et tu la détruis, tout simplement.&lt;/p&gt;
+&lt;p&gt;Tes tests unitaires pourront également utiliser une base de données dans un
+conteneur, ce qui te permettra d'éviter de manipuler du &lt;em&gt;sqlite&lt;/em&gt; ou une base en
+mémoire.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pour-diffuser-une-application-de-demo"&gt;
+&lt;h3&gt;Pour diffuser une application de démo&lt;/h3&gt;
+&lt;p&gt;Ce n'est pas forcément évident de &lt;em&gt;containeriser&lt;/em&gt; une application de prod.
+Il faut notamment penser à la gestion des mots de passe et des certificats.&lt;/p&gt;
+&lt;p&gt;Mais pour diffuser une application de démo, tu peux passer outre ces questions !
+Tu vas ainsi éviter à tes utilisateurs d'installer toute une application sur leur
+système, en leur proposant juste de démarrer un conteneur.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pour-les-serveurs-http"&gt;
+&lt;h3&gt;Pour les serveurs http&lt;/h3&gt;
+&lt;p&gt;L'idée est la même que pour les bases de données. Tu peux installer et tester
+&lt;em&gt;nginx&lt;/em&gt;, &lt;em&gt;apache&lt;/em&gt; et &lt;em&gt;lighttpd&lt;/em&gt; dans des conteneurs.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pour-faker-des-api"&gt;
+&lt;h3&gt;Pour faker des API&lt;/h3&gt;
+&lt;p&gt;À la place de &lt;em&gt;mocker&lt;/em&gt; les réponses de tes API dans tes tests unitaires, tu
+peux déployer tes API de test dans un conteneur et les utiliser directement dans
+tes tests unitaires.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="guix-tox"&gt;
+&lt;h2&gt;Guix-tox&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;par Cyril Roelandt&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://www.gnu.org/software/guix/"&gt;Guix&lt;/a&gt; est un gestionnaire fonctionnel de
+paquets pour le système GNU.&lt;/p&gt;
+&lt;p&gt;Il fonctionne pour tous les langages. Ainsi, il permettrait d'éviter d'utiliser
+des gestionnaires de paquets spécifiques aux langages, comme pip, npm, cpan.&lt;/p&gt;
+&lt;p&gt;Il utilise le langage &lt;a class="reference external" href="http://www.gnu.org/software/guile/"&gt;guile&lt;/a&gt;, qui est
+une implémentation de &lt;a class="reference external" href="http://schemers.org/"&gt;scheme&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Dans guix, on a entre autres la possibilité d'utiliser des conteneurs, de gérer
+des profils, de revenir en arrière.&lt;/p&gt;
+&lt;p&gt;Je t'invite à lire &lt;a class="reference external" href="http://matutine.cmoi.cc/2015/11/14/installer-guix-le-gestionnaire-de-paquets-distro-venv-universel-et-container.html"&gt;l'article de Matutine&lt;/a&gt;
+qui explique bien l'idée générale.&lt;/p&gt;
+&lt;p&gt;Et du coup, &lt;a class="reference external" href="https://git.framasoft.org/Steap/guix-tox"&gt;guix-tox&lt;/a&gt; est tout
+simplement un fork de tox qui remplace les &lt;em&gt;virtualenvs&lt;/em&gt; python par guix.&lt;/p&gt;
+&lt;p&gt;Tu vas ainsi pouvoir tester ton application dans un environnement système
+complet, ce qui rejoint l'idée précédemment évoquée avec docker.&lt;/p&gt;
+&lt;p&gt;Le débat entre guix, docker et vagrant reste ouvert !&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pulp"&gt;
+&lt;h2&gt;Pulp&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;par Michael Hrivnak&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.pulpproject.org/"&gt;Pulp&lt;/a&gt; est un projet qui permet de gérer ses propres
+dépôts. On va ainsi pouvoir héberger son propre pypi, synchroniser les dépôts
+entre eux et y uploader nos paquets.&lt;/p&gt;
+&lt;p&gt;C'est compatible avec les paquets debian, rpm, python, docker et autres.
+Franchement, ça semble plutôt bien foutu et pratique!&lt;/p&gt;
+&lt;p&gt;Pour finir, merci à toute l'équipe du FOSDEM et à l'année prochaine !&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="fosdem"></category><category term="2016"></category><category term="python"></category><category term="docker"></category><category term="containers"></category><category term="pulp"></category><category term="guix"></category><category term="tox"></category><category term="systemd"></category></entry><entry><title>Se passer de Grunt/Gulp/Brunch/Broccoli/Mimosa/Jake grâce à Make</title><link href="http://dotmobo.github.io/makefile-frontend.html" rel="alternate"></link><updated>2016-01-12T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2016-01-12:makefile-frontend.html</id><summary type="html">&lt;img alt="Gnu" class="align-right" src="./images/gnu.png" /&gt;
 &lt;p&gt;La communauté &lt;a class="reference external" href="https://nodejs.org"&gt;Node.js&lt;/a&gt; a été plutôt productive ces deux
 dernières années, notamment au niveau de la création de &lt;em&gt;tasks runners&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Certains sont enthousiastes de cet essor et de cette profusion d'outils,

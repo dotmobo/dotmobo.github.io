@@ -30,7 +30,7 @@ Systemd
 *par Lennart Poettering*
 
 Ça y est, *systemd* est officiellement installé par défaut dans toutes les plus
-grosses distros linux (sauf Gentoo).
+grosses distros linux (sauf gentoo).
 
 Si tu es sous linux, tu vas obligatoirement devoir te pencher dessus.
 C'est grosso-modo un *daemon* qui va te permettre de gérer tes services
@@ -44,27 +44,30 @@ Docker for developers
 =====================
 *par Michael Hrivnak*
 
-Bon, n'y allons pas par quatres chemins, `Docker <https://www.docker.com/>`_ est
+Bon, n'y allons pas par quatres chemins, `docker <https://www.docker.com/>`_ est
 clairement **LA** techno en vogue du moment. La salle était pleine à craquer, et
 il y avait facilement autant de gens à l'intérieur qu'à l'extérieur. J'avais
 l'impression que les organisateurs ne s'attendaient pas à ça !
 
-C'est un outil écrit en Go et développé par Solomon Kykes, qui permet de gérer
+C'est un outil écrit en go et développé par Solomon Kykes, qui permet de gérer
 des conteneurs LXC et d'y déployer des applications.
 
-On a pu voir ici l'utilisation quotidienne de Docker pour un développeur, sans
+On a pu voir ici l'utilisation quotidienne de docker pour un développeur, sans
 évoquer les questions de déploiement.
+
+Note : on me chuchote à l'oreille que `vagrant-lxc <https://github.com/fgrehm/vagrant-lxc>`_
+pourrait également faire l'affaire. À méditer donc !
 
 Pour les tests unitaires
 -------------------------
 
-L'idée, c'est d'utiliser une image Docker pour chaque combinaison
-d'environnement. En python, on a déjà les *virtualenvs* qui nous
+L'idée, c'est d'utiliser une image docker pour chaque combinaison
+d'environnements. En python, on a déjà les *virtualenvs* qui nous
 permettent de tester diverses combinaisons d'interpréteurs et de librairies
 python via *tox*.
 
-Grâce à Docker, on va en plus pouvoir tester nos applications dans différents
-environnements linux (debian, gentoo, etc...)
+Grâce à docker, on va en plus pouvoir tester nos applications dans différents
+environnements linux (debian, gentoo, etc...).
 
 Il suffit de créer un *Dockerfile* qui va :
 
@@ -78,7 +81,8 @@ Pour la base de données de dev
 
 En utilisant des conteneurs pour tes bases de données, tu peux facilement
 tester une migration de postgres 9.4 en 9.5 par exemple, sans pourrir ton système.
-Tu démarres un nouveau conteneur, tu te branches dessus et puis voilà !
+Tu démarres un nouveau conteneur postgres 9.5, tu y fais tes tests de migration
+et tu la détruis, tout simplement.
 
 Tes tests unitaires pourront également utiliser une base de données dans un
 conteneur, ce qui te permettra d'éviter de manipuler du *sqlite* ou une base en
@@ -112,14 +116,13 @@ Guix-tox
 *par Cyril Roelandt*
 
 `Guix <https://www.gnu.org/software/guix/>`_ est un gestionnaire fonctionnel de
-paquets pour le système GNU. On pourrait le considérer comme une alternative
-à Docker pour déployer des applications.
+paquets pour le système GNU.
 
 Il fonctionne pour tous les langages. Ainsi, il permettrait d'éviter d'utiliser
 des gestionnaires de paquets spécifiques aux langages, comme pip, npm, cpan.
 
-Il utilise le langage `Guile <http://www.gnu.org/software/guile/>`_, qui est
-une implémentation de `Scheme <http://schemers.org/>`_.
+Il utilise le langage `guile <http://www.gnu.org/software/guile/>`_, qui est
+une implémentation de `scheme <http://schemers.org/>`_.
 
 Dans guix, on a entre autres la possibilité d'utiliser des conteneurs, de gérer
 des profils, de revenir en arrière.
@@ -131,17 +134,19 @@ Et du coup, `guix-tox <https://git.framasoft.org/Steap/guix-tox>`_ est tout
 simplement un fork de tox qui remplace les *virtualenvs* python par guix.
 
 Tu vas ainsi pouvoir tester ton application dans un environnement système
-complet, ce qui rejoint l'idée précédemment évoquée avec Docker.
+complet, ce qui rejoint l'idée précédemment évoquée avec docker.
+
+Le débat entre guix, docker et vagrant reste ouvert !
 
 Pulp
 ====
 *par Michael Hrivnak*
 
 `Pulp <http://www.pulpproject.org/>`_ est un projet qui permet de gérer ses propres
-dépôts. On va ainsi pouvoir héberger son propre Pypi, synchroniser les dépôts
+dépôts. On va ainsi pouvoir héberger son propre pypi, synchroniser les dépôts
 entre eux et y uploader nos paquets.
 
-C'est compatible avec les paquets Debian, RPM, python, Docker et autres.
+C'est compatible avec les paquets debian, rpm, python, docker et autres.
 Franchement, ça semble plutôt bien foutu et pratique!
 
 Pour finir, merci à toute l'équipe du FOSDEM et à l'année prochaine !

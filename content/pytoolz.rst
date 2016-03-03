@@ -85,7 +85,7 @@ fonctions **remove_even** et **take_two**:
     [1, 2]
 
 Et maintenant, place au fun avec **functoolz** ! Comme en *shell*, tu vas
-pouvoir **piper** tes fonctions. Disons que tu veuilles les deux premiers
+pouvoir *piper* tes fonctions. Disons que tu veuilles les deux premiers
 éléments non paires d'une liste:
 
 .. code-block:: python

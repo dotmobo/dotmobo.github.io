@@ -51,7 +51,7 @@ fonctions &lt;strong&gt;remove_even&lt;/strong&gt; et &lt;strong&gt;take_two&lt;
 &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Et maintenant, place au fun avec &lt;strong&gt;functoolz&lt;/strong&gt; ! Comme en &lt;em&gt;shell&lt;/em&gt;, tu vas
-pouvoir &lt;strong&gt;piper&lt;/strong&gt; tes fonctions. Disons que tu veuilles les deux premiers
+pouvoir &lt;em&gt;piper&lt;/em&gt; tes fonctions. Disons que tu veuilles les deux premiers
 éléments non paires d'une liste:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;toolz.curried&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;remove&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;take&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;toolz.functoolz&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;pipe&lt;/span&gt;

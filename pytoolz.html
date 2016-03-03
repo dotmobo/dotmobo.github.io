@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="http://dotmobo.github.io/pytoolz.html" />
+
+    <title>  .mobo &mdash; Programmation fonctionnelle avec PyToolz
+</title>
+
+
+
+      <link type="application/atom+xml" rel="alternate" href="/feeds/all.atom.xml"  title=".mobo Atom Feed">
+
+    <link rel="stylesheet" href="http://dotmobo.github.io/theme/css/style.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68852219-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+    <meta name="author" content="Morgan">
+    <meta name="description" content="Programmation fonctionnelle avec PyToolz">
+  <meta name="tags" contents="python, pytoolz, programmation fonctionnelle, fonctions, mochi, pipe, curry, ">
+</head>
+
+<body>
+<header class="header">
+  <div class="container">
+      <div class="header-image pull-left">
+        <a class="nodec" href="http://dotmobo.github.io"><img src=https://pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg></a>
+      </div>
+    <div class="header-inner">
+      <h1 class="header-name">
+        <a class="nodec" href="http://dotmobo.github.io">.mobo</a>
+      </h1>
+      <h3 class="header-text">Blog d'un Pythoniste Djangonaute</h3>
+      <ul class="header-menu list-inline">
+          <li><a class="nodec" href="http://dotmobo.github.io/categories.html">Cat&eacute;gories</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/tags.html">Tags</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/archives.html">Archives</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec icon-github" href="https://github.com/dotmobo"></a></li>
+          <li><a class="nodec icon-twitter" href="https://twitter.com/dotmobo"></a></li>
+          <li><a class="nodec icon-gplus" href="https://www.google.com/+DotmoboGithubIo6"></a></li>
+          <li><a class="nodec icon-rss" href="/feeds/all.atom.xml"></a></li>
+      </ul>
+    </div>
+  </div>
+</header> <!-- /.header -->  <div class="container">
+  <div class="post full-post">
+    <h1 class="post-title">
+      <a href="/pytoolz.html" title="Permalink to Programmation fonctionnelle avec PyToolz">Programmation fonctionnelle avec PyToolz</a>
+    </h1>
+    <ul class="list-inline">
+      <li class="post-date">
+        <a class="text-muted" href="/pytoolz.html" title="2016-03-03T00:00:00+01:00">jeu. 03 mars 2016</a>
+      </li>
+      <li class="muted">&middot;</li>
+      <li class="post-category">
+        <a href="http://dotmobo.github.io/category/python.html">Python</a>
+      </li>
+        <li class="muted">&middot;</li>
+        <li>
+            <a href="/tag/python.html">python</a>,             <a href="/tag/pytoolz.html">pytoolz</a>,             <a href="/tag/programmation fonctionnelle.html">programmation fonctionnelle</a>,             <a href="/tag/fonctions.html">fonctions</a>,             <a href="/tag/mochi.html">mochi</a>,             <a href="/tag/pipe.html">pipe</a>,             <a href="/tag/curry.html">curry</a>        </li>
+    </ul>
+    <div class="post-content">
+      <img alt="Python" class="align-right" src="./images/python.png" />
+<p><a class="reference external" href="http://toolz.readthedocs.org/en/latest/index.html">PyToolz</a> est un ensemble
+de fonctions qui étendent <em>itertools</em> et <em>functools</em> de la librairie
+standard. Ainsi, il va te permettre d'utiliser les
+paradigmes de la programmation fonctionnelle en python.</p>
+<p>Ce qui est sympa avec <em>PyToolz</em>, c'est qu'il est écrit en pur python et ne
+dépend donc d'aucune librairie externe. De plus, il est compatible python 3.</p>
+<p>Comme le veut la programmation fonctionnelle, les fonctions proposées sont
+<em>composable</em>, <em>pure</em> et <em>lazy</em>. Si tout ça ne te parle pas, je t'invite à lire
+le livre &quot;<a class="reference external" href="http://lyah.haskell.fr/">Apprendre Haskell vous fera le plus grand bien !</a>&quot;
+pour te plonger dans l'univers de la programmation fonctionnelle.
+Même si tu ne comptes pas développer en <a class="reference external" href="https://www.haskell.org/">Haskell</a>,
+il est intéressant d'en comprendre les concepts.</p>
+<p>Mais retournons à <em>PyToolz</em>. Comme d'hab, tu l'installes avec pip:</p>
+<div class="highlight"><pre>pip install toolz
+</pre></div>
+<p>Et tu peux maintenant utiliser toutes les méthodes de
+<a class="reference external" href="http://toolz.readthedocs.org/en/latest/api.html#itertoolz">Itertoolz</a>,
+<a class="reference external" href="http://toolz.readthedocs.org/en/latest/api.html#functoolz">Functoolz</a> et
+<a class="reference external" href="http://toolz.readthedocs.org/en/latest/api.html#dicttoolz">Dictoolz</a>.</p>
+<p><em>Itertoolz</em> te permettra, par exemple, de retirer les éléments pairs d'une liste:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">toolz.itertoolz</span> <span class="kn">import</span> <span class="n">remove</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">remove</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+<p>De récupérer les deux premiers éléments d'une liste:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">toolz.itertoolz</span> <span class="kn">import</span> <span class="n">take</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">take</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+<p>De partitionner une liste d'éléments en liste de tuples de deux éléments:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">toolz.itertoolz</span> <span class="kn">import</span> <span class="n">partition</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">partition</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span>
+<span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
+</pre></div>
+<p>Ou encore de retourner les différences entre deux listes:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">toolz.itertoolz</span> <span class="kn">import</span> <span class="n">diff</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">diff</span><span class="p">([</span><span class="s">&quot;pommes&quot;</span><span class="p">,</span> <span class="s">&quot;poires&quot;</span><span class="p">,</span> <span class="s">&quot;bananes&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s">&quot;pommes&quot;</span><span class="p">,</span> <span class="s">&quot;poires&quot;</span><span class="p">,</span> <span class="s">&quot;oranges&quot;</span><span class="p">]))</span>
+<span class="p">[(</span><span class="s">&#39;bananes&#39;</span><span class="p">,</span> <span class="s">&#39;oranges&#39;</span><span class="p">)]</span>
+</pre></div>
+<p><em>PyToolz</em> propose également la version <em>curryfiée</em> des différentes
+fonctions pour en effectuer des applications partielles. Ici, on crée les
+fonctions <strong>remove_even</strong> et <strong>take_two</strong>:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="n">remove</span><span class="p">,</span> <span class="n">take</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">remove_even</span> <span class="o">=</span> <span class="n">remove</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">remove_even</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">take_two</span> <span class="o">=</span> <span class="n">take</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">take_two</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+<p>Et maintenant, place au fun avec <strong>functoolz</strong> ! Comme en <em>shell</em>, tu vas
+pouvoir <strong>piper</strong> tes fonctions. Disons que tu veuilles les deux premiers
+éléments non paires d'une liste:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="n">remove</span><span class="p">,</span> <span class="n">take</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">toolz.functoolz</span> <span class="kn">import</span> <span class="n">pipe</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">remove_even</span> <span class="o">=</span> <span class="n">remove</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">take_two</span> <span class="o">=</span> <span class="n">take</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">pipe</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="n">remove_even</span><span class="p">,</span> <span class="n">take_two</span><span class="p">))</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+<p>Plutôt cool non ?</p>
+<p><strong>Dictoolz</strong>, quand à lui, permet entre autres de fusionner des dictionnaires:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">toolz.dicttoolz</span> <span class="kn">import</span> <span class="n">merge</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">merge</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="s">&#39;one&#39;</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="s">&#39;two&#39;</span><span class="p">})</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s">&#39;one&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">&#39;two&#39;</span><span class="p">}</span>
+</pre></div>
+<p>Ou d'appliquer une fonction aux valeurs d'un dictionnaire:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">toolz.dicttoolz</span> <span class="kn">import</span> <span class="n">valmap</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">bills</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;Alice&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="s">&quot;Bob&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">35</span><span class="p">]}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">valmap</span><span class="p">(</span><span class="nb">sum</span><span class="p">,</span> <span class="n">bills</span><span class="p">)</span>
+<span class="p">{</span><span class="s">&#39;Alice&#39;</span><span class="p">:</span> <span class="mi">65</span><span class="p">,</span> <span class="s">&#39;Bob&#39;</span><span class="p">:</span> <span class="mi">45</span><span class="p">}</span>
+</pre></div>
+<p>Il y a évidemment tout un tas d'autres fonctions disponibles que je t'invite à découvrir !</p>
+<p>Sinon, si tu veux pousser une peu plus loin la programmation fonctionnelle avec
+python, il existe un langage intéressant appelé <a class="reference external" href="https://github.com/i2y/mochi">Mochi</a>, dont l'interpréteur
+convertit le code Mochi en bytecode Python 3.</p>
+<p>Il permet d'écrire notamment ce genre de chose:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">fizzbuzz</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">match</span> <span class="p">[</span><span class="n">n</span> <span class="o">%</span> <span class="mi">3</span><span class="p">,</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">5</span><span class="p">]:</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]:</span> <span class="s">&quot;fizzbuzz&quot;</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">_</span><span class="p">]:</span> <span class="s">&quot;fizz&quot;</span>
+        <span class="p">[</span><span class="n">_</span><span class="p">,</span> <span class="mi">0</span><span class="p">]:</span> <span class="s">&quot;buzz&quot;</span>
+        <span class="n">_</span><span class="p">:</span> <span class="n">n</span>
+
+<span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+<span class="o">|&gt;</span> <span class="nb">map</span><span class="p">(</span><span class="n">fizzbuzz</span><span class="p">)</span>
+<span class="o">|&gt;</span> <span class="n">pvector</span><span class="p">()</span>
+<span class="o">|&gt;</span> <span class="k">print</span><span class="p">()</span>
+</pre></div>
+<p>À découvrir !</p>
+
+    </div>
+  </div>
+  <hr class="separator">
+  <div class="col-md-8 col-md-offset-2">
+  <div id="disqus_thread">
+    <script>
+      var disqus_shortname = 'dotmobo';
+      (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] ||
+         document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>
+      Activez Javascript pour voir 
+      <a href="https://disqus.com/?ref_noscript=dotmobo">
+        les commentaires Disqus.
+      </a>
+    </noscript>
+    <a href="https://disqus.com" class="dsq-brlink">
+      Commentaires de blog par <span class="logo-disqus">Disqus</span>
+    </a>
+  </div>
+  </div>
+  </div>
+<footer class="footer">
+  <div class="container">
+    <p class="text-center">
+      dotmobo, <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>.
+    </p>
+    <div class="text-center">
+      G&eacute;n&eacute;r&eacute; par <a href="http://getpelican.com" target="_blank">Pelican</a> avec le th&egrave;me <a href="https://github.com/dotmobo/pelican-alchemy">alchemy</a>.
+    </div>
+  </div>
+</footer> <!-- /.footer -->
+  <script src="http://dotmobo.github.io/theme/js/jquery.min.js"></script>
+  <script src="http://dotmobo.github.io/theme/js/bootstrap.min.js"></script>
+</body> <!-- 42 -->
+
+</html>

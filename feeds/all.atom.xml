@@ -1,5 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2016-03-03T00:00:00+01:00</updated><entry><title>Programmation fonctionnelle avec PyToolz</title><link href="http://dotmobo.github.io/pytoolz.html" rel="alternate"></link><updated>2016-03-03T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2016-03-03:pytoolz.html</id><summary type="html">&lt;img alt="Python" class="align-right" src="./images/python.png" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2016-04-04T00:00:00+02:00</updated><entry><title>Créer une application django minimaliste</title><link href="http://dotmobo.github.io/django-minimaliste.html" rel="alternate"></link><updated>2016-04-04T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2016-04-04:django-minimaliste.html</id><summary type="html">&lt;img alt="Django" class="align-right" src="./images/djangopony.png" /&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://www.djangoproject.com/"&gt;Django&lt;/a&gt; est un framework très complet,
+qui nécessite un certain investissement pour entrer dans le bain.&lt;/p&gt;
+&lt;p&gt;Il est donc le plus souvent utilisé pour créer des applications conséquentes,
+ce qui amène les développeurs à préférer des frameworks légers comme
+&lt;a class="reference external" href="http://bottlepy.org/"&gt;Bottle&lt;/a&gt; ou &lt;a class="reference external" href="http://flask.pocoo.org/"&gt;Flask&lt;/a&gt; pour le
+développement de petites applications.&lt;/p&gt;
+&lt;p&gt;Pourtant, il est possible d'utiliser Django de manière minimaliste, afin
+d'obtenir un résultat proche des frameworks légers.&lt;/p&gt;
+&lt;p&gt;L'astuce décrite ci-dessous est à garder quelque part dans un coin de ta tête,
+car ça pourra sûrement t'être utile un jour.&lt;/p&gt;
+&lt;p&gt;Après avoir installer django:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;pip install django
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu crées le fichier &lt;strong&gt;myserver.py&lt;/strong&gt; suivant dans le répertoire de ton pojet:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+
+&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;    Django minimaliste&lt;/span&gt;
+&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.conf&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;settings&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.conf.urls&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.shortcuts&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;render&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+
+&lt;span class="c"&gt;# On définit les settings obligatoires et utiles&lt;/span&gt;
+&lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;configure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;DEBUG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;SECRET_KEY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;S3CR3T&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;ROOT_URLCONF&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;TEMPLATE_DIRS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;./templates/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="n"&gt;MIDDLEWARE_CLASSES&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;#39;django.middleware.common.CommonMiddleware&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;#39;django.middleware.csrf.CsrfViewMiddleware&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;#39;django.middleware.clickjacking.XFrameOptionsMiddleware&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;),&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# On crée nos vues&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;someone&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;World&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;index.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;someone&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;someone&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+
+&lt;span class="c"&gt;# On délare nos urls&lt;/span&gt;
+&lt;span class="n"&gt;urlpatterns&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;r&amp;#39;^$&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;r&amp;#39;^(?P&amp;lt;someone&amp;gt;\w+)/$&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# On exécute le serveur comme s&amp;#39;il s&amp;#39;agissait d&amp;#39;un fichier manage.py&lt;/span&gt;
+&lt;span class="c"&gt;# via python myserver.py runserver&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.core.management&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;execute_from_command_line&lt;/span&gt;
+    &lt;span class="n"&gt;execute_from_command_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu as donc écrit:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Les paramètres de configuration de base, incluant le nom du répertoire qui
+contiendra les templates.&lt;/li&gt;
+&lt;li&gt;Une vue &lt;strong&gt;index&lt;/strong&gt; qui appelle le template &lt;strong&gt;index.html&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Les patterns de tes urls.&lt;/li&gt;
+&lt;li&gt;Le &lt;strong&gt;main&lt;/strong&gt; qui va te permettre d'exécuter l'ensemble des commandes django.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Evidemment, tu peux faire évoluer ce fichier selon tes besoins, comme pour
+rajouter une base de données par exemple.&lt;/p&gt;
+&lt;p&gt;Maintenant, tu vas créer le template &lt;strong&gt;index.html&lt;/strong&gt; suivant dans un sous-répertoire
+appelé &lt;strong&gt;templates&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;meta&lt;/span&gt; &lt;span class="na"&gt;charset=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Hello World!&lt;span class="nt"&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Hello {{ someone }} !&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Il ne te reste plus qu'à lancer le serveur via la commande:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;python myserver.py runserver
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enfin, rends-toi sur &lt;a class="reference external" href="http://127.0.0.1:8000/"&gt;http://127.0.0.1:8000/&lt;/a&gt; et &lt;a class="reference external" href="http://127.0.0.1:8000/arthur/"&gt;http://127.0.0.1:8000/arthur/&lt;/a&gt;
+pour voir le résultat !&lt;/p&gt;
+</summary><category term="python"></category><category term="django"></category><category term="mini"></category></entry><entry><title>Programmation fonctionnelle avec PyToolz</title><link href="http://dotmobo.github.io/pytoolz.html" rel="alternate"></link><updated>2016-03-03T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2016-03-03:pytoolz.html</id><summary type="html">&lt;img alt="Python" class="align-right" src="./images/python.png" /&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://toolz.readthedocs.org/en/latest/index.html"&gt;PyToolz&lt;/a&gt; est un ensemble
 de fonctions qui étendent &lt;em&gt;itertools&lt;/em&gt; et &lt;em&gt;functools&lt;/em&gt; de la librairie
 standard. Ainsi, il va te permettre d'utiliser les

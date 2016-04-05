@@ -26,7 +26,7 @@ d'obtenir un résultat proche des frameworks légers.
 L'astuce décrite ci-dessous est à garder quelque part dans un coin de ta tête,
 car ça pourra sûrement t'être utile un jour.
 
-Après avoir installé django:
+Après avoir installé django (1.9.5 à l'heure où j'écris ces lignes):
 
 .. code-block:: bash
 
@@ -52,7 +52,10 @@ Tu crées le fichier **myserver.py** suivant dans le répertoire de ton pojet:
         DEBUG=True,
         SECRET_KEY='S3CR3T',
         ROOT_URLCONF=__name__,
-        TEMPLATE_DIRS=['./templates/'],
+        TEMPLATES=[{
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': ['./templates/'],
+        }],
         MIDDLEWARE_CLASSES=(
             'django.middleware.common.CommonMiddleware',
             'django.middleware.csrf.CsrfViewMiddleware',

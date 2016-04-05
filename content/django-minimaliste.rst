@@ -26,7 +26,7 @@ d'obtenir un résultat proche des frameworks légers.
 L'astuce décrite ci-dessous est à garder quelque part dans un coin de ta tête,
 car ça pourra sûrement t'être utile un jour.
 
-Après avoir installer django:
+Après avoir installé django:
 
 .. code-block:: bash
 

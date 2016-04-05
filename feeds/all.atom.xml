@@ -10,7 +10,7 @@ développement de petites applications.&lt;/p&gt;
 d'obtenir un résultat proche des frameworks légers.&lt;/p&gt;
 &lt;p&gt;L'astuce décrite ci-dessous est à garder quelque part dans un coin de ta tête,
 car ça pourra sûrement t'être utile un jour.&lt;/p&gt;
-&lt;p&gt;Après avoir installer django:&lt;/p&gt;
+&lt;p&gt;Après avoir installé django:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;pip install django
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Tu crées le fichier &lt;strong&gt;myserver.py&lt;/strong&gt; suivant dans le répertoire de ton pojet:&lt;/p&gt;

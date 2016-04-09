@@ -1,7 +1,7 @@
 Diffuser une application web python avec chaussette, circus et nginx
 ####################################################################
 
-:date: 2016-04-08
+:date: 2016-04-09
 :tags: python,circus,chaussette,nginx,django,bottle,flask,mozilla,waitress
 :category: Python
 :slug: chaussette-circus
@@ -24,10 +24,10 @@ tout particulièrement, à savoir le trio chaussette/circus/nginx.
 ----------------------------
 
 Tu vas commencer par créer une application `bottle <http://bottlepy.org/>`_
-de base, pour changer de django tiens!
+de base (pour changer de django, tiens !).
 
 Tu crées et actives un environnement virtuel **myapp** en python 3.5 à l'aide de
-*virtualenvwrapper* :
+*virtualenvwrapper*:
 
 .. code-block:: python
 
@@ -109,7 +109,7 @@ Tu l'installes via pip **en dehors** du virtualenv **myapp** (donc en global sur
 
     deactivate
     apt-get install libzmq-dev libevent-dev
-    sudo pip install circus
+    pip install circus
 
 Et tu crées le fichier de configuration de circus **circus.ini** dans ton *home*
 par exemple. C'est là que tu vas pouvoir configurer tes *watchers*, qui vont
@@ -138,7 +138,7 @@ Dans le fichier **~/circus.ini**, tu mets:
 
 N'oublie pas de modifier les différents chemins de **working_dir**, **cmd** et
 **virtualenv** pour que ça correspondent à ta propre machine. Tu peux également
-configurer plusieurs *watchers** si tu souhaites monitorer plusieurs applications
+configurer plusieurs *watchers* si tu souhaites monitorer plusieurs applications
 web.
 
 Enfin, tu lances le *daemon* de circus:
@@ -148,7 +148,7 @@ Enfin, tu lances le *daemon* de circus:
     circusd --daemon ~/circus.ini
 
 Si tout s'est bien passé, tu devrais pouvoir utiliser la commande **circusctl**
-pour voir le status de tes applications, les redémarrer et autres.
+pour voir le statut de tes applications, les redémarrer et autres.
 Sinon, tu peux exécuter **circusd** sans l'option **--daemon** pour debugger.
 
 Tu peux voir ci-dessous quelques exemples d'utilisation de **circusctl**:
@@ -156,7 +156,7 @@ Tu peux voir ci-dessous quelques exemples d'utilisation de **circusctl**:
 .. code-block:: bash
 
     circusctl --help # voir l'ensemble des commandes disponibles
-    circusctl status # voir le status des applications
+    circusctl status # voir le statut des applications
     circusctl listsockets # lister les sockets utilisés par les applications
     circusctl restart myapp # redémarrer myapp
     circusctl reload myapp # recharcher la configuration du watcher myapp
@@ -167,7 +167,7 @@ pour vérifier que tout fonctionne.
 Grâce à circus, tu peux désormais manager plusieurs applications différentes,
 qui tournent sous des environnements virtuels différents.
 
-Pour information, il existe une interfaçe web pour monitorer circus appelé
+Pour information, il existe une interface web pour monitorer circus appelé
 **circus-web**, mais qui n'est pas encore compatible python 3.
 
 3) Paramétrer nginx
@@ -178,7 +178,7 @@ serveur http libre et performant qui est une très bonne alternative à apache.
 Il va nous permettre de transmettre les requêtes http à circus/chaussette via les
 sockets.
 
-Tu l'installes via **apt** par exemple:
+Tu l'installes via *apt-get* par exemple:
 
 .. code-block:: bash
 
@@ -203,7 +203,7 @@ Et tu vas créer la configuration suivante dans **/etc/nginx/sites-available/mya
         }
     }
 
-Tu actives ta conf, tu supprimes le site par défaut et tu redémarres nginx:
+Tu actives ta conf', tu supprimes le site par défaut et tu redémarres nginx:
 
 .. code-block:: bash
 

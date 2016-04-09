@@ -1,12 +1,12 @@
-Diffuser une application web python avec chaussette, circus et nginx
-####################################################################
+Servir une application web python avec chaussette, circus et nginx
+###################################################################
 
 :date: 2016-04-09
 :tags: python,circus,chaussette,nginx,django,bottle,flask,mozilla,waitress
 :category: Python
 :slug: chaussette-circus
 :authors: Morgan
-:summary: Diffuser une application web python avec chaussette, circus et nginx
+:summary: Servir une application web python avec chaussette, circus et nginx
 
 .. image:: ./images/chaussette.png
     :alt: Chaussette

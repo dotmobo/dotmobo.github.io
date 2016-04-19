@@ -1,5 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2016-04-09T00:00:00+02:00</updated><entry><title>Servir une application web python avec chaussette, circus et nginx</title><link href="http://dotmobo.github.io/chaussette-circus.html" rel="alternate"></link><updated>2016-04-09T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2016-04-09:chaussette-circus.html</id><summary type="html">&lt;img alt="Chaussette" class="align-right" src="./images/chaussette.png" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2016-04-19T00:00:00+02:00</updated><entry><title>Environnement de développement open source</title><link href="http://dotmobo.github.io/environnement-developpement.html" rel="alternate"></link><updated>2016-04-19T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2016-04-19:environnement-developpement.html</id><summary type="html">&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;Envie de faire évoluer ton environnement de développement ?&lt;/div&gt;
+&lt;div class="line"&gt;D'utiliser une solution simple, pratique et efficace ?&lt;/div&gt;
+&lt;div class="line"&gt;Alors, tu es au bon endroit !&lt;/div&gt;
+&lt;div class="line"&gt;&lt;br /&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;On va faire le tour des outils indispensables pour mettre ça en place.
+Bien évidemment, mon avis est subjectif et ce n'est qu'une solution parmis tant
+d'autres.&lt;/p&gt;
+&lt;p&gt;C'est parti !&lt;/p&gt;
+&lt;div class="section" id="la-distro"&gt;
+&lt;h2&gt;1) La distro&lt;/h2&gt;
+&lt;img alt="arch linux" class="align-right" src="./images/arch.png" /&gt;
+&lt;p&gt;On commence par le choix de la distribution. Je te conseille vivement de partir
+sur &lt;a class="reference external" href="https://www.archlinux.org/"&gt;arch linux&lt;/a&gt; pour les raisons suivantes:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://fr.wikipedia.org/wiki/Rolling_release"&gt;rolling-release&lt;/a&gt;:
+ton système est tout le temps à jour et tu bénéficies des dernières
+versions des logiciels.&lt;/li&gt;
+&lt;li&gt;légèreté: l'installation de base est minimaliste, ce qui fait que tu n'installes
+que ce dont tu as besoin.&lt;/li&gt;
+&lt;li&gt;la communauté: le &lt;a class="reference external" href="https://wiki.archlinux.org/"&gt;wiki&lt;/a&gt; et le
+&lt;a class="reference external" href="https://bbs.archlinux.org/"&gt;forum&lt;/a&gt; de la communauté sont vraiment très bien
+foutus. Il y a même une &lt;a class="reference external" href="https://archlinux.fr/"&gt;communauté francophone&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://aur.archlinux.org/"&gt;AUR&lt;/a&gt;: c'est un dépôt communautaire où l'on trouve
+absolument tout.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Les principales critiques envers arch linux concernent en général la stabilité du système.
+La stabilité, c'est bien pour un serveur. Mais ce n'est pas forcément le plus important
+pour le poste de travail d'un dev. Avec arch, tu pourras tester les toutes
+dernières versions des logiciels et utiliser les nouvelles librairies à la mode !&lt;/p&gt;
+&lt;p&gt;Pour l'installer, je t'invites à le faire à la main en suivant
+la &lt;a class="reference external" href="https://wiki.archlinux.fr/Installation"&gt;doc officielle&lt;/a&gt;, histoire d'entrer dans le bain.
+Si tu as vraiment la flemme, tu peux passer par
+&lt;a class="reference external" href="https://sourceforge.net/projects/architect-linux/"&gt;architect&lt;/a&gt; pour te faciliter la chose.&lt;/p&gt;
+&lt;p&gt;N'oublie pas d'installer &lt;a class="reference external" href="https://wiki.archlinux.fr/Yaourt"&gt;yaourt&lt;/a&gt; pour bénifier du dépôt AUR.&lt;/p&gt;
+&lt;p&gt;Tu auras remarqué que les tutos de ce blog sont en général à destination
+des utilisateurs ubuntu/debian. Pas de panique, il te suffira grosso-modo de
+remplacer les &lt;strong&gt;apt-get install&lt;/strong&gt; par &lt;strong&gt;pacman -S&lt;/strong&gt; pour installer les paquets.
+Pour le reste, c'est généralement du pareil au même.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="le-shell"&gt;
+&lt;h2&gt;2) Le shell&lt;/h2&gt;
+&lt;img alt="zsh" class="align-right" src="./images/zsh.gif" /&gt;
+&lt;p&gt;Maintenant, tu vas t'installer un shell très pratique appelé &lt;a class="reference external" href="https://wiki.archlinux.fr/Zsh"&gt;zsh&lt;/a&gt;,
+qui permet une complétion avancée et l'utilisation d'une syntaxe plus sympa que bash pour
+les scripts.&lt;/p&gt;
+&lt;p&gt;Et en plus de zsh, tu vas également t'installer &lt;a class="reference external" href="https://tmux.github.io/"&gt;tmux&lt;/a&gt;,
+qui est un multiplexeur de terminaux.
+Il permet de manipuler plusieurs terminaux au sein d'une même fenêtre et
+de se rattacher à une session tmux distante. C'est très pratique pour le
+travail collaboratif et pour lancer des commandes sur des serveurs.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;pacman -S zsh tmux
+&lt;span class="nb"&gt;exec &lt;/span&gt;zsh
+chsh -s /bin/zsh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Il ne te reste plus qu'à &lt;a class="reference external" href="https://github.com/dotmobo/dotzsh"&gt;customiser ton .zshrc&lt;/a&gt;
+comme bon de semble.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="le-gestionnaire-de-fenetre"&gt;
+&lt;h2&gt;3) Le gestionnaire de fenêtre&lt;/h2&gt;
+&lt;img alt="i3" class="align-right" src="./images/i3.png" /&gt;
+&lt;p&gt;Oublie les kde, gnome et autres cinammon. Ces environnements sont très bien
+pour un usage classique de linux ; mais pour du dev, il vaut mieux se tourner vers
+un &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Tiling_window_manager"&gt;tiling window manager&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Je te conseille de partir sur &lt;a class="reference external" href="https://i3wm.org/"&gt;i3&lt;/a&gt;, qui est facile d'accès,
+customisable et efficace. Il te permettra d'utiliser l'ensemble de l'espace visible
+disponible, de splitter tes fenêtres comme bon te semble et d'exécuter tes applications.
+De plus, tu pourras manipuler tout ton bureau
+&lt;a class="reference external" href="http://i3wm.org/docs/userguide.html#_default_keybindings"&gt;au clavier&lt;/a&gt;,
+ce qui fait un sacré gain de temps.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;pacman -S i3
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;exec i3&amp;quot;&lt;/span&gt; &amp;gt; ~/.xinitrc
+reboot
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A côté d'i3, tu pourras installer entre autres:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://www.npmjs.com/package/i3-style"&gt;i3-style&lt;/a&gt;: pour styliser i3.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Dmenu"&gt;dmenu&lt;/a&gt;: pour avoir un lanceur d'applications.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://wiki.archlinux.org/index.php/i3#i3bar"&gt;i3bar et i3status&lt;/a&gt;:
+pour avoir une barre de status en bas de l'écran.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://wiki.archlinux.org/index.php/i3#Screensaver_and_power_management"&gt;i3lock et xautolock&lt;/a&gt;:
+pour verrouiller l'écran au bout de quelques minutes d'inactivité.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://projects.l3ib.org/nitrogen/"&gt;nitrogen&lt;/a&gt;: pour changer l'image de fond.&lt;/li&gt;
+&lt;li&gt;pactl de &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/PulseAudio"&gt;pulseaudio&lt;/a&gt;:
+pour changer le volume au clavier.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://knopwob.org/dunst/index.html"&gt;dunst&lt;/a&gt;: pour les notifications.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://jonls.dk/redshift/"&gt;redshift&lt;/a&gt;: pour éviter de se fatiguer les yeux.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://wiki.lxde.org/en/PCManFM"&gt;pcmanfm&lt;/a&gt;: pour la gestion des fichiers.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://www.mozilla.org/fr/firefox/"&gt;firefox&lt;/a&gt;: pour la navigation web.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Jete un coup d'oeil à &lt;a class="reference external" href="https://github.com/dotmobo/doti3"&gt;ma customisation&lt;/a&gt;
+si ça t'intéresse.&lt;/p&gt;
+&lt;p&gt;Et si tu as besoin d'aide, la &lt;a class="reference external" href="https://www.reddit.com/r/i3wm/"&gt;communauté reddit&lt;/a&gt;
+est très active.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="je-veux-coder"&gt;
+&lt;h2&gt;4) Je veux coder !&lt;/h2&gt;
+&lt;img alt="vim" class="align-right" src="./images/vim.png" /&gt;
+&lt;p&gt;Pour coder, tu auras besoin d'un éditeur de texte.
+Je te recommande fortement &lt;a class="reference external" href="https://atom.io/"&gt;atom&lt;/a&gt;, que j'ai déjà présenté
+&lt;a class="reference external" href="http://dotmobo.github.io/sublime-text-to-atom.html"&gt;ici&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;En plus d'atom, tu auras besoin d'un éditeur qui peut s'exécuter dans un terminal.
+Pas besoin de chercher bien loin, le plus avancé est &lt;a class="reference external" href="http://www.vim.org/"&gt;vim&lt;/a&gt;.
+Mais tu peux également te tourner vers son successeur, &lt;a class="reference external" href="https://neovim.io/"&gt;neovim&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Comme le reste des outils présentés sur cet article, il est aussi &lt;a class="reference external" href="https://github.com/dotmobo/dotvim"&gt;très fortement
+customisable&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;En plus des éditeurs de texte, il te faudra un gestionnaire de version de code.
+Sans surprise, je t'invite à installer &lt;a class="reference external" href="https://git-scm.com/"&gt;git&lt;/a&gt;,
+qui te permettra de partager ton code sous github et qui s'interface très bien
+avec atom.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;pacman -S git vim
+yaourt -S atom
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enfin, à toi d'installer ce qui te manque:
+python, node.js, postgresql, nginx, etc ...&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="environnements-isoles"&gt;
+&lt;h2&gt;5) Environnements isolés&lt;/h2&gt;
+&lt;img alt="docker" class="align-right" src="./images/docker.png" /&gt;
+&lt;p&gt;Dans le cas où tu aurais besoin de tester des applications sous d'autres
+distributions, tu pourras utiliser &lt;a class="reference external" href="https://www.vagrantup.com/"&gt;vagrant&lt;/a&gt;
+pour installer des vms ou &lt;a class="reference external" href="https://www.docker.com/"&gt;docker&lt;/a&gt; pour utiliser par des conteneurs.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;yaourt -S vagrant docker docker-compose
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A l'aide de &lt;a class="reference external" href="https://docs.docker.com/compose/"&gt;docker-compose&lt;/a&gt;,
+tu pourras te créer un environnement spécifique par application en utilisant des conteneurs.
+Par exemple, un pour elasticsearch, un autre pour mysql,
+un troisième pour redis et un quatrième pour ton application django.&lt;/p&gt;
+&lt;p&gt;Tu bénificieras ainsi d'environnements complètement isolés, sans devoir installer des tonnes
+d'applications directement sur ton système.&lt;/p&gt;
+&lt;p&gt;A toi de jouer maintenant, et n'hésite pas à donner tes propres astuces dans les commentaires !&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="arch"></category><category term="linux"></category><category term="i3"></category><category term="atom"></category><category term="vim"></category><category term="docker"></category><category term="tmux"></category><category term="zsh"></category><category term="git"></category></entry><entry><title>Servir une application web python avec chaussette, circus et nginx</title><link href="http://dotmobo.github.io/chaussette-circus.html" rel="alternate"></link><updated>2016-04-09T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2016-04-09:chaussette-circus.html</id><summary type="html">&lt;img alt="Chaussette" class="align-right" src="./images/chaussette.png" /&gt;
 &lt;p&gt;Voilà, tu as enfin développé ton application django/bottle/flask (raye les
 mentions inutiles) et tu es fin prêt à la rendre disponible au monde entier.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Mais comment faire ? Quel serveur wsgi utiliser ? A l'aide !&lt;/em&gt;&lt;/p&gt;

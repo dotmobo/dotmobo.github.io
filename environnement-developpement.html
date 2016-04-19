@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="http://dotmobo.github.io/environnement-developpement.html" />
+
+    <title>  .mobo &mdash; Environnement de développement open source
+</title>
+
+
+
+      <link type="application/atom+xml" rel="alternate" href="/feeds/all.atom.xml"  title=".mobo Atom Feed">
+
+    <link rel="stylesheet" href="http://dotmobo.github.io/theme/css/style.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68852219-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+    <meta name="author" content="Morgan">
+    <meta name="description" content="Environnement de développement open source">
+  <meta name="tags" contents="arch, linux, i3, atom, vim, docker, tmux, zsh, git, ">
+</head>
+
+<body>
+<header class="header">
+  <div class="container">
+      <div class="header-image pull-left">
+        <a class="nodec" href="http://dotmobo.github.io"><img src=https://pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg></a>
+      </div>
+    <div class="header-inner">
+      <h1 class="header-name">
+        <a class="nodec" href="http://dotmobo.github.io">.mobo</a>
+      </h1>
+      <h3 class="header-text">Blog d'un Pythoniste Djangonaute</h3>
+      <ul class="header-menu list-inline">
+          <li><a class="nodec" href="http://dotmobo.github.io/categories.html">Cat&eacute;gories</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/tags.html">Tags</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/archives.html">Archives</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec icon-github" href="https://github.com/dotmobo"></a></li>
+          <li><a class="nodec icon-twitter" href="https://twitter.com/dotmobo"></a></li>
+          <li><a class="nodec icon-gplus" href="https://www.google.com/+DotmoboGithubIo6"></a></li>
+          <li><a class="nodec icon-rss" href="/feeds/all.atom.xml"></a></li>
+      </ul>
+    </div>
+  </div>
+</header> <!-- /.header -->  <div class="container">
+  <div class="post full-post">
+    <h1 class="post-title">
+      <a href="/environnement-developpement.html" title="Permalink to Environnement de développement open source">Environnement de développement open source</a>
+    </h1>
+    <ul class="list-inline">
+      <li class="post-date">
+        <a class="text-muted" href="/environnement-developpement.html" title="2016-04-19T00:00:00+02:00">mar. 19 avril 2016</a>
+      </li>
+      <li class="muted">&middot;</li>
+      <li class="post-category">
+        <a href="http://dotmobo.github.io/category/linux.html">Linux</a>
+      </li>
+        <li class="muted">&middot;</li>
+        <li>
+            <a href="/tag/arch.html">arch</a>,             <a href="/tag/linux.html">linux</a>,             <a href="/tag/i3.html">i3</a>,             <a href="/tag/atom.html">atom</a>,             <a href="/tag/vim.html">vim</a>,             <a href="/tag/docker.html">docker</a>,             <a href="/tag/tmux.html">tmux</a>,             <a href="/tag/zsh.html">zsh</a>,             <a href="/tag/git.html">git</a>        </li>
+    </ul>
+    <div class="post-content">
+      <div class="line-block">
+<div class="line">Envie de faire évoluer ton environnement de développement ?</div>
+<div class="line">D'utiliser une solution simple, pratique et efficace ?</div>
+<div class="line">Alors, tu es au bon endroit !</div>
+<div class="line"><br /></div>
+</div>
+<p>On va faire le tour des outils indispensables pour mettre ça en place.
+Bien évidemment, mon avis est subjectif et ce n'est qu'une solution parmis tant
+d'autres.</p>
+<p>C'est parti !</p>
+<div class="section" id="la-distro">
+<h2>1) La distro</h2>
+<img alt="arch linux" class="align-right" src="./images/arch.png" />
+<p>On commence par le choix de la distribution. Je te conseille vivement de partir
+sur <a class="reference external" href="https://www.archlinux.org/">arch linux</a> pour les raisons suivantes:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://fr.wikipedia.org/wiki/Rolling_release">rolling-release</a>:
+ton système est tout le temps à jour et tu bénéficies des dernières
+versions des logiciels.</li>
+<li>légèreté: l'installation de base est minimaliste, ce qui fait que tu n'installes
+que ce dont tu as besoin.</li>
+<li>la communauté: le <a class="reference external" href="https://wiki.archlinux.org/">wiki</a> et le
+<a class="reference external" href="https://bbs.archlinux.org/">forum</a> de la communauté sont vraiment très bien
+foutus. Il y a même une <a class="reference external" href="https://archlinux.fr/">communauté francophone</a>.</li>
+<li><a class="reference external" href="https://aur.archlinux.org/">AUR</a>: c'est un dépôt communautaire où l'on trouve
+absolument tout.</li>
+</ul>
+<p>Les principales critiques envers arch linux concernent en général la stabilité du système.
+La stabilité, c'est bien pour un serveur. Mais ce n'est pas forcément le plus important
+pour le poste de travail d'un dev. Avec arch, tu pourras tester les toutes
+dernières versions des logiciels et utiliser les nouvelles librairies à la mode !</p>
+<p>Pour l'installer, je t'invites à le faire à la main en suivant
+la <a class="reference external" href="https://wiki.archlinux.fr/Installation">doc officielle</a>, histoire d'entrer dans le bain.
+Si tu as vraiment la flemme, tu peux passer par
+<a class="reference external" href="https://sourceforge.net/projects/architect-linux/">architect</a> pour te faciliter la chose.</p>
+<p>N'oublie pas d'installer <a class="reference external" href="https://wiki.archlinux.fr/Yaourt">yaourt</a> pour bénifier du dépôt AUR.</p>
+<p>Tu auras remarqué que les tutos de ce blog sont en général à destination
+des utilisateurs ubuntu/debian. Pas de panique, il te suffira grosso-modo de
+remplacer les <strong>apt-get install</strong> par <strong>pacman -S</strong> pour installer les paquets.
+Pour le reste, c'est généralement du pareil au même.</p>
+</div>
+<div class="section" id="le-shell">
+<h2>2) Le shell</h2>
+<img alt="zsh" class="align-right" src="./images/zsh.gif" />
+<p>Maintenant, tu vas t'installer un shell très pratique appelé <a class="reference external" href="https://wiki.archlinux.fr/Zsh">zsh</a>,
+qui permet une complétion avancée et l'utilisation d'une syntaxe plus sympa que bash pour
+les scripts.</p>
+<p>Et en plus de zsh, tu vas également t'installer <a class="reference external" href="https://tmux.github.io/">tmux</a>,
+qui est un multiplexeur de terminaux.
+Il permet de manipuler plusieurs terminaux au sein d'une même fenêtre et
+de se rattacher à une session tmux distante. C'est très pratique pour le
+travail collaboratif et pour lancer des commandes sur des serveurs.</p>
+<div class="highlight"><pre>pacman -S zsh tmux
+<span class="nb">exec </span>zsh
+chsh -s /bin/zsh
+</pre></div>
+<p>Il ne te reste plus qu'à <a class="reference external" href="https://github.com/dotmobo/dotzsh">customiser ton .zshrc</a>
+comme bon de semble.</p>
+</div>
+<div class="section" id="le-gestionnaire-de-fenetre">
+<h2>3) Le gestionnaire de fenêtre</h2>
+<img alt="i3" class="align-right" src="./images/i3.png" />
+<p>Oublie les kde, gnome et autres cinammon. Ces environnements sont très bien
+pour un usage classique de linux ; mais pour du dev, il vaut mieux se tourner vers
+un <a class="reference external" href="https://en.wikipedia.org/wiki/Tiling_window_manager">tiling window manager</a>.</p>
+<p>Je te conseille de partir sur <a class="reference external" href="https://i3wm.org/">i3</a>, qui est facile d'accès,
+customisable et efficace. Il te permettra d'utiliser l'ensemble de l'espace visible
+disponible, de splitter tes fenêtres comme bon te semble et d'exécuter tes applications.
+De plus, tu pourras manipuler tout ton bureau
+<a class="reference external" href="http://i3wm.org/docs/userguide.html#_default_keybindings">au clavier</a>,
+ce qui fait un sacré gain de temps.</p>
+<div class="highlight"><pre>pacman -S i3
+<span class="nb">echo</span> <span class="s2">&quot;exec i3&quot;</span> &gt; ~/.xinitrc
+reboot
+</pre></div>
+<p>A côté d'i3, tu pourras installer entre autres:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.npmjs.com/package/i3-style">i3-style</a>: pour styliser i3.</li>
+<li><a class="reference external" href="https://wiki.archlinux.org/index.php/Dmenu">dmenu</a>: pour avoir un lanceur d'applications.</li>
+<li><a class="reference external" href="https://wiki.archlinux.org/index.php/i3#i3bar">i3bar et i3status</a>:
+pour avoir une barre de status en bas de l'écran.</li>
+<li><a class="reference external" href="https://wiki.archlinux.org/index.php/i3#Screensaver_and_power_management">i3lock et xautolock</a>:
+pour verrouiller l'écran au bout de quelques minutes d'inactivité.</li>
+<li><a class="reference external" href="http://projects.l3ib.org/nitrogen/">nitrogen</a>: pour changer l'image de fond.</li>
+<li>pactl de <a class="reference external" href="https://wiki.archlinux.org/index.php/PulseAudio">pulseaudio</a>:
+pour changer le volume au clavier.</li>
+<li><a class="reference external" href="http://knopwob.org/dunst/index.html">dunst</a>: pour les notifications.</li>
+<li><a class="reference external" href="http://jonls.dk/redshift/">redshift</a>: pour éviter de se fatiguer les yeux.</li>
+<li><a class="reference external" href="http://wiki.lxde.org/en/PCManFM">pcmanfm</a>: pour la gestion des fichiers.</li>
+<li><a class="reference external" href="https://www.mozilla.org/fr/firefox/">firefox</a>: pour la navigation web.</li>
+</ul>
+<p>Jete un coup d'oeil à <a class="reference external" href="https://github.com/dotmobo/doti3">ma customisation</a>
+si ça t'intéresse.</p>
+<p>Et si tu as besoin d'aide, la <a class="reference external" href="https://www.reddit.com/r/i3wm/">communauté reddit</a>
+est très active.</p>
+</div>
+<div class="section" id="je-veux-coder">
+<h2>4) Je veux coder !</h2>
+<img alt="vim" class="align-right" src="./images/vim.png" />
+<p>Pour coder, tu auras besoin d'un éditeur de texte.
+Je te recommande fortement <a class="reference external" href="https://atom.io/">atom</a>, que j'ai déjà présenté
+<a class="reference external" href="http://dotmobo.github.io/sublime-text-to-atom.html">ici</a>.</p>
+<p>En plus d'atom, tu auras besoin d'un éditeur qui peut s'exécuter dans un terminal.
+Pas besoin de chercher bien loin, le plus avancé est <a class="reference external" href="http://www.vim.org/">vim</a>.
+Mais tu peux également te tourner vers son successeur, <a class="reference external" href="https://neovim.io/">neovim</a>.</p>
+<p>Comme le reste des outils présentés sur cet article, il est aussi <a class="reference external" href="https://github.com/dotmobo/dotvim">très fortement
+customisable</a>.</p>
+<p>En plus des éditeurs de texte, il te faudra un gestionnaire de version de code.
+Sans surprise, je t'invite à installer <a class="reference external" href="https://git-scm.com/">git</a>,
+qui te permettra de partager ton code sous github et qui s'interface très bien
+avec atom.</p>
+<div class="highlight"><pre>pacman -S git vim
+yaourt -S atom
+</pre></div>
+<p>Enfin, à toi d'installer ce qui te manque:
+python, node.js, postgresql, nginx, etc ...</p>
+</div>
+<div class="section" id="environnements-isoles">
+<h2>5) Environnements isolés</h2>
+<img alt="docker" class="align-right" src="./images/docker.png" />
+<p>Dans le cas où tu aurais besoin de tester des applications sous d'autres
+distributions, tu pourras utiliser <a class="reference external" href="https://www.vagrantup.com/">vagrant</a>
+pour installer des vms ou <a class="reference external" href="https://www.docker.com/">docker</a> pour utiliser par des conteneurs.</p>
+<div class="highlight"><pre>yaourt -S vagrant docker docker-compose
+</pre></div>
+<p>A l'aide de <a class="reference external" href="https://docs.docker.com/compose/">docker-compose</a>,
+tu pourras te créer un environnement spécifique par application en utilisant des conteneurs.
+Par exemple, un pour elasticsearch, un autre pour mysql,
+un troisième pour redis et un quatrième pour ton application django.</p>
+<p>Tu bénificieras ainsi d'environnements complètement isolés, sans devoir installer des tonnes
+d'applications directement sur ton système.</p>
+<p>A toi de jouer maintenant, et n'hésite pas à donner tes propres astuces dans les commentaires !</p>
+</div>
+
+    </div>
+  </div>
+  <hr class="separator">
+  <div class="col-md-8 col-md-offset-2">
+  <div id="disqus_thread">
+    <script>
+      var disqus_shortname = 'dotmobo';
+      (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] ||
+         document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>
+      Activez Javascript pour voir 
+      <a href="https://disqus.com/?ref_noscript=dotmobo">
+        les commentaires Disqus.
+      </a>
+    </noscript>
+    <a href="https://disqus.com" class="dsq-brlink">
+      Commentaires de blog par <span class="logo-disqus">Disqus</span>
+    </a>
+  </div>
+  </div>
+  </div>
+<footer class="footer">
+  <div class="container">
+    <p class="text-center">
+      dotmobo, <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>.
+    </p>
+    <div class="text-center">
+      G&eacute;n&eacute;r&eacute; par <a href="http://getpelican.com" target="_blank">Pelican</a> avec le th&egrave;me <a href="https://github.com/dotmobo/pelican-alchemy">alchemy</a>.
+    </div>
+  </div>
+</footer> <!-- /.footer -->
+  <script src="http://dotmobo.github.io/theme/js/jquery.min.js"></script>
+  <script src="http://dotmobo.github.io/theme/js/bootstrap.min.js"></script>
+</body> <!-- 42 -->
+
+</html>

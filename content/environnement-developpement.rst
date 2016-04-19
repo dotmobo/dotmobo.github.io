@@ -1,17 +1,23 @@
 Environnement de développement open source
 ##########################################
 
-:date: 2016-04-17
+:date: 2016-04-19
 :tags: arch,linux,i3,atom,vim,docker,tmux,zsh,git
 :category: Linux
 :slug: environnement-developpement
 :authors: Morgan
 :summary: Environnement de développement open source
 
-Aujourd'hui, on va voir comment tu peux t'installer un environnement de développement
-open source pratique et optimal. Bien évidemment, mon avis est subjectif
-et ce n'est qu'une solution parmis tant d'autres. Néanmoins, ça reste un bon point
-de départ si tu cherches une solution moderne, simple et efficace !
+| Envie de faire évoluer ton environnement de développement ?
+| D'utiliser une solution simple, pratique et efficace ?
+| Alors, tu es au bon endroit !
+|
+
+On va faire le tour des outils indispensables pour mettre ça en place.
+Bien évidemment, mon avis est subjectif et ce n'est qu'une solution parmis tant
+d'autres.
+
+C'est parti !
 
 1) La distro
 ------------
@@ -27,12 +33,12 @@ sur `arch linux <https://www.archlinux.org/>`_ pour les raisons suivantes:
   ton système est tout le temps à jour et tu bénéficies des dernières
   versions des logiciels.
 * légèreté: l'installation de base est minimaliste, ce qui fait que tu n'installes
-  que ce dont tu as besoins.
+  que ce dont tu as besoin.
 * la communauté: le `wiki <https://wiki.archlinux.org/>`_ et le
   `forum <https://bbs.archlinux.org/>`_ de la communauté sont vraiment très bien
   foutus. Il y a même une `communauté francophone <https://archlinux.fr/>`_.
 * `AUR <https://aur.archlinux.org/>`_: c'est un dépôt communautaire où l'on trouve
-  vraiment tout ce dont on a besoin.
+  absolument tout.
 
 Les principales critiques envers arch linux concernent en général la stabilité du système.
 La stabilité, c'est bien pour un serveur. Mais ce n'est pas forcément le plus important
@@ -105,7 +111,7 @@ ce qui fait un sacré gain de temps.
 A côté d'i3, tu pourras installer entre autres:
 
 * `i3-style <https://www.npmjs.com/package/i3-style>`_: pour styliser i3.
-* `dmenu <https://wiki.archlinux.org/index.php/Dmenu>`_: pour avoir un lanceur d'application.
+* `dmenu <https://wiki.archlinux.org/index.php/Dmenu>`_: pour avoir un lanceur d'applications.
 * `i3bar et i3status <https://wiki.archlinux.org/index.php/i3#i3bar>`_:
   pour avoir une barre de status en bas de l'écran.
 * `i3lock et xautolock <https://wiki.archlinux.org/index.php/i3#Screensaver_and_power_management>`_:
@@ -152,8 +158,8 @@ avec atom.
     pacman -S git vim
     yaourt -S atom
 
-Enfin, à toi d'installer ce qui te manques:
-python, node.js, postgres, nginx, etc ...
+Enfin, à toi d'installer ce qui te manque:
+python, node.js, postgresql, nginx, etc ...
 
 
 5) Environnements isolés
@@ -165,7 +171,7 @@ python, node.js, postgres, nginx, etc ...
 
 Dans le cas où tu aurais besoin de tester des applications sous d'autres
 distributions, tu pourras utiliser `vagrant <https://www.vagrantup.com/>`_
-pour installer des vms ou `docker <https://www.docker.com/>`_ pour passer par des conteneurs.
+pour installer des vms ou `docker <https://www.docker.com/>`_ pour utiliser par des conteneurs.
 
 .. code-block:: bash
 
@@ -176,7 +182,7 @@ tu pourras te créer un environnement spécifique par application en utilisant d
 Par exemple, un pour elasticsearch, un autre pour mysql,
 un troisième pour redis et un quatrième pour ton application django.
 
-Tu bénificies ainsi d'un environnement complètement isolé sans installer des tonnes
+Tu bénificieras ainsi d'environnements complètement isolés, sans devoir installer des tonnes
 d'applications directement sur ton système.
 
 A toi de jouer maintenant, et n'hésite pas à donner tes propres astuces dans les commentaires !

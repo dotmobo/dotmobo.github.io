@@ -52,8 +52,8 @@ Tu crées un projet django appelé **demo-django-crispy-forms** qui contient une
 
 .. code-block:: bash
 
-    django-admin startproject demo-django-crispy-forms
-    cd demo-django-crispy-forms/demo-django-crispy-forms
+    django-admin startproject demo_django_crispy_forms
+    cd demo_django_crispy_forms/demo_django_crispy_forms
     mkdir apps && cd apps
     django-admin startapp core
 
@@ -69,18 +69,19 @@ Dans le fichier **settings.py** de ton projet, tu modifies/ajoutes les lignes su
         'django_countries',
         'bootstrap3_datetime',
         'captcha',
-        'demo-django-crispy-forms.apps.core
+        'demo_django_crispy_forms.apps.core'
     )
     CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 Tu as ainsi définit la langue et le time zone, ajouté les applications installées précédemment
 et utilisé le template **bootstrap3** pour *crispy-forms*.
 
-Il te suffit de migrer la base de données et de vérifier que tout est bon pour l'instant:
+Il te suffit de migrer la base de données et de vérifier que tout est bon pour l'instant.
+Depuis le répertoire racine du projet, tu fais:
 
 .. code-block:: bash
 
-    cdproject && ./manage.py migrate && ./manage.py check
+    ./manage.py migrate && ./manage.py check
 
 
 2) Le modèle
@@ -173,7 +174,6 @@ Dans **apps/core/forms.py**, tu mets:
     from django import forms
     from .models import Registration
     from crispy_forms.helper import FormHelper
-    from django.utils.translation import gettext_lazy as _
     from crispy_forms.bootstrap import StrictButton
     from bootstrap3_datetime.widgets import DateTimePicker
     from crispy_forms.layout import Layout

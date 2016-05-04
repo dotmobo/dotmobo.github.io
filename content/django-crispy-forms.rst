@@ -540,6 +540,10 @@ Tu démarres le serveur:
 Puis, tu te rends sur `http://127.0.0.1:8000 <http://127.0.0.1:8000>`_
 pour tester ton formulaire !
 
+.. image:: ./images/crispy1.png
+    :alt: Crispy
+    :align: left
+
 Après avoir correctement saisie et validé le formulaire, rends-toi sur
 `http://127.0.0.1:8000/admin/core/registration/ <http://127.0.0.1:8000/admin/core/registration/>`_
 pour vérifier ton inscription.

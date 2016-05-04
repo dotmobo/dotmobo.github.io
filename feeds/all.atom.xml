@@ -121,7 +121,7 @@ python, node.js, postgresql, nginx, etc ...&lt;/p&gt;
 &lt;img alt="docker" class="align-right" src="./images/docker.png" /&gt;
 &lt;p&gt;Dans le cas où tu aurais besoin de tester des applications sous d'autres
 distributions, tu pourras utiliser &lt;a class="reference external" href="https://www.vagrantup.com/"&gt;vagrant&lt;/a&gt;
-pour installer des vms ou &lt;a class="reference external" href="https://www.docker.com/"&gt;docker&lt;/a&gt; pour utiliser par des conteneurs.&lt;/p&gt;
+pour installer des vms ou &lt;a class="reference external" href="https://www.docker.com/"&gt;docker&lt;/a&gt; pour utiliser des conteneurs.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;yaourt -S vagrant docker docker-compose
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;A l'aide de &lt;a class="reference external" href="https://docs.docker.com/compose/"&gt;docker-compose&lt;/a&gt;,

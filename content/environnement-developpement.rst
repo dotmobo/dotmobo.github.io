@@ -171,7 +171,7 @@ python, node.js, postgresql, nginx, etc ...
 
 Dans le cas où tu aurais besoin de tester des applications sous d'autres
 distributions, tu pourras utiliser `vagrant <https://www.vagrantup.com/>`_
-pour installer des vms ou `docker <https://www.docker.com/>`_ pour utiliser par des conteneurs.
+pour installer des vms ou `docker <https://www.docker.com/>`_ pour utiliser des conteneurs.
 
 .. code-block:: bash
 

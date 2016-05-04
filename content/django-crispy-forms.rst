@@ -29,11 +29,11 @@ Pour simplifier ce tuto, on ne va pas s'occuper de l'internationalisation. Mais
 rien ne t'empêches de la mettre en place de ton côté.
 
 
-1) Installation et configuration
---------------------------------
+1) L'installation et la configuration
+-------------------------------------
 
 C'est parti ! On suppose que tu as déjà installé python 3.5 avec virtualenvwrapper.
-Tu crée donc ton environnement virtuel et tu installes les librairies requises:
+Tu crées donc ton environnement virtuel et tu installes les librairies requises:
 
 .. code-block:: bash
 
@@ -42,13 +42,13 @@ Tu crée donc ton environnement virtuel et tu installes les librairies requises:
     django-simple-captcha==0.5.1
 
 La version compatible de *django-bootstrap3-datetimepicker* avec django 1.9 n'est pas encore disponible
-sur pypi. Du cou,p tu l'installes directement depuis github:
+sur pypi. Du coup, tu l'installes directement depuis github:
 
 .. code-block:: bash
 
     pip install git+https://github.com/nkunihiko/django-bootstrap3-datetimepicker.git@2fa9ea5
 
-Tu crées un projet django appelé **demo-django-crispy-forms** qui contient une application **core**.
+Tu crées un projet django appelé **demo-django-crispy-forms**, qui contient une application **core**:
 
 .. code-block:: bash
 
@@ -73,7 +73,7 @@ Dans le fichier **settings.py** de ton projet, tu modifies/ajoutes les lignes su
     )
     CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-Tu as ainsi définit la langue et le time zone, ajouté les applications installées précédemment
+Tu as ainsi défini la langue et le time zone, ajouté les applications installées précédemment
 et utilisé le template **bootstrap3** pour *crispy-forms*.
 
 Il te suffit de migrer la base de données et de vérifier que tout est bon pour l'instant.
@@ -90,7 +90,7 @@ Depuis le répertoire racine du projet, tu fais:
 Maintenant que tu as fini l'installation et le paramétrage des différentes libraires,
 tu vas pouvoir créer le modèle de ton inscription.
 
-Dans **apps/core/models.py**, tu définit le modèle **Registration** suivant :
+Dans **apps/core/models.py**, tu définis le modèle **Registration** suivant :
 
 .. code-block:: python
 
@@ -149,9 +149,9 @@ Dans **apps/core/models.py**, tu définit le modèle **Registration** suivant :
 Pour chaque champ, *crispy-forms* va :
 
 * utiliser le **verbose_name** comme label.
-* vérifier les paramètres **blank** et **null** pour savoir s'il est obligatoire.
+* vérifier les paramètres **blank** et **null** pour savoir si le champ est obligatoire.
 * utiliser le type de champ pour définir le type de la balise **<input>**.
-* récupérer les valeurs du paramètres **choices** pour la balise **<select>**.
+* récupérer les valeurs du paramètre **choices** (si présent) pour la balise **<select>**.
 
 Enfin, tu mets à jour la base de données:
 
@@ -207,7 +207,7 @@ Dans **apps/core/forms.py**, tu mets:
             # Tu définis la taille des labels et des champs sur la grille
             self.helper.label_class = 'col-md-2'
             self.helper.field_class = 'col-md-8'
-            # Tu crée l'affichage de ton formulaire
+            # Tu crées l'affichage de ton formulaire
             self.helper.layout = Layout(
                 # Le formulaire va contenir 3 onglets
                 TabHolder(
@@ -223,7 +223,7 @@ Dans **apps/core/forms.py**, tu mets:
                         'birth_date',
                         'birth_place',
                         'birth_country',
-                        # Tu rajoute un bouton "Suivant"
+                        # Tu rajoutes un bouton "Suivant"
                         StrictButton(
                             '<span class="glyphicon glyphicon-arrow-right" \
                             aria-hidden="true"></span> %s' % "Suivant",
@@ -246,7 +246,7 @@ Dans **apps/core/forms.py**, tu mets:
                         'zip_code',
                         'country',
                         'phone',
-                        # Tu rajoute des boutons "Précédent" et "Suivant"
+                        # Tu rajoutes des boutons "Précédent" et "Suivant"
                         StrictButton(
                             '<span class="glyphicon glyphicon-arrow-left" \
                             aria-hidden="true"></span> %s' % 'Précédent',
@@ -269,7 +269,7 @@ Dans **apps/core/forms.py**, tu mets:
                         'confirmation_mail',
                         'comments',
                         'captcha',
-                        # Tu rajoute des boutons "Précédent" et "Valider"
+                        # Tu rajoutes des boutons "Précédent" et "Valider"
                         StrictButton(
                             '<span class="glyphicon glyphicon-arrow-left" \
                             aria-hidden="true"></span> %s' % "Précédent",
@@ -302,7 +302,7 @@ Dans **apps/core/forms.py**, tu mets:
             # Tu définis le modèle utilisé
             model = Registration
             exclude = []
-            # Tu customise le champ date de naissance pour ajouter le date picker
+            # Tu customises le champ date de naissance pour ajouter le date picker
             widgets = {
                 'birth_date': DateTimePicker(
                     options={"format": "DD/MM/YYYY", "pickTime": False,
@@ -385,7 +385,7 @@ Tu vas créer trois templates:
 
 * Le premier, **base.html**, qui servira de base aux deux autres.
 * Le deuxième, **core/registration_form.html**, pour afficher le formulaire.
-* Le dernier, **core/registration_success.html**, pour affiche le message de confirmation.
+* Le dernier, **core/registration_success.html**, pour afficher le message de confirmation.
 
 Le template **apps/core/templates/base.html** va contenir:
 
@@ -422,7 +422,7 @@ Le template **apps/core/templates/base.html** va contenir:
 
 C'est une page html5 standard, qui contient les fichiers nécessaires à bootstrap,
 un **block page-header** pour afficher le titre de la page et un **block content**
-pour affiche le contenu de la page. Les templates suivant vont donc étendre **base.html**.
+pour afficher le contenu de la page. Les templates suivants vont donc étendre **base.html**.
 
 
 Pour le template **apps/core/templates/core/registration_form.html**, tu mets:
@@ -470,7 +470,7 @@ Pour le template **apps/core/templates/core/registration_form.html**, tu mets:
             $('.nav-tabs > .active + li a').trigger('click');
             $(".nav-tabs + .tab-content").find(":input:visible:first").focus();
         });
-        // Affifcher l'onglet précédent en cliquant sur le bouton précédent
+        // Afficher l'onglet précédent en cliquant sur le bouton précédent
         $('.btnPrevious').click(function(){
             $('.nav-tabs > .active').prev('li').find('a').trigger('click');
             $(".nav-tabs + .tab-content").find(":input:visible:first").focus();
@@ -479,7 +479,7 @@ Pour le template **apps/core/templates/core/registration_form.html**, tu mets:
     </script>
     {% endblock %}
 
-Pour *crispy-forms*, il ne faut que deux éléments ! Le **{% load crispy_forms_tags %}**
+Pour *crispy-forms*, il ne faut que deux éléments ! Le **{% load crispy_forms_tags %}**,
 qui permet d'utiliser le **{% crispy form %}** pour afficher le formulaire.
 
 Et c'est tout ! Plutôt cool non ?
@@ -537,10 +537,12 @@ Tu démarres le serveur:
 
     ./manage.py runserver
 
-Puis tu te rends sur **http://127.0.0.1:8000** pour tester ton formulaire !
+Puis, tu te rends sur `http://127.0.0.1:8000 <http://127.0.0.1:8000>`_
+pour tester ton formulaire !
 
-Après avoir correctement saisie et valider le formulaire, rends toi sur
-**http://127.0.0.1:8001/admin/core/registration/** pour vérifier ton inscription.
+Après avoir correctement saisie et validé le formulaire, rends-toi sur
+`http://127.0.0.1:8000/admin/core/registration/ <http://127.0.0.1:8000/admin/core/registration/>`_
+pour vérifier ton inscription.
 
 Tu sais désormais utiliser un outil puissant pour générer tes nombreux formulaires !
 Et pour voir le résultat final, tu peux te rendre sur

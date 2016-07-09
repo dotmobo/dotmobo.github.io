@@ -97,7 +97,7 @@ Test
 ====
 
 * tox_: outil qui permet d'exécuter les tests unitaires sous plusieurs virtualenvs
-  avec des configurations différentes. Tuto dispo `ici <http://dotmobo.github.io/integration-continue.html>`_.
+  avec des configurations différentes. Tuto dispo `ici <http://dotmobo.github.io/integration-continue.html>`__.
 * coverage_: outil d'analyse de la couverture du code.
 * prospector_: outil utilisé par `landsacape.io <https://landscape.io/>`_
   qui utilise les meilleurs linters python pour vérifier la qualité du code.
@@ -110,46 +110,49 @@ Doc
 Wamp
 ====
 
-* crossbar: router wamp le plus avancée pour python. Il y a de nombreux articles chez Sam;
-* autobahn: implémentation du protocle wamp qui fonctionne très bien avec crossbar
+* crossbar_: router wamp le plus avancé pour python.
+  Il y a `de nombreux articles chez Sam <http://sametmax.com/tag/wamp/>`_.
+* autobahn_: implémentation du protocle wamp qui fonctionne très bien avec crossbar.
 
 Wsgi
 ====
 
-* circus + chaussette + waitress: stack wsgi dont je parle ici
+* circus_ + chaussette_ + waitress_: stack wsgi complète.
+  Tuto dispo `ici <http://dotmobo.github.io/chaussette-circus.html>`_.
 
 Date
 ====
 
-* python-dateutil: extension au module datetime de python
-* pytz: gestion des timezones
+* python-dateutil_: extension au module datetime de python.
+* pytz_: gestion des timezones.
 
 Script
 ======
 
-* docopt: parser les arguments de script de manière élégante
-* ipython: shell python le plus avancé
-* apscheduler: planifier des tâches à la manière des crons
+* docopt_: parser les arguments de script de manière élégante.
+* ipython_: shell python le plus avancé.
+* apscheduler_: planificateur de tâches à la manière des crons.
 
 Crypto
 ======
 
-* pycrypto: pratique pour générer des hashs en sha2546 par ex
+* pycrypto_: outil de cryptographie, pour générer des hashs en sha2546 par exemple.
 
 Parsing
 =======
 
-* lxml: lire/écrire du xml
-* jsonschema: c'est comme les schémas xml, mais pour json
-* pyyaml: libraire pour lire/écrire du yaml
-* reportlab: outil de production de pdf
+* lxml_: librairie pour lire/écrire du xml.
+* jsonschema_: implémentation de JSON Schema.
+* pyyaml_: librairie pour lire/écrire du yaml.
+* reportlab_: outil de production de pdf.
 
 En vrac
 =======
 
-* six: pour la compatibilité python 2/3
-* pytoolz: extension d'itertools et functools, j'en parle ici
-* unidecode: permet de remplacer des caractères unicode en ascii
+* six_: librairie pour la compatibilité python 2/python 3.
+* pytoolz_: extension d'itertools et functools.
+  Tuto dispo `ici <http://dotmobo.github.io/pytoolz.html>`__.
+* unidecode_: libairie très pratique permet de remplacer des caractères unicode en ascii.
 
 Bonne découverte !
 
@@ -196,3 +199,21 @@ Bonne découverte !
 .. _coverage: https://coverage.readthedocs.io
 .. _prospector: http://prospector.landscape.io/en/master/
 .. _sphinx: http://www.sphinx-doc.org/
+.. _crossbar: http://crossbar.io/
+.. _autobahn: http://autobahn.ws/python/
+.. _circus: https://circus.readthedocs.io
+.. _chaussette: https://chaussette.readthedocs.io/
+.. _waitress: http://docs.pylonsproject.org/projects/waitress/
+.. _python-dateutil: https://dateutil.readthedocs.io/
+.. _pytz: https://pypi.python.org/pypi/pytz
+.. _docopt: http://docopt.org/
+.. _ipython: https://ipython.org/
+.. _apscheduler: https://apscheduler.readthedocs.io/
+.. _pycrypto: https://www.dlitz.net/software/pycrypto/
+.. _lxml: http://lxml.de/
+.. _jsonschema: https://pypi.python.org/pypi/jsonschema
+.. _pyyaml: http://pyyaml.org/
+.. _reportlab: https://pypi.python.org/pypi/reportlab
+.. _six: https://pythonhosted.org/six/
+.. _pytoolz: https://toolz.readthedocs.io/
+.. _unidecode: https://pypi.python.org/pypi/Unidecode

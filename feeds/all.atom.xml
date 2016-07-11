@@ -2,8 +2,8 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2016-07-11T00:00:00+02:00</updated><entry><title>Mes librairies python indispensables</title><link href="http://dotmobo.github.io/indispensables-python.html" rel="alternate"></link><updated>2016-07-11T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2016-07-11:indispensables-python.html</id><summary type="html">&lt;img alt="Python" class="align-right" src="./images/python.png" /&gt;
 &lt;p&gt;Ça y est c'est les vacances ! À toi le soleil, les plages, les cocotiers et ...
 les librairies python bien sûr !&lt;/p&gt;
-&lt;p&gt;Du coup, j'en profite pour te un faire petit listing de mes quelques librairies
-indispensables. On ne sait jamais, peut-être que tu y découvriras
+&lt;p&gt;Du coup, j'en profite pour te un faire petit listing de mes librairies
+indispensables en python. On ne sait jamais, peut-être que tu y découvriras
 quelque-chose d'utile !&lt;/p&gt;
 &lt;div class="section" id="framework-web"&gt;
 &lt;h2&gt;Framework web&lt;/h2&gt;

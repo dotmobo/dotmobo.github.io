@@ -87,21 +87,21 @@ a été développée en python.</p>
 <p>Intuitif, simple, et prenant en charge la coloration syntaxique, c'est l'outil
 idéal pour requêter des APIs JSON par exemple.</p>
 <p>Tu l'installes avec pip :</p>
-<div class="highlight"><pre><span></span>pip install httpie
+<div class="highlight"><pre>pip install httpie
 </pre></div>
 <p>Tu disposes maintenant de la commande <strong>http</strong> dans ton terminal qui te
 permettra d'effectuer des requêtes très simplement de cette manière:</p>
-<div class="highlight"><pre><span></span>http <span class="o">[</span>flags<span class="o">]</span> <span class="o">[</span>METHOD<span class="o">]</span> URL <span class="o">[</span>ITEM <span class="o">[</span>ITEM<span class="o">]]</span>
+<div class="highlight"><pre>http <span class="o">[</span>flags<span class="o">]</span> <span class="o">[</span>METHOD<span class="o">]</span> URL <span class="o">[</span>ITEM <span class="o">[</span>ITEM<span class="o">]]</span>
 </pre></div>
 <p>Tu peux évidemment faire du GET:</p>
-<div class="highlight"><pre><span></span>http httpie.org
+<div class="highlight"><pre>http httpie.org
 http GET httpie.org
 </pre></div>
 <p>Du DELETE:</p>
-<div class="highlight"><pre><span></span>http DELETE example.org/todos/7
+<div class="highlight"><pre>http DELETE example.org/todos/7
 </pre></div>
 <p>Ou mettre à jour les données d'une API via PUT:</p>
-<div class="highlight"><pre><span></span>http PUT example.org X-API-Token:123 <span class="nv">name</span><span class="o">=</span>John
+<div class="highlight"><pre>http PUT example.org X-API-Token:123 <span class="nv">name</span><span class="o">=</span>John
 </pre></div>
 <p>Tu remarques ici qu'on a d'abord passé la méthode PUT, puis l'url, puis le token
 d'authentification dans l'entête de la requête, et enfin les données.</p>
@@ -111,11 +111,11 @@ Les éléments de l'entête de la requête sont séparés par <strong>:</strong>
 <p>Tu peux aussi utiliser l'option <strong>-a</strong> pour l'authentification type
 username/password.</p>
 <p>Par exemple, pour poster un commentaire sur un problème via l'api github:</p>
-<div class="highlight"><pre><span></span>http -a USERNAME POST https://api.github.com/repos/jkbrzt/httpie/issues/83/comments <span class="nv">body</span><span class="o">=</span><span class="s1">&#39;HTTPie is awesome!&#39;</span>
+<div class="highlight"><pre>http -a USERNAME POST https://api.github.com/repos/jkbrzt/httpie/issues/83/comments <span class="nv">body</span><span class="o">=</span><span class="s1">&#39;HTTPie is awesome!&#39;</span>
 </pre></div>
 <p>Tu peux utiliser les symboles de redirection pour uploader
 ou downloader des fichiers :</p>
-<div class="highlight"><pre><span></span>http example.org &lt; file.json
+<div class="highlight"><pre>http example.org &lt; file.json
 http example.org &gt; file.json
 </pre></div>
 <p>L'outil est très complet (gestion des sessions, des certificats SSL) mais je

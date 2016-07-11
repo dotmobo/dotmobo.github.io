@@ -107,10 +107,10 @@ assez crades avec tout et n'importe quoi dedans.
 D'autres diront que ça ne sert à rien d'inventer une nouvelle syntaxe spécifique
 aux templates, alors que python est disponible et peut faire ça très bien.</p>
 <p>Pour te faire ton propre avis, installes-le via pip:</p>
-<div class="highlight"><pre><span></span>pip install mako
+<div class="highlight"><pre>pip install mako
 </pre></div>
 <p>En résumé, tes templates ressembleront à ça:</p>
-<div class="highlight"><pre><span></span><span class="o">&lt;%</span><span class="n">inherit</span> <span class="nb">file</span><span class="o">=</span><span class="s2">&quot;base.html&quot;</span><span class="o">/&gt;</span>
+<div class="highlight"><pre><span class="o">&lt;%</span><span class="n">inherit</span> <span class="nb">file</span><span class="o">=</span><span class="s">&quot;base.html&quot;</span><span class="o">/&gt;</span>
 <span class="o">&lt;%</span>
     <span class="n">rows</span> <span class="o">=</span> <span class="p">[[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)]</span>
 <span class="o">%&gt;</span>
@@ -120,7 +120,7 @@ aux templates, alors que python est disponible et peut faire ça très bien.</p>
     <span class="o">%</span> <span class="n">endfor</span>
 <span class="o">&lt;/</span><span class="n">table</span><span class="o">&gt;</span>
 
-<span class="o">&lt;%</span><span class="k">def</span> <span class="nf">name</span><span class="o">=</span><span class="s2">&quot;makerow(row)&quot;</span><span class="o">&gt;</span>
+<span class="o">&lt;%</span><span class="k">def</span> <span class="nf">name</span><span class="o">=</span><span class="s">&quot;makerow(row)&quot;</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
     <span class="o">%</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
         <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="err">$</span><span class="p">{</span><span class="n">name</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>\
@@ -140,10 +140,10 @@ mais pour faire simple :</p>
 <li>Enfin, tout ce qui se trouve entre <strong>&lt;% %&gt;</strong> est du python. Tu peux profiter de toute la syntaxe de python et même importer des libs. C'est la fête !</li>
 </ul>
 <p>Et pour l'utiliser, rien de plus simple, tu utilises la classe <strong>Template</strong> :</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mako.template</span> <span class="kn">import</span> <span class="n">Template</span>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">mako.template</span> <span class="kn">import</span> <span class="n">Template</span>
 
-<span class="n">mytemplate</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="s2">&quot;hello, ${name}!&quot;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">mytemplate</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;jack&quot;</span><span class="p">))</span>
+<span class="n">mytemplate</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="s">&quot;hello, ${name}!&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mytemplate</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;jack&quot;</span><span class="p">))</span>
 </pre></div>
 <p>Tu peux désormais utiliser mako pour gérer tes pages html! Et si tu es un
 utilisateur de django, il t'es même possible de remplacer jinja par mako via
@@ -154,20 +154,20 @@ comme une liste d'utilisateurs par exemple.
 Ça évite de manipuler le DOM en mémoire comme avec <a class="reference external" href="http://lxml.de/">lxml</a>,
 c'est plus facile d'accès que <a class="reference external" href="https://docs.python.org/3/library/xml.sax.html">SAX</a>,
 et c'est très performant :</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mako.template</span> <span class="kn">import</span> <span class="n">Template</span>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">mako.template</span> <span class="kn">import</span> <span class="n">Template</span>
 <span class="kn">from</span> <span class="nn">mako.runtime</span> <span class="kn">import</span> <span class="n">Context</span>
 
-<span class="n">tpl_xml</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">&lt;doc&gt;</span>
-<span class="si">% f</span><span class="s1">or i in data:</span>
-<span class="s1">&lt;p&gt;${i}&lt;/p&gt;</span>
-<span class="si">% e</span><span class="s1">ndfor</span>
-<span class="s1">&lt;/doc&gt;</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="n">tpl_xml</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;</span>
+<span class="s">&lt;doc&gt;</span>
+<span class="si">% f</span><span class="s">or i in data:</span>
+<span class="s">&lt;p&gt;${i}&lt;/p&gt;</span>
+<span class="si">% e</span><span class="s">ndfor</span>
+<span class="s">&lt;/doc&gt;</span>
+<span class="s">&#39;&#39;&#39;</span>
 
 <span class="n">tpl</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="n">tpl_xml</span><span class="p">)</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;output.xml&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;output.xml&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">ctx</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="nb">xrange</span><span class="p">(</span><span class="mi">10000000</span><span class="p">))</span>
     <span class="n">tpl</span><span class="o">.</span><span class="n">render_context</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
 </pre></div>

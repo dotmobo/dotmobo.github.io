@@ -88,16 +88,16 @@ avec <a class="reference external" href="https://github.com/aio-libs/aiopg">aiop
 <p>Et notamment lorsqu'il s'agit d'appliquer de multiples <em>insert</em> ou <em>update</em>, appelés <em>upsert</em> dans le monde de <em>mongodb</em>.</p>
 <p>Sous <em>mongodb</em> avec <a class="reference external" href="https://api.mongodb.org/python/current/">pymongo</a> c'est facile,
 il suffit de passer le paramètre <em>upsert=True</em> à la méthode <em>update_one</em> :</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span> <span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span>
 <span class="o">&gt;&gt;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">MongoClient</span><span class="p">()</span>
 <span class="o">&gt;&gt;</span> <span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">test_database</span>
-<span class="o">&gt;&gt;</span> <span class="n">db</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">update_one</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;$inc&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}},</span> <span class="n">upsert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="n">db</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">update_one</span><span class="p">({</span><span class="s">&#39;x&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="s">&#39;$inc&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;x&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}},</span> <span class="n">upsert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 <p>Mais sous <em>posgresql</em>, il n'existe pas de mot-clé <em>upsert</em>. Et c'est là que tu te demandes:</p>
 <p><em>&quot;Comment faire un upsert en postgresql, tout en évitant les problèmes d'accès concurrents ?&quot;</em></p>
 <p>Si tu n'es pas pressé, attends la sortie de postgresql 9.5 qui va inclure <a class="reference external" href="https://wiki.postgresql.org/wiki/What's_new_in_PostgreSQL_9.5#INSERT_..._ON_CONFLICT_DO_NOTHING.2FUPDATE_.28.22UPSERT.22.29">la syntaxe du upsert</a>.</p>
 <p>En imaginant une table qui ressemble à ça:</p>
-<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">username</span><span class="p">,</span> <span class="n">logins</span> <span class="k">FROM</span> <span class="n">user_logins</span><span class="p">;</span>
+<div class="highlight"><pre><span class="k">SELECT</span> <span class="n">username</span><span class="p">,</span> <span class="n">logins</span> <span class="k">FROM</span> <span class="n">user_logins</span><span class="p">;</span>
 
 <span class="n">username</span> <span class="o">|</span> <span class="n">logins</span>
 <span class="c1">----------+--------</span>
@@ -106,15 +106,15 @@ il suffit de passer le paramètre <em>upsert=True</em> à la méthode <em>update
 <span class="p">(</span><span class="mi">2</span> <span class="k">rows</span><span class="p">)</span>
 </pre></div>
 <p>Et que tu veuilles ajouter deux nouveaux <em>logins</em>:</p>
-<div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">user_logins</span> <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">logins</span><span class="p">)</span>
+<div class="highlight"><pre><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">user_logins</span> <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">logins</span><span class="p">)</span>
 <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;Naomi&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="s1">&#39;James&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
 </pre></div>
 <p>En temps normal, tu auras cette erreur si le <em>username</em> existe déjà en base:</p>
-<div class="highlight"><pre><span></span><span class="n">ERROR</span><span class="p">:</span>  <span class="n">duplicate</span> <span class="k">key</span> <span class="n">value</span> <span class="n">violates</span> <span class="k">unique</span> <span class="k">constraint</span> <span class="ss">&quot;users_pkey&quot;</span>
+<div class="highlight"><pre><span class="n">ERROR</span><span class="p">:</span>  <span class="n">duplicate</span> <span class="k">key</span> <span class="n">value</span> <span class="n">violates</span> <span class="k">unique</span> <span class="k">constraint</span> <span class="ss">&quot;users_pkey&quot;</span>
 <span class="n">DETAIL</span><span class="p">:</span>  <span class="k">Key</span> <span class="p">(</span><span class="n">username</span><span class="p">)</span><span class="o">=</span><span class="p">(</span><span class="n">James</span><span class="p">)</span> <span class="n">already</span> <span class="k">exists</span><span class="p">.</span>
 </pre></div>
 <p>Et bien en 9.5, tu pourras gérer ça de cette manière:</p>
-<div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">user_logins</span> <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">logins</span><span class="p">)</span>
+<div class="highlight"><pre><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">user_logins</span> <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">logins</span><span class="p">)</span>
 <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;Naomi&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="s1">&#39;James&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">ON</span> <span class="n">CONFLICT</span> <span class="p">(</span><span class="n">username</span><span class="p">)</span>
 <span class="k">DO</span> <span class="k">UPDATE</span> <span class="k">SET</span> <span class="n">logins</span> <span class="o">=</span> <span class="n">user_logins</span><span class="p">.</span><span class="n">logins</span> <span class="o">+</span> <span class="n">EXCLUDED</span><span class="p">.</span><span class="n">logins</span><span class="p">;</span>
@@ -132,7 +132,7 @@ Pour plus de détail, lis l'article que j'ai cité précédemment.</p>
 <p>Du coup, la <a class="reference external" href="http://stackoverflow.com/questions/1109061/insert-on-duplicate-update-in-postgresql?answertab=votes#tab-top">solution admise par la communauté stackoverflow</a>
 est la suivante. Tu écris une fonction <a class="reference external" href="https://fr.wikipedia.org/wiki/PL/SQL">pl/sql</a> qui boucle sur le <em>update</em> ou <em>insert</em>, en utilisant l'exception <em>unique_violation</em>.
 Du coup, cette fonction s'appelle à l'aide d'un seul <em>select</em>, donc pas besoin de <em>lock</em> ou de transaction:</p>
-<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">db</span> <span class="p">(</span><span class="n">a</span> <span class="nb">INT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">b</span> <span class="nb">TEXT</span><span class="p">);</span>
+<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">db</span> <span class="p">(</span><span class="n">a</span> <span class="nb">INT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">b</span> <span class="nb">TEXT</span><span class="p">);</span>
 
 <span class="k">CREATE</span> <span class="k">FUNCTION</span> <span class="n">merge_db</span><span class="p">(</span><span class="k">key</span> <span class="nb">INT</span><span class="p">,</span> <span class="k">data</span> <span class="nb">TEXT</span><span class="p">)</span> <span class="k">RETURNS</span> <span class="n">VOID</span> <span class="k">AS</span>
 <span class="err">$$</span>
@@ -141,9 +141,9 @@ Du coup, cette fonction s'appelle à l'aide d'un seul <em>select</em>, donc pas 
         <span class="c1">-- first try to update the key</span>
         <span class="c1">-- note that &quot;a&quot; must be unique</span>
         <span class="k">UPDATE</span> <span class="n">db</span> <span class="k">SET</span> <span class="n">b</span> <span class="o">=</span> <span class="k">data</span> <span class="k">WHERE</span> <span class="n">a</span> <span class="o">=</span> <span class="k">key</span><span class="p">;</span>
-        <span class="k">IF</span> <span class="k">found</span> <span class="k">THEN</span>
+        <span class="n">IF</span> <span class="k">found</span> <span class="k">THEN</span>
             <span class="k">RETURN</span><span class="p">;</span>
-        <span class="k">END</span> <span class="k">IF</span><span class="p">;</span>
+        <span class="k">END</span> <span class="n">IF</span><span class="p">;</span>
         <span class="c1">-- not there, so try to insert the key</span>
         <span class="c1">-- if someone else inserts the same key concurrently,</span>
         <span class="c1">-- we could get a unique-key failure</span>

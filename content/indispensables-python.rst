@@ -15,8 +15,8 @@ Mes librairies python indispensables
 Ça y est c'est les vacances ! À toi le soleil, les plages, les cocotiers et ...
 les librairies python bien sûr !
 
-Du coup, j'en profite pour te un faire petit listing de mes quelques librairies
-indispensables. On ne sait jamais, peut-être que tu y découvriras
+Du coup, j'en profite pour te un faire petit listing de mes librairies
+indispensables en python. On ne sait jamais, peut-être que tu y découvriras
 quelque-chose d'utile !
 
 Framework web

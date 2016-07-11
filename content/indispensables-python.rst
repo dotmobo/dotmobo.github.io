@@ -1,7 +1,7 @@
 Mes librairies python indispensables
 ####################################
 
-:date: 2016-07-09
+:date: 2016-07-11
 :tags: python,django,librairies
 :category: Python
 :slug: indispensables-python
@@ -12,11 +12,11 @@ Mes librairies python indispensables
     :alt: Python
     :align: right
 
-C'est pas forcément évident de trouver le temps de faire un tuto intéressant
-et complet pour chaque outil rencontré dans sa vie de dev.
+Ça y est c'est les vacances ! À toi le soleil, les plages, les cocotiers et ...
+les librairies python bien sûr !
 
-Du coup, j'en profite pour te un faire un petit listing de mes librairies
-indispensables en python. On ne sait jamais, peut-être que tu y découvriras
+Du coup, j'en profite pour te un faire petit listing de mes quelques librairies
+indispensables. On ne sait jamais, peut-être que tu y découvriras
 quelque-chose d'utile !
 
 Framework web
@@ -24,8 +24,7 @@ Framework web
 
 * django_: framework le plus réputé, qui a l'avantage d'avoir une tonne de
   support et de documentation. Indispensable pour créer des applications web complexes.
-* bottle_: framework ultra minimaliste, idéal pour les applications web de petites et de
-  moyennes tailles.
+* bottle_: framework ultra minimaliste, idéal pour les applications web de petite taille.
 * pelican_: générateur de site statique utilisé par ce blog ! Tuto dispo `ici <http://dotmobo.github.io/pelican.html>`__.
 
 Base de données
@@ -51,7 +50,7 @@ Templating
 
 * jinja2_: moteur de template le plus réputé, utilisé par django.
 * mako_: moteur de template ultra performant. Tuto dispo `ici <http://dotmobo.github.io/mako.html>`__.
-* cookiecutter_: moteur de template de projet utilisant jinja2. Vous pouvez jeter un oeil à `l'article
+* cookiecutter_: moteur de template de projet utilisant jinja2. Tu peux jeter un oeil à `l'article
   de Sam <http://sametmax.com/templates-de-projet-avec-cookiecutter/>`_ sur le sujet.
   Exemples d'utilisation: simple-python-drybones_ et bottle-drybones_.
 
@@ -129,14 +128,14 @@ Date
 Script
 ======
 
-* docopt_: parser les arguments de script de manière élégante.
+* docopt_: librairie pour parser les arguments de script de manière élégante.
 * ipython_: shell python le plus avancé.
 * apscheduler_: planificateur de tâches à la manière des crons.
 
 Crypto
 ======
 
-* pycrypto_: outil de cryptographie, pour générer des hashs en sha2546 par exemple.
+* pycrypto_: outil de cryptographie, pour générer des hashs en sha256 par exemple.
 
 Parsing
 =======
@@ -154,7 +153,7 @@ En vrac
   Tuto dispo `ici <http://dotmobo.github.io/pytoolz.html>`__.
 * unidecode_: libairie très pratique permet de remplacer des caractères unicode en ascii.
 
-Bonne découverte !
+Bonnes découvertes et bonnes vacances !
 
 .. _django: https://www.djangoproject.com/
 .. _bottle: http://bottlepy.org/docs/dev/index.html

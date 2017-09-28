@@ -3,7 +3,7 @@ Découverte du gestionnaire de files de tâches Celery
 
 :date: 2017-09-28
 :tags: rabbitmq,message broker,python,celery,tâches,jobs
-:category: Python
+:category: Django
 :slug: celery
 :authors: Morgan
 :summary: Découverte du gestionnaire de files de tâches Celery

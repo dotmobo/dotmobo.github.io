@@ -1,5 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2017-09-26T00:00:00+02:00</updated><entry><title>Découverte du message broker RabbitMQ</title><link href="http://dotmobo.github.io/rabbitmq.html" rel="alternate"></link><updated>2017-09-26T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2017-09-26:rabbitmq.html</id><summary type="html">&lt;img alt="RabbitMQ" class="align-right" src="./images/rabbitmq_logo.png" style="width: 500px;" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2017-09-28T00:00:00+02:00</updated><entry><title>Découverte du gestionnaire de files de tâches Celery</title><link href="http://dotmobo.github.io/celery.html" rel="alternate"></link><updated>2017-09-28T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2017-09-28:celery.html</id><summary type="html">&lt;img alt="RabbitMQ" class="align-right" src="./images/celery.png" /&gt;
+&lt;p&gt;&lt;strong&gt;C'est quoi ? Ça se mange ?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.celeryproject.org/"&gt;Celery&lt;/a&gt; est un gestionnaire de tâches &lt;em&gt;asynchrone&lt;/em&gt;.
+Il s'occupe de créer des files d'attentes pour les tâches, de les distribuer sur un ou des &lt;em&gt;workers&lt;/em&gt; et
+d'en répartir la charge. Intégré dans une application web, il va permettre d'ordonner l'exécution de tâches
+en background.&lt;/p&gt;
+&lt;p&gt;Cet outil va t'être utile dans de nombreux cas d'usages. Personnellement, je l'utilise pour une application de streaming
+de vidéos et il me permet de lancer les jobs d'encodage des médias sur différents serveurs.&lt;/p&gt;
+&lt;p&gt;Mais tu vas pouvoir lui laisser le soin de zipper/dézipper de gros fichiers, générer de nombreux documents pdf, lancer
+le téléchargement de fichiers en masse ou encore lancer des calculs sur plusieurs machines.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Mais pourquoi utiliser Celery et pas un autre outil ?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Déjà, il est mature et très utilisé dans la communauté Python. Son côté &lt;em&gt;asynchrone&lt;/em&gt; lui donne de bonnes performances.
+De plus, il en existe une intégration dans Django. Il y a des clients implémentés dans d'autres languages, comme php ou node.
+Grâce à lui, tu vas pouvoir automatiser tout un tas de trucs en répartissant les &lt;em&gt;workers&lt;/em&gt; et les clients sur différentes machines.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Broker, quésaco ?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;La première notion à connaître est le &lt;strong&gt;broker&lt;/strong&gt;. Il s'agit tout simplement de la file d'attente.
+Tu vas pouvoir utiliser plusieurs technos pour gérer le &lt;em&gt;broker&lt;/em&gt;, comme RabbitMq, Redis, Mongodb, Sqlalchemy, ou même l'orm de Django.&lt;/p&gt;
+&lt;p&gt;C'est le &lt;em&gt;broker&lt;/em&gt; qui va permettre la communication entre le(s) workers(s) et le(s) client(s). La techno recommandée par Celery est &lt;a class="reference external" href="https://www.rabbitmq.com/"&gt;RabbitMq&lt;/a&gt;,
+qui utilise le protocole &lt;strong&gt;AMQP&lt;/strong&gt;. Je t'en ai &lt;a class="reference external" href="http://dotmobo.github.io/rabbitmq.html"&gt;déjà parlé précédemment&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Backend, quésaco ?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;La seconde notion à connaître est le &lt;strong&gt;backend&lt;/strong&gt;. Celui-ci est optionnel et permet de monitorer et de garder une trace des états des tâches.
+Les options de stockage sont quasi-similaires à celle du broker (RabbitMq, Redis, etc ...)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Mon application web qui génère des archives AVANT Celery&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Prenons l'exemple d'une petite application web qui a pour objectif de générer un document au format pdf pour chaque usager présent dans une base de
+données, par année de naissance.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Étape 1 : choisir une année de naissance&lt;/li&gt;
+&lt;li&gt;Étape 2 : cliquer sur &amp;quot;Générer&amp;quot;&lt;/li&gt;
+&lt;li&gt;Étape 3 : regarder la roue qui tourne &lt;img alt="waiting" src="./images/loading.gif" /&gt;&lt;/li&gt;
+&lt;li&gt;Étape 4 : se faire un café&lt;/li&gt;
+&lt;li&gt;Étape 5 : contempler la roue qui tourne&lt;/li&gt;
+&lt;li&gt;Étape 6 : se faire un autre café&lt;/li&gt;
+&lt;li&gt;Étape 7 : 504 Gateway Timeout&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Mon application web qui génère des archives AVEC Celery&lt;/strong&gt;&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Étape 1 : choisir une année de naissance&lt;/li&gt;
+&lt;li&gt;Étape 2 : cliquer sur &amp;quot;Générer&amp;quot;&lt;/li&gt;
+&lt;li&gt;Étape 3 : choisir une autre année&lt;/li&gt;
+&lt;li&gt;Étape 4 : cliquer sur &amp;quot;Générer&amp;quot;&lt;/li&gt;
+&lt;li&gt;Étape 5 : choisir une autre année&lt;/li&gt;
+&lt;li&gt;Étape 6 : cliquer sur &amp;quot;Générer&amp;quot;&lt;/li&gt;
+&lt;li&gt;Étape 7: Mince, il est où mon café ?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Objectif&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Pour se faire, l'objectif est d'arriver à une architecture de ce type:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="objectif" src="./images/django_celery_architecture.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Installation&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Tu commences par installer RabbitMq:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Soit sous Ubuntu (tu prends la dernière version ici):&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;deb http://www.rabbitmq.com/debian/ testing main&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sudo tee /etc/apt/sources.list.d/rabbitmq.list
+wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc &lt;span class="p"&gt;|&lt;/span&gt; sudo apt-key add -
+sudo apt-get update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get install rabbitmq-server
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Soit via Docker:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker run -d --hostname myrabbitmq --name myrabbitmq -p 5672:5672 rabbitmq:3
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Puis tu installes Celery avec pip:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install &lt;span class="nv"&gt;celery&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;3.1.25
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Oui je sais, il y a la version 4.1 de Celery qui est sortie cet été. Mais je n'ai pas encore eu le temps de me pencher dessus, donc il
+faudra sûrement mettre à jour ce tuto à l'avenir ! Désolé mon vieux !&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Django - Configuration&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Dans ton fichier de &lt;em&gt;settings&lt;/em&gt; de django, par exemple &lt;em&gt;myproject/settings.py&lt;/em&gt;, tu ajoutes les paramètres suivants:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;CELERY_NAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;myproject&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;CELERY_BACKEND&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;amqp&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;CELERY_BROKER&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;amqp://guest@localhost//&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Django - Worker&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Ensuite, tu crées ton worker &lt;em&gt;myproject/celery.py&lt;/em&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;celery&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Celery&lt;/span&gt;
+
+&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setdefault&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;DJANGO_SETTINGS_MODULE&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;myproject.settings&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.conf&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;settings&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Celery&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CELERY_NAME&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;backend&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CELERY_BACKEND&lt;/span&gt;
+    &lt;span class="n"&gt;broker&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CELERY_BROKER&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config_from_object&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;django.conf:settings&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;autodiscover_tasks&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;INSTALLED_APPS&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nd"&gt;@app.task&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;bind&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;debug_task&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Request: {0!r}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Django - Création des tâches&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Puis, tu crées les tâches qui vont te permettre de générer les documents pdf dans &lt;em&gt;myproject/apps/myapp/tasks.py&lt;/em&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;celery&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;shared_task&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;celery.signals&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;task_prerun&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;task_success&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;task_failure&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.utils&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;get_persons_and_generate_pdfs&lt;/span&gt;
+
+&lt;span class="nd"&gt;@shared_task&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;bind&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# utile pour les &amp;quot;reusable apps&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;task_generate_archive_files&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot; generate pdf files &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;get_persons_and_generate_pdfs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nd"&gt;@task_prerun.connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;task_generate_archive_files&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;start_generate_archive_files&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Initialisation du statut du lot en base&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nd"&gt;@task_success.connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;task_generate_archive_files&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;success_generate_archive_files&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Modification du statut du lot en réussi&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nd"&gt;@task_failure.connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;task_generate_archive_files&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;failure_generate_archive_files&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Modification du statut du lot en échec&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Django - Appel des tâches&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Enfin, tu gères l'appelles des tâches dans &lt;em&gt;myproject/apps/myapp/views.py&lt;/em&gt;, par exemple:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.tasks&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;task_generate_archive_files&lt;/span&gt;
+
+&lt;span class="nd"&gt;@login_required&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_archive_files&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;method&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;POST&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;birth_date&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;my_task&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;task_generate_archive_files&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;delay&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="n"&gt;IntegrityError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;messages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;messages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ERROR&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;A file for one of those persons already exists&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;messages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;messages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;INFO&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;A file creation task is scheduled&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;redirect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;reverse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;myproject-database:database&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;?birth_date={}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;HttpResponseForbidden&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;À toi d'adapter le code pour que ça colle avec ton projet, tes urls, et autres. C'est qu'un exemple d'utilisation.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Django - Exécution&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Pour exécuter celery, tu peux alors lancer la commande suivante:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;celery -A myproject worker -l info
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu peux même te faire un petit &lt;strong&gt;Makefile&lt;/strong&gt; dans ce genre:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;RABBITMQ :&lt;span class="o"&gt;=&lt;/span&gt; rabbitmq-myproject
+CELERY :&lt;span class="o"&gt;=&lt;/span&gt; myproject
+
+run-rabbitmq:
+    docker ps -aq --filter &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;RABBITMQ&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; xargs -r docker rm -f -v &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    docker run -d --hostname &lt;span class="k"&gt;$(&lt;/span&gt;RABBITMQ&lt;span class="k"&gt;)&lt;/span&gt; --name &lt;span class="k"&gt;$(&lt;/span&gt;RABBITMQ&lt;span class="k"&gt;)&lt;/span&gt; -p 5672:5672 rabbitmq:3
+
+run-celery: run-rabbitmq
+    celery -A &lt;span class="k"&gt;$(&lt;/span&gt;CELERY&lt;span class="k"&gt;)&lt;/span&gt; worker -l info
+
+.PHONY: un-rabbitmq run-celery
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Debug&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Tu vas alors avoir un écran de debug qui ressemble à ça:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;2016-10-21 16:47:18,568: INFO/MainProcess&lt;span class="o"&gt;]&lt;/span&gt; Connected to amqp://guest:**@127.0.0.1:5672//
+&lt;span class="o"&gt;[&lt;/span&gt;2016-10-21 16:47:18,615: INFO/MainProcess&lt;span class="o"&gt;]&lt;/span&gt; mingle: searching &lt;span class="k"&gt;for&lt;/span&gt; neighbors
+&lt;span class="o"&gt;[&lt;/span&gt;2016-10-21 16:47:19,628: INFO/MainProcess&lt;span class="o"&gt;]&lt;/span&gt; mingle: all alone
+&lt;span class="o"&gt;[&lt;/span&gt;2016-10-21 16:50:23,354: INFO/MainProcess&lt;span class="o"&gt;]&lt;/span&gt; Received task: myproject.apps.file.
+tasks.task_generate_archive_files&lt;span class="o"&gt;[&lt;/span&gt;1755cd30-03f5-4d8a-8d92-fa5b1853a209&lt;span class="o"&gt;]&lt;/span&gt;
+...
+...
+...
+&lt;span class="o"&gt;[&lt;/span&gt;2016-10-21 16:50:26,944: INFO/MainProcess&lt;span class="o"&gt;]&lt;/span&gt; Task myproject.apps.file.
+tasks.task_generate_archive_files&lt;span class="o"&gt;[&lt;/span&gt;1755cd30-03f5-4d8a-8d92-fa5b1853a209&lt;span class="o"&gt;]&lt;/span&gt;
+succeeded in 3.588768539018929s: &lt;span class="s1"&gt;&amp;#39;1755cd30-03f5-4d8a-8d92-fa5b1853a209&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Tests unitaires&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Pour lancer des tests unitaires sur tes tâches dans ton projet Django, tu peux utiliser le paramètre suivant dans tes &lt;em&gt;settings&lt;/em&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;CELERY_ALWAYS_EAGER&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ça permet de tester les tâches Celery de manière synchrone et sans &lt;em&gt;broker&lt;/em&gt; (il utilise un genre de &lt;em&gt;broker&lt;/em&gt; en mémoire).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Déploiement avec init.d&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Il existe &lt;a class="reference external" href="https://github.com/celery/celery/tree/master/extra"&gt;un dépôt d'helpers&lt;/a&gt; pour déployer avec init.d ou systemd. Par exemple pour init.d :&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Mettre le fichier &lt;em&gt;celeryd&lt;/em&gt; du dépôt d'&lt;em&gt;helpers&lt;/em&gt; dans &lt;em&gt;/etc/init.d&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Mettre la configuration suivante dans /etc/default/celeryd:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;DJANGO_SETTINGS_MODULE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;myproject.settings&amp;quot;&lt;/span&gt;
+
+&lt;span class="nv"&gt;CELERYD_NODES&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;worker1&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;CELERY_BIN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/home/myuser/.virtualenvs/myproject/bin/celery&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;CELERY_APP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;myproject&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;CELERYD_CHDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/home/myuser/myproject&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;CELERYD_OPTS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;--time-limit=300 --concurrency=8&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;CELERYD_LOG_FILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/var/log/celery/%N.log&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;CELERYD_PID_FILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/var/run/celery/%N.pid&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;CELERYD_USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;myuser&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;CELERYD_GROUP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;mygroup&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;CELERY_CREATE_DIRS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Monitoring - Exemples&lt;/strong&gt;&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Voir le résultat d'une tâche :&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;celery -A myproject result -t tasks.add 4e196aa4-0141-4601-8138-7aa33db0f577
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Voir liste des workers actifs :&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;celery -A myproject status
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Voir les tâches actives :&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;celery -A myproject inspect active
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Voir les statistiques des workers :&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;celery -A myproject inspect stats
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Sinon, il existe le projet &lt;a class="reference external" href="https://github.com/mher/flower"&gt;flower&lt;/a&gt; pour monitorer et administrer les workers et les tâches via une appli web.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;En vrac&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Quelques tips en vrac:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Cron-like :&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;@periodic_task&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;run_every&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;crontab&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;hour&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;5,13,23&amp;#39;&lt;/span&gt;, &lt;span class="nv"&gt;minute&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;30, &lt;span class="nv"&gt;day_of_week&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;monday&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
+def mytask&lt;span class="o"&gt;()&lt;/span&gt;:
+...
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Sqlite n'aime pas les accès concurrents&lt;/li&gt;
+&lt;li&gt;Purger les tâches en attentes :&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;celery -A proj purge
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Récupérer le statut d'une tâche :&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; my_task.AsyncResult&lt;span class="o"&gt;(&lt;/span&gt;task_id&lt;span class="o"&gt;)&lt;/span&gt;
+result.state
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Attendre le résultat d'une tâche :&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; my_task.AsyncResult&lt;span class="o"&gt;(&lt;/span&gt;task_id&lt;span class="o"&gt;)&lt;/span&gt;
+result.get&lt;span class="o"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Appeler une tâche par son nom depuis une autre machine :&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;from celery import Celery
+&lt;span class="nv"&gt;celery&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Celery&lt;span class="o"&gt;()&lt;/span&gt;
+celery.config_from_object&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;celeryconfig&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+celery.send_task&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;tasks.add&amp;#39;&lt;/span&gt;, &lt;span class="o"&gt;(&lt;/span&gt;2,2&lt;span class="o"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Appeler une tâches via HTTP :&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;from celery.task.http import URL
+&lt;span class="nv"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; URL&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http://example.com/multiply&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.get_async&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;10, &lt;span class="nv"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;10&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;On peut appeler une tâche dans une tâche !&lt;/li&gt;
+&lt;li&gt;Pour l'optimisation, la sécurité, les extensions, la concurrence, voir la &lt;a class="reference external" href="http://docs.celeryproject.org/en/latest/index.html"&gt;doc officielle&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</summary><category term="rabbitmq"></category><category term="message broker"></category><category term="python"></category><category term="celery"></category><category term="tâches"></category><category term="jobs"></category></entry><entry><title>Découverte du message broker RabbitMQ</title><link href="http://dotmobo.github.io/rabbitmq.html" rel="alternate"></link><updated>2017-09-26T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2017-09-26:rabbitmq.html</id><summary type="html">&lt;img alt="RabbitMQ" class="align-right" src="./images/rabbitmq_logo.png" style="width: 500px;" /&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://www.rabbitmq.com/"&gt;RabbitMQ&lt;/a&gt; est ce qu'on appelle un &lt;em&gt;message broker&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Grosso-modo, ça sert à gérer des files de messages. Il permet ainsi de reçevoir et de transmettre des messages de différentes
 manières.&lt;/p&gt;

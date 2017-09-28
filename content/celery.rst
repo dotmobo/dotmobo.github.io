@@ -9,7 +9,7 @@ Découverte du gestionnaire de files de tâches Celery
 :summary: Découverte du gestionnaire de files de tâches Celery
 
 .. image:: ./images/celery.png
-    :alt: RabbitMQ
+    :alt: Celery
     :align: right
 
 **C'est quoi ? Ça se mange ?**

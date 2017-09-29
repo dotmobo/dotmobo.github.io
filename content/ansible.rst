@@ -416,5 +416,5 @@ Tu l'exécutes:
 
 Et voilà Apache est bien installé et configuré !
 
-Pour aller un peu plus loin, tu peux jeter un oeil aux les rôles disponibles sur `Galaxy <https://galaxy.ansible.com/>`_,
+Pour aller un peu plus loin, tu peux jeter un oeil aux rôles disponibles sur `Galaxy <https://galaxy.ansible.com/>`_,
 tu y trouveras sûrement ton bonheur !

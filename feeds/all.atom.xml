@@ -244,6 +244,9 @@ Tu vas pour ce faire créer un rôle &lt;strong&gt;apache&lt;/strong&gt; qui va 
     └── templates
         └── mysite.j2
 &lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ou alors tu peux utiliser la commande &lt;strong&gt;ansible-galaxy&lt;/strong&gt; pour initialiser l'arborescence complète d'un rôle:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ansible-galaxy init --offline --init-path ~/tuto_ansible/roles apache
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Le dossier &lt;em&gt;handlers&lt;/em&gt; va te permettre d'y mettre des tâches qui vont être exécutées à chaque notification de changement.
 C'est utile pour redémarrer Apache dès que c'est nécessaire par exemple.&lt;/p&gt;
 &lt;p&gt;Dans &lt;em&gt;~/tuto_ansible/roles/apache/handlers/main.yml&lt;/em&gt;, tu mets:&lt;/p&gt;

@@ -325,6 +325,9 @@ Tu vas pour ce faire créer un rôle <strong>apache</strong> qui va installer Ap
     └── templates
         └── mysite.j2
 </pre></div>
+<p>Ou alors tu peux utiliser la commande <strong>ansible-galaxy</strong> pour initialiser l'arborescence complète d'un rôle:</p>
+<div class="highlight"><pre>ansible-galaxy init --offline --init-path ~/tuto_ansible/roles apache
+</pre></div>
 <p>Le dossier <em>handlers</em> va te permettre d'y mettre des tâches qui vont être exécutées à chaque notification de changement.
 C'est utile pour redémarrer Apache dès que c'est nécessaire par exemple.</p>
 <p>Dans <em>~/tuto_ansible/roles/apache/handlers/main.yml</em>, tu mets:</p>

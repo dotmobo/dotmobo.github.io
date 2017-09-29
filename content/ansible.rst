@@ -156,8 +156,8 @@ Tu vas maintenant pouvoir utiliser la commande **ansible** pour faire des trucs 
     ansible ubuntu -m file -a "path=/etc/passwd mode=0664"
     ansible ubuntu -m file -a "path=/etc/shadow mode=0400"
 
-Playbook
-========
+Playbooks
+=========
 
 La commande **ansible** c'est bien mais ça va un moment. Ce que tu veux, c'est avoir une recette à exécuter qui s'occupe de mettre
 à jour ou non ce dont tu as besoin sur les machines distantes. Cette recette, ça s'appelle un **playbook**.
@@ -236,3 +236,151 @@ par défaut de apache:
     wget http://127.0.0.1:8011/
 
 Tu peux relancer plusieurs fois de suite le *playbook*, Ansible ne fera rien de plus sur les serveurs car rien n'a changé.
+
+Templates
+=========
+
+Dans ton playbook, tu peux également utiliser des templates pour déployer des fichiers de configuration.
+Si tu as l'habitude de django ou flask, ça tombe bien car c'est jinja qui est utilisé par ansible !
+
+Tu vas maintenant mettre en place un *message du jour* (motd) sur les serveurs à l'aide d'un template.
+
+TU créés le template **motd** suivant dans *~/tuto_ansible/motd*:
+
+.. code-block:: bash
+
+    IP = {{ ansible_default_ipv4.address }}
+    OS = {{ ansible_distribution }} 
+    {% if env == 'prod' %}
+    ENV = Production
+    {% elif env == 'test' %}
+    ENV = Test
+    {% endif %}
+
+Et le playbook associé dans *~/tuto_ansible/motd.yml*:
+
+.. code-block:: yaml
+
+    - hosts: ubuntu
+      become: true
+      tasks:
+      - template:
+          src: motd
+          dest: /etc/motd
+          owner: ansible
+          group: ansible
+          mode: 0640
+          backup: yes
+
+Tu lances ton playbook et tu testes tout ça:
+
+.. code-block:: bash
+
+    ansible-playbook motd.yml
+    ssh -p 2200 ubuntu@127.0.0.1
+    ssh -p 2201 ubuntu@127.0.0.1
+
+Tu devrais voir:
+
+.. code-block:: bash
+
+    IP = 10.0.2.15
+    OS = Ubuntu
+    ENV = Test
+    Last login: Fri Sep 29 06:45:30 2017 from 10.0.2.2
+    ubuntu@ubuntu-xenial:~$
+
+Rôles
+=====
+
+Ce qui serait bien, ça serait de pouvoir organiser un peu mieux tout ça pour que tes playbooks soient réutilisables.
+Tu vas pour se faire créer un rôle apache, qui va installer apache et le configurer à l'aide d'un template.
+
+C'est parti ! Tu crées un répertoire *~/tuto_ansible/roles* qui contient l'arborescence suivante:
+
+.. code-block:: bash
+
+    roles
+    └── apache
+        ├── handlers
+        │   └── main.yml
+        ├── tasks
+        │   └── main.yml
+        └── templates
+            └── mysite.j2
+
+Le dossier *handlers* va te permettre d'y mettre des tâches qui vont être exécutées à chaque notification de changement.
+Utile pour redémarrer apache dès que c'est nécessaire par exemple.
+Dans *~/tuto_ansible/roles/apache/handlers/main.yml*, tu mets:
+
+.. code-block:: yaml
+
+    ---
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted
+
+Le dossiers *tasks* va tout simplement contenir tes tâches. Dans *~/tuto_ansible/roles/apache/tasks/main.yml*, tu mets:
+
+.. code-block:: yaml
+
+    ---
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+    - name: Check Apache
+      service:
+        name: apache2
+        enabled: true
+        state: started    
+    - name: Installation d'un vhost
+      template:
+        src: mysite.j2
+        dest: /etc/apache2/sites-available/mysite.conf
+    - name: a2ensite mysite
+      command: a2ensite mysite
+      notify:
+      - Restart Apache
+
+Ça installe et démarre apache et ça déploie et active un site qui va utiliser la configuration du template *mysite.j2*.
+
+Pour finir, dans le dossier *templates* sous *~/tuto_ansible/roles/apache/templates/mysite.j2*, tu vas mettre la configuration de ton Virtual Host Apache:
+
+.. code-block:: bash
+
+    <VirtualHost *:{{ http_port }}>
+        ServerAdmin webmaster@{{ domain }}
+        ServerName {{ domain }}
+        DocumentRoot /var/www/
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>
+
+Les variables **http_port** et **domain** seront à définir dans ton playbook principal.
+Tu édites donc un fichier *~/tuto_ansible/playbook-apache.yml* et tu y configure ton rôle apache:
+
+.. code-block:: yaml
+
+    ---
+    # role apache
+    
+    - hosts: ubuntu
+      become: true
+      vars:
+        http_port: 80
+        domain: localhost
+      roles:
+      - apache
+
+Tu l'exécutes:
+
+.. code-block:: bash
+
+    ansible-playbook playbook-apache.yml
+
+Et voilà apache est bien installé et configuré !
+
+Pour aller un peu plus loin, tu peux jeter un oeil sur les rôles disponibles sur `Galaxy <https://galaxy.ansible.com/>`_,
+tu y trouveras sûrement ton bonheur !

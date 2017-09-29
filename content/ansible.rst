@@ -340,6 +340,12 @@ C'est parti ! Tu crées un répertoire *~/tuto_ansible/roles* qui contient l'arb
         └── templates
             └── mysite.j2
 
+Ou alors tu peux utiliser la commande **ansible-galaxy** pour initialiser l'arborescence complète d'un rôle:
+
+.. code-block:: bash
+
+    ansible-galaxy init --offline --init-path ~/tuto_ansible/roles apache
+
 Le dossier *handlers* va te permettre d'y mettre des tâches qui vont être exécutées à chaque notification de changement.
 C'est utile pour redémarrer Apache dès que c'est nécessaire par exemple.
 

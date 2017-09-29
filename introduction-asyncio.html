@@ -109,7 +109,7 @@ L'idée n'est pas de faire le code le plus simple et performant possible, mais p
 en revue l'ensemble des concepts et mots-clés utiles.</p>
 <p>Pour Asyncio, il n'y a rien à installer à part python 3.5. Par contre, il va te
 falloir <a class="reference external" href="https://github.com/KeepSafe/aiohttp">aiohttp</a> pour faire les requêtes http:</p>
-<div class="highlight"><pre><span></span>pip install aiohttp
+<div class="highlight"><pre>pip install aiohttp
 </pre></div>
 <p>Et c'est là où le bât blesse. Tu ne pourras pas utiliser <a class="reference external" href="http://docs.python-requests.org/en/latest/">requests</a> par exemple, car
 il faut utiliser des outils compatibles avec Asyncio, c'est-à-dire écrits sous forme
@@ -117,15 +117,15 @@ de coroutines. Sinon, le programme bloquera la boucle d'événements et ça ne s
 pas asynchrone. Pareil pour les accès <em>BDD</em>, il faut utiliser <a class="reference external" href="https://github.com/aio-libs/aiopg">aiopg</a> pour postgresql par exemple.</p>
 <p>Tu crées un fichier <em>asyncio35.py</em>, tu importes <em>aiohttp</em> et <em>asyncio</em> et tu déclares ta liste
 d'urls:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">import</span> <span class="nn">aiohttp</span>
 
-<span class="n">URLS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;http://ip.jsontest.com/&#39;</span><span class="p">,</span> <span class="s1">&#39;http://headers.jsontest.com/&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;http://date.jsontest.com/&#39;</span><span class="p">]</span>
+<span class="n">URLS</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;http://ip.jsontest.com/&#39;</span><span class="p">,</span> <span class="s">&#39;http://headers.jsontest.com/&#39;</span><span class="p">,</span>
+        <span class="s">&#39;http://date.jsontest.com/&#39;</span><span class="p">]</span>
 </pre></div>
 <p>Tu vas alors créer ta coroutine qui va récupérer les données renvoyées par une
 url et les insérer dans un objet <strong>Future</strong>:</p>
-<div class="highlight"><pre><span></span><span class="n">async</span> <span class="k">def</span> <span class="nf">call_url</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="p">):</span>
+<div class="highlight"><pre><span class="n">async</span> <span class="k">def</span> <span class="nf">call_url</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Coroutine récupérant les données provenant d&#39;une url &quot;&quot;&quot;</span>
     <span class="n">async</span> <span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
@@ -140,14 +140,14 @@ url et les insérer dans un objet <strong>Future</strong>:</p>
 </ul>
 <p>Ensuite, dans ton <em>main</em>, tu initalises ta boucle, ton client <em>aiohttp</em>, ta liste
 de tâches et ta liste de résultats:</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="c1"># On initialise les variables</span>
+<div class="highlight"><pre><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c"># On initialise les variables</span>
     <span class="n">list_results</span><span class="p">,</span> <span class="n">list_tasks</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
     <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
     <span class="n">client</span> <span class="o">=</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientSession</span><span class="p">(</span><span class="n">loop</span><span class="o">=</span><span class="n">loop</span><span class="p">)</span>
 </pre></div>
 <p>Tu ajoutes ton <em>callback</em> pour les objets <strong>Future</strong>:</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fill_results_list</span><span class="p">(</span><span class="n">future</span><span class="p">):</span>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">fill_results_list</span><span class="p">(</span><span class="n">future</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Callback de l&#39;objet future qui ajoute sa valeur dans une liste &quot;&quot;&quot;</span>
     <span class="n">list_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
 </pre></div>
@@ -157,7 +157,7 @@ de tâches et ta liste de résultats:</p>
 <li>ajouter la méthode <strong>call_url</strong> à la liste des tâches à accomplir via la méthode <strong>ensure_future</strong>.</li>
 <li>ajouter ton <em>callback</em> <strong>fill_results_list</strong> à ton objet <strong>Future</strong> via la méthode <strong>add_done_callback</strong>.</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="c1"># On créé les objets Future et la liste des tâches</span>
+<div class="highlight"><pre><span class="c"># On créé les objets Future et la liste des tâches</span>
 <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">URLS</span><span class="p">:</span>
     <span class="n">future</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Future</span><span class="p">()</span>
     <span class="n">list_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">ensure_future</span><span class="p">(</span><span class="n">call_url</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="p">)))</span>
@@ -168,12 +168,12 @@ la boucle d'événements et sa méthode <strong>run_until_complete</strong>. Ton
 sera bloqué ici jusqu'à la fin du traitement de toutes les tâches et donc de la
 réception des objets <strong>Future</strong> via <strong>asyncio.wait</strong>. À la fin, il affiche la liste
 des résultats sur la sortie standard:</p>
-<div class="highlight"><pre><span></span><span class="c1"># Exécution des tâches</span>
+<div class="highlight"><pre><span class="c"># Exécution des tâches</span>
 <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">list_tasks</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">list_results</span><span class="p">)</span>
 </pre></div>
 <p>Enfin, tu peux fermer le client <em>aiohttp</em> et la boucle d'événements:</p>
-<div class="highlight"><pre><span></span><span class="c1"># Ferme le client et la boucle</span>
+<div class="highlight"><pre><span class="c"># Ferme le client et la boucle</span>
 <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 <span class="n">loop</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
@@ -181,15 +181,15 @@ des résultats sur la sortie standard:</p>
 Donc il faut faire attention quand tu la manipules à plusieurs endroits du code,
 et quand tu la fermes.</p>
 <p>Voici le résultat final :</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">import</span> <span class="nn">aiohttp</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Aggrégation de données provenant d&#39;urls</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="n">URLS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;http://ip.jsontest.com/&#39;</span><span class="p">,</span> <span class="s1">&#39;http://headers.jsontest.com/&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;http://date.jsontest.com/&#39;</span><span class="p">]</span>
+<span class="n">URLS</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;http://ip.jsontest.com/&#39;</span><span class="p">,</span> <span class="s">&#39;http://headers.jsontest.com/&#39;</span><span class="p">,</span>
+        <span class="s">&#39;http://date.jsontest.com/&#39;</span><span class="p">]</span>
 
 <span class="n">async</span> <span class="k">def</span> <span class="nf">call_url</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Coroutine récupérant les données provenant d&#39;une url &quot;&quot;&quot;</span>
@@ -197,8 +197,8 @@ et quand tu la fermes.</p>
         <span class="n">result</span> <span class="o">=</span> <span class="n">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
         <span class="n">future</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="c1"># On initialise les variables</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c"># On initialise les variables</span>
     <span class="n">list_results</span><span class="p">,</span> <span class="n">list_tasks</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
     <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
     <span class="n">client</span> <span class="o">=</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientSession</span><span class="p">(</span><span class="n">loop</span><span class="o">=</span><span class="n">loop</span><span class="p">)</span>
@@ -207,22 +207,22 @@ et quand tu la fermes.</p>
         <span class="sd">&quot;&quot;&quot; Callback de l&#39;objet future qui ajoute sa valeur dans une liste &quot;&quot;&quot;</span>
         <span class="n">list_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
 
-    <span class="c1"># On créé les objets Future et la liste des tâches</span>
+    <span class="c"># On créé les objets Future et la liste des tâches</span>
     <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">URLS</span><span class="p">:</span>
         <span class="n">future</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Future</span><span class="p">()</span>
         <span class="n">list_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">ensure_future</span><span class="p">(</span><span class="n">call_url</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="p">)))</span>
         <span class="n">future</span><span class="o">.</span><span class="n">add_done_callback</span><span class="p">(</span><span class="n">fill_results_list</span><span class="p">)</span>
 
-    <span class="c1"># Exécution des tâches</span>
+    <span class="c"># Exécution des tâches</span>
     <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">list_tasks</span><span class="p">))</span>
     <span class="k">print</span><span class="p">(</span><span class="n">list_results</span><span class="p">)</span>
 
-    <span class="c1"># Ferme le client et la boucle</span>
+    <span class="c"># Ferme le client et la boucle</span>
     <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="n">loop</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 <p>Et hop, tu exécutes tout ça:</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">time</span> python asyncio35.py
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">time </span>python asyncio35.py
 <span class="o">[{</span><span class="s1">&#39;ip&#39;</span>: <span class="s1">&#39;109.221.53.120&#39;</span><span class="o">}</span>,
 <span class="o">{</span><span class="s1">&#39;Host&#39;</span>: <span class="s1">&#39;headers.jsontest.com&#39;</span>, <span class="s1">&#39;User-Agent&#39;</span>: <span class="s1">&#39;Python/3.5 aiohttp/0.18.4&#39;</span>, <span class="s1">&#39;Accept&#39;</span>: <span class="s1">&#39;*/*&#39;</span>, <span class="s1">&#39;Content-Length&#39;</span>: <span class="s1">&#39;0&#39;</span><span class="o">}</span>,
 <span class="o">{</span><span class="s1">&#39;date&#39;</span>: <span class="s1">&#39;11-14-2015&#39;</span>, <span class="s1">&#39;time&#39;</span>: <span class="s1">&#39;03:16:45 PM&#39;</span>, <span class="s1">&#39;milliseconds_since_epoch&#39;</span>: 1447514205836<span class="o">}]</span>
@@ -233,16 +233,16 @@ sys 0m0.033s
 </pre></div>
 <p><em>&quot;Ok c'est sympa mais est-ce que c'est vraiment plus rapide en asynchrone ?&quot;</em></p>
 <p>Tu veux une preuve ? En voici une; le même programme sans Asyncio:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Aggrégation de données provenant d&#39;urls</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="n">URLS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;http://ip.jsontest.com/&#39;</span><span class="p">,</span> <span class="s1">&#39;http://headers.jsontest.com/&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;http://date.jsontest.com/&#39;</span><span class="p">]</span>
+<span class="n">URLS</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;http://ip.jsontest.com/&#39;</span><span class="p">,</span> <span class="s">&#39;http://headers.jsontest.com/&#39;</span><span class="p">,</span>
+        <span class="s">&#39;http://date.jsontest.com/&#39;</span><span class="p">]</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">list_results</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">URLS</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
@@ -251,7 +251,7 @@ sys 0m0.033s
     <span class="k">print</span><span class="p">(</span><span class="n">list_results</span><span class="p">)</span>
 </pre></div>
 <p>Tu l'exécutes:</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">time</span> python noasyncio35.py
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">time </span>python noasyncio35.py
 <span class="o">[{</span><span class="s1">&#39;ip&#39;</span>: <span class="s1">&#39;109.221.53.120&#39;</span><span class="o">}</span>,
 <span class="o">{</span><span class="s1">&#39;Host&#39;</span>: <span class="s1">&#39;headers.jsontest.com&#39;</span>, <span class="s1">&#39;User-Agent&#39;</span>: <span class="s1">&#39;python-requests/2.8.1&#39;</span>, <span class="s1">&#39;Accept&#39;</span>: <span class="s1">&#39;*/*&#39;</span><span class="o">}</span>,
 <span class="o">{</span><span class="s1">&#39;date&#39;</span>: <span class="s1">&#39;11-14-2015&#39;</span>, <span class="s1">&#39;time&#39;</span>: <span class="s1">&#39;11:57:03 AM&#39;</span>, <span class="s1">&#39;milliseconds_since_epoch&#39;</span>: 1447502223337<span class="o">}]</span>

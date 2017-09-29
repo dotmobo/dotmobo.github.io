@@ -92,10 +92,10 @@ d'obtenir un résultat proche des frameworks légers.</p>
 <p>L'astuce décrite ci-dessous est à garder quelque part dans un coin de ta tête,
 car ça pourra sûrement t'être utile un jour.</p>
 <p>Après avoir installé django (1.9.5 à l'heure où j'écris ces lignes):</p>
-<div class="highlight"><pre><span></span>pip install django
+<div class="highlight"><pre>pip install django
 </pre></div>
 <p>Tu crées le fichier <strong>myserver.py</strong> suivant dans le répertoire de ton pojet:</p>
-<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Django minimaliste</span>
@@ -106,35 +106,35 @@ car ça pourra sûrement t'être utile un jour.</p>
 <span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="c1"># On définit les settings obligatoires et utiles</span>
+<span class="c"># On définit les settings obligatoires et utiles</span>
 <span class="n">settings</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
     <span class="n">DEBUG</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-    <span class="n">SECRET_KEY</span><span class="o">=</span><span class="s1">&#39;S3CR3T&#39;</span><span class="p">,</span>
+    <span class="n">SECRET_KEY</span><span class="o">=</span><span class="s">&#39;S3CR3T&#39;</span><span class="p">,</span>
     <span class="n">ROOT_URLCONF</span><span class="o">=</span><span class="n">__name__</span><span class="p">,</span>
     <span class="n">TEMPLATES</span><span class="o">=</span><span class="p">[{</span>
-        <span class="s1">&#39;BACKEND&#39;</span><span class="p">:</span> <span class="s1">&#39;django.template.backends.django.DjangoTemplates&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;DIRS&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;./templates/&#39;</span><span class="p">],</span>
+        <span class="s">&#39;BACKEND&#39;</span><span class="p">:</span> <span class="s">&#39;django.template.backends.django.DjangoTemplates&#39;</span><span class="p">,</span>
+        <span class="s">&#39;DIRS&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;./templates/&#39;</span><span class="p">],</span>
     <span class="p">}],</span>
     <span class="n">MIDDLEWARE_CLASSES</span><span class="o">=</span><span class="p">(</span>
-        <span class="s1">&#39;django.middleware.common.CommonMiddleware&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;django.middleware.csrf.CsrfViewMiddleware&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;</span><span class="p">,</span>
+        <span class="s">&#39;django.middleware.common.CommonMiddleware&#39;</span><span class="p">,</span>
+        <span class="s">&#39;django.middleware.csrf.CsrfViewMiddleware&#39;</span><span class="p">,</span>
+        <span class="s">&#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;</span><span class="p">,</span>
     <span class="p">),</span>
 <span class="p">)</span>
 
-<span class="c1"># On crée nos vues</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">someone</span><span class="o">=</span><span class="s2">&quot;World&quot;</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;someone&quot;</span><span class="p">:</span> <span class="n">someone</span><span class="p">})</span>
+<span class="c"># On crée nos vues</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">someone</span><span class="o">=</span><span class="s">&quot;World&quot;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">&#39;index.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;someone&quot;</span><span class="p">:</span> <span class="n">someone</span><span class="p">})</span>
 
-<span class="c1"># On délare nos urls</span>
+<span class="c"># On délare nos urls</span>
 <span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">url</span><span class="p">(</span><span class="s1">r&#39;^$&#39;</span><span class="p">,</span> <span class="n">index</span><span class="p">),</span>
-    <span class="n">url</span><span class="p">(</span><span class="s1">r&#39;^(?P&lt;someone&gt;\w+)/$&#39;</span><span class="p">,</span> <span class="n">index</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^$&#39;</span><span class="p">,</span> <span class="n">index</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^(?P&lt;someone&gt;\w+)/$&#39;</span><span class="p">,</span> <span class="n">index</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="c1"># On exécute le serveur comme s&#39;il s&#39;agissait d&#39;un fichier manage.py</span>
-<span class="c1"># via python myserver.py runserver</span>
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="c"># On exécute le serveur comme s&#39;il s&#39;agissait d&#39;un fichier manage.py</span>
+<span class="c"># via python myserver.py runserver</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">django.core.management</span> <span class="kn">import</span> <span class="n">execute_from_command_line</span>
     <span class="n">execute_from_command_line</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
 </pre></div>
@@ -150,19 +150,19 @@ contiendra les templates.</li>
 rajouter une base de données par exemple.</p>
 <p>Maintenant, tu vas créer le template <strong>index.html</strong> suivant dans un sous-répertoire
 appelé <strong>templates</strong>:</p>
-<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Hello World!<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Hello {{ someone }} !<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Hello World!<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;p&gt;</span>Hello {{ someone }} !<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
 </pre></div>
 <p>Il ne te reste plus qu'à lancer le serveur via la commande:</p>
-<div class="highlight"><pre><span></span>python myserver.py runserver
+<div class="highlight"><pre>python myserver.py runserver
 </pre></div>
 <p>Enfin, rends-toi sur <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> et <a class="reference external" href="http://127.0.0.1:8000/arthur/">http://127.0.0.1:8000/arthur/</a>
 pour voir le résultat !</p>

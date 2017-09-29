@@ -108,22 +108,22 @@ en Php, en Javascript, en Ruby, etc...</p>
 <div class="section" id="installation">
 <h2>Installation</h2>
 <p>Sur Ubuntu, Rabbitmq est présent dans les dépôts officiels, donc rien de plus simple à installer:</p>
-<div class="highlight"><pre><span></span><span class="c1"># Install the package</span>
+<div class="highlight"><pre><span class="c"># Install the package</span>
 apt-get install -y rabbitmq-server
 </pre></div>
 <p>À l'aide de <strong>rabbitmqctl</strong>, tu vas pouvoir ajouter des utilisateurs, gérer les permissions, créer des <em>Virtual Hosts</em>
 (oui, c'est bien le même concept que pour Apache), effacer des utilisateurs, etc...</p>
-<div class="highlight"><pre><span></span><span class="c1"># Add rabbitmq user</span>
+<div class="highlight"><pre><span class="c"># Add rabbitmq user</span>
 rabbitmqctl add_user myuser mypassword
-<span class="c1"># Add rabbitmq vhost</span>
+<span class="c"># Add rabbitmq vhost</span>
 rabbitmqctl add_vhost myproject
-<span class="c1"># Add a tag to the user</span>
+<span class="c"># Add a tag to the user</span>
 rabbitmqctl set_user_tags myuser management
-<span class="c1"># Add vhost all permissions (conf, read, write) to the user</span>
+<span class="c"># Add vhost all permissions (conf, read, write) to the user</span>
 rabbitmqctl set_permissions -p myproject myuser <span class="s2">&quot;.*&quot;</span> <span class="s2">&quot;.*&quot;</span> <span class="s2">&quot;.*&quot;</span>
-<span class="c1"># Delete the guest user</span>
+<span class="c"># Delete the guest user</span>
 rabbitmqctl delete_user guest
-<span class="c1"># Check user authentication</span>
+<span class="c"># Check user authentication</span>
 rabbitmqctl authenticate_user myuser mypassword
 </pre></div>
 <p>Ici, j'ai volontairement effacé l'utilisateur <em>guest</em> qui est activé par défaut.</p>
@@ -134,23 +134,23 @@ rabbitmqctl authenticate_user myuser mypassword
 <ul class="simple">
 <li>Via une interface web disponible sur <em>http://server-name:15672/</em> en activant le plugin <em>management</em>:</li>
 </ul>
-<div class="highlight"><pre><span></span>rabbitmq-plugins <span class="nb">enable</span> rabbitmq_management
+<div class="highlight"><pre>rabbitmq-plugins <span class="nb">enable </span>rabbitmq_management
 </pre></div>
 <ul class="simple">
 <li>ou en ligne de commande via <strong>rabbitmqctl</strong>:</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="c1"># users</span>
+<div class="highlight"><pre><span class="c"># users</span>
 rabbitmqctl list_users
 rabbitmqctl delete_user &lt;username&gt;
 rabbitmqctl change_password &lt;username&gt; &lt;newpassword&gt;
-<span class="c1"># queue</span>
+<span class="c"># queue</span>
 rabbitmqctl list_queues -p myproject
 rabbitmqctl purge_queue queue
 rabbitmqctl list_connections
 rabbitmqctl list_channels
 rabbitmqctl list_consumers
 rabbitmqctl list_exchanges
-<span class="c1"># vhost</span>
+<span class="c"># vhost</span>
 rabbitmqctl list_vhosts
 rabbitmqctl list_permissions -p myproject
 </pre></div>
@@ -158,7 +158,7 @@ rabbitmqctl list_permissions -p myproject
 <div class="section" id="installation-du-client-python">
 <h2>Installation du client Python</h2>
 <p>Pour installer le client Python Pika, tu utilises pip comme d'hab':</p>
-<div class="highlight"><pre><span></span>pip install pika
+<div class="highlight"><pre>pip install pika
 </pre></div>
 </div>
 <div class="section" id="scenarios">
@@ -172,46 +172,46 @@ rabbitmqctl list_permissions -p myproject
 <li>Le <em>consumer</em> reçoit les messages de cette <em>queue</em>.</li>
 </ul>
 <p>Le code du <em>producer</em> <strong>send.py</strong>:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">pika</span>
 
-<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">))</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">))</span>
 <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
-<span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s">&#39;hello&#39;</span><span class="p">)</span>
 
-<span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-                    <span class="n">routing_key</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span>
-                    <span class="n">body</span><span class="o">=</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Sent &#39;Hello World!&#39;&quot;</span><span class="p">)</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+                    <span class="n">routing_key</span><span class="o">=</span><span class="s">&#39;hello&#39;</span><span class="p">,</span>
+                    <span class="n">body</span><span class="o">=</span><span class="s">&#39;Hello World!&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot; [x] Sent &#39;Hello World!&#39;&quot;</span><span class="p">)</span>
 <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 <p>Le code du <em>consumer</em> <strong>receive.py</strong>:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">pika</span>
 
-<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">))</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">))</span>
 <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
-<span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s">&#39;hello&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Received </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">body</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot; [x] Received </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">body</span><span class="p">)</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span>
-                    <span class="n">queue</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span>
+                    <span class="n">queue</span><span class="o">=</span><span class="s">&#39;hello&#39;</span><span class="p">,</span>
                     <span class="n">no_ack</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39; [*] Waiting for messages. To exit press CTRL+C&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39; [*] Waiting for messages. To exit press CTRL+C&#39;</span><span class="p">)</span>
 <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
 </pre></div>
 <p>Et au final, tu as comme résultat:</p>
-<div class="highlight"><pre><span></span>python receive.py
-<span class="c1"># =&gt; [*] Waiting for messages. To exit press CTRL+C</span>
-<span class="c1"># =&gt; [x] Received &#39;Hello World!&#39;</span>
+<div class="highlight"><pre>python receive.py
+<span class="c"># =&gt; [*] Waiting for messages. To exit press CTRL+C</span>
+<span class="c"># =&gt; [x] Received &#39;Hello World!&#39;</span>
 </pre></div>
-<div class="highlight"><pre><span></span>python send.py
-<span class="c1"># =&gt; [x] Sent &#39;Hello World!&#39;</span>
+<div class="highlight"><pre>python send.py
+<span class="c"># =&gt; [x] Sent &#39;Hello World!&#39;</span>
 </pre></div>
 </div>
 <div class="section" id="work-queues">
@@ -223,45 +223,45 @@ rabbitmqctl list_permissions -p myproject
 <li>C'est utile pour des tâches longues (encodage, importation, copies).</li>
 </ul>
 <p>Le code du <em>producer</em> <strong>new_task.py</strong>:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">pika</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">))</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">))</span>
 <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
-<span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s1">&#39;task_queue&#39;</span><span class="p">,</span> <span class="n">durable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s">&#39;task_queue&#39;</span><span class="p">,</span> <span class="n">durable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-<span class="n">message</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="ow">or</span> <span class="s2">&quot;Hello World!&quot;</span>
-<span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-                    <span class="n">routing_key</span><span class="o">=</span><span class="s1">&#39;task_queue&#39;</span><span class="p">,</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="ow">or</span> <span class="s">&quot;Hello World!&quot;</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+                    <span class="n">routing_key</span><span class="o">=</span><span class="s">&#39;task_queue&#39;</span><span class="p">,</span>
                     <span class="n">body</span><span class="o">=</span><span class="n">message</span><span class="p">,</span>
                     <span class="n">properties</span><span class="o">=</span><span class="n">pika</span><span class="o">.</span><span class="n">BasicProperties</span><span class="p">(</span>
-                        <span class="n">delivery_mode</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="c1"># make message persistent</span>
+                        <span class="n">delivery_mode</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="c"># make message persistent</span>
                     <span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Sent </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">message</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot; [x] Sent </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">message</span><span class="p">)</span>
 <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 <p>Le code du <em>consumer</em> <strong>worker.py</strong>:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">pika</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
-<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">))</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">))</span>
 <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
-<span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s1">&#39;task_queue&#39;</span><span class="p">,</span> <span class="n">durable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39; [*] Waiting for messages. To exit press CTRL+C&#39;</span><span class="p">)</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s">&#39;task_queue&#39;</span><span class="p">,</span> <span class="n">durable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39; [*] Waiting for messages. To exit press CTRL+C&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Received </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">body</span><span class="p">)</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">b</span><span class="s1">&#39;.&#39;</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Done&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot; [x] Received </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">body</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;.&#39;</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot; [x] Done&quot;</span><span class="p">)</span>
     <span class="n">ch</span><span class="o">.</span><span class="n">basic_ack</span><span class="p">(</span><span class="n">delivery_tag</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="n">delivery_tag</span><span class="p">)</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_qos</span><span class="p">(</span><span class="n">prefetch_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span>
-                    <span class="n">queue</span><span class="o">=</span><span class="s1">&#39;task_queue&#39;</span><span class="p">)</span>
+                    <span class="n">queue</span><span class="o">=</span><span class="s">&#39;task_queue&#39;</span><span class="p">)</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
 </pre></div>
@@ -277,43 +277,43 @@ rabbitmqctl list_permissions -p myproject
 <li>L'<em>exchange</em> de type <em>fanout</em> délivre le message à toutes les files.</li>
 </ul>
 <p>Le code du <em>producer</em> <strong>emit_log.py</strong>:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">pika</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">))</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">))</span>
 <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
-<span class="n">channel</span><span class="o">.</span><span class="n">exchange_declare</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;logs&#39;</span><span class="p">,</span>
-                        <span class="n">exchange_type</span><span class="o">=</span><span class="s1">&#39;fanout&#39;</span><span class="p">)</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">exchange_declare</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;logs&#39;</span><span class="p">,</span>
+                        <span class="n">exchange_type</span><span class="o">=</span><span class="s">&#39;fanout&#39;</span><span class="p">)</span>
 
-<span class="n">message</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="ow">or</span> <span class="s2">&quot;info: Hello World!&quot;</span>
-<span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;logs&#39;</span><span class="p">,</span>
-                    <span class="n">routing_key</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="ow">or</span> <span class="s">&quot;info: Hello World!&quot;</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;logs&#39;</span><span class="p">,</span>
+                    <span class="n">routing_key</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span>
                     <span class="n">body</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Sent </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">message</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot; [x] Sent </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">message</span><span class="p">)</span>
 <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 <p>Le code du <em>consumer</em> <strong>receive_logs.py</strong>:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">pika</span>
 
-<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">))</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">))</span>
 <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
-<span class="n">channel</span><span class="o">.</span><span class="n">exchange_declare</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;logs&#39;</span><span class="p">,</span>
-                        <span class="n">exchange_type</span><span class="o">=</span><span class="s1">&#39;fanout&#39;</span><span class="p">)</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">exchange_declare</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;logs&#39;</span><span class="p">,</span>
+                        <span class="n">exchange_type</span><span class="o">=</span><span class="s">&#39;fanout&#39;</span><span class="p">)</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">exclusive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">queue_name</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">queue</span>
 
-<span class="n">channel</span><span class="o">.</span><span class="n">queue_bind</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;logs&#39;</span><span class="p">,</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">queue_bind</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;logs&#39;</span><span class="p">,</span>
                 <span class="n">queue</span><span class="o">=</span><span class="n">queue_name</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39; [*] Waiting for logs. To exit press CTRL+C&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39; [*] Waiting for logs. To exit press CTRL+C&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">body</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot; [x] </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">body</span><span class="p">)</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span>
                     <span class="n">queue</span><span class="o">=</span><span class="n">queue_name</span><span class="p">,</span>
@@ -331,52 +331,52 @@ rabbitmqctl list_permissions -p myproject
 <li>C'est utile pour gérer des logs par exemple.</li>
 </ul>
 <p>Le code du <em>producer</em> <strong>emit_log_direct.py</strong>:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">pika</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">))</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">))</span>
 <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
-<span class="n">channel</span><span class="o">.</span><span class="n">exchange_declare</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;direct_logs&#39;</span><span class="p">,</span>
-                        <span class="n">exchange_type</span><span class="o">=</span><span class="s1">&#39;direct&#39;</span><span class="p">)</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">exchange_declare</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;direct_logs&#39;</span><span class="p">,</span>
+                        <span class="n">exchange_type</span><span class="o">=</span><span class="s">&#39;direct&#39;</span><span class="p">)</span>
 
-<span class="n">severity</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="s1">&#39;info&#39;</span>
-<span class="n">message</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span> <span class="ow">or</span> <span class="s1">&#39;Hello World!&#39;</span>
-<span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;direct_logs&#39;</span><span class="p">,</span>
+<span class="n">severity</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="s">&#39;info&#39;</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span> <span class="ow">or</span> <span class="s">&#39;Hello World!&#39;</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;direct_logs&#39;</span><span class="p">,</span>
                     <span class="n">routing_key</span><span class="o">=</span><span class="n">severity</span><span class="p">,</span>
                     <span class="n">body</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Sent </span><span class="si">%r</span><span class="s2">:</span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">severity</span><span class="p">,</span> <span class="n">message</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot; [x] Sent </span><span class="si">%r</span><span class="s">:</span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">severity</span><span class="p">,</span> <span class="n">message</span><span class="p">))</span>
 <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 <p>Le code du <em>consumer</em> <strong>receive_logs_direct.py</strong>:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">pika</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">))</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">))</span>
 <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
-<span class="n">channel</span><span class="o">.</span><span class="n">exchange_declare</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;direct_logs&#39;</span><span class="p">,</span>
-                        <span class="n">exchange_type</span><span class="o">=</span><span class="s1">&#39;direct&#39;</span><span class="p">)</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">exchange_declare</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;direct_logs&#39;</span><span class="p">,</span>
+                        <span class="n">exchange_type</span><span class="o">=</span><span class="s">&#39;direct&#39;</span><span class="p">)</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">exclusive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">queue_name</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">queue</span>
 
 <span class="n">severities</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">severities</span><span class="p">:</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Usage: </span><span class="si">%s</span><span class="s2"> [info] [warning] [error]</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;Usage: </span><span class="si">%s</span><span class="s"> [info] [warning] [error]</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">severity</span> <span class="ow">in</span> <span class="n">severities</span><span class="p">:</span>
-    <span class="n">channel</span><span class="o">.</span><span class="n">queue_bind</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;direct_logs&#39;</span><span class="p">,</span>
+    <span class="n">channel</span><span class="o">.</span><span class="n">queue_bind</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;direct_logs&#39;</span><span class="p">,</span>
                     <span class="n">queue</span><span class="o">=</span><span class="n">queue_name</span><span class="p">,</span>
                     <span class="n">routing_key</span><span class="o">=</span><span class="n">severity</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39; [*] Waiting for logs. To exit press CTRL+C&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39; [*] Waiting for logs. To exit press CTRL+C&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] </span><span class="si">%r</span><span class="s2">:</span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">routing_key</span><span class="p">,</span> <span class="n">body</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot; [x] </span><span class="si">%r</span><span class="s">:</span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">routing_key</span><span class="p">,</span> <span class="n">body</span><span class="p">))</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span>
                     <span class="n">queue</span><span class="o">=</span><span class="n">queue_name</span><span class="p">,</span>
@@ -385,12 +385,12 @@ rabbitmqctl list_permissions -p myproject
 <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
 </pre></div>
 <p>Tu t'attends alors à reçevoir des messages de type <em>info</em>, <em>warning</em> et <em>error</em>:</p>
-<div class="highlight"><pre><span></span>python receive_logs_direct.py info warning error
-<span class="c1"># =&gt; [*] Waiting for logs. To exit press CTRL+C</span>
+<div class="highlight"><pre>python receive_logs_direct.py info warning error
+<span class="c"># =&gt; [*] Waiting for logs. To exit press CTRL+C</span>
 </pre></div>
 <p>Par exemple, pour émettre un message de type <em>error</em>:</p>
-<div class="highlight"><pre><span></span>python emit_log_direct.py error <span class="s2">&quot;Run. Run. Or it will explode.&quot;</span>
-<span class="c1"># =&gt; [x] Sent &#39;error&#39;:&#39;Run. Run. Or it will explode.&#39;</span>
+<div class="highlight"><pre>python emit_log_direct.py error <span class="s2">&quot;Run. Run. Or it will explode.&quot;</span>
+<span class="c"># =&gt; [x] Sent &#39;error&#39;:&#39;Run. Run. Or it will explode.&#39;</span>
 </pre></div>
 </div>
 <div class="section" id="topics">
@@ -401,52 +401,52 @@ rabbitmqctl list_permissions -p myproject
 <li>Le message avec la clé de <strong>routage quick.orange.rabbit</strong> ira dans les 2 files.</li>
 </ul>
 <p>Le code du <em>producer</em> <strong>emit_log_topic.py</strong>:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">pika</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">))</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">))</span>
 <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
-<span class="n">channel</span><span class="o">.</span><span class="n">exchange_declare</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;topic_logs&#39;</span><span class="p">,</span>
-                        <span class="n">exchange_type</span><span class="o">=</span><span class="s1">&#39;topic&#39;</span><span class="p">)</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">exchange_declare</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;topic_logs&#39;</span><span class="p">,</span>
+                        <span class="n">exchange_type</span><span class="o">=</span><span class="s">&#39;topic&#39;</span><span class="p">)</span>
 
-<span class="n">routing_key</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="s1">&#39;anonymous.info&#39;</span>
-<span class="n">message</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span> <span class="ow">or</span> <span class="s1">&#39;Hello World!&#39;</span>
-<span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;topic_logs&#39;</span><span class="p">,</span>
+<span class="n">routing_key</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="s">&#39;anonymous.info&#39;</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span> <span class="ow">or</span> <span class="s">&#39;Hello World!&#39;</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;topic_logs&#39;</span><span class="p">,</span>
                     <span class="n">routing_key</span><span class="o">=</span><span class="n">routing_key</span><span class="p">,</span>
                     <span class="n">body</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Sent </span><span class="si">%r</span><span class="s2">:</span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">routing_key</span><span class="p">,</span> <span class="n">message</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot; [x] Sent </span><span class="si">%r</span><span class="s">:</span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">routing_key</span><span class="p">,</span> <span class="n">message</span><span class="p">))</span>
 <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 <p>Le code du <em>consumer</em> <strong>receive_logs_topic.py</strong>:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">pika</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">))</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">))</span>
 <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
-<span class="n">channel</span><span class="o">.</span><span class="n">exchange_declare</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;topic_logs&#39;</span><span class="p">,</span>
-                        <span class="n">exchange_type</span><span class="o">=</span><span class="s1">&#39;topic&#39;</span><span class="p">)</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">exchange_declare</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;topic_logs&#39;</span><span class="p">,</span>
+                        <span class="n">exchange_type</span><span class="o">=</span><span class="s">&#39;topic&#39;</span><span class="p">)</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">exclusive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">queue_name</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">queue</span>
 
 <span class="n">binding_keys</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">binding_keys</span><span class="p">:</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Usage: </span><span class="si">%s</span><span class="s2"> [binding_key]...</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;Usage: </span><span class="si">%s</span><span class="s"> [binding_key]...</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">binding_key</span> <span class="ow">in</span> <span class="n">binding_keys</span><span class="p">:</span>
-    <span class="n">channel</span><span class="o">.</span><span class="n">queue_bind</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;topic_logs&#39;</span><span class="p">,</span>
+    <span class="n">channel</span><span class="o">.</span><span class="n">queue_bind</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;topic_logs&#39;</span><span class="p">,</span>
                     <span class="n">queue</span><span class="o">=</span><span class="n">queue_name</span><span class="p">,</span>
                     <span class="n">routing_key</span><span class="o">=</span><span class="n">binding_key</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39; [*] Waiting for logs. To exit press CTRL+C&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39; [*] Waiting for logs. To exit press CTRL+C&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] </span><span class="si">%r</span><span class="s2">:</span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">routing_key</span><span class="p">,</span> <span class="n">body</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot; [x] </span><span class="si">%r</span><span class="s">:</span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">routing_key</span><span class="p">,</span> <span class="n">body</span><span class="p">))</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span>
                     <span class="n">queue</span><span class="o">=</span><span class="n">queue_name</span><span class="p">,</span>
@@ -455,19 +455,19 @@ rabbitmqctl list_permissions -p myproject
 <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
 </pre></div>
 <p>Tu peux maintenant utiliser les topics de différentes manières :</p>
-<div class="highlight"><pre><span></span><span class="c1"># To receive all the logs run:</span>
+<div class="highlight"><pre><span class="c"># To receive all the logs run:</span>
 python receive_logs_topic.py <span class="s2">&quot;#&quot;</span>
 
-<span class="c1"># To receive all logs from the facility &quot;kern&quot;:</span>
+<span class="c"># To receive all logs from the facility &quot;kern&quot;:</span>
 python receive_logs_topic.py <span class="s2">&quot;kern.*&quot;</span>
 
-<span class="c1"># Or if you want to hear only about &quot;critical&quot; logs:</span>
+<span class="c"># Or if you want to hear only about &quot;critical&quot; logs:</span>
 python receive_logs_topic.py <span class="s2">&quot;*.critical&quot;</span>
 
-<span class="c1"># You can create multiple bindings:</span>
+<span class="c"># You can create multiple bindings:</span>
 python receive_logs_topic.py <span class="s2">&quot;kern.*&quot;</span> <span class="s2">&quot;*.critical&quot;</span>
 
-<span class="c1"># And to emit a log with a routing key &quot;kern.critical&quot; type:</span>
+<span class="c"># And to emit a log with a routing key &quot;kern.critical&quot; type:</span>
 python emit_log_topic.py <span class="s2">&quot;kern.critical&quot;</span> <span class="s2">&quot;A critical kernel error&quot;</span>
 </pre></div>
 </div>
@@ -480,14 +480,14 @@ python emit_log_topic.py <span class="s2">&quot;kern.critical&quot;</span> <span
 <li>Le serveur attend les requêtes, exécute la fonction et retourne la réponse.</li>
 </ul>
 <p>Le code de la partie <em>server</em> <em>rpc_server.py</em> :</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">pika</span>
 
-<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">))</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">))</span>
 
 <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
-<span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s1">&#39;rpc_queue&#39;</span><span class="p">)</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s">&#39;rpc_queue&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -500,10 +500,10 @@ python emit_log_topic.py <span class="s2">&quot;kern.critical&quot;</span> <span
 <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">props</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; [.] fib(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot; [.] fib(</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-    <span class="n">ch</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">ch</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span>
                     <span class="n">routing_key</span><span class="o">=</span><span class="n">props</span><span class="o">.</span><span class="n">reply_to</span><span class="p">,</span>
                     <span class="n">properties</span><span class="o">=</span><span class="n">pika</span><span class="o">.</span><span class="n">BasicProperties</span><span class="p">(</span><span class="n">correlation_id</span> <span class="o">=</span> \
                                                         <span class="n">props</span><span class="o">.</span><span class="n">correlation_id</span><span class="p">),</span>
@@ -511,19 +511,19 @@ python emit_log_topic.py <span class="s2">&quot;kern.critical&quot;</span> <span
     <span class="n">ch</span><span class="o">.</span><span class="n">basic_ack</span><span class="p">(</span><span class="n">delivery_tag</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="n">delivery_tag</span><span class="p">)</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_qos</span><span class="p">(</span><span class="n">prefetch_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">on_request</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="s1">&#39;rpc_queue&#39;</span><span class="p">)</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">on_request</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="s">&#39;rpc_queue&#39;</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Awaiting RPC requests&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot; [x] Awaiting RPC requests&quot;</span><span class="p">)</span>
 <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
 </pre></div>
 <p>Le code de la partie <em>cliente</em> <em>rpc_client.py</em> :</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">pika</span>
 <span class="kn">import</span> <span class="nn">uuid</span>
 
 <span class="k">class</span> <span class="nc">FibonacciRpcClient</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">channel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
@@ -540,8 +540,8 @@ python emit_log_topic.py <span class="s2">&quot;kern.critical&quot;</span> <span
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">corr_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-                                <span class="n">routing_key</span><span class="o">=</span><span class="s1">&#39;rpc_queue&#39;</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+                                <span class="n">routing_key</span><span class="o">=</span><span class="s">&#39;rpc_queue&#39;</span><span class="p">,</span>
                                 <span class="n">properties</span><span class="o">=</span><span class="n">pika</span><span class="o">.</span><span class="n">BasicProperties</span><span class="p">(</span>
                                         <span class="n">reply_to</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">callback_queue</span><span class="p">,</span>
                                         <span class="n">correlation_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">corr_id</span><span class="p">,</span>
@@ -553,16 +553,16 @@ python emit_log_topic.py <span class="s2">&quot;kern.critical&quot;</span> <span
 
 <span class="n">fibonacci_rpc</span> <span class="o">=</span> <span class="n">FibonacciRpcClient</span><span class="p">()</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Requesting fib(30)&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot; [x] Requesting fib(30)&quot;</span><span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">fibonacci_rpc</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [.] Got </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">response</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot; [.] Got </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">response</span><span class="p">)</span>
 </pre></div>
 <p>Et pour tester ça :</p>
-<div class="highlight"><pre><span></span>python rpc_server.py
-<span class="c1"># =&gt; [x] Awaiting RPC requests</span>
+<div class="highlight"><pre>python rpc_server.py
+<span class="c"># =&gt; [x] Awaiting RPC requests</span>
 </pre></div>
-<div class="highlight"><pre><span></span>python rpc_client.py
-<span class="c1"># =&gt; [x] Requesting fib(30)</span>
+<div class="highlight"><pre>python rpc_client.py
+<span class="c"># =&gt; [x] Requesting fib(30)</span>
 </pre></div>
 </div>
 <div class="section" id="conclusion">

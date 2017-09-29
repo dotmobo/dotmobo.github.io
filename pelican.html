@@ -89,18 +89,18 @@ générer rapidement un site statique comme un blog, afin de le publier via
 principale force de Pelican, c'est de proposer également le <a class="reference external" href="http://sphinx-doc.org/rest.html">reStructuredText</a> comme format d'écriture, ce qui rendra
 heureux tous les amoureux de Sphinx.</p>
 <p>Pour l'installer, rien de plus simple, l'outil est dispo sur <a class="reference external" href="https://pypi.python.org/pypi">Pypi</a>:</p>
-<div class="highlight"><pre><span></span>pip install pelican
+<div class="highlight"><pre>pip install pelican
 </pre></div>
 <p>Il propose une commande de génération automatique de projet :</p>
-<div class="highlight"><pre><span></span>mkdir ~/dev/myblog <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ~/dev/myblog <span class="o">&amp;&amp;</span> pelican-quickstart
+<div class="highlight"><pre>mkdir ~/dev/myblog <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ~/dev/myblog <span class="o">&amp;&amp;</span> pelican-quickstart
 </pre></div>
 <p>N'oublie pas de dire oui aux deux questions concernant Github Pages,
 et ... c'est tout! Pour proposer des articles, il te suffit de les créer en .rst
 dans le dossier <em>content</em>:</p>
-<div class="highlight"><pre><span></span>vi ~/dev/myblog/content/mon-article.rst
+<div class="highlight"><pre>vi ~/dev/myblog/content/mon-article.rst
 </pre></div>
 <p>Ils devront ressembler à ça:</p>
-<div class="highlight"><pre><span></span><span class="gh">Mon article</span>
+<div class="highlight"><pre><span class="gh">Mon article</span>
 <span class="gh">###########</span>
 
 <span class="nc">:date:</span> <span class="nf">2015-10-11 10:20</span>
@@ -115,67 +115,67 @@ blablabla ...
 </pre></div>
 <p>Jetons maintenant un coup d'oeil aux deux fichiers de configuration.</p>
 <p>Le premier, <em>pelicanconf.py</em> , est utilisé pour la configuration générale du site:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
-<span class="c1"># -*- coding: utf-8 -*- #</span>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*- #</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
 
-<span class="n">AUTHOR</span> <span class="o">=</span> <span class="s1">&#39;myusername&#39;</span>
-<span class="n">SITENAME</span> <span class="o">=</span> <span class="s2">&quot;myblog&quot;</span>
-<span class="n">SITEURL</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">AUTHOR</span> <span class="o">=</span> <span class="s">&#39;myusername&#39;</span>
+<span class="n">SITENAME</span> <span class="o">=</span> <span class="s">&quot;myblog&quot;</span>
+<span class="n">SITEURL</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
 
-<span class="n">PATH</span> <span class="o">=</span> <span class="s1">&#39;content&#39;</span>
+<span class="n">PATH</span> <span class="o">=</span> <span class="s">&#39;content&#39;</span>
 
-<span class="n">TIMEZONE</span> <span class="o">=</span> <span class="s1">&#39;Europe/Paris&#39;</span>
+<span class="n">TIMEZONE</span> <span class="o">=</span> <span class="s">&#39;Europe/Paris&#39;</span>
 
-<span class="n">DEFAULT_LANG</span> <span class="o">=</span> <span class="s1">&#39;fr&#39;</span>
+<span class="n">DEFAULT_LANG</span> <span class="o">=</span> <span class="s">&#39;fr&#39;</span>
 
-<span class="c1"># Feed generation is usually not desired when developing</span>
+<span class="c"># Feed generation is usually not desired when developing</span>
 <span class="n">FEED_ALL_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
 <span class="n">CATEGORY_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
 <span class="n">TRANSLATION_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
 <span class="n">AUTHOR_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
 <span class="n">AUTHOR_FEED_RSS</span> <span class="o">=</span> <span class="bp">None</span>
 
-<span class="c1"># Blogroll</span>
+<span class="c"># Blogroll</span>
 <span class="n">LINKS</span> <span class="o">=</span> <span class="bp">None</span>
 
-<span class="c1"># Social widget</span>
+<span class="c"># Social widget</span>
 <span class="n">SOCIAL</span> <span class="o">=</span> <span class="bp">None</span>
 
 <span class="n">DEFAULT_PAGINATION</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="c1"># Uncomment following line if you want document-relative URLs when developing</span>
+<span class="c"># Uncomment following line if you want document-relative URLs when developing</span>
 <span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="bp">True</span>
 
-<span class="c1"># Theme</span>
-<span class="c1"># THEME = &quot;simple&quot;</span>
+<span class="c"># Theme</span>
+<span class="c"># THEME = &quot;simple&quot;</span>
 </pre></div>
 <p>Tu remarqueras une partie <em>Theme</em>, on y reviendra plus tard.
 Le reste est relativement compréhensible pour se passer d'explication.</p>
 <p>Le second, <em>publishconf.py</em> , rajoute les spécificités pour la production:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
-<span class="c1"># -*- coding: utf-8 -*- #</span>
+<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*- #</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
 
-<span class="c1"># This file is only used if you use `make publish` or</span>
-<span class="c1"># explicitly specify it as your config file.</span>
+<span class="c"># This file is only used if you use `make publish` or</span>
+<span class="c"># explicitly specify it as your config file.</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">curdir</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">pelicanconf</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="n">SITEURL</span> <span class="o">=</span> <span class="s1">&#39;http://myusername.github.io&#39;</span>
+<span class="n">SITEURL</span> <span class="o">=</span> <span class="s">&#39;http://myusername.github.io&#39;</span>
 <span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="bp">False</span>
 
-<span class="n">FEED_ATOM</span> <span class="o">=</span> <span class="s1">&#39;feeds/all.atom.xml&#39;</span>
+<span class="n">FEED_ATOM</span> <span class="o">=</span> <span class="s">&#39;feeds/all.atom.xml&#39;</span>
 
 <span class="n">DELETE_OUTPUT_DIRECTORY</span> <span class="o">=</span> <span class="bp">True</span>
 
-<span class="c1"># Following items are often useful when publishing</span>
+<span class="c"># Following items are often useful when publishing</span>
 
-<span class="c1">#DISQUS_SITENAME = &quot;&quot;</span>
-<span class="c1">#GOOGLE_ANALYTICS = &quot;&quot;</span>
+<span class="c">#DISQUS_SITENAME = &quot;&quot;</span>
+<span class="c">#GOOGLE_ANALYTICS = &quot;&quot;</span>
 </pre></div>
 <p>Il est important ici de définir <strong>SITEURL</strong> et <strong>FEED_ATOM</strong>.
 En effet, en mode dev, on n'a pas besoin de générer les flux atom et on utilise
@@ -186,19 +186,19 @@ Et concernant Disqus, on y reviendra également plus tard.</p>
 Au choix, on va pouvoir utiliser <a class="reference external" href="http://www.fabfile.org">Fabric</a>
 (malheureusement non disponible en Python 3) ou <strong>make</strong>.</p>
 <p>Pour générer ton site en mode dev (utilise <em>pelicanconf.py</em>):</p>
-<div class="highlight"><pre><span></span>make html
+<div class="highlight"><pre>make html
 </pre></div>
 <p>Tu peux aussi utiliser un watcher pour automatiser la génération de ton site à chaque modification:</p>
-<div class="highlight"><pre><span></span>make regenerate
+<div class="highlight"><pre>make regenerate
 </pre></div>
 <p>Pour servir ton site en mode dev sur <a class="reference external" href="http://localhost:8000/">http://localhost:8000/</a>:</p>
-<div class="highlight"><pre><span></span>make serve
+<div class="highlight"><pre>make serve
 </pre></div>
 <p>Pour générer ton site pour la production (utilise <em>publishconf.py</em>):</p>
-<div class="highlight"><pre><span></span>make publish
+<div class="highlight"><pre>make publish
 </pre></div>
 <p>Enfin, pour le diffuser sur le master de ton dépôt Github Pages:</p>
-<div class="highlight"><pre><span></span>make github
+<div class="highlight"><pre>make github
 </pre></div>
 <p>Concernant le dépôt Github, je te recommande de commiter le code Pelican sur une
 branche à part, et de garder la branche <em>master</em> pour la diffusion du site.
@@ -214,20 +214,20 @@ forker pour y apporter tes customisations.</p>
 <a class="reference external" href="http://flask.pocoo.org/">flask</a>, Pelican utilise <a class="reference external" href="http://jinja.pocoo.org/">jinja2</a>
 comme moteur de template. Et ça c'est carrément cool.</p>
 <p>On installe donc alchemy:</p>
-<div class="highlight"><pre><span></span>git clone git@github.com:nairobilug/pelican-alchemy.git ~/dev/pelican-alchemy
+<div class="highlight"><pre>git clone git@github.com:nairobilug/pelican-alchemy.git ~/dev/pelican-alchemy
 pelican-themes -i ~/dev/pelican-alchemy/alchemy
 </pre></div>
 <p>Et on définit la variable <strong>THEME</strong> de notre fichier de conf <em>pelicanconf.py</em>:</p>
-<div class="highlight"><pre><span></span><span class="n">THEME</span> <span class="o">=</span> <span class="s2">&quot;alchemy&quot;</span>
-<span class="n">SITE_SUBTEXT</span> <span class="o">=</span> <span class="s2">&quot;Blabla&quot;</span>
-<span class="n">PROFILE_IMAGE</span> <span class="o">=</span> <span class="s2">&quot;profil.jpeg&quot;</span>
-<span class="n">GITHUB_ADDRESS</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/myusername&quot;</span>
-<span class="n">TWITTER_ADDRESS</span> <span class="o">=</span> <span class="s2">&quot;https://twitter.com/myusername&quot;</span>
+<div class="highlight"><pre><span class="n">THEME</span> <span class="o">=</span> <span class="s">&quot;alchemy&quot;</span>
+<span class="n">SITE_SUBTEXT</span> <span class="o">=</span> <span class="s">&quot;Blabla&quot;</span>
+<span class="n">PROFILE_IMAGE</span> <span class="o">=</span> <span class="s">&quot;profil.jpeg&quot;</span>
+<span class="n">GITHUB_ADDRESS</span> <span class="o">=</span> <span class="s">&quot;https://github.com/myusername&quot;</span>
+<span class="n">TWITTER_ADDRESS</span> <span class="o">=</span> <span class="s">&quot;https://twitter.com/myusername&quot;</span>
 <span class="n">EXTRA_FAVICON</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">LICENSE_NAME</span> <span class="o">=</span> <span class="s2">&quot;MIT&quot;</span>
-<span class="n">LICENSE_URL</span> <span class="o">=</span> <span class="s2">&quot;https://opensource.org/licenses/MIT&quot;</span>
+<span class="n">LICENSE_NAME</span> <span class="o">=</span> <span class="s">&quot;MIT&quot;</span>
+<span class="n">LICENSE_URL</span> <span class="o">=</span> <span class="s">&quot;https://opensource.org/licenses/MIT&quot;</span>
 <span class="n">MENU_ITEMS</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">META_DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Blabla</span>
+<span class="n">META_DESCRIPTION</span> <span class="o">=</span> <span class="s">&quot;Blabla</span>
 <span class="n">PAGES_ON_MENU</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="n">CATEGORIES_ON_MENU</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="n">TAGS_ON_MENU</span> <span class="o">=</span> <span class="bp">True</span>
@@ -242,7 +242,7 @@ des commentaires? Il me faut bien une partie dynamique non ?&quot;. Pas de paniq
 utilisant le paramétrage <strong>universal-embed-code</strong>. À partir de là, tu vas pouvoir
 le configurer via <em>http://&lt;username&gt;.disqus.com/admin/settings</em>.</p>
 <p>Enfin, tu l'actives via ton fichier de conf de prod <em>publishconf.py</em>:</p>
-<div class="highlight"><pre><span></span><span class="n">DISQUS_SITENAME</span> <span class="o">=</span> <span class="s2">&quot;myusername&quot;</span>
+<div class="highlight"><pre><span class="n">DISQUS_SITENAME</span> <span class="o">=</span> <span class="s">&quot;myusername&quot;</span>
 </pre></div>
 <p>Tu commites tout ça, tu publies et hop! Ton blog est complètement prêt!</p>
 <p>Et si tu veux pousser un peu plus loin l'outil, il y a énormément de

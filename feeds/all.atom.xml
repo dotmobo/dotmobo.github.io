@@ -301,7 +301,7 @@ Tu édites donc un fichier &lt;em&gt;~/tuto_ansible/playbook-apache.yml&lt;/em&g
 &lt;div class="highlight"&gt;&lt;pre&gt;ansible-playbook playbook-apache.yml
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Et voilà Apache est bien installé et configuré !&lt;/p&gt;
-&lt;p&gt;Pour aller un peu plus loin, tu peux jeter un oeil aux les rôles disponibles sur &lt;a class="reference external" href="https://galaxy.ansible.com/"&gt;Galaxy&lt;/a&gt;,
+&lt;p&gt;Pour aller un peu plus loin, tu peux jeter un oeil aux rôles disponibles sur &lt;a class="reference external" href="https://galaxy.ansible.com/"&gt;Galaxy&lt;/a&gt;,
 tu y trouveras sûrement ton bonheur !&lt;/p&gt;
 &lt;/div&gt;
 </summary><category term="python"></category><category term="ansible"></category><category term="fabric"></category><category term="devops"></category><category term="linux"></category><category term="déploiement"></category><category term="vagrant"></category><category term="virtualbox"></category><category term="ubuntu"></category></entry><entry><title>Découverte du gestionnaire de files de tâches Celery</title><link href="http://dotmobo.github.io/celery.html" rel="alternate"></link><updated>2017-09-28T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2017-09-28:celery.html</id><summary type="html">&lt;img alt="Celery" class="align-right" src="./images/celery.png" /&gt;

@@ -2,7 +2,7 @@ Thématique DevOps avec Ansible
 ##############################
 
 :date: 2017-09-29
-:tags: python,ansible,fabric,devops,linux,déploiement
+:tags: python,ansible,fabric,devops,linux,déploiement,vagrant,virtualbox,ubuntu
 :category: Linux
 :slug: ansible
 :authors: Morgan
@@ -14,7 +14,9 @@ Thématique DevOps avec Ansible
 
 
 `Ansible <https://www.ansible.com/>`_ est un *configuration management tool*, c'est-à-dire que c'est un outil qui va te permettre
-d'administrer tes serveurs et d'y déployer automatiquement tes applications. Et franchement, ça bute. 
+d'administrer tes serveurs et d'y déployer automatiquement tes applications. 
+
+**Et franchement, ça bute !** 
 
 C'est très puissant tout en étant relativement simple à prendre en main, à l'inverse d'outils plus compliqués comme *Chef* ou *Puppet* par exemple.
 
@@ -30,13 +32,15 @@ Vagrant
 Pour tester Ansible, tu vas utiliser `Virtualbox <https://www.virtualbox.org/>`_ avec `Vagrant <https://www.vagrantup.com/downloads.html>`_
 pour te monter deux petites VMs Ubuntu Xenial.
 
-Sous Ubuntu tu peux installer tout ça via la commande suivante (et redémarre ta machine si besoin):
+Sous Ubuntu, tu peux installer tout ça via la commande suivante et redémarrer ta machine si besoin:
 
 .. code-block:: bash
 
     sudo apt-get install virtualbox virtualbox-dkms vagrant
 
-Ensuite, tu te créés le fichier *Vagrantfile* suivant dans *~/tuto_ansible/vagrant/Vagrantfile* par exemple:
+Dans l'idéal, essaye d'avoir une version assez récente de Vagrant. Les fichiers de conf peuvent changer selon les versions.
+
+Ensuite, tu te crées le fichier *Vagrantfile* suivant dans *~/tuto_ansible/vagrant/Vagrantfile* par exemple:
 
 .. code-block:: ruby
 
@@ -59,7 +63,7 @@ Ensuite, tu te créés le fichier *Vagrantfile* suivant dans *~/tuto_ansible/vag
 
     end
 
-Et tu démarres tes deux Vms via:
+Et tu démarres tes deux VMs via:
 
 .. code-block:: bash
 
@@ -78,7 +82,7 @@ Tu installes Ansible sous Ubuntu via :
     sudo apt-get update
     sudo apt-get install ansible
 
-Puis tu créés un ficher *hosts* à la racine du projet, dans *~/tuto_ansible/hosts* par exemple:
+Puis tu crées un fichier *hosts* à la racine du projet, dans *~/tuto_ansible/hosts*:
 
 .. code-block:: bash
 
@@ -86,14 +90,14 @@ Puis tu créés un ficher *hosts* à la racine du projet, dans *~/tuto_ansible/h
     vm1 ansible_host=127.0.0.1 ansible_port=2200 ansible_user=ubuntu ansible_become=yes env=test
     vm2 ansible_host=127.0.0.1 ansible_port=2201 ansible_user=ubuntu ansible_become=yes env=prod
 
-Et tu créés un fichier *ansible.cfg* qui va contenir ta configuration Ansible, dans *~/tuto_ansible/ansible.cfg* par exemple:
+Et tu édites un fichier *ansible.cfg* qui va contenir ta configuration Ansible, dans *~/tuto_ansible/ansible.cfg*:
 
 .. code-block:: bash
 
     [defaults]
     inventory      = hosts
 
-On a désormais indiqué à Ansible d'utiliser nos deux Vms précédemment créées.
+Tu as désormais indiqué à Ansible d'utiliser tes deux Vms précédemment créées.
 
 Tout est prêt !
 
@@ -113,17 +117,17 @@ Ansible a besoin de python sur les machines clientes, donc si c'est pas install�
 
     ansible all -m raw -a "apt install -y python" --ask-sudo-pass
 
-L'astuce ici c'est que l'option **-m raw** permet d'exécuter une commande ssh sans ansible.
+L'astuce ici c'est que l'option **-m raw** permet d'exécuter directement une commande ssh sans Ansible.
 
-Et tu essayes maintenant de contacter tes deux Vms via:
+Et tu essayes maintenant de contacter tes deux VMs via:
 
 .. code-block:: bash
     
     ansible all -m ping 
 
-Si tout est ok à ce niveau là, tu peux passer à la suite. Sinon c'est qu'il y a un souci quelque-part.
+Si tout est ok à ce niveau-là, tu peux passer à la suite. Sinon c'est qu'il y a un souci quelque-part.
 
-Tu vas maintenant pouvoir utiliser la commande **ansible** pour faire des trucs sur les serveurs comme :
+Tu vas maintenant pouvoir utiliser la commande **ansible** pour faire des trucs sur les serveurs comme:
 
 * Exécuter une commande pour afficher la liste des utilisateurs de la première machine:
 
@@ -164,11 +168,11 @@ La commande **ansible** c'est bien mais ça va un moment. Ce que tu veux, c'est 
 
 Tu vas donc écrire un **playbook** permettant de :
 
-* installer le paquet sudo
-* créer un utilisateur ansible
-* importer une clé SSH publique pour cet utilisateur
-* configurer sudo pour cet utilisateur (sans mot de passe)
-* installer Apache avec le support de PHP activé pour les distributions Ubuntu
+* installer le paquet sudo.
+* créer un utilisateur ansible.
+* importer une clé SSH publique pour cet utilisateur.
+* configurer sudo pour cet utilisateur (sans mot de passe).
+* installer Apache avec le support de PHP activé pour les distributions Ubuntu.
 
 Tu crées le fichier *~/tuto_ansible/myplaybook1.yml* :
 
@@ -221,31 +225,46 @@ Tu crées le fichier *~/tuto_ansible/myplaybook1.yml* :
           name: apache2
           state: restarted
 
+Regarde bien en détail le playbook: 
+
+* *hosts* précise sur quelles machines exécuter les tâches.
+* *become* indique qu'il faut être *sudoer*.
+* *tasks* contient les différentes tâches à lancer.
+* *apt*, *user*, *authorized_key*, *lineinfile*, *apache2_module* et *service* sont `des modules <http://docs.ansible.com/ansible/latest/list_of_all_modules.html>`_.
+* *when* permet d'utiliser de la conditionnalité pour l'exécution des tâches.
+* *name*, *state*, *key*, *shell*, *dest*, *line* et autres sont les paramètres des modules. Pour voir la doc d'un module, tu peux utiliser la commande:
+
+.. code-block:: bash
+
+    ansible-doc apache2_module
+
 Tu exécutes ton *playbook*:
 
 .. code-block:: bash
 
     ansible-playbook myplaybook1.yml
 
-Et si te te rends sur *http://127.0.0.1:8010/* et *http://127.0.0.1:8011/*, tu obtiens bien la page
-par défaut de apache:
+Et si tu te rends sur *http://127.0.0.1:8010/* et *http://127.0.0.1:8011/*, tu obtiens bien la page
+par défaut de Apache:
 
 .. code-block:: bash
 
     wget http://127.0.0.1:8010/
     wget http://127.0.0.1:8011/
 
-Tu peux relancer plusieurs fois de suite le *playbook*, Ansible ne fera rien de plus sur les serveurs car rien n'a changé.
+Tu peux relancer plusieurs fois de suite le playbook, Ansible ne fera rien de plus sur les serveurs car rien n'a changé.
+
+
 
 Templates
 =========
 
 Dans ton playbook, tu peux également utiliser des templates pour déployer des fichiers de configuration.
-Si tu as l'habitude de django ou flask, ça tombe bien car c'est jinja qui est utilisé par ansible !
+Si tu as l'habitude de Django ou Flask, ça tombe bien car c'est `Jinja <http://jinja.pocoo.org/>`_ qui est utilisé par Ansible !
 
 Tu vas maintenant mettre en place un *message du jour* (motd) sur les serveurs à l'aide d'un template.
 
-TU créés le template **motd** suivant dans *~/tuto_ansible/motd*:
+Tu crées le template **motd** suivant dans *~/tuto_ansible/motd*:
 
 .. code-block:: bash
 
@@ -277,16 +296,28 @@ Tu lances ton playbook et tu testes tout ça:
 .. code-block:: bash
 
     ansible-playbook motd.yml
-    ssh -p 2200 ubuntu@127.0.0.1
-    ssh -p 2201 ubuntu@127.0.0.1
 
 Tu devrais voir:
 
 .. code-block:: bash
 
+    ssh -p 2200 ubuntu@127.0.0.1
+    ...
     IP = 10.0.2.15
     OS = Ubuntu
     ENV = Test
+    Last login: Fri Sep 29 06:45:30 2017 from 10.0.2.2
+    ubuntu@ubuntu-xenial:~$
+
+Et:
+
+.. code-block:: bash
+
+    ssh -p 2201 ubuntu@127.0.0.1
+    ...
+    IP = 10.0.2.15
+    OS = Ubuntu
+    ENV = Production
     Last login: Fri Sep 29 06:45:30 2017 from 10.0.2.2
     ubuntu@ubuntu-xenial:~$
 
@@ -294,7 +325,7 @@ Rôles
 =====
 
 Ce qui serait bien, ça serait de pouvoir organiser un peu mieux tout ça pour que tes playbooks soient réutilisables.
-Tu vas pour se faire créer un rôle apache, qui va installer apache et le configurer à l'aide d'un template.
+Tu vas pour ce faire créer un rôle **apache** qui va installer Apache et le configurer à l'aide d'un template.
 
 C'est parti ! Tu crées un répertoire *~/tuto_ansible/roles* qui contient l'arborescence suivante:
 
@@ -310,7 +341,8 @@ C'est parti ! Tu crées un répertoire *~/tuto_ansible/roles* qui contient l'arb
             └── mysite.j2
 
 Le dossier *handlers* va te permettre d'y mettre des tâches qui vont être exécutées à chaque notification de changement.
-Utile pour redémarrer apache dès que c'est nécessaire par exemple.
+C'est utile pour redémarrer Apache dès que c'est nécessaire par exemple.
+
 Dans *~/tuto_ansible/roles/apache/handlers/main.yml*, tu mets:
 
 .. code-block:: yaml
@@ -321,7 +353,9 @@ Dans *~/tuto_ansible/roles/apache/handlers/main.yml*, tu mets:
         name: apache2
         state: restarted
 
-Le dossiers *tasks* va tout simplement contenir tes tâches. Dans *~/tuto_ansible/roles/apache/tasks/main.yml*, tu mets:
+Le dossiers *tasks* va tout simplement contenir tes tâches.
+
+Dans *~/tuto_ansible/roles/apache/tasks/main.yml*, tu mets:
 
 .. code-block:: yaml
 
@@ -344,7 +378,7 @@ Le dossiers *tasks* va tout simplement contenir tes tâches. Dans *~/tuto_ansibl
       notify:
       - Restart Apache
 
-Ça installe et démarre apache et ça déploie et active un site qui va utiliser la configuration du template *mysite.j2*.
+Ça installe et démarre Apache, et ça déploie et active un site qui va utiliser la configuration du template *mysite.j2*.
 
 Pour finir, dans le dossier *templates* sous *~/tuto_ansible/roles/apache/templates/mysite.j2*, tu vas mettre la configuration de ton Virtual Host Apache:
 
@@ -359,7 +393,7 @@ Pour finir, dans le dossier *templates* sous *~/tuto_ansible/roles/apache/templa
     </VirtualHost>
 
 Les variables **http_port** et **domain** seront à définir dans ton playbook principal.
-Tu édites donc un fichier *~/tuto_ansible/playbook-apache.yml* et tu y configure ton rôle apache:
+Tu édites donc un fichier *~/tuto_ansible/playbook-apache.yml* et tu y configures ton rôle **apache**:
 
 .. code-block:: yaml
 
@@ -380,7 +414,7 @@ Tu l'exécutes:
 
     ansible-playbook playbook-apache.yml
 
-Et voilà apache est bien installé et configuré !
+Et voilà Apache est bien installé et configuré !
 
-Pour aller un peu plus loin, tu peux jeter un oeil sur les rôles disponibles sur `Galaxy <https://galaxy.ansible.com/>`_,
+Pour aller un peu plus loin, tu peux jeter un oeil aux les rôles disponibles sur `Galaxy <https://galaxy.ansible.com/>`_,
 tu y trouveras sûrement ton bonheur !

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="http://dotmobo.github.io/munch.html" />
+
+    <title>  .mobo &mdash; Munch, un dictionnaire qui supporte les accesseurs
+</title>
+
+
+
+      <link type="application/atom+xml" rel="alternate" href="/feeds/all.atom.xml"  title=".mobo Atom Feed">
+
+    <link rel="stylesheet" href="http://dotmobo.github.io/theme/css/style.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68852219-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+    <meta name="author" content="Morgan">
+    <meta name="description" content="Munch, un dictionnaire qui supporte les accesseurs">
+  <meta name="tags" contents="python, bunch, munch, object, dict, ">
+</head>
+
+<body>
+<header class="header">
+  <div class="container">
+      <div class="header-image pull-left">
+        <a class="nodec" href="http://dotmobo.github.io"><img src=https://pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg></a>
+      </div>
+    <div class="header-inner">
+      <h1 class="header-name">
+        <a class="nodec" href="http://dotmobo.github.io">.mobo</a>
+      </h1>
+      <h3 class="header-text">Blog d'un Pythoniste Djangonaute</h3>
+      <ul class="header-menu list-inline">
+          <li><a class="nodec" href="http://dotmobo.github.io/categories.html">Cat&eacute;gories</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/tags.html">Tags</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec" href="http://dotmobo.github.io/archives.html">Archives</a></li>
+          <li class="muted">|</li>
+          <li><a class="nodec icon-github" href="https://github.com/dotmobo"></a></li>
+          <li><a class="nodec icon-twitter" href="https://twitter.com/dotmobo"></a></li>
+          <li><a class="nodec icon-gplus" href="https://www.google.com/+DotmoboGithubIo6"></a></li>
+          <li><a class="nodec icon-rss" href="/feeds/all.atom.xml"></a></li>
+      </ul>
+    </div>
+  </div>
+</header> <!-- /.header -->  <div class="container">
+  <div class="post full-post">
+    <h1 class="post-title">
+      <a href="/munch.html" title="Permalink to Munch, un dictionnaire qui supporte les accesseurs">Munch, un dictionnaire qui supporte les accesseurs</a>
+    </h1>
+    <ul class="list-inline">
+      <li class="post-date">
+        <a class="text-muted" href="/munch.html" title="2017-11-09T00:00:00+01:00">jeu. 09 novembre 2017</a>
+      </li>
+      <li class="muted">&middot;</li>
+      <li class="post-category">
+        <a href="http://dotmobo.github.io/category/python.html">Python</a>
+      </li>
+        <li class="muted">&middot;</li>
+        <li>
+            <a href="/tag/python.html">python</a>,             <a href="/tag/bunch.html">bunch</a>,             <a href="/tag/munch.html">munch</a>,             <a href="/tag/object.html">object</a>,             <a href="/tag/dict.html">dict</a>        </li>
+    </ul>
+    <div class="post-content">
+      <img alt="Python" class="align-right" src="./images/python.png" />
+<p><a class="reference external" href="https://github.com/Infinidat/munch">Munch</a> est une petite librairie bien pratique et bien pensé.</p>
+<p>En gros, elle permet d'utiliser les accesseurs pour accéder aux éléments de tes dictionnaires, à la manière d'un objet python.</p>
+<p>Ça peut être utile notamment dans les tests unitaires, si tu as besoin de mocker rapidement un objet par exemple.</p>
+<p>Tu écris un dictionnaire qui correspond à ton objet, tu le <em>munchify</em> et hop !</p>
+<p>Si dans une fonction que tu veux tester, tu as utilisé des accesseurs sur un objet, ton <em>munch</em> sera considéré comme l'objet en question.</p>
+<p>C'est à priori un fork de <a class="reference external" href="https://github.com/dsc/bunch">Bunch</a>, mais maintenu et qui fonctionne en python 3.</p>
+<p>Tu l'installes avec <strong>pip</strong> :</p>
+<div class="highlight"><pre>pip install munch
+</pre></div>
+<p>Tu importes <strong>munchify</strong> et tu convertis ton dictionnaire en <strong>munch</strong> :</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">munch</span> <span class="kn">import</span> <span class="n">munchify</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&quot;last_name&quot;</span><span class="p">:</span> <span class="s">&quot;Dupont&quot;</span><span class="p">,</span>
+        <span class="s">&quot;first_name&quot;</span><span class="p">:</span> <span class="s">&quot;Jean&quot;</span><span class="p">,</span>
+        <span class="s">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="s">&quot;activities&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;football&quot;</span><span class="p">,</span> <span class="s">&quot;ping-pong&quot;</span><span class="p">],</span>
+        <span class="s">&quot;job&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Developer&quot;</span><span class="p">,</span>
+            <span class="s">&quot;enterprise&quot;</span><span class="p">:</span> <span class="s">&quot;Mozilla&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mymunch</span> <span class="o">=</span> <span class="n">munchify</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mymunch</span><span class="o">.</span><span class="n">last_name</span>
+<span class="s">&#39;Dupont&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mymunch</span><span class="o">.</span><span class="n">first_name</span> <span class="o">=</span> <span class="s">&quot;Pierre&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mymunch</span><span class="o">.</span><span class="n">first_name</span>
+<span class="s">&#39;Pierre&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mymunch</span><span class="o">.</span><span class="n">activities</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="s">&#39;football&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mymunch</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">enterprise</span>
+<span class="s">&#39;Mozilla&#39;</span>
+</pre></div>
+<p>Voilà c'est tout !</p>
+<p>Tu as accès aux différentes méthodes des dictionnaires, comme <em>keys()</em> et <em>update()</em>, ainsi qu'à l'itération et à l'opérateur <em>splat</em>.
+Ça supporte également la sérialization en JSON et en YAML.</p>
+
+    </div>
+  </div>
+  <hr class="separator">
+  <div class="col-md-8 col-md-offset-2">
+  <div id="disqus_thread">
+    <script>
+      var disqus_shortname = 'dotmobo';
+      (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] ||
+         document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>
+      Activez Javascript pour voir 
+      <a href="https://disqus.com/?ref_noscript=dotmobo">
+        les commentaires Disqus.
+      </a>
+    </noscript>
+    <a href="https://disqus.com" class="dsq-brlink">
+      Commentaires de blog par <span class="logo-disqus">Disqus</span>
+    </a>
+  </div>
+  </div>
+  </div>
+<footer class="footer">
+  <div class="container">
+    <p class="text-center">
+      dotmobo, <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>.
+    </p>
+    <div class="text-center">
+      G&eacute;n&eacute;r&eacute; par <a href="http://getpelican.com" target="_blank">Pelican</a> avec le th&egrave;me <a href="https://github.com/dotmobo/pelican-alchemy">alchemy</a>.
+    </div>
+  </div>
+</footer> <!-- /.footer -->
+  <script src="http://dotmobo.github.io/theme/js/jquery.min.js"></script>
+  <script src="http://dotmobo.github.io/theme/js/bootstrap.min.js"></script>
+</body> <!-- 42 -->
+
+</html>

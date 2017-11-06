@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2017-09-29T00:00:00+02:00</updated><entry><title>Thématique DevOps avec Ansible</title><link href="http://dotmobo.github.io/ansible.html" rel="alternate"></link><updated>2017-09-29T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2017-09-29:ansible.html</id><summary type="html">&lt;img alt="Ansible" class="align-right" src="./images/ansible.png" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="http://dotmobo.github.io/" rel="alternate"></link><link href="http://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://dotmobo.github.io/</id><updated>2017-11-09T00:00:00+01:00</updated><entry><title>Munch, un dictionnaire qui supporte les accesseurs</title><link href="http://dotmobo.github.io/munch.html" rel="alternate"></link><updated>2017-11-09T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2017-11-09:munch.html</id><summary type="html">&lt;img alt="Python" class="align-right" src="./images/python.png" /&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/Infinidat/munch"&gt;Munch&lt;/a&gt; est une petite librairie bien pratique et bien pensé.&lt;/p&gt;
+&lt;p&gt;En gros, elle permet d'utiliser les accesseurs pour accéder aux éléments de tes dictionnaires, à la manière d'un objet python.&lt;/p&gt;
+&lt;p&gt;Ça peut être utile notamment dans les tests unitaires, si tu as besoin de mocker rapidement un objet par exemple.&lt;/p&gt;
+&lt;p&gt;Tu écris un dictionnaire qui correspond à ton objet, tu le &lt;em&gt;munchify&lt;/em&gt; et hop !&lt;/p&gt;
+&lt;p&gt;Si dans une fonction que tu veux tester, tu as utilisé des accesseurs sur un objet, ton &lt;em&gt;munch&lt;/em&gt; sera considéré comme l'objet en question.&lt;/p&gt;
+&lt;p&gt;C'est à priori un fork de &lt;a class="reference external" href="https://github.com/dsc/bunch"&gt;Bunch&lt;/a&gt;, mais maintenu et qui fonctionne en python 3.&lt;/p&gt;
+&lt;p&gt;Tu l'installes avec &lt;strong&gt;pip&lt;/strong&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;pip install munch
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu importes &lt;strong&gt;munchify&lt;/strong&gt; et tu convertis ton dictionnaire en &lt;strong&gt;munch&lt;/strong&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;munch&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;munchify&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;quot;last_name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Dupont&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;quot;first_name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Jean&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;quot;age&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;quot;activities&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;football&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;ping-pong&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;quot;job&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="s"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Developer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s"&gt;&amp;quot;enterprise&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Mozilla&amp;quot;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;mymunch&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;munchify&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;mymunch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;last_name&lt;/span&gt;
+&lt;span class="s"&gt;&amp;#39;Dupont&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;mymunch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Pierre&amp;quot;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;mymunch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first_name&lt;/span&gt;
+&lt;span class="s"&gt;&amp;#39;Pierre&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;mymunch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;activities&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="s"&gt;&amp;#39;football&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;mymunch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;job&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;enterprise&lt;/span&gt;
+&lt;span class="s"&gt;&amp;#39;Mozilla&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Voilà c'est tout !&lt;/p&gt;
+&lt;p&gt;Tu as accès aux différentes méthodes des dictionnaires, comme &lt;em&gt;keys()&lt;/em&gt; et &lt;em&gt;update()&lt;/em&gt;, ainsi qu'à l'itération et à l'opérateur &lt;em&gt;splat&lt;/em&gt;.
+Ça supporte également la sérialization en JSON et en YAML.&lt;/p&gt;
+</summary><category term="python"></category><category term="bunch"></category><category term="munch"></category><category term="object"></category><category term="dict"></category></entry><entry><title>Thématique DevOps avec Ansible</title><link href="http://dotmobo.github.io/ansible.html" rel="alternate"></link><updated>2017-09-29T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2017-09-29:ansible.html</id><summary type="html">&lt;img alt="Ansible" class="align-right" src="./images/ansible.png" /&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://www.ansible.com/"&gt;Ansible&lt;/a&gt; est un &lt;em&gt;configuration management tool&lt;/em&gt;, c'est-à-dire que c'est un outil qui va te permettre
 d'administrer tes serveurs et d'y déployer automatiquement tes applications.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Et franchement, ça bute !&lt;/strong&gt;&lt;/p&gt;

@@ -77,7 +77,7 @@
       </li>
         <li class="muted">&middot;</li>
         <li>
-            <a href="/tag/python.html">python</a>,             <a href="/tag/django.html">django</a>,             <a href="/tag/django-countries.html">django-countries</a>,             <a href="/tag/countries.html">countries</a>,             <a href="/tag/pays.html">pays</a>        </li>
+            <a href="http://dotmobo.github.io/tag/python.html">python</a>,             <a href="http://dotmobo.github.io/tag/django.html">django</a>,             <a href="http://dotmobo.github.io/tag/django-countries.html">django-countries</a>,             <a href="http://dotmobo.github.io/tag/countries.html">countries</a>,             <a href="http://dotmobo.github.io/tag/pays.html">pays</a>        </li>
     </ul>
     <div class="post-content">
       <img alt="Django" class="align-right" src="./images/djangopony.png" />
@@ -101,66 +101,66 @@ traduite dans 25 langues.</li>
 <li>Une compatibilité avec <a class="reference external" href="http://www.django-rest-framework.org/">Django Rest Framework</a>.</li>
 </ul>
 <p>Tu l'installes via pip:</p>
-<div class="highlight"><pre>pip install django-countries
+<div class="highlight"><pre><span></span>pip install django-countries
 </pre></div>
 <p>Et tu ajoutes <strong>django_countries</strong> dans la liste de tes <strong>INSTALLED_APPS</strong>
 dans le fichier <em>settings.py</em> de django.</p>
-<div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span><span class="o">...</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span><span class="o">...</span><span class="p">,</span>
                   <span class="n">django_countries</span>
 <span class="p">)</span>
 </pre></div>
 <p>Au niveau de ton modèle, tu peux maintenant utiliser le champ <strong>CountryField</strong>,
 qui est basé sur <strong>CharField</strong> et qui correspond au code iso 3166:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 <span class="kn">from</span> <span class="nn">django_countries.fields</span> <span class="kn">import</span> <span class="n">CountryField</span>
 
 <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-    <span class="n">country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">(</span><span class="n">blank_label</span><span class="o">=</span><span class="s">&#39;(select country)&#39;</span><span class="p">)</span>
+    <span class="n">country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">(</span><span class="n">blank_label</span><span class="o">=</span><span class="s1">&#39;(select country)&#39;</span><span class="p">)</span>
 </pre></div>
 <p>Tu peux maintenant créer une personne avec un pays associé, et accéder aux
 différents attributs du pays comme son code, son icône, son nom et autres:</p>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Chris&#39;</span><span class="p">,</span> <span class="n">country</span><span class="o">=</span><span class="s">&#39;NZ&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Chris&#39;</span><span class="p">,</span> <span class="n">country</span><span class="o">=</span><span class="s1">&#39;NZ&#39;</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span>
-<span class="n">Country</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="s">&#39;NZ&#39;</span><span class="p">)</span>
+<span class="n">Country</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="s1">&#39;NZ&#39;</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">name</span>
-<span class="s">&#39;New Zealand&#39;</span>
+<span class="s1">&#39;New Zealand&#39;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">flag</span>
-<span class="s">&#39;/static/flags/nz.gif&#39;</span>
+<span class="s1">&#39;/static/flags/nz.gif&#39;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">alpha3</span>
-<span class="s">&#39;NZL&#39;</span>
+<span class="s1">&#39;NZL&#39;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">numeric</span>
-<span class="s">&#39;554&#39;</span>
+<span class="s1">&#39;554&#39;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">numeric_padded</span>
-<span class="s">&#39;554&#39;</span>
+<span class="s1">&#39;554&#39;</span>
 </pre></div>
 <p>Dans le formulaire associé à ton modèle, tu peux aussi utiliser un widget qui va
 afficher le drapeau du pays à côté de la liste déroulante:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django_countries.widgets</span> <span class="kn">import</span> <span class="n">CountrySelectWidget</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_countries.widgets</span> <span class="kn">import</span> <span class="n">CountrySelectWidget</span>
 
 <span class="k">class</span> <span class="nc">PersonForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Person</span>
-        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;country&#39;</span><span class="p">)</span>
-        <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;country&#39;</span><span class="p">:</span> <span class="n">CountrySelectWidget</span><span class="p">()}</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">)</span>
+        <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="n">CountrySelectWidget</span><span class="p">()}</span>
 </pre></div>
 <p>Dans le <em>settings.py</em>, on peut spécifier les pays à utiliser:</p>
-<div class="highlight"><pre><span class="n">COUNTRIES_ONLY</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;NZ&#39;</span><span class="p">,</span> <span class="s">&#39;AU&#39;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">COUNTRIES_ONLY</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;NZ&#39;</span><span class="p">,</span> <span class="s1">&#39;AU&#39;</span><span class="p">]</span>
 </pre></div>
 <p>Ou carrément customiser la liste:</p>
-<div class="highlight"><pre><span class="n">COUNTRIES_OVERRIDE</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">&#39;NZ&#39;</span><span class="p">:</span> <span class="n">_</span><span class="p">(</span><span class="s">&#39;Middle Earth&#39;</span><span class="p">),</span>
-    <span class="s">&#39;AU&#39;</span><span class="p">:</span> <span class="bp">None</span>
+<div class="highlight"><pre><span></span><span class="n">COUNTRIES_OVERRIDE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;NZ&#39;</span><span class="p">:</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Middle Earth&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;AU&#39;</span><span class="p">:</span> <span class="bp">None</span>
 <span class="p">}</span>
 </pre></div>
 <p>Et on a donc également une compatibilité avec Django Rest Framework en modifiant
 le serializer de cette manière:</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">PersonSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PersonSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
     <span class="n">country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">()</span>
 
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Person</span>
-        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;email&#39;</span><span class="p">,</span> <span class="s">&#39;country&#39;</span><span class="p">)</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">)</span>
 </pre></div>
 <p>Je ne suis pas rentré dans le détail de la customisation pour rester simple,
 mais il est possible de modifier pas mal de choses au niveau de la liste,

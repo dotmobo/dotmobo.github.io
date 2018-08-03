@@ -77,7 +77,7 @@
       </li>
         <li class="muted">&middot;</li>
         <li>
-            <a href="/tag/python.html">python</a>,             <a href="/tag/bunch.html">bunch</a>,             <a href="/tag/munch.html">munch</a>,             <a href="/tag/object.html">object</a>,             <a href="/tag/dict.html">dict</a>        </li>
+            <a href="http://dotmobo.github.io/tag/python.html">python</a>,             <a href="http://dotmobo.github.io/tag/bunch.html">bunch</a>,             <a href="http://dotmobo.github.io/tag/munch.html">munch</a>,             <a href="http://dotmobo.github.io/tag/object.html">object</a>,             <a href="http://dotmobo.github.io/tag/dict.html">dict</a>        </li>
     </ul>
     <div class="post-content">
       <img alt="Python" class="align-right" src="./images/python.png" />
@@ -88,33 +88,33 @@
 <p>Si dans une fonction que tu veux tester, tu as utilisé des accesseurs sur un objet, ton <em>munch</em> sera considéré comme l'objet en question.</p>
 <p>C'est à priori un fork de <a class="reference external" href="https://github.com/dsc/bunch">Bunch</a>, mais maintenu et qui fonctionne en python 3.</p>
 <p>Tu l'installes avec <strong>pip</strong> :</p>
-<div class="highlight"><pre>pip install munch
+<div class="highlight"><pre><span></span>pip install munch
 </pre></div>
 <p>Tu importes <strong>munchify</strong> et tu convertis ton dictionnaire en <strong>munch</strong> :</p>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">munch</span> <span class="kn">import</span> <span class="n">munchify</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">munch</span> <span class="kn">import</span> <span class="n">munchify</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">&quot;last_name&quot;</span><span class="p">:</span> <span class="s">&quot;Dupont&quot;</span><span class="p">,</span>
-        <span class="s">&quot;first_name&quot;</span><span class="p">:</span> <span class="s">&quot;Jean&quot;</span><span class="p">,</span>
-        <span class="s">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-        <span class="s">&quot;activities&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;football&quot;</span><span class="p">,</span> <span class="s">&quot;ping-pong&quot;</span><span class="p">],</span>
-        <span class="s">&quot;job&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Developer&quot;</span><span class="p">,</span>
-            <span class="s">&quot;enterprise&quot;</span><span class="p">:</span> <span class="s">&quot;Mozilla&quot;</span>
+        <span class="s2">&quot;last_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Dupont&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;first_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Jean&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="s2">&quot;activities&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;football&quot;</span><span class="p">,</span> <span class="s2">&quot;ping-pong&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;job&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Developer&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;enterprise&quot;</span><span class="p">:</span> <span class="s2">&quot;Mozilla&quot;</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="n">mymunch</span> <span class="o">=</span> <span class="n">munchify</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="n">mymunch</span><span class="o">.</span><span class="n">last_name</span>
-<span class="s">&#39;Dupont&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">mymunch</span><span class="o">.</span><span class="n">first_name</span> <span class="o">=</span> <span class="s">&quot;Pierre&quot;</span>
+<span class="s1">&#39;Dupont&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mymunch</span><span class="o">.</span><span class="n">first_name</span> <span class="o">=</span> <span class="s2">&quot;Pierre&quot;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">mymunch</span><span class="o">.</span><span class="n">first_name</span>
-<span class="s">&#39;Pierre&#39;</span>
+<span class="s1">&#39;Pierre&#39;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">mymunch</span><span class="o">.</span><span class="n">activities</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="s">&#39;football&#39;</span>
+<span class="s1">&#39;football&#39;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">mymunch</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">enterprise</span>
-<span class="s">&#39;Mozilla&#39;</span>
+<span class="s1">&#39;Mozilla&#39;</span>
 </pre></div>
 <p>Voilà c'est tout !</p>
 <p>Tu as accès aux différentes méthodes des dictionnaires, comme <em>keys()</em> et <em>update()</em>, ainsi qu'à l'itération et à l'opérateur <em>splat</em>.

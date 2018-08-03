@@ -77,7 +77,7 @@
       </li>
         <li class="muted">&middot;</li>
         <li>
-            <a href="/tag/python.html">python</a>,             <a href="/tag/django.html">django</a>,             <a href="/tag/formulaire.html">formulaire</a>,             <a href="/tag/bootstrap.html">bootstrap</a>,             <a href="/tag/crispy.html">crispy</a>,             <a href="/tag/forms.html">forms</a>,             <a href="/tag/captcha.html">captcha</a>,             <a href="/tag/datetimepicker.html">datetimepicker</a>        </li>
+            <a href="http://dotmobo.github.io/tag/python.html">python</a>,             <a href="http://dotmobo.github.io/tag/django.html">django</a>,             <a href="http://dotmobo.github.io/tag/formulaire.html">formulaire</a>,             <a href="http://dotmobo.github.io/tag/bootstrap.html">bootstrap</a>,             <a href="http://dotmobo.github.io/tag/crispy.html">crispy</a>,             <a href="http://dotmobo.github.io/tag/forms.html">forms</a>,             <a href="http://dotmobo.github.io/tag/captcha.html">captcha</a>,             <a href="http://dotmobo.github.io/tag/datetimepicker.html">datetimepicker</a>        </li>
     </ul>
     <div class="post-content">
       <img alt="Django" class="align-right" src="./images/djangopony.png" />
@@ -97,38 +97,38 @@ rien ne t'empêches de la mettre en place de ton côté.</p>
 <h2>1) L'installation et la configuration</h2>
 <p>C'est parti ! On suppose que tu as déjà installé python 3.5 avec virtualenvwrapper.
 Tu crées donc ton environnement virtuel et tu installes les librairies requises:</p>
-<div class="highlight"><pre>mkvirtualenv -p /usr/bin/python3.5 demo-django-crispy-forms
-pip install <span class="nv">Django</span><span class="o">==</span>1.9.6 django-countries<span class="o">==</span>3.4.1 django-crispy-forms<span class="o">==</span>1.6.0 <span class="se">\</span>
-django-simple-captcha<span class="o">==</span>0.5.1
+<div class="highlight"><pre><span></span>mkvirtualenv -p /usr/bin/python3.5 demo-django-crispy-forms
+pip install <span class="nv">Django</span><span class="o">==</span><span class="m">1</span>.9.6 django-countries<span class="o">==</span><span class="m">3</span>.4.1 django-crispy-forms<span class="o">==</span><span class="m">1</span>.6.0 <span class="se">\</span>
+django-simple-captcha<span class="o">==</span><span class="m">0</span>.5.1
 </pre></div>
 <p>La version compatible de <em>django-bootstrap3-datetimepicker</em> avec django 1.9 n'est pas encore disponible
 sur pypi. Du coup, tu l'installes directement depuis github:</p>
-<div class="highlight"><pre>pip install git+https://github.com/nkunihiko/django-bootstrap3-datetimepicker.git@2fa9ea5
+<div class="highlight"><pre><span></span>pip install git+https://github.com/nkunihiko/django-bootstrap3-datetimepicker.git@2fa9ea5
 </pre></div>
 <p>Tu crées un projet django appelé <strong>demo-django-crispy-forms</strong>, qui contient une application <strong>core</strong>:</p>
-<div class="highlight"><pre>django-admin startproject demo_django_crispy_forms
-<span class="nb">cd </span>demo_django_crispy_forms/demo_django_crispy_forms
-mkdir apps <span class="o">&amp;&amp;</span> <span class="nb">cd </span>apps
+<div class="highlight"><pre><span></span>django-admin startproject demo_django_crispy_forms
+<span class="nb">cd</span> demo_django_crispy_forms/demo_django_crispy_forms
+mkdir apps <span class="o">&amp;&amp;</span> <span class="nb">cd</span> apps
 django-admin startapp core
 </pre></div>
 <p>Dans le fichier <strong>settings.py</strong> de ton projet, tu modifies/ajoutes les lignes suivantes:</p>
-<div class="highlight"><pre><span class="n">LANGUAGE_CODE</span> <span class="o">=</span> <span class="s">&#39;fr&#39;</span>
-<span class="n">TIME_ZONE</span> <span class="o">=</span> <span class="s">&#39;Europe/Paris&#39;</span>
+<div class="highlight"><pre><span></span><span class="n">LANGUAGE_CODE</span> <span class="o">=</span> <span class="s1">&#39;fr&#39;</span>
+<span class="n">TIME_ZONE</span> <span class="o">=</span> <span class="s1">&#39;Europe/Paris&#39;</span>
 <span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
     <span class="o">...</span>
-    <span class="s">&#39;crispy_forms&#39;</span><span class="p">,</span>
-    <span class="s">&#39;django_countries&#39;</span><span class="p">,</span>
-    <span class="s">&#39;bootstrap3_datetime&#39;</span><span class="p">,</span>
-    <span class="s">&#39;captcha&#39;</span><span class="p">,</span>
-    <span class="s">&#39;demo_django_crispy_forms.apps.core&#39;</span>
+    <span class="s1">&#39;crispy_forms&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django_countries&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;bootstrap3_datetime&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;captcha&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;demo_django_crispy_forms.apps.core&#39;</span>
 <span class="p">)</span>
-<span class="n">CRISPY_TEMPLATE_PACK</span> <span class="o">=</span> <span class="s">&#39;bootstrap3&#39;</span>
+<span class="n">CRISPY_TEMPLATE_PACK</span> <span class="o">=</span> <span class="s1">&#39;bootstrap3&#39;</span>
 </pre></div>
 <p>Tu as ainsi défini la langue et le time zone, ajouté les applications installées précédemment
 et utilisé le template <strong>bootstrap3</strong> pour <em>crispy-forms</em>.</p>
 <p>Il te suffit de migrer la base de données et de vérifier que tout est bon pour l'instant.
 Depuis le répertoire racine du projet, tu fais:</p>
-<div class="highlight"><pre>./manage.py migrate <span class="o">&amp;&amp;</span> ./manage.py check
+<div class="highlight"><pre><span></span>./manage.py migrate <span class="o">&amp;&amp;</span> ./manage.py check
 </pre></div>
 </div>
 <div class="section" id="le-modele">
@@ -136,7 +136,7 @@ Depuis le répertoire racine du projet, tu fais:</p>
 <p>Maintenant que tu as fini l'installation et le paramétrage des différentes libraires,
 tu vas pouvoir créer le modèle de ton inscription.</p>
 <p>Dans <strong>apps/core/models.py</strong>, tu définis le modèle <strong>Registration</strong> suivant :</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 <span class="kn">from</span> <span class="nn">django_countries.fields</span> <span class="kn">import</span> <span class="n">CountryField</span>
 
 
@@ -145,48 +145,48 @@ tu vas pouvoir créer le modèle de ton inscription.</p>
 <span class="sd">    Modèle de l&#39;inscription</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">CIVILITY_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="p">(</span><span class="s">&#39;M.&#39;</span><span class="p">,</span> <span class="s">&#39;M.&#39;</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;MME&#39;</span><span class="p">,</span> <span class="s">&#39;Mme&#39;</span><span class="p">)</span>
+        <span class="p">(</span><span class="s1">&#39;M.&#39;</span><span class="p">,</span> <span class="s1">&#39;M.&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;MME&#39;</span><span class="p">,</span> <span class="s1">&#39;Mme&#39;</span><span class="p">)</span>
     <span class="p">)</span>
     <span class="n">STREET_TYPE_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="p">(</span><span class="s">&#39;Boulevard&#39;</span><span class="p">,</span> <span class="s">&#39;Boulevard&#39;</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;Avenue&#39;</span><span class="p">,</span> <span class="s">&#39;Avenue&#39;</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;Cours&#39;</span><span class="p">,</span> <span class="s">&#39;Cours&#39;</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;Place&#39;</span><span class="p">,</span> <span class="s">&#39;Place&#39;</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;Rue&#39;</span><span class="p">,</span> <span class="s">&#39;Rue&#39;</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;Route&#39;</span><span class="p">,</span> <span class="s">&#39;Route&#39;</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;Voie&#39;</span><span class="p">,</span> <span class="s">&#39;Voie&#39;</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;Chemin&#39;</span><span class="p">,</span> <span class="s">&#39;Chemin&#39;</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;Square&#39;</span><span class="p">,</span> <span class="s">&#39;Square&#39;</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;Impasse&#39;</span><span class="p">,</span> <span class="s">&#39;Impasse&#39;</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;Rond-point&#39;</span><span class="p">,</span> <span class="s">&#39;Rond-point&#39;</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;Quai&#39;</span><span class="p">,</span> <span class="s">&#39;Quai&#39;</span><span class="p">)</span>
+        <span class="p">(</span><span class="s1">&#39;Boulevard&#39;</span><span class="p">,</span> <span class="s1">&#39;Boulevard&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Avenue&#39;</span><span class="p">,</span> <span class="s1">&#39;Avenue&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Cours&#39;</span><span class="p">,</span> <span class="s1">&#39;Cours&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Place&#39;</span><span class="p">,</span> <span class="s1">&#39;Place&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Rue&#39;</span><span class="p">,</span> <span class="s1">&#39;Rue&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Route&#39;</span><span class="p">,</span> <span class="s1">&#39;Route&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Voie&#39;</span><span class="p">,</span> <span class="s1">&#39;Voie&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Chemin&#39;</span><span class="p">,</span> <span class="s1">&#39;Chemin&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Square&#39;</span><span class="p">,</span> <span class="s1">&#39;Square&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Impasse&#39;</span><span class="p">,</span> <span class="s1">&#39;Impasse&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Rond-point&#39;</span><span class="p">,</span> <span class="s1">&#39;Rond-point&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Quai&#39;</span><span class="p">,</span> <span class="s1">&#39;Quai&#39;</span><span class="p">)</span>
     <span class="p">)</span>
 
     <span class="n">civility</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">CIVILITY_CHOICES</span><span class="p">,</span>
-                                <span class="n">default</span><span class="o">=</span><span class="s">&#39;M.&#39;</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Civilité&quot;</span><span class="p">)</span>
-    <span class="n">birth_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Nom de naissance&quot;</span><span class="p">)</span>
+                                <span class="n">default</span><span class="o">=</span><span class="s1">&#39;M.&#39;</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Civilité&quot;</span><span class="p">)</span>
+    <span class="n">birth_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Nom de naissance&quot;</span><span class="p">)</span>
     <span class="n">last_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                                 <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Nom d&#39;usage ou marital&quot;</span><span class="p">)</span>
-    <span class="n">first_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Prénom&quot;</span><span class="p">)</span>
-    <span class="n">birth_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Date de naissance &quot;</span><span class="p">)</span>
-    <span class="n">birth_place</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Ville de naissance&quot;</span><span class="p">)</span>
-    <span class="n">birth_country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Pays de naissance&quot;</span><span class="p">)</span>
-    <span class="n">mail</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Mail&quot;</span><span class="p">)</span>
-    <span class="n">street_type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Type de rue&quot;</span><span class="p">,</span>
-                                   <span class="n">choices</span><span class="o">=</span><span class="n">STREET_TYPE_CHOICES</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;Rue&#39;</span><span class="p">)</span>
-    <span class="n">street_number</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Numéro de rue&quot;</span><span class="p">)</span>
-    <span class="n">street</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Rue&quot;</span><span class="p">)</span>
-    <span class="n">comp_1</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Complément 1&quot;</span><span class="p">,</span>
+                                 <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Nom d&#39;usage ou marital&quot;</span><span class="p">)</span>
+    <span class="n">first_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Prénom&quot;</span><span class="p">)</span>
+    <span class="n">birth_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Date de naissance &quot;</span><span class="p">)</span>
+    <span class="n">birth_place</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Ville de naissance&quot;</span><span class="p">)</span>
+    <span class="n">birth_country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Pays de naissance&quot;</span><span class="p">)</span>
+    <span class="n">mail</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Mail&quot;</span><span class="p">)</span>
+    <span class="n">street_type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Type de rue&quot;</span><span class="p">,</span>
+                                   <span class="n">choices</span><span class="o">=</span><span class="n">STREET_TYPE_CHOICES</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;Rue&#39;</span><span class="p">)</span>
+    <span class="n">street_number</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Numéro de rue&quot;</span><span class="p">)</span>
+    <span class="n">street</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Rue&quot;</span><span class="p">)</span>
+    <span class="n">comp_1</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Complément 1&quot;</span><span class="p">,</span>
                               <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">comp_2</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Complément 2&quot;</span><span class="p">,</span>
+    <span class="n">comp_2</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Complément 2&quot;</span><span class="p">,</span>
                               <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">city</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Ville&quot;</span><span class="p">)</span>
-    <span class="n">zip_code</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Code postal&quot;</span><span class="p">)</span>
-    <span class="n">country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Pays&quot;</span><span class="p">)</span>
+    <span class="n">city</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Ville&quot;</span><span class="p">)</span>
+    <span class="n">zip_code</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Code postal&quot;</span><span class="p">)</span>
+    <span class="n">country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Pays&quot;</span><span class="p">)</span>
     <span class="n">phone</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                             <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Téléphone&quot;</span><span class="p">)</span>
-    <span class="n">comments</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">&quot;Commentaires&quot;</span><span class="p">)</span>
+                             <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Téléphone&quot;</span><span class="p">)</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Commentaires&quot;</span><span class="p">)</span>
 </pre></div>
 <p>Pour chaque champ, <em>crispy-forms</em> va :</p>
 <ul class="simple">
@@ -196,7 +196,7 @@ tu vas pouvoir créer le modèle de ton inscription.</p>
 <li>récupérer les valeurs du paramètre <strong>choices</strong> (si présent) pour la balise <strong>&lt;select&gt;</strong>.</li>
 </ul>
 <p>Enfin, tu mets à jour la base de données:</p>
-<div class="highlight"><pre>./manage.py makemigrations
+<div class="highlight"><pre><span></span>./manage.py makemigrations
 ./manage.py migrate
 </pre></div>
 </div>
@@ -205,7 +205,7 @@ tu vas pouvoir créer le modèle de ton inscription.</p>
 <p>Place au formulaire. J'ai rajouté des commentaires directement dans le code
 ci-dessous pour expliquer les différentes étapes.</p>
 <p>Dans <strong>apps/core/forms.py</strong>, tu mets:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
 <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Registration</span>
 <span class="kn">from</span> <span class="nn">crispy_forms.helper</span> <span class="kn">import</span> <span class="n">FormHelper</span>
 <span class="kn">from</span> <span class="nn">crispy_forms.bootstrap</span> <span class="kn">import</span> <span class="n">StrictButton</span>
@@ -220,101 +220,101 @@ ci-dessous pour expliquer les différentes étapes.</p>
 <span class="sd">    Formulaire d&#39;inscription</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c"># Ici, tu vas rajouter les champs supplémentaires au modèle</span>
-    <span class="c"># Tu définis le captcha</span>
+    <span class="c1"># Ici, tu vas rajouter les champs supplémentaires au modèle</span>
+    <span class="c1"># Tu définis le captcha</span>
     <span class="n">captcha</span> <span class="o">=</span> <span class="n">CaptchaField</span><span class="p">()</span>
-    <span class="c"># Tu ajoutes un mail de confirmation</span>
-    <span class="n">confirmation_mail</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Mail de confirmation&quot;</span><span class="p">)</span>
+    <span class="c1"># Tu ajoutes un mail de confirmation</span>
+    <span class="n">confirmation_mail</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mail de confirmation&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Surcharge de l&#39;initialisation du formulaire</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="c"># Tu modifies le label de la date de naissance pour rajouter le format</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&#39;birth_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> (JJ/MM/AAAA)&quot;</span> <span class="o">%</span> <span class="s">&quot;Date de naissance&quot;</span>
-        <span class="c"># Tu utilises FormHelper pour customiser ton formulaire</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Tu modifies le label de la date de naissance pour rajouter le format</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;birth_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> (JJ/MM/AAAA)&quot;</span> <span class="o">%</span> <span class="s2">&quot;Date de naissance&quot;</span>
+        <span class="c1"># Tu utilises FormHelper pour customiser ton formulaire</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">helper</span> <span class="o">=</span> <span class="n">FormHelper</span><span class="p">()</span>
-        <span class="c"># Tu définis l&#39;id et la classe bootstrap de ton formulaire</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">helper</span><span class="o">.</span><span class="n">form_class</span> <span class="o">=</span> <span class="s">&#39;form-horizontal&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">helper</span><span class="o">.</span><span class="n">form_id</span> <span class="o">=</span> <span class="s">&#39;registration-form&#39;</span>
-        <span class="c"># Tu définis la taille des labels et des champs sur la grille</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">helper</span><span class="o">.</span><span class="n">label_class</span> <span class="o">=</span> <span class="s">&#39;col-md-2&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">helper</span><span class="o">.</span><span class="n">field_class</span> <span class="o">=</span> <span class="s">&#39;col-md-8&#39;</span>
-        <span class="c"># Tu crées l&#39;affichage de ton formulaire</span>
+        <span class="c1"># Tu définis l&#39;id et la classe bootstrap de ton formulaire</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">helper</span><span class="o">.</span><span class="n">form_class</span> <span class="o">=</span> <span class="s1">&#39;form-horizontal&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">helper</span><span class="o">.</span><span class="n">form_id</span> <span class="o">=</span> <span class="s1">&#39;registration-form&#39;</span>
+        <span class="c1"># Tu définis la taille des labels et des champs sur la grille</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">helper</span><span class="o">.</span><span class="n">label_class</span> <span class="o">=</span> <span class="s1">&#39;col-md-2&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">helper</span><span class="o">.</span><span class="n">field_class</span> <span class="o">=</span> <span class="s1">&#39;col-md-8&#39;</span>
+        <span class="c1"># Tu crées l&#39;affichage de ton formulaire</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">helper</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="p">(</span>
-            <span class="c"># Le formulaire va contenir 3 onglets</span>
+            <span class="c1"># Le formulaire va contenir 3 onglets</span>
             <span class="n">TabHolder</span><span class="p">(</span>
-                <span class="c"># Premier onglet</span>
+                <span class="c1"># Premier onglet</span>
                 <span class="n">Tab</span><span class="p">(</span>
-                    <span class="c"># Label de l&#39;onglet</span>
-                    <span class="s">&#39;Étape 1 - Identité&#39;</span><span class="p">,</span>
-                    <span class="c"># Liste des champs du modèle à afficher dans l&#39;onglet</span>
-                    <span class="s">&#39;civility&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;birth_name&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;last_name&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;first_name&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;birth_date&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;birth_place&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;birth_country&#39;</span><span class="p">,</span>
-                    <span class="c"># Tu rajoutes un bouton &quot;Suivant&quot;</span>
+                    <span class="c1"># Label de l&#39;onglet</span>
+                    <span class="s1">&#39;Étape 1 - Identité&#39;</span><span class="p">,</span>
+                    <span class="c1"># Liste des champs du modèle à afficher dans l&#39;onglet</span>
+                    <span class="s1">&#39;civility&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;birth_name&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;last_name&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;first_name&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;birth_date&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;birth_place&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;birth_country&#39;</span><span class="p">,</span>
+                    <span class="c1"># Tu rajoutes un bouton &quot;Suivant&quot;</span>
                     <span class="n">StrictButton</span><span class="p">(</span>
-                        <span class="s">&#39;&lt;span class=&quot;glyphicon glyphicon-arrow-right&quot; </span><span class="se">\</span>
-<span class="s">                        aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="s">&quot;Suivant&quot;</span><span class="p">,</span>
-                        <span class="nb">type</span><span class="o">=</span><span class="s">&#39;button&#39;</span><span class="p">,</span>
-                        <span class="n">css_class</span><span class="o">=</span><span class="s">&#39;btn-default col-md-offset-9 btnNext&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;&lt;span class=&quot;glyphicon glyphicon-arrow-right&quot; </span><span class="se">\</span>
+<span class="s1">                        aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="s2">&quot;Suivant&quot;</span><span class="p">,</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;button&#39;</span><span class="p">,</span>
+                        <span class="n">css_class</span><span class="o">=</span><span class="s1">&#39;btn-default col-md-offset-9 btnNext&#39;</span><span class="p">,</span>
                     <span class="p">)</span>
 
                 <span class="p">),</span>
-                <span class="c"># Deuxième onglet</span>
+                <span class="c1"># Deuxième onglet</span>
                 <span class="n">Tab</span><span class="p">(</span>
-                    <span class="c"># Label de l&#39;onglet</span>
-                    <span class="s">&#39;Étape 2 - Adresse&#39;</span><span class="p">,</span>
-                    <span class="c"># Liste des champs à afficher</span>
-                    <span class="s">&#39;street_number&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;street_type&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;street&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;comp_1&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;comp_2&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;city&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;zip_code&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;country&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;phone&#39;</span><span class="p">,</span>
-                    <span class="c"># Tu rajoutes des boutons &quot;Précédent&quot; et &quot;Suivant&quot;</span>
+                    <span class="c1"># Label de l&#39;onglet</span>
+                    <span class="s1">&#39;Étape 2 - Adresse&#39;</span><span class="p">,</span>
+                    <span class="c1"># Liste des champs à afficher</span>
+                    <span class="s1">&#39;street_number&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;street_type&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;street&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;comp_1&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;comp_2&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;city&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;zip_code&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;country&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;phone&#39;</span><span class="p">,</span>
+                    <span class="c1"># Tu rajoutes des boutons &quot;Précédent&quot; et &quot;Suivant&quot;</span>
                     <span class="n">StrictButton</span><span class="p">(</span>
-                        <span class="s">&#39;&lt;span class=&quot;glyphicon glyphicon-arrow-left&quot; </span><span class="se">\</span>
-<span class="s">                        aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="s">&#39;Précédent&#39;</span><span class="p">,</span>
-                        <span class="nb">type</span><span class="o">=</span><span class="s">&#39;button&#39;</span><span class="p">,</span>
-                        <span class="n">css_class</span><span class="o">=</span><span class="s">&#39;btn-default btnPrevious&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;&lt;span class=&quot;glyphicon glyphicon-arrow-left&quot; </span><span class="se">\</span>
+<span class="s1">                        aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="s1">&#39;Précédent&#39;</span><span class="p">,</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;button&#39;</span><span class="p">,</span>
+                        <span class="n">css_class</span><span class="o">=</span><span class="s1">&#39;btn-default btnPrevious&#39;</span><span class="p">,</span>
                     <span class="p">),</span>
                     <span class="n">StrictButton</span><span class="p">(</span>
-                        <span class="s">&#39;&lt;span class=&quot;glyphicon glyphicon-arrow-right&quot; </span><span class="se">\</span>
-<span class="s">                        aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="s">&#39;Suivant&#39;</span><span class="p">,</span>
-                        <span class="nb">type</span><span class="o">=</span><span class="s">&#39;button&#39;</span><span class="p">,</span>
-                        <span class="n">css_class</span><span class="o">=</span><span class="s">&#39;btn-default col-md-offset-8 btnNext&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;&lt;span class=&quot;glyphicon glyphicon-arrow-right&quot; </span><span class="se">\</span>
+<span class="s1">                        aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="s1">&#39;Suivant&#39;</span><span class="p">,</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;button&#39;</span><span class="p">,</span>
+                        <span class="n">css_class</span><span class="o">=</span><span class="s1">&#39;btn-default col-md-offset-8 btnNext&#39;</span><span class="p">,</span>
                     <span class="p">)</span>
                 <span class="p">),</span>
-                <span class="c"># Troisième onglet</span>
+                <span class="c1"># Troisième onglet</span>
                 <span class="n">Tab</span><span class="p">(</span>
-                    <span class="c"># Label de l&#39;onglet</span>
-                    <span class="s">&#39;Étape 3 - Validation&#39;</span><span class="p">,</span>
-                    <span class="c"># Liste des champs à afficher dont les champs supplémentaires</span>
-                    <span class="s">&#39;mail&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;confirmation_mail&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;comments&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;captcha&#39;</span><span class="p">,</span>
-                    <span class="c"># Tu rajoutes des boutons &quot;Précédent&quot; et &quot;Valider&quot;</span>
+                    <span class="c1"># Label de l&#39;onglet</span>
+                    <span class="s1">&#39;Étape 3 - Validation&#39;</span><span class="p">,</span>
+                    <span class="c1"># Liste des champs à afficher dont les champs supplémentaires</span>
+                    <span class="s1">&#39;mail&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;confirmation_mail&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;comments&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;captcha&#39;</span><span class="p">,</span>
+                    <span class="c1"># Tu rajoutes des boutons &quot;Précédent&quot; et &quot;Valider&quot;</span>
                     <span class="n">StrictButton</span><span class="p">(</span>
-                        <span class="s">&#39;&lt;span class=&quot;glyphicon glyphicon-arrow-left&quot; </span><span class="se">\</span>
-<span class="s">                        aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="s">&quot;Précédent&quot;</span><span class="p">,</span>
-                        <span class="nb">type</span><span class="o">=</span><span class="s">&#39;button&#39;</span><span class="p">,</span>
-                        <span class="n">css_class</span><span class="o">=</span><span class="s">&#39;btn-default btnPrevious&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;&lt;span class=&quot;glyphicon glyphicon-arrow-left&quot; </span><span class="se">\</span>
+<span class="s1">                        aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="s2">&quot;Précédent&quot;</span><span class="p">,</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;button&#39;</span><span class="p">,</span>
+                        <span class="n">css_class</span><span class="o">=</span><span class="s1">&#39;btn-default btnPrevious&#39;</span><span class="p">,</span>
                     <span class="p">),</span>
                     <span class="n">StrictButton</span><span class="p">(</span>
-                        <span class="s">&#39;&lt;span class=&quot;glyphicon glyphicon-ok&quot; </span><span class="se">\</span>
-<span class="s">                        aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="s">&quot;Valider&quot;</span><span class="p">,</span>
-                        <span class="nb">type</span><span class="o">=</span><span class="s">&#39;submit&#39;</span><span class="p">,</span>
-                        <span class="n">css_class</span><span class="o">=</span><span class="s">&#39;btn-default col-md-offset-8&#39;</span>
+                        <span class="s1">&#39;&lt;span class=&quot;glyphicon glyphicon-ok&quot; </span><span class="se">\</span>
+<span class="s1">                        aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="s2">&quot;Valider&quot;</span><span class="p">,</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;submit&#39;</span><span class="p">,</span>
+                        <span class="n">css_class</span><span class="o">=</span><span class="s1">&#39;btn-default col-md-offset-8&#39;</span>
                     <span class="p">)</span>
                 <span class="p">),</span>
             <span class="p">),</span>
@@ -325,24 +325,24 @@ ci-dessous pour expliquer les différentes étapes.</p>
 <span class="sd">        Méthode pour vérifier que le mail correspond bien au</span>
 <span class="sd">        mail de confirmation lors de la validation du formulaire</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">confirmation_mail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s">&#39;confirmation_mail&#39;</span><span class="p">]</span>
-        <span class="n">mail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s">&#39;mail&#39;</span><span class="p">]</span>
+        <span class="n">confirmation_mail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;confirmation_mail&#39;</span><span class="p">]</span>
+        <span class="n">mail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;mail&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">mail</span> <span class="o">!=</span> <span class="n">confirmation_mail</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">forms</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span>
-                <span class="s">&quot;Le mail et le mail de confirmation ne sont pas identiques&quot;</span><span class="p">)</span>
+                <span class="s2">&quot;Le mail et le mail de confirmation ne sont pas identiques&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">confirmation_mail</span>
 
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-        <span class="c"># Tu définis le modèle utilisé</span>
+        <span class="c1"># Tu définis le modèle utilisé</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">Registration</span>
         <span class="n">exclude</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="c"># Tu customises le champ date de naissance pour ajouter le date picker</span>
+        <span class="c1"># Tu customises le champ date de naissance pour ajouter le date picker</span>
         <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s">&#39;birth_date&#39;</span><span class="p">:</span> <span class="n">DateTimePicker</span><span class="p">(</span>
-                <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;format&quot;</span><span class="p">:</span> <span class="s">&quot;DD/MM/YYYY&quot;</span><span class="p">,</span> <span class="s">&quot;pickTime&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
-                         <span class="s">&quot;useStrict&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s">&quot;viewMode&quot;</span><span class="p">:</span> <span class="s">&quot;years&quot;</span><span class="p">,</span>
-                         <span class="s">&quot;startDate&quot;</span><span class="p">:</span> <span class="s">&quot;01/01/1900&quot;</span><span class="p">},</span>
-                <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;placeholder&#39;</span><span class="p">:</span> <span class="s">&#39;ex: 05/11/1975&#39;</span><span class="p">}</span>
+            <span class="s1">&#39;birth_date&#39;</span><span class="p">:</span> <span class="n">DateTimePicker</span><span class="p">(</span>
+                <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;DD/MM/YYYY&quot;</span><span class="p">,</span> <span class="s2">&quot;pickTime&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+                         <span class="s2">&quot;useStrict&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s2">&quot;viewMode&quot;</span><span class="p">:</span> <span class="s2">&quot;years&quot;</span><span class="p">,</span>
+                         <span class="s2">&quot;startDate&quot;</span><span class="p">:</span> <span class="s2">&quot;01/01/1900&quot;</span><span class="p">},</span>
+                <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;placeholder&#39;</span><span class="p">:</span> <span class="s1">&#39;ex: 05/11/1975&#39;</span><span class="p">}</span>
             <span class="p">)</span>
         <span class="p">}</span>
 </pre></div>
@@ -352,7 +352,7 @@ ci-dessous pour expliquer les différentes étapes.</p>
 <p>Maintenant que tu as ton formulaire, il te faut une vue pour afficher le formulaire
 et une autre pour afficher un message de confirmation après la validation de celui-ci.</p>
 <p>Tu vas créer tout ça dans <strong>apps/core/views.py</strong>:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.views.generic.edit</span> <span class="kn">import</span> <span class="n">CreateView</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.views.generic.edit</span> <span class="kn">import</span> <span class="n">CreateView</span>
 <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Registration</span>
 <span class="kn">from</span> <span class="nn">django.core.urlresolvers</span> <span class="kn">import</span> <span class="n">reverse_lazy</span>
 <span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
@@ -365,14 +365,14 @@ et une autre pour afficher un message de confirmation après la validation de ce
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">Registration</span>
     <span class="n">form_class</span> <span class="o">=</span> <span class="n">RegistrationForm</span>
-    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s">&#39;core:success&#39;</span><span class="p">)</span>
+    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;core:success&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">registration_success</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Message de confirmation</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">&#39;core/registration_success.html&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;core/registration_success.html&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="section" id="les-urls">
@@ -380,23 +380,23 @@ et une autre pour afficher un message de confirmation après la validation de ce
 <p>Dans le fichier des urls du projet, tu vas inclure les urls de l'application <strong>core</strong>
 et l'url pour le captcha.</p>
 <p>Dans <strong>urls.py</strong>, tu insères:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span><span class="p">,</span> <span class="n">include</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span><span class="p">,</span> <span class="n">include</span>
 <span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
 <span class="kn">from</span> <span class="nn">.apps.core.urls</span> <span class="kn">import</span> <span class="n">urlpatterns</span> <span class="k">as</span> <span class="n">core_urls</span>
 
 <span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
-    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="n">core_urls</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s">&#39;core&#39;</span><span class="p">)),</span>
-    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^captcha/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s">&#39;captcha.urls&#39;</span><span class="p">)),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="n">core_urls</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;core&#39;</span><span class="p">)),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^captcha/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;captcha.urls&#39;</span><span class="p">)),</span>
 <span class="p">]</span>
 </pre></div>
 <p>Et dans <strong>apps/core/urls.py</strong>, tu mets les urls correspondantes à tes deux vues:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">url</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">url</span>
 <span class="kn">from</span> <span class="nn">.views</span> <span class="kn">import</span> <span class="n">RegistrationCreate</span><span class="p">,</span> <span class="n">registration_success</span>
 
 <span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^$&#39;</span><span class="p">,</span> <span class="n">RegistrationCreate</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;add&#39;</span><span class="p">),</span>
-    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^success/$&#39;</span><span class="p">,</span> <span class="n">registration_success</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;success&#39;</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^$&#39;</span><span class="p">,</span> <span class="n">RegistrationCreate</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^success/$&#39;</span><span class="p">,</span> <span class="n">registration_success</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;success&#39;</span><span class="p">),</span>
 <span class="p">]</span>
 </pre></div>
 </div>
@@ -409,40 +409,40 @@ et l'url pour le captcha.</p>
 <li>Le dernier, <strong>core/registration_success.html</strong>, pour afficher le message de confirmation.</li>
 </ul>
 <p>Le template <strong>apps/core/templates/base.html</strong> va contenir:</p>
-<div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;fr&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Mon site<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content=</span><span class="s">&quot;IE=edge&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span>
-          <span class="na">href=</span><span class="s">&quot;//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span>
-          <span class="na">href=</span><span class="s">&quot;//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap-theme.min.css&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdn.jsdelivr.net/jquery/2.2.3/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;fr&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Mon site<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;IE=edge&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span>
+          <span class="na">href</span><span class="o">=</span><span class="s">&quot;//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span>
+          <span class="na">href</span><span class="o">=</span><span class="s">&quot;//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap-theme.min.css&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;//cdn.jsdelivr.net/jquery/2.2.3/jquery.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
     {% block head-javascript %}{% endblock %}
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container&quot;</span> <span class="na">role=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;summary&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;page-header&quot;</span><span class="nt">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;main&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;summary&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;page-header&quot;</span><span class="p">&gt;</span>
             {% block page-header %}{% endblock %}
-        <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
     {% block content %}
     {% endblock %}
-    <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdn.jsdelivr.net/bootstrap/3.3.6/js/bootstrap.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;//cdn.jsdelivr.net/bootstrap/3.3.6/js/bootstrap.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
     {% block foot-javascript %}{% endblock %}
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 <p>C'est une page html5 standard, qui contient les fichiers nécessaires à bootstrap,
 un <strong>block page-header</strong> pour afficher le titre de la page et un <strong>block content</strong>
 pour afficher le contenu de la page. Les templates suivants vont donc étendre <strong>base.html</strong>.</p>
 <p>Pour le template <strong>apps/core/templates/core/registration_form.html</strong>, tu mets:</p>
-<div class="highlight"><pre>{% extends &quot;base.html&quot; %}
+<div class="highlight"><pre><span></span>{% extends &quot;base.html&quot; %}
 {% load crispy_forms_tags %}
 
 {% block head-javascript %}
@@ -450,15 +450,15 @@ pour afficher le contenu de la page. Les templates suivants vont donc étendre <
 {% endblock %}
 
 {% block page-header %}
-<span class="nt">&lt;h1&gt;</span>Inscription<span class="nt">&lt;/h1&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Inscription<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 {% endblock %}
 
 {% block content %}
-<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;row&quot;</span><span class="nt">&gt;</span>{% crispy form %}<span class="nt">&lt;/div&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>{% crispy form %}<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 {% endblock %}
 
 {% block foot-javascript %}
-<span class="nt">&lt;script&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
 <span class="nx">$</span><span class="p">(</span> <span class="nb">document</span> <span class="p">).</span><span class="nx">ready</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// On interdit le copier/coller du mail</span>
     <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#id_confirmation_mail&#39;</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;copy paste&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
@@ -489,7 +489,7 @@ pour afficher le contenu de la page. Les templates suivants vont donc étendre <
         <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.nav-tabs + .tab-content&quot;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;:input:visible:first&quot;</span><span class="p">).</span><span class="nx">focus</span><span class="p">();</span>
     <span class="p">});</span>
 <span class="p">});</span>
-<span class="nt">&lt;/script&gt;</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 {% endblock %}
 </pre></div>
 <p>Pour <em>crispy-forms</em>, il ne faut que deux éléments ! Le <strong>{% load crispy_forms_tags %}</strong>,
@@ -498,38 +498,38 @@ qui permet d'utiliser le <strong>{% crispy form %}</strong> pour afficher le for
 <p>Le <strong>{{ form.media }}</strong> est nécessaire au date picker et tout ce qui se trouve dans
 le <strong>block foot-javascript</strong> permet de pousser un peu plus la customisation.</p>
 <p>Enfin, de la même manière, tu crées le template <strong>apps/core/templates/core/registration_success.html</strong>:</p>
-<div class="highlight"><pre>{% extends &quot;base.html&quot; %}
+<div class="highlight"><pre><span></span>{% extends &quot;base.html&quot; %}
 
 {% block page-header %}
-<span class="nt">&lt;h1&gt;</span>Succès<span class="nt">&lt;/h1&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Succès<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 {% endblock %}
 
 {% block content %}
-<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;row&quot;</span><span class="nt">&gt;</span>Votre inscription a été validée.<span class="nt">&lt;/div&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>Votre inscription a été validée.<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 {% endblock %}
 </pre></div>
 </div>
 <div class="section" id="la-page-d-administration">
 <h2>7) La page d'administration</h2>
 <p>Pour pouvoir vérifier les futures inscriptions, tu ajoutes le modèle <strong>Registration</strong> dans <strong>apps/core/admin.py</strong>:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
 <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Registration</span>
 
 
 <span class="k">class</span> <span class="nc">RegistrationAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
-    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;birth_name&#39;</span><span class="p">,</span> <span class="s">&#39;last_name&#39;</span><span class="p">,</span> <span class="s">&#39;first_name&#39;</span><span class="p">)</span>
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;birth_name&#39;</span><span class="p">,</span> <span class="s1">&#39;last_name&#39;</span><span class="p">,</span> <span class="s1">&#39;first_name&#39;</span><span class="p">)</span>
 
 <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Registration</span><span class="p">,</span> <span class="n">RegistrationAdmin</span><span class="p">)</span>
 </pre></div>
 <p>Tu vas également en profiter pour ajouter un compte admin via:</p>
-<div class="highlight"><pre>./manage.py createsuperuser
+<div class="highlight"><pre><span></span>./manage.py createsuperuser
 </pre></div>
 </div>
 <div class="section" id="la-verification">
 <h2>8) La vérification</h2>
 <p>Tout est fini ! Il ne reste plus qu'à vérifier que ça fonctionne correctement.</p>
 <p>Tu démarres le serveur:</p>
-<div class="highlight"><pre>./manage.py runserver
+<div class="highlight"><pre><span></span>./manage.py runserver
 </pre></div>
 <p>Puis, tu te rends sur <a class="reference external" href="http://127.0.0.1:8000">http://127.0.0.1:8000</a>
 pour tester ton formulaire !</p>

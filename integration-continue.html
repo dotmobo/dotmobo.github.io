@@ -77,7 +77,7 @@
       </li>
         <li class="muted">&middot;</li>
         <li>
-            <a href="/tag/python.html">python</a>,             <a href="/tag/github.html">github</a>,             <a href="/tag/travis.html">travis</a>,             <a href="/tag/tox.html">tox</a>,             <a href="/tag/intégration continue.html">intégration continue</a>,             <a href="/tag/coveralls.html">coveralls</a>,             <a href="/tag/tests unitaires.html">tests unitaires</a>,             <a href="/tag/landscape.html">landscape</a>,             <a href="/tag/coverage.html">coverage</a>        </li>
+            <a href="http://dotmobo.github.io/tag/python.html">python</a>,             <a href="http://dotmobo.github.io/tag/github.html">github</a>,             <a href="http://dotmobo.github.io/tag/travis.html">travis</a>,             <a href="http://dotmobo.github.io/tag/tox.html">tox</a>,             <a href="http://dotmobo.github.io/tag/integration-continue.html">intégration continue</a>,             <a href="http://dotmobo.github.io/tag/coveralls.html">coveralls</a>,             <a href="http://dotmobo.github.io/tag/tests-unitaires.html">tests unitaires</a>,             <a href="http://dotmobo.github.io/tag/landscape.html">landscape</a>,             <a href="http://dotmobo.github.io/tag/coverage.html">coverage</a>        </li>
     </ul>
     <div class="post-content">
       <img alt="Travis" class="align-right" src="./images/travis.png" />
@@ -103,7 +103,7 @@ du code et d'éviter toutes régressions.</p>
 <p>Dans le répertoire de ton projet <em>myproject</em>, tu vas créer un package <em>myapp</em> contenant le
 classique <em>__init__.py</em>, ainsi qu'un fichier <em>maths.py</em>.
 Celui-ci contiendra une méthode d'addition et de soustraction:</p>
-<div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Provides an addition function and a subtraction function</span>
@@ -121,22 +121,22 @@ Celui-ci contiendra une méthode d'addition et de soustraction:</p>
 </pre></div>
 <p>Tu vas donc mettre en place l'intégration continue sur ce petit bout de code.</p>
 <p>Tu ajoutes également dans le répertoire du projet le fichier <em>setup.py</em> suivant:</p>
-<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 
 <span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
 
-<span class="n">setup</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;myproject&#39;</span><span class="p">,</span>
-  <span class="n">version</span><span class="o">=</span><span class="s">&#39;1.0&#39;</span><span class="p">,</span>
-  <span class="n">description</span><span class="o">=</span><span class="s">&#39;My project&#39;</span><span class="p">,</span>
-  <span class="n">author</span><span class="o">=</span><span class="s">&#39;Me&#39;</span><span class="p">,</span>
-  <span class="n">author_email</span><span class="o">=</span><span class="s">&#39;me@noreply.com&#39;</span><span class="p">,</span>
-  <span class="n">url</span><span class="o">=</span><span class="s">&#39;http://myproject&#39;</span><span class="p">,</span>
+<span class="n">setup</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;myproject&#39;</span><span class="p">,</span>
+  <span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
+  <span class="n">description</span><span class="o">=</span><span class="s1">&#39;My project&#39;</span><span class="p">,</span>
+  <span class="n">author</span><span class="o">=</span><span class="s1">&#39;Me&#39;</span><span class="p">,</span>
+  <span class="n">author_email</span><span class="o">=</span><span class="s1">&#39;me@noreply.com&#39;</span><span class="p">,</span>
+  <span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://myproject&#39;</span><span class="p">,</span>
   <span class="n">packages</span><span class="o">=</span><span class="p">[],</span>
   <span class="p">)</span>
 </pre></div>
 <p>Puis, tu exécutes la commande suivante afin d'ajouter ton application dans le <em>path</em>
 python:</p>
-<div class="highlight"><pre><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
+<div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
 </pre></div>
 </div>
 <div class="section" id="ajouter-des-tests-unitaires">
@@ -146,7 +146,7 @@ python:</p>
 <p>Au même niveau que ton package <em>myapp</em>, tu vas créer un package <em>tests</em> qui sera
 dédié aux tests unitaires. Celui-ci doit contenir le fichier <em>__init__.py</em> et le
 fichier <em>test_maths.py</em> suivant:</p>
-<div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Tests unitaires</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -176,11 +176,11 @@ fichier <em>test_maths.py</em> suivant:</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="bp">None</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 <p>Et pour vérifier le bon fonctionnement de tes tests, tu peux les exécuter via:</p>
-<div class="highlight"><pre>python tests/test_maths.py
+<div class="highlight"><pre><span></span>python tests/test_maths.py
 </pre></div>
 <p>Pour plus d'informations concernant les tests unitaires, je t'invite à te pencher
 sur le dossier de Sam&amp;Max :</p>
@@ -195,11 +195,11 @@ sur le dossier de Sam&amp;Max :</p>
 <h2>3) Couvrir son code avec Coverage</h2>
 <p>Tu vas maintenant ajouter les utilitaires permettant la couverture de ton code.</p>
 <p>Premièrement, tu installes <a class="reference external" href="https://bitbucket.org/ned/coveragepy">coverage</a>:</p>
-<div class="highlight"><pre>pip install coverage
+<div class="highlight"><pre><span></span>pip install coverage
 </pre></div>
 <p>Puis, tu crées le fichier de configuration de coverage appelé <em>.coveragerc</em>
 dans ton répertoire <em>myproject</em>:</p>
-<div class="highlight"><pre><span class="o">[</span>run<span class="o">]</span>
+<div class="highlight"><pre><span></span><span class="o">[</span>run<span class="o">]</span>
 <span class="nb">source</span> <span class="o">=</span>
     myapp
 
@@ -210,13 +210,13 @@ dans ton répertoire <em>myproject</em>:</p>
 ignorant d'analyser la couverture des fichiers de tests.
 Sinon, il faudrait faire des tests unitaires pour tester les tests unitaires !</p>
 <p>Tu lances les tests unitaires avec coverage:</p>
-<div class="highlight"><pre>coverage run -m unittest discover tests/
+<div class="highlight"><pre><span></span>coverage run -m unittest discover tests/
 </pre></div>
 <p>Tu peux désormais afficher un rapport simple via:</p>
-<div class="highlight"><pre>coverage report
+<div class="highlight"><pre><span></span>coverage report
 </pre></div>
 <p>Ou un rapport html via:</p>
-<div class="highlight"><pre>coverage html
+<div class="highlight"><pre><span></span>coverage html
 </pre></div>
 <p>Celui-ci s'est créé dans le répertoire <em>htmlcov</em>. A l'aide de ce rapport, tu
 vas pouvoir visualiser le pourcentage de code couvert ainsi que les zones de code
@@ -229,10 +229,10 @@ unitaires en python. Il permet, à l'aide d'environnements virtuels, de tester t
 code sous plusieurs interpréteurs python et sous plusieurs versions de librairies.</p>
 <p>Il est très simple d'utilisation et s’interface parfaitement avec Travis.</p>
 <p>Tu peux l'installer via pip:</p>
-<div class="highlight"><pre>pip install tox
+<div class="highlight"><pre><span></span>pip install tox
 </pre></div>
 <p>Ensuite, il te faut créer le fichier <em>tox.ini</em> dans le répertoire <em>myproject</em>:</p>
-<div class="highlight"><pre><span class="p">[</span><span class="n">tox</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">tox</span><span class="p">]</span>
 <span class="n">envlist</span><span class="o">=</span><span class="n">py27</span><span class="p">,</span><span class="n">py34</span>
 
 <span class="p">[</span><span class="n">testenv</span><span class="p">]</span>
@@ -251,7 +251,7 @@ les installer sur ton système si ce n'est pas déjà fait.</li>
 </ul>
 <p>Enfin, pour exécuter tes tests sous les différents environnements, lance la
 commande:</p>
-<div class="highlight"><pre>tox
+<div class="highlight"><pre><span></span>tox
 </pre></div>
 <p>Plutôt simple non ?</p>
 <p>Crée-toi un dépôt sur Github et <em>commit</em> tout ça.</p>
@@ -264,17 +264,17 @@ tests unitaires à chaque <em>commit</em>, et qui va t'envoyer un mail si un pro
 été rencontré.</p>
 <p>Tu peux t'y connecter via ton compte Github et y ajouter ton dépôt git via le bouton <em>+</em>.</p>
 <p>Au préalable, il faut créer un fichier <em>.travis.yml</em> dans ton répertoire <em>myproject</em>:</p>
-<div class="highlight"><pre><span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">python</span>
-<span class="l-Scalar-Plain">python</span><span class="p-Indicator">:</span> <span class="s">&quot;2.7&quot;</span>
-<span class="l-Scalar-Plain">env</span><span class="p-Indicator">:</span>
-<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">TOX_ENV=py27</span>
-<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">TOX_ENV=py34</span>
-<span class="l-Scalar-Plain">install</span><span class="p-Indicator">:</span>
-<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">pip install tox</span>
-<span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">tox -e $TOX_ENV</span>
-<span class="l-Scalar-Plain">after_success</span><span class="p-Indicator">:</span>
-<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">pip install coveralls</span>
-<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">coveralls</span>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">language</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+<span class="l l-Scalar l-Scalar-Plain">python</span><span class="p p-Indicator">:</span> <span class="s">&quot;2.7&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">TOX_ENV=py27</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">TOX_ENV=py34</span>
+<span class="l l-Scalar l-Scalar-Plain">install</span><span class="p p-Indicator">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip install tox</span>
+<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">tox -e $TOX_ENV</span>
+<span class="l l-Scalar l-Scalar-Plain">after_success</span><span class="p p-Indicator">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip install coveralls</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">coveralls</span>
 </pre></div>
 <p>On y indique les environnements de tox à tester et le script tox à exécuter.</p>
 <p>Tu peux maintenant <em>commiter</em> tout ça sur ton dépôt Github, et te rendre sur le site
@@ -303,20 +303,20 @@ via <em>Add repository</em>.</p>
 <a class="reference external" href="http://sphinx-doc.org/rest.html">restructuredText</a>, dans la configuration de
 ton projet sur ces trois plate-formes.</p>
 <p>Exemple:</p>
-<div class="highlight"><pre><span class="l-Scalar-Plain">demo-integration-continue</span>
-<span class="l-Scalar-Plain">-------------------------</span>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">demo-integration-continue</span>
+<span class="l l-Scalar l-Scalar-Plain">-------------------------</span>
 
-<span class="l-Scalar-Plain">Application de démo d&#39;intégration continue sous github</span>
+<span class="l l-Scalar l-Scalar-Plain">Application de démo d&#39;intégration continue sous github</span>
 
-<span class="l-Scalar-Plain">.. image:</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">https://travis-ci.org/dotmobo/demo-integration-continue.svg</span>
-    <span class="l-Scalar-Plain">:target</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">https://travis-ci.org/dotmobo/demo-integration-continue</span>
+<span class="l l-Scalar l-Scalar-Plain">.. image:</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://travis-ci.org/dotmobo/demo-integration-continue.svg</span>
+    <span class="l l-Scalar l-Scalar-Plain">:target</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://travis-ci.org/dotmobo/demo-integration-continue</span>
 
-<span class="l-Scalar-Plain">.. image:</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">https://coveralls.io/repos/dotmobo/demo-integration-continue/badge.svg?branch=master&amp;service=github</span>
-    <span class="l-Scalar-Plain">:target</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">https://coveralls.io/github/dotmobo/demo-integration-continue?branch=master</span>
+<span class="l l-Scalar l-Scalar-Plain">.. image:</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://coveralls.io/repos/dotmobo/demo-integration-continue/badge.svg?branch=master&amp;service=github</span>
+    <span class="l l-Scalar l-Scalar-Plain">:target</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://coveralls.io/github/dotmobo/demo-integration-continue?branch=master</span>
 
-<span class="l-Scalar-Plain">.. image:</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">https://landscape.io/github/dotmobo/demo-integration-continue/master/landscape.svg?style=flat</span>
-    <span class="l-Scalar-Plain">:target</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">https://landscape.io/github/dotmobo/demo-integration-continue/master</span>
-    <span class="l-Scalar-Plain">:alt</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Code Health</span>
+<span class="l l-Scalar l-Scalar-Plain">.. image:</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://landscape.io/github/dotmobo/demo-integration-continue/master/landscape.svg?style=flat</span>
+    <span class="l l-Scalar l-Scalar-Plain">:target</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://landscape.io/github/dotmobo/demo-integration-continue/master</span>
+    <span class="l l-Scalar l-Scalar-Plain">:alt</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Code Health</span>
 </pre></div>
 <p><em>Commit</em> et rends-toi sur ton dépôt github pour voir
 <a class="reference external" href="https://github.com/dotmobo/demo-integration-continue">le résultat</a>!</p>

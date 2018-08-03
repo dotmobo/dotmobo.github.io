@@ -77,7 +77,7 @@
       </li>
         <li class="muted">&middot;</li>
         <li>
-            <a href="/tag/python.html">python</a>,             <a href="/tag/django.html">django</a>,             <a href="/tag/django-simple-captcha.html">django-simple-captcha</a>,             <a href="/tag/captcha.html">captcha</a>,             <a href="/tag/crispy.html">crispy</a>,             <a href="/tag/django-crispy.html">django-crispy</a>,             <a href="/tag/recaptcha.html">recaptcha</a>        </li>
+            <a href="http://dotmobo.github.io/tag/python.html">python</a>,             <a href="http://dotmobo.github.io/tag/django.html">django</a>,             <a href="http://dotmobo.github.io/tag/django-simple-captcha.html">django-simple-captcha</a>,             <a href="http://dotmobo.github.io/tag/captcha.html">captcha</a>,             <a href="http://dotmobo.github.io/tag/crispy.html">crispy</a>,             <a href="http://dotmobo.github.io/tag/django-crispy.html">django-crispy</a>,             <a href="http://dotmobo.github.io/tag/recaptcha.html">recaptcha</a>        </li>
     </ul>
     <div class="post-content">
       <img alt="Django" class="align-right" src="./images/djangopony.png" />
@@ -95,30 +95,30 @@ et est même compatible python 3. Elle est customisable, s'intègre dans les for
 des calculs mathématiques, des dictionnaires de mots.</p>
 <p>Captcha utilise <em>PIL</em> et <em>Pillow</em> qui nécessitent certaines librairies systèmes.
 Par exemple sous Ubuntu, tu fais:</p>
-<div class="highlight"><pre>apt-get -y install libz-dev libjpeg-dev libfreetype6-dev
+<div class="highlight"><pre><span></span>apt-get -y install libz-dev libjpeg-dev libfreetype6-dev
 </pre></div>
 <p>Tu l'installes comme d'habitude avec pip:</p>
-<div class="highlight"><pre>pip install django-simple-captcha
+<div class="highlight"><pre><span></span>pip install django-simple-captcha
 </pre></div>
 <p>Et tu ajoutes <strong>captcha</strong> dans la liste de tes <strong>INSTALLED_APPS</strong>
 dans le fichier <em>settings.py</em> de django:</p>
-<div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span><span class="o">...</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span><span class="o">...</span><span class="p">,</span>
                   <span class="n">captcha</span>
 <span class="p">)</span>
 </pre></div>
 <p>Tu synchronises ta base de données:</p>
-<div class="highlight"><pre>python manage.py migrate
+<div class="highlight"><pre><span></span>python manage.py migrate
 </pre></div>
 <p>Et tu ajoutes l'entrée suivante dans ton fichier <strong>urls.py</strong>:</p>
-<div class="highlight"><pre><span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span>
-    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^captcha/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s">&#39;captcha.urls&#39;</span><span class="p">)),</span>
+<div class="highlight"><pre><span></span><span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">patterns</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^captcha/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;captcha.urls&#39;</span><span class="p">)),</span>
 <span class="p">)</span>
 </pre></div>
 <p>Il ne reste plus qu'à l'intégrer dans ton formulaire.</p>
 <ul class="simple">
 <li>Soit dans un <strong>Form</strong>:</li>
 </ul>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
 <span class="kn">from</span> <span class="nn">captcha.fields</span> <span class="kn">import</span> <span class="n">CaptchaField</span>
 
 <span class="k">class</span> <span class="nc">CaptchaTestForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
@@ -128,7 +128,7 @@ dans le fichier <em>settings.py</em> de django:</p>
 <ul class="simple">
 <li>Soit dans un <strong>ModelForm</strong>:</li>
 </ul>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
 <span class="kn">from</span> <span class="nn">captcha.fields</span> <span class="kn">import</span> <span class="n">CaptchaField</span>
 
 <span class="k">class</span> <span class="nc">CaptchaTestModelForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
@@ -137,7 +137,7 @@ dans le fichier <em>settings.py</em> de django:</p>
         <span class="n">model</span> <span class="o">=</span> <span class="n">MyModel</span>
 </pre></div>
 <p>Et sous <em>django-crispy</em>, tu peux utiliser <strong>captcha</strong> comme un <strong>Field</strong> à déclarer dans le <strong>Layout</strong>:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
 <span class="kn">from</span> <span class="nn">captcha.fields</span> <span class="kn">import</span> <span class="n">CaptchaField</span>
 <span class="kn">from</span> <span class="nn">crispy_forms.helper</span> <span class="kn">import</span> <span class="n">FormHelper</span>
 <span class="kn">from</span> <span class="nn">crispy_forms.layout</span> <span class="kn">import</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">Field</span><span class="p">,</span> <span class="n">Submit</span>
@@ -145,14 +145,14 @@ dans le fichier <em>settings.py</em> de django:</p>
 <span class="k">class</span> <span class="nc">CaptchaTestModelForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
     <span class="n">captcha</span> <span class="o">=</span> <span class="n">CaptchaField</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">helper</span> <span class="o">=</span> <span class="n">FormHelper</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">helper</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="p">(</span>
-            <span class="n">Field</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="n">placeholder</span><span class="o">=</span><span class="s">&quot;Enter Full Name&quot;</span><span class="p">),</span>
-            <span class="n">Field</span><span class="p">(</span><span class="s">&#39;captcha &#39;</span><span class="p">,</span> <span class="n">placeholder</span><span class="o">=</span><span class="s">&quot;Enter captcha&quot;</span><span class="p">),</span>
-            <span class="n">Submit</span><span class="p">(</span><span class="s">&#39;valid&#39;</span><span class="p">,</span> <span class="s">&#39;Valid&#39;</span><span class="p">)</span>
+            <span class="n">Field</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">placeholder</span><span class="o">=</span><span class="s2">&quot;Enter Full Name&quot;</span><span class="p">),</span>
+            <span class="n">Field</span><span class="p">(</span><span class="s1">&#39;captcha &#39;</span><span class="p">,</span> <span class="n">placeholder</span><span class="o">=</span><span class="s2">&quot;Enter captcha&quot;</span><span class="p">),</span>
+            <span class="n">Submit</span><span class="p">(</span><span class="s1">&#39;valid&#39;</span><span class="p">,</span> <span class="s1">&#39;Valid&#39;</span><span class="p">)</span>
             <span class="p">)</span>
 
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
@@ -160,18 +160,18 @@ dans le fichier <em>settings.py</em> de django:</p>
 </pre></div>
 <p>La validation du formulaire se fait comme d'habitude. Si la réponse au captcha
 est mauvaise, une exception <strong>ValidationError</strong> sera levée:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">some_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">some_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">:</span>
         <span class="n">form</span> <span class="o">=</span> <span class="n">CaptchaTestForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
 
-        <span class="c"># Validate the form: the captcha field will automatically</span>
-        <span class="c"># check the input</span>
+        <span class="c1"># Validate the form: the captcha field will automatically</span>
+        <span class="c1"># check the input</span>
         <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
             <span class="n">human</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">form</span> <span class="o">=</span> <span class="n">CaptchaTestForm</span><span class="p">()</span>
 
-    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;template.html&#39;</span><span class="p">,</span><span class="nb">locals</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s1">&#39;template.html&#39;</span><span class="p">,</span><span class="nb">locals</span><span class="p">())</span>
 </pre></div>
 <p>Il est également possible de faire une validation
 <a class="reference external" href="http://django-simple-captcha.readthedocs.org/en/latest/usage.html#example-usage-for-ajax-form">via ajax</a>.</p>
@@ -179,19 +179,19 @@ est mauvaise, une exception <strong>ValidationError</strong> sera levée:</p>
 permettant la customisation du captcha, mais il y en a surtout deux à retenir.</p>
 <p>Le premier permet de choisir le type de captcha que tu veux utiliser.
 Dans ton <strong>settings.py</strong>, tu peux mettre au choix:</p>
-<div class="highlight"><pre><span class="c"># Random chars</span>
-<span class="n">CAPTCHA_CHALLENGE_FUNCT</span> <span class="o">=</span> <span class="s">&#39;captcha.helpers.random_char_challenge&#39;</span>
-<span class="c"># Simple Math</span>
-<span class="n">CAPTCHA_CHALLENGE_FUNCT</span> <span class="o">=</span> <span class="s">&#39;captcha.helpers.math_challenge&#39;</span>
-<span class="c"># Dictionary Word</span>
-<span class="n">CAPTCHA_CHALLENGE_FUNCT</span> <span class="o">=</span> <span class="s">&#39;captcha.helpers.word_challenge&#39;</span>
+<div class="highlight"><pre><span></span><span class="c1"># Random chars</span>
+<span class="n">CAPTCHA_CHALLENGE_FUNCT</span> <span class="o">=</span> <span class="s1">&#39;captcha.helpers.random_char_challenge&#39;</span>
+<span class="c1"># Simple Math</span>
+<span class="n">CAPTCHA_CHALLENGE_FUNCT</span> <span class="o">=</span> <span class="s1">&#39;captcha.helpers.math_challenge&#39;</span>
+<span class="c1"># Dictionary Word</span>
+<span class="n">CAPTCHA_CHALLENGE_FUNCT</span> <span class="o">=</span> <span class="s1">&#39;captcha.helpers.word_challenge&#39;</span>
 </pre></div>
 <p>Tu peux même créer <a class="reference external" href="http://django-simple-captcha.readthedocs.org/en/latest/advanced.html#roll-your-own">ta propre fonction de captcha</a>
 si celles proposées ne te conviennent pas.</p>
 <p>Le second permet d'utiliser le captcha dans les tests unitaires. Si la chaîne de caractères <strong>PASSED</strong>
 est renseignée comme valeur de réponse au captcha, le formulaire sera valide.
 À mettre dans ton fichier de configuration de tes tests unitaires:</p>
-<div class="highlight"><pre><span class="n">CAPTCHA_TEST_MODE</span> <span class="o">=</span> <span class="bp">True</span>
+<div class="highlight"><pre><span></span><span class="n">CAPTCHA_TEST_MODE</span> <span class="o">=</span> <span class="bp">True</span>
 </pre></div>
 <p>Le résultat final ressemble à ça :</p>
 <img alt="Django" class="align-left" src="http://django-simple-captcha.readthedocs.org/en/latest/_images/captcha3.png" />

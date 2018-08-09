@@ -3,68 +3,91 @@
 from __future__ import unicode_literals
 
 AUTHOR = 'dotmobo'
-SITENAME = ".mobo"
 SITEURL = ''
+SITENAME = ".mobo"
+SITETITLE = SITENAME
+SITESUBTITLE = "Blog d'un Pythoniste Djangonaute"
+SITEDESCRIPTION = "DotMobo - Blog d'un Pythoniste Djangonaute"
+SITELOGO = "//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg"
+FAVICON = None
+BROWSER_COLOR = '#333333'
+PYGMENTS_STYLE = 'monokai'
 
+ROBOTS = 'index, follow'
+
+THEME = "../pelican-themes/Flex"
 PATH = 'content'
-
 TIMEZONE = 'Europe/Paris'
 
+# Default theme language.
+I18N_TEMPLATES_LANG = 'en'
+# Your language.
 DEFAULT_LANG = 'fr'
+OG_LOCALE = 'fr_FR'
 
-# Feed generation is usually not desired when developing
+DATE_FORMATS = {
+    'fr': '%d/%m/%Y',
+}
+
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-# Blogroll
+USE_FOLDER_AS_CATEGORY = False
+MAIN_MENU = True
+HOME_HIDE_TAGS = True
+
 LINKS = None
 
-# Social widget
-SOCIAL = None
+
+SOCIAL = (('github', 'https://github.com/dotmobo'),
+          ('twitter', 'https://twitter.com/dotmobo'),
+          ('google', "https://www.google.com/+DotmoboGithubIo6"),
+          ('rss', '//dotmobo.github.io/feeds/all.atom.xml'))
+
+
+MENUITEMS = (('Categories', '/categories.html'),
+             ('Tags', '/tags.html'),
+             ('Archives', '/archives.html'))
+
+
+CC_LICENSE = {
+    'name': 'Creative Commons Attribution-ShareAlike',
+    'version': '4.0',
+    'slug': 'by-sa'
+}
+
+
+
+COPYRIGHT_YEAR = 2018
 
 DEFAULT_PAGINATION = 10
 
-# Uncomment following line if you want document-relative URLs when developing
-RELATIVE_URLS = True
-
-# static
-STATIC_PATHS = ['images']
-
-# Theme
-THEME = "alchemy"
-SITE_SUBTEXT = "Blog d'un Pythoniste Djangonaute"
-PROFILE_IMAGE = "https://pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg"
-GITHUB_ADDRESS = "https://github.com/dotmobo"
-TWITTER_ADDRESS = "https://twitter.com/dotmobo"
-EXTRA_FAVICON = False
-LICENSE_NAME = "MIT"
-LICENSE_URL = "https://opensource.org/licenses/MIT"
-MENU_ITEMS = {}
-META_DESCRIPTION = "DotMobo - Blog d'un Pythoniste Djangonaute"
-PAGES_ON_MENU = True
-CATEGORIES_ON_MENU = True
-TAGS_ON_MENU = True
-ARCHIVES_ON_MENU = True
-SHOW_ARTICLE_AUTHOR = False
-GOOGLEPLUS_ADDRESS = "https://www.google.com/+DotmoboGithubIo6"
-
-# Plugins
 PLUGIN_PATHS = ['../pelican-plugins']
-PLUGINS = ['sitemap']
+PLUGINS = ['sitemap', 'i18n_subsites']
+
+JINJA_ENVIRONMENT = {'extensions': ['jinja2.ext.i18n']}
 
 SITEMAP = {
     'format': 'xml',
     'priorities': {
-        'articles': 0.5,
-        'indexes': 0.5,
-        'pages': 0.5
+        'articles': 0.6,
+        'indexes': 0.6,
+        'pages': 0.5,
     },
     'changefreqs': {
         'articles': 'monthly',
         'indexes': 'daily',
-        'pages': 'monthly'
+        'pages': 'monthly',
     }
 }
+
+# static
+STATIC_PATHS = ['images']
+
+USE_LESS = False
+
+# Uncomment following line if you want document-relative URLs when developing
+RELATIVE_URLS = True

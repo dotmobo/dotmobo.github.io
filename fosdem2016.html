@@ -1,86 +1,118 @@
+
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-      <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="canonical" href="http://dotmobo.github.io/fosdem2016.html" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
 
-    <title>  .mobo &mdash; Retour du FOSDEM 2016
-</title>
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/font-awesome.min.css">
 
 
 
-      <link type="application/atom+xml" rel="alternate" href="/feeds/all.atom.xml"  title=".mobo Atom Feed">
 
-    <link rel="stylesheet" href="http://dotmobo.github.io/theme/css/style.css">
 
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-68852219-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
 
-    ga('create', 'UA-68852219-1', 'auto');
-    ga('send', 'pageview');
+<meta name="author" content="Morgan" />
+<meta name="description" content="Retour du FOSDEM 2016" />
+<meta name="keywords" content="fosdem, 2016, python, docker, containers, pulp, guix, tox, systemd">
 
-  </script>
+<meta property="og:site_name" content=".mobo"/>
+<meta property="og:title" content="Retour du FOSDEM 2016"/>
+<meta property="og:description" content="Retour du FOSDEM 2016"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="http://dotmobo.github.io/fosdem2016.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-02-04 00:00:00+01:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://dotmobo.github.io/author/morgan.html">
+<meta property="article:section" content="Événements"/>
+<meta property="article:tag" content="fosdem"/>
+<meta property="article:tag" content="2016"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="docker"/>
+<meta property="article:tag" content="containers"/>
+<meta property="article:tag" content="pulp"/>
+<meta property="article:tag" content="guix"/>
+<meta property="article:tag" content="tox"/>
+<meta property="article:tag" content="systemd"/>
+<meta property="og:image" content="//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg">
 
-    <meta name="author" content="Morgan">
-    <meta name="description" content="Retour du FOSDEM 2016">
-  <meta name="tags" contents="fosdem, 2016, python, docker, containers, pulp, guix, tox, systemd, ">
+  <title>.mobo &ndash; Retour du FOSDEM 2016</title>
+
 </head>
-
 <body>
-<header class="header">
-  <div class="container">
-      <div class="header-image pull-left">
-        <a class="nodec" href="http://dotmobo.github.io"><img src=https://pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg></a>
-      </div>
-    <div class="header-inner">
-      <h1 class="header-name">
-        <a class="nodec" href="http://dotmobo.github.io">.mobo</a>
-      </h1>
-      <h3 class="header-text">Blog d'un Pythoniste Djangonaute</h3>
-      <ul class="header-menu list-inline">
-          <li><a class="nodec" href="http://dotmobo.github.io/categories.html">Cat&eacute;gories</a></li>
-          <li class="muted">|</li>
-          <li><a class="nodec" href="http://dotmobo.github.io/tags.html">Tags</a></li>
-          <li class="muted">|</li>
-          <li><a class="nodec" href="http://dotmobo.github.io/archives.html">Archives</a></li>
-          <li class="muted">|</li>
-          <li><a class="nodec icon-github" href="https://github.com/dotmobo"></a></li>
-          <li><a class="nodec icon-twitter" href="https://twitter.com/dotmobo"></a></li>
-          <li><a class="nodec icon-gplus" href="https://www.google.com/+DotmoboGithubIo6"></a></li>
-          <li><a class="nodec icon-rss" href="/feeds/all.atom.xml"></a></li>
+  <aside>
+    <div>
+      <a href="http://dotmobo.github.io">
+        <img src="//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg" alt=".mobo" title=".mobo">
+      </a>
+      <h1><a href="http://dotmobo.github.io">.mobo</a></h1>
+
+<p>Blog d'un Pythoniste Djangonaute</p>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/dotmobo" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-google" href="https://www.google.com/+DotmoboGithubIo6" target="_blank"><i class="fa fa-google"></i></a></li>
+        <li><a class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
       </ul>
     </div>
-  </div>
-</header> <!-- /.header -->  <div class="container">
-  <div class="post full-post">
-    <h1 class="post-title">
-      <a href="/fosdem2016.html" title="Permalink to Retour du FOSDEM 2016">Retour du FOSDEM 2016</a>
-    </h1>
-    <ul class="list-inline">
-      <li class="post-date">
-        <a class="text-muted" href="/fosdem2016.html" title="2016-02-04T00:00:00+01:00">jeu. 04 février 2016</a>
-      </li>
-      <li class="muted">&middot;</li>
-      <li class="post-category">
-        <a href="http://dotmobo.github.io/category/evenements.html">Événements</a>
-      </li>
-        <li class="muted">&middot;</li>
-        <li>
-            <a href="http://dotmobo.github.io/tag/fosdem.html">fosdem</a>,             <a href="http://dotmobo.github.io/tag/2016.html">2016</a>,             <a href="http://dotmobo.github.io/tag/python.html">python</a>,             <a href="http://dotmobo.github.io/tag/docker.html">docker</a>,             <a href="http://dotmobo.github.io/tag/containers.html">containers</a>,             <a href="http://dotmobo.github.io/tag/pulp.html">pulp</a>,             <a href="http://dotmobo.github.io/tag/guix.html">guix</a>,             <a href="http://dotmobo.github.io/tag/tox.html">tox</a>,             <a href="http://dotmobo.github.io/tag/systemd.html">systemd</a>        </li>
-    </ul>
-    <div class="post-content">
-      <img alt="FOSDEM" class="align-right" src="./images/fosdem.png" />
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://dotmobo.github.io">Accueil</a>
+
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/archives.html">Archives</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="fosdem2016">Retour du FOSDEM 2016</h1>
+    <p>
+      Posté le 04/02/2016 dans <a href="http://dotmobo.github.io/category/evenements.html">Événements</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="FOSDEM" class="align-right" src="./images/fosdem.png" />
 <p>Le <a class="reference external" href="https://fosdem.org/">FOSDEM</a> est un événement qui a lieu chaque année à
 <a class="reference external" href="http://www.ulb.ac.be/">l'Université Libre de Bruxelles</a>.
 Il permet de rencontrer d'autres développeurs, d'animer et
@@ -190,46 +222,72 @@ Franchement, ça semble plutôt bien foutu et pratique!</p>
 <p>Pour finir, merci à toute l'équipe du FOSDEM et à l'année prochaine !</p>
 </div>
 
-    </div>
   </div>
-  <hr class="separator">
-  <div class="col-md-8 col-md-offset-2">
-  <div id="disqus_thread">
-    <script>
-      var disqus_shortname = 'dotmobo';
-      (function() {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] ||
-         document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-    </script>
-    <noscript>
-      Activez Javascript pour voir 
-      <a href="https://disqus.com/?ref_noscript=dotmobo">
-        les commentaires Disqus.
-      </a>
-    </noscript>
-    <a href="https://disqus.com" class="dsq-brlink">
-      Commentaires de blog par <span class="logo-disqus">Disqus</span>
-    </a>
-  </div>
-  </div>
-  </div>
-<footer class="footer">
-  <div class="container">
-    <p class="text-center">
-      dotmobo, <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>.
+  <div class="tag-cloud">
+    <p>
+      <a href="http://dotmobo.github.io/tag/fosdem.html">fosdem</a>
+      <a href="http://dotmobo.github.io/tag/2016.html">2016</a>
+      <a href="http://dotmobo.github.io/tag/python.html">python</a>
+      <a href="http://dotmobo.github.io/tag/docker.html">docker</a>
+      <a href="http://dotmobo.github.io/tag/containers.html">containers</a>
+      <a href="http://dotmobo.github.io/tag/pulp.html">pulp</a>
+      <a href="http://dotmobo.github.io/tag/guix.html">guix</a>
+      <a href="http://dotmobo.github.io/tag/tox.html">tox</a>
+      <a href="http://dotmobo.github.io/tag/systemd.html">systemd</a>
     </p>
-    <div class="text-center">
-      G&eacute;n&eacute;r&eacute; par <a href="http://getpelican.com" target="_blank">Pelican</a> avec le th&egrave;me <a href="https://github.com/dotmobo/pelican-alchemy">alchemy</a>.
-    </div>
   </div>
-</footer> <!-- /.footer -->
-  <script src="http://dotmobo.github.io/theme/js/jquery.min.js"></script>
-  <script src="http://dotmobo.github.io/theme/js/bootstrap.min.js"></script>
-</body> <!-- 42 -->
 
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dotmobo';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Propulsé par <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> thème par <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " .mobo ",
+  "url" : "http://dotmobo.github.io",
+  "image": "//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg",
+  "description": "DotMobo - Blog d'un Pythoniste Djangonaute"
+}
+</script>
+
+</body>
 </html>

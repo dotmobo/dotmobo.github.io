@@ -1,86 +1,112 @@
+
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-      <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="canonical" href="http://dotmobo.github.io/elixir-killer-features.html" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
 
-    <title>  .mobo &mdash; Les killer features d'Elixir
-</title>
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/font-awesome.min.css">
 
 
 
-      <link type="application/atom+xml" rel="alternate" href="/feeds/all.atom.xml"  title=".mobo Atom Feed">
 
-    <link rel="stylesheet" href="http://dotmobo.github.io/theme/css/style.css">
 
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-68852219-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
 
-    ga('create', 'UA-68852219-1', 'auto');
-    ga('send', 'pageview');
+<meta name="author" content="Morgan" />
+<meta name="description" content="Les killer features d&#39;Elixir" />
+<meta name="keywords" content="elixir, killer, features">
 
-  </script>
+<meta property="og:site_name" content=".mobo"/>
+<meta property="og:title" content="Les killer features d&#39;Elixir"/>
+<meta property="og:description" content="Les killer features d&#39;Elixir"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="http://dotmobo.github.io/elixir-killer-features.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-08-03 00:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://dotmobo.github.io/author/morgan.html">
+<meta property="article:section" content="Elixir"/>
+<meta property="article:tag" content="elixir"/>
+<meta property="article:tag" content="killer"/>
+<meta property="article:tag" content="features"/>
+<meta property="og:image" content="//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg">
 
-    <meta name="author" content="Morgan">
-    <meta name="description" content="Les killer features d'Elixir">
-  <meta name="tags" contents="elixir, killer, features, ">
+  <title>.mobo &ndash; Les killer features d&#39;Elixir</title>
+
 </head>
-
 <body>
-<header class="header">
-  <div class="container">
-      <div class="header-image pull-left">
-        <a class="nodec" href="http://dotmobo.github.io"><img src=https://pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg></a>
-      </div>
-    <div class="header-inner">
-      <h1 class="header-name">
-        <a class="nodec" href="http://dotmobo.github.io">.mobo</a>
-      </h1>
-      <h3 class="header-text">Blog d'un Pythoniste Djangonaute</h3>
-      <ul class="header-menu list-inline">
-          <li><a class="nodec" href="http://dotmobo.github.io/categories.html">Cat&eacute;gories</a></li>
-          <li class="muted">|</li>
-          <li><a class="nodec" href="http://dotmobo.github.io/tags.html">Tags</a></li>
-          <li class="muted">|</li>
-          <li><a class="nodec" href="http://dotmobo.github.io/archives.html">Archives</a></li>
-          <li class="muted">|</li>
-          <li><a class="nodec icon-github" href="https://github.com/dotmobo"></a></li>
-          <li><a class="nodec icon-twitter" href="https://twitter.com/dotmobo"></a></li>
-          <li><a class="nodec icon-gplus" href="https://www.google.com/+DotmoboGithubIo6"></a></li>
-          <li><a class="nodec icon-rss" href="/feeds/all.atom.xml"></a></li>
+  <aside>
+    <div>
+      <a href="http://dotmobo.github.io">
+        <img src="//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg" alt=".mobo" title=".mobo">
+      </a>
+      <h1><a href="http://dotmobo.github.io">.mobo</a></h1>
+
+<p>Blog d'un Pythoniste Djangonaute</p>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/dotmobo" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-google" href="https://www.google.com/+DotmoboGithubIo6" target="_blank"><i class="fa fa-google"></i></a></li>
+        <li><a class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
       </ul>
     </div>
-  </div>
-</header> <!-- /.header -->  <div class="container">
-  <div class="post full-post">
-    <h1 class="post-title">
-      <a href="/elixir-killer-features.html" title="Permalink to Les killer features d'Elixir">Les killer features d'Elixir</a>
-    </h1>
-    <ul class="list-inline">
-      <li class="post-date">
-        <a class="text-muted" href="/elixir-killer-features.html" title="2018-08-03T00:00:00+02:00">ven. 03 août 2018</a>
-      </li>
-      <li class="muted">&middot;</li>
-      <li class="post-category">
-        <a href="http://dotmobo.github.io/category/elixir.html">Elixir</a>
-      </li>
-        <li class="muted">&middot;</li>
-        <li>
-            <a href="http://dotmobo.github.io/tag/elixir.html">elixir</a>,             <a href="http://dotmobo.github.io/tag/killer.html">killer</a>,             <a href="http://dotmobo.github.io/tag/features.html">features</a>        </li>
-    </ul>
-    <div class="post-content">
-      <img alt="Elixir" class="align-right" src="./images/elixir.png" />
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://dotmobo.github.io">Accueil</a>
+
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/archives.html">Archives</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="elixir-killer-features">Les killer features d'Elixir</h1>
+    <p>
+      Posté le 03/08/2018 dans <a href="http://dotmobo.github.io/category/elixir.html">Elixir</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="Elixir" class="align-right" src="./images/elixir.png" />
 <p>Ça fait un petit moment que j'ai dans l'idée de bosser un langage fonctionnel, histoire d'améliorer mes compétences de dev
 en m'entrainant à réfléchir autrement. <em>Haskell</em> m'attirait beaucoup, car il semblait représenter la perfection du paradigme fonctionnel.
 Mais bon, il faut vraiment prendre le temps de s'y investir, et il n'est pas simple de l'utiliser rapidement pour nos petits <em>use-cases</em> quotidiens.</p>
@@ -237,46 +263,66 @@ les fonctions d'ordre supérieur, la récursivité à la place des boucles <em>f
 <p>Voilà, j'espère t'avoir donné envie de t'intéresser à cet excellent langage ! Et ce n'est qu'un bref aperçu de toutes ses possibilités !</p>
 </div>
 
-    </div>
   </div>
-  <hr class="separator">
-  <div class="col-md-8 col-md-offset-2">
-  <div id="disqus_thread">
-    <script>
-      var disqus_shortname = 'dotmobo';
-      (function() {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] ||
-         document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-    </script>
-    <noscript>
-      Activez Javascript pour voir 
-      <a href="https://disqus.com/?ref_noscript=dotmobo">
-        les commentaires Disqus.
-      </a>
-    </noscript>
-    <a href="https://disqus.com" class="dsq-brlink">
-      Commentaires de blog par <span class="logo-disqus">Disqus</span>
-    </a>
-  </div>
-  </div>
-  </div>
-<footer class="footer">
-  <div class="container">
-    <p class="text-center">
-      dotmobo, <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>.
+  <div class="tag-cloud">
+    <p>
+      <a href="http://dotmobo.github.io/tag/elixir.html">elixir</a>
+      <a href="http://dotmobo.github.io/tag/killer.html">killer</a>
+      <a href="http://dotmobo.github.io/tag/features.html">features</a>
     </p>
-    <div class="text-center">
-      G&eacute;n&eacute;r&eacute; par <a href="http://getpelican.com" target="_blank">Pelican</a> avec le th&egrave;me <a href="https://github.com/dotmobo/pelican-alchemy">alchemy</a>.
-    </div>
   </div>
-</footer> <!-- /.footer -->
-  <script src="http://dotmobo.github.io/theme/js/jquery.min.js"></script>
-  <script src="http://dotmobo.github.io/theme/js/bootstrap.min.js"></script>
-</body> <!-- 42 -->
 
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dotmobo';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Propulsé par <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> thème par <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " .mobo ",
+  "url" : "http://dotmobo.github.io",
+  "image": "//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg",
+  "description": "DotMobo - Blog d'un Pythoniste Djangonaute"
+}
+</script>
+
+</body>
 </html>

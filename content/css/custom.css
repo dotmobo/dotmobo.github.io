@@ -4,3 +4,28 @@
 .align-right {
     float: right;
 }
+/** gris python pour le background du menu à droite */
+aside {
+    background-color: #646464;
+}
+/* jaune python pour le lien principal */
+aside h1 a {
+    color: #FFD43B;
+}
+aside h1 a:hover {
+    color: #FFE873;
+}
+/** bleu python pour les liens et boutons */
+a:hover {
+    color: #4B8BBE;
+}
+a {
+    color: #306998;
+}
+a.btn, .tag-cloud a {
+    background-color: #306998;
+}
+a.btn:hover, .tag-cloud a:hover {
+    color: #ffffff;
+    background-color: #4B8BBE;
+}

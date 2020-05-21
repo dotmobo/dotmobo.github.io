@@ -149,8 +149,45 @@ Error thrown
 -------------
 j'en ai fait des cauchemars de celle-là. Si tu fais des tests unitaires pour ton application angular, tu risques de la rencontrer souvent. Elle peut survenir aléatoirement, c'est dur à débugguer, un horreur. Mais en gros, après s'être arraché les cheveux, si tu as une erreur de ce type qui survient à l'exécution des tests unitaires, c'est qu'il te manque dans 99% des cas l'importation et l'initialisation de ton store quelques part dans un des tests.
 
+UI
+==
+
+Niveau UI, tu peux partir sur la librairie de composants Angular Material (https://material.angular.io/). Elle a l'avantage d'être open source et d'être officiellement suppoorté par Angular.
+
+Material
+--------
+Quand tu as des doutes sur l'utilisation de tes composants material, n'hésite pas à te référer à la documentation officielle de google sur material, c'est une mine d'or : https://material.io/
+
+Theme
+-----
+Il est possible de faire son propre theme, voir ici (https://material.angular.io/guide/theming#defining-a-custom-theme).
+Et de la même manière, tu peux également thémer tes propres composants customisés voir ici (https://material.angular.io/guide/theming-your-components)
+
+Angular
+=======
+On finit sur les tips internes à Angular.
+
+i18n
+----
+Avec le module i18n de Angular, il est possible d'internationaliser les templates. Oui. Mais il faut savoir qu'il ne permet pas d'internationaliser les chaines de caractères en dehors de ces templates ! C'est une demande qui est ouverte depuis 4 ans (cf: https://github.com/angular/angular/issues/11405) et qui n'a toujours pas été résolu. Donc il faut soit prendre son mal en patience, soit utiliser une librairie externe pour l'internationalisation, ou alors gérer ça dans le code à la main. Franchement, en comparaison d'autres framework, l'internationalisation dans Angular n'est franchement pas terrible. Et en plus il faut se taper des fichiers xml ...
+
+Schematics
+----------
+Les schematics sont les templates utilisés par le angular cli pour généré les composants, les modules et autres. C'est pratique à utiliser, par contre c'est une horreur à écrire. Franchement, ne pert pas de temps à en créer des customs, ça ne te servira pas à grand chose au final ...
+
+Lazy loading
+-------------
+Pour gagner en performance, il faut savoir qu'il est possible de découper son application en plusieurs sous modules lazy loadé (https://angular.io/guide/lazy-loading-ngmodules). Ca permet à l'application de répondre rapidement lorsque l'on va sur la page d'accueil, et ne charger les modules nécessaires que lorsqu'ils sont vraiment utiles. Il suffit de déclarer nos modules à lazy loader de cette manière dans le fichier de routing :
 
 
+.. code-block:: javascript
+
+        const routes: Routes = [
+          {
+            path: 'items',
+            loadChildren: () => import('./items/items.module').then(m => m.ItemsModule)
+          }
+        ];
 
 
 

@@ -190,6 +190,19 @@ Pour gagner en performance, il faut savoir qu'il est possible de découper son a
         ];
 
 
+Guards vs Resolvers
+--------------------
+La différence entre les deux concepts est pas toujours bien comprise donc on va juste faire un petit point ici:
+- Les Guards sont utilisés pour autoriser ou non l'utilisateur à accéder à une page. On va y faire des contrôles sur l'authentification et sur les autorisations.
+- Les resolvers sont utilisés pour récupérer des données d'un api nécessaire au bon fonctionnement d'un page, comme des nomenclatures ou autres.
+Eviter donc d'utiliser les guards pour récupérer des données qui n'ont rien à voir avec les autorisations !
 
+Detection des changements
+--------------------------
 
+TODO
 
+Librairies
+----------
+
+TODO

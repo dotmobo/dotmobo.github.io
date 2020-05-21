@@ -1,0 +1,466 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="http://dotmobo.github.io/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/solid.css">
+
+    <link href="http://dotmobo.github.io/css/custom.css" rel="stylesheet">
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68852219-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Morgan" />
+<meta name="description" content="Man vs. Wild: Angular" />
+<meta name="keywords" content="frontend, angular, rxjs, typescript, javascript, framework, material, ngrx">
+
+
+<meta property="og:site_name" content=".mobo"/>
+<meta property="og:title" content="Man vs. Wild: Angular"/>
+<meta property="og:description" content="Man vs. Wild: Angular"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="http://dotmobo.github.io/man-vs-wild-angular.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-05-21 00:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://dotmobo.github.io/author/morgan.html">
+<meta property="article:section" content="Frontend"/>
+<meta property="article:tag" content="frontend"/>
+<meta property="article:tag" content="angular"/>
+<meta property="article:tag" content="rxjs"/>
+<meta property="article:tag" content="typescript"/>
+<meta property="article:tag" content="javascript"/>
+<meta property="article:tag" content="framework"/>
+<meta property="article:tag" content="material"/>
+<meta property="article:tag" content="ngrx"/>
+<meta property="og:image" content="//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg">
+
+  <title>.mobo &ndash; Man vs. Wild: Angular</title>
+
+</head>
+<body class="light-theme">
+  <aside>
+    <div>
+      <a href="http://dotmobo.github.io">
+        <img src="//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg" alt=".mobo" title=".mobo">
+      </a>
+
+      <h1>
+        <a href="http://dotmobo.github.io">.mobo</a>
+      </h1>
+
+<p>Blog d'un Pythoniste Djangonaute</p>
+
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-google" href="https://www.google.com/+DotmoboGithubIo6" target="_blank">
+              <i class="fab fa-google"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://dotmobo.github.io">Accueil</a>
+
+      <a href="/categories.html">Catégories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/archives.html">Archives</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="man-vs-wild-angular">Man vs. Wild: Angular</h1>
+    <p>
+      Posté le 21/05/2020 dans <a href="http://dotmobo.github.io/category/frontend.html">Frontend</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="Angular" class="align-right" src="./images/angular.png" />
+<p>Ah <a class="reference external" href="https://angular.io/">Angular</a>... Sujet de débat éternel pour tous les trolls des technos front. Ce framework est soit détesté, soit adulé,
+mais on est rarement dans la nuance. Pour le coup je botte un peu en touche, car mes sentiments à l'égard d'Angular font office de montagnes russes.
+Et après m'être battu pendant 2 ans avec ce framework pour un projet pro, j'avais envie de te faire un petit retour des choses que j'aurai aimé savoir dès le début
+pour m'en sortir avec cette stack et ses concepts.</p>
+<div class="section" id="editeur">
+<h2>Editeur</h2>
+<p>De ce que j'ai pu tester, l'éditeur le plus simple à prendre en main pour Angular (et de loin) est <a class="reference external" href="https://code.visualstudio.com/">VS Code</a>.
+J'ai un peu testé Intellij, Atom et Vim, mais je suis très vite retourné sur VS Code.</p>
+<div class="section" id="plugins">
+<h3>Plugins</h3>
+<p>Au niveau des plugins, mes quelques indispensables sont:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=Mikael.Angular-BeastCode">Angular 8 Snippets</a>: Snippets pour angular, material et ngrx.</li>
+<li><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier</a>: Formatage automatique du code.</li>
+<li><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin">Tsint</a>: Linter typescript.</li>
+<li><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer">Bracket Pair Colorizer</a> : Pour s'en sortir avec les parenthèses !</li>
+</ul>
+</div>
+</div>
+<div class="section" id="rxjs">
+<h2>Rxjs</h2>
+<p>On attaque directement avec le plus important. <a class="reference external" href="https://rxjs-dev.firebaseapp.com/">Rxjs</a> est une libraire de <strong>reactive programming</strong> permettant de travailler avec des
+flux de données asynchrones. Il faut savoir que Angular repose complètement sur cette librairie et qu'il est absolument vital de la maîtriser.
+Toute la technicité du code va en grande partie dépendre de Rxjs.</p>
+<div class="section" id="operateurs">
+<h3>Opérateurs</h3>
+<p>Il faut absolument en <strong>maitriser les principaux opérateurs</strong> comme <em>switchMap</em>, <em>combineLatest</em>, <em>filter</em>, <em>debounce</em> et autres.
+Si ce n'est pas déjà fait, commence par aller sur <a class="reference external" href="https://www.learnrxjs.io">learnrxjs.io</a> et fait le tour des opérateurs, joue avec, essaye de les comprendre et de les garder en tête.</p>
+</div>
+<div class="section" id="subscribe-unsubscribe">
+<h3>Subscribe/unsubscribe</h3>
+<p>Une des premières grosses sources de bugs est <strong>d'oublier de se désabonner d'un flux</strong>. Ça entraine des fuites de mémoires et ça produit des effets de bord en cascade.
+Tu risques de te retrouver abonné à certains flux plusieurs fois inutilement et d'avoir des comportements étranges sans comprendre facilement d'où ça vient.</p>
+<p>Si possible, évite d'utiliser le <em>unsubscribe</em> à la main et privilégie plutôt le déclenchement d'un signal de fin de flux, avec <strong>first()</strong> par exemple.
+Ici on récupère la première valeur du flux <em>source</em> et un signal de fin de flux est alors émis grace au <em>first()</em>, ce qui nous désabonne directement sans utiliser <em>unsubscribe</em>:</p>
+<div class="highlight"><pre><span></span><span class="nx">source</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">first</span><span class="p">()).</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">val</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`First value: </span><span class="si">${</span><span class="nx">val</span><span class="si">}</span><span class="sb">`</span><span class="p">));</span>
+</pre></div>
+<p>En second lieu, tu peux aussi privilégier l'abonnement directement dans le template via <strong>monflux$ | async</strong>, car le désabonnement est alors géré automatiquement
+par Angular lorsque l'on quitte le composant:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Hello {{ myName$ | async }}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</pre></div>
+<p>Enfin, si tu es obligé de rester abonné à un flux dans ton fichier typescript pour x raisons, n'oublie surtout pas de te désabonner dans l'événement <strong>ngOnDestroy</strong>:</p>
+<div class="highlight"><pre><span></span><span class="err">@</span><span class="nx">Component</span><span class="p">({...})</span>
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">OnDestroy</span> <span class="p">{</span>
+    <span class="nx">subscription</span><span class="o">:</span> <span class="nx">Subscription</span>
+    <span class="nx">ngOnInit</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">timer$</span> <span class="o">=</span> <span class="nx">Rx</span><span class="p">.</span><span class="nx">Observable</span><span class="p">.</span><span class="nx">interval</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">subscription</span> <span class="o">=</span> <span class="nx">timer$</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">x</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="nx">ngOnDestroy</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">subscription</span><span class="p">.</span><span class="nx">unsubscribe</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>Dernier point, il faut également <strong>éviter de faire des subscribe dans des subscribe</strong> car c'est pas très propre et ça peut entrainer des comportements non voulus.</p>
+</div>
+<div class="section" id="marble-tests">
+<h3>Marble tests</h3>
+<p>Il est possible de faire des tests unitaires plutôt poussés de tes flux avec des <strong>marble tests</strong>.
+<a class="reference external" href="https://rxjs-dev.firebaseapp.com/guide/testing/marble-testing">La documentation officielle</a> est pas trop mal faite,
+mais il faut savoir que c'est pas forcément évident à appréhender.</p>
+<p>Pour info ca ressemble à ça:</p>
+<div class="highlight"><pre><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">TestScheduler</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs/testing&#39;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">testScheduler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TestScheduler</span><span class="p">((</span><span class="nx">actual</span><span class="p">,</span> <span class="nx">expected</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// asserting the two objects are equal</span>
+  <span class="c1">// e.g. using chai.</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">actual</span><span class="p">).</span><span class="nx">deep</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// This test will actually run *synchronously*</span>
+<span class="nx">it</span><span class="p">(</span><span class="s1">&#39;generate the stream correctly&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">testScheduler</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="nx">helpers</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">cold</span><span class="p">,</span> <span class="nx">expectObservable</span><span class="p">,</span> <span class="nx">expectSubscriptions</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">helpers</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="nx">e1</span> <span class="o">=</span>  <span class="nx">cold</span><span class="p">(</span><span class="s1">&#39;-a--b--c---|&#39;</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="nx">subs</span> <span class="o">=</span>     <span class="s1">&#39;^----------!&#39;</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="nx">expected</span> <span class="o">=</span> <span class="s1">&#39;-a-----c---|&#39;</span><span class="p">;</span>
+
+    <span class="nx">expectObservable</span><span class="p">(</span><span class="nx">e1</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">throttleTime</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nx">testScheduler</span><span class="p">))).</span><span class="nx">toBe</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
+    <span class="nx">expectSubscriptions</span><span class="p">(</span><span class="nx">e1</span><span class="p">.</span><span class="nx">subscriptions</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="nx">subs</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="section" id="resolver-avec-du-cache">
+<h3>Resolver avec du cache</h3>
+<p>En Angular, les <em>resolvers</em> sont des services qui permettent de récupérer des données d'une api avant d'afficher une page.
+Il est intéressant de savoir qu'il est possible de gérer facilement du cache avec l'opérateur <strong>shareReplay</strong> de rxjs de cette manière:</p>
+<div class="highlight"><pre><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Resolve</span><span class="p">,</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span> <span class="nx">RouterStateSnapshot</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Country</span><span class="p">,</span> <span class="nx">NomenclatureService</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;ins-common-lib&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">shareReplay</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs/operators&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">({</span>
+    <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span>
+<span class="p">})</span>
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">PaysResolver</span> <span class="kr">implements</span> <span class="nx">Resolve</span><span class="o">&lt;</span><span class="nx">Country</span><span class="p">[]</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kr">private</span> <span class="nx">pays$</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Country</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">service</span><span class="o">:</span> <span class="nx">NomenclatureService</span><span class="p">)</span> <span class="p">{}</span>
+
+    <span class="nx">resolve</span><span class="p">(</span><span class="nx">_route</span><span class="o">:</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span> <span class="nx">_state</span><span class="o">:</span> <span class="nx">RouterStateSnapshot</span><span class="p">)</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Country</span><span class="p">[]</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">pays$</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">pays$</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">service</span><span class="p">.</span><span class="nx">listCountries</span><span class="p">().</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">shareReplay</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3600000</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">pays$</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>Ici, le <em>resolver</em> récupère la première requête et la met en cache pendant 1h. Pratique pour éviter de faire des appels systématiques à l'api !</p>
+</div>
+</div>
+<div class="section" id="store">
+<h2>Store</h2>
+<p>L'utilisation d'un <strong>store type Redux</strong> pour Angular est très intéressant pour les gros projets.
+Ça permet de débugger plus facilement l'application et ça facilite l'intéraction entre plusieurs pages en partageant des données.
+Le <em>store</em> le plus utilisé par la communauté est <a class="reference external" href="https://ngrx.io/">Ngrx</a>, donc je t'invite à partir sur celui-là si tu n'a pas de préférences particulières.
+Potasse un peu la <a class="reference external" href="https://ngrx.io/guide/store">doc officielle</a> pour en comprendre le fonctionnement.
+Après rxjs, c'est la deuxième librairie qu'il est vital de maîtriser.</p>
+<div class="section" id="debug">
+<h3>Debug</h3>
+<p>L'outil de debug indispensable est le <a class="reference external" href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=fr">Redux Devtools</a>.
+Ça va te permettre de visualiser ton <em>store</em> en direct et de lancer des actions manuellement.</p>
+</div>
+<div class="section" id="facade">
+<h3>Facade</h3>
+<p>Plutôt que de manipuler directement le <em>store</em> dans les composants, je te conseille d'utiliser un service Angular qui va s'en charger.
+Dans ce service, tu vas y mettre tes appels aux sélecteurs, l'éxecution de tes actions et autres. C'est une manière d'utiliser le <strong>design pattern façade</strong>.
+Tu peux jeter un oeil à <a class="reference external" href="https://medium.com/&#64;thomasburlesonIA/ngrx-facades-better-state-management-82a04b9a1e39">cet article</a> où c'est bien expliqué.
+Concrètement ta façade va ressembler à ça :</p>
+<div class="highlight"><pre><span></span><span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">CarsFacade</span> <span class="p">{</span>
+  <span class="nx">loaded$</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="nx">carsQuery</span><span class="p">.</span><span class="nx">getIsLoaded</span><span class="p">);</span>
+  <span class="nx">allCars$</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="nx">carsQuery</span><span class="p">.</span><span class="nx">getAllCars</span><span class="p">);</span>
+  <span class="nx">selectedCar$</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="nx">carsQuery</span><span class="p">.</span><span class="nx">getSelectedCar</span><span class="p">);</span>
+
+  <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">store</span><span class="o">:</span> <span class="nx">Store</span><span class="o">&lt;</span><span class="nx">CarsState</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="nx">loadAllCars</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="k">new</span> <span class="nx">LoadCar</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="nx">selectCar</span><span class="p">(</span><span class="nx">carId</span><span class="o">:</span> <span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="k">new</span> <span class="nx">SelectCar</span><span class="p">(</span><span class="nx">carId</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>Et c'est donc ce service que tu vas injecter dans tes composants plutôt que le <em>store</em> directement !
+Ça permet de garder des composants plus lisibles, et d'isoler la partie <em>store</em>. Si un jour tu migres de technos de <em>store</em>, il te suffira de modifier les façades.</p>
+</div>
+<div class="section" id="formulaires">
+<h3>Formulaires</h3>
+<p>Il est possible de gérer nos formulaires Angular directement dans le <em>store ngrx</em>.
+C'est vraiment très pratique si tu dois faire une application avec beaucoup de <strong>formulaires complexes</strong>. Ça facilite grandement le debug des formulaires
+et on a une manière propre de les créer. Cette librairie s'appelle <a class="reference external" href="https://ngrx-forms.readthedocs.io/">ngrx-forms</a> et est vraiment au top !</p>
+</div>
+<div class="section" id="error-thrown">
+<h3>Error thrown</h3>
+<p>J'en ai fait des cauchemars de celle-là ! Si tu fais des tests unitaires pour ton application Angular, tu risques de la rencontrer souvent.
+Elle peut survenir aléatoirement et c'est dur à débugguer, une horreur. Mais en gros, après m'être arraché les cheveux, si tu rencontre un <strong>Error thrown</strong>
+à l'exécution de tes tests unitaires, c'est qu'il te manque dans 99% des cas <strong>l'importation et l'initialisation de données de ton store</strong> quelque part dans un des tests.</p>
+</div>
+</div>
+<div class="section" id="ui">
+<h2>UI</h2>
+<p>Niveau UI, tu peux partir sur la librairie de composants <a class="reference external" href="https://material.angular.io/">Angular Material</a>.
+Elle a l'avantage d'être open source et d'être officiellement supportée par Angular.</p>
+<div class="section" id="material">
+<h3>Material</h3>
+<p>Quand tu as des doutes sur l'utilisation de tes composants <strong>material</strong>, n'hésite pas à te référer à la <a class="reference external" href="https://material.io/">documentation officielle de google sur material</a>, c'est une mine d'or.</p>
+</div>
+<div class="section" id="theme">
+<h3>Theme</h3>
+<p>Il est possible de <a class="reference external" href="https://material.angular.io/guide/theming#defining-a-custom-theme">faire ton propre theme</a>.
+Et de la même manière, tu peux également <a class="reference external" href="https://material.angular.io/guide/theming-your-components">themer tes propres composants customisés</a>.</p>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>Angular</h2>
+<p>Allez on y est presque, place aux tips sur les mécaniques internes de Angular.</p>
+<div class="section" id="i18n">
+<h3>i18n</h3>
+<p>Avec le module i18n de Angular, il est possible d'internationaliser les templates.
+Oui... mais il faut savoir qu'il <strong>ne permet pas d'internationaliser les chaines de caractères en dehors des templates</strong> !
+C'est une demande qui est <a class="reference external" href="https://github.com/angular/angular/issues/11405">ouverte depuis 4 ans</a> et qui n'a toujours pas été résolue.
+Donc il faut soit prendre son mal en patience, soit utiliser une librairie externe pour l'internationalisation, ou alors gérer ça dans le code à la main.</p>
+<p>Franchement, en comparaison d'autres frameworks, l'internationalisation dans Angular n'est vraiment pas terrible. Et en plus il faut se taper des fichiers xml ...</p>
+</div>
+<div class="section" id="schematics">
+<h3>Schematics</h3>
+<p>Les <em>schematics</em> sont les templates utilisés par <em>angular cli</em> pour générer les composants, les modules et autres.
+C'est pratique à utiliser, par contre c'est une horreur à écrire. Franchement, <strong>ne perds pas de temps à en créer</strong>, car ça ne te servira pas à grand chose au final.</p>
+</div>
+<div class="section" id="lazy-loading">
+<h3>Lazy loading</h3>
+<p>Pour gagner en performance, il faut savoir qu'il est possible de découper son application en plusieurs <a class="reference external" href="https://angular.io/guide/lazy-loading-ngmodules">sous-modules lazy loadés</a>.
+Ça permet à l'application de répondre rapidement lorsque l'on va sur la page d'accueil, et de charger les modules nécessaires que lorsqu'ils sont vraiment demandés par l'utilisateur.
+Il suffit de déclarer nos modules de cette manière dans le fichier de <em>routing</em> :</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">routes</span><span class="o">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;items&#39;</span><span class="p">,</span>
+    <span class="nx">loadChildren</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="kr">import</span><span class="p">(</span><span class="s1">&#39;./items/items.module&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">m</span> <span class="p">=&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">ItemsModule</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">];</span>
+</pre></div>
+</div>
+<div class="section" id="guards-vs-resolvers">
+<h3>Guards vs Resolvers</h3>
+<p>La différence entre les deux concepts n'est pas toujours bien comprise, donc on va juste faire un petit point ici:</p>
+<ul class="simple">
+<li>Les <em>Guards</em> sont utilisés <strong>pour autoriser ou non l'utilisateur à accéder à une page</strong>. On va y faire des contrôles sur l'authentification et sur les autorisations.</li>
+<li>Les <em>Resolvers</em> sont utilisés pour <strong>récupérer des données d'une api</strong> nécessaire au bon fonctionnement d'un page, comme des nomenclatures ou autres.</li>
+</ul>
+<p>Evite donc d'utiliser les <em>guards</em> pour récupérer des données qui n'ont rien à voir avec les autorisations !</p>
+</div>
+<div class="section" id="detection-des-changements">
+<h3>Detection des changements</h3>
+<p>Si tu rencontre des soucis au niveau de la detection des changements, verifie que tu n'as pas une stratégie particulière type <strong>ChangeDetectionStrategy.OnPush</strong> sur ton composant.
+Cette stratégie permet d'avoir de meilleurs performances mais risque de ne pas détecter les changements sur les variables en dehors des <em>inputs</em>.
+Donc pour des petits composants qui fonctionnent uniquement à base de <em>input/output</em> c'est parfait, mais pour le reste il faut se méfier.</p>
+</div>
+<div class="section" id="librairies-et-workspaces">
+<h3>Librairies et workspaces</h3>
+<p>Il y a quelques temps encore, il fallait installer et gérer <em>ng-packagr</em> à la main pour créer des libraires.
+Aujourd'hui, c'est directement disponible via <em>angular cli</em>. Voici les commandes pour créer, tester, builder et publier une librairie :</p>
+<div class="highlight"><pre><span></span>ng new my-workspace --create-application<span class="o">=</span><span class="nb">false</span>
+<span class="nb">cd</span> my-workspace
+ng generate library my-lib
+ng build my-lib
+ng <span class="nb">test</span> my-lib
+ng lint my-lib
+ng build my-lib --prod
+<span class="nb">cd</span> dist/my-lib
+npm publish
+</pre></div>
+<p>Il est également possible de créer un workspace qui va contenir plusieurs applications et librairies pour un même projet.</p>
+<div class="highlight"><pre><span></span>ng new my-workspace --createApplication<span class="o">=</span><span class="s2">&quot;false&quot;</span>
+<span class="nb">cd</span> my-workspace
+ng generate library my-first-lib
+ng generate library my-second-lib
+ng generate application my-first-app
+ng generate application my-second-app
+</pre></div>
+<p>C'est pratique dans le cas où tu aurais <strong>plusieurs applications qui partagent des librairies communes</strong>.
+Par exemple, on pourrait imaginer une application pour les clients et une pour l'administration du site avec des modèles métier en commun dans une librarie partagée.</p>
+</div>
+<div class="section" id="mot-de-la-fin">
+<h3>Mot de la fin</h3>
+<p>Et voilà, on a plus ou moins fait le tour de quelques tips que j'aurai bien aimé savoir en début de projet pour gagner du temps.
+Si un de ces points a pu t'aider, n'hésite pas à en faire part dans les commentaires. Bon courage !</p>
+</div>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://dotmobo.github.io/tag/frontend.html">frontend</a>
+      <a href="http://dotmobo.github.io/tag/angular.html">angular</a>
+      <a href="http://dotmobo.github.io/tag/rxjs.html">rxjs</a>
+      <a href="http://dotmobo.github.io/tag/typescript.html">typescript</a>
+      <a href="http://dotmobo.github.io/tag/javascript.html">javascript</a>
+      <a href="http://dotmobo.github.io/tag/framework.html">framework</a>
+      <a href="http://dotmobo.github.io/tag/material.html">material</a>
+      <a href="http://dotmobo.github.io/tag/ngrx.html">ngrx</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dotmobo';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " .mobo ",
+  "url" : "http://dotmobo.github.io",
+  "image": "//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg",
+  "description": "DotMobo - Blog d'un Pythoniste Djangonaute"
+}
+</script>
+
+
+</body>
+</html>

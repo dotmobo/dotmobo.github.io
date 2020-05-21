@@ -12,8 +12,14 @@
 
     <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/pygments/monokai.min.css">
-  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/font-awesome.min.css">
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="http://dotmobo.github.io/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/solid.css">
 
     <link href="http://dotmobo.github.io/css/custom.css" rel="stylesheet">
 
@@ -45,6 +51,7 @@
 <meta name="description" content="Découverte du message broker RabbitMQ" />
 <meta name="keywords" content="rabbitmq, message broker, python">
 
+
 <meta property="og:site_name" content=".mobo"/>
 <meta property="og:title" content="Découverte du message broker RabbitMQ"/>
 <meta property="og:description" content="Découverte du message broker RabbitMQ"/>
@@ -63,24 +70,43 @@
   <title>.mobo &ndash; Découverte du message broker RabbitMQ</title>
 
 </head>
-<body>
+<body class="light-theme">
   <aside>
     <div>
       <a href="http://dotmobo.github.io">
         <img src="//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg" alt=".mobo" title=".mobo">
       </a>
-      <h1><a href="http://dotmobo.github.io">.mobo</a></h1>
+
+      <h1>
+        <a href="http://dotmobo.github.io">.mobo</a>
+      </h1>
 
 <p>Blog d'un Pythoniste Djangonaute</p>
 
+
       <ul class="social">
-        <li><a class="sc-github" href="https://github.com/dotmobo" target="_blank"><i class="fa fa-github"></i></a></li>
-        <li><a class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank"><i class="fa fa-twitter"></i></a></li>
-        <li><a class="sc-google" href="https://www.google.com/+DotmoboGithubIo6" target="_blank"><i class="fa fa-google"></i></a></li>
-        <li><a class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-google" href="https://www.google.com/+DotmoboGithubIo6" target="_blank">
+              <i class="fab fa-google"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
       </ul>
     </div>
-
 
   </aside>
   <main>
@@ -88,7 +114,7 @@
     <nav>
       <a href="http://dotmobo.github.io">Accueil</a>
 
-      <a href="/categories.html">Categories</a>
+      <a href="/categories.html">Catégories</a>
       <a href="/tags.html">Tags</a>
       <a href="/archives.html">Archives</a>
 
@@ -210,7 +236,7 @@ rabbitmqctl list_permissions -p myproject
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
                     <span class="n">routing_key</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span>
                     <span class="n">body</span><span class="o">=</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Sent &#39;Hello World!&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [x] Sent &#39;Hello World!&#39;&quot;</span><span class="p">)</span>
 <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 <p>Le code du <em>consumer</em> <strong>receive.py</strong>:</p>
@@ -223,13 +249,13 @@ rabbitmqctl list_permissions -p myproject
 <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Received </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">body</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [x] Received </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">body</span><span class="p">)</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span>
                     <span class="n">queue</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span>
-                    <span class="n">no_ack</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                    <span class="n">no_ack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39; [*] Waiting for messages. To exit press CTRL+C&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; [*] Waiting for messages. To exit press CTRL+C&#39;</span><span class="p">)</span>
 <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
 </pre></div>
 <p>Et au final, tu as comme résultat:</p>
@@ -257,7 +283,7 @@ rabbitmqctl list_permissions -p myproject
 <span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">))</span>
 <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
-<span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s1">&#39;task_queue&#39;</span><span class="p">,</span> <span class="n">durable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s1">&#39;task_queue&#39;</span><span class="p">,</span> <span class="n">durable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="ow">or</span> <span class="s2">&quot;Hello World!&quot;</span>
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -266,7 +292,7 @@ rabbitmqctl list_permissions -p myproject
                     <span class="n">properties</span><span class="o">=</span><span class="n">pika</span><span class="o">.</span><span class="n">BasicProperties</span><span class="p">(</span>
                         <span class="n">delivery_mode</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="c1"># make message persistent</span>
                     <span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Sent </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">message</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [x] Sent </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">message</span><span class="p">)</span>
 <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 <p>Le code du <em>consumer</em> <strong>worker.py</strong>:</p>
@@ -277,13 +303,13 @@ rabbitmqctl list_permissions -p myproject
 <span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span><span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">))</span>
 <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
-<span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s1">&#39;task_queue&#39;</span><span class="p">,</span> <span class="n">durable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39; [*] Waiting for messages. To exit press CTRL+C&#39;</span><span class="p">)</span>
+<span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s1">&#39;task_queue&#39;</span><span class="p">,</span> <span class="n">durable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; [*] Waiting for messages. To exit press CTRL+C&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Received </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">body</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [x] Received </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">body</span><span class="p">)</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;.&#39;</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Done&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [x] Done&quot;</span><span class="p">)</span>
     <span class="n">ch</span><span class="o">.</span><span class="n">basic_ack</span><span class="p">(</span><span class="n">delivery_tag</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="n">delivery_tag</span><span class="p">)</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_qos</span><span class="p">(</span><span class="n">prefetch_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -318,7 +344,7 @@ rabbitmqctl list_permissions -p myproject
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;logs&#39;</span><span class="p">,</span>
                     <span class="n">routing_key</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
                     <span class="n">body</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Sent </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">message</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [x] Sent </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">message</span><span class="p">)</span>
 <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 <p>Le code du <em>consumer</em> <strong>receive_logs.py</strong>:</p>
@@ -331,20 +357,20 @@ rabbitmqctl list_permissions -p myproject
 <span class="n">channel</span><span class="o">.</span><span class="n">exchange_declare</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;logs&#39;</span><span class="p">,</span>
                         <span class="n">exchange_type</span><span class="o">=</span><span class="s1">&#39;fanout&#39;</span><span class="p">)</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">exclusive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">exclusive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">queue_name</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">queue</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">queue_bind</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;logs&#39;</span><span class="p">,</span>
                 <span class="n">queue</span><span class="o">=</span><span class="n">queue_name</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39; [*] Waiting for logs. To exit press CTRL+C&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; [*] Waiting for logs. To exit press CTRL+C&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">body</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [x] </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">body</span><span class="p">)</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span>
                     <span class="n">queue</span><span class="o">=</span><span class="n">queue_name</span><span class="p">,</span>
-                    <span class="n">no_ack</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                    <span class="n">no_ack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
 </pre></div>
@@ -373,7 +399,7 @@ rabbitmqctl list_permissions -p myproject
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;direct_logs&#39;</span><span class="p">,</span>
                     <span class="n">routing_key</span><span class="o">=</span><span class="n">severity</span><span class="p">,</span>
                     <span class="n">body</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Sent </span><span class="si">%r</span><span class="s2">:</span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">severity</span><span class="p">,</span> <span class="n">message</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [x] Sent </span><span class="si">%r</span><span class="s2">:</span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">severity</span><span class="p">,</span> <span class="n">message</span><span class="p">))</span>
 <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 <p>Le code du <em>consumer</em> <strong>receive_logs_direct.py</strong>:</p>
@@ -387,7 +413,7 @@ rabbitmqctl list_permissions -p myproject
 <span class="n">channel</span><span class="o">.</span><span class="n">exchange_declare</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;direct_logs&#39;</span><span class="p">,</span>
                         <span class="n">exchange_type</span><span class="o">=</span><span class="s1">&#39;direct&#39;</span><span class="p">)</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">exclusive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">exclusive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">queue_name</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">queue</span>
 
 <span class="n">severities</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
@@ -400,14 +426,14 @@ rabbitmqctl list_permissions -p myproject
                     <span class="n">queue</span><span class="o">=</span><span class="n">queue_name</span><span class="p">,</span>
                     <span class="n">routing_key</span><span class="o">=</span><span class="n">severity</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39; [*] Waiting for logs. To exit press CTRL+C&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; [*] Waiting for logs. To exit press CTRL+C&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] </span><span class="si">%r</span><span class="s2">:</span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">routing_key</span><span class="p">,</span> <span class="n">body</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [x] </span><span class="si">%r</span><span class="s2">:</span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">routing_key</span><span class="p">,</span> <span class="n">body</span><span class="p">))</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span>
                     <span class="n">queue</span><span class="o">=</span><span class="n">queue_name</span><span class="p">,</span>
-                    <span class="n">no_ack</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                    <span class="n">no_ack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
 </pre></div>
@@ -443,7 +469,7 @@ rabbitmqctl list_permissions -p myproject
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;topic_logs&#39;</span><span class="p">,</span>
                     <span class="n">routing_key</span><span class="o">=</span><span class="n">routing_key</span><span class="p">,</span>
                     <span class="n">body</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Sent </span><span class="si">%r</span><span class="s2">:</span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">routing_key</span><span class="p">,</span> <span class="n">message</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [x] Sent </span><span class="si">%r</span><span class="s2">:</span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">routing_key</span><span class="p">,</span> <span class="n">message</span><span class="p">))</span>
 <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 <p>Le code du <em>consumer</em> <strong>receive_logs_topic.py</strong>:</p>
@@ -457,7 +483,7 @@ rabbitmqctl list_permissions -p myproject
 <span class="n">channel</span><span class="o">.</span><span class="n">exchange_declare</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;topic_logs&#39;</span><span class="p">,</span>
                         <span class="n">exchange_type</span><span class="o">=</span><span class="s1">&#39;topic&#39;</span><span class="p">)</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">exclusive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">exclusive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">queue_name</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">queue</span>
 
 <span class="n">binding_keys</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
@@ -470,14 +496,14 @@ rabbitmqctl list_permissions -p myproject
                     <span class="n">queue</span><span class="o">=</span><span class="n">queue_name</span><span class="p">,</span>
                     <span class="n">routing_key</span><span class="o">=</span><span class="n">binding_key</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39; [*] Waiting for logs. To exit press CTRL+C&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; [*] Waiting for logs. To exit press CTRL+C&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] </span><span class="si">%r</span><span class="s2">:</span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">routing_key</span><span class="p">,</span> <span class="n">body</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [x] </span><span class="si">%r</span><span class="s2">:</span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">routing_key</span><span class="p">,</span> <span class="n">body</span><span class="p">))</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span>
                     <span class="n">queue</span><span class="o">=</span><span class="n">queue_name</span><span class="p">,</span>
-                    <span class="n">no_ack</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                    <span class="n">no_ack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
 </pre></div>
@@ -527,7 +553,7 @@ python emit_log_topic.py <span class="s2">&quot;kern.critical&quot;</span> <span
 <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">props</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; [.] fib(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [.] fib(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
     <span class="n">ch</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -540,7 +566,7 @@ python emit_log_topic.py <span class="s2">&quot;kern.critical&quot;</span> <span
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_qos</span><span class="p">(</span><span class="n">prefetch_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">on_request</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="s1">&#39;rpc_queue&#39;</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Awaiting RPC requests&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [x] Awaiting RPC requests&quot;</span><span class="p">)</span>
 <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
 </pre></div>
 <p>Le code de la partie <em>cliente</em> <em>rpc_client.py</em> :</p>
@@ -554,10 +580,10 @@ python emit_log_topic.py <span class="s2">&quot;kern.critical&quot;</span> <span
 
         <span class="bp">self</span><span class="o">.</span><span class="n">channel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">exclusive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">exclusive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">callback_queue</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">queue</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_response</span><span class="p">,</span> <span class="n">no_ack</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_response</span><span class="p">,</span> <span class="n">no_ack</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                 <span class="n">queue</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">callback_queue</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">on_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">props</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
@@ -565,7 +591,7 @@ python emit_log_topic.py <span class="s2">&quot;kern.critical&quot;</span> <span
             <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="n">body</span>
 
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">corr_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
                                 <span class="n">routing_key</span><span class="o">=</span><span class="s1">&#39;rpc_queue&#39;</span><span class="p">,</span>
@@ -574,15 +600,15 @@ python emit_log_topic.py <span class="s2">&quot;kern.critical&quot;</span> <span
                                         <span class="n">correlation_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">corr_id</span><span class="p">,</span>
                                         <span class="p">),</span>
                                 <span class="n">body</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">process_data_events</span><span class="p">()</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="p">)</span>
 
 <span class="n">fibonacci_rpc</span> <span class="o">=</span> <span class="n">FibonacciRpcClient</span><span class="p">()</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [x] Requesting fib(30)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [x] Requesting fib(30)&quot;</span><span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">fibonacci_rpc</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot; [.] Got </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">response</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [.] Got </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">response</span><span class="p">)</span>
 </pre></div>
 <p>Et pour tester ça :</p>
 <div class="highlight"><pre><span></span>python rpc_server.py
@@ -634,7 +660,9 @@ mais n'hésite pas à te plonger dedans pour plus de détail si besoin.</p>
 <p>
   &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
 </p>
-<p>Propulsé par <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> thème par <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+</p><p>
   <a rel="license"
      href="http://creativecommons.org/licenses/by-sa/4.0/"
      target="_blank">
@@ -661,6 +689,7 @@ mais n'hésite pas à te plonger dedans pour plus de détail si besoin.</p>
   "description": "DotMobo - Blog d'un Pythoniste Djangonaute"
 }
 </script>
+
 
 </body>
 </html>

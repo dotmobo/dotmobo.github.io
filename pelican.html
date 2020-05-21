@@ -12,8 +12,14 @@
 
     <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/pygments/monokai.min.css">
-  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/font-awesome.min.css">
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="http://dotmobo.github.io/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/solid.css">
 
     <link href="http://dotmobo.github.io/css/custom.css" rel="stylesheet">
 
@@ -45,6 +51,7 @@
 <meta name="description" content="Générer son site statique grâce à Pelican" />
 <meta name="keywords" content="pelican, python, jekyll, blog, github">
 
+
 <meta property="og:site_name" content=".mobo"/>
 <meta property="og:title" content="Générer son site statique grâce à Pelican"/>
 <meta property="og:description" content="Générer son site statique grâce à Pelican"/>
@@ -65,24 +72,43 @@
   <title>.mobo &ndash; Générer son site statique grâce à Pelican</title>
 
 </head>
-<body>
+<body class="light-theme">
   <aside>
     <div>
       <a href="http://dotmobo.github.io">
         <img src="//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg" alt=".mobo" title=".mobo">
       </a>
-      <h1><a href="http://dotmobo.github.io">.mobo</a></h1>
+
+      <h1>
+        <a href="http://dotmobo.github.io">.mobo</a>
+      </h1>
 
 <p>Blog d'un Pythoniste Djangonaute</p>
 
+
       <ul class="social">
-        <li><a class="sc-github" href="https://github.com/dotmobo" target="_blank"><i class="fa fa-github"></i></a></li>
-        <li><a class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank"><i class="fa fa-twitter"></i></a></li>
-        <li><a class="sc-google" href="https://www.google.com/+DotmoboGithubIo6" target="_blank"><i class="fa fa-google"></i></a></li>
-        <li><a class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-google" href="https://www.google.com/+DotmoboGithubIo6" target="_blank">
+              <i class="fab fa-google"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
       </ul>
     </div>
-
 
   </aside>
   <main>
@@ -90,7 +116,7 @@
     <nav>
       <a href="http://dotmobo.github.io">Accueil</a>
 
-      <a href="/categories.html">Categories</a>
+      <a href="/categories.html">Catégories</a>
       <a href="/tags.html">Tags</a>
       <a href="/archives.html">Archives</a>
 
@@ -132,13 +158,13 @@ dans le dossier <em>content</em>:</p>
 <div class="highlight"><pre><span></span><span class="gh">Mon article</span>
 <span class="gh">###########</span>
 
-<span class="nc">:date:</span> <span class="nf">2015-10-11 10:20</span>
-<span class="nc">:modified:</span> <span class="nf">2015-11-04 18:40</span>
-<span class="nc">:tags:</span> <span class="nf">python,django</span>
-<span class="nc">:category:</span> <span class="nf">Développement</span>
-<span class="nc">:slug:</span> <span class="nf">mon-article</span>
-<span class="nc">:authors:</span> <span class="nf">Toi</span>
-<span class="nc">:summary:</span> <span class="nf">Mon article concerne blablabla</span>
+<span class="nc">:date:</span> 2015-10-11 10:20
+<span class="nc">:modified:</span> 2015-11-04 18:40
+<span class="nc">:tags:</span> python,django
+<span class="nc">:category:</span> Développement
+<span class="nc">:slug:</span> mon-article
+<span class="nc">:authors:</span> Toi
+<span class="nc">:summary:</span> Mon article concerne blablabla
 
 blablabla ...
 </pre></div>
@@ -159,22 +185,22 @@ blablabla ...
 <span class="n">DEFAULT_LANG</span> <span class="o">=</span> <span class="s1">&#39;fr&#39;</span>
 
 <span class="c1"># Feed generation is usually not desired when developing</span>
-<span class="n">FEED_ALL_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
-<span class="n">CATEGORY_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
-<span class="n">TRANSLATION_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
-<span class="n">AUTHOR_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
-<span class="n">AUTHOR_FEED_RSS</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">FEED_ALL_ATOM</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">CATEGORY_FEED_ATOM</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">TRANSLATION_FEED_ATOM</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">AUTHOR_FEED_ATOM</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">AUTHOR_FEED_RSS</span> <span class="o">=</span> <span class="kc">None</span>
 
 <span class="c1"># Blogroll</span>
-<span class="n">LINKS</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">LINKS</span> <span class="o">=</span> <span class="kc">None</span>
 
 <span class="c1"># Social widget</span>
-<span class="n">SOCIAL</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">SOCIAL</span> <span class="o">=</span> <span class="kc">None</span>
 
 <span class="n">DEFAULT_PAGINATION</span> <span class="o">=</span> <span class="mi">10</span>
 
 <span class="c1"># Uncomment following line if you want document-relative URLs when developing</span>
-<span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="c1"># Theme</span>
 <span class="c1"># THEME = &quot;simple&quot;</span>
@@ -195,11 +221,11 @@ Le reste est relativement compréhensible pour se passer d'explication.</p>
 <span class="kn">from</span> <span class="nn">pelicanconf</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">SITEURL</span> <span class="o">=</span> <span class="s1">&#39;http://myusername.github.io&#39;</span>
-<span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="n">FEED_ATOM</span> <span class="o">=</span> <span class="s1">&#39;feeds/all.atom.xml&#39;</span>
 
-<span class="n">DELETE_OUTPUT_DIRECTORY</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">DELETE_OUTPUT_DIRECTORY</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="c1"># Following items are often useful when publishing</span>
 
@@ -252,16 +278,16 @@ pelican-themes -i ~/dev/pelican-alchemy/alchemy
 <span class="n">PROFILE_IMAGE</span> <span class="o">=</span> <span class="s2">&quot;profil.jpeg&quot;</span>
 <span class="n">GITHUB_ADDRESS</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/myusername&quot;</span>
 <span class="n">TWITTER_ADDRESS</span> <span class="o">=</span> <span class="s2">&quot;https://twitter.com/myusername&quot;</span>
-<span class="n">EXTRA_FAVICON</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">EXTRA_FAVICON</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">LICENSE_NAME</span> <span class="o">=</span> <span class="s2">&quot;MIT&quot;</span>
 <span class="n">LICENSE_URL</span> <span class="o">=</span> <span class="s2">&quot;https://opensource.org/licenses/MIT&quot;</span>
 <span class="n">MENU_ITEMS</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">META_DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Blabla</span>
-<span class="n">PAGES_ON_MENU</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="n">CATEGORIES_ON_MENU</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="n">TAGS_ON_MENU</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="n">ARCHIVES_ON_MENU</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="n">SHOW_ARTICLE_AUTHOR</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">PAGES_ON_MENU</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">CATEGORIES_ON_MENU</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">TAGS_ON_MENU</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">ARCHIVES_ON_MENU</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">SHOW_ARTICLE_AUTHOR</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 <p>Concernant les paramètres optionnels, je t'invite à regarder la doc d'alchemy.</p>
 <p>&quot;Ok, avoir un blog statique, c'est bien sympa, mais comment je fais pour avoir
@@ -312,7 +338,9 @@ le configurer via <em>http://&lt;username&gt;.disqus.com/admin/settings</em>.</p
 <p>
   &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
 </p>
-<p>Propulsé par <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> thème par <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+</p><p>
   <a rel="license"
      href="http://creativecommons.org/licenses/by-sa/4.0/"
      target="_blank">
@@ -339,6 +367,7 @@ le configurer via <em>http://&lt;username&gt;.disqus.com/admin/settings</em>.</p
   "description": "DotMobo - Blog d'un Pythoniste Djangonaute"
 }
 </script>
+
 
 </body>
 </html>

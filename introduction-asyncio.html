@@ -12,8 +12,14 @@
 
     <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/pygments/monokai.min.css">
-  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/font-awesome.min.css">
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="http://dotmobo.github.io/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/solid.css">
 
     <link href="http://dotmobo.github.io/css/custom.css" rel="stylesheet">
 
@@ -45,6 +51,7 @@
 <meta name="description" content="Introduction à Asyncio" />
 <meta name="keywords" content="python, asychrone, asyncio, aiohttp, requests, json, http, async, await, coroutine">
 
+
 <meta property="og:site_name" content=".mobo"/>
 <meta property="og:title" content="Introduction à Asyncio"/>
 <meta property="og:description" content="Introduction à Asyncio"/>
@@ -70,24 +77,43 @@
   <title>.mobo &ndash; Introduction à Asyncio</title>
 
 </head>
-<body>
+<body class="light-theme">
   <aside>
     <div>
       <a href="http://dotmobo.github.io">
         <img src="//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg" alt=".mobo" title=".mobo">
       </a>
-      <h1><a href="http://dotmobo.github.io">.mobo</a></h1>
+
+      <h1>
+        <a href="http://dotmobo.github.io">.mobo</a>
+      </h1>
 
 <p>Blog d'un Pythoniste Djangonaute</p>
 
+
       <ul class="social">
-        <li><a class="sc-github" href="https://github.com/dotmobo" target="_blank"><i class="fa fa-github"></i></a></li>
-        <li><a class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank"><i class="fa fa-twitter"></i></a></li>
-        <li><a class="sc-google" href="https://www.google.com/+DotmoboGithubIo6" target="_blank"><i class="fa fa-google"></i></a></li>
-        <li><a class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-google" href="https://www.google.com/+DotmoboGithubIo6" target="_blank">
+              <i class="fab fa-google"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
       </ul>
     </div>
-
 
   </aside>
   <main>
@@ -95,7 +121,7 @@
     <nav>
       <a href="http://dotmobo.github.io">Accueil</a>
 
-      <a href="/categories.html">Categories</a>
+      <a href="/categories.html">Catégories</a>
       <a href="/tags.html">Tags</a>
       <a href="/archives.html">Archives</a>
 
@@ -159,10 +185,10 @@ d'urls:</p>
 </pre></div>
 <p>Tu vas alors créer ta coroutine qui va récupérer les données renvoyées par une
 url et les insérer dans un objet <strong>Future</strong>:</p>
-<div class="highlight"><pre><span></span><span class="n">async</span> <span class="k">def</span> <span class="nf">call_url</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">call_url</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Coroutine récupérant les données provenant d&#39;une url &quot;&quot;&quot;</span>
-    <span class="n">async</span> <span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
         <span class="n">future</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 <p>Plusieurs explications sont nécessaires ici:</p>
@@ -204,7 +230,7 @@ réception des objets <strong>Future</strong> via <strong>asyncio.wait</strong>.
 des résultats sur la sortie standard:</p>
 <div class="highlight"><pre><span></span><span class="c1"># Exécution des tâches</span>
 <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">list_tasks</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">list_results</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_results</span><span class="p">)</span>
 </pre></div>
 <p>Enfin, tu peux fermer le client <em>aiohttp</em> et la boucle d'événements:</p>
 <div class="highlight"><pre><span></span><span class="c1"># Ferme le client et la boucle</span>
@@ -225,10 +251,10 @@ et quand tu la fermes.</p>
 <span class="n">URLS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;http://ip.jsontest.com/&#39;</span><span class="p">,</span> <span class="s1">&#39;http://headers.jsontest.com/&#39;</span><span class="p">,</span>
         <span class="s1">&#39;http://date.jsontest.com/&#39;</span><span class="p">]</span>
 
-<span class="n">async</span> <span class="k">def</span> <span class="nf">call_url</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">call_url</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Coroutine récupérant les données provenant d&#39;une url &quot;&quot;&quot;</span>
-    <span class="n">async</span> <span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
         <span class="n">future</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -249,7 +275,7 @@ et quand tu la fermes.</p>
 
     <span class="c1"># Exécution des tâches</span>
     <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">list_tasks</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">list_results</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">list_results</span><span class="p">)</span>
 
     <span class="c1"># Ferme le client et la boucle</span>
     <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -282,7 +308,7 @@ sys 0m0.033s
         <span class="n">result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="n">list_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="n">list_results</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">list_results</span><span class="p">)</span>
 </pre></div>
 <p>Tu l'exécutes:</p>
 <div class="highlight"><pre><span></span>$ <span class="nb">time</span> python noasyncio35.py
@@ -338,7 +364,9 @@ vraiment beaucoup plus à voir dans <a class="reference external" href="https://
 <p>
   &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
 </p>
-<p>Propulsé par <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> thème par <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+</p><p>
   <a rel="license"
      href="http://creativecommons.org/licenses/by-sa/4.0/"
      target="_blank">
@@ -365,6 +393,7 @@ vraiment beaucoup plus à voir dans <a class="reference external" href="https://
   "description": "DotMobo - Blog d'un Pythoniste Djangonaute"
 }
 </script>
+
 
 </body>
 </html>

@@ -3,13 +3,23 @@ Man vs. Wild: Angular
 ##############################
 
 :date: 2020-05-21
-:tags: python,ansible,fabric,devops,linux,déploiement,vagrant,virtualbox,ubuntu
+:tags: frontend,angular,rxjs
 :category: Frontend
 :slug: man-vs-wild-angular
 :authors: Morgan
 :summary: Angular
 
 Ah Angular, sujet de débat éternel pour tous les trolls des technos front. Ce framework est soit détesté, soit adulé, mais on est rarement dans la nuance. Pour le coup je botte un peu en touche, car mes sentiments à l'égard d'Angular font office de montagnes russes. Après m'être battu pendant 2 ans avec ce framework pour un projet pro, j'avais envie de te faire un petit retour des choses que j'aurai aimé savoir dès le début et sur comment s'en sortir avec cette stack et ses concepts.
+
+Editeur
+=======
+De ce que j'ai pu tester, l'éditeur le plus simple à prendre en main pour angular est VS Code (https://code.visualstudio.com/).
+Au niveau des plugins, j'ai bien aimé les suivants :
+- Angular 8 Snippets (https://marketplace.visualstudio.com/items?itemName=Mikael.Angular-BeastCode) : Snippets pour angular, material, ngrx
+- Prettier (https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) : pour le formatage du code
+- Tsint (https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin) : le linter typescript
+- Bracket Pair Colorizer (https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer) : pour s'en sortir avec les parenthèses
+J'ai un peu testé Intellij, Atom et Vim, mais je suis vite retourné sur VS Code.
 
 Rxjs
 ====
@@ -55,6 +65,8 @@ Enfin, si tu es obligé de rester abonné dans ton fichier typescript à un flux
             this.subscription.unsubscribe()
         }
     }
+
+Dernier point, il faut également éviter de faire des subscribe dans des subscribe pour éviter des comportements non voulus.
 
 Marble tests
 ------------

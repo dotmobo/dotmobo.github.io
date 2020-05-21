@@ -107,6 +107,48 @@ TODO mettre exemple avec sharereplay de 1h
 Ici, le resolver récupère la première requête et la met en cache pendant 1h. Pratique pour éviter de faire des appels systématiques !
 
 
+Store
+=====
+L'utilisation d'un store type redux pour Angular est très intéressant pour les gros projets. Ca permet de débugger plus facilement l'application et ça facilite l'intéraction entre plusieurs pages en partageant les données. Le store le plus utilisé par la communauté est Ngrx (https://ngrx.io/), donc je t'invite à partir sur celui-là si tu n'a pas de préférence particulière. Potasse un peu la doc officielle pour comprendre le fonctionnement (https://ngrx.io/guide/store). Après rxjs, c'est le deuxième indispensable.
+
+Debug
+-----
+L'outil de debug indispensable est le Redux Devtools (https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=fr). Ca va te pemettre de visualiser ton store en direct et de lancer des actions manuellement.
+
+Facade
+------
+Plutôt que de manipuler directement le store dans les composants, je te conseille d'utiliser un service angular qui va s'en charger. Dans ce service, tu vas mettre tes appels aux selectors, les dispatchs de tes actions et autres. C'est une manière d'utiliser le design pattern facade. Tu peux jeter un oeil à cette article où c'est bien expliqué (https://medium.com/@thomasburlesonIA/ngrx-facades-better-state-management-82a04b9a1e39). Concretement ta facade va ressembler à ça :
+
+
+.. code-block:: javascript
+
+        @Injectable()
+        export class CarsFacade {
+          loaded$ = this.store.select(carsQuery.getIsLoaded);
+          allCars$ = this.store.select(carsQuery.getAllCars);
+          selectedCar$ = this.store.select(carsQuery.getSelectedCar);
+
+          constructor(private store: Store<CarsState>) {}
+
+          loadAllCars() {
+            this.store.dispatch(new LoadCar());
+          }
+
+          selectCar(carId: string) {
+            this.store.dispatch(new SelectCar(carId));
+          }
+        }
+        
+Et c'est donc ce service que tu vas injecter dans tes composants plutot que le store directement ! Ca permet de garder des composants plus lisible, et d'isoler la partie store. Si un jour tu migres de technos de store, il te suffira de modifier les facades.
+
+Forms
+-----
+Il est possible de gérer nos formulaires angular directement dans le store ngrx. C'est vraiment très pratique si tu dois faire une application avec beaucoup de formulaire complexe. Ca facilite grandement le debug des formulaires et on a une manière propre de les utiliser. Cette librairie s'appelle ngrx-forms (https://ngrx-forms.readthedocs.io/) et est vraiment au top !
+
+Error thrown
+-------------
+j'en ai fait des cauchemars de celle-là. Si tu fais des tests unitaires pour ton application angular, tu risques de la rencontrer souvent. Elle peut survenir aléatoirement, c'est dur à débugguer, un horreur. Mais en gros, après s'être arraché les cheveux, si tu as une erreur de ce type qui survient à l'exécution des tests unitaires, c'est qu'il te manque dans 99% des cas l'importation et l'initialisation de ton store quelques part dans un des tests.
+
 
 
 

@@ -1,19 +1,19 @@
-Débuter le développement de jeux vidéos en créant un Infinite Runner en Lua
+Débuter le développement de jeux vidéo en créant un Infinite Runner en Lua
 ###########################################################################
 
 :date: 2021-06-16
-:tags: jeux,videos,lua,love2d,pico8,runner,itch
+:tags: jeux,video,lua,love2d,pico8,runner,itch
 :category: Lua
-:slug: jeux-videos-lua
+:slug: jeux-video-lua
 :authors: Morgan
-:summary: Débuter le développement de jeux vidéos en créant un Infinite Runner en Lua
+:summary: Débuter le développement de jeux vidéo en créant un Infinite Runner en Lua
 
 .. image:: ./images/lua-logo.gif
     :alt: Lua
     :align: right
 
 
-L'an dernier, principalement pendant la période de confinement, je me suis mis dans l'idée d'expérimenter le développement de jeux vidéos.
+L'an dernier, principalement pendant la période de confinement, je me suis mis dans l'idée d'expérimenter le développement de jeux vidéo.
 C'est un domaine qui m'a toujours attiré et passionné depuis tout petit, mais je n'ai jamais vraiment pris le temps de m'y attarder sérieusement.
 
 Les moteurs de jeux actuels comme l'Unreal Engine ou Unity ne m'attiraient pas vraiment. Ils me donnaient l'impression de devoir apprendre à utiliser un logiciel de
@@ -22,7 +22,7 @@ création complexe plutôt que de développer simplement un jeu.
 L'idée était de rester au plus simple, au plus rapide et au plus prêt du code. Et donc de pouvoir utiliser le combo Linux + VS Code pour le développement.
 
 Afin de trouver un moteur de jeu qui convenait à mes attentes, je me suis intéressé à l'excellent site `Itch.io <https://itch.io/>`_, qui permet aux développeurs
-indépendants de vendre leurs créations et de participer à des *Game Jams*. Pour mes lecteurs musiciens, c'est un peu le `Bandcamp <https://bandcamp.com/>`_ des jeux vidéos. 
+indépendants de vendre leurs créations et de participer à des *Game Jams*. Pour mes lecteurs musiciens, c'est un peu le `Bandcamp <https://bandcamp.com/>`_ des jeux vidéo. 
 
 Et ce qui est intéressant, c'est qu'il propose une `liste des moteurs de jeux les plus utilisés <https://itch.io/game-development/engines/most-projects>`_ sur sa plateforme.
 En éliminant les logiciels de création (Unity, Construct, Game Maker, Unreal Engine, Godot), il nous reste principalement deux moteurs de jeux : 
@@ -37,7 +37,7 @@ Lua
 Lua est un langage de script écrit en C très simple à apprendre et à utiliser. Il permet de faire de la programmation impérative de base, et se situe donc à mi-chemin entre
 Python, Go et Shellscript. Il ne faut pas espérer y trouver des concepts très avancés en programmation objet ou fonctionnel.
 
-Néanmoins, il est parfait pour s'initier au développement de jeux vidéos sans avoir de grandes connaissances en programmation en amont.
+Néanmoins, il est parfait pour s'initier au développement de jeux vidéo sans avoir de grandes connaissances en programmation en amont.
 
 Ses concepts de base sont bien résumés sur `Learn Lua in Y Minutes <https://learnxinyminutes.com/docs/fr-fr/lua-fr/>`_ et ça ressemble à ça :
 

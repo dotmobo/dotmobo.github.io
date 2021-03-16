@@ -1,0 +1,595 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="http://dotmobo.github.io/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/solid.css">
+
+    <link href="http://dotmobo.github.io/css/custom.css" rel="stylesheet">
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68852219-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Morgan" />
+<meta name="description" content="Débuter le développement de jeux vidéos en créant un Infinite Runner en Lua" />
+<meta name="keywords" content="jeux, videos, lua, love2d, pico8, runner, itch">
+
+
+<meta property="og:site_name" content=".mobo"/>
+<meta property="og:title" content="Débuter le développement de jeux vidéos en créant un Infinite Runner en Lua"/>
+<meta property="og:description" content="Débuter le développement de jeux vidéos en créant un Infinite Runner en Lua"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="http://dotmobo.github.io/jeux-videos-lua.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2021-06-16 00:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://dotmobo.github.io/author/morgan.html">
+<meta property="article:section" content="Lua"/>
+<meta property="article:tag" content="jeux"/>
+<meta property="article:tag" content="videos"/>
+<meta property="article:tag" content="lua"/>
+<meta property="article:tag" content="love2d"/>
+<meta property="article:tag" content="pico8"/>
+<meta property="article:tag" content="runner"/>
+<meta property="article:tag" content="itch"/>
+<meta property="og:image" content="//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg">
+
+  <title>.mobo &ndash; Débuter le développement de jeux vidéos en créant un Infinite Runner en Lua</title>
+
+</head>
+<body class="light-theme">
+  <aside>
+    <div>
+      <a href="http://dotmobo.github.io">
+        <img src="//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg" alt=".mobo" title=".mobo">
+      </a>
+
+      <h1>
+        <a href="http://dotmobo.github.io">.mobo</a>
+      </h1>
+
+<p>Blog d'un Pythoniste Djangonaute</p>
+
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-google" href="https://www.google.com/+DotmoboGithubIo6" target="_blank">
+              <i class="fab fa-google"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://dotmobo.github.io">Accueil</a>
+
+      <a href="/categories.html">Catégories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/archives.html">Archives</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="jeux-videos-lua">Débuter le développement de jeux vidéos en créant un Infinite Runner en Lua</h1>
+    <p>
+      Posté le 16/06/2021 dans <a href="http://dotmobo.github.io/category/lua.html">Lua</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="Lua" class="align-right" src="./images/lua-logo.gif" />
+<p>L'an dernier, principalement pendant la période de confinement, je me suis mis dans l'idée d'expérimenter le développement de jeux vidéos.
+C'est un domaine qui m'a toujours attiré et passionné depuis tout petit, mais je n'ai jamais vraiment pris le temps de m'y attarder sérieusement.</p>
+<p>Les moteurs de jeux actuels comme l'Unreal Engine ou Unity ne m'attiraient pas vraiment. Ils me donnaient l'impression de devoir apprendre à utiliser un logiciel de
+création complexe plutôt que de développer simplement un jeu.</p>
+<p>L'idée était de rester au plus simple, au plus rapide et au plus prêt du code. Et donc de pouvoir utiliser le combo Linux + VS Code pour le développement.</p>
+<p>Afin de trouver un moteur de jeu qui convenait à mes attentes, je me suis intéressé à l'excellent site <a class="reference external" href="https://itch.io/">Itch.io</a>, qui permet aux développeurs
+indépendants de vendre leurs créations et de participer à des <em>Game Jams</em>. Pour mes lecteurs musiciens, c'est un peu le <a class="reference external" href="https://bandcamp.com/">Bandcamp</a> des jeux vidéos.</p>
+<p>Et ce qui est intéressant, c'est qu'il propose une <a class="reference external" href="https://itch.io/game-development/engines/most-projects">liste des moteurs de jeux les plus utilisés</a> sur sa plateforme.
+En éliminant les logiciels de création (Unity, Construct, Game Maker, Unreal Engine, Godot), il nous reste principalement deux moteurs de jeux :</p>
+<p><a class="reference external" href="https://love2d.org/">LÖVE</a> et <a class="reference external" href="https://www.lexaloffle.com/pico-8.php">PICO-8</a></p>
+<p>Ces deux moteurs sont vraiment excellents et on l'avantage d'être basé sur le même langage de programmation, <a class="reference external" href="http://www.lua.org/">Lua</a>.</p>
+<div class="section" id="id1">
+<h2>Lua</h2>
+<p>Lua est un langage de script écrit en C très simple à apprendre et à utiliser. Il permet de faire de la programmation impérative de base, et se situe donc à mi-chemin entre
+Python, Go et Shellscript. Il ne faut pas espérer y trouver des concepts très avancés en programmation objet ou fonctionnel.</p>
+<p>Néanmoins, il est parfait pour s'initier au développement de jeux vidéos sans avoir de grandes connaissances en programmation en amont.</p>
+<p>Ses concepts de base sont bien résumés sur <a class="reference external" href="https://learnxinyminutes.com/docs/fr-fr/lua-fr/">Learn Lua in Y Minutes</a> et ça ressemble à ça :</p>
+<div class="highlight"><pre><span></span><span class="c1">-- defines a factorial function</span>
+<span class="kr">function</span> <span class="nf">fact</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span>
+        <span class="kr">return</span> <span class="mi">1</span>
+    <span class="kr">else</span>
+        <span class="kr">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fact</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;enter a number:&quot;</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">io.read</span><span class="p">(</span><span class="s2">&quot;*number&quot;</span><span class="p">)</span>        <span class="c1">-- read a number</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fact</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</pre></div>
+<p>Prends-toi 10 minutes pour te familiariser avec le langage et on peut passer à la suite !</p>
+</div>
+<div class="section" id="id2">
+<h2>LÖVE</h2>
+<img alt="Löve" class="align-right" src="./images/love.png" />
+<p>On commence par le moteur LÖVE, qui est un moteur open source, à l'inverse de PICO-8 qui est payant et propriétaire.
+Tu l'installes et tu fais le <a class="reference external" href="https://love2d.org/wiki/Getting_Started">Getting Started</a> du site officiel qui va te permettre que vérifier que tout est ok.</p>
+<p>Tout le fonctionnement de LÖVE se situe autour de 3 fonctions principales.</p>
+<p>La fonction <strong>load</strong> permet d'initialiser les éléments du jeu une fois au démarrage, comme le chargement d'images ou l'initialisation de variables.
+Dans l'exemple ci-dessous, on charge une image et on définit la police de caractères et les couleurs de notre jeu :</p>
+<div class="highlight"><pre><span></span><span class="kr">function</span> <span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">newImage</span><span class="p">(</span><span class="s2">&quot;cake.jpg&quot;</span><span class="p">)</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">setNewFont</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">setColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">setBackgroundColor</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<p>La fonction <strong>update</strong> est appelée continuellement, comme une boucle infinie, et utilise le <strong>delta time</strong> en paramètre qui représente le temps écoulé entre chaque appel.
+C'est ici que l'on va mettre à jour les données de notre jeu. Tu vas pouvoir l'utiliser pour mettre à jour les positions X et Y de ton joueur en fonction de l'appuie
+sur une touche par exemple. Ici, on incrémente un nombre lorsque l'on appuie sur <em>flèche haut</em> :</p>
+<div class="highlight"><pre><span></span><span class="kr">function</span> <span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">love</span><span class="p">.</span><span class="n">keyboard</span><span class="p">.</span><span class="n">isDown</span><span class="p">(</span><span class="s2">&quot;up&quot;</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">+</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">dt</span> <span class="c1">-- this would increment num by 100 per second</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<p>La fonction <strong>draw</strong> gère l'affichage des éléments, et les met automatiquement à jour lorsque des modifications sont apportées sur la position du joueur dans <strong>update</strong>
+par exemple. La séparation de <strong>update</strong> et de <strong>draw</strong> permet d'éviter des soucis de performances. Si des méthodes de calculs prennent beaucoup de temps dans <strong>update</strong>,
+ça n'affecte pas l'affichage des éléments dans <strong>draw</strong> et évite des effets de ralentissements.
+Ici, on affiche une image en fonction de sa position et du texte.</p>
+<div class="highlight"><pre><span></span><span class="kr">function</span> <span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">imgx</span><span class="p">,</span> <span class="n">imgy</span><span class="p">)</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Click and drag the cake around or use the arrow keys&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+</div>
+<div class="section" id="outils">
+<h2>Outils</h2>
+<p>Avant de s'attaquer au développement de ton premier jeu, il faut t'équiper de certains outils.</p>
+<p><strong>Pixel Art</strong></p>
+<p>Pour l'instant, on ne s'intéressera qu'aux dessins sous forme de <em>Pixel Art</em>. Tu peux utiliser les outils suivants :</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.piskelapp.com/">Piskel</a> : Outil en ligne pour faire tes dessins et animations. Parfait pour débuter.</li>
+<li><a class="reference external" href="https://krita.org/">Krita</a> : Outil de dessin très populaire sous Linux, qui permet d'utiliser <a class="reference external" href="https://docs.krita.org/en/reference_manual/brushes/brush_engines/pixel_brush_engine.html">une brosse spécifique pour le Pixel Art</a>.</li>
+<li><a class="reference external" href="https://www.aseprite.org/">Aseprite</a> : Mon outil préféré, mais payant pour avoir un installateur. Il est néanmoins open source et peut être compilé gratuitement depuis les sources sur Github.</li>
+</ul>
+<p><strong>Musique</strong></p>
+<p>Au niveau du son, tu peux t'équiper des outils suivants :</p>
+<ul class="simple">
+<li><a class="reference external" href="https://freesound.org/">Freesound</a> : Librarie en ligne de milliers de sons utilisable gratuitement. Parfait pour trouver des musiques et des effets.</li>
+<li><a class="reference external" href="https://audacity.fr/">Audacity</a> : Outil d'édition de fichier audio, simple et efficace si tu as besoin de faire des retouches ou d'enregistrer des sons.</li>
+<li><a class="reference external" href="https://jfxr.frozenfractal.com/">Jfxr</a> : Successeur de <a class="reference external" href="https://www.bfxr.net/">Bfxr</a>, c'est un outil qui permet de générer aléatoirement des sons 8bits comme le saut, le tir au laser et autres.</li>
+</ul>
+<p><strong>Editeur de cartes</strong></p>
+<p>On ne l'utilisera pas tout suite, mais le meilleur outil pour éditer des niveaux est <a class="reference external" href="https://www.mapeditor.org/">Tiled</a>. Il est gratuit, très populaire et est
+compatible avec la plupart des moteurs de jeux. Tu peux déjà y jeter un oeil si ça t'intéresse.</p>
+</div>
+<div class="section" id="runner">
+<h2>Runner</h2>
+<p>Ma première expérience dans l'utilisation de LÖVE a été la création de ce petit <em>Infinite Runner</em> appelé <a class="reference external" href="https://dotmobo.itch.io/multipla-adventure">Multipla Adventure</a>.
+Il s'agissait d'un projet inspiré par la destruction du carter d'huile ma Fiat Multipla sur un rocher dans un chemin forestier !</p>
+<img alt="Multipla" src="./images/multipla.png" />
+<p>L'intégralité du code source du jeu est disponible <a class="reference external" href="https://github.com/dotmobo/runner-game">ici</a>.
+Tu peux récupérer le dossier <strong>images</strong> et <strong>sounds</strong>, où utiliser les outils cités plus haut pour faire tes propres créations !
+N'hésite pas à prendre du temps pour comprendre les différents fichiers du jeu.</p>
+<p>On va avoir besoin de quelques petites fonctions utilitaires pour gérer les animations et les collisions. Dans un fichier <strong>utils.lua</strong>, tu mets :</p>
+<div class="highlight"><pre><span></span><span class="kr">function</span> <span class="nf">newAnimation</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">animation</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">animation</span><span class="p">.</span><span class="n">spriteSheet</span> <span class="o">=</span> <span class="n">image</span><span class="p">;</span>
+    <span class="n">animation</span><span class="p">.</span><span class="n">quads</span> <span class="o">=</span> <span class="p">{};</span>
+
+    <span class="kr">for</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span><span class="n">getHeight</span><span class="p">()</span> <span class="o">-</span> <span class="n">height</span><span class="p">,</span> <span class="n">height</span> <span class="kr">do</span>
+        <span class="kr">for</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span><span class="n">getWidth</span><span class="p">()</span> <span class="o">-</span> <span class="n">width</span><span class="p">,</span> <span class="n">width</span> <span class="kr">do</span>
+            <span class="nb">table.insert</span><span class="p">(</span><span class="n">animation</span><span class="p">.</span><span class="n">quads</span><span class="p">,</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">newQuad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span><span class="n">getDimensions</span><span class="p">()))</span>
+        <span class="kr">end</span>
+    <span class="kr">end</span>
+
+    <span class="n">animation</span><span class="p">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">duration</span> <span class="ow">or</span> <span class="mi">1</span>
+    <span class="n">animation</span><span class="p">.</span><span class="n">currentTime</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="kr">return</span> <span class="n">animation</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">setScale</span><span class="p">()</span>
+    <span class="kd">local</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">getWidth</span><span class="p">()</span> <span class="o">/</span> <span class="n">WIN_WIDTH</span>
+    <span class="kd">local</span> <span class="n">scaleY</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">getHeight</span><span class="p">()</span> <span class="o">/</span> <span class="n">WIN_HEIGHT</span>
+    <span class="kr">if</span> <span class="n">scaleY</span> <span class="o">&lt;</span> <span class="n">scale</span> <span class="kr">then</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">scaleY</span> <span class="kr">end</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">collideRect</span><span class="p">(</span><span class="n">rect1</span><span class="p">,</span> <span class="n">rect2</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">rect1</span><span class="p">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">rect2</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">rect2</span><span class="p">.</span><span class="n">width</span> <span class="ow">and</span>
+    <span class="n">rect1</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">rect1</span><span class="p">.</span><span class="n">width</span> <span class="o">&gt;</span> <span class="n">rect2</span><span class="p">.</span><span class="n">x</span> <span class="ow">and</span>
+    <span class="n">rect1</span><span class="p">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">rect2</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">rect2</span><span class="p">.</span><span class="n">height</span> <span class="ow">and</span>
+    <span class="n">rect1</span><span class="p">.</span><span class="n">height</span> <span class="o">+</span> <span class="n">rect1</span><span class="p">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">rect2</span><span class="p">.</span><span class="n">y</span> <span class="kr">then</span>
+        <span class="kr">return</span> <span class="kc">true</span>
+    <span class="kr">end</span>
+    <span class="kr">return</span> <span class="kc">false</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Notre joueur sera donc une voiture qui restera fixe à gauche de l'écran. La voiture pourra sauter avec la barre d'espace ou en appuyant
+sur l'écran de notre smartphone android. Ce qui signifie qu'il faudra gérer la gravité à minima.
+Il faudra également gérer l'animation et les sons de la voiture.</p>
+<p>Tu crées donc un fichier <strong>player.lua</strong> comme ci-dessous :</p>
+<div class="highlight"><pre><span></span><span class="kd">local</span> <span class="n">player</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">player</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">48</span>
+<span class="n">player</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">48</span>
+<span class="n">player</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">72</span>
+<span class="n">player</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">WIN_HEIGHT</span><span class="o">-</span><span class="n">player</span><span class="p">.</span><span class="n">height</span><span class="o">-</span><span class="mi">20</span>
+<span class="n">player</span><span class="p">.</span><span class="n">speedY</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">player</span><span class="p">.</span><span class="n">gravity</span> <span class="o">=</span> <span class="o">-</span><span class="mi">500</span>
+<span class="n">player</span><span class="p">.</span><span class="n">jumpHeight</span> <span class="o">=</span> <span class="o">-</span><span class="mi">250</span>
+<span class="n">player</span><span class="p">.</span><span class="n">groundY</span> <span class="o">=</span> <span class="n">WIN_HEIGHT</span><span class="o">-</span><span class="mi">48</span><span class="o">-</span><span class="mi">20</span>
+<span class="n">player</span><span class="p">.</span><span class="n">alive</span> <span class="o">=</span> <span class="kc">false</span>
+
+
+<span class="kr">function</span> <span class="nf">loadPlayer</span><span class="p">()</span>
+    <span class="n">player</span><span class="p">.</span><span class="n">img</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">newImage</span><span class="p">(</span><span class="s2">&quot;images/car.png&quot;</span><span class="p">)</span>
+    <span class="n">player</span><span class="p">.</span><span class="n">img</span><span class="p">:</span><span class="n">setFilter</span><span class="p">(</span><span class="s2">&quot;nearest&quot;</span><span class="p">,</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+    <span class="n">player</span><span class="p">.</span><span class="n">anim</span> <span class="o">=</span> <span class="n">newAnimation</span><span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="n">img</span><span class="p">,</span> <span class="n">player</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">player</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">player</span><span class="p">.</span><span class="n">jumpSound</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">audio</span><span class="p">.</span><span class="n">newSource</span><span class="p">(</span><span class="s2">&quot;sounds/340629__mickyman5000__chainsaw-stop .wav&quot;</span><span class="p">,</span> <span class="s2">&quot;static&quot;</span><span class="p">)</span>
+    <span class="kr">return</span> <span class="n">player</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">updatePlayer</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+    <span class="n">player</span><span class="p">.</span><span class="n">anim</span><span class="p">.</span><span class="n">currentTime</span> <span class="o">=</span> <span class="n">player</span><span class="p">.</span><span class="n">anim</span><span class="p">.</span><span class="n">currentTime</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="mi">10</span>
+
+    <span class="c1">-- android touch</span>
+    <span class="kd">local</span> <span class="n">touches</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">touch</span><span class="p">.</span><span class="n">getTouches</span><span class="p">()</span>
+    <span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">touch</span> <span class="kr">in</span> <span class="nb">ipairs</span><span class="p">(</span><span class="n">touches</span><span class="p">)</span> <span class="kr">do</span>
+        <span class="kd">local</span> <span class="n">tx</span><span class="p">,</span> <span class="n">ty</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">touch</span><span class="p">.</span><span class="n">getPosition</span><span class="p">(</span><span class="n">touch</span><span class="p">)</span>
+        <span class="kr">if</span> <span class="n">player</span><span class="p">.</span><span class="n">speedY</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span>
+            <span class="n">player</span><span class="p">.</span><span class="n">speedY</span> <span class="o">=</span> <span class="n">player</span><span class="p">.</span><span class="n">jumpHeight</span>
+        <span class="kr">end</span>
+    <span class="kr">end</span>
+    <span class="c1">-- keyboard</span>
+    <span class="kr">if</span> <span class="n">love</span><span class="p">.</span><span class="n">keyboard</span><span class="p">.</span><span class="n">isDown</span><span class="p">(</span><span class="s1">&#39;space&#39;</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="kr">if</span> <span class="n">player</span><span class="p">.</span><span class="n">speedY</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span>
+            <span class="n">player</span><span class="p">.</span><span class="n">jumpSound</span><span class="p">:</span><span class="n">play</span><span class="p">()</span>
+            <span class="n">player</span><span class="p">.</span><span class="n">speedY</span> <span class="o">=</span> <span class="n">player</span><span class="p">.</span><span class="n">jumpHeight</span>
+        <span class="kr">end</span>
+    <span class="kr">end</span>
+    <span class="c1">-- jumping</span>
+    <span class="kr">if</span> <span class="n">player</span><span class="p">.</span><span class="n">speedY</span> <span class="o">~=</span> <span class="mi">0</span> <span class="kr">then</span>
+        <span class="n">player</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">player</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">player</span><span class="p">.</span><span class="n">speedY</span> <span class="o">*</span> <span class="n">dt</span>
+        <span class="n">player</span><span class="p">.</span><span class="n">speedY</span> <span class="o">=</span> <span class="n">player</span><span class="p">.</span><span class="n">speedY</span> <span class="o">-</span> <span class="n">player</span><span class="p">.</span><span class="n">gravity</span> <span class="o">*</span> <span class="n">dt</span>
+    <span class="kr">end</span>
+    <span class="c1">-- stop jumping</span>
+    <span class="kr">if</span> <span class="n">player</span><span class="p">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">player</span><span class="p">.</span><span class="n">groundY</span> <span class="kr">then</span>
+        <span class="n">player</span><span class="p">.</span><span class="n">speedY</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">player</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">player</span><span class="p">.</span><span class="n">groundY</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">drawPlayer</span><span class="p">()</span>
+    <span class="kd">local</span> <span class="n">spriteNum</span> <span class="o">=</span> <span class="nb">math.floor</span><span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="n">anim</span><span class="p">.</span><span class="n">currentTime</span> <span class="o">%</span> <span class="o">#</span><span class="n">player</span><span class="p">.</span><span class="n">anim</span><span class="p">.</span><span class="n">quads</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="n">anim</span><span class="p">.</span><span class="n">spriteSheet</span><span class="p">,</span> <span class="n">player</span><span class="p">.</span><span class="n">anim</span><span class="p">.</span><span class="n">quads</span><span class="p">[</span><span class="n">spriteNum</span><span class="p">],</span> <span class="n">player</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">resetPlayer</span><span class="p">()</span>
+    <span class="n">player</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">72</span>
+    <span class="n">player</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">WIN_HEIGHT</span><span class="o">-</span><span class="n">player</span><span class="p">.</span><span class="n">height</span><span class="o">-</span><span class="mi">20</span>
+    <span class="n">player</span><span class="p">.</span><span class="n">alive</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="n">player</span><span class="p">.</span><span class="n">speedY</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kr">end</span>
+</pre></div>
+<p>La voiture restant fixe, c'est le décor qui va bouger pour donner une impression de mouvement. Pour donner du relief, on va créer 3 strates de montagnes
+et les faire défiler à des vitesses différentes.</p>
+<p>Tu crées un fichier <strong>landscape.lua</strong> comme qui suit :</p>
+<div class="highlight"><pre><span></span><span class="kd">local</span> <span class="n">imgMoutainsBack</span>
+<span class="kd">local</span> <span class="n">moutainsBackX</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">local</span> <span class="n">imgMoutainsFront</span>
+<span class="kd">local</span> <span class="n">moutainsFrontX</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">local</span> <span class="n">imgTrees</span>
+<span class="kd">local</span> <span class="n">treesX</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">local</span> <span class="n">ground</span>
+
+<span class="n">moutainsBack</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">newQuad</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">WIN_WIDTH</span><span class="p">,</span><span class="n">WIN_HEIGHT</span><span class="p">,</span><span class="n">WIN_WIDTH</span><span class="p">,</span><span class="n">WIN_HEIGHT</span><span class="p">)</span>
+<span class="n">moutainsFront</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">newQuad</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">WIN_WIDTH</span><span class="p">,</span><span class="n">WIN_HEIGHT</span><span class="p">,</span><span class="n">WIN_WIDTH</span><span class="p">,</span><span class="n">WIN_HEIGHT</span><span class="p">)</span>
+<span class="n">trees</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">newQuad</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">WIN_WIDTH</span><span class="p">,</span><span class="n">WIN_HEIGHT</span><span class="p">,</span><span class="n">WIN_WIDTH</span><span class="p">,</span><span class="n">WIN_HEIGHT</span><span class="p">)</span>
+<span class="n">ground</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">newQuad</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">WIN_WIDTH</span><span class="p">,</span><span class="n">WIN_HEIGHT</span><span class="p">,</span><span class="n">WIN_WIDTH</span><span class="p">,</span><span class="n">WIN_HEIGHT</span><span class="p">)</span>
+
+<span class="kr">function</span> <span class="nf">loadLandscape</span><span class="p">()</span>
+    <span class="n">imgMoutainsBack</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">newImage</span><span class="p">(</span><span class="s2">&quot;images/mountains_back.png&quot;</span><span class="p">)</span>
+    <span class="n">imgMoutainsBack</span><span class="p">:</span><span class="n">setFilter</span><span class="p">(</span><span class="s2">&quot;nearest&quot;</span><span class="p">,</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+
+    <span class="n">imgMoutainsFront</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">newImage</span><span class="p">(</span><span class="s2">&quot;images/mountains_front.png&quot;</span><span class="p">)</span>
+    <span class="n">imgMoutainsFront</span><span class="p">:</span><span class="n">setFilter</span><span class="p">(</span><span class="s2">&quot;nearest&quot;</span><span class="p">,</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+
+    <span class="n">imgTrees</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">newImage</span><span class="p">(</span><span class="s2">&quot;images/trees.png&quot;</span><span class="p">)</span>
+    <span class="n">imgTrees</span><span class="p">:</span><span class="n">setFilter</span><span class="p">(</span><span class="s2">&quot;nearest&quot;</span><span class="p">,</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+
+    <span class="n">imgGround</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">newImage</span><span class="p">(</span><span class="s2">&quot;images/ground.png&quot;</span><span class="p">)</span>
+    <span class="n">imgGround</span><span class="p">:</span><span class="n">setFilter</span><span class="p">(</span><span class="s2">&quot;nearest&quot;</span><span class="p">,</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">updateLandscape</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+    <span class="n">moutainsBackX</span> <span class="o">=</span> <span class="p">(</span><span class="n">moutainsBackX</span> <span class="o">+</span> <span class="mi">30</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span> <span class="o">%</span> <span class="n">WIN_WIDTH</span>
+    <span class="n">moutainsFrontX</span> <span class="o">=</span> <span class="p">(</span><span class="n">moutainsFrontX</span> <span class="o">+</span> <span class="mi">60</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span> <span class="o">%</span> <span class="n">WIN_WIDTH</span>
+    <span class="n">treesX</span> <span class="o">=</span> <span class="p">(</span><span class="n">treesX</span> <span class="o">+</span> <span class="mi">180</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span> <span class="o">%</span> <span class="n">WIN_WIDTH</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">drawLandscape</span><span class="p">()</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">imgMoutainsBack</span><span class="p">,</span><span class="n">moutainsBack</span><span class="p">,</span><span class="mi">0</span><span class="o">-</span><span class="n">moutainsBackX</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">imgMoutainsBack</span><span class="p">,</span><span class="n">moutainsBack</span><span class="p">,</span><span class="n">WIN_WIDTH</span><span class="o">-</span><span class="n">moutainsBackX</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">imgMoutainsFront</span><span class="p">,</span><span class="n">moutainsFront</span><span class="p">,</span><span class="mi">0</span><span class="o">-</span><span class="n">moutainsFrontX</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">imgMoutainsFront</span><span class="p">,</span><span class="n">moutainsFront</span><span class="p">,</span><span class="n">WIN_WIDTH</span><span class="o">-</span><span class="n">moutainsFrontX</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">imgTrees</span><span class="p">,</span><span class="n">trees</span><span class="p">,</span><span class="mi">0</span><span class="o">-</span><span class="n">treesX</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">imgTrees</span><span class="p">,</span><span class="n">trees</span><span class="p">,</span><span class="n">WIN_WIDTH</span><span class="o">-</span><span class="n">treesX</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">imgGround</span><span class="p">,</span><span class="n">ground</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Enfin, on va gérer l'apparition aléatoire de notre rocher se déplacant à des vitesses différentes, que le joueur devra éviter.
+Dans un fichier <strong>enemy.lua</strong>, tu écris :</p>
+<div class="highlight"><pre><span></span><span class="kd">local</span> <span class="n">enemy</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">enemy</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">36</span>
+<span class="n">enemy</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">36</span>
+<span class="n">enemy</span><span class="p">.</span><span class="n">groundY</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">enemy</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">WIN_WIDTH</span>
+<span class="n">enemy</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">WIN_HEIGHT</span><span class="o">-</span><span class="n">enemy</span><span class="p">.</span><span class="n">height</span><span class="o">-</span><span class="n">enemy</span><span class="p">.</span><span class="n">groundY</span>
+<span class="n">enemy</span><span class="p">.</span><span class="n">speedX</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">enemy</span><span class="p">.</span><span class="n">extraX</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">enemy</span><span class="p">.</span><span class="n">speedXMin</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">enemy</span><span class="p">.</span><span class="n">speedXMax</span> <span class="o">=</span> <span class="mi">700</span>
+
+
+<span class="kr">function</span> <span class="nf">loadEnemy</span><span class="p">()</span>
+    <span class="n">enemy</span><span class="p">.</span><span class="n">quad</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">newQuad</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">enemy</span><span class="p">.</span><span class="n">width</span><span class="p">,</span><span class="n">enemy</span><span class="p">.</span><span class="n">height</span><span class="p">,</span><span class="n">enemy</span><span class="p">.</span><span class="n">width</span><span class="p">,</span><span class="n">enemy</span><span class="p">.</span><span class="n">height</span><span class="p">)</span>
+    <span class="n">enemy</span><span class="p">.</span><span class="n">img</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">newImage</span><span class="p">(</span><span class="s2">&quot;images/enemy1.png&quot;</span><span class="p">)</span>
+    <span class="n">enemy</span><span class="p">.</span><span class="n">img</span><span class="p">:</span><span class="n">setFilter</span><span class="p">(</span><span class="s2">&quot;nearest&quot;</span><span class="p">,</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+    <span class="kr">return</span> <span class="n">enemy</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">updateEnemy</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">enemy</span><span class="p">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">WIN_WIDTH</span> <span class="kr">then</span>
+        <span class="n">enemy</span><span class="p">.</span><span class="n">speedX</span> <span class="o">=</span> <span class="nb">math.random</span><span class="p">(</span><span class="n">enemy</span><span class="p">.</span><span class="n">speedXMin</span><span class="p">,</span> <span class="n">enemy</span><span class="p">.</span><span class="n">speedXMax</span><span class="p">)</span>
+    <span class="kr">end</span>
+    <span class="n">enemy</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">enemy</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">enemy</span><span class="p">.</span><span class="n">speedX</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">WIN_WIDTH</span> <span class="o">+</span> <span class="n">enemy</span><span class="p">.</span><span class="n">extraX</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">drawEnemy</span><span class="p">()</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">enemy</span><span class="p">.</span><span class="n">img</span><span class="p">,</span><span class="n">enemy</span><span class="p">.</span><span class="n">quad</span><span class="p">,</span><span class="n">enemy</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">enemy</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">resetEnemy</span><span class="p">()</span>
+    <span class="n">enemy</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">WIN_WIDTH</span>
+    <span class="n">enemy</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">WIN_HEIGHT</span><span class="o">-</span><span class="n">enemy</span><span class="p">.</span><span class="n">height</span><span class="o">-</span><span class="n">enemy</span><span class="p">.</span><span class="n">groundY</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Il ne reste plus qu'à inclure tous ces éléments dans LÖVE !</p>
+<p>Pour ce faire, tu crées un fichier de constantes <strong>const.lua</strong> pour définir la taille de la fenêtre et le titre du jeu :</p>
+<div class="highlight"><pre><span></span><span class="n">TITLE</span> <span class="o">=</span> <span class="s2">&quot;Game 1&quot;</span>
+<span class="n">PATH_ICON</span> <span class="o">=</span> <span class="s2">&quot;images/enemy1.png&quot;</span>
+<span class="n">WIN_WIDTH</span> <span class="o">=</span> <span class="mi">640</span>
+<span class="n">WIN_HEIGHT</span> <span class="o">=</span> <span class="mi">360</span>
+</pre></div>
+<p>Puis un fichier de configuration <strong>conf.lua</strong> :</p>
+<div class="highlight"><pre><span></span><span class="nb">require</span><span class="p">(</span><span class="s1">&#39;const&#39;</span><span class="p">)</span>
+
+<span class="kr">function</span> <span class="nc">love</span><span class="p">.</span><span class="nf">conf</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">t</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">TITLE</span> <span class="c1">-- Change le titre de la fenêtre</span>
+    <span class="n">t</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">icon</span> <span class="o">=</span> <span class="n">PATH_ICON</span> <span class="c1">-- Change l&#39;icone de la fenêtre</span>
+    <span class="n">t</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">WIN_WIDTH</span> <span class="c1">-- Change la largeur de la fenêtre</span>
+    <span class="n">t</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">WIN_HEIGHT</span> <span class="c1">-- Change la hauteur de la fenêtre</span>
+    <span class="n">t</span><span class="p">.</span><span class="n">console</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Enfin, on intègre tout ça dans la boucle de LÖVE à l'aide des méthodes <strong>load</strong>, <strong>update</strong> et <strong>draw</strong> :</p>
+<div class="highlight"><pre><span></span><span class="nb">require</span><span class="p">(</span><span class="s1">&#39;utils&#39;</span><span class="p">)</span>
+<span class="nb">require</span><span class="p">(</span><span class="s1">&#39;landscape&#39;</span><span class="p">)</span>
+<span class="nb">require</span><span class="p">(</span><span class="s1">&#39;player&#39;</span><span class="p">)</span>
+<span class="nb">require</span><span class="p">(</span><span class="s1">&#39;enemy&#39;</span><span class="p">)</span>
+
+<span class="kd">local</span> <span class="n">player</span>
+<span class="kd">local</span> <span class="n">enemy</span>
+<span class="kd">local</span> <span class="n">score</span>
+
+<span class="kr">function</span> <span class="nf">reset</span><span class="p">()</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">resetPlayer</span><span class="p">()</span>
+    <span class="n">resetEnemy</span><span class="p">()</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+    <span class="c1">-- font</span>
+    <span class="n">font</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">newFont</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+    <span class="c1">-- game</span>
+    <span class="n">loadLandscape</span><span class="p">()</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="n">loadPlayer</span><span class="p">()</span>
+    <span class="n">enemy</span> <span class="o">=</span> <span class="n">loadEnemy</span><span class="p">()</span>
+    <span class="n">crashSound</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">audio</span><span class="p">.</span><span class="n">newSource</span><span class="p">(</span><span class="s2">&quot;sounds/151624__qubodup__clank-car-crash-collision.wav&quot;</span><span class="p">,</span> <span class="s2">&quot;static&quot;</span><span class="p">)</span>
+    <span class="n">music</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">audio</span><span class="p">.</span><span class="n">newSource</span><span class="p">(</span><span class="s2">&quot;sounds/514960__deleted-user-11009121__synthwave-loop-100bpm.mp3&quot;</span><span class="p">,</span> <span class="s2">&quot;static&quot;</span><span class="p">)</span>
+    <span class="n">music</span><span class="p">:</span><span class="n">setLooping</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+    <span class="n">music</span><span class="p">:</span><span class="n">play</span><span class="p">()</span>
+    <span class="n">music</span><span class="p">:</span><span class="n">setVolume</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+    <span class="n">updateLandscape</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">player</span><span class="p">.</span><span class="n">alive</span> <span class="o">==</span> <span class="kc">true</span> <span class="kr">then</span>
+        <span class="n">updatePlayer</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+        <span class="n">updateEnemy</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+        <span class="kr">if</span> <span class="n">collideRect</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">enemy</span><span class="p">)</span> <span class="kr">then</span>
+            <span class="n">crashSound</span><span class="p">:</span><span class="n">play</span><span class="p">()</span>
+            <span class="n">player</span><span class="p">.</span><span class="n">alive</span> <span class="o">=</span> <span class="kc">false</span>
+        <span class="kr">end</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">score</span> <span class="o">+</span> <span class="mi">20</span><span class="o">*</span><span class="n">dt</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+    <span class="n">setScale</span><span class="p">()</span>
+    <span class="n">drawLandscape</span><span class="p">()</span>
+
+    <span class="kr">if</span> <span class="n">player</span><span class="p">.</span><span class="n">alive</span> <span class="o">==</span> <span class="kc">true</span> <span class="kr">then</span>
+        <span class="n">drawPlayer</span><span class="p">()</span>
+        <span class="n">drawEnemy</span><span class="p">()</span>
+        <span class="c1">-- score</span>
+        <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="nb">print</span><span class="p">({{</span><span class="mi">2</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">9</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">4</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;score: &#39;</span><span class="o">..</span><span class="nb">math.floor</span><span class="p">(</span><span class="n">score</span><span class="p">)},</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+    <span class="kr">else</span>
+        <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">printf</span><span class="p">({{</span><span class="mi">2</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">9</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">4</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;Multipla Adventure&#39;</span><span class="p">},</span><span class="mi">0</span><span class="p">,</span><span class="n">WIN_HEIGHT</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="n">WIN_WIDTH</span><span class="p">,</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+        <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">printf</span><span class="p">({{</span><span class="mi">2</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">9</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">4</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="s2">&quot;Press space to play and jump &quot;</span><span class="p">},</span><span class="mi">0</span><span class="p">,</span><span class="n">WIN_HEIGHT</span><span class="o">/</span><span class="mi">3</span><span class="o">+</span><span class="mi">32</span><span class="p">,</span><span class="n">WIN_WIDTH</span><span class="p">,</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+        <span class="kr">if</span> <span class="n">score</span> <span class="o">~=</span> <span class="mi">0</span> <span class="kr">then</span>
+            <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">printf</span><span class="p">({{</span><span class="mi">2</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">9</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">4</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="s2">&quot;your score: &quot;</span><span class="o">..</span> <span class="nb">math.floor</span><span class="p">(</span><span class="n">score</span><span class="p">)},</span><span class="mi">0</span><span class="p">,</span><span class="n">WIN_HEIGHT</span><span class="o">/</span><span class="mi">3</span><span class="o">+</span><span class="mi">64</span><span class="p">,</span><span class="n">WIN_WIDTH</span><span class="p">,</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+        <span class="kr">end</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+
+<span class="kr">function</span> <span class="nc">love</span><span class="p">.</span><span class="nf">keyreleased</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">player</span><span class="p">.</span><span class="n">alive</span> <span class="o">==</span> <span class="kc">false</span> <span class="kr">then</span>
+        <span class="n">reset</span><span class="p">()</span>
+    <span class="kr">end</span>
+    <span class="kr">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;escape&quot;</span> <span class="kr">then</span>
+        <span class="n">love</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">quit</span><span class="p">()</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nc">love</span><span class="p">.</span><span class="nf">touchreleased</span><span class="p">(</span> <span class="n">id</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">pressure</span> <span class="p">)</span>
+    <span class="kr">if</span> <span class="n">player</span><span class="p">.</span><span class="n">alive</span> <span class="o">==</span> <span class="kc">false</span> <span class="kr">then</span>
+        <span class="n">reset</span><span class="p">()</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Il ne reste plus qu'à exécuter LÖVE depuis le dossier du jeu pour voir le résultat :</p>
+<div class="highlight"><pre><span></span>love .
+</pre></div>
+<p>Happy coding !</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://dotmobo.github.io/tag/jeux.html">jeux</a>
+      <a href="http://dotmobo.github.io/tag/videos.html">videos</a>
+      <a href="http://dotmobo.github.io/tag/lua.html">lua</a>
+      <a href="http://dotmobo.github.io/tag/love2d.html">love2d</a>
+      <a href="http://dotmobo.github.io/tag/pico8.html">pico8</a>
+      <a href="http://dotmobo.github.io/tag/runner.html">runner</a>
+      <a href="http://dotmobo.github.io/tag/itch.html">itch</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dotmobo';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; 2018  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " .mobo ",
+  "url" : "http://dotmobo.github.io",
+  "image": "//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg",
+  "description": "DotMobo - Blog d'un Pythoniste Djangonaute"
+}
+</script>
+
+
+</body>
+</html>

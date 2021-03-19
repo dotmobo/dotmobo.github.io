@@ -1,7 +1,7 @@
 Débuter le développement de jeux vidéo en créant un Infinite Runner en Lua
 ###########################################################################
 
-:date: 2021-06-16
+:date: 2021-03-16
 :tags: jeux,video,lua,love2d,pico8,runner,itch
 :category: Lua
 :slug: jeux-video-lua

@@ -181,7 +181,7 @@ Et dans l'état du jeu en cours *PlayState* on a :
 Le hero
 -------
 
-Notre hero va devoir se déplacer si on utilise le joystick ou le clavier, en utilisant un système d'accélération et de décélération dans son **update** :
+`Notre hero <https://github.com/dotmobo/disc-room-escape/blob/master/Hero.lua>`_ va devoir se déplacer si on utilise le joystick ou le clavier, en utilisant un système d'accélération et de décélération dans son **update** :
 
 .. code-block:: lua
 

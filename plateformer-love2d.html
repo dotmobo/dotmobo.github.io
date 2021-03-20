@@ -274,7 +274,7 @@ Une <a class="reference external" href="https://github.com/dotmobo/disc-room-esc
 </div>
 <div class="section" id="le-hero">
 <h2>Le hero</h2>
-<p>Notre hero va devoir se déplacer si on utilise le joystick ou le clavier, en utilisant un système d'accélération et de décélération dans son <strong>update</strong> :</p>
+<p><a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/Hero.lua">Notre hero</a> va devoir se déplacer si on utilise le joystick ou le clavier, en utilisant un système d'accélération et de décélération dans son <strong>update</strong> :</p>
 <div class="highlight"><pre><span></span><span class="kd">local</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
 
 <span class="kr">if</span> <span class="n">love</span><span class="p">.</span><span class="n">keyboard</span><span class="p">.</span><span class="n">isDown</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Joystick</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Joystick</span><span class="p">:</span><span class="n">isGamepadDown</span><span class="p">(</span><span class="s1">&#39;dpleft&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">Joystick</span><span class="p">:</span><span class="n">getGamepadAxis</span><span class="p">(</span><span class="s1">&#39;leftx&#39;</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mf">0.25</span><span class="p">))</span> <span class="kr">then</span>

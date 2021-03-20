@@ -145,9 +145,9 @@ Chaque chiffre va représenter un élément sur notre écran.
 Chacun de ces éléments utilise le système de classes de Lua via **setmetatable** pour sa représentation.
 Une `classe Level <https://github.com/dotmobo/disc-room-escape/blob/master/Level.lua>`_ va se charger de l'affichage des éléments du niveau en fonction de ces chiffres.
 
-Il sera alors possible de déclencher des évenements dans le monde, par exemple lorsque le joueur franchit une porte.
+Il sera alors possible de déclencher des évenements dans le monde via une fonction **trigger**, par exemple lorsque le joueur franchit une porte.
 
-Dans notre classe *Door* on a :
+Pour gérer cet évenement, dans notre classe *Door* on a :
 
 .. code-block:: lua
 

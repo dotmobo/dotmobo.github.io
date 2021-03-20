@@ -109,8 +109,8 @@ vérifier en continue la position des éléments et leurs collisions.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;Chacun de ces éléments utilise le système de classes de Lua via &lt;strong&gt;setmetatable&lt;/strong&gt; pour sa représentation.
 Une &lt;a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/Level.lua"&gt;classe Level&lt;/a&gt; va se charger de l'affichage des éléments du niveau en fonction de ces chiffres.&lt;/p&gt;
-&lt;p&gt;Il sera alors possible de déclencher des évenements dans le monde, par exemple lorsque le joueur franchit une porte.&lt;/p&gt;
-&lt;p&gt;Dans notre classe &lt;em&gt;Door&lt;/em&gt; on a :&lt;/p&gt;
+&lt;p&gt;Il sera alors possible de déclencher des évenements dans le monde via une fonction &lt;strong&gt;trigger&lt;/strong&gt;, par exemple lorsque le joueur franchit une porte.&lt;/p&gt;
+&lt;p&gt;Pour gérer cet évenement, dans notre classe &lt;em&gt;Door&lt;/em&gt; on a :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kr"&gt;function&lt;/span&gt; &lt;span class="nc"&gt;mt&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nf"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dt&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;touches_hero&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;GameState&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getCurrent&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="n"&gt;world&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;check&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;is_hero&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="kr"&gt;end&lt;/span&gt;

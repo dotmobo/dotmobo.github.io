@@ -245,8 +245,8 @@ vérifier en continue la position des éléments et leurs collisions.</p>
 </ul>
 <p>Chacun de ces éléments utilise le système de classes de Lua via <strong>setmetatable</strong> pour sa représentation.
 Une <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/Level.lua">classe Level</a> va se charger de l'affichage des éléments du niveau en fonction de ces chiffres.</p>
-<p>Il sera alors possible de déclencher des évenements dans le monde, par exemple lorsque le joueur franchit une porte.</p>
-<p>Dans notre classe <em>Door</em> on a :</p>
+<p>Il sera alors possible de déclencher des évenements dans le monde via une fonction <strong>trigger</strong>, par exemple lorsque le joueur franchit une porte.</p>
+<p>Pour gérer cet évenement, dans notre classe <em>Door</em> on a :</p>
 <div class="highlight"><pre><span></span><span class="kr">function</span> <span class="nc">mt</span><span class="p">:</span><span class="nf">update</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
     <span class="n">self</span><span class="p">.</span><span class="n">touches_hero</span> <span class="o">=</span> <span class="n">GameState</span><span class="p">.</span><span class="n">getCurrent</span><span class="p">().</span><span class="n">world</span><span class="p">:</span><span class="n">check</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="s1">&#39;is_hero&#39;</span><span class="p">)</span>
 <span class="kr">end</span>

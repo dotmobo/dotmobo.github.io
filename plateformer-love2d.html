@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="http://dotmobo.github.io/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/solid.css">
+
+    <link href="http://dotmobo.github.io/css/custom.css" rel="stylesheet">
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68852219-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Morgan" />
+<meta name="description" content="Créer un petit jeu de plateforme avec Löve" />
+<meta name="keywords" content="jeux, video, lua, love2d, plateformer, itch">
+
+
+<meta property="og:site_name" content=".mobo"/>
+<meta property="og:title" content="Créer un petit jeu de plateforme avec Löve"/>
+<meta property="og:description" content="Créer un petit jeu de plateforme avec Löve"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="http://dotmobo.github.io/plateformer-love2d.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2021-03-19 00:00:00+01:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://dotmobo.github.io/author/morgan.html">
+<meta property="article:section" content="Lua"/>
+<meta property="article:tag" content="jeux"/>
+<meta property="article:tag" content="video"/>
+<meta property="article:tag" content="lua"/>
+<meta property="article:tag" content="love2d"/>
+<meta property="article:tag" content="plateformer"/>
+<meta property="article:tag" content="itch"/>
+<meta property="og:image" content="//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg">
+
+  <title>.mobo &ndash; Créer un petit jeu de plateforme avec Löve</title>
+
+</head>
+<body class="light-theme">
+  <aside>
+    <div>
+      <a href="http://dotmobo.github.io">
+        <img src="//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg" alt=".mobo" title=".mobo">
+      </a>
+
+      <h1>
+        <a href="http://dotmobo.github.io">.mobo</a>
+      </h1>
+
+<p>Blog d'un Pythoniste Djangonaute</p>
+
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-google" href="https://www.google.com/+DotmoboGithubIo6" target="_blank">
+              <i class="fab fa-google"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://dotmobo.github.io">Accueil</a>
+
+      <a href="/categories.html">Catégories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/archives.html">Archives</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="plateformer-love2d">Créer un petit jeu de plateforme avec Löve</h1>
+    <p>
+      Posté le 19/03/2021 dans <a href="http://dotmobo.github.io/category/lua.html">Lua</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="Löve" class="align-right" src="./images/love.png" />
+<p>On fait suite au <a class="reference external" href="http://dotmobo.github.io/jeux-video-lua.html">précédent article du blog</a> qui introduisait le développement de jeux vidéo en Lua avec <a class="reference external" href="https://love2d.org/">Löve</a>.
+Tu vas voir comment créer un petit jeu de plateforme inspiré de <a class="reference external" href="https://store.steampowered.com/app/40800/Super_Meat_Boy/">Super Meat Boy</a> et de <a class="reference external" href="https://store.steampowered.com/app/1229580/Disc_Room/">Disc Room</a> uniquement avec Löve.</p>
+<div class="section" id="disc-room-escape">
+<h2>Disc Room Escape</h2>
+<p>Le jeu s'appelle Disc Room Escape et <a class="reference external" href="https://dotmobo.itch.io/disc-room-escape">est jouable sur itch.io</a>.
+Le but est simplement de traverser les différents niveaux, sans mourir, dans la limite de temps disponible.
+Il faudra sauter sur des plateformes et éviter des scies mortelles.</p>
+<p>Ici, pas besoin de librairies et outils annexes. Tout sera fait uniquement avec Löve.</p>
+<img alt="Disc Room" src="./images/discroom.gif" />
+</div>
+<div class="section" id="code-source">
+<h2>Code source</h2>
+<p>Le code source est <a class="reference external" href="https://github.com/dotmobo/disc-room-escape">intégralement disponible sur Github</a>.
+N'hésite pas à le récupérer, à jouer avec, à le modifier et à te l'approprier.</p>
+<p>Je vais t'expliquer dans les grandes lignes son fonctionnement. Suis les liens vers les fichiers sources pour les comprendre.
+Sur cet article, je ne mettrais en exemple que certains bouts de code intéressants pour éviter de trop le surcharger d'information.</p>
+</div>
+<div class="section" id="etat-du-jeu">
+<h2>Etat du jeu</h2>
+<p>On va commencer par créer un système qui gère l'état de notre jeu. Dans les prochains fichiers, on va beaucoup utiliser <strong>setmetatable</strong>,
+qui permet de gérer des sortes de <a class="reference external" href="https://www.lua.org/pil/16.1.html">classes en Lua</a>.</p>
+<p>Tu voudras avoir <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/StartState.lua">un écran d'accueil</a> où tu lances le jeu,
+<a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/PlayState.lua">un écran avec le jeu en cours</a>,
+<a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/WinState.lua">un écran de fin lors de la victoire</a> et
+<a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/DeadState.lua">un écran de fin lors de la défaite</a>. Ces écrans vont utiliser les fonctions
+<strong>update</strong> et <strong>draw</strong> de Löve pour se mettre à jour, afficher les éléments et gérer les touches.</p>
+<div class="highlight"><pre><span></span><span class="kr">function</span> <span class="nc">mt</span><span class="p">:</span><span class="nf">update</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">love</span><span class="p">.</span><span class="n">keyboard</span><span class="p">.</span><span class="n">isDown</span><span class="p">(</span><span class="s1">&#39;return&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Joystick</span> <span class="ow">and</span> <span class="n">Joystick</span><span class="p">:</span><span class="n">isGamepadDown</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">))</span> <span class="kr">then</span>
+        <span class="n">GameState</span><span class="p">.</span><span class="n">setCurrent</span><span class="p">(</span><span class="s1">&#39;Play&#39;</span><span class="p">,</span> <span class="n">GAME_LEVEL_START</span><span class="p">)</span>
+        <span class="kd">local</span> <span class="n">doorSound</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">audio</span><span class="p">.</span><span class="n">newSource</span><span class="p">(</span><span class="n">SOUND_DOOR</span><span class="p">,</span> <span class="s2">&quot;static&quot;</span><span class="p">)</span>
+        <span class="n">doorSound</span><span class="p">:</span><span class="n">play</span><span class="p">()</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nc">mt</span><span class="p">:</span><span class="nf">draw</span><span class="p">()</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">setNewFont</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">setColor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">setBackgroundColor</span><span class="p">(</span> <span class="mi">104</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span> <span class="mi">124</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span> <span class="mi">133</span><span class="o">/</span><span class="mi">255</span> <span class="p">)</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">img</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>
+    <span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="nb">print</span><span class="p">({{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;Press [enter] or [start] to start the game !&#39;</span><span class="p">},</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">220</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Tous ces écrans vont être manipulables grâce à <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/GameState.lua">une classe GameState</a>
+qui va se charger de gérer la transition des états. Il suffit par exemple, d'utiliser la commande suivante pour changer de niveau :</p>
+<div class="highlight"><pre><span></span><span class="n">GameState</span><span class="p">.</span><span class="n">setCurrent</span><span class="p">(</span><span class="s1">&#39;Play&#39;</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">level_num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+<p>Le <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/main.lua">fichier principal de Löve</a> va juste se charger de démarrer le jeu sur
+l'écran d'accueil et d'initier le joystick, <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/conf.lua">le fichier de configuration</a> et
+<a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/const.lua">les constantes du jeu</a>.</p>
+</div>
+<div class="section" id="animation-et-assets">
+<h2>Animation et assets</h2>
+<p>Tous les assets du jeu, sons et images, sont disponibles <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/tree/master/assets">ici</a>.
+Tu peux les modifier selon tes propres envies. Tu auras besoin de deux petits helpers,
+<a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/Animation.lua">un pour gérer les animations</a> et
+<a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/assets.lua">un autre pour gérer les assets</a>.</p>
+</div>
+<div class="section" id="le-monde">
+<h2>Le monde</h2>
+<p>Chaque élément du jeu sera ajouté à <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/World.lua">un monde</a>, qui va se charger de
+vérifier en continue la position des éléments et leurs collisions.</p>
+<p>On vérifie la collision de nos éléments à l'aide d'une fonction toute simple :</p>
+<div class="highlight"><pre><span></span><span class="kd">local</span> <span class="kr">function</span> <span class="nf">checkCollision</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="kr">return</span> <span class="n">a</span><span class="p">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="n">w</span> <span class="ow">and</span>
+        <span class="n">a</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">a</span><span class="p">.</span><span class="n">w</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">.</span><span class="n">x</span> <span class="ow">and</span>
+        <span class="n">a</span><span class="p">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="n">h</span> <span class="ow">and</span>
+        <span class="n">a</span><span class="p">.</span><span class="n">h</span> <span class="o">+</span> <span class="n">a</span><span class="p">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">.</span><span class="n">y</span>
+<span class="kr">end</span>
+</pre></div>
+</div>
+<div class="section" id="les-niveaux">
+<h2>Les niveaux</h2>
+<p>Les niveaux seront représentés par des tableaux de la manière suivante :</p>
+<div class="highlight"><pre><span></span><span class="kr">return</span> <span class="p">{</span>
+    <span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+<p>Chaque chiffre va représenter un élément sur notre écran.</p>
+<ul class="simple">
+<li>le 0 représente le vide.</li>
+<li>le 1 sera <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/Wall.lua">des murs</a>.</li>
+<li>le 2 sera <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/Floor.lua">le sol</a>.</li>
+<li>le 3 sera <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/ToggleFloor.lua">des plateformes amovibles</a>.</li>
+<li>le 4 sera <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/Door.lua">les portes de sorties</a>.</li>
+<li>le 5 sera <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/Disc.lua">des scies fixes</a>.</li>
+<li>le 6 sera <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/Roof.lua">le toît</a>.</li>
+<li>le 7 sera <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/Boss.lua">le boss du jeu</a>.</li>
+<li>le 8 sera <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/Enemy.lua">les ennemies du jeu</a>, des scies qui se déplacent.</li>
+<li>le 9 sera <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/Hero.lua">notre héro</a>.</li>
+<li>le 10 sera un élement du décor, <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/Scaffold.lua">l'échafaudage</a>.</li>
+</ul>
+<p>Chacun de ces éléments utilise le système de classes de Lua via <strong>setmetatable</strong> pour sa représentation.
+Une <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/Level.lua">classe Level</a> va se charger de l'affichage des éléments du niveau en fonction de ces chiffres.</p>
+<p>Il sera alors possible de déclencher des évenements dans le monde, par exemple lorsque le joueur franchit une porte.</p>
+<p>Dans notre classe <em>Door</em> on a :</p>
+<div class="highlight"><pre><span></span><span class="kr">function</span> <span class="nc">mt</span><span class="p">:</span><span class="nf">update</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">touches_hero</span> <span class="o">=</span> <span class="n">GameState</span><span class="p">.</span><span class="n">getCurrent</span><span class="p">().</span><span class="n">world</span><span class="p">:</span><span class="n">check</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="s1">&#39;is_hero&#39;</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nc">mt</span><span class="p">:</span><span class="nf">draw</span><span class="p">()</span>
+    <span class="n">assets</span><span class="p">.</span><span class="n">qdraw</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">self</span><span class="p">.</span><span class="n">touches_hero</span> <span class="kr">then</span>
+        <span class="n">GameState</span><span class="p">.</span><span class="n">getCurrent</span><span class="p">():</span><span class="n">trigger</span><span class="p">(</span><span class="s1">&#39;door:open&#39;</span><span class="p">)</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Et dans l'état du jeu en cours <em>PlayState</em> on a :</p>
+<div class="highlight"><pre><span></span><span class="kr">function</span> <span class="nc">mt</span><span class="p">:</span><span class="nf">trigger</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">actor</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">event</span> <span class="o">==</span> <span class="s1">&#39;door:open&#39;</span> <span class="kr">then</span>
+        <span class="kd">local</span> <span class="n">doorSound</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">audio</span><span class="p">.</span><span class="n">newSource</span><span class="p">(</span><span class="n">SOUND_DOOR</span><span class="p">,</span> <span class="s2">&quot;static&quot;</span><span class="p">)</span>
+        <span class="n">doorSound</span><span class="p">:</span><span class="n">play</span><span class="p">()</span>
+        <span class="kr">if</span> <span class="n">self</span><span class="p">.</span><span class="n">level_num</span> <span class="o">&lt;</span> <span class="n">GAME_LEVEL_MAX</span> <span class="kr">then</span>
+            <span class="n">GameState</span><span class="p">.</span><span class="n">setCurrent</span><span class="p">(</span><span class="s1">&#39;Play&#39;</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">level_num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="kr">else</span>
+            <span class="n">GameState</span><span class="p">.</span><span class="n">setCurrent</span><span class="p">(</span><span class="s1">&#39;Win&#39;</span><span class="p">)</span>
+        <span class="kr">end</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+</div>
+<div class="section" id="le-hero">
+<h2>Le hero</h2>
+<p>Notre hero va devoir se déplacer si on utilise le joystick ou le clavier, en utilisant un système d'accélération et de décélération dans son <strong>update</strong> :</p>
+<div class="highlight"><pre><span></span><span class="kd">local</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+<span class="kr">if</span> <span class="n">love</span><span class="p">.</span><span class="n">keyboard</span><span class="p">.</span><span class="n">isDown</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Joystick</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Joystick</span><span class="p">:</span><span class="n">isGamepadDown</span><span class="p">(</span><span class="s1">&#39;dpleft&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">Joystick</span><span class="p">:</span><span class="n">getGamepadAxis</span><span class="p">(</span><span class="s1">&#39;leftx&#39;</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mf">0.25</span><span class="p">))</span> <span class="kr">then</span>
+    <span class="n">self</span><span class="p">:</span><span class="n">setAnim</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">last_direction</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="c1">-- acceleration system</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">self</span><span class="p">.</span><span class="n">speed</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">acceleration</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">self</span><span class="p">.</span><span class="n">speed</span> <span class="kr">then</span> <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">=</span> <span class="o">-</span><span class="n">self</span><span class="p">.</span><span class="n">speed</span> <span class="kr">end</span>
+<span class="kr">elseif</span> <span class="n">love</span><span class="p">.</span><span class="n">keyboard</span><span class="p">.</span><span class="n">isDown</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Joystick</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Joystick</span><span class="p">:</span><span class="n">isGamepadDown</span><span class="p">(</span><span class="s1">&#39;dpright&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">Joystick</span><span class="p">:</span><span class="n">getGamepadAxis</span><span class="p">(</span><span class="s1">&#39;leftx&#39;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0.25</span><span class="p">))</span> <span class="kr">then</span>
+    <span class="n">self</span><span class="p">:</span><span class="n">setAnim</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">last_direction</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1">-- acceleration system</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">+</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">speed</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">acceleration</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">&gt;</span> <span class="n">self</span><span class="p">.</span><span class="n">speed</span> <span class="kr">then</span> <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">speed</span> <span class="kr">end</span>
+<span class="kr">else</span>
+    <span class="c1">-- deceleration system</span>
+    <span class="kr">if</span> <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="kr">then</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">+</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">speed</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">deceleration</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="kr">if</span> <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="kr">then</span> <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">=</span> <span class="mi">0</span> <span class="kr">end</span>
+    <span class="kr">elseif</span> <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="kr">then</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">self</span><span class="p">.</span><span class="n">speed</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">deceleration</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="kr">if</span> <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="kr">then</span> <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">=</span> <span class="mi">0</span> <span class="kr">end</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="n">dx</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">vx</span> <span class="o">*</span> <span class="n">dt</span>
+</pre></div>
+<p>Tu va devoir gérer la gravité lors du saut dans le <strong>update</strong> également :</p>
+<div class="highlight"><pre><span></span><span class="kr">if</span> <span class="p">(</span><span class="n">love</span><span class="p">.</span><span class="n">keyboard</span><span class="p">.</span><span class="n">isDown</span><span class="p">(</span><span class="s1">&#39;up&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Joystick</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Joystick</span><span class="p">:</span><span class="n">isGamepadDown</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))))</span> <span class="kr">then</span>
+    <span class="c1">-- init jump</span>
+    <span class="kr">if</span> <span class="n">self</span><span class="p">:</span><span class="n">canJump</span><span class="p">()</span> <span class="kr">then</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">vy</span> <span class="o">=</span> <span class="n">HERO_JUMP_SPEED</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">is_jumping</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="kd">local</span> <span class="n">jumpSound</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">audio</span><span class="p">.</span><span class="n">newSource</span><span class="p">(</span><span class="n">SOUND_JUMP</span><span class="p">,</span> <span class="s2">&quot;static&quot;</span><span class="p">)</span>
+        <span class="n">jumpSound</span><span class="p">:</span><span class="n">play</span><span class="p">()</span>
+    <span class="c1">-- during the jump</span>
+    <span class="kr">elseif</span> <span class="n">self</span><span class="p">.</span><span class="n">is_jumping</span> <span class="o">==</span> <span class="kc">true</span> <span class="kr">then</span>
+        <span class="c1">-- reduce the gravity for smooth jump</span>
+        <span class="kr">if</span> <span class="n">self</span><span class="p">.</span><span class="n">vy</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="kr">then</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">vy</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">vy</span> <span class="o">-</span> <span class="n">HERO_JUMP_GRAVITY</span> <span class="o">*</span> <span class="n">dt</span>
+        <span class="kr">end</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+<span class="c1">-- gravity</span>
+<span class="kr">if</span> <span class="n">self</span><span class="p">:</span><span class="n">isGrounded</span><span class="p">()</span> <span class="kr">then</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">vy</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">is_jumping</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">ungroundedTime</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kr">else</span>
+    <span class="n">self</span><span class="p">:</span><span class="n">setAnim</span><span class="p">(</span><span class="s1">&#39;jump&#39;</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">vy</span> <span class="o">=</span> <span class="nb">math.min</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">vy</span> <span class="o">+</span> <span class="n">HERO_GRAVITY</span> <span class="o">*</span> <span class="n">dt</span><span class="p">,</span> <span class="n">HERO_MAX_VELOCITY</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">ungroundedTime</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">ungroundedTime</span> <span class="o">+</span> <span class="n">dt</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Et bien évidemment, il faudra l'animer à l'aide de notre helper :</p>
+<div class="highlight"><pre><span></span><span class="n">self</span><span class="p">:</span><span class="n">setAnim</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">)</span>
+</pre></div>
+<p>et enfin le déplacer dans notre monde via :</p>
+<div class="highlight"><pre><span></span><span class="n">GameState</span><span class="p">.</span><span class="n">getCurrent</span><span class="p">().</span><span class="n">world</span><span class="p">:</span><span class="n">move</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">vy</span><span class="p">,</span> <span class="s1">&#39;is_solid&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="les-particules-de-sang">
+<h2>Les particules de sang</h2>
+<p>Enfin, à la mort, on va utiliser <a class="reference external" href="https://github.com/dotmobo/disc-room-escape/blob/master/Particles.lua">un système de particules</a> pour gérer le sang.
+On va pouvoir utiliser différents paramètres pour styliser nos particules :</p>
+<div class="highlight"><pre><span></span><span class="n">p</span><span class="p">.</span><span class="n">psystem</span><span class="p">:</span><span class="n">setParticleLifetime</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">p</span><span class="p">.</span><span class="n">psystem</span><span class="p">:</span><span class="n">setEmissionRate</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
+<span class="n">p</span><span class="p">.</span><span class="n">psystem</span><span class="p">:</span><span class="n">setEmitterLifetime</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">p</span><span class="p">.</span><span class="n">psystem</span><span class="p">:</span><span class="n">setSizeVariation</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">p</span><span class="p">.</span><span class="n">psystem</span><span class="p">:</span><span class="n">setLinearAcceleration</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">p</span><span class="p">.</span><span class="n">psystem</span><span class="p">:</span><span class="n">setColors</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion</h2>
+<p>J'espère que cet aperçu va te donner envie d'essayer Löve plus en profondeur !</p>
+<p>Ici, on a tout fait à la main, sans librairie. C'est la meilleur manière de procéder je pense pour avoir le contrôle complet de ton code.</p>
+<p>Mais si tu veux voir ce que ça donne en utilisant des librairies de gestion de
+collisions comme <a class="reference external" href="https://github.com/kikito/bump.lua">Bump</a>, des utilitaires pour gérer l'état du jeu ou la caméra comme <a class="reference external" href="https://github.com/HDictus/hump">Hump</a>,
+l'outil de gestion des animations <a class="reference external" href="https://github.com/kikito/anim8">Anim8</a>, ou encore l'utilitaire <a class="reference external" href="https://github.com/karai17/Simple-Tiled-Implementation">STI</a>
+pour manipuler des niveaux créés avec <a class="reference external" href="https://www.mapeditor.org/">Tiled</a>, tu peux jeter un oeil à mon deuxième projet Löve, <a class="reference external" href="https://dotmobo.itch.io/the-legend-of-shifu">The Legend Of Shifu</a>,
+dont l'intégralité du code source est <a class="reference external" href="https://github.com/dotmobo/the-legend-of-shifu">disponible sur Github</a>. C'est un petit jeu inspiré de
+<a class="reference external" href="https://store.steampowered.com/app/250900/The_Binding_of_Isaac_Rebirth/">The Binding Of Isaac</a>.</p>
+<img alt="The Legend Of Shifu" src="./images/shifu.png" />
+<p>Have fun !</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://dotmobo.github.io/tag/jeux.html">jeux</a>
+      <a href="http://dotmobo.github.io/tag/video.html">video</a>
+      <a href="http://dotmobo.github.io/tag/lua.html">lua</a>
+      <a href="http://dotmobo.github.io/tag/love2d.html">love2d</a>
+      <a href="http://dotmobo.github.io/tag/plateformer.html">plateformer</a>
+      <a href="http://dotmobo.github.io/tag/itch.html">itch</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dotmobo';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; 2018  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " .mobo ",
+  "url" : "http://dotmobo.github.io",
+  "image": "//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg",
+  "description": "DotMobo - Blog d'un Pythoniste Djangonaute"
+}
+</script>
+
+
+</body>
+</html>

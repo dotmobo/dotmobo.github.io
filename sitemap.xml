@@ -5,14 +5,21 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://dotmobo.github.io/</loc>
-<lastmod>2021-03-16T12:47:07-00:00</lastmod>
+<lastmod>2021-03-20T10:58:01-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
+<loc>http://dotmobo.github.io/plateformer-love2d.html</loc>
+<lastmod>2021-03-19T00:00:00+01:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
 <loc>http://dotmobo.github.io/jeux-video-lua.html</loc>
-<lastmod>2021-06-16T00:00:00+02:00</lastmod>
+<lastmod>2021-03-16T00:00:00+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
@@ -236,7 +243,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://dotmobo.github.io/category/lua.html</loc>
-<lastmod>2021-06-16T00:00:00+00:09</lastmod>
+<lastmod>2021-03-19T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -257,49 +264,56 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://dotmobo.github.io/tag/jeux.html</loc>
-<lastmod>2021-06-16T00:00:00+00:09</lastmod>
+<lastmod>2021-03-19T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>http://dotmobo.github.io/tag/video.html</loc>
-<lastmod>2021-06-16T00:00:00+00:09</lastmod>
+<lastmod>2021-03-19T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>http://dotmobo.github.io/tag/lua.html</loc>
-<lastmod>2021-06-16T00:00:00+00:09</lastmod>
+<lastmod>2021-03-19T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>http://dotmobo.github.io/tag/love2d.html</loc>
-<lastmod>2021-06-16T00:00:00+00:09</lastmod>
+<lastmod>2021-03-19T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>http://dotmobo.github.io/tag/pico8.html</loc>
-<lastmod>2021-06-16T00:00:00+00:09</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>http://dotmobo.github.io/tag/runner.html</loc>
-<lastmod>2021-06-16T00:00:00+00:09</lastmod>
+<loc>http://dotmobo.github.io/tag/plateformer.html</loc>
+<lastmod>2021-03-19T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>http://dotmobo.github.io/tag/itch.html</loc>
-<lastmod>2021-06-16T00:00:00+00:09</lastmod>
+<lastmod>2021-03-19T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>http://dotmobo.github.io/tag/pico8.html</loc>
+<lastmod>2021-03-16T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>http://dotmobo.github.io/tag/runner.html</loc>
+<lastmod>2021-03-16T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -1118,7 +1132,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://dotmobo.github.io/author/morgan.html</loc>
-<lastmod>2021-06-16T00:00:00+00:09</lastmod>
+<lastmod>2021-03-19T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>

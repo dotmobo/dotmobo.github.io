@@ -44,7 +44,6 @@ LINKS = None
 
 SOCIAL = (('github', 'https://github.com/dotmobo'),
           ('twitter', 'https://twitter.com/dotmobo'),
-          ('google', "https://www.google.com/+DotmoboGithubIo6"),
           ('rss', '//dotmobo.github.io/feeds/all.atom.xml'))
 
 

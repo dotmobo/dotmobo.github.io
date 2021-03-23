@@ -43,11 +43,11 @@ Grâce à tout ça, on peut se concentrer uniquement sur les aspects créatifs d
 **Facile à prendre en main !**
 
 La cerise sur le gâteau est sa facilité de prise en main. Le combo `Lua <http://www.lua.org/>`_/outils intégrés permet de très vite se lancer dans la création de ton premier jeu !
-La communauté est excellente et il existe de `très bon tutorials sur le net <https://www.youtube.com/watch?v=YXbR0eqPoAw&list=PLHKUrXMrDS5t3ibCCh412ZAy0slIv3jeE>`_.
+La communauté est excellente et il existe de `très bon tutoriels sur le net <https://www.youtube.com/watch?v=YXbR0eqPoAw&list=PLHKUrXMrDS5t3ibCCh412ZAy0slIv3jeE>`_.
 
 **Favorise le partage !**
 
-Le fichier du jeu est la cartouche intégrale du jeu. Il est donc très simple de l'extraire, et de la partager, que ça soit `sur itch.io <https://itch.io/games/tag-pico-8>`_
+Le fichier du jeu est la cartouche intégrale du jeu. Il est donc très simple de l'extraire et de la partager, que ça soit `sur itch.io <https://itch.io/games/tag-pico-8>`_
 ou sur sur le `hub Pico-8 <https://www.lexaloffle.com/bbs/?cat=7>`_.
 
 **Parfait pour les Game Jams**
@@ -677,5 +677,7 @@ Voici un exemple complet d'une cartouche, celle de *Hellhound*, pour te faire un
     010f00000003100001000310000100001000010000100001000310000100031000010000100001000010000100031000010003100001000010000100001000010000100001000010000100001000010000100001
     __music__
     02 0a424344
+
+Plutôt simple et efficace non ?
 
 Amuse-toi bien et sois créatif !

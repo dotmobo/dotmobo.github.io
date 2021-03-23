@@ -1,0 +1,853 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="http://dotmobo.github.io/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/solid.css">
+
+    <link href="http://dotmobo.github.io/css/custom.css" rel="stylesheet">
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68852219-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Morgan" />
+<meta name="description" content="Pico-8, mon coup de coeur !" />
+<meta name="keywords" content="jeux, video, lua, pico8, pico-8, plateformer, arcade, shooter, itch">
+
+
+<meta property="og:site_name" content=".mobo"/>
+<meta property="og:title" content="Pico-8, mon coup de coeur !"/>
+<meta property="og:description" content="Pico-8, mon coup de coeur !"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="http://dotmobo.github.io/pico8.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2021-03-23 00:00:00+01:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://dotmobo.github.io/author/morgan.html">
+<meta property="article:section" content="Lua"/>
+<meta property="article:tag" content="jeux"/>
+<meta property="article:tag" content="video"/>
+<meta property="article:tag" content="lua"/>
+<meta property="article:tag" content="pico8"/>
+<meta property="article:tag" content="pico-8"/>
+<meta property="article:tag" content="plateformer"/>
+<meta property="article:tag" content="arcade"/>
+<meta property="article:tag" content="shooter"/>
+<meta property="article:tag" content="itch"/>
+<meta property="og:image" content="//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg">
+
+  <title>.mobo &ndash; Pico-8, mon coup de coeur !</title>
+
+</head>
+<body class="light-theme">
+  <aside>
+    <div>
+      <a href="http://dotmobo.github.io">
+        <img src="//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg" alt=".mobo" title=".mobo">
+      </a>
+
+      <h1>
+        <a href="http://dotmobo.github.io">.mobo</a>
+      </h1>
+
+<p>Blog d'un Pythoniste Djangonaute</p>
+
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-google" href="https://www.google.com/+DotmoboGithubIo6" target="_blank">
+              <i class="fab fa-google"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://dotmobo.github.io">Accueil</a>
+
+      <a href="/categories.html">Catégories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/archives.html">Archives</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="pico8">Pico-8, mon coup de coeur !</h1>
+    <p>
+      Posté le 23/03/2021 dans <a href="http://dotmobo.github.io/category/lua.html">Lua</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="Pico-8" class="align-right" src="./images/pico8.png" />
+<p><a class="reference external" href="https://www.lexaloffle.com/pico-8.php">Pico-8</a> est ce qu'on appelle une <strong>Fantasy Console</strong>, c'est-à-dire qu'il s'agit d'une console virtuelle 8 bits
+imaginaire. C'est un peu comme une cousine de la Game Boy n'ayant jamais existée. Et comme toutes les consoles, elle a des contraintes et des limitations.
+Sa résolution est fixée à 128x128 pixels, le nombre de couleurs limité à 16 et la taille de la cartouche contenant le code du jeu ne peut pas dépasser 32 kilo-octets.</p>
+<p>Mais pourquoi avoir mis ces contraintes ? N'est-ce pas gênant ? Et bien, c'est là qu'opère toute la magie de cette console.</p>
+<p><strong>Ses limitations stimulent la créativité !</strong></p>
+<ul class="simple">
+<li>La résolution et la taille de la carte est fixe, ce qui permet d'avoir une vision globale du nombre de niveaux que notre jeu sera capable de supporter.</li>
+<li>La limitation de la taille de la cartouche nous force à écrire du code simple et efficace.</li>
+<li>Le style graphique sera forcément du pixel art.</li>
+<li>On est obligé de piocher dans les couleurs proposées, donc pas besoin de réfléchir à des palettes de couleurs.</li>
+<li>Les sons utilisables sont également proposés, à l'instar des couleurs.</li>
+</ul>
+<p>Du coup, le fait d'avoir un cadre imposé permet d'éviter de se poser trop de question sur notre jeu.</p>
+<p><strong>Tous les outils sont intégrés !</strong></p>
+<p>En effet, <em>Pico-8</em> propose un éditeur de code, un éditeur de son, un éditeur de musique, un éditeur de niveaux et un éditeur de pixel art.
+Tout est intégré et se suffit à lui-même !</p>
+<img alt="Pico-8" class="align-right" src="./images/pico8editor.gif" />
+<p>Grâce à tout ça, on peut se concentrer uniquement sur les aspects créatifs de notre jeu, comme le game design, le gameplay, le scénario, ou la musique.</p>
+<p><strong>Facile à prendre en main !</strong></p>
+<p>La cerise sur le gâteau est sa facilité de prise en main. Le combo <a class="reference external" href="http://www.lua.org/">Lua</a>/outils intégrés permet de très vite se lancer dans la création de ton premier jeu !
+La communauté est excellente et il existe de <a class="reference external" href="https://www.youtube.com/watch?v=YXbR0eqPoAw&amp;list=PLHKUrXMrDS5t3ibCCh412ZAy0slIv3jeE">très bon tutoriels sur le net</a>.</p>
+<p><strong>Favorise le partage !</strong></p>
+<p>Le fichier du jeu est la cartouche intégrale du jeu. Il est donc très simple de l'extraire et de la partager, que ça soit <a class="reference external" href="https://itch.io/games/tag-pico-8">sur itch.io</a>
+ou sur sur le <a class="reference external" href="https://www.lexaloffle.com/bbs/?cat=7">hub Pico-8</a>.</p>
+<p><strong>Parfait pour les Game Jams</strong></p>
+<p>Pour finir, sa facilité de prise en main et son cadre imposé le rendent parfait pour les Game Jams. De gros projets ont utilisé Pico-8 dans des Game Jams
+pour prototyper leur jeu, <a class="reference external" href="https://mattmakesgames.itch.io/celesteclassic">comme Celeste</a> !</p>
+<p><strong>Mais non libre</strong></p>
+<p>Malheurseusement, l'outil est non-libre et donc payant. Je n'ai pas l'habitude de promouvoir des logiciels payants, mais celui-ci est tellement bien
+pensé que je pense que ça vaut réellement le coup. Si vraiment ça te bloque, tu peux te tourner vers un équivalent open source appelé <a class="reference external" href="https://tic80.com/">TIC-80</a>.</p>
+<div class="section" id="mes-jeux">
+<h2>Mes jeux</h2>
+<p>Tu peux jeter un oeil aux jeux que j'ai codé pour des Game Jams avec <em>Pico-8</em>. J'ai tenté de découvrir différents styles de jeux :</p>
+<ul class="simple">
+<li><a class="reference external" href="https://dotmobo.itch.io/shoot-the-moon">Shoot The Moon</a>, un shooter spatial donc le code source est <a class="reference external" href="https://github.com/dotmobo/shoot-the-moon">disponible ici</a>.</li>
+</ul>
+<img alt="Shoot The Moon" src="./images/shootthemoon.gif" />
+<ul class="simple">
+<li><a class="reference external" href="https://dotmobo.itch.io/solene-is-missing">Solène Is Missing</a>, un mini rpg donc le code source est <a class="reference external" href="https://github.com/dotmobo/solene-is-missing">disponible là</a>.</li>
+</ul>
+<img alt="Solène Is Missing" src="./images/solene.gif" />
+<ul class="simple">
+<li><a class="reference external" href="https://dotmobo.itch.io/badaboom">Badaboom</a>, un petit jeu d'arcade à l'ancienne basé sur une scène du film <strong>Le 5ème élément</strong>, donc le code source est <a class="reference external" href="https://github.com/dotmobo/badaboom">disponible ici aussi</a>.</li>
+</ul>
+<img alt="Badaboom" src="./images/badaboom.gif" />
+<ul class="simple">
+<li><a class="reference external" href="https://dotmobo.itch.io/hellhound">Hellhound</a>, le prototyope d'un jeu de plateforme et de survie, donc le code source est <a class="reference external" href="https://github.com/dotmobo/hellhound">disponible là aussi</a>.</li>
+</ul>
+<img alt="Hellhound" src="./images/hellhound.gif" />
+</div>
+<div class="section" id="le-code">
+<h2>Le code</h2>
+<p>Au niveau du code, tu pourras trouver de nombreuses similarités avec <em>Löve</em> qu'on a <a class="reference external" href="http://dotmobo.github.io/plateformer-love2d.html">étudié précédemment</a>.</p>
+<p>Tu as aussi les trois fonctions <strong>init</strong>, <strong>update</strong> et <strong>draw</strong> dans lesquelles tout ce passe.
+De la même manière il te faudra gérer l'état de ton jeu et les différents écrans. Tu ne seras vraiment pas dépaysé !</p>
+<p>Voici un exemple complet d'une cartouche, celle de <em>Hellhound</em>, pour te faire une idée !</p>
+<div class="highlight"><pre><span></span><span class="n">pico</span><span class="o">-</span><span class="mi">8</span> <span class="n">cartridge</span> <span class="o">//</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">pico</span><span class="o">-</span><span class="mf">8.</span><span class="n">com</span>
+<span class="n">version</span> <span class="mi">29</span>
+<span class="n">__lua__</span>
+<span class="c1">-- hellhound</span>
+<span class="c1">-- mobo</span>
+<span class="kr">function</span> <span class="nf">_init</span><span class="p">()</span>
+    <span class="n">state</span><span class="o">=</span><span class="mi">2</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">_update60</span><span class="p">()</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="n">state</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="n">update_game</span><span class="p">()</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="n">state</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="n">update_gameover</span><span class="p">()</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="n">state</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span> <span class="n">update_gamestart</span><span class="p">()</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">_draw</span><span class="p">()</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="n">state</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="n">draw_game</span><span class="p">()</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="n">state</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="n">draw_gameover</span><span class="p">()</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="n">state</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span> <span class="n">draw_gamestart</span><span class="p">()</span>
+<span class="kr">end</span>
+<span class="c1">--&gt;8</span>
+<span class="c1">-- game start</span>
+<span class="kr">function</span> <span class="nf">update_gamestart</span><span class="p">()</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="n">btnp</span><span class="p">(</span><span class="err">⬆️</span><span class="p">))</span> <span class="n">init_game</span><span class="p">()</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">draw_gamestart</span><span class="p">()</span>
+    <span class="n">cls</span><span class="p">()</span>
+    <span class="n">map</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+    <span class="n">camera</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">384</span><span class="p">)</span>
+    <span class="n">rectfill</span><span class="p">(</span><span class="mi">31</span><span class="p">,</span><span class="mi">73</span><span class="o">+</span><span class="mi">384</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">109</span><span class="o">+</span><span class="mi">384</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">rectfill</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">70</span><span class="o">+</span><span class="mi">384</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">106</span><span class="o">+</span><span class="mi">384</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hellhound&quot;</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">76</span><span class="o">+</span><span class="mi">384</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⬆️ to start&quot;</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">96</span><span class="o">+</span><span class="mi">384</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="c1">--&gt;8</span>
+<span class="c1">-- game over</span>
+<span class="kr">function</span> <span class="nf">update_gameover</span><span class="p">()</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="n">btnp</span><span class="p">(</span><span class="err">⬆️</span><span class="p">))</span> <span class="n">init_game</span><span class="p">()</span>
+    <span class="kr">if</span> <span class="n">music_start</span> <span class="kr">then</span>
+        <span class="n">music_start</span><span class="o">=</span><span class="kc">false</span>
+        <span class="n">music</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">draw_gameover</span><span class="p">()</span>
+    <span class="n">cls</span><span class="p">()</span>
+    <span class="n">map</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+    <span class="n">camera</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">384</span><span class="p">)</span>
+    <span class="n">rectfill</span><span class="p">(</span><span class="mi">31</span><span class="p">,</span><span class="mi">73</span><span class="o">+</span><span class="mi">384</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">109</span><span class="o">+</span><span class="mi">384</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">rectfill</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">70</span><span class="o">+</span><span class="mi">384</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">106</span><span class="o">+</span><span class="mi">384</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Game over&quot;</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">76</span><span class="o">+</span><span class="mi">384</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Score:&quot;</span><span class="o">..</span><span class="n">ticks</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">86</span><span class="o">+</span><span class="mi">384</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⬆️ to retry&quot;</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">96</span><span class="o">+</span><span class="mi">384</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="c1">--&gt;8</span>
+<span class="c1">--game</span>
+<span class="kr">function</span> <span class="nf">init_game</span><span class="p">()</span>
+    <span class="n">state</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">ticks</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">music_start</span><span class="o">=</span><span class="kc">false</span>
+    <span class="n">cam</span><span class="o">=</span><span class="n">create_camera</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">512</span><span class="o">-</span><span class="mi">128</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">32</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">=</span><span class="n">create_player</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">62</span><span class="o">*</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">bullets</span><span class="o">=</span><span class="n">create_bullets</span><span class="p">()</span>
+    <span class="n">enemies</span><span class="o">=</span><span class="n">create_enemies</span><span class="p">()</span>
+    <span class="n">explosions</span><span class="o">=</span><span class="n">create_explosions</span><span class="p">()</span>
+    <span class="n">spawns</span><span class="o">=</span><span class="p">{</span>
+        <span class="p">{</span><span class="n">x</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">62</span><span class="o">*</span><span class="mi">8</span><span class="p">},{</span><span class="n">x</span><span class="o">=</span><span class="mi">13</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">62</span><span class="o">*</span><span class="mi">8</span><span class="p">},{</span><span class="n">x</span><span class="o">=</span><span class="mi">6</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">58</span><span class="o">*</span><span class="mi">8</span><span class="p">},</span>
+        <span class="p">{</span><span class="n">x</span><span class="o">=</span><span class="mi">6</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">54</span><span class="o">*</span><span class="mi">8</span><span class="p">},</span> <span class="p">{</span><span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">51</span><span class="o">*</span><span class="mi">8</span><span class="p">},</span> <span class="p">{</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">51</span><span class="o">*</span><span class="mi">8</span><span class="p">},</span>
+        <span class="p">{</span><span class="n">x</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">56</span><span class="o">*</span><span class="mi">8</span><span class="p">},</span> <span class="p">{</span><span class="n">x</span><span class="o">=</span><span class="mi">12</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">56</span><span class="o">*</span><span class="mi">8</span><span class="p">},</span> <span class="p">{</span><span class="n">x</span><span class="o">=</span><span class="mi">21</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">56</span><span class="o">*</span><span class="mi">8</span><span class="p">},</span>
+        <span class="p">{</span><span class="n">x</span><span class="o">=</span><span class="mi">21</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">62</span><span class="o">*</span><span class="mi">8</span><span class="p">},</span> <span class="p">{</span><span class="n">x</span><span class="o">=</span><span class="mi">25</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">62</span><span class="o">*</span><span class="mi">8</span><span class="p">},</span> <span class="p">{</span><span class="n">x</span><span class="o">=</span><span class="mi">29</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">62</span><span class="o">*</span><span class="mi">8</span><span class="p">},</span>
+        <span class="p">{</span><span class="n">x</span><span class="o">=</span><span class="mi">27</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">58</span><span class="o">*</span><span class="mi">8</span><span class="p">},</span> <span class="p">{</span><span class="n">x</span><span class="o">=</span><span class="mi">30</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">58</span><span class="o">*</span><span class="mi">8</span><span class="p">},</span> <span class="p">{</span><span class="n">x</span><span class="o">=</span><span class="mi">29</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">55</span><span class="o">*</span><span class="mi">8</span><span class="p">},</span>
+        <span class="p">{</span><span class="n">x</span><span class="o">=</span><span class="mi">29</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">51</span><span class="o">*</span><span class="mi">8</span><span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kr">for</span> <span class="n">s</span> <span class="kr">in</span> <span class="n">all</span><span class="p">(</span><span class="n">spawns</span><span class="p">)</span> <span class="kr">do</span>
+        <span class="n">enemies</span><span class="p">:</span><span class="n">spawn</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">s</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">update_game</span><span class="p">()</span>
+    <span class="n">ticks</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="kr">if</span> <span class="ow">not</span> <span class="n">music_start</span> <span class="kr">then</span>
+        <span class="n">music</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">music_start</span><span class="o">=</span><span class="kc">true</span>
+    <span class="kr">end</span>
+    <span class="n">p</span><span class="p">:</span><span class="n">update</span><span class="p">()</span>
+    <span class="n">cam</span><span class="p">:</span><span class="n">update</span><span class="p">()</span>
+    <span class="n">bullets</span><span class="p">:</span><span class="n">update</span><span class="p">()</span>
+    <span class="n">enemies</span><span class="p">:</span><span class="n">update</span><span class="p">()</span>
+    <span class="n">explosions</span><span class="p">:</span><span class="n">update</span><span class="p">()</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">draw_game</span><span class="p">()</span>
+    <span class="n">cls</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+    <span class="n">palt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
+    <span class="n">palt</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+    <span class="c1">--camera</span>
+    <span class="n">cam</span><span class="p">:</span><span class="n">draw</span><span class="p">()</span>
+    <span class="c1">-- map</span>
+    <span class="n">map</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+    <span class="c1">-- items</span>
+    <span class="n">p</span><span class="p">:</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">enemies</span><span class="p">:</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">bullets</span><span class="p">:</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">explosions</span><span class="p">:</span><span class="n">draw</span><span class="p">()</span>
+    <span class="c1">-- hud</span>
+    <span class="n">camera</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;score: &#39;</span><span class="o">..</span><span class="n">ticks</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">spr</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">120</span><span class="p">)</span>
+    <span class="kr">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">p</span><span class="p">.</span><span class="n">life</span> <span class="kr">do</span>
+        <span class="n">rectfill</span><span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">8</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+<span class="c1">--&gt;8</span>
+<span class="c1">-- camera</span>
+<span class="kr">function</span> <span class="nf">create_camera</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span><span class="n">margin</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">c</span><span class="o">=</span><span class="p">{</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span><span class="n">dx</span><span class="o">=</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span><span class="n">speed</span><span class="o">=</span><span class="n">speed</span><span class="p">,</span><span class="n">margin</span><span class="o">=</span><span class="n">margin</span><span class="p">,</span>
+        <span class="n">update</span><span class="o">=</span><span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="kr">if</span> <span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="o">-</span><span class="n">cam</span><span class="p">.</span><span class="n">x</span><span class="o">&lt;</span><span class="p">(</span><span class="mi">64</span><span class="o">-</span><span class="n">cam</span><span class="p">.</span><span class="n">margin</span><span class="p">))</span> <span class="kr">then</span>
+                <span class="n">cam</span><span class="p">.</span><span class="n">x</span><span class="o">=</span><span class="n">mid</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">cam</span><span class="p">.</span><span class="n">x</span><span class="o">-</span><span class="n">cam</span><span class="p">.</span><span class="n">dx</span><span class="p">,</span><span class="mi">1024</span><span class="o">-</span><span class="mi">128</span><span class="p">)</span>
+            <span class="kr">elseif</span> <span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="o">-</span><span class="n">cam</span><span class="p">.</span><span class="n">x</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">64</span><span class="o">+</span><span class="n">cam</span><span class="p">.</span><span class="n">margin</span><span class="p">))</span> <span class="kr">then</span>
+                <span class="n">cam</span><span class="p">.</span><span class="n">x</span><span class="o">=</span><span class="n">mid</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">cam</span><span class="p">.</span><span class="n">x</span><span class="o">+</span><span class="n">cam</span><span class="p">.</span><span class="n">dx</span><span class="p">,</span><span class="mi">1024</span><span class="o">-</span><span class="mi">128</span><span class="p">)</span>
+            <span class="kr">end</span>
+            <span class="kr">if</span> <span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="o">-</span><span class="n">cam</span><span class="p">.</span><span class="n">y</span><span class="o">&lt;</span><span class="p">(</span><span class="mi">64</span><span class="o">-</span><span class="n">cam</span><span class="p">.</span><span class="n">margin</span><span class="p">))</span> <span class="kr">then</span>
+                <span class="n">cam</span><span class="p">.</span><span class="n">y</span><span class="o">=</span><span class="n">mid</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">cam</span><span class="p">.</span><span class="n">y</span><span class="o">-</span><span class="n">cam</span><span class="p">.</span><span class="n">dy</span><span class="p">,</span><span class="mi">512</span><span class="o">-</span><span class="mi">128</span><span class="p">)</span>
+            <span class="kr">elseif</span> <span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="o">-</span><span class="n">cam</span><span class="p">.</span><span class="n">y</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">64</span><span class="o">+</span><span class="n">cam</span><span class="p">.</span><span class="n">margin</span><span class="p">))</span> <span class="kr">then</span>
+                <span class="n">cam</span><span class="p">.</span><span class="n">y</span><span class="o">=</span><span class="n">mid</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">cam</span><span class="p">.</span><span class="n">y</span><span class="o">+</span><span class="n">cam</span><span class="p">.</span><span class="n">dy</span><span class="p">,</span><span class="mi">512</span><span class="o">-</span><span class="mi">128</span><span class="p">)</span>
+            <span class="kr">end</span>
+        <span class="kr">end</span><span class="p">,</span>
+        <span class="n">draw</span><span class="o">=</span><span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="n">camera</span><span class="p">(</span><span class="n">cam</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">cam</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+        <span class="kr">end</span>
+    <span class="p">}</span>
+    <span class="kr">return</span> <span class="n">c</span>
+<span class="kr">end</span>
+<span class="c1">--&gt;8</span>
+<span class="c1">-- player</span>
+<span class="kr">function</span> <span class="nf">create_player</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">p</span><span class="o">=</span><span class="p">{</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">h</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">dx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">dy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">acc</span><span class="o">=</span><span class="mf">0.08</span><span class="p">,</span><span class="n">dcc</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span><span class="n">max_dx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">max_dy</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">gravity</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span><span class="n">jump_speed</span><span class="o">=-</span><span class="mf">1.75</span><span class="p">,</span><span class="n">jump_hold_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ungrounded_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">max_jump_press</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+        <span class="n">jump_forgiveness</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">grounded</span><span class="o">=</span><span class="kc">false</span><span class="p">,</span><span class="n">is_jumping</span><span class="o">=</span><span class="kc">false</span><span class="p">,</span><span class="n">flip</span><span class="o">=</span><span class="kc">false</span><span class="p">,</span>
+        <span class="n">anims</span><span class="o">=</span><span class="n">anims</span><span class="p">(</span><span class="n">self</span><span class="p">),</span><span class="n">curanim</span><span class="o">=</span><span class="s2">&quot;idle&quot;</span><span class="p">,</span><span class="n">curframe</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">animtick</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">attack_tick</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">life</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+        <span class="n">set_anim</span><span class="o">=</span><span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">anim</span><span class="p">)</span>
+            <span class="kr">if</span><span class="p">(</span><span class="n">anim</span><span class="o">==</span><span class="n">self</span><span class="p">.</span><span class="n">curanim</span><span class="p">)</span><span class="kr">return</span><span class="c1">--early out.</span>
+            <span class="kd">local</span> <span class="n">a</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">anims</span><span class="p">[</span><span class="n">anim</span><span class="p">]</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">animtick</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">ticks</span><span class="c1">--ticks count down.</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">curanim</span><span class="o">=</span><span class="n">anim</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">curframe</span><span class="o">=</span><span class="mi">1</span>
+        <span class="kr">end</span><span class="p">,</span>
+        <span class="n">update</span><span class="o">=</span><span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="n">move</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="n">jump</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="n">fall</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="n">attack</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="n">animate</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="n">hurt</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+        <span class="kr">end</span><span class="p">,</span>
+        <span class="n">draw</span><span class="o">=</span><span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="kd">local</span> <span class="n">a</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">anims</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">curanim</span><span class="p">]</span>
+            <span class="kd">local</span> <span class="n">frame</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">frames</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">curframe</span><span class="p">]</span>
+            <span class="n">spr</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">flip</span><span class="p">)</span>
+        <span class="kr">end</span>
+    <span class="p">}</span>
+    <span class="kr">return</span> <span class="n">p</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">move</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">btn</span><span class="p">(</span><span class="err">⬅️</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">dx</span><span class="o">-=</span><span class="n">self</span><span class="p">.</span><span class="n">acc</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">flip</span><span class="o">=</span><span class="kc">true</span>
+        <span class="kr">if</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">grounded</span><span class="p">)</span> <span class="n">self</span><span class="p">:</span><span class="n">set_anim</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">)</span>
+    <span class="kr">elseif</span> <span class="n">btn</span><span class="p">(</span><span class="err">➡️</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">dx</span><span class="o">+=</span><span class="n">self</span><span class="p">.</span><span class="n">acc</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">flip</span><span class="o">=</span><span class="kc">false</span>
+        <span class="kr">if</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">grounded</span><span class="p">)</span> <span class="n">self</span><span class="p">:</span><span class="n">set_anim</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">)</span>
+    <span class="kr">else</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">dx</span><span class="o">*=</span><span class="n">self</span><span class="p">.</span><span class="n">dcc</span>
+        <span class="kr">if</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">grounded</span> <span class="ow">and</span> <span class="n">self</span><span class="p">.</span><span class="n">dx</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="n">self</span><span class="p">:</span><span class="n">set_anim</span><span class="p">(</span><span class="s2">&quot;slide&quot;</span><span class="p">)</span>
+        <span class="kr">if</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">grounded</span> <span class="ow">and</span> <span class="n">self</span><span class="p">.</span><span class="n">dx</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">)</span> <span class="n">self</span><span class="p">:</span><span class="n">set_anim</span><span class="p">(</span><span class="s2">&quot;idle&quot;</span><span class="p">)</span>
+    <span class="kr">end</span>
+    <span class="kr">if</span> <span class="n">is_solid</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="o">+</span><span class="n">self</span><span class="p">.</span><span class="n">dx</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">dx</span><span class="o">=</span><span class="mi">0</span>
+    <span class="kr">end</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">dx</span><span class="o">=</span><span class="n">mid</span><span class="p">(</span><span class="o">-</span><span class="n">self</span><span class="p">.</span><span class="n">max_dx</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">dx</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">max_dx</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="o">+=</span><span class="n">self</span><span class="p">.</span><span class="n">dx</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">jump</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">btn</span><span class="p">(</span><span class="err">🅾️</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="kd">local</span> <span class="n">canJump</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">grounded</span> <span class="ow">or</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">ungrounded_time</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">self</span><span class="p">.</span><span class="n">ungrounded_time</span> <span class="o">&lt;=</span> <span class="n">self</span><span class="p">.</span><span class="n">jump_forgiveness</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">self</span><span class="p">.</span><span class="n">is_jumping</span>
+        <span class="kr">if</span> <span class="n">self</span><span class="p">.</span><span class="n">jump_hold_time</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">canJump</span> <span class="kr">then</span>
+            <span class="kr">if</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">jump_hold_time</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="n">sfx</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">is_jumping</span><span class="o">=</span><span class="kc">true</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">jump_hold_time</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="kr">if</span> <span class="n">self</span><span class="p">.</span><span class="n">jump_hold_time</span><span class="o">&lt;</span><span class="n">self</span><span class="p">.</span><span class="n">max_jump_press</span> <span class="kr">then</span>
+                <span class="n">self</span><span class="p">.</span><span class="n">dy</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">jump_speed</span>
+            <span class="kr">end</span>
+        <span class="kr">end</span>
+
+    <span class="kr">else</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">jump_hold_time</span><span class="o">=</span><span class="mi">0</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">fall</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">dy</span><span class="o">+=</span><span class="n">self</span><span class="p">.</span><span class="n">gravity</span>
+    <span class="kr">if</span> <span class="n">is_solid</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="o">+</span><span class="n">self</span><span class="p">.</span><span class="n">dy</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">dy</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">grounded</span><span class="o">=</span><span class="kc">true</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">is_jumping</span> <span class="o">=</span> <span class="kc">false</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">ungrounded_time</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="kr">else</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">grounded</span><span class="o">=</span><span class="kc">false</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">ungrounded_time</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="kr">end</span>
+    <span class="kr">if</span><span class="p">(</span><span class="ow">not</span> <span class="n">self</span><span class="p">.</span><span class="n">grounded</span><span class="p">)</span> <span class="n">self</span><span class="p">:</span><span class="n">set_anim</span><span class="p">(</span><span class="s2">&quot;jump&quot;</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">dy</span><span class="o">=</span><span class="n">mid</span><span class="p">(</span><span class="o">-</span><span class="n">self</span><span class="p">.</span><span class="n">max_dy</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">dy</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">max_dy</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="o">+=</span><span class="n">self</span><span class="p">.</span><span class="n">dy</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">attack</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">btn</span><span class="p">(</span><span class="err">❎</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="kr">if</span> <span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">attack_tick</span><span class="o">%</span><span class="mi">15</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="kr">then</span>
+            <span class="n">bullets</span><span class="p">:</span><span class="n">shoot</span><span class="p">()</span>
+        <span class="kr">end</span>
+        <span class="kr">if</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">grounded</span><span class="p">)</span> <span class="n">self</span><span class="p">:</span><span class="n">set_anim</span><span class="p">(</span><span class="s2">&quot;attack&quot;</span><span class="p">)</span>
+        <span class="kr">if</span><span class="p">(</span><span class="ow">not</span> <span class="n">self</span><span class="p">.</span><span class="n">grounded</span><span class="p">)</span> <span class="n">self</span><span class="p">:</span><span class="n">set_anim</span><span class="p">(</span><span class="s2">&quot;airattack&quot;</span><span class="p">)</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">attack_tick</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="kr">else</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">attack_tick</span><span class="o">=</span><span class="mi">0</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">anims</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+    <span class="kr">return</span> <span class="p">{</span>
+        <span class="p">[</span><span class="s2">&quot;idle&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="n">ticks</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">frames</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">}},</span>
+        <span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="n">ticks</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">frames</span><span class="o">=</span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">}},</span>
+        <span class="p">[</span><span class="s2">&quot;jump&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="n">ticks</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">frames</span><span class="o">=</span><span class="p">{</span><span class="mi">10</span><span class="p">}},</span>
+        <span class="p">[</span><span class="s2">&quot;slide&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="n">ticks</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">frames</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">}},</span>
+        <span class="p">[</span><span class="s2">&quot;attack&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="n">ticks</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">frames</span><span class="o">=</span><span class="p">{</span><span class="mi">7</span><span class="p">}},</span>
+        <span class="p">[</span><span class="s2">&quot;airattack&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="n">ticks</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">frames</span><span class="o">=</span><span class="p">{</span><span class="mi">11</span><span class="p">}},</span>
+        <span class="p">[</span><span class="s2">&quot;climb&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="n">ticks</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">frames</span><span class="o">=</span><span class="p">{</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">}},</span>
+    <span class="p">}</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">hurt</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">ticks</span><span class="o">%</span><span class="mi">35</span><span class="o">==</span><span class="mi">0</span> <span class="kr">then</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">life</span><span class="o">-=</span><span class="mi">1</span>
+    <span class="kr">end</span>
+    <span class="c1">--death</span>
+    <span class="kr">if</span> <span class="n">p</span><span class="p">.</span><span class="n">life</span><span class="o">&lt;=</span><span class="mi">0</span> <span class="kr">then</span>
+        <span class="n">sfx</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">state</span><span class="o">=</span><span class="mi">1</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+<span class="c1">--&gt;8</span>
+<span class="c1">-- bullets</span>
+<span class="kr">function</span> <span class="nf">create_bullets</span><span class="p">()</span>
+    <span class="kr">return</span> <span class="p">{</span>
+        <span class="n">items</span><span class="o">=</span><span class="p">{},</span>
+        <span class="n">update</span><span class="o">=</span><span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="kr">for</span> <span class="n">b</span> <span class="kr">in</span> <span class="n">all</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">)</span> <span class="kr">do</span>
+                <span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="o">+=</span><span class="n">b</span><span class="p">.</span><span class="n">speed</span>
+                <span class="n">animate</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+                <span class="kr">if</span> <span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="o">&gt;</span><span class="mi">1024</span> <span class="ow">or</span> <span class="n">is_solid</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">)</span> <span class="kr">then</span>
+                    <span class="n">del</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+                <span class="kr">end</span>
+            <span class="kr">end</span>
+        <span class="kr">end</span><span class="p">,</span>
+        <span class="n">draw</span><span class="o">=</span><span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="kr">for</span> <span class="n">b</span> <span class="kr">in</span> <span class="n">all</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">)</span> <span class="kr">do</span>
+                <span class="kd">local</span> <span class="n">a</span><span class="o">=</span><span class="n">b</span><span class="p">.</span><span class="n">anims</span><span class="p">[</span><span class="n">b</span><span class="p">.</span><span class="n">curanim</span><span class="p">]</span>
+                <span class="kd">local</span> <span class="n">frame</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">frames</span><span class="p">[</span><span class="n">b</span><span class="p">.</span><span class="n">curframe</span><span class="p">]</span>
+                <span class="n">spr</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">flip</span><span class="p">)</span>
+            <span class="kr">end</span>
+        <span class="kr">end</span><span class="p">,</span>
+        <span class="n">shoot</span><span class="o">=</span><span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="n">sfx</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="kd">local</span> <span class="n">new_bullet</span><span class="o">=</span><span class="p">{</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">p</span><span class="p">.</span><span class="n">flip</span> <span class="ow">and</span> <span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="o">-</span><span class="mi">4</span> <span class="ow">or</span> <span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="o">+</span><span class="mi">4</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">,</span>
+                <span class="n">speed</span><span class="o">=</span><span class="n">p</span><span class="p">.</span><span class="n">flip</span> <span class="ow">and</span> <span class="o">-</span><span class="mf">1.5</span> <span class="ow">or</span> <span class="mf">1.5</span><span class="p">,</span>
+                <span class="n">flip</span><span class="o">=</span><span class="n">p</span><span class="p">.</span><span class="n">flip</span><span class="p">,</span>
+                <span class="n">anims</span><span class="o">=</span><span class="p">{[</span><span class="s2">&quot;shoot&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="n">ticks</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">frames</span><span class="o">=</span><span class="p">{</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">15</span><span class="p">}}},</span>
+                <span class="n">curanim</span><span class="o">=</span><span class="s2">&quot;shoot&quot;</span><span class="p">,</span><span class="n">curframe</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">animtick</span><span class="o">=</span><span class="mi">0</span>
+            <span class="p">}</span>
+            <span class="n">add</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">,</span> <span class="n">new_bullet</span><span class="p">)</span>
+        <span class="kr">end</span>
+    <span class="p">}</span>
+<span class="kr">end</span>
+<span class="c1">--&gt;8</span>
+<span class="c1">-- enemies</span>
+<span class="kr">function</span> <span class="nf">create_enemies</span><span class="p">()</span>
+    <span class="kr">return</span> <span class="p">{</span>
+        <span class="n">items</span><span class="o">=</span><span class="p">{},</span>
+        <span class="n">update</span><span class="o">=</span><span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="kr">for</span> <span class="n">e</span> <span class="kr">in</span> <span class="n">all</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">)</span> <span class="kr">do</span>
+                <span class="kr">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">e</span><span class="p">.</span><span class="n">flip</span><span class="p">)</span> <span class="n">e</span><span class="p">.</span><span class="n">x</span><span class="o">+=</span><span class="n">e</span><span class="p">.</span><span class="n">speed</span>
+                <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">flip</span><span class="p">)</span> <span class="n">e</span><span class="p">.</span><span class="n">x</span><span class="o">-=</span><span class="n">e</span><span class="p">.</span><span class="n">speed</span>
+                <span class="n">animate</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="kr">if</span> <span class="n">is_solid</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">e</span><span class="p">.</span><span class="n">y</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">is_solid</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">e</span><span class="p">.</span><span class="n">y</span><span class="o">+</span><span class="mi">8</span><span class="p">)</span> <span class="kr">then</span>
+                    <span class="n">e</span><span class="p">.</span><span class="n">flip</span><span class="o">=</span><span class="ow">not</span> <span class="n">e</span><span class="p">.</span><span class="n">flip</span>
+                <span class="kr">end</span>
+                <span class="c1">-- killed ?</span>
+                <span class="kr">for</span> <span class="n">b</span> <span class="kr">in</span> <span class="n">all</span><span class="p">(</span><span class="n">bullets</span><span class="p">.</span><span class="n">items</span><span class="p">)</span> <span class="kr">do</span>
+                    <span class="kr">if</span> <span class="n">collide</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="kr">then</span>
+                        <span class="n">explosions</span><span class="p">:</span><span class="n">add</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="o">+</span><span class="mi">4</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+                        <span class="n">del</span><span class="p">(</span><span class="n">bullets</span><span class="p">.</span><span class="n">items</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+                        <span class="n">e</span><span class="p">.</span><span class="n">life</span><span class="o">-=</span><span class="mi">1</span>
+                        <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">life</span><span class="o">==</span><span class="mi">0</span> <span class="kr">then</span>
+                            <span class="kr">if</span> <span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">life</span><span class="o">&lt;</span><span class="mi">15</span><span class="p">)</span> <span class="n">p</span><span class="p">.</span><span class="n">life</span><span class="o">+=</span><span class="mi">1</span>
+                            <span class="n">sfx</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                            <span class="n">del</span><span class="p">(</span><span class="n">enemies</span><span class="p">.</span><span class="n">items</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+                            <span class="kd">local</span> <span class="n">random_spawn</span><span class="o">=</span><span class="n">rnd</span><span class="p">(</span><span class="n">spawns</span><span class="p">)</span>
+                            <span class="n">enemies</span><span class="p">:</span><span class="n">spawn</span><span class="p">(</span><span class="n">random_spawn</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">random_spawn</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+                        <span class="kr">end</span>
+                    <span class="kr">end</span>
+                <span class="kr">end</span>
+            <span class="kr">end</span>
+        <span class="kr">end</span><span class="p">,</span>
+        <span class="n">draw</span><span class="o">=</span><span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="kr">for</span> <span class="n">e</span> <span class="kr">in</span> <span class="n">all</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">)</span> <span class="kr">do</span>
+                <span class="kd">local</span> <span class="n">a</span><span class="o">=</span><span class="n">e</span><span class="p">.</span><span class="n">anims</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">curanim</span><span class="p">]</span>
+                <span class="kd">local</span> <span class="n">frame</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">frames</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">curframe</span><span class="p">]</span>
+                <span class="n">spr</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span><span class="n">e</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">e</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">e</span><span class="p">.</span><span class="n">flip</span><span class="p">)</span>
+            <span class="kr">end</span>
+        <span class="kr">end</span><span class="p">,</span>
+        <span class="n">spawn</span><span class="o">=</span><span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+            <span class="kd">local</span> <span class="n">new_enemy</span><span class="o">=</span><span class="p">{</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+                <span class="n">speed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">life</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">flip</span><span class="o">=</span><span class="kc">false</span><span class="p">,</span>
+                <span class="n">anims</span><span class="o">=</span><span class="p">{[</span><span class="s2">&quot;run&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="n">ticks</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">frames</span><span class="o">=</span><span class="n">rnd</span><span class="p">{{</span><span class="mi">17</span><span class="p">,</span><span class="mi">18</span><span class="p">},{</span><span class="mi">33</span><span class="p">,</span><span class="mi">34</span><span class="p">},{</span><span class="mi">49</span><span class="p">,</span><span class="mi">50</span><span class="p">},{</span><span class="mi">19</span><span class="p">,</span><span class="mi">20</span><span class="p">},{</span><span class="mi">35</span><span class="p">,</span><span class="mi">36</span><span class="p">}}}},</span>
+                <span class="n">curanim</span><span class="o">=</span><span class="s2">&quot;run&quot;</span><span class="p">,</span><span class="n">curframe</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">animtick</span><span class="o">=</span><span class="mi">0</span>
+            <span class="p">}</span>
+            <span class="n">add</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">,</span> <span class="n">new_enemy</span><span class="p">)</span>
+        <span class="kr">end</span>
+    <span class="p">}</span>
+<span class="kr">end</span>
+<span class="c1">--&gt;8</span>
+<span class="c1">--explosions</span>
+<span class="kr">function</span> <span class="nf">create_explosions</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="kr">return</span> <span class="p">{</span>
+        <span class="n">items</span><span class="o">=</span><span class="p">{},</span>
+        <span class="n">update</span><span class="o">=</span><span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="kr">for</span> <span class="n">e</span> <span class="kr">in</span> <span class="n">all</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">)</span> <span class="kr">do</span>
+                <span class="n">e</span><span class="p">.</span><span class="n">timer</span><span class="o">+=</span><span class="mi">1</span>
+                <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">timer</span><span class="o">==</span><span class="mi">13</span> <span class="kr">then</span>
+                    <span class="n">del</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+                <span class="kr">end</span>
+            <span class="kr">end</span>
+        <span class="kr">end</span><span class="p">,</span>
+        <span class="n">draw</span><span class="o">=</span><span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+            <span class="kr">for</span> <span class="n">e</span> <span class="kr">in</span> <span class="n">all</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">)</span> <span class="kr">do</span>
+                <span class="n">circ</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">e</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="n">e</span><span class="p">.</span><span class="n">timer</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span>
+                <span class="mi">8</span><span class="o">+</span><span class="n">e</span><span class="p">.</span><span class="n">timer</span><span class="o">%</span><span class="mi">3</span><span class="p">)</span>
+            <span class="kr">end</span>
+        <span class="kr">end</span><span class="p">,</span>
+        <span class="n">add</span><span class="o">=</span><span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">add</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">,{</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span><span class="n">timer</span><span class="o">=</span><span class="mi">0</span><span class="p">})</span>
+        <span class="kr">end</span>
+    <span class="p">}</span>
+<span class="kr">end</span>
+<span class="c1">--&gt;8</span>
+<span class="c1">-- misc</span>
+<span class="kr">function</span> <span class="nf">is_solid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="n">flag</span> <span class="ow">or</span> <span class="mi">0</span>
+    <span class="kr">if</span><span class="p">(</span><span class="n">fget</span><span class="p">(</span><span class="n">mget</span><span class="p">(</span><span class="n">flr</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mi">8</span><span class="p">),</span><span class="n">flr</span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="mi">8</span><span class="p">)),</span><span class="n">flag</span><span class="p">))</span><span class="kr">return</span> <span class="kc">true</span>
+    <span class="kr">if</span><span class="p">(</span><span class="n">fget</span><span class="p">(</span><span class="n">mget</span><span class="p">(</span><span class="n">flr</span><span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="mi">7</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">),</span><span class="n">flr</span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="mi">8</span><span class="p">)),</span><span class="n">flag</span><span class="p">))</span><span class="kr">return</span> <span class="kc">true</span>
+    <span class="kr">if</span><span class="p">(</span><span class="n">fget</span><span class="p">(</span><span class="n">mget</span><span class="p">(</span><span class="n">flr</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mi">8</span><span class="p">),</span><span class="n">flr</span><span class="p">((</span><span class="n">y</span><span class="o">+</span><span class="mi">7</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">)),</span><span class="n">flag</span><span class="p">))</span><span class="kr">return</span> <span class="kc">true</span>
+    <span class="kr">if</span><span class="p">(</span><span class="n">fget</span><span class="p">(</span><span class="n">mget</span><span class="p">(</span><span class="n">flr</span><span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="mi">7</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">),</span><span class="n">flr</span><span class="p">((</span><span class="n">y</span><span class="o">+</span><span class="mi">7</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">)),</span><span class="n">flag</span><span class="p">))</span><span class="kr">return</span> <span class="kc">true</span>
+    <span class="kr">return</span> <span class="kc">false</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">collide</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+    <span class="kr">return</span> <span class="ow">not</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">x</span><span class="o">&gt;</span><span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="o">+</span><span class="mi">8</span>
+        <span class="ow">or</span> <span class="n">a</span><span class="p">.</span><span class="n">y</span><span class="o">&gt;</span><span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="o">+</span><span class="mi">8</span>
+        <span class="ow">or</span> <span class="n">a</span><span class="p">.</span><span class="n">x</span><span class="o">+</span><span class="mi">8</span><span class="o">&lt;</span><span class="n">b</span><span class="p">.</span><span class="n">x</span>
+        <span class="ow">or</span> <span class="n">a</span><span class="p">.</span><span class="n">y</span><span class="o">+</span><span class="mi">8</span><span class="o">&lt;</span><span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">animate</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">animtick</span><span class="o">-=</span><span class="mi">1</span>
+    <span class="kr">if</span> <span class="n">self</span><span class="p">.</span><span class="n">animtick</span><span class="o">&lt;=</span><span class="mi">0</span> <span class="kr">then</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">curframe</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="kd">local</span> <span class="n">a</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">anims</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">curanim</span><span class="p">]</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">animtick</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">ticks</span>
+        <span class="kr">if</span> <span class="n">self</span><span class="p">.</span><span class="n">curframe</span><span class="o">&gt;#</span><span class="n">a</span><span class="p">.</span><span class="n">frames</span> <span class="kr">then</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">curframe</span><span class="o">=</span><span class="mi">1</span>
+        <span class="kr">end</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+
+<span class="n">__gfx__</span>
+<span class="mi">00000000</span><span class="n">ffff8ff8ffffffffffff8ff8ffffffffffff8ff8ffff8ff8ffff8ff8f8080000f8080000ffff8ff8ffff8ff8ffffffffffffffffffffffffffffffff</span>
+<span class="mi">00000000</span><span class="n">ffff0000ffff8ff8ffff0000ffff8ff8ffff0000ffff0000ffff0000ff000000ff000000ffff0000ffff0000fff2222ffff2222ffff2222ffff2222f</span>
+<span class="mi">00700700</span><span class="n">ff000808ff000000ff000808ff000000ff000808ff000808ff000808ff080000ff080000ff000808ff000808ff288882ff228882ff222882ff228882</span>
+<span class="mi">00077000</span><span class="n">f0000000f0000808f0000000f0000808f0000000f0000000f0000000f8000000f8000000f0000000f0000000f2899aa8f22899a8f2228998f22899a8</span>
+<span class="mi">00077000</span><span class="n">f0000000f0000000f0000787f0000000f0000000f0000000f0000787fff00000fff00000f0000000f00007872899aaa822899aa8222899a822899aa8</span>
+<span class="mi">0070070000000000</span><span class="n">f000000000000888f0000787000000000000000000000888fff00000fff000000000000000000888f2899aa8f22899a8f2228998f22899a8</span>
+<span class="mi">00000000</span><span class="n">f000000000000000f000000000000888f0000000f0000000f0000000ffff0000ffff0000f0000000f0000000ff288882ff228882ff222882ff228882</span>
+<span class="mi">00000000</span><span class="n">ff0f0ff0ff0f0ff0ff0f0ff0ff0f0ff0ff0f0ff0f0f0ff0fff0f0ff0ffffff0ffffffff0fffffffffffffffffff2222ffff2222ffff2222ffff2222f</span>
+<span class="n">ffffffffff444444ff444444ff333333ff3333330000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="n">fffffffff44eeeeef44eeeeef33eeeeef33eeeee0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="n">fffffffff4eee1e1f4eee1e1f3eee1e1f3eee1e10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="n">faafaafff44eeeeef44eee8ef33eeeeef33eee8e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="n">faaa7afff44eeeeef44eee8ef33eeeeef33eee8e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="n">faaaaafff3333333fe33333ef5555555fe55555e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="n">ffaaaffffe33333ef3333333fe55555ef55555550000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="n">fffaffffffeefeeffffeefeeffeefeeffffeefee0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">ff999999ff999999ff888888ff8888880000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">f99eeeeef99eeeeef88eeeeef88eeeee0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">f9eee1e1f9eee1e1f8eee1e1f8eee1e10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">f99eeeeef99eee8ef88eeeeef88eee8e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">f99eeeeef99eee8ef88eeeeef88eee8e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">f4444444fe44444efcccccccfeccccce0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">fe44444ef4444444fecccccefccccccc0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">ffeefeeffffeefeeffeefeeffffeefee0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">ff555555ff55555500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">f55eeeeef55eeeee00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">f5eee1e1f5eee1e100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">f55eeeeef55eee8e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">f55eeeeef55eee8e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">f9999999fe99999e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">fe99999ef999999900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">00000000</span><span class="n">ffeefeeffffeefee00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">55555555000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000882222222222288200000000</span>
+<span class="mi">55555555000002200200022002000000000200200220020000200000000001100100011001000000000100100110010000100000828822222228828200000000</span>
+<span class="mi">55555555002200000002022000000200000002200220022000002200001100000001011000000100000001100110011000001100282882222288282200000000</span>
+<span class="mi">55555555002200000000000000000000000000000000000000002200001100000000000000000000000000000000000000001100282288222882282200000000</span>
+<span class="mi">55555555000000002020202020202020202020202020202000000000000000001010101010101010101010101010101000000000228228828822822200000000</span>
+<span class="mi">55555555020000222222222222222222222222222222222222000020010000111111111111111111111111111111111111000010228222282222822200000000</span>
+<span class="mi">55555555000002222822228888222282222228822288282222200020000001111</span><span class="n">c1111cccc1111c111111cc111cc1c1111100010222828828828222200000000</span>
+<span class="mi">5555555500000222882882882828288222882882828828822220000000000111</span><span class="n">cc1cc1cc1c1c1cc111cc1cc1c1cc1cc111100000228882222288822200000000</span>
+<span class="mi">00000000000002882222222222222222222222222222222222220000000001</span><span class="n">cc1111111111111111111111111111111111110000288282222282882200000000</span>
+<span class="mi">000000000220228822</span><span class="n">eee22222666662222222222266652222200000011011cc11ddd11111666661111111111166651111100000888888888888888200000000</span>
+<span class="mi">00000000022002222</span><span class="n">ee8ee2226666666222222222660665282220000011001111dd8dd11166666661111111116606651c1110000222282222282222200000000</span>
+<span class="mi">0000000000002228</span><span class="n">ee898ee2260060062222222266606665822000200000111cdd898dd1160060061111111166606665c1100010222228222822222200000000</span>
+<span class="mf">0000000000200228e89</span><span class="n">a98e2266060662222222266000665222200000010011cd89a98d116606066111111116600066511110000222228222822222200000000</span>
+<span class="mf">00000000000022222e444</span><span class="n">e2222666662622226226660666588200200000011111d444d11116666616111161166606665cc100100222222828222222200000000</span>
+<span class="mf">000000000200028822e4</span><span class="n">e22222626262266662226666666588220220010001cc11d4d111116161611666611166666665cc110110222222828222222200000000</span>
+<span class="mi">000000000000222822242222222222226222262266666665222000000000111</span><span class="n">c1114111111111111611116116666666511100000222222282222222200000000</span>
+<span class="mi">222222220000022222222222222222222222222222222222822200000000011111111111111111111111111111111111</span><span class="n">c1110000cc11111111111cc100000000</span>
+<span class="mi">22222222000022882222222222222222222222222222222222200220000011</span><span class="n">cc1111111111111111111111111111111111100110c1cc1111111cc1c100000000</span>
+<span class="mi">222222220020022822222222222222222222222222222222882202200010011</span><span class="n">c11111111111111111111111111111111cc1101101c1cc11111cc1c1100000000</span>
+<span class="mi">222222220000222222222222222222222222222222222222882000000000111111111111111111111111111111111111</span><span class="n">cc1000001c11cc111cc11c1100000000</span>
+<span class="mi">222222220000022822222222222222222222222222222222222200000000011</span><span class="n">c111111111111111111111111111111111111000011c11cc1cc11c11100000000</span>
+<span class="mi">222222220000222222222222222222222222222222222222882002200000111111111111111111111111111111111111</span><span class="n">cc10011011c1111c1111c11100000000</span>
+<span class="mi">22222222020002882222222222222222222222222222222282220200010001</span><span class="n">cc11111111111111111111111111111111c1110100111c1cc1cc1c111100000000</span>
+<span class="mi">22222222000022822222222222222222222222222222222222200000000011</span><span class="n">c1111111111111111111111111111111111110000011ccc11111ccc11100000000</span>
+<span class="mi">1111111100000222882882882882828228828822288288282220000000000111</span><span class="n">cc1cc1cc1cc1c1c11cc1cc111cc1cc1c111000001cc1c11111c1cc1100000000</span>
+<span class="mi">1111111102000222882222822822228828822222228288222220000001000111</span><span class="n">cc1111c11c1111cc1cc1111111c1cc1111100000ccccccccccccccc100000000</span>
+<span class="mi">111111110200002222222222222222222222222222222222220000200100001111111111111111111111111111111111110000101111</span><span class="n">c11111c1111100000000</span>
+<span class="mi">1111111100000000020202020202020202020202020202020000000000000000010101010101010101010101010101010000000011111</span><span class="n">c111c11111100000000</span>
+<span class="mi">1111111100220000000000000000000000000000000000000000220000110000000000000000000000000000000000000000110011111</span><span class="n">c111c11111100000000</span>
+<span class="mi">11111111002200000220200000200000022000000220022000002200001100000110100000100000011000000110011000001100111111</span><span class="n">c1c111111100000000</span>
+<span class="mi">11111111000002000220002000000020020020000020022002200000000001000110001000000010010010000010011001100000111111</span><span class="n">c1c111111100000000</span>
+<span class="mi">111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111111</span><span class="n">c1111111100000000</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000004</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040404040004</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004040404040000000000000004</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000000040400040000000000000000000000000000000000000000000000000000000000000004</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000000000000040404040000000000000000000000000000000000000004040404000404040004</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000004040404040000040000000000000000000000000000000000000000000000000000000004</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000040404040400040000040400000000000000000000000000000000000404040400000000000004</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000000000000040000000400000000000000000000000000000000000000000000000000000404</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000404040400000004040004040400000000000000040000000404000000000000000000000000000000000000000004040400040004</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000000000000040000000004040400000000000000000000000000000000000000000000000004</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000404040404040000000000000404040400000000000000000000000000000000040400000004</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000040404040400000000000000000000000000000000040000000000000000000404000000000000000000000004040404040000000004</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000000000000040000000000000000000004040400000000000000000000000000000000000004</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000404040400040000040000000000000000000000000404000000000000000000040404040400000004</span>
+<span class="mi">05050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000404040400000004040400000000000000000000000000040000040000000000000000000000000000040404000000000000000000000000000004</span>
+<span class="mi">1424543444543424342434543444246405057484</span><span class="n">b494a48494a484b48494a4c40505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000040404000000000000000000000000040000000000000000000000000000000004040000000000000000000404040004</span>
+<span class="mi">16060606060606060606060606</span><span class="n">d4e465050576d6e607070707070707070707c50505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000040400000000000000000000040000000000000000000000000000000000000400000000000000000000000004</span>
+<span class="mi">15062506060606060606060606</span><span class="n">d5e566050576d7e707070707070707078507c50505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000404000000000000000404040404</span>
+<span class="mi">16350606060606060606060606060666050576070707070707070707070795</span><span class="n">c50505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000040000000000000000000000040000000000000000000000000000000000040400000000000000000000000004</span>
+<span class="mi">16572757470606060606060606060665050576070707070707070707079797</span><span class="n">c60505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000040404040004040400000000040000000000000000000000000000000404000000000000000000000004040404</span>
+<span class="mi">15060606160606060606060606060666050575070707070707</span><span class="n">b50707070707c50505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000000000000040000000000000000000000000004040000000000000000000000000000000004</span>
+<span class="mi">15060606163506060606060606060665050576070707070787</span><span class="n">b7a707070707c60505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000000000000040000000000000000000000000404000000000000000000000000000000000004</span>
+<span class="mi">160606061737373706060606060606665494750785070707070707070707</span><span class="n">a5c60505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000404040400000000000000000000000000000000000404040404000000040000000000000000000004040400000000000000000000000000040404000004</span>
+<span class="mi">15060606060606060606060606550606450707070707070707070707</span><span class="n">a7b7a7c60505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000404000000000000000000000000000000040400000000000000040000000000000000000404000000000000000000000000000000000000000004</span>
+<span class="mi">160606060606060606063737373737663797769797</span><span class="n">a7a70707070707070707c50505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000000000000040000000000000000040400000000000000000000000000000000000000000004</span>
+<span class="mi">160606060606060606060606060606650505750707070707070707070795</span><span class="n">a5c50505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000404040404040000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000004040404</span>
+<span class="mi">1506060606064747570606060606066505057507070707070707</span><span class="n">a7a7b787a7c50505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000404040404000000000000040000000000000000000000000000000000000000000000000000000004000004</span>
+<span class="mi">16060606060666060606060625060666050576070707070707070707070707</span><span class="n">c60505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000040404040404000000000000000000000000040000000000000000000000000000000000000000000000000000040404040404</span>
+<span class="mi">15060606273767060637060606060665050576070707</span><span class="n">b7a707070707078507c60505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000004040400040000000000000000000000000000000000000000000000000000040000000004</span>
+<span class="mi">150606576745060606060606060635660505750707079507070707070707</span><span class="n">b5c50505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">00000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000040000000004</span>
+<span class="mi">1727374757273747273727374757476705057787</span><span class="n">a787a7b797879787a797b7c70505050505050505050505050505050505050505050505050505050505050504</span>
+<span class="mi">04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404</span>
+<span class="n">__gff__</span>
+<span class="mi">0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101000000000100000000010100000000010000000001000000000101000000000100000000010101010101010101010101000000</span>
+<span class="mi">0000000000000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="n">__map__</span>
+<span class="mi">4040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000040404000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000040404000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000004040004000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000404000004040404000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000040400000004000404040000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000004040400000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000004040000000004000000040400000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000404000000000004000000000004040000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000040404000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000040400000000000004000000000000040000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000004040000000000000004000000000000000404000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4040404040404040404040000040404040404040404040404040404040404040000000000000000000000000000000000000000000004000000000000000004000000000000000004040000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000404000000000000000004000000000000000000040000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000004040400000000000000000000000000000000040000000000000000000000000000000000000000000400000000000000000004000000000000000000000400000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000040400000000000000000004000000000000000000000404000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000040404040400000000000000000000000000000000040000000000000000000000000000000000000004040000000000000000000004000000000000000000000004040000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000404040400000000000000000000000000040000000000000000000000000000000000040404000000000000000000000004000000000000000000000000040000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000404000000000000000000000000040000000000000000000000000000000004040000000000000000000000000004000000000000000000000000000400000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000040400000000000000000000000000000004000000000000000000000000000004000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000040000000000000000000000000404040000000000000000000000000000000004000000000000000000000000000004040000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000404040404040000000000000000040000000000000000000000040400000000000000000000000000000000000004000000000000000000000000000000000400000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000400000000000000000000000000040000000000000000000404040000000000000000000000000000000000000004000000000000000000000000000000000004040000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000404040400000000000000000000000000040000000000000004040400000000000000000000000000000000000000000004000000000000000000000000000000000000040400000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000400000000000000000000000000000000040000000000000004000000000000000000000000000000000000000000000004000000000000000000000000000000000000000404000000000000000000000400000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000004040404040400000000000000000000000000000000000000000000000404000000000000000000000000000000000000000000000004000000000000000000000000000000000000000004040000000000000000000000000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000040400000000000000000000000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000404000000000000000000000000000000000000000000000000000000000000000000000000000000040</span>
+<span class="mi">4040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040000000000000000000404040</span>
+<span class="n">__sfx__</span>
+<span class="mf">00010000160001602016030160401705016050160501605016050150501305012050100500e0500</span><span class="n">c0500a05008050060400302000010000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mf">000100002e7102</span><span class="n">d7302d7502d7502d7502d7502c7502b7502b7502a7502775024750227501f75016750117500d750087500675005740057400473003720027100271000700007000070000700007000070000700</span>
+<span class="mi">000300000</span><span class="n">d1200a140091500915009150091500815007150051500415003150021500115000150001500015000150001500015000150001500015000150001500015000140001200011000110001100011000110</span>
+<span class="mi">0101000011320123201332015320163201</span><span class="n">a3201b3201e320213202232026320293202c3202e320333203432035320003000030000300003000030000300003000030000300003000030000300003000030000300</span>
+<span class="mi">001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+<span class="mi">010</span><span class="n">f00000003100001000310000100001000010000100001000310000100031000010000100001000010000100031000010003100001000010000100001000010000100001000010000100001000010000100001</span>
+<span class="n">__music__</span>
+<span class="mi">02</span> <span class="mi">0</span><span class="n">a424344</span>
+</pre></div>
+<p>Plutôt simple et efficace non ?</p>
+<p>Amuse-toi bien et sois créatif !</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://dotmobo.github.io/tag/jeux.html">jeux</a>
+      <a href="http://dotmobo.github.io/tag/video.html">video</a>
+      <a href="http://dotmobo.github.io/tag/lua.html">lua</a>
+      <a href="http://dotmobo.github.io/tag/pico8.html">pico8</a>
+      <a href="http://dotmobo.github.io/tag/pico-8.html">pico-8</a>
+      <a href="http://dotmobo.github.io/tag/plateformer.html">plateformer</a>
+      <a href="http://dotmobo.github.io/tag/arcade.html">arcade</a>
+      <a href="http://dotmobo.github.io/tag/shooter.html">shooter</a>
+      <a href="http://dotmobo.github.io/tag/itch.html">itch</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dotmobo';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; 2018  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " .mobo ",
+  "url" : "http://dotmobo.github.io",
+  "image": "//pbs.twimg.com/profile_images/559712938420760577/Hraa9PBv_200x200.jpeg",
+  "description": "DotMobo - Blog d'un Pythoniste Djangonaute"
+}
+</script>
+
+
+</body>
+</html>

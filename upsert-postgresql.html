@@ -146,27 +146,27 @@ il suffit de passer le paramètre <em>upsert=True</em> à la méthode <em>update
 <p><em>&quot;Comment faire un upsert en postgresql, tout en évitant les problèmes d'accès concurrents ?&quot;</em></p>
 <p>Si tu n'es pas pressé, attends la sortie de postgresql 9.5 qui va inclure <a class="reference external" href="https://wiki.postgresql.org/wiki/What's_new_in_PostgreSQL_9.5#INSERT_..._ON_CONFLICT_DO_NOTHING.2FUPDATE_.28.22UPSERT.22.29">la syntaxe du upsert</a>.</p>
 <p>En imaginant une table qui ressemble à ça:</p>
-<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">username</span><span class="p">,</span> <span class="n">logins</span> <span class="k">FROM</span> <span class="n">user_logins</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">logins</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">user_logins</span><span class="p">;</span><span class="w"></span>
 
-<span class="n">username</span> <span class="o">|</span> <span class="n">logins</span>
+<span class="n">username</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">logins</span><span class="w"></span>
 <span class="c1">----------+--------</span>
-<span class="n">James</span>    <span class="o">|</span>      <span class="mi">4</span>
-<span class="n">Lois</span>     <span class="o">|</span>      <span class="mi">2</span>
-<span class="p">(</span><span class="mi">2</span> <span class="k">rows</span><span class="p">)</span>
+<span class="n">James</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"></span>
+<span class="n">Lois</span><span class="w">     </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"></span>
+<span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 <p>Et que tu veuilles ajouter deux nouveaux <em>logins</em>:</p>
-<div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">user_logins</span> <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">logins</span><span class="p">)</span>
-<span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;Naomi&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="s1">&#39;James&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">user_logins</span><span class="w"> </span><span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">logins</span><span class="p">)</span><span class="w"></span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Naomi&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="s1">&#39;James&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 <p>En temps normal, tu auras cette erreur si le <em>username</em> existe déjà en base:</p>
-<div class="highlight"><pre><span></span><span class="n">ERROR</span><span class="p">:</span>  <span class="n">duplicate</span> <span class="k">key</span> <span class="n">value</span> <span class="n">violates</span> <span class="k">unique</span> <span class="k">constraint</span> <span class="ss">&quot;users_pkey&quot;</span>
-<span class="n">DETAIL</span><span class="p">:</span>  <span class="k">Key</span> <span class="p">(</span><span class="n">username</span><span class="p">)</span><span class="o">=</span><span class="p">(</span><span class="n">James</span><span class="p">)</span> <span class="n">already</span> <span class="k">exists</span><span class="p">.</span>
+<div class="highlight"><pre><span></span><span class="n">ERROR</span><span class="p">:</span><span class="w">  </span><span class="n">duplicate</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">violates</span><span class="w"> </span><span class="k">unique</span><span class="w"> </span><span class="k">constraint</span><span class="w"> </span><span class="ss">&quot;users_pkey&quot;</span><span class="w"></span>
+<span class="n">DETAIL</span><span class="p">:</span><span class="w">  </span><span class="k">Key</span><span class="w"> </span><span class="p">(</span><span class="n">username</span><span class="p">)</span><span class="o">=</span><span class="p">(</span><span class="n">James</span><span class="p">)</span><span class="w"> </span><span class="n">already</span><span class="w"> </span><span class="k">exists</span><span class="p">.</span><span class="w"></span>
 </pre></div>
 <p>Et bien en 9.5, tu pourras gérer ça de cette manière:</p>
-<div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">user_logins</span> <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">logins</span><span class="p">)</span>
-<span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;Naomi&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="s1">&#39;James&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="k">ON</span> <span class="n">CONFLICT</span> <span class="p">(</span><span class="n">username</span><span class="p">)</span>
-<span class="k">DO</span> <span class="k">UPDATE</span> <span class="k">SET</span> <span class="n">logins</span> <span class="o">=</span> <span class="n">user_logins</span><span class="p">.</span><span class="n">logins</span> <span class="o">+</span> <span class="n">EXCLUDED</span><span class="p">.</span><span class="n">logins</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">user_logins</span><span class="w"> </span><span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">logins</span><span class="p">)</span><span class="w"></span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Naomi&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="s1">&#39;James&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="k">ON</span><span class="w"> </span><span class="n">CONFLICT</span><span class="w"> </span><span class="p">(</span><span class="n">username</span><span class="p">)</span><span class="w"></span>
+<span class="k">DO</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">logins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_logins</span><span class="p">.</span><span class="n">logins</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">EXCLUDED</span><span class="p">.</span><span class="n">logins</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 <p>Génial non ?</p>
 <p><em>&quot;Oui mais bon, de mon côté, en production, j'ai du postgresql 9.4 et c'est pas près de changer.&quot;</em></p>
@@ -181,34 +181,34 @@ Pour plus de détail, lis l'article que j'ai cité précédemment.</p>
 <p>Du coup, la <a class="reference external" href="http://stackoverflow.com/questions/1109061/insert-on-duplicate-update-in-postgresql?answertab=votes#tab-top">solution admise par la communauté stackoverflow</a>
 est la suivante. Tu écris une fonction <a class="reference external" href="https://fr.wikipedia.org/wiki/PL/SQL">pl/sql</a> qui boucle sur le <em>update</em> ou <em>insert</em>, en utilisant l'exception <em>unique_violation</em>.
 Du coup, cette fonction s'appelle à l'aide d'un seul <em>select</em>, donc pas besoin de <em>lock</em> ou de transaction:</p>
-<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">db</span> <span class="p">(</span><span class="n">a</span> <span class="nb">INT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">b</span> <span class="nb">TEXT</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">);</span><span class="w"></span>
 
-<span class="k">CREATE</span> <span class="k">FUNCTION</span> <span class="n">merge_db</span><span class="p">(</span><span class="k">key</span> <span class="nb">INT</span><span class="p">,</span> <span class="k">data</span> <span class="nb">TEXT</span><span class="p">)</span> <span class="k">RETURNS</span> <span class="n">VOID</span> <span class="k">AS</span>
-<span class="err">$$</span>
-<span class="k">BEGIN</span>
-    <span class="n">LOOP</span>
-        <span class="c1">-- first try to update the key</span>
-        <span class="c1">-- note that &quot;a&quot; must be unique</span>
-        <span class="k">UPDATE</span> <span class="n">db</span> <span class="k">SET</span> <span class="n">b</span> <span class="o">=</span> <span class="k">data</span> <span class="k">WHERE</span> <span class="n">a</span> <span class="o">=</span> <span class="k">key</span><span class="p">;</span>
-        <span class="k">IF</span> <span class="k">found</span> <span class="k">THEN</span>
-            <span class="k">RETURN</span><span class="p">;</span>
-        <span class="k">END</span> <span class="k">IF</span><span class="p">;</span>
-        <span class="c1">-- not there, so try to insert the key</span>
-        <span class="c1">-- if someone else inserts the same key concurrently,</span>
-        <span class="c1">-- we could get a unique-key failure</span>
-        <span class="k">BEGIN</span>
-            <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">db</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="k">key</span><span class="p">,</span> <span class="k">data</span><span class="p">);</span>
-            <span class="k">RETURN</span><span class="p">;</span>
-        <span class="k">EXCEPTION</span> <span class="k">WHEN</span> <span class="n">unique_violation</span> <span class="k">THEN</span>
-            <span class="c1">-- do nothing, and loop to try the UPDATE again</span>
-        <span class="k">END</span><span class="p">;</span>
-    <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
-<span class="k">END</span><span class="p">;</span>
-<span class="err">$$</span>
-<span class="k">LANGUAGE</span> <span class="n">plpgsql</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">merge_db</span><span class="p">(</span><span class="k">key</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">)</span><span class="w"> </span><span class="k">RETURNS</span><span class="w"> </span><span class="n">VOID</span><span class="w"> </span><span class="k">AS</span><span class="w"></span>
+<span class="err">$$</span><span class="w"></span>
+<span class="k">BEGIN</span><span class="w"></span>
+<span class="w">    </span><span class="n">LOOP</span><span class="w"></span>
+<span class="w">        </span><span class="c1">-- first try to update the key</span>
+<span class="w">        </span><span class="c1">-- note that &quot;a&quot; must be unique</span>
+<span class="w">        </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">key</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">IF</span><span class="w"> </span><span class="k">found</span><span class="w"> </span><span class="k">THEN</span><span class="w"></span>
+<span class="w">            </span><span class="k">RETURN</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">END</span><span class="w"> </span><span class="k">IF</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="c1">-- not there, so try to insert the key</span>
+<span class="w">        </span><span class="c1">-- if someone else inserts the same key concurrently,</span>
+<span class="w">        </span><span class="c1">-- we could get a unique-key failure</span>
+<span class="w">        </span><span class="k">BEGIN</span><span class="w"></span>
+<span class="w">            </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">db</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="w"> </span><span class="k">data</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="k">RETURN</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">EXCEPTION</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">unique_violation</span><span class="w"> </span><span class="k">THEN</span><span class="w"></span>
+<span class="w">            </span><span class="c1">-- do nothing, and loop to try the UPDATE again</span>
+<span class="w">        </span><span class="k">END</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span><span class="w"></span>
+<span class="k">END</span><span class="p">;</span><span class="w"></span>
+<span class="err">$$</span><span class="w"></span>
+<span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span><span class="p">;</span><span class="w"></span>
 
-<span class="k">SELECT</span> <span class="n">merge_db</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;david&#39;</span><span class="p">);</span>
-<span class="k">SELECT</span> <span class="n">merge_db</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;dennis&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">merge_db</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;david&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">merge_db</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dennis&#39;</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 
   </div>

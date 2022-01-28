@@ -526,7 +526,7 @@ pour afficher le contenu de la page. Les templates suivants vont donc étendre <
         <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
         <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
         <span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
-        <span class="kd">var</span> <span class="nx">format</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s2">&quot;^\\d{2}\/\\d{2}\/\\d{4}$&quot;</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">format</span> <span class="o">=</span> <span class="ow">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s2">&quot;^\\d{2}\/\\d{2}\/\\d{4}$&quot;</span><span class="p">);</span>
         <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">format</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">val</span><span class="p">))</span> <span class="p">{</span>
             <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
         <span class="p">}</span>

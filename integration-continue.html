@@ -318,17 +318,17 @@ tests unitaires à chaque <em>commit</em>, et qui va t'envoyer un mail si un pro
 été rencontré.</p>
 <p>Tu peux t'y connecter via ton compte Github et y ajouter ton dépôt git via le bouton <em>+</em>.</p>
 <p>Au préalable, il faut créer un fichier <em>.travis.yml</em> dans ton répertoire <em>myproject</em>:</p>
-<div class="highlight"><pre><span></span><span class="nt">language</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
-<span class="nt">python</span><span class="p">:</span> <span class="s">&quot;2.7&quot;</span>
-<span class="nt">env</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">TOX_ENV=py27</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">TOX_ENV=py34</span>
-<span class="nt">install</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip install tox</span>
-<span class="nt">script</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tox -e $TOX_ENV</span>
-<span class="nt">after_success</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip install coveralls</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">coveralls</span>
+<div class="highlight"><pre><span></span><span class="nt">language</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w"></span>
+<span class="nt">python</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2.7&quot;</span><span class="w"></span>
+<span class="nt">env</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TOX_ENV=py27</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TOX_ENV=py34</span><span class="w"></span>
+<span class="nt">install</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install tox</span><span class="w"></span>
+<span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tox -e $TOX_ENV</span><span class="w"></span>
+<span class="nt">after_success</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install coveralls</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coveralls</span><span class="w"></span>
 </pre></div>
 <p>On y indique les environnements de tox à tester et le script tox à exécuter.</p>
 <p>Tu peux maintenant <em>commiter</em> tout ça sur ton dépôt Github, et te rendre sur le site
@@ -357,20 +357,20 @@ via <em>Add repository</em>.</p>
 <a class="reference external" href="http://sphinx-doc.org/rest.html">restructuredText</a>, dans la configuration de
 ton projet sur ces trois plate-formes.</p>
 <p>Exemple:</p>
-<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">demo-integration-continue</span>
-<span class="l l-Scalar l-Scalar-Plain">-------------------------</span>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">demo-integration-continue</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">-------------------------</span><span class="w"></span>
 
-<span class="l l-Scalar l-Scalar-Plain">Application de démo d&#39;intégration continue sous github</span>
+<span class="l l-Scalar l-Scalar-Plain">Application de démo d&#39;intégration continue sous github</span><span class="w"></span>
 
-<span class="l l-Scalar l-Scalar-Plain">.. image:</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://travis-ci.org/dotmobo/demo-integration-continue.svg</span>
-    <span class="l l-Scalar l-Scalar-Plain">:target</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://travis-ci.org/dotmobo/demo-integration-continue</span>
+<span class="l l-Scalar l-Scalar-Plain">.. image:</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://travis-ci.org/dotmobo/demo-integration-continue.svg</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">:target</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://travis-ci.org/dotmobo/demo-integration-continue</span><span class="w"></span>
 
-<span class="l l-Scalar l-Scalar-Plain">.. image:</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://coveralls.io/repos/dotmobo/demo-integration-continue/badge.svg?branch=master&amp;service=github</span>
-    <span class="l l-Scalar l-Scalar-Plain">:target</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://coveralls.io/github/dotmobo/demo-integration-continue?branch=master</span>
+<span class="l l-Scalar l-Scalar-Plain">.. image:</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://coveralls.io/repos/dotmobo/demo-integration-continue/badge.svg?branch=master&amp;service=github</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">:target</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://coveralls.io/github/dotmobo/demo-integration-continue?branch=master</span><span class="w"></span>
 
-<span class="l l-Scalar l-Scalar-Plain">.. image:</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://landscape.io/github/dotmobo/demo-integration-continue/master/landscape.svg?style=flat</span>
-    <span class="l l-Scalar l-Scalar-Plain">:target</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://landscape.io/github/dotmobo/demo-integration-continue/master</span>
-    <span class="l l-Scalar l-Scalar-Plain">:alt</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Code Health</span>
+<span class="l l-Scalar l-Scalar-Plain">.. image:</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://landscape.io/github/dotmobo/demo-integration-continue/master/landscape.svg?style=flat</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">:target</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://landscape.io/github/dotmobo/demo-integration-continue/master</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">:alt</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Code Health</span><span class="w"></span>
 </pre></div>
 <p><em>Commit</em> et rends-toi sur ton dépôt github pour voir
 <a class="reference external" href="https://github.com/dotmobo/demo-integration-continue">le résultat</a>!</p>

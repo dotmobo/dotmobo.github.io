@@ -149,8 +149,8 @@ Et ça tourne sur la VM <em>Erlang</em>, qui est réputée comme étant très pe
 <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
 </pre></div>
 <p>En <em>Elixir</em>, ça donne ça :</p>
-<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span> <span class="n">myList</span> <span class="o">=</span> <span class="k">for</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="mi">1</span><span class="o">..</span><span class="mi">4</span><span class="p">,</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">do</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
-<span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span><span class="o">..</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"></span>
+<span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">]</span><span class="w"></span>
 </pre></div>
 <p>Et pour faire un dictionnaire compréhension à partir d'une liste, en <em>Python</em> on ferait ça :</p>
 <div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">myDict</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">}</span>
@@ -158,8 +158,8 @@ Et ça tourne sur la VM <em>Erlang</em>, qui est réputée comme étant très pe
 <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">16</span><span class="p">}</span>
 </pre></div>
 <p>En <em>Elixir</em>, ça donne ça :</p>
-<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span> <span class="n">myDict</span> <span class="o">=</span> <span class="k">for</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="mi">1</span><span class="o">..</span><span class="mi">4</span><span class="p">,</span> <span class="n">rem</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="ss">into</span><span class="p">:</span> <span class="p">%{},</span> <span class="ss">do</span><span class="p">:</span> <span class="p">{</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">}</span>
-<span class="p">%{</span><span class="mi">2</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span> <span class="o">=&gt;</span> <span class="mi">16</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myDict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span><span class="o">..</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">rem</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="ss">into</span><span class="p">:</span><span class="w"> </span><span class="p">%{},</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">}</span><span class="w"></span>
+<span class="p">%{</span><span class="mi">2</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">16</span><span class="p">}</span><span class="w"></span>
 </pre></div>
 <p>Tu remarqueras qu'<em>Elixir</em> utilise le typage dynamique comme en <em>Python</em>, du coup on peut avoir un syntaxe assez concise.</p>
 </div>
@@ -172,9 +172,9 @@ Et ça tourne sur la VM <em>Erlang</em>, qui est réputée comme étant très pe
 <span class="mi">7</span>
 </pre></div>
 <p>En <em>Elixir</em> :</p>
-<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span> <span class="n">add</span> <span class="o">=</span> <span class="k">fn</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="k">end</span>
-<span class="n">iex</span><span class="o">&gt;</span> <span class="n">add</span><span class="o">.</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="mi">7</span>
+<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">end</span><span class="w"></span>
+<span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add</span><span class="o">.</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
+<span class="mi">7</span><span class="w"></span>
 </pre></div>
 <p>Ici on a un exemple relativement simple, mais sache que tu n'as pas de limitation de syntaxe dans les fonctions anonymes d'<em>Elixir</em>.</p>
 <p>Il s'agit également de <em>closures</em>, donc elles ont accès aux variables du <em>scope</em>. Tu remarqueras la syntaxe <strong>.(</strong> pour l'appel de la fonction.
@@ -186,66 +186,66 @@ C'est une volonté d'<em>Elixir</em> de différencier les appels des fonctions a
 <p>En effet, pour faire simple, en <em>Elixir</em> lorsque tu fais <strong>x = 1</strong>, le langage essaye de <em>matcher</em> l'expression de droite avec celle de gauche.
 On pourra voir l'assignation de la variable x comme une conséquence de ce <em>pattern matching</em>.</p>
 <p>Ça permet de faire tout un tas de choses, par exemple :</p>
-<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span> <span class="p">{</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">}</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:hello</span><span class="p">,</span> <span class="s2">&quot;world&quot;</span><span class="p">,</span> <span class="mi">42</span><span class="p">}</span>
-<span class="p">{</span><span class="ss">:hello</span><span class="p">,</span> <span class="s2">&quot;world&quot;</span><span class="p">,</span> <span class="mi">42</span><span class="p">}</span>
-<span class="n">iex</span><span class="o">&gt;</span> <span class="n">a</span>
-<span class="ss">:hello</span>
-<span class="n">iex</span><span class="o">&gt;</span> <span class="n">b</span>
-<span class="s2">&quot;world&quot;</span>
+<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="ss">:hello</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;world&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">}</span><span class="w"></span>
+<span class="p">{</span><span class="ss">:hello</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;world&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">}</span><span class="w"></span>
+<span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"></span>
+<span class="ss">:hello</span><span class="w"></span>
+<span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"></span>
+<span class="s2">&quot;world&quot;</span><span class="w"></span>
 </pre></div>
 <p>Tu remarqueras le <strong>:hello</strong>, qui est en réalité un <em>atom</em>. C'est en gros une constante qui porte comme nom de variable sa valeur. les <strong>true</strong> et <strong>false</strong> du langage
 sont des <em>atoms</em> par exemple.</p>
 <p>Pour récupérer le <em>head</em> et le <em>tail</em> d'une liste via le <em>pattern matching</em> :</p>
-<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">head</span> <span class="o">|</span> <span class="n">tail</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="n">iex</span><span class="o">&gt;</span> <span class="n">head</span>
-<span class="mi">1</span>
-<span class="n">iex</span><span class="o">&gt;</span> <span class="n">tail</span>
-<span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">head</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">tail</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"></span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"></span>
+<span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">head</span><span class="w"></span>
+<span class="mi">1</span><span class="w"></span>
+<span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tail</span><span class="w"></span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"></span>
 </pre></div>
 <p>Mais là où c'est vraiment fort, c'est que ce <em>pattern matching</em> fonctionne également pour les arguments des fonctions.
 Et on va alors pouvoir écrire une fonction qui va se comporter différemment en fonction des arguments d'entrée.
 Ça peut faire penser à <em>Java</em>, mais via le <em>pattern matching</em>, c'est vraiment plus puissant.</p>
 <p>On imagine ici une fonction que se comporterait différemment en fonction du <em>JSON</em> qu'elle a reçu par exemple.
 Ici, on effectue des répartions différentes selon le véhicule passé en entrée.</p>
-<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span> <span class="kd">defmodule</span> <span class="nc">Garage</span> <span class="k">do</span>
-         <span class="kd">def</span> <span class="n">repair</span><span class="p">(%{</span><span class="s2">&quot;voitures&quot;</span> <span class="o">=&gt;</span> <span class="p">%{</span> <span class="s2">&quot;marque&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;peugeot&quot;</span><span class="p">}})</span> <span class="k">do</span>
-             <span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;on traite les voitures peugeots&quot;</span><span class="p">)</span>
-         <span class="k">end</span>
-         <span class="kd">def</span> <span class="n">repair</span><span class="p">(%{</span><span class="s2">&quot;motos&quot;</span> <span class="o">=&gt;</span> <span class="p">%{</span> <span class="s2">&quot;couleur&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;rouge&quot;</span><span class="p">}})</span> <span class="k">do</span>
-             <span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;on traite les motos rouges&quot;</span><span class="p">)</span>
-         <span class="k">end</span>
-         <span class="kd">def</span> <span class="n">repair</span><span class="p">(</span><span class="bp">_</span><span class="p">)</span> <span class="k">do</span>
-             <span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;on traite le reste&quot;</span><span class="p">)</span>
-         <span class="k">end</span>
-     <span class="k">end</span>
+<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Garage</span><span class="w"> </span><span class="k">do</span><span class="w"></span>
+<span class="w">         </span><span class="kd">def</span><span class="w"> </span><span class="n">repair</span><span class="p">(%{</span><span class="s2">&quot;voitures&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">%{</span><span class="w"> </span><span class="s2">&quot;marque&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;peugeot&quot;</span><span class="p">}})</span><span class="w"> </span><span class="k">do</span><span class="w"></span>
+<span class="w">             </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;on traite les voitures peugeots&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">         </span><span class="k">end</span><span class="w"></span>
+<span class="w">         </span><span class="kd">def</span><span class="w"> </span><span class="n">repair</span><span class="p">(%{</span><span class="s2">&quot;motos&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">%{</span><span class="w"> </span><span class="s2">&quot;couleur&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;rouge&quot;</span><span class="p">}})</span><span class="w"> </span><span class="k">do</span><span class="w"></span>
+<span class="w">             </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;on traite les motos rouges&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">         </span><span class="k">end</span><span class="w"></span>
+<span class="w">         </span><span class="kd">def</span><span class="w"> </span><span class="n">repair</span><span class="p">(</span><span class="bp">_</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"></span>
+<span class="w">             </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;on traite le reste&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">         </span><span class="k">end</span><span class="w"></span>
+<span class="w">     </span><span class="k">end</span><span class="w"></span>
 
-<span class="n">iex</span><span class="o">&gt;</span> <span class="nc">Garage</span><span class="o">.</span><span class="n">repair</span><span class="p">(%{</span>
-         <span class="s2">&quot;voitures&quot;</span> <span class="o">=&gt;</span> <span class="p">%{</span>
-            <span class="s2">&quot;marque&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;peugeot&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;roues&quot;</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="p">,</span>
-            <span class="s2">&quot;couleur&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;rouge&quot;</span>
-         <span class="p">}</span>
-     <span class="p">})</span>
-<span class="n">on</span> <span class="n">traite</span> <span class="n">les</span> <span class="n">voitures</span> <span class="n">peugeots</span>
+<span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="nc">Garage</span><span class="o">.</span><span class="n">repair</span><span class="p">(%{</span><span class="w"></span>
+<span class="w">         </span><span class="s2">&quot;voitures&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">%{</span><span class="w"></span>
+<span class="w">            </span><span class="s2">&quot;marque&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;peugeot&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="s2">&quot;roues&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="s2">&quot;couleur&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;rouge&quot;</span><span class="w"></span>
+<span class="w">         </span><span class="p">}</span><span class="w"></span>
+<span class="w">     </span><span class="p">})</span><span class="w"></span>
+<span class="n">on</span><span class="w"> </span><span class="n">traite</span><span class="w"> </span><span class="n">les</span><span class="w"> </span><span class="n">voitures</span><span class="w"> </span><span class="n">peugeots</span><span class="w"></span>
 
-<span class="n">iex</span><span class="o">&gt;</span> <span class="nc">Garage</span><span class="o">.</span><span class="n">repair</span><span class="p">(%{</span>
-         <span class="s2">&quot;motos&quot;</span> <span class="o">=&gt;</span> <span class="p">%{</span>
-             <span class="s2">&quot;marque&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;ducati&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;roues&quot;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
-             <span class="s2">&quot;couleur&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;rouge&quot;</span>
-         <span class="p">}</span>
-     <span class="p">})</span>
-<span class="n">on</span> <span class="n">traite</span> <span class="n">les</span> <span class="n">motos</span> <span class="n">rouges</span>
+<span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="nc">Garage</span><span class="o">.</span><span class="n">repair</span><span class="p">(%{</span><span class="w"></span>
+<span class="w">         </span><span class="s2">&quot;motos&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">%{</span><span class="w"></span>
+<span class="w">             </span><span class="s2">&quot;marque&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;ducati&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="s2">&quot;roues&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="s2">&quot;couleur&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;rouge&quot;</span><span class="w"></span>
+<span class="w">         </span><span class="p">}</span><span class="w"></span>
+<span class="w">     </span><span class="p">})</span><span class="w"></span>
+<span class="n">on</span><span class="w"> </span><span class="n">traite</span><span class="w"> </span><span class="n">les</span><span class="w"> </span><span class="n">motos</span><span class="w"> </span><span class="n">rouges</span><span class="w"></span>
 
-<span class="n">iex</span><span class="o">&gt;</span> <span class="nc">Garage</span><span class="o">.</span><span class="n">repair</span><span class="p">(%{</span>
-         <span class="s2">&quot;motos&quot;</span> <span class="o">=&gt;</span> <span class="p">%{</span>
-             <span class="s2">&quot;marque&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;derbi&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;roues&quot;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
-             <span class="s2">&quot;couleur&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;noir&quot;</span>
-         <span class="p">}</span>
-     <span class="p">})</span>
-<span class="n">on</span> <span class="n">traite</span> <span class="n">le</span> <span class="n">reste</span>
+<span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="nc">Garage</span><span class="o">.</span><span class="n">repair</span><span class="p">(%{</span><span class="w"></span>
+<span class="w">         </span><span class="s2">&quot;motos&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">%{</span><span class="w"></span>
+<span class="w">             </span><span class="s2">&quot;marque&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;derbi&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="s2">&quot;roues&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="s2">&quot;couleur&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;noir&quot;</span><span class="w"></span>
+<span class="w">         </span><span class="p">}</span><span class="w"></span>
+<span class="w">     </span><span class="p">})</span><span class="w"></span>
+<span class="n">on</span><span class="w"> </span><span class="n">traite</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="n">reste</span><span class="w"></span>
 </pre></div>
 <p>Plutôt sympa nan ? Ça peut nous éviter pas mal de bloc type <em>if ... else</em> ce genre de syntaxe !</p>
 </div>
@@ -253,8 +253,8 @@ Ici, on effectue des répartions différentes selon le véhicule passé en entr�
 <h2>Pipe</h2>
 <p>L'opérateur unix ultime, qui manque cruellement à <em>Python</em>, est bien présent dans Elixir !</p>
 <p>Tu peux du coup faire ce genre de truc :</p>
-<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span> <span class="s2">&quot;i love elixir&quot;</span> <span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">split</span> <span class="o">|&gt;</span> <span class="nc">Enum</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="nc">Enum</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">capitalize</span>
-<span class="s2">&quot;Elixir&quot;</span>
+<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="s2">&quot;i love elixir&quot;</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">split</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Enum</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Enum</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">capitalize</span><span class="w"></span>
+<span class="s2">&quot;Elixir&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="section" id="processus">
@@ -267,14 +267,14 @@ sans que ça pose problème au niveau de la machine.</p>
 messages à travers les processus.</p>
 <p>Ça ressemble un peu au système de <em>goroutines</em> de <em>Go</em>. On pourrait voir le mot clé <strong>spawn</strong> équivalent au mot clé <strong>go</strong> de <em>Go</em>,
 et le système <strong>send</strong>/<strong>receive</strong> comme le système de channel de <em>Go</em>.</p>
-<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">self</span><span class="p">()</span>
-<span class="c1">#PID&lt;0.41.0&gt;</span>
-<span class="n">iex</span><span class="o">&gt;</span> <span class="n">spawn</span> <span class="k">fn</span> <span class="o">-&gt;</span> <span class="n">send</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="p">{</span><span class="ss">:hello</span><span class="p">,</span> <span class="n">self</span><span class="p">()})</span> <span class="k">end</span>
-<span class="c1">#PID&lt;0.48.0&gt;</span>
-<span class="n">iex</span><span class="o">&gt;</span> <span class="k">receive</span> <span class="k">do</span>
-<span class="n">...</span><span class="o">&gt;</span>   <span class="p">{</span><span class="ss">:hello</span><span class="p">,</span> <span class="n">pid</span><span class="p">}</span> <span class="o">-&gt;</span> <span class="s2">&quot;Got hello from </span><span class="si">#{</span><span class="n">inspect</span> <span class="n">pid</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="n">...</span><span class="o">&gt;</span> <span class="k">end</span>
-<span class="s2">&quot;Got hello from </span><span class="err">#</span><span class="s2">PID&lt;0.48.0&gt;&quot;</span>
+<div class="highlight"><pre><span></span><span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">parent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">()</span><span class="w"></span>
+<span class="c1">#PID&lt;0.41.0&gt;</span><span class="w"></span>
+<span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">spawn</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">send</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="ss">:hello</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">()})</span><span class="w"> </span><span class="k">end</span><span class="w"></span>
+<span class="c1">#PID&lt;0.48.0&gt;</span><span class="w"></span>
+<span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="k">receive</span><span class="w"> </span><span class="k">do</span><span class="w"></span>
+<span class="n">...</span><span class="o">&gt;</span><span class="w">   </span><span class="p">{</span><span class="ss">:hello</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="p">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Got hello from </span><span class="si">#{</span><span class="n">inspect</span><span class="w"> </span><span class="n">pid</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"></span>
+<span class="n">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">end</span><span class="w"></span>
+<span class="s2">&quot;Got hello from </span><span class="err">#</span><span class="s2">PID&lt;0.48.0&gt;&quot;</span><span class="w"></span>
 </pre></div>
 <p>Dans cet exemple, on a notre processus parent qui reçoit un message du processus 48 qui a été <em>spawné</em>.</p>
 </div>

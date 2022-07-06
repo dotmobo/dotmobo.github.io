@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="http://dotmobo.github.io/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/solid.css">
+
+    <link href="http://dotmobo.github.io/css/custom.css" rel="stylesheet">
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68852219-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Morgan" />
+<meta name="description" content="Smart Contract Elrond en Rust : DAO vote" />
+<meta name="keywords" content="elrond, rust, dao, vote">
+
+
+<meta property="og:site_name" content=".mobo"/>
+<meta property="og:title" content="Smart Contract Elrond en Rust : DAO vote"/>
+<meta property="og:description" content="Smart Contract Elrond en Rust : DAO vote"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="http://dotmobo.github.io/elrond-sc-rust-dao-vote.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2022-07-06 00:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://dotmobo.github.io/author/morgan.html">
+<meta property="article:section" content="Elrond"/>
+<meta property="article:tag" content="elrond"/>
+<meta property="article:tag" content="rust"/>
+<meta property="article:tag" content="dao"/>
+<meta property="article:tag" content="vote"/>
+<meta property="og:image" content="//fr.gravatar.com/userimage/46763775/9a175067c03981dd3920b32ecbb1032f.jpeg">
+
+  <title>.mobo &ndash; Smart Contract Elrond en Rust : DAO vote</title>
+
+</head>
+<body class="light-theme">
+  <aside>
+    <div>
+      <a href="http://dotmobo.github.io">
+        <img src="//fr.gravatar.com/userimage/46763775/9a175067c03981dd3920b32ecbb1032f.jpeg" alt=".mobo" title=".mobo">
+      </a>
+
+      <h1>
+        <a href="http://dotmobo.github.io">.mobo</a>
+      </h1>
+
+<p>Blog d'un Pythoniste Djangonaute</p>
+
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://dotmobo.github.io">Accueil</a>
+
+      <a href="/categories.html">Catégories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/archives.html">Archives</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="elrond-sc-rust-dao-vote">Smart Contract Elrond en Rust : DAO vote</h1>
+    <p>
+      Posté le 06/07/2022 dans <a href="http://dotmobo.github.io/category/elrond.html">Elrond</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="Elrond" class="align-right" src="./images/elrond.png" />
+<p>Allez, c'est parti pour une série d'articles concernant l'écriture de Smart Contract <a class="reference external" href="https://elrond.com/">Elrond</a>
+en <a class="reference external" href="https://rust-lang.org/">Rust</a>.
+Etant dans l'équipe d'un projet NFT sur Elrond, j'ai pu explorer certains facettes de cette blockchain.</p>
+<div class="section" id="contexte">
+<h2>Contexte</h2>
+<p>On va commencer par écrire un SC en Rust pour implémenter le système de vote d'une <a class="reference external" href="https://fr.wikipedia.org/wiki/Organisation_autonome_d%C3%A9centralis%C3%A9e">DAO</a>.
+Imaginons que la DAO de notre projet NFT a son propre token (ici $DEAD). Et que nous souhaitons mettre en place
+un système de vote où les membres peuvent utiliser des $DEAD pour voter.</p>
+<p>Ici, le nombre de $DEAD accumulés équivaut à une puissance de vote. Les membres qui ont plus de tokens
+ont donc plus de pouvoir dans la DAO.</p>
+<p>On aura donc une question stockée dans le SC et la possibilité de voter oui ou non avec des $DEAD.
+A la fin du vote, les membres doivent pouvoir récupérer leurs tokens.</p>
+</div>
+<div class="section" id="tools">
+<h2>Tools</h2>
+<p>Tu vas avoir besoin de Python 3, de Rust et de Erdpy.</p>
+<div class="highlight"><pre><span></span>sudo apt install libncurses5 python3
+wget -O erdpy-up.py https://raw.githubusercontent.com/ElrondNetwork/elrond-sdk-erdpy/master/erdpy-up.py
+python3.8 erdpy-up.py
+curl --proto <span class="s1">&#39;=https&#39;</span> --tlsv1.2 -sSf https://sh.rustup.rs <span class="p">|</span> sh
+</pre></div>
+<p>Prends ton éditeur préféré et c'est parti !</p>
+</div>
+<div class="section" id="smart-contract">
+<h2>Smart Contract</h2>
+<p>On va utiliser un template vide à l'aide de <strong>erdpy</strong> pour créer un SC. Tu peux trouver des informations complémentaire
+dans la <a class="reference external" href="https://docs.elrond.com/sdk-and-tools/erdpy/erdpy/">documentation officielle</a>, notamment pour te créer le fichier
+<strong>pem</strong> de ton <strong>wallet</strong> nécessaire au déploiement en production.</p>
+<div class="highlight"><pre><span></span>erdpy contract new vote --template empty
+</pre></div>
+<p>Pour faire ça proprement, on va créer un fichier <strong>vote_info.rs</strong> dans <strong>src</strong> qui va contenir
+la structure de notre vote. On va y stocker l'adresse Elrond du votant ainsi qui le nombre de $DEAD
+qu'il a utilisé pour voter.</p>
+<div class="highlight"><pre><span></span><span class="n">elrond_wasm</span>::<span class="n">imports</span><span class="o">!</span><span class="p">();</span><span class="w"></span>
+<span class="n">elrond_wasm</span>::<span class="n">derive_imports</span><span class="o">!</span><span class="p">();</span><span class="w"></span>
+
+<span class="cp">#[derive(TypeAbi, TopEncode, TopDecode, PartialEq, Debug)]</span><span class="w"></span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">VoteInfo</span><span class="o">&lt;</span><span class="n">M</span>: <span class="nc">ManagedTypeApi</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">address</span>: <span class="nc">ManagedAddress</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">amount</span>: <span class="nc">BigUint</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span><span class="p">,</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+<p>Le fichier qui va principalement nous intéresser est <strong>src/empty.rs</strong>.</p>
+<p>A chaque déploiement ou mise à jour du smart contract, la fonction <strong>init</strong> est appelée.
+Il faut donc faire attention à ne pas écraser des valeurs !</p>
+<p>On va prendre en paramètre la question et l'identifiant du token que l'on souhaite utiliser pour voter.
+Et on initialise à 0 le nombre total de vote &quot;oui&quot; et de vote &quot;non&quot;, et on démarre le vote.</p>
+<div class="highlight"><pre><span></span><span class="cp">#![no_std]</span><span class="w"></span>
+
+<span class="n">elrond_wasm</span>::<span class="n">imports</span><span class="o">!</span><span class="p">();</span><span class="w"></span>
+
+<span class="k">mod</span> <span class="nn">vote_info</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">vote_info</span>::<span class="n">VoteInfo</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">elrond_wasm</span>::<span class="n">types</span>::<span class="n">heap</span>::<span class="n">BoxedBytes</span><span class="p">;</span><span class="w"></span>
+
+<span class="cp">#[elrond_wasm::contract]</span><span class="w"></span>
+<span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Vote</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// La fonction d&#39;initialisation au déployement du contrat</span>
+<span class="w">    </span><span class="c1">// On définit la question et les réponses possibles</span>
+<span class="w">    </span><span class="cp">#[init]</span><span class="w"></span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">init</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">question</span>: <span class="nc">BoxedBytes</span><span class="p">,</span><span class="w"> </span><span class="n">token_id</span>: <span class="nc">TokenIdentifier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">question</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">question</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">token_id</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">token_id</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">yes</span><span class="p">().</span><span class="n">is_empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="bp">self</span><span class="p">.</span><span class="n">yes</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="n">BigUint</span>::<span class="n">from</span><span class="p">(</span><span class="mi">0</span><span class="k">u32</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">no</span><span class="p">().</span><span class="n">is_empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="bp">self</span><span class="p">.</span><span class="n">no</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="n">BigUint</span>::<span class="n">from</span><span class="p">(</span><span class="mi">0</span><span class="k">u32</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">in_progress</span><span class="p">().</span><span class="n">is_empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="bp">self</span><span class="p">.</span><span class="n">in_progress</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="mi">1</span><span class="k">u32</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+<p>En bas de notre <strong>trait</strong>, on va définir l'ensemble des valeurs que l'on souhaite stocker dans le SC.
+C'est directement stocké dans la blockchain via <strong>storage_mapper</strong> et on peut visualiser les données depuis
+une dapp par exemple en appelant les méthodes de <strong>view</strong>.</p>
+<div class="highlight"><pre><span></span><span class="c1">// La question</span>
+<span class="cp">#[view(getQuestion)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;question&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">question</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">BoxedBytes</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// Le nombre de votes pour la réponse &quot;oui&quot;</span>
+<span class="cp">#[view(getYes)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;yes&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">yes</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">BigUint</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// Le nombre de votes pour la réponse &quot;non&quot;</span>
+<span class="cp">#[view(getNo)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;no&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">no</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">BigUint</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// Le token utilisé pour les votes</span>
+<span class="cp">#[view(getTokenId)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;token_id&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">token_id</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">TokenIdentifier</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// Si le vote est terminé</span>
+<span class="cp">#[view(getInProgress)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;in_progress&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">in_progress</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="kt">u32</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// L&#39;information du votant</span>
+<span class="cp">#[view(getVoteInfo)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;vote_info&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">address</span>: <span class="kp">&amp;</span><span class="nc">ManagedAddress</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">VoteInfo</span><span class="o">&lt;</span><span class="bp">Self</span>::<span class="n">Api</span><span class="o">&gt;&gt;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+<p>Ensuite, on va créer nos deux fonctions <strong>vote_yes</strong> et <strong>vote_no</strong>.
+Il y a sûrement moyen de mutualiser ces deux fonctions, mais j'ai fait au plus rapide.</p>
+<p>Il faut mettre quelques garde-fous, notamment pour vérifier que le type de token envoyé est le bon et
+que le vote est toujours en cours.</p>
+<p>Cette fonction doit donc être <strong>payable</strong>. Son fonctionnement est tout simple. On incrémente le nombre total de &quot;oui&quot; ou de &quot;non&quot;, et on
+ajoute ou met à jour l'information du votant.</p>
+<p>Le <strong>Ok(())</strong> à la fin est important, car il permet de confirmer que la transaction s'est bien effectuée.</p>
+<div class="highlight"><pre><span></span><span class="cp">#[payable(</span><span class="s">&quot;*&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="cp">#[endpoint]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">vote_yes</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="cp">#[payment_token]</span><span class="w"> </span><span class="n">payment_token</span>: <span class="nc">TokenIdentifier</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="cp">#[payment_amount]</span><span class="w"> </span><span class="n">payment_amount</span>: <span class="nc">BigUint</span><span class="p">,</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">payment_token</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">token_id</span><span class="p">().</span><span class="n">get</span><span class="p">(),</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;Invalid payment token&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">in_progress</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="k">u32</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;the vote is over&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">yes</span><span class="p">().</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">yes</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">yes</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&amp;</span><span class="n">payment_amount</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// save info about the voter</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">caller</span>: <span class="nc">ManagedAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// if vote info exists, update it</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="bp">self</span><span class="p">.</span><span class="n">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">is_empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">new_vote_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VoteInfo</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">address</span>: <span class="nc">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">(),</span><span class="w"></span>
+<span class="w">            </span><span class="n">amount</span>: <span class="nc">self</span><span class="p">.</span><span class="n">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">get</span><span class="p">().</span><span class="n">amount</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&amp;</span><span class="n">payment_amount</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">clear</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_vote_info</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// else create a new vote info</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">new_vote_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VoteInfo</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">address</span>: <span class="nc">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">(),</span><span class="w"></span>
+<span class="w">            </span><span class="n">amount</span>: <span class="nc">payment_amount</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_vote_info</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// On peut voter non en envoyant autant de tokens que souhaité</span>
+<span class="cp">#[payable(</span><span class="s">&quot;*&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="cp">#[endpoint]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">vote_no</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="cp">#[payment_token]</span><span class="w"> </span><span class="n">payment_token</span>: <span class="nc">TokenIdentifier</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="cp">#[payment_amount]</span><span class="w"> </span><span class="n">payment_amount</span>: <span class="nc">BigUint</span><span class="p">,</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">payment_token</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">token_id</span><span class="p">().</span><span class="n">get</span><span class="p">(),</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;Invalid payment token&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">in_progress</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="k">u32</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;the vote is over&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">no</span><span class="p">().</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">no</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">no</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&amp;</span><span class="n">payment_amount</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// save info about the voter</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">caller</span>: <span class="nc">ManagedAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// if vote info exists, update it</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="bp">self</span><span class="p">.</span><span class="n">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">is_empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">new_vote_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VoteInfo</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">address</span>: <span class="nc">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">(),</span><span class="w"></span>
+<span class="w">            </span><span class="n">amount</span>: <span class="nc">self</span><span class="p">.</span><span class="n">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">get</span><span class="p">().</span><span class="n">amount</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&amp;</span><span class="n">payment_amount</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">clear</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_vote_info</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// else create a new vote info</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">new_vote_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VoteInfo</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">address</span>: <span class="nc">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">(),</span><span class="w"></span>
+<span class="w">            </span><span class="n">amount</span>: <span class="nc">payment_amount</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_vote_info</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+<p>A la fin du vote, le votant doit pouvoir récupérer ses tokens. On créé donc une fonction qui sera appelée
+par le votant via un bouton dans la <strong>dapp</strong>. On effectue donc une transaction pour lui envoyer le montant total
+de ses tokens stockés dans le SC via la fonction <strong>self.send().direct()</strong>.</p>
+<div class="highlight"><pre><span></span><span class="cp">#[endpoint]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">withdraw_my_amount</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">in_progress</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="k">u32</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;the vote is not over&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">caller</span>: <span class="nc">ManagedAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="o">!</span><span class="bp">self</span><span class="p">.</span><span class="n">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">is_empty</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Nothing to withdraw!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">vote_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vote_info</span><span class="p">.</span><span class="n">amount</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">token_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">token_id</span><span class="p">().</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">send</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="n">direct</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">token_id</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">my_amount</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="p">[]);</span><span class="w"></span>
+
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">clear</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+<p>On donne également la possibilité à l'administrateur du smart contract de retirer tous les tokens, au cas où.
+On additionne ici le total des &quot;oui&quot; et des &quot;non&quot; et on envoie le tout à l'administrateur.</p>
+<div class="highlight"><pre><span></span><span class="cp">#[only_owner]</span><span class="w"></span>
+<span class="cp">#[endpoint]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">withdraw</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">in_progress</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="k">u32</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;the vote is not over&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">caller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">yes</span><span class="p">().</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">no</span><span class="p">().</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">token_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">token_id</span><span class="p">().</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">yes</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&amp;</span><span class="n">no</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">send</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="n">direct</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">token_id</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amount</span><span class="p">,</span><span class="w"> </span><span class="s">b&quot;withdraw successful&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+<p>Enfin, on ajoute quelques petites fonctions pratiques.</p>
+<p>Par exemple, pour stopper le vote :</p>
+<div class="highlight"><pre><span></span><span class="cp">#[only_owner]</span><span class="w"></span>
+<span class="cp">#[endpoint]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">finish_vote</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">in_progress</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="k">u32</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+<p>Ou pour changer la question :</p>
+<div class="highlight"><pre><span></span><span class="cp">#[only_owner]</span><span class="w"></span>
+<span class="cp">#[endpoint]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">change_question</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">question</span>: <span class="nc">BoxedBytes</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">question</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">question</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+<p>Attention à bien utiliser <strong>only_owner</strong>, sinon n'importe qui pourra appeler ces fonctions !</p>
+<p>Enfin, pour récupérer le nombre total de tokens utilisés par le votant :</p>
+<div class="highlight"><pre><span></span><span class="cp">#[view(getMyAmount)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">get_my_amount</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">address</span>: <span class="kp">&amp;</span><span class="nc">ManagedAddress</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">BigUint</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="o">!</span><span class="bp">self</span><span class="p">.</span><span class="n">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">address</span><span class="p">).</span><span class="n">is_empty</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Nothing to withdraw!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">vote_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">vote_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">address</span><span class="p">).</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vote_info</span><span class="p">.</span><span class="n">amount</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">amount</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+<p>Et voilà ! Tu peux jeter un oeil au résultat final sur <a class="reference external" href="https://github.com/dotmobo/dbc-dashboard/blob/master/contract/vote/src/empty.rs">mon github</a>.</p>
+<p>Pour tester si tout fonctionne, tu utilise <strong>erdpy</strong> pour compiler ton SC :</p>
+<div class="highlight"><pre><span></span>erdpy contract build
+</pre></div>
+<p>Et pour déployer, il te faut créer à la racine du projet un fichier <strong>erdpy.json</strong> avec les informations
+nécessaires au déploiement.
+Ici, on déploie sur <strong>devnet</strong>.
+Tu pourras trouver dans <strong>arguments</strong> les 2 arguments nécessaires au <strong>init</strong> du SC.
+<strong>DEADBROS-fa8f0f</strong> est l'id du token $DEAD sur devnet.</p>
+<div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;configurations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;proxy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://devnet-api.elrond.com&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;chainID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;D&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;contract&quot;</span><span class="p">:{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;deploy&quot;</span><span class="p">:{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;bytecode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;output/vote.wasm&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;recall-nonce&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;pem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;../../wallet/wallet-owner.pem&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;gas-limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">59999999</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;arguments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;str:Do you approve of the following plan regarding Dawn DeadBrothers funds: 35% EGLD staking, 35% LKMEX farming, 5% foundation, 5% charity, 10% marketing, 10% team ?&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;str:DEADBROS-fa8f0f&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">],</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;send&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;outfile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;deploy-testnet.interaction.json&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;upgrade&quot;</span><span class="p">:{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;bytecode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;output/vote.wasm&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;recall-nonce&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;pem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;../../wallet/wallet-owner.pem&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;gas-limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">59999999</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;arguments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;str:Do you approve of the following plan regarding Dawn DeadBrothers funds: 35% EGLD staking, 35% LKMEX farming, 5% foundation, 5% charity, 10% marketing, 10% team ?&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="s2">&quot;str:DEADBROS-fa8f0f&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">],</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;send&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;outfile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;deploy-testnet.interaction.json&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+<p>On imagine ici que tu as le <strong>pem</strong> de ton <strong>wallet</strong> dans <strong>../../wallet/wallet-owner.pem</strong>.
+N'oublie pas d'utiliser un <strong>faucet</strong> pour récupérer des EGLD de tests, car le déploiement a un coût !</p>
+<p>Tu déploie le tout et tu croises les doigts !</p>
+<div class="highlight"><pre><span></span>erdpy contract deploy
+</pre></div>
+<p>Tu peux désormais utiliser <strong>erdpy</strong> pour effectuer des transactions et tester les différentes fonctions de ton SC.</p>
+<div class="highlight"><pre><span></span>erdpy tx new --help
+</pre></div>
+<p>Ou alors tu peux directement passer à l'écriture de ton <a class="reference external" href="https://github.com/ElrondNetwork/dapp-template">application frontend</a> !</p>
+<p>Avec une <a class="reference external" href="https://github.com/dotmobo/dbc-dashboard/blob/master/dapp/src/pages/Dao/Components/Vote.tsx">dapp associée</a>, ça peut ressembler à ça :</p>
+<img alt="Dao_vote" src="./images/dao_vote.png" />
+<p>Have fun !</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://dotmobo.github.io/tag/elrond.html">elrond</a>
+      <a href="http://dotmobo.github.io/tag/rust.html">rust</a>
+      <a href="http://dotmobo.github.io/tag/dao.html">dao</a>
+      <a href="http://dotmobo.github.io/tag/vote.html">vote</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dotmobo';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; 2018  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " .mobo ",
+  "url" : "http://dotmobo.github.io",
+  "image": "//fr.gravatar.com/userimage/46763775/9a175067c03981dd3920b32ecbb1032f.jpeg",
+  "description": "DotMobo - Blog d'un Pythoniste Djangonaute"
+}
+</script>
+
+
+</body>
+</html>

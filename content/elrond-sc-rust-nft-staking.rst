@@ -48,7 +48,7 @@ Comme dans le premier épisode, on crée un SC vide à l'aide de **erdpy**.
 
 .. code-block:: bash
 
-    erdpy contract new vote --template empty
+    erdpy contract new staking --template empty
 
 Ensuite, dans un fichier **src/stake_info.rs**, on va avoir notre structure qui nous permettra de stocker les
 informations de staking de l'utilisateur.

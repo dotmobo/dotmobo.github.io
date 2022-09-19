@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="http://dotmobo.github.io/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://dotmobo.github.io/theme/font-awesome/css/solid.css">
+
+    <link href="http://dotmobo.github.io/css/custom.css" rel="stylesheet">
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68852219-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Morgan" />
+<meta name="description" content="Environnement de développement 2022" />
+<meta name="keywords" content="debian, environnement, developpement, gnome, flatpak, fish, copilot, neovim">
+
+
+<meta property="og:site_name" content=".mobo"/>
+<meta property="og:title" content="Environnement de développement en 2022"/>
+<meta property="og:description" content="Environnement de développement 2022"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="http://dotmobo.github.io/environnement-developpement-2022.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2022-09-19 00:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://dotmobo.github.io/author/morgan.html">
+<meta property="article:section" content="Linux"/>
+<meta property="article:tag" content="debian"/>
+<meta property="article:tag" content="environnement"/>
+<meta property="article:tag" content="developpement"/>
+<meta property="article:tag" content="gnome"/>
+<meta property="article:tag" content="flatpak"/>
+<meta property="article:tag" content="fish"/>
+<meta property="article:tag" content="copilot"/>
+<meta property="article:tag" content="neovim"/>
+<meta property="og:image" content="//fr.gravatar.com/userimage/46763775/9a175067c03981dd3920b32ecbb1032f.jpeg">
+
+  <title>.mobo &ndash; Environnement de développement en 2022</title>
+
+</head>
+<body class="light-theme">
+  <aside>
+    <div>
+      <a href="http://dotmobo.github.io">
+        <img src="//fr.gravatar.com/userimage/46763775/9a175067c03981dd3920b32ecbb1032f.jpeg" alt=".mobo" title=".mobo">
+      </a>
+
+      <h1>
+        <a href="http://dotmobo.github.io">.mobo</a>
+      </h1>
+
+<p>Blog d'un Pythoniste Djangonaute</p>
+
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://dotmobo.github.io">Accueil</a>
+
+      <a href="/categories.html">Catégories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/archives.html">Archives</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="environnement-developpement-2022">Environnement de développement en 2022</h1>
+    <p>
+      Posté le 19/09/2022 dans <a href="http://dotmobo.github.io/category/linux.html">Linux</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>Mon dernier article concernant mon environnement de développement datant de 2016, il était temps de faire une petite
+mise à jour de ce qui a changé depuis.</p>
+<img alt="Debian" class="align-right" src="./images/debian.png" />
+<div class="section" id="distribution">
+<h2>Distribution</h2>
+<p>Au revoir Arch Linux, et bonjour <a class="reference external" href="https://www.debian.org/">Debian Sid</a>. J'adore toujours Arch Linux mais je n'ai plus autant de temps qu'avant pour
+bidouiller et customiser mon système. Il me faut un système stable et robuste, sans surprise, mais qui soit relativement
+à jour par rapport aux derniers paquets disponibles. Et clé en main.</p>
+<p>Ça va faire 3 ans que je suis sur Debian Sid et je n'ai jamais eu de problème. C'est un bon compromis entre stabilité et
+fraicheur. Debian est devenu suffisamment user-friendly pour rendre obsolète toutes les distros basées sur elle comme Ubuntu
+ou Mint.</p>
+<p>Tout ce qui me dérange un peu, c'est la migration vers Systemd, car ne je suis personnellement pas fan du principe.
+Je préfère les outils qui suivent plus la philosophie Unix, c'est-à-dire qui font une seule chose et le font bien.
+Mais bon, toutes les grosses distros ont désormais migré dessus, et à l'avenir il faudra peut-être plutôt regarder du
+côté de BSD pour avoir des outils plus simples.</p>
+</div>
+<div class="section" id="bureau">
+<h2>Bureau</h2>
+<p><a class="reference external" href="https://www.gnome.org/">Gnome</a>. Principalement parce que je suis passé d'un PC fixe à un portable avec un dock. Ce qui fait que j'ai beaucoup
+de périphériques à gérer et que je me connecte/déconnecte régulièrement à différents docks et écrans. Et Gnome gère
+automatiquement tout ça pour moi. Ok, y a plein de démons qui tournent mais bon... C'est clairement du confort.</p>
+<p>Je regarde toujours les tiling window managers de temps en temps comme i3, et j'ai donc testé Pop Shell qui permet du tiling avec Gnome.
+C'est pas trop mal mais finalement, sur un portable, je préfére utiliser Gnome avec le terminal top-down <a class="reference external" href="http://guake-project.org/">Guake</a>.</p>
+</div>
+<div class="section" id="shell">
+<h2>Shell</h2>
+<p>J'ai migré de zsh à <a class="reference external" href="https://fishshell.com/">fish</a> après m'être rendu compte que ma configuration customisée de zsh correspondait exactement
+au réglage par défaut de fish. Donc fish vanilla couplé à <a class="reference external" href="https://github.com/tmux/tmux">tmux</a> pour la gestion des onglets et des sessions.
+Rien à configurer, juste ça marche par défaut. Magique.</p>
+</div>
+<div class="section" id="theme">
+<h2>Theme</h2>
+<p>Concernant les thèmes, je suis passé sur <a class="reference external" href="https://draculatheme.com/">Dracula</a> pour absolument tout. C'est un thème sombre parfait qui est disponible
+pour gnome, fish, vim, tmux, vs code, etc. L'ensemble de mon environnement est donc cohérent et j'aime beaucoup le résultat.</p>
+</div>
+<div class="section" id="police">
+<h2>Police</h2>
+<p>J'utile désormais la police <a class="reference external" href="https://github.com/tonsky/FiraCode">Fira Code</a> depuis que je l'ai découverte. C'est une police monospace avec des ligatures,
+parfaite pour le développement.</p>
+</div>
+<div class="section" id="editeur-de-code">
+<h2>Editeur de code</h2>
+<p><a class="reference external" href="https://code.visualstudio.com/">Visual Code Studio</a> et <a class="reference external" href="https://neovim.io/">Neovim</a>.</p>
+<p>VS Code a clairement remporté la bataille des éditeurs de texte face à Atom et Sublime Text.
+C'est un éditeur de code moderne, performant, avec un grand nombre de plugins. Et il est open source.
+Rien à redire de ce côté là, bravo Microsoft pour une fois.</p>
+<p>Neovim prend bien la relève de Vim et c'est plutôt agréable de pouvoir utiliser Lua pour gérer les plugins.</p>
+</div>
+<div class="section" id="completion">
+<h2>Completion</h2>
+<p>J'ai participé à la beta de <a class="reference external" href="https://github.com/features/copilot">Github Copilot</a> et j'y suis resté depuis. Un outil vraiment bluffant, et qui continue de me
+bluffer tous les jours. Je vois beaucoup de réticents mais vraiment... essayez-le, au moins pour votre culture.
+Pour des développements type Java avec une tonne de boilerplate à écrire, c'est juste génial.</p>
+</div>
+<div class="section" id="gestion-des-applications">
+<h2>Gestion des applications</h2>
+<p>Récemment j'ai découvert <a class="reference external" href="https://flatpak.org/">Flatpak</a> et je suis plutôt fan du principe. J'avais testé Snap de Ubuntu à l'époque mais ça ne m'avait pas
+convaincu. Flatpak est plutôt rapide et simple à utiliser. C'est un peu plus sécurisé et ça permet de gérer les dépendances de manière plus propre.
+Le principe d'isolation me fait un peu penser aux installations des applications sur Android.</p>
+<p>Du coup, désormais, dès que je dois installer une application externe propriétaire commme Spotify, Discord, Telegram ou Google Chrome,
+je passe par Flatpak.</p>
+<p>En vrai, je me dis que Flatpak me permettrait même de rester sur Debian Stable plutôt que Sid et d'avoir des outils à jour grâce
+à lui. Mais bon, il y a encore quelques soucis de compatibilité avec certaines applications comme VS Code ou Steam par exemple.</p>
+<p>Bonne découverte !</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://dotmobo.github.io/tag/debian.html">debian</a>
+      <a href="http://dotmobo.github.io/tag/environnement.html">environnement</a>
+      <a href="http://dotmobo.github.io/tag/developpement.html">developpement</a>
+      <a href="http://dotmobo.github.io/tag/gnome.html">gnome</a>
+      <a href="http://dotmobo.github.io/tag/flatpak.html">flatpak</a>
+      <a href="http://dotmobo.github.io/tag/fish.html">fish</a>
+      <a href="http://dotmobo.github.io/tag/copilot.html">copilot</a>
+      <a href="http://dotmobo.github.io/tag/neovim.html">neovim</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dotmobo';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; 2018  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " .mobo ",
+  "url" : "http://dotmobo.github.io",
+  "image": "//fr.gravatar.com/userimage/46763775/9a175067c03981dd3920b32ecbb1032f.jpeg",
+  "description": "DotMobo - Blog d'un Pythoniste Djangonaute"
+}
+</script>
+
+
+</body>
+</html>

@@ -5,35 +5,35 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://dotmobo.github.io/</loc>
-<lastmod>2022-09-19T21:10:03-00:00</lastmod>
+<lastmod>2022-09-21T12:45:52-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>http://dotmobo.github.io/tags.html</loc>
-<lastmod>2022-09-19T21:10:03-00:00</lastmod>
+<lastmod>2022-09-21T12:45:52-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>http://dotmobo.github.io/categories.html</loc>
-<lastmod>2022-09-19T21:10:03-00:00</lastmod>
+<lastmod>2022-09-21T12:45:52-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>http://dotmobo.github.io/authors.html</loc>
-<lastmod>2022-09-19T21:10:03-00:00</lastmod>
+<lastmod>2022-09-21T12:45:52-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>http://dotmobo.github.io/archives.html</loc>
-<lastmod>2022-09-19T21:10:03-00:00</lastmod>
+<lastmod>2022-09-21T12:45:52-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>

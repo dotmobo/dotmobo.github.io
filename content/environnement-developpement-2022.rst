@@ -26,7 +26,7 @@ bidouiller et customiser mon système. Il me faut un système stable et robuste,
 fraicheur. Debian est devenu suffisamment user-friendly pour rendre obsolète toutes les distros basées sur elle comme Ubuntu
 ou Mint.
 
-Tout ce qui me dérange un peu, c'est la migration vers Systemd, car ne je suis personnellement pas fan du principe.
+Tout ce qui me dérange un peu, c'est la migration vers Systemd, car je ne suis personnellement pas fan du principe.
 Je préfère les outils qui suivent plus la philosophie Unix, c'est-à-dire qui font une seule chose et le font bien.
 Mais bon, toutes les grosses distros ont désormais migré dessus, et à l'avenir il faudra peut-être plutôt regarder du
 côté de BSD pour avoir des outils plus simples.
@@ -36,7 +36,7 @@ Bureau
 
 `Gnome <https://www.gnome.org/>`_. Principalement parce que je suis passé d'un PC fixe à un portable avec un dock. Ce qui fait que j'ai beaucoup
 de périphériques à gérer et que je me connecte/déconnecte régulièrement à différents docks et écrans. Et Gnome gère
-automatiquement tout ça pour moi. Ok, y a plein de démons qui tournent mais bon... C'est clairement du confort.
+automatiquement tout ça pour moi. Ok, y a plein de daemons qui tournent mais bon... C'est clairement du confort.
 
 Je regarde toujours les tiling window managers de temps en temps comme i3, et j'ai donc testé Pop Shell qui permet du tiling avec Gnome.
 C'est pas trop mal mais finalement, sur un portable, je préfére utiliser Gnome avec le terminal top-down `Guake <http://guake-project.org/>`_.

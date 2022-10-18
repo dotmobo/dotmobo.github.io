@@ -528,7 +528,7 @@ Tu peux alors déployer et tester les transactions avec **erdpy**.
     erdpy contract deploy
     erdpy tx new --help
 
-Il ne te reste plus qu'à coder `une interface frontend pour le SC <https://github.com/dotmobo/dbc-dashboard/blob/master/dapp/src/pages/Stake/Components/NftStaking.tsx>`_.
+Il ne te reste plus qu'à coder `une interface frontend pour le SC <https://github.com/dotmobo/dbc-dashboard/blob/master/dapp/src/components/NftStaking/index.tsx>`_.
 
 Bon courage ! Et n'hésite pas à améliorer tout ça et à nous faire un retour !
 

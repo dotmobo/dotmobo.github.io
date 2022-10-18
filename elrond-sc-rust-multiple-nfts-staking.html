@@ -1,0 +1,541 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://dotmobo.github.io/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://dotmobo.github.io/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.github.io/theme/font-awesome/css/solid.css">
+
+    <link href="https://dotmobo.github.io/css/custom.css" rel="stylesheet">
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68852219-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Morgan" />
+<meta name="description" content="Smart Contract Elrond en Rust : Multiple NFTs staking" />
+<meta name="keywords" content="elrond, rust, nft, staking">
+
+
+<meta property="og:site_name" content=".mobo"/>
+<meta property="og:title" content="Smart Contract Elrond en Rust : Multiple NFTs staking"/>
+<meta property="og:description" content="Smart Contract Elrond en Rust : Multiple NFTs staking"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="https://dotmobo.github.io/elrond-sc-rust-multiple-nfts-staking.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2022-10-16 00:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://dotmobo.github.io/author/morgan.html">
+<meta property="article:section" content="Elrond"/>
+<meta property="article:tag" content="elrond"/>
+<meta property="article:tag" content="rust"/>
+<meta property="article:tag" content="nft"/>
+<meta property="article:tag" content="staking"/>
+<meta property="og:image" content="//dotmobo.github.io/images/avatar700.jpg">
+
+  <title>.mobo &ndash; Smart Contract Elrond en Rust : Multiple NFTs staking</title>
+
+</head>
+<body class="light-theme">
+  <aside>
+    <div>
+      <a href="https://dotmobo.github.io">
+        <img src="//dotmobo.github.io/images/avatar700.jpg" alt=".mobo" title=".mobo">
+      </a>
+
+      <h1>
+        <a href="https://dotmobo.github.io">.mobo</a>
+      </h1>
+
+<p>Blog d'un Pythoniste Djangonaute</p>
+
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://dotmobo.github.io">Accueil</a>
+
+      <a href="/categories.html">Catégories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/archives.html">Archives</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="elrond-sc-rust-multiple-nfts-staking">Smart Contract Elrond en Rust : Multiple NFTs staking</h1>
+    <p>
+      Posté le 16/10/2022 dans <a href="https://dotmobo.github.io/category/elrond.html">Elrond</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="Elrond" class="align-right" src="./images/elrond.png" />
+<p>C'est parti pour un petit article faisant suite au premier dédié <a class="reference external" href="https://dotmobo.github.io/elrond-sc-rust-nft-staking.html#elrond-sc-rust-nft-staking">au staking de NFT sur Elrond</a>.</p>
+<div class="section" id="contexte">
+<h2>Contexte</h2>
+<p>Afin d'avoir un premier jet fonctionnel, on a vu comment staker un NFT sur un smart contract avec quelques limitations :</p>
+<ul class="simple">
+<li>Chaque utilisateur représenté par une adresse Elrond ne peut envoyer qu'un seul NFT dans la pool.</li>
+<li>Les récompenses sont à réclamer régulièrement et ne sont pas directement attribuées.</li>
+<li>Une seule collection de NFT est supportée. Donc pour faire une pool de staking sur une autre collection, il
+faudra déployer un deuxième SC.</li>
+</ul>
+<p>On va ici voir comment faire sauter la première limitation, c'est-à-dire de permettre le staking de plusieurs NFTs par adresse Elrond dans la pool.</p>
+<p>Dans ta <strong>dapp</strong>, tu pourras ainsi faire quelque-chose comme ça :</p>
+<img alt="Elrond" src="./images/staking_multiple.png" />
+</div>
+<div class="section" id="smart-contract">
+<h2>Smart Contract</h2>
+<p>On reprend donc <a class="reference external" href="https://github.com/dotmobo/dbc-dashboard/blob/master/contract/nft_staking/src/empty.rs">le code du smart contract précédent</a>, et on va ajouter une nouvelle fonctionnalité : le staking de plusieurs NFTs.</p>
+<p>Tu commences donc par modifier le fichier <strong>src/stake_info.rs</strong> de la manière suivante :</p>
+<div class="highlight"><pre><span></span><span class="n">elrond_wasm</span>::<span class="n">imports</span><span class="o">!</span><span class="p">();</span><span class="w"></span>
+<span class="n">elrond_wasm</span>::<span class="n">derive_imports</span><span class="o">!</span><span class="p">();</span><span class="w"></span>
+
+<span class="k">use</span><span class="w"> </span><span class="n">elrond_wasm</span>::<span class="n">types</span>::<span class="n">heap</span>::<span class="nb">Vec</span><span class="p">;</span><span class="w"></span>
+
+<span class="cp">#[derive(TypeAbi, TopEncode, TopDecode, PartialEq, Debug)]</span><span class="w"></span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">StakeInfo</span><span class="o">&lt;</span><span class="n">M</span>: <span class="nc">ManagedTypeApi</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">address</span>: <span class="nc">ManagedAddress</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">nft_nonce</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u64</span><span class="o">&gt;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">lock_time</span>: <span class="kt">u64</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">unstake_time</span>: <span class="kt">u64</span><span class="p">,</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+<p>L'astuce ici, c'est d'avoir transformé le champ <strong>nft_nonce</strong> en un vecteur de <strong>u64</strong>. Cela permet de stocker plusieurs valeurs dans ce champ.</p>
+<p>Tu va maintenant modifier le fichier <strong>src/empty.rs</strong> pour prendre en compte cette modification et permettre la gestion de plusieurs NFTs par adresse.</p>
+<p>Au niveau du bloc d'initialisation, on a juste rajouté un nouveau paramètre appelé <strong>nbr_of_nft_staked</strong> qui va nous permettre de stocker le nombre
+total de NFTs stakés, pour donner une information globale du contract à l'utilisateur.</p>
+<div class="highlight"><pre><span></span><span class="cp">#![no_std]</span><span class="w"></span>
+
+<span class="n">elrond_wasm</span>::<span class="n">imports</span><span class="o">!</span><span class="p">();</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">elrond_wasm</span>::<span class="n">types</span>::<span class="n">heap</span>::<span class="nb">Vec</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">mod</span> <span class="nn">stake_info</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">stake_info</span>::<span class="n">StakeInfo</span><span class="p">;</span><span class="w"></span>
+
+<span class="cp">#[elrond_wasm::contract]</span><span class="w"></span>
+<span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">NftStaking</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="cp">#[init]</span><span class="w"></span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">init</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">nft_identifier</span>: <span class="nc">EgldOrEsdtTokenIdentifier</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">minimum_staking_days</span>: <span class="kt">u64</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">rewards_token_id</span>: <span class="nc">EgldOrEsdtTokenIdentifier</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">rewards_token_amount_per_day</span>: <span class="nc">BigUint</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">rewards_token_total_supply</span>: <span class="nc">BigUint</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">nft_identifier</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">nft_identifier</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">minimum_staking_days</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">minimum_staking_days</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">rewards_token_id</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rewards_token_id</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">rewards_token_amount_per_day</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rewards_token_amount_per_day</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">rewards_token_total_supply</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rewards_token_total_supply</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// if staking status is empty, set it to false</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_status</span><span class="p">().</span><span class="n">is_empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_status</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// if staking end time is empty, set it to 0</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_end_time</span><span class="p">().</span><span class="n">is_empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_end_time</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// if nbr of stakers is empty, set it to 0</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_stakers</span><span class="p">().</span><span class="n">is_empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_stakers</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// if nbr of nft staked is empty, set it to 0</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_nft_staked</span><span class="p">().</span><span class="n">is_empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_nft_staked</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+<p>Au niveau des <strong>storage_mapper</strong> et des <strong>view</strong>, tu peux déjà rajouter une <strong>view</strong> pour le nouveau champ
+<strong>getNbrOfNftStaked</strong>. Tu va également modifier la méthode <strong>getNftNonce</strong> pour qu'elle renvoie un vecteur de <strong>u64</strong>.
+Enfin, tu calcules le montant des récompenses à envoyer à l'utilisateur en fonction du nombre de NFTs stakés dans <strong>getCurrentRewards</strong>.</p>
+<div class="highlight"><pre><span></span><span class="cp">#[view(getCurrentRewards)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">get_current_rewards</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">address</span>: <span class="kp">&amp;</span><span class="nc">ManagedAddress</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">BigUint</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="o">!</span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">address</span><span class="p">).</span><span class="n">is_empty</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;You didn&#39;t stake!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">cur_time</span>: <span class="kt">u64</span> <span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_block_timestamp</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="o">!</span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">address</span><span class="p">).</span><span class="n">is_empty</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;You didn&#39;t stake!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">stake_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">address</span><span class="p">).</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// calculate rewards</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">from_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur_time</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="bp">self</span><span class="p">.</span><span class="n">staking_status</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">from_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_end_time</span><span class="p">().</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">staked_days</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="k">u64</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">from_time</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">stake_info</span><span class="p">.</span><span class="n">lock_time</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">staked_days</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">from_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">stake_info</span><span class="p">.</span><span class="n">lock_time</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">86400</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">rewards_amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">rewards_token_amount_per_day</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">staked_days</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">stake_info</span><span class="p">.</span><span class="n">nft_nonce</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">u64</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">rewards_amount</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="cp">#[view(getNftNonce)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">get_nft_nonce</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">address</span>: <span class="kp">&amp;</span><span class="nc">ManagedAddress</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u64</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="o">!</span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">address</span><span class="p">).</span><span class="n">is_empty</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;You didn&#39;t stake!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">stake_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">address</span><span class="p">).</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">nft_nonce</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u64</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stake_info</span><span class="p">.</span><span class="n">nft_nonce</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nft_nonce</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="cp">#[view(getNbrOfNftStaked)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;nbr_of_nft_staked&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">nbr_of_nft_staked</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="kt">u64</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+<p>Tu modifies la méthode <strong>stake</strong> pour prendre en compte non plus un seul paiement, c'est-à-dire un seul NFT, mais plusieurs paiements.
+C'est ici que tu vas donc construire le vecteur de NFTs stakés par l'utilisateur. Penses également à incrémenter ta nouvelle variable <strong>nbr_of_nft_staked</strong>.</p>
+<div class="highlight"><pre><span></span><span class="cp">#[payable(</span><span class="s">&quot;*&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="cp">#[endpoint]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">stake</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">payments</span>: <span class="nc">ManagedVec</span><span class="o">&lt;</span><span class="n">EsdtTokenPayment</span><span class="o">&lt;</span><span class="bp">Self</span>::<span class="n">Api</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">call_value</span><span class="p">().</span><span class="n">all_esdt_transfers</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">staking_status</span><span class="p">().</span><span class="n">get</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;The staking is stopped&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">payment</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">&amp;</span><span class="n">payments</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="n">payment</span><span class="p">.</span><span class="n">token_identifier</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">nft_identifier</span><span class="p">().</span><span class="n">get</span><span class="p">(),</span><span class="w"></span>
+<span class="w">            </span><span class="s">&quot;Invalid nft identifier&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="n">payment</span><span class="p">.</span><span class="n">token_nonce</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Invalid nft nonce&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="n">payment</span><span class="p">.</span><span class="n">amount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;You can only send 1 nft&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">caller</span>: <span class="nc">ManagedAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">cur_time</span>: <span class="kt">u64</span> <span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_block_timestamp</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">unstake_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur_time</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">minimum_staking_days</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">86400</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">is_empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">vec_nonce</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u64</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Vec</span>::<span class="n">new</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">payment</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">&amp;</span><span class="n">payments</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">vec_nonce</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">payment</span><span class="p">.</span><span class="n">token_nonce</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">stake_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StakeInfo</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">address</span>: <span class="nc">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">(),</span><span class="w"></span>
+<span class="w">            </span><span class="n">nft_nonce</span>: <span class="nc">vec_nonce</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">lock_time</span>: <span class="nc">cur_time</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">unstake_time</span>: <span class="nc">unstake_time</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">())</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stake_info</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_stakers</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_stakers</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">stake_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">payment</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">&amp;</span><span class="n">payments</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">vec_nonce</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u64</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stake_info</span><span class="p">.</span><span class="n">nft_nonce</span><span class="p">.</span><span class="n">clone</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">vec_nonce</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">payment</span><span class="p">.</span><span class="n">token_nonce</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">stake_info</span><span class="p">.</span><span class="n">nft_nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec_nonce</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">stake_info</span><span class="p">.</span><span class="n">lock_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur_time</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">stake_info</span><span class="p">.</span><span class="n">unstake_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unstake_time</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stake_info</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_nft_staked</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_nft_staked</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">payments</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">u64</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+<p>Pour la méthode <strong>unstake</strong>, il suffira de parcourir le vecteur de NFTs stakés par l'utilisateur et de les transférer à l'utilisateur un par un.
+Attention, si beaucoup de NFTs sont stakés, cela risque de consommer beaucoup de gas.</p>
+<div class="highlight"><pre><span></span><span class="cp">#[endpoint]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">unstake</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">caller</span>: <span class="nc">ManagedAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">cur_time</span>: <span class="kt">u64</span> <span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_block_timestamp</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="o">!</span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">is_empty</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;You didn&#39;t stake!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">stake_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">stake_info</span><span class="p">.</span><span class="n">unstake_time</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">cur_time</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;You can&#39;t unlock staking nft yet.&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">nft_identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">nft_identifier</span><span class="p">().</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">nft_nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stake_info</span><span class="p">.</span><span class="n">nft_nonce</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">nbr_of_nonce</span>: <span class="kt">u64</span> <span class="o">=</span><span class="w"> </span><span class="n">nft_nonce</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">u64</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BigUint</span>::<span class="n">from</span><span class="p">(</span><span class="mi">1</span><span class="k">u32</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// for each nft nonce, send nft back to caller</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">nft_nonce</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">send</span><span class="p">().</span><span class="n">direct</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="o">&amp;</span><span class="n">caller</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="o">&amp;</span><span class="n">nft_identifier</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">n</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="o">&amp;</span><span class="n">amount</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">clear</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_stakers</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_stakers</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_stakers</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_stakers</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_nft_staked</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">nbr_of_nonce</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_nft_staked</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_nft_staked</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">nbr_of_nonce</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">nbr_of_nft_staked</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+<p>Enfin, tu corriges la méthode <strong>claim</strong> pour calculer les récompenses en fonction du nombre de NFTs stakés, comme pour la <strong>view</strong> précédente appelée <strong>getCurrentRewards</strong>.</p>
+<div class="highlight"><pre><span></span><span class="cp">#[endpoint]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">claim</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">caller</span>: <span class="nc">ManagedAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">cur_time</span>: <span class="kt">u64</span> <span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_block_timestamp</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">rewards_token_total_supply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">rewards_token_total_supply</span><span class="p">().</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="o">!</span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">is_empty</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;You didn&#39;t stake!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">stake_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">nft_nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stake_info</span><span class="p">.</span><span class="n">nft_nonce</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">unstake_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stake_info</span><span class="p">.</span><span class="n">unstake_time</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">reward_token_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">rewards_token_id</span><span class="p">().</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// calculate rewards</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">from_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur_time</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="bp">self</span><span class="p">.</span><span class="n">staking_status</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">from_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_end_time</span><span class="p">().</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">staked_days</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="k">u64</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">from_time</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">stake_info</span><span class="p">.</span><span class="n">lock_time</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">staked_days</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">from_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">stake_info</span><span class="p">.</span><span class="n">lock_time</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">86400</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">rewards_amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">rewards_token_amount_per_day</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">staked_days</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nft_nonce</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">u64</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// check the supply</span>
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">rewards_amount</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">rewards_token_total_supply</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;You can&#39;t claim rewards more than total supply.&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// send rewards</span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">send</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="n">direct</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">reward_token_id</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rewards_amount</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// remove rewards amount from rewards_token_total_supply</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">rewards_token_total_supply</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">rewards_amount</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">rewards_token_total_supply</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">rewards_token_total_supply</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rewards_amount</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">rewards_token_total_supply</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">BigUint</span>::<span class="n">from</span><span class="p">(</span><span class="mi">0</span><span class="k">u32</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// update staking_info</span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">).</span><span class="n">clear</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">stake_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StakeInfo</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">address</span>: <span class="nc">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">(),</span><span class="w"></span>
+<span class="w">        </span><span class="n">nft_nonce</span>: <span class="nc">nft_nonce</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">lock_time</span>: <span class="nc">from_time</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">unstake_time</span>: <span class="nc">unstake_time</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">())</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stake_info</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+<p>Les autres <strong>storage_mapper</strong>, <strong>view</strong> et <strong>owner endpoint</strong> restent inchangés :</p>
+<div class="highlight"><pre><span></span><span class="cp">#[view(getLockTime)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">get_lock_time</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">address</span>: <span class="kp">&amp;</span><span class="nc">ManagedAddress</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">u64</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="o">!</span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">address</span><span class="p">).</span><span class="n">is_empty</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;You didn&#39;t stake!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">stake_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">address</span><span class="p">).</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">lock_time</span>: <span class="kt">u64</span> <span class="o">=</span><span class="w"> </span><span class="n">stake_info</span><span class="p">.</span><span class="n">lock_time</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">lock_time</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="cp">#[view(getUnstakeTime)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">get_unstake_time</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">address</span>: <span class="kp">&amp;</span><span class="nc">ManagedAddress</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">u64</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="o">!</span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">address</span><span class="p">).</span><span class="n">is_empty</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;You didn&#39;t stake!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">stake_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">address</span><span class="p">).</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">unstake_time</span>: <span class="kt">u64</span> <span class="o">=</span><span class="w"> </span><span class="n">stake_info</span><span class="p">.</span><span class="n">unstake_time</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">unstake_time</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="cp">#[view(getNftIdentifier)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;nft_identifier&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">nft_identifier</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">EgldOrEsdtTokenIdentifier</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="cp">#[view(getMinimumStakingDays)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;minimum_staking_days&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">minimum_staking_days</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="kt">u64</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="cp">#[view(getRewardsTokenId)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;rewards_token_id&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">rewards_token_id</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">EgldOrEsdtTokenIdentifier</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="cp">#[view(getRewardsTokenAmountPerDay)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;rewards_token_amount_per_day&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">rewards_token_amount_per_day</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">BigUint</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="cp">#[view(getStakingInfo)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;staking_info&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">staking_info</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">address</span>: <span class="kp">&amp;</span><span class="nc">ManagedAddress</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">StakeInfo</span><span class="o">&lt;</span><span class="bp">Self</span>::<span class="n">Api</span><span class="o">&gt;&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="cp">#[view(getStakingStatus)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;staking_status&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">staking_status</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="cp">#[view(getStakingEndTime)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;staking_end_time&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">staking_end_time</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="kt">u64</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="cp">#[view(getRewardsTokenTotalSupply)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;rewards_token_total_supply&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">rewards_token_total_supply</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">BigUint</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="cp">#[view(getNbrOfStakers)]</span><span class="w"></span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;nbr_of_stakers&quot;</span><span class="cp">)]</span><span class="w"></span>
+<span class="k">fn</span> <span class="nf">nbr_of_stakers</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="kt">u64</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+<p>Tu re-compiles alors le tout avec <strong>erdpy</strong> :</p>
+<div class="highlight"><pre><span></span>erdpy contract build
+</pre></div>
+<p>Le code final est visible <a class="reference external" href="https://github.com/dotmobo/dbc-dashboard/blob/master/contract/multiple_nft_staking/src/empty.rs">ici</a>.</p>
+</div>
+<div class="section" id="deploiement">
+<h2>Déploiement</h2>
+<p>Ton fichier <a class="reference external" href="https://github.com/dotmobo/dbc-dashboard/blob/master/contract/multiple_nft_staking/erdpy.json">erdpy.json</a> ne bouge pas, c'est exactement le même que pour le déploiement du contrat précédent.
+Tu peux donc déployer et faire tes transactions :</p>
+<div class="highlight"><pre><span></span>erdpy contract deploy
+erdpy tx new --help
+</pre></div>
+<p>Concernant <a class="reference external" href="https://github.com/dotmobo/dbc-dashboard/blob/master/dapp/src/components/MultipleNftStaking/index.tsx">l'interface frontend pour le SC</a>,
+tu peux suivre mon exemple ou faire ce qu'il te plait !</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://dotmobo.github.io/tag/elrond.html">elrond</a>
+      <a href="https://dotmobo.github.io/tag/rust.html">rust</a>
+      <a href="https://dotmobo.github.io/tag/nft.html">nft</a>
+      <a href="https://dotmobo.github.io/tag/staking.html">staking</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dotmobo';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; 2018  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " .mobo ",
+  "url" : "https://dotmobo.github.io",
+  "image": "//dotmobo.github.io/images/avatar700.jpg",
+  "description": "DotMobo - Blog d'un Pythoniste Djangonaute"
+}
+</script>
+
+
+</body>
+</html>

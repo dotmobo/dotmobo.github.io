@@ -5,36 +5,43 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.github.io/</loc>
-<lastmod>2022-09-23T15:38:46-00:00</lastmod>
+<lastmod>2022-10-18T16:10:18-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/tags.html</loc>
-<lastmod>2022-09-23T15:38:46-00:00</lastmod>
+<lastmod>2022-10-18T16:10:18-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/categories.html</loc>
-<lastmod>2022-09-23T15:38:46-00:00</lastmod>
+<lastmod>2022-10-18T16:10:18-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/authors.html</loc>
-<lastmod>2022-09-23T15:38:46-00:00</lastmod>
+<lastmod>2022-10-18T16:10:18-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/archives.html</loc>
-<lastmod>2022-09-23T15:38:46-00:00</lastmod>
+<lastmod>2022-10-18T16:10:18-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.github.io/elrond-sc-rust-multiple-nfts-staking.html</loc>
+<lastmod>2022-10-16T00:00:00+02:00</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
@@ -292,7 +299,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.github.io/category/elrond.html</loc>
-<lastmod>2022-07-07T00:00:00+00:09</lastmod>
+<lastmod>2022-10-16T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -335,6 +342,34 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://dotmobo.github.io/category/python.html</loc>
 <lastmod>2022-01-28T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.github.io/tag/elrond.html</loc>
+<lastmod>2022-10-16T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.github.io/tag/rust.html</loc>
+<lastmod>2022-10-16T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.github.io/tag/nft.html</loc>
+<lastmod>2022-10-16T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.github.io/tag/staking.html</loc>
+<lastmod>2022-10-16T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -396,35 +431,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://dotmobo.github.io/tag/elrond.html</loc>
-<lastmod>2022-07-07T00:00:00+00:09</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://dotmobo.github.io/tag/rust.html</loc>
-<lastmod>2022-07-07T00:00:00+00:09</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://dotmobo.github.io/tag/nft.html</loc>
-<lastmod>2022-07-07T00:00:00+00:09</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
 <loc>https://dotmobo.github.io/tag/market.html</loc>
-<lastmod>2022-07-07T00:00:00+00:09</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://dotmobo.github.io/tag/staking.html</loc>
 <lastmod>2022-07-07T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
@@ -1370,7 +1377,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.github.io/author/morgan.html</loc>
-<lastmod>2022-09-19T00:00:00+00:09</lastmod>
+<lastmod>2022-10-16T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>

@@ -17,38 +17,29 @@ Domain Driven Design en Rust
 ------------------------------------------
 
 Le Domain Driven Design (DDD) est un paradigme de développement de logiciels qui met l'accent sur la compréhension
-approfondie du domaine dans lequel ton application sera utilisée. Le but du DDD est de permettre aux développeurs de
-créer des logiciels qui reflètent la réalité du domaine d'application, ce qui te permet de mieux résoudre les
-problèmes et de rendre les logiciels plus faciles à maintenir et à évoluer.
+approfondie du domaine dans lequel ton application sera utilisée.
 
-En utilisant le DDD, tu peux créer des modèles de données et des algorithmes qui reflètent les concepts et les
-relations qui existent dans le domaine d'application, ce qui te permet de créer des logiciels plus clairs et plus
+En utilisant le DDD, tu peux donc imaginer des modèles de données et des algorithmes qui reflètent précisément les
+concepts et les relations qui existent dans le domaine d'application. Cela te permet de créer des logiciels plus clairs et plus
 faciles à comprendre. Le DDD est donc un outil très utile pour les développeurs de logiciels, en particulier pour
 ceux qui travaillent sur des projets complexes ou qui doivent collaborer avec des domaines experts.
 
-2) Comment utiliser le DDD dans un projet en Rust ?
+1) Comment utiliser le DDD dans un projet en Rust ?
 ---------------------------------------------------
 
 Pour utiliser le DDD dans ton projet en `Rust <https://rust-lang.org/>`_, tu dois d'abord comprendre les concepts et les relations qui existent
-dans le domaine d'application. Cela te permettra de créer des modèles de données et des algorithmes qui reflètent
-ces concepts, ce qui rendra ton code plus clair et plus facile à comprendre.
+dans le domaine d'application. Cette phase d'analyse et de compréhension est la plus importante.
+Cela peut t'aider à résoudre les problèmes de manière plus efficace pour maintenir et faire évoluer ton
+application.
 
 Ensuite, tu peux utiliser des structures en Rust pour représenter les concepts du domaine, ainsi que des fonctions
 pour manipuler ces structures. Par exemple, si tu développes une application de gestion de compte bancaire, tu peux
 créer des structures pour représenter les comptes bancaires, les transactions et les clients, ainsi que des fonctions
 pour effectuer des opérations sur ces structures (depôt, retrait, consultation du solde, etc.).
 
-En utilisant cette approche, tu peux créer un code clair et facile à comprendre qui reflète la réalité du domaine
-d'application. Cela peut t'aider à résoudre les problèmes de manière plus efficace et à maintenir et à évoluer ton
-application de manière plus facile.
 
 3) Un exemple concret de DDD en Rust : une application de gestion de compte bancaire.
 -------------------------------------------------------------------------------------
-
-Un exemple concret de DDD en Rust pourrait être une application de gestion de compte bancaire. Dans ce cas, les concepts du
-domaine pourraient être les comptes bancaires, les transactions et les clients. En utilisant le DDD, tu pourrais créer des
-structures et des fonctions en Rust qui reflètent ces concepts, ce qui rendrait ton application plus facile à comprendre et à
-maintenir.
 
 Voici un exemple de code en Rust qui utilise le DDD pour gérer un compte bancaire :
 
@@ -109,9 +100,7 @@ Voici un exemple de code en Rust qui utilise le DDD pour gérer un compte bancai
     }
 
 Ce code utilise des structures pour représenter les concepts du domaine (compte bancaire, transaction et client), ainsi que
-des fonctions pour manipuler ces structures. Cela permet de créer un code clair et facile à comprendre qui reflète la réalité
-du domaine d'application. Grâce au DDD, tu peux créer des applications en Rust qui sont plus efficaces, plus faciles à
-maintenir et à évoluer.
+des fonctions pour manipuler ces structures (dépôt, retrait, etc.).
 
 4) Comment le DDD peut améliorer la collaboration avec les experts du domaine ?
 -------------------------------------------------------------------------------
@@ -249,12 +238,6 @@ Voici un exemple de code Rust plus avancé qui utilise le DDD pour gérer un sys
     }
 
 
-
-Ce code utilise des structures pour représenter les concepts du domaine (produit, client, commande, système de stock), ainsi
-que des fonctions pour manipuler ces structures. Cela permet de créer un code clair et facile à comprendre qui reflète la
-réalité du domaine d'application (la gestion de stock). Grâce au DDD, tu peux créer des applications en Rust qui sont plus
-efficaces, plus faciles à maintenir et à évoluer.
-
 Pour utiliser ce code, tu peux créer une instance de la structure StockSystem et ajouter des produits, des clients et passer
 des commandes :
 
@@ -313,7 +296,7 @@ des commandes :
     }
 
 
-7) Avantages et défis du DDD dans un projet en Rust.
+1) Avantages et défis du DDD dans un projet en Rust.
 ----------------------------------------------------
 
 En utilisant le DDD dans tes projets en Rust, tu peux bénéficier de nombreux avantages, tels que :

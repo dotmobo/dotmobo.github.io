@@ -187,7 +187,7 @@ via la revue de **merge requests** et éventuellement le **Test Driven Developme
 
 Enfin, personnellement, le **pair programming**, c'est pas trop mon délire, mais je n'ai rien contre.
 
-**Mais Scrum et SAFe donc ?**
+*Mais Scrum et SAFe donc ?*
 
 Non, ça dégage.
 

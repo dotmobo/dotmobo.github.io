@@ -141,15 +141,15 @@ pour certaines librairies avec python 3.10.</p>
 <p>Pour gérer les différentes versions de python sur ta machine, il est plutôt pratique d'utiliser <a class="reference external" href="https://github.com/pyenv/pyenv">pyenv</a>.
 Pour les devs JS, c'est un équivalent à <a class="reference external" href="https://github.com/nvm-sh/nvm">nvm</a> et à <a class="reference external" href="https://github.com/tj/n">n</a> mais pour python.</p>
 <p>Pour l'installer et l'utiliser rien de plus simple :</p>
-<div class="highlight"><pre><span></span>sudo apt-get install aria2 build-essential curl git libbz2-dev libffi-dev liblzma-dev <span class="se">\</span>
-libncurses5-dev libncursesw5-dev libreadline-dev libsqlite3-dev libssl-dev llvm make tk-dev wget xz-utils zlib1g-dev
-curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer <span class="p">|</span> bash
+<div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>aria2<span class="w"> </span>build-essential<span class="w"> </span>curl<span class="w"> </span>git<span class="w"> </span>libbz2-dev<span class="w"> </span>libffi-dev<span class="w"> </span>liblzma-dev<span class="w"> </span><span class="se">\</span>
+libncurses5-dev<span class="w"> </span>libncursesw5-dev<span class="w"> </span>libreadline-dev<span class="w"> </span>libsqlite3-dev<span class="w"> </span>libssl-dev<span class="w"> </span>llvm<span class="w"> </span>make<span class="w"> </span>tk-dev<span class="w"> </span>wget<span class="w"> </span>xz-utils<span class="w"> </span>zlib1g-dev
+curl<span class="w"> </span>-L<span class="w"> </span>https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 
-<span class="nb">export</span> <span class="nv">PYENV_ROOT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.pyenv&quot;</span>
-<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PYENV_ROOT</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
-<span class="nb">eval</span> <span class="s2">&quot;</span><span class="k">$(</span>pyenv init -<span class="k">)</span><span class="s2">&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PYENV_ROOT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.pyenv&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PYENV_ROOT</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>pyenv<span class="w"> </span>init<span class="w"> </span>-<span class="k">)</span><span class="s2">&quot;</span>
 
-pyenv install <span class="m">3</span>.9.10
+pyenv<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.9.10
 </pre></div>
 <p>Après, si tu n'as pas besoin de gérer plein de versions différentes régulièrement, tu peux te cantonner à utiliser les packages de ta distro.</p>
 </div>
@@ -162,36 +162,36 @@ et <a class="reference external" href="https://docs.python.org/fr/3/distutils/se
 tout ça. Certains diront que sa non-compatibilité avec les fichiers <strong>setup.py</strong> est le mal absolu car non-standard, ce qui n'est pas complètement faux ...
 Mais cet outil est tellement pratique que j'en ai fait fi.</p>
 <p>On l'installe et on initie un nouveau projet avec un <strong>venv</strong> encapsulé automatiquement :</p>
-<div class="highlight"><pre><span></span>curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py <span class="p">|</span> python -
+<div class="highlight"><pre><span></span>curl<span class="w"> </span>-sSL<span class="w"> </span>https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-
 
-poetry new --src myapp
-<span class="nb">cd</span> myapp
-poetry add black isort
-<span class="nb">echo</span> <span class="s1">&#39;print(&quot;Hello World!&quot;)&#39;</span> &gt; src/main.py
-poetry run python src/main.py
-poetry build
-poetry publish
+poetry<span class="w"> </span>new<span class="w"> </span>--src<span class="w"> </span>myapp
+<span class="nb">cd</span><span class="w"> </span>myapp
+poetry<span class="w"> </span>add<span class="w"> </span>black<span class="w"> </span>isort
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;print(&quot;Hello World!&quot;)&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>src/main.py
+poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>src/main.py
+poetry<span class="w"> </span>build
+poetry<span class="w"> </span>publish
 </pre></div>
 <p>Ici on a ajouté les librairies black et isort dans les dépendances du projet et on a exécuté notre script python &quot;Hello World!&quot;.
 Ensuite, on a buildé un <strong>sdist</strong> et un <strong>wheel</strong> qu'on a déployé sur PyPI.</p>
 <p>Et voici aperçu du fameux fichier <strong>pyproject.toml</strong> généré :</p>
 <div class="highlight"><pre><span></span><span class="o">[</span>tool.poetry<span class="o">]</span>
-<span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;myapp&quot;</span>
-<span class="nv">version</span> <span class="o">=</span> <span class="s2">&quot;0.1.0&quot;</span>
-<span class="nv">description</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="nv">authors</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;mobo&quot;</span><span class="o">]</span>
+<span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;myapp&quot;</span>
+<span class="nv">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="nv">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="nv">authors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;mobo&quot;</span><span class="o">]</span>
 
 <span class="o">[</span>tool.poetry.dependencies<span class="o">]</span>
-<span class="nv">python</span> <span class="o">=</span> <span class="s2">&quot;^3.9&quot;</span>
-<span class="nv">black</span> <span class="o">=</span> <span class="s2">&quot;^21.12b0&quot;</span>
-<span class="nv">isort</span> <span class="o">=</span> <span class="s2">&quot;^5.10.1&quot;</span>
+<span class="nv">python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;^3.9&quot;</span>
+<span class="nv">black</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;^21.12b0&quot;</span>
+<span class="nv">isort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;^5.10.1&quot;</span>
 
 <span class="o">[</span>tool.poetry.dev-dependencies<span class="o">]</span>
-<span class="nv">pytest</span> <span class="o">=</span> <span class="s2">&quot;^5.2&quot;</span>
+<span class="nv">pytest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;^5.2&quot;</span>
 
 <span class="o">[</span>build-system<span class="o">]</span>
-<span class="nv">requires</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;poetry-core&gt;=1.0.0&quot;</span><span class="o">]</span>
-build-backend <span class="o">=</span> <span class="s2">&quot;poetry.core.masonry.api&quot;</span>
+<span class="nv">requires</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;poetry-core&gt;=1.0.0&quot;</span><span class="o">]</span>
+build-backend<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;poetry.core.masonry.api&quot;</span>
 </pre></div>
 <p>Quel gain de temps énorme !</p>
 </div>
@@ -203,13 +203,13 @@ On dégage tout ça et on utilise que <strong>black</strong>. Il va se charger d
 <p>Est-ce que le rendu est parfait ? Non. Est-ce qu'il est suffisamment bon pour qu'on arrête de se poser la question de comment formater notre code ?
 Oui, mille fois oui.</p>
 <p>On l'installe et on l'exécute sur notre projet et c'est tout. Pour automatiser tout ça, tu peux même le mettre sur un git hook, au commit par exemple.</p>
-<div class="highlight"><pre><span></span>poetry add black
-poetry run black src/
+<div class="highlight"><pre><span></span>poetry<span class="w"> </span>add<span class="w"> </span>black
+poetry<span class="w"> </span>run<span class="w"> </span>black<span class="w"> </span>src/
 </pre></div>
 <p>Si tu es quelqu'un de tatillon qui aime avoir ses importations bien ordonnées, tu peux utiliser <a class="reference external" href="https://github.com/PyCQA/isort">isort</a>.
 Comme pour black, tu l'installes et tu le lances sur ton projet et c'est réglé :</p>
-<div class="highlight"><pre><span></span>poetry add isort
-poetry run isort src/
+<div class="highlight"><pre><span></span>poetry<span class="w"> </span>add<span class="w"> </span>isort
+poetry<span class="w"> </span>run<span class="w"> </span>isort<span class="w"> </span>src/
 </pre></div>
 </div>
 <div class="section" id="typage-statique">
@@ -224,26 +224,26 @@ Cette librarie permet d'annoter notre code pour expliciter les types de nos argu
 <span class="nb">print</span><span class="p">(</span><span class="n">hello</span><span class="p">(</span><span class="s2">&quot;Jean&quot;</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span>
 </pre></div>
 <p>Et tu verifies le typage à l'aide de la commande suivante :</p>
-<div class="highlight"><pre><span></span>poetry add mypy
-poetry run mypy src/
+<div class="highlight"><pre><span></span>poetry<span class="w"> </span>add<span class="w"> </span>mypy
+poetry<span class="w"> </span>run<span class="w"> </span>mypy<span class="w"> </span>src/
 </pre></div>
 </div>
 <div class="section" id="tests-unitaires">
 <h2>Tests unitaires</h2>
 <p>Rien de neuf sous le soleil, on utilise toujours <a class="reference external" href="https://docs.pytest.org/en/6.2.x/">pytest</a> qui est installé par defaut avec poetry :</p>
-<div class="highlight"><pre><span></span>poetry run pytest
+<div class="highlight"><pre><span></span>poetry<span class="w"> </span>run<span class="w"> </span>pytest
 </pre></div>
 <p>Il est même possible d'utiliser <a class="reference external" href="https://python-poetry.org/docs/faq/#is-tox-supported">tox avec poetry</a> pour exécuter les tests sous
 plusieurs environnements avec un <strong>tox.ini</strong> ressemblant à ça :</p>
 <div class="highlight"><pre><span></span><span class="o">[</span>tox<span class="o">]</span>
-<span class="nv">isolated_build</span> <span class="o">=</span> <span class="nb">true</span>
-<span class="nv">envlist</span> <span class="o">=</span> py27, py36
+<span class="nv">isolated_build</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
+<span class="nv">envlist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>py27,<span class="w"> </span>py36
 
 <span class="o">[</span>testenv<span class="o">]</span>
-<span class="nv">whitelist_externals</span> <span class="o">=</span> poetry
-<span class="nv">commands</span> <span class="o">=</span>
-    poetry install -v
-    poetry run pytest tests/
+<span class="nv">whitelist_externals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>poetry
+<span class="nv">commands</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span>poetry<span class="w"> </span>install<span class="w"> </span>-v
+<span class="w">    </span>poetry<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/
 </pre></div>
 </div>
 <div class="section" id="developpement-web">

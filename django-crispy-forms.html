@@ -150,19 +150,19 @@ rien ne t'empêches de la mettre en place de ton côté.</p>
 <h2>1) L'installation et la configuration</h2>
 <p>C'est parti ! On suppose que tu as déjà installé python 3.5 avec virtualenvwrapper.
 Tu crées donc ton environnement virtuel et tu installes les librairies requises:</p>
-<div class="highlight"><pre><span></span>mkvirtualenv -p /usr/bin/python3.5 demo-django-crispy-forms
-pip install <span class="nv">Django</span><span class="o">==</span><span class="m">1</span>.9.6 django-countries<span class="o">==</span><span class="m">3</span>.4.1 django-crispy-forms<span class="o">==</span><span class="m">1</span>.6.0 <span class="se">\</span>
+<div class="highlight"><pre><span></span>mkvirtualenv<span class="w"> </span>-p<span class="w"> </span>/usr/bin/python3.5<span class="w"> </span>demo-django-crispy-forms
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">Django</span><span class="o">==</span><span class="m">1</span>.9.6<span class="w"> </span>django-countries<span class="o">==</span><span class="m">3</span>.4.1<span class="w"> </span>django-crispy-forms<span class="o">==</span><span class="m">1</span>.6.0<span class="w"> </span><span class="se">\</span>
 django-simple-captcha<span class="o">==</span><span class="m">0</span>.5.1
 </pre></div>
 <p>La version compatible de <em>django-bootstrap3-datetimepicker</em> avec django 1.9 n'est pas encore disponible
 sur pypi. Du coup, tu l'installes directement depuis github:</p>
-<div class="highlight"><pre><span></span>pip install git+https://github.com/nkunihiko/django-bootstrap3-datetimepicker.git@2fa9ea5
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/nkunihiko/django-bootstrap3-datetimepicker.git@2fa9ea5
 </pre></div>
 <p>Tu crées un projet django appelé <strong>demo-django-crispy-forms</strong>, qui contient une application <strong>core</strong>:</p>
-<div class="highlight"><pre><span></span>django-admin startproject demo_django_crispy_forms
-<span class="nb">cd</span> demo_django_crispy_forms/demo_django_crispy_forms
-mkdir apps <span class="o">&amp;&amp;</span> <span class="nb">cd</span> apps
-django-admin startapp core
+<div class="highlight"><pre><span></span>django-admin<span class="w"> </span>startproject<span class="w"> </span>demo_django_crispy_forms
+<span class="nb">cd</span><span class="w"> </span>demo_django_crispy_forms/demo_django_crispy_forms
+mkdir<span class="w"> </span>apps<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>apps
+django-admin<span class="w"> </span>startapp<span class="w"> </span>core
 </pre></div>
 <p>Dans le fichier <strong>settings.py</strong> de ton projet, tu modifies/ajoutes les lignes suivantes:</p>
 <div class="highlight"><pre><span></span><span class="n">LANGUAGE_CODE</span> <span class="o">=</span> <span class="s1">&#39;fr&#39;</span>
@@ -181,7 +181,7 @@ django-admin startapp core
 et utilisé le template <strong>bootstrap3</strong> pour <em>crispy-forms</em>.</p>
 <p>Il te suffit de migrer la base de données et de vérifier que tout est bon pour l'instant.
 Depuis le répertoire racine du projet, tu fais:</p>
-<div class="highlight"><pre><span></span>./manage.py migrate <span class="o">&amp;&amp;</span> ./manage.py check
+<div class="highlight"><pre><span></span>./manage.py<span class="w"> </span>migrate<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>./manage.py<span class="w"> </span>check
 </pre></div>
 </div>
 <div class="section" id="le-modele">
@@ -194,7 +194,7 @@ tu vas pouvoir créer le modèle de ton inscription.</p>
 
 
 <span class="k">class</span> <span class="nc">Registration</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Modèle de l&#39;inscription</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">CIVILITY_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
@@ -249,8 +249,8 @@ tu vas pouvoir créer le modèle de ton inscription.</p>
 <li>récupérer les valeurs du paramètre <strong>choices</strong> (si présent) pour la balise <strong>&lt;select&gt;</strong>.</li>
 </ul>
 <p>Enfin, tu mets à jour la base de données:</p>
-<div class="highlight"><pre><span></span>./manage.py makemigrations
-./manage.py migrate
+<div class="highlight"><pre><span></span>./manage.py<span class="w"> </span>makemigrations
+./manage.py<span class="w"> </span>migrate
 </pre></div>
 </div>
 <div class="section" id="le-formulaire">
@@ -269,7 +269,7 @@ ci-dessous pour expliquer les différentes étapes.</p>
 
 
 <span class="k">class</span> <span class="nc">RegistrationForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Formulaire d&#39;inscription</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -280,7 +280,7 @@ ci-dessous pour expliquer les différentes étapes.</p>
     <span class="n">confirmation_mail</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mail de confirmation&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Surcharge de l&#39;initialisation du formulaire</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -374,7 +374,7 @@ ci-dessous pour expliquer les différentes étapes.</p>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">clean_confirmation_mail</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Méthode pour vérifier que le mail correspond bien au</span>
 <span class="sd">        mail de confirmation lors de la validation du formulaire</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -413,7 +413,7 @@ et une autre pour afficher un message de confirmation après la validation de ce
 
 
 <span class="k">class</span> <span class="nc">RegistrationCreate</span><span class="p">(</span><span class="n">CreateView</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Affichage du formulaire</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">Registration</span>
@@ -422,7 +422,7 @@ et une autre pour afficher un message de confirmation après la validation de ce
 
 
 <span class="k">def</span> <span class="nf">registration_success</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Message de confirmation</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;core/registration_success.html&#39;</span><span class="p">)</span>
@@ -512,35 +512,35 @@ pour afficher le contenu de la page. Les templates suivants vont donc étendre <
 
 {% block foot-javascript %}
 <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="nx">$</span><span class="p">(</span> <span class="nb">document</span> <span class="p">).</span><span class="nx">ready</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// On interdit le copier/coller du mail</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#id_confirmation_mail&#39;</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;copy paste&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-    <span class="p">});</span>
-    <span class="c1">// On affiche le calendrier lorsqu&#39;on clique sur le champ date de naissance</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#id_birth_date&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-        <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">data</span><span class="p">(</span><span class="s2">&quot;DateTimePicker&quot;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
-    <span class="p">});</span>
-    <span class="c1">// On teste la valeur de la date et on la force à vide si elle est mauvaise</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#id_birth_date&#39;</span><span class="p">).</span><span class="nx">change</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
-        <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-        <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
-        <span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
-        <span class="kd">var</span> <span class="nx">format</span> <span class="o">=</span> <span class="ow">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s2">&quot;^\\d{2}\/\\d{2}\/\\d{4}$&quot;</span><span class="p">);</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">format</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">val</span><span class="p">))</span> <span class="p">{</span>
-            <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">});</span>
-    <span class="c1">// Afficher l&#39;onglet suivant en cliquant sur le bouton suivant</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.btnNext&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.nav-tabs &gt; .active + li a&#39;</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">);</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.nav-tabs + .tab-content&quot;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;:input:visible:first&quot;</span><span class="p">).</span><span class="nx">focus</span><span class="p">();</span>
-    <span class="p">});</span>
-    <span class="c1">// Afficher l&#39;onglet précédent en cliquant sur le bouton précédent</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.btnPrevious&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.nav-tabs &gt; .active&#39;</span><span class="p">).</span><span class="nx">prev</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">);</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.nav-tabs + .tab-content&quot;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;:input:visible:first&quot;</span><span class="p">).</span><span class="nx">focus</span><span class="p">();</span>
-    <span class="p">});</span>
+<span class="nx">$</span><span class="p">(</span><span class="w"> </span><span class="nb">document</span><span class="w"> </span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// On interdit le copier/coller du mail</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#id_confirmation_mail&#39;</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;copy paste&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="c1">// On affiche le calendrier lorsqu&#39;on clique sur le champ date de naissance</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#id_birth_date&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<span class="w">        </span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">data</span><span class="p">(</span><span class="s2">&quot;DateTimePicker&quot;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="c1">// On teste la valeur de la date et on la force à vide si elle est mauvaise</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#id_birth_date&#39;</span><span class="p">).</span><span class="nx">change</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+<span class="w">        </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">RegExp</span><span class="p">(</span><span class="s2">&quot;^\\d{2}\/\\d{2}\/\\d{4}$&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">format</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">val</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="c1">// Afficher l&#39;onglet suivant en cliquant sur le bouton suivant</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.btnNext&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<span class="w">        </span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.nav-tabs &gt; .active + li a&#39;</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.nav-tabs + .tab-content&quot;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;:input:visible:first&quot;</span><span class="p">).</span><span class="nx">focus</span><span class="p">();</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="c1">// Afficher l&#39;onglet précédent en cliquant sur le bouton précédent</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.btnPrevious&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<span class="w">        </span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.nav-tabs &gt; .active&#39;</span><span class="p">).</span><span class="nx">prev</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.nav-tabs + .tab-content&quot;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;:input:visible:first&quot;</span><span class="p">).</span><span class="nx">focus</span><span class="p">();</span>
+<span class="w">    </span><span class="p">});</span>
 <span class="p">});</span>
 <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 {% endblock %}
@@ -575,14 +575,14 @@ le <strong>block foot-javascript</strong> permet de pousser un peu plus la custo
 <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Registration</span><span class="p">,</span> <span class="n">RegistrationAdmin</span><span class="p">)</span>
 </pre></div>
 <p>Tu vas également en profiter pour ajouter un compte admin via:</p>
-<div class="highlight"><pre><span></span>./manage.py createsuperuser
+<div class="highlight"><pre><span></span>./manage.py<span class="w"> </span>createsuperuser
 </pre></div>
 </div>
 <div class="section" id="la-verification">
 <h2>8) La vérification</h2>
 <p>Tout est fini ! Il ne reste plus qu'à vérifier que ça fonctionne correctement.</p>
 <p>Tu démarres le serveur:</p>
-<div class="highlight"><pre><span></span>./manage.py runserver
+<div class="highlight"><pre><span></span>./manage.py<span class="w"> </span>runserver
 </pre></div>
 <p>Puis, tu te rends sur <a class="reference external" href="http://127.0.0.1:8000">http://127.0.0.1:8000</a>
 pour tester ton formulaire !</p>

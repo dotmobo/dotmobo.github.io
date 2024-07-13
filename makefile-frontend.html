@@ -168,33 +168,33 @@ jouer le rôle de <em>tasks runners</em>.</p>
 </ul>
 <p>Et que tu veux tes fichiers compilés et minifiés dans <strong>static/dist/css</strong> et <strong>static/dist/js</strong>.</p>
 <p>C'est parti, tu vas te créer un fichier <strong>Makefile</strong> qui fera tous ça !</p>
-<div class="highlight"><pre><span></span>vim Makefile
+<div class="highlight"><pre><span></span>vim<span class="w"> </span>Makefile
 </pre></div>
 <p>Tu y déclares tes répertoires de travail :</p>
-<div class="highlight"><pre><span></span>LESS_FOLDER :<span class="o">=</span> static/src/less
-LS_FOLDER :<span class="o">=</span> static/src/ls
-CSS_FOLDER :<span class="o">=</span> static/dist/css
-JS_FOLDER :<span class="o">=</span> static/dist/js
+<div class="highlight"><pre><span></span>LESS_FOLDER<span class="w"> </span>:<span class="o">=</span><span class="w"> </span>static/src/less
+LS_FOLDER<span class="w"> </span>:<span class="o">=</span><span class="w"> </span>static/src/ls
+CSS_FOLDER<span class="w"> </span>:<span class="o">=</span><span class="w"> </span>static/dist/css
+JS_FOLDER<span class="w"> </span>:<span class="o">=</span><span class="w"> </span>static/dist/js
 </pre></div>
 <p>Ensuite, tu y listes les fichiers concernés :</p>
-<div class="highlight"><pre><span></span>LESS_FILES :<span class="o">=</span> <span class="si">${</span><span class="nv">shell</span><span class="p"> find </span><span class="si">${</span><span class="nv">LESS_FOLDER</span><span class="si">}</span><span class="p"> -type f -name </span><span class="s1">&#39;*.less&#39;</span><span class="si">}</span>
-LS_FILES :<span class="o">=</span> <span class="si">${</span><span class="nv">shell</span><span class="p"> find </span><span class="si">${</span><span class="nv">LS_FOLDER</span><span class="si">}</span><span class="p"> -type f -name </span><span class="s1">&#39;*.ls&#39;</span><span class="si">}</span>
-CSS_FILE :<span class="o">=</span> <span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span>/main.min.css
-JS_FILE :<span class="o">=</span> <span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span>/main.min.js
+<div class="highlight"><pre><span></span>LESS_FILES<span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="si">${</span><span class="nv">shell</span><span class="p"> find </span><span class="si">${</span><span class="nv">LESS_FOLDER</span><span class="si">}</span><span class="p"> -type f -name </span><span class="s1">&#39;*.less&#39;</span><span class="si">}</span>
+LS_FILES<span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="si">${</span><span class="nv">shell</span><span class="p"> find </span><span class="si">${</span><span class="nv">LS_FOLDER</span><span class="si">}</span><span class="p"> -type f -name </span><span class="s1">&#39;*.ls&#39;</span><span class="si">}</span>
+CSS_FILE<span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span>/main.min.css
+JS_FILE<span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span>/main.min.js
 </pre></div>
 <p>La commande <strong>find</strong> utilisée pour <em>LESS_FILES</em> et <em>LS_FILES</em> permet de récupérer le
 chemin de tous les fichiers LESS et LiveScript présents.</p>
 <p>Tu déclares une tâche <em>build</em> qui sera chargée de lancer la compilation des fichiers :</p>
-<div class="highlight"><pre><span></span>build: build-css build-js
+<div class="highlight"><pre><span></span>build:<span class="w"> </span>build-css<span class="w"> </span>build-js
 </pre></div>
 <p>Puis, tu commences par créer la tâche qui va compiler les fichiers LESS :</p>
-<div class="highlight"><pre><span></span>build-css: <span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span> <span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span>
+<div class="highlight"><pre><span></span>build-css:<span class="w"> </span><span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span>
 
-<span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span>: <span class="si">${</span><span class="nv">LESS_FILES</span><span class="si">}</span>
-    cat $^ <span class="p">|</span> lessc - <span class="p">|</span> cleancss &gt; <span class="nv">$@</span>
+<span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span>:<span class="w"> </span><span class="si">${</span><span class="nv">LESS_FILES</span><span class="si">}</span>
+<span class="w">    </span>cat<span class="w"> </span>$^<span class="w"> </span><span class="p">|</span><span class="w"> </span>lessc<span class="w"> </span>-<span class="w"> </span><span class="p">|</span><span class="w"> </span>cleancss<span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$@</span>
 
 <span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span>:
-    mkdir -p <span class="nv">$@</span>
+<span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$@</span>
 </pre></div>
 <p>Ta tâche <em>build-css</em> va créer le répertoire <strong>static/dist/css</strong> via <strong>mkdir</strong>.
 Et elle va compiler tous les fichiers LESS à l'aide de <strong>lessc</strong> et les minifier à
@@ -203,31 +203,31 @@ l'aide de <strong>cleancss</strong>.</p>
 des fichiers contenus dans <em>LESS_FILES</em>. <em>$&#64;</em> correspond au nom de la cible, à
 savoir le fichier contenu dans <em>CSS_FILE</em>.</p>
 <p>De la même manière, tu crées la tâche qui va compiler les fichiers LiveScript :</p>
-<div class="highlight"><pre><span></span>build-js: <span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span> <span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>
+<div class="highlight"><pre><span></span>build-js:<span class="w"> </span><span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>
 
-<span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>: <span class="si">${</span><span class="nv">LS_FILES</span><span class="si">}</span>
-cat $^ <span class="p">|</span> lsc -sc <span class="p">|</span> uglifyjs - &gt; <span class="nv">$@</span>
+<span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>:<span class="w"> </span><span class="si">${</span><span class="nv">LS_FILES</span><span class="si">}</span>
+cat<span class="w"> </span>$^<span class="w"> </span><span class="p">|</span><span class="w"> </span>lsc<span class="w"> </span>-sc<span class="w"> </span><span class="p">|</span><span class="w"> </span>uglifyjs<span class="w"> </span>-<span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$@</span>
 
 <span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span>:
-mkdir -p <span class="nv">$@</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$@</span>
 </pre></div>
 <p>Les fichiers LiveScript sont compilés à l'aide de <strong>lsc</strong> et minifiés à l'aide
 de <strong>uglifyjs</strong>.</p>
 <p>Tu rajoutes une méthode pour nettoyer le répertoire <em>dist</em> :</p>
 <div class="highlight"><pre><span></span>clean:
-    rm <span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span> <span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>
+<span class="w">    </span>rm<span class="w"> </span><span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>
 </pre></div>
 <p>Et une méthode qui te permettra d'installer les librairies utilisées par ton <strong>Makefile</strong> via <strong>npm</strong> :</p>
 <div class="highlight"><pre><span></span>install-dependencies:
-    sudo npm install -g less clean-css livescript uglifyjs onchange
+<span class="w">    </span>sudo<span class="w"> </span>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>less<span class="w"> </span>clean-css<span class="w"> </span>livescript<span class="w"> </span>uglifyjs<span class="w"> </span>onchange
 </pre></div>
 <p>Enfin, tu vas mettre en place ton <em>watcher</em> à l'aide de <strong>onchange</strong> :</p>
 <div class="highlight"><pre><span></span>watch:
-    onchange <span class="s2">&quot;</span><span class="si">${</span><span class="nv">LESS_FILES</span><span class="si">}</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">LS_FILES</span><span class="si">}</span><span class="s2">&quot;</span> -- make build
+<span class="w">    </span>onchange<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">LESS_FILES</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">LS_FILES</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>--<span class="w"> </span>make<span class="w"> </span>build
 </pre></div>
 <p>La dernière instruction servira à dire à <strong>make</strong> que certaines tâches
 ne sont pas directement liées à des noms de fichiers :</p>
-<div class="highlight"><pre><span></span>.PHONY: build build-css build-js clean watch install-dependencies
+<div class="highlight"><pre><span></span>.PHONY:<span class="w"> </span>build<span class="w"> </span>build-css<span class="w"> </span>build-js<span class="w"> </span>clean<span class="w"> </span>watch<span class="w"> </span>install-dependencies
 </pre></div>
 <p>Et c'est fini! Tu disposes désormais des commandes suivantes :</p>
 <ul class="simple">
@@ -244,72 +244,72 @@ ne sont pas directement liées à des noms de fichiers :</p>
 <span class="c1"># Require node.js and npm                       #</span>
 <span class="c1">#################################################</span>
 
-LESS_FOLDER :<span class="o">=</span> static/src/less
-LS_FOLDER :<span class="o">=</span> static/src/ls
-CSS_FOLDER :<span class="o">=</span> static/dist/css
-JS_FOLDER :<span class="o">=</span> static/dist/js
+LESS_FOLDER<span class="w"> </span>:<span class="o">=</span><span class="w"> </span>static/src/less
+LS_FOLDER<span class="w"> </span>:<span class="o">=</span><span class="w"> </span>static/src/ls
+CSS_FOLDER<span class="w"> </span>:<span class="o">=</span><span class="w"> </span>static/dist/css
+JS_FOLDER<span class="w"> </span>:<span class="o">=</span><span class="w"> </span>static/dist/js
 
-LESS_FILES :<span class="o">=</span> <span class="si">${</span><span class="nv">shell</span><span class="p"> find </span><span class="si">${</span><span class="nv">LESS_FOLDER</span><span class="si">}</span><span class="p"> -type f -name </span><span class="s1">&#39;*.less&#39;</span><span class="si">}</span>
-LS_FILES :<span class="o">=</span> <span class="si">${</span><span class="nv">shell</span><span class="p"> find </span><span class="si">${</span><span class="nv">LS_FOLDER</span><span class="si">}</span><span class="p"> -type f -name </span><span class="s1">&#39;*.ls&#39;</span><span class="si">}</span>
-CSS_FILE :<span class="o">=</span> <span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span>/main.min.css
-JS_FILE :<span class="o">=</span> <span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span>/main.min.js
+LESS_FILES<span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="si">${</span><span class="nv">shell</span><span class="p"> find </span><span class="si">${</span><span class="nv">LESS_FOLDER</span><span class="si">}</span><span class="p"> -type f -name </span><span class="s1">&#39;*.less&#39;</span><span class="si">}</span>
+LS_FILES<span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="si">${</span><span class="nv">shell</span><span class="p"> find </span><span class="si">${</span><span class="nv">LS_FOLDER</span><span class="si">}</span><span class="p"> -type f -name </span><span class="s1">&#39;*.ls&#39;</span><span class="si">}</span>
+CSS_FILE<span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span>/main.min.css
+JS_FILE<span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span>/main.min.js
 
 <span class="c1">###############</span>
 <span class="c1"># Build files #</span>
 <span class="c1">###############</span>
 
-build: build-css build-js
+build:<span class="w"> </span>build-css<span class="w"> </span>build-js
 
 <span class="c1">####################</span>
 <span class="c1"># Build css files #</span>
 <span class="c1">####################</span>
 
-build-css: <span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span> <span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span>
+build-css:<span class="w"> </span><span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span>
 
-<span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span>: <span class="si">${</span><span class="nv">LESS_FILES</span><span class="si">}</span>
-    cat $^ <span class="p">|</span> lessc - <span class="p">|</span> cleancss &gt; <span class="nv">$@</span>
+<span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span>:<span class="w"> </span><span class="si">${</span><span class="nv">LESS_FILES</span><span class="si">}</span>
+<span class="w">    </span>cat<span class="w"> </span>$^<span class="w"> </span><span class="p">|</span><span class="w"> </span>lessc<span class="w"> </span>-<span class="w"> </span><span class="p">|</span><span class="w"> </span>cleancss<span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$@</span>
 
 <span class="si">${</span><span class="nv">CSS_FOLDER</span><span class="si">}</span>:
-    mkdir -p <span class="nv">$@</span>
+<span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$@</span>
 
 <span class="c1">##################</span>
 <span class="c1"># Build js files #</span>
 <span class="c1">##################</span>
 
-build-js: <span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span> <span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>
+build-js:<span class="w"> </span><span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>
 
-<span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>: <span class="si">${</span><span class="nv">LS_FILES</span><span class="si">}</span>
-    cat $^ <span class="p">|</span> lsc -sc <span class="p">|</span> uglifyjs - &gt; <span class="nv">$@</span>
+<span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>:<span class="w"> </span><span class="si">${</span><span class="nv">LS_FILES</span><span class="si">}</span>
+<span class="w">    </span>cat<span class="w"> </span>$^<span class="w"> </span><span class="p">|</span><span class="w"> </span>lsc<span class="w"> </span>-sc<span class="w"> </span><span class="p">|</span><span class="w"> </span>uglifyjs<span class="w"> </span>-<span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$@</span>
 
 <span class="si">${</span><span class="nv">JS_FOLDER</span><span class="si">}</span>:
-    mkdir -p <span class="nv">$@</span>
+<span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$@</span>
 
 <span class="c1">###############</span>
 <span class="c1"># Clean files #</span>
 <span class="c1">###############</span>
 
 clean:
-    rm <span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span> <span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>
+<span class="w">    </span>rm<span class="w"> </span><span class="si">${</span><span class="nv">CSS_FILE</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">JS_FILE</span><span class="si">}</span>
 
 <span class="c1">########################</span>
 <span class="c1"># Install dépendencies #</span>
 <span class="c1">########################</span>
 
 install-dependencies:
-    sudo npm install -g less clean-css livescript uglifyjs onchange
+<span class="w">    </span>sudo<span class="w"> </span>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>less<span class="w"> </span>clean-css<span class="w"> </span>livescript<span class="w"> </span>uglifyjs<span class="w"> </span>onchange
 
 <span class="c1">###############</span>
 <span class="c1"># Watch files #</span>
 <span class="c1">###############</span>
 
 watch:
-    onchange <span class="s2">&quot;</span><span class="si">${</span><span class="nv">LESS_FILES</span><span class="si">}</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">LS_FILES</span><span class="si">}</span><span class="s2">&quot;</span> -- make build
+<span class="w">    </span>onchange<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">LESS_FILES</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">LS_FILES</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>--<span class="w"> </span>make<span class="w"> </span>build
 
 <span class="c1">#########</span>
 <span class="c1"># Phony #</span>
 <span class="c1">#########</span>
 
-.PHONY: build build-css build-js clean watch install-dependencies
+.PHONY:<span class="w"> </span>build<span class="w"> </span>build-css<span class="w"> </span>build-js<span class="w"> </span>clean<span class="w"> </span>watch<span class="w"> </span>install-dependencies
 </pre></div>
 <p>Evidemment, ça reste un exemple très simple. Mais rien ne t'empêche de faire
 évoluer ton <strong>Makefile</strong> selon tes besoins.</p>

@@ -169,7 +169,7 @@ Si ce n'est pas déjà fait, commence par aller sur <a class="reference external
 Tu risques de te retrouver abonné à certains flux plusieurs fois inutilement et d'avoir des comportements étranges sans comprendre facilement d'où ça vient.</p>
 <p>Si possible, évite d'utiliser le <em>unsubscribe</em> à la main et privilégie plutôt le déclenchement d'un signal de fin de flux, avec <strong>first()</strong> par exemple.
 Ici on récupère la première valeur du flux <em>source</em> et un signal de fin de flux est alors émis grace au <em>first()</em>, ce qui nous désabonne directement sans utiliser <em>unsubscribe</em>:</p>
-<div class="highlight"><pre><span></span><span class="nx">source</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">first</span><span class="p">()).</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">val</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`First value: </span><span class="si">${</span><span class="nx">val</span><span class="si">}</span><span class="sb">`</span><span class="p">));</span>
+<div class="highlight"><pre><span></span><span class="nx">source</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">first</span><span class="p">()).</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">val</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`First value: </span><span class="si">${</span><span class="nx">val</span><span class="si">}</span><span class="sb">`</span><span class="p">));</span>
 </pre></div>
 <p>En second lieu, tu peux aussi privilégier l'abonnement directement dans le template via <strong>monflux$ | async</strong>, car le désabonnement est alors géré automatiquement
 par Angular lorsque l'on quitte le composant:</p>
@@ -177,15 +177,15 @@ par Angular lorsque l'on quitte le composant:</p>
 </pre></div>
 <p>Enfin, si tu es obligé de rester abonné à un flux dans ton fichier typescript pour x raisons, n'oublie surtout pas de te désabonner dans l'événement <strong>ngOnDestroy</strong>:</p>
 <div class="highlight"><pre><span></span><span class="err">@</span><span class="nx">Component</span><span class="p">({...})</span>
-<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">OnDestroy</span> <span class="p">{</span>
-    <span class="nx">subscription</span><span class="o">:</span> <span class="nx">Subscription</span>
-    <span class="nx">ngOnInit</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="kd">const</span> <span class="nx">timer$</span> <span class="o">=</span> <span class="nx">Rx</span><span class="p">.</span><span class="nx">Observable</span><span class="p">.</span><span class="nx">interval</span><span class="p">(</span><span class="mf">500</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">subscription</span> <span class="o">=</span> <span class="nx">timer$</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">x</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span>
-    <span class="p">}</span>
-    <span class="nx">ngOnDestroy</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">subscription</span><span class="p">.</span><span class="nx">unsubscribe</span><span class="p">()</span>
-    <span class="p">}</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">AppComponent</span><span class="w"> </span><span class="kr">implements</span><span class="w"> </span><span class="nx">OnInit</span><span class="p">,</span><span class="w"> </span><span class="nx">OnDestroy</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">subscription</span><span class="o">:</span><span class="w"> </span><span class="nx">Subscription</span>
+<span class="w">    </span><span class="nx">ngOnInit</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">timer$</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Rx</span><span class="p">.</span><span class="nx">Observable</span><span class="p">.</span><span class="nx">interval</span><span class="p">(</span><span class="mf">500</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">subscription</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timer$</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">ngOnDestroy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">subscription</span><span class="p">.</span><span class="nx">unsubscribe</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 <p>Dernier point, il faut également <strong>éviter de faire des subscribe dans des subscribe</strong> car c'est pas très propre et ça peut entrainer des comportements non voulus.</p>
@@ -196,25 +196,25 @@ par Angular lorsque l'on quitte le composant:</p>
 <a class="reference external" href="https://rxjs-dev.firebaseapp.com/guide/testing/marble-testing">La documentation officielle</a> est pas trop mal faite,
 mais il faut savoir que c'est pas forcément évident à appréhender.</p>
 <p>Pour info ca ressemble à ça:</p>
-<div class="highlight"><pre><span></span><span class="k">import</span> <span class="p">{</span> <span class="nx">TestScheduler</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs/testing&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">TestScheduler</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;rxjs/testing&#39;</span><span class="p">;</span>
 
-<span class="kd">const</span> <span class="nx">testScheduler</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">TestScheduler</span><span class="p">((</span><span class="nx">actual</span><span class="p">,</span> <span class="nx">expected</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="c1">// asserting the two objects are equal</span>
-  <span class="c1">// e.g. using chai.</span>
-  <span class="nx">expect</span><span class="p">(</span><span class="nx">actual</span><span class="p">).</span><span class="nx">deep</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">testScheduler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">TestScheduler</span><span class="p">((</span><span class="nx">actual</span><span class="p">,</span><span class="w"> </span><span class="nx">expected</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// asserting the two objects are equal</span>
+<span class="w">  </span><span class="c1">// e.g. using chai.</span>
+<span class="w">  </span><span class="nx">expect</span><span class="p">(</span><span class="nx">actual</span><span class="p">).</span><span class="nx">deep</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
 <span class="p">});</span>
 
 <span class="c1">// This test will actually run *synchronously*</span>
-<span class="nx">it</span><span class="p">(</span><span class="s1">&#39;generate the stream correctly&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="nx">testScheduler</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="nx">helpers</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="p">{</span> <span class="nx">cold</span><span class="p">,</span> <span class="nx">expectObservable</span><span class="p">,</span> <span class="nx">expectSubscriptions</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">helpers</span><span class="p">;</span>
-    <span class="kd">const</span> <span class="nx">e1</span> <span class="o">=</span>  <span class="nx">cold</span><span class="p">(</span><span class="s1">&#39;-a--b--c---|&#39;</span><span class="p">);</span>
-    <span class="kd">const</span> <span class="nx">subs</span> <span class="o">=</span>     <span class="s1">&#39;^----------!&#39;</span><span class="p">;</span>
-    <span class="kd">const</span> <span class="nx">expected</span> <span class="o">=</span> <span class="s1">&#39;-a-----c---|&#39;</span><span class="p">;</span>
+<span class="nx">it</span><span class="p">(</span><span class="s1">&#39;generate the stream correctly&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">testScheduler</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="nx">helpers</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">cold</span><span class="p">,</span><span class="w"> </span><span class="nx">expectObservable</span><span class="p">,</span><span class="w"> </span><span class="nx">expectSubscriptions</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">helpers</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">e1</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="nx">cold</span><span class="p">(</span><span class="s1">&#39;-a--b--c---|&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">subs</span><span class="w"> </span><span class="o">=</span><span class="w">     </span><span class="s1">&#39;^----------!&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">expected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;-a-----c---|&#39;</span><span class="p">;</span>
 
-    <span class="nx">expectObservable</span><span class="p">(</span><span class="nx">e1</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">throttleTime</span><span class="p">(</span><span class="mf">3</span><span class="p">,</span> <span class="nx">testScheduler</span><span class="p">))).</span><span class="nx">toBe</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
-    <span class="nx">expectSubscriptions</span><span class="p">(</span><span class="nx">e1</span><span class="p">.</span><span class="nx">subscriptions</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="nx">subs</span><span class="p">);</span>
-  <span class="p">});</span>
+<span class="w">    </span><span class="nx">expectObservable</span><span class="p">(</span><span class="nx">e1</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">throttleTime</span><span class="p">(</span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="nx">testScheduler</span><span class="p">))).</span><span class="nx">toBe</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">expectSubscriptions</span><span class="p">(</span><span class="nx">e1</span><span class="p">.</span><span class="nx">subscriptions</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="nx">subs</span><span class="p">);</span>
+<span class="w">  </span><span class="p">});</span>
 <span class="p">});</span>
 </pre></div>
 </div>
@@ -222,26 +222,26 @@ mais il faut savoir que c'est pas forcément évident à appréhender.</p>
 <h3>Resolver avec du cache</h3>
 <p>En Angular, les <em>resolvers</em> sont des services qui permettent de récupérer des données d'une api avant d'afficher une page.
 Il est intéressant de savoir qu'il est possible de gérer facilement du cache avec l'opérateur <strong>shareReplay</strong> de rxjs de cette manière:</p>
-<div class="highlight"><pre><span></span><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Resolve</span><span class="p">,</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span> <span class="nx">RouterStateSnapshot</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Country</span><span class="p">,</span> <span class="nx">NomenclatureService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;ins-common-lib&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">shareReplay</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs/operators&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Injectable</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span><span class="w"> </span><span class="nx">RouterStateSnapshot</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Observable</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Country</span><span class="p">,</span><span class="w"> </span><span class="nx">NomenclatureService</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;ins-common-lib&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">shareReplay</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;rxjs/operators&#39;</span><span class="p">;</span>
 
 <span class="err">@</span><span class="nx">Injectable</span><span class="p">({</span>
-    <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span>
+<span class="w">    </span><span class="nx">providedIn</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;root&#39;</span>
 <span class="p">})</span>
-<span class="k">export</span> <span class="kd">class</span> <span class="nx">PaysResolver</span> <span class="kr">implements</span> <span class="nx">Resolve</span><span class="o">&lt;</span><span class="nx">Country</span><span class="p">[]</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="kr">private</span> <span class="nx">pays$</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Country</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">PaysResolver</span><span class="w"> </span><span class="kr">implements</span><span class="w"> </span><span class="nx">Resolve</span><span class="o">&lt;</span><span class="nx">Country</span><span class="p">[]</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">private</span><span class="w"> </span><span class="nx">pays$</span><span class="o">:</span><span class="w"> </span><span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Country</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">;</span>
 
-    <span class="kr">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">service</span><span class="o">:</span> <span class="nx">NomenclatureService</span><span class="p">)</span> <span class="p">{}</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="kr">private</span><span class="w"> </span><span class="nx">service</span><span class="o">:</span><span class="w"> </span><span class="nx">NomenclatureService</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
 
-    <span class="nx">resolve</span><span class="p">(</span><span class="nx">_route</span><span class="o">:</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span> <span class="nx">_state</span><span class="o">:</span> <span class="nx">RouterStateSnapshot</span><span class="p">)</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Country</span><span class="p">[]</span><span class="o">&gt;</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">pays$</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">pays$</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">service</span><span class="p">.</span><span class="nx">listCountries</span><span class="p">().</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">shareReplay</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span> <span class="mf">3600000</span><span class="p">));</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">pays$</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="nx">resolve</span><span class="p">(</span><span class="nx">_route</span><span class="o">:</span><span class="w"> </span><span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span><span class="w"> </span><span class="nx">_state</span><span class="o">:</span><span class="w"> </span><span class="nx">RouterStateSnapshot</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Country</span><span class="p">[]</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">pays$</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">pays$</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">service</span><span class="p">.</span><span class="nx">listCountries</span><span class="p">().</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">shareReplay</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">3600000</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">pays$</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 <p>Ici, le <em>resolver</em> récupère la première requête et la met en cache pendant 1h. Pratique pour éviter de faire des appels systématiques à l'api !</p>
@@ -266,20 +266,20 @@ Dans ce service, tu vas y mettre tes appels aux sélecteurs, l'éxecution de tes
 Tu peux jeter un oeil à <a class="reference external" href="https://medium.com/&#64;thomasburlesonIA/ngrx-facades-better-state-management-82a04b9a1e39">cet article</a> où c'est bien expliqué.
 Concrètement ta façade va ressembler à ça :</p>
 <div class="highlight"><pre><span></span><span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
-<span class="k">export</span> <span class="kd">class</span> <span class="nx">CarsFacade</span> <span class="p">{</span>
-  <span class="nx">loaded$</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="nx">carsQuery</span><span class="p">.</span><span class="nx">getIsLoaded</span><span class="p">);</span>
-  <span class="nx">allCars$</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="nx">carsQuery</span><span class="p">.</span><span class="nx">getAllCars</span><span class="p">);</span>
-  <span class="nx">selectedCar$</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="nx">carsQuery</span><span class="p">.</span><span class="nx">getSelectedCar</span><span class="p">);</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">CarsFacade</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">loaded$</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="nx">carsQuery</span><span class="p">.</span><span class="nx">getIsLoaded</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">allCars$</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="nx">carsQuery</span><span class="p">.</span><span class="nx">getAllCars</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">selectedCar$</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="nx">carsQuery</span><span class="p">.</span><span class="nx">getSelectedCar</span><span class="p">);</span>
 
-  <span class="kr">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">store</span><span class="o">:</span> <span class="nx">Store</span><span class="o">&lt;</span><span class="nx">CarsState</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{}</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="kr">private</span><span class="w"> </span><span class="nx">store</span><span class="o">:</span><span class="w"> </span><span class="nx">Store</span><span class="o">&lt;</span><span class="nx">CarsState</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
 
-  <span class="nx">loadAllCars</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="ow">new</span> <span class="nx">LoadCar</span><span class="p">());</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="nx">loadAllCars</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">LoadCar</span><span class="p">());</span>
+<span class="w">  </span><span class="p">}</span>
 
-  <span class="nx">selectCar</span><span class="p">(</span><span class="nx">carId</span><span class="o">:</span> <span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="ow">new</span> <span class="nx">SelectCar</span><span class="p">(</span><span class="nx">carId</span><span class="p">));</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="nx">selectCar</span><span class="p">(</span><span class="nx">carId</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">SelectCar</span><span class="p">(</span><span class="nx">carId</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 <p>Et c'est donc ce service que tu vas injecter dans tes composants plutôt que le <em>store</em> directement !
@@ -333,11 +333,11 @@ C'est pratique à utiliser, par contre c'est une horreur à écrire. Franchement
 <p>Pour gagner en performance, il faut savoir qu'il est possible de découper son application en plusieurs <a class="reference external" href="https://angular.io/guide/lazy-loading-ngmodules">sous-modules lazy loadés</a>.
 Ça permet à l'application de répondre rapidement lorsque l'on va sur la page d'accueil, et de charger les modules nécessaires que lorsqu'ils sont vraiment demandés par l'utilisateur.
 Il suffit de déclarer nos modules de cette manière dans le fichier de <em>routing</em> :</p>
-<div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">routes</span><span class="o">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="p">{</span>
-    <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;items&#39;</span><span class="p">,</span>
-    <span class="nx">loadChildren</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="s1">&#39;./items/items.module&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">m</span> <span class="p">=&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">ItemsModule</span><span class="p">)</span>
-  <span class="p">}</span>
+<div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">routes</span><span class="o">:</span><span class="w"> </span><span class="nx">Routes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;items&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">loadChildren</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">import</span><span class="p">(</span><span class="s1">&#39;./items/items.module&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">ItemsModule</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">];</span>
 </pre></div>
 </div>
@@ -360,23 +360,23 @@ Donc pour des petits composants qui fonctionnent uniquement à base de <em>input
 <h3>Librairies et workspaces</h3>
 <p>Il y a quelques temps encore, il fallait installer et gérer <em>ng-packagr</em> à la main pour créer des libraires.
 Aujourd'hui, c'est directement disponible via <em>angular cli</em>. Voici les commandes pour créer, tester, builder et publier une librairie :</p>
-<div class="highlight"><pre><span></span>ng new my-workspace --create-application<span class="o">=</span><span class="nb">false</span>
-<span class="nb">cd</span> my-workspace
-ng generate library my-lib
-ng build my-lib
-ng <span class="nb">test</span> my-lib
-ng lint my-lib
-ng build my-lib --prod
-<span class="nb">cd</span> dist/my-lib
-npm publish
+<div class="highlight"><pre><span></span>ng<span class="w"> </span>new<span class="w"> </span>my-workspace<span class="w"> </span>--create-application<span class="o">=</span><span class="nb">false</span>
+<span class="nb">cd</span><span class="w"> </span>my-workspace
+ng<span class="w"> </span>generate<span class="w"> </span>library<span class="w"> </span>my-lib
+ng<span class="w"> </span>build<span class="w"> </span>my-lib
+ng<span class="w"> </span><span class="nb">test</span><span class="w"> </span>my-lib
+ng<span class="w"> </span>lint<span class="w"> </span>my-lib
+ng<span class="w"> </span>build<span class="w"> </span>my-lib<span class="w"> </span>--prod
+<span class="nb">cd</span><span class="w"> </span>dist/my-lib
+npm<span class="w"> </span>publish
 </pre></div>
 <p>Il est également possible de créer un workspace qui va contenir plusieurs applications et librairies pour un même projet.</p>
-<div class="highlight"><pre><span></span>ng new my-workspace --createApplication<span class="o">=</span><span class="s2">&quot;false&quot;</span>
-<span class="nb">cd</span> my-workspace
-ng generate library my-first-lib
-ng generate library my-second-lib
-ng generate application my-first-app
-ng generate application my-second-app
+<div class="highlight"><pre><span></span>ng<span class="w"> </span>new<span class="w"> </span>my-workspace<span class="w"> </span>--createApplication<span class="o">=</span><span class="s2">&quot;false&quot;</span>
+<span class="nb">cd</span><span class="w"> </span>my-workspace
+ng<span class="w"> </span>generate<span class="w"> </span>library<span class="w"> </span>my-first-lib
+ng<span class="w"> </span>generate<span class="w"> </span>library<span class="w"> </span>my-second-lib
+ng<span class="w"> </span>generate<span class="w"> </span>application<span class="w"> </span>my-first-app
+ng<span class="w"> </span>generate<span class="w"> </span>application<span class="w"> </span>my-second-app
 </pre></div>
 <p>C'est pratique dans le cas où tu aurais <strong>plusieurs applications qui partagent des librairies communes</strong>.
 Par exemple, on pourrait imaginer une application pour les clients et une pour l'administration du site avec des modèles métier en commun dans une librarie partagée.</p>

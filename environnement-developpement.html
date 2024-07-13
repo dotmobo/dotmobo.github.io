@@ -186,9 +186,9 @@ qui est un multiplexeur de terminaux.
 Il permet de manipuler plusieurs terminaux au sein d'une même fenêtre et
 de se rattacher à une session tmux distante. C'est très pratique pour le
 travail collaboratif et pour lancer des commandes sur des serveurs.</p>
-<div class="highlight"><pre><span></span>pacman -S zsh tmux
-<span class="nb">exec</span> zsh
-chsh -s /bin/zsh
+<div class="highlight"><pre><span></span>pacman<span class="w"> </span>-S<span class="w"> </span>zsh<span class="w"> </span>tmux
+<span class="nb">exec</span><span class="w"> </span>zsh
+chsh<span class="w"> </span>-s<span class="w"> </span>/bin/zsh
 </pre></div>
 <p>Il ne te reste plus qu'à <a class="reference external" href="https://github.com/dotmobo/dotzsh">customiser ton .zshrc</a>
 comme bon de semble.</p>
@@ -205,8 +205,8 @@ disponible, de splitter tes fenêtres comme bon te semble et d'exécuter tes app
 De plus, tu pourras manipuler tout ton bureau
 <a class="reference external" href="http://i3wm.org/docs/userguide.html#_default_keybindings">au clavier</a>,
 ce qui fait un sacré gain de temps.</p>
-<div class="highlight"><pre><span></span>pacman -S i3
-<span class="nb">echo</span> <span class="s2">&quot;exec i3&quot;</span> &gt; ~/.xinitrc
+<div class="highlight"><pre><span></span>pacman<span class="w"> </span>-S<span class="w"> </span>i3
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;exec i3&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>~/.xinitrc
 reboot
 </pre></div>
 <p>A côté d'i3, tu pourras installer entre autres:</p>
@@ -245,8 +245,8 @@ customisable</a>.</p>
 Sans surprise, je t'invite à installer <a class="reference external" href="https://git-scm.com/">git</a>,
 qui te permettra de partager ton code sous github et qui s'interface très bien
 avec atom.</p>
-<div class="highlight"><pre><span></span>pacman -S git vim
-yaourt -S atom
+<div class="highlight"><pre><span></span>pacman<span class="w"> </span>-S<span class="w"> </span>git<span class="w"> </span>vim
+yaourt<span class="w"> </span>-S<span class="w"> </span>atom
 </pre></div>
 <p>Enfin, à toi d'installer ce qui te manque:
 python, node.js, postgresql, nginx, etc ...</p>
@@ -257,7 +257,7 @@ python, node.js, postgresql, nginx, etc ...</p>
 <p>Dans le cas où tu aurais besoin de tester des applications sous d'autres
 distributions, tu pourras utiliser <a class="reference external" href="https://www.vagrantup.com/">vagrant</a>
 pour installer des vms ou <a class="reference external" href="https://www.docker.com/">docker</a> pour utiliser des conteneurs.</p>
-<div class="highlight"><pre><span></span>yaourt -S vagrant docker docker-compose
+<div class="highlight"><pre><span></span>yaourt<span class="w"> </span>-S<span class="w"> </span>vagrant<span class="w"> </span>docker<span class="w"> </span>docker-compose
 </pre></div>
 <p>A l'aide de <a class="reference external" href="https://docs.docker.com/compose/">docker-compose</a>,
 tu pourras te créer un environnement spécifique par application en utilisant des conteneurs.

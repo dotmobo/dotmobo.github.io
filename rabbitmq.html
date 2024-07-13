@@ -157,22 +157,22 @@ en Php, en Javascript, en Ruby, etc...</p>
 <h2>Installation</h2>
 <p>Sur Ubuntu, Rabbitmq est présent dans les dépôts officiels, donc rien de plus simple à installer:</p>
 <div class="highlight"><pre><span></span><span class="c1"># Install the package</span>
-apt-get install -y rabbitmq-server
+apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>rabbitmq-server
 </pre></div>
 <p>À l'aide de <strong>rabbitmqctl</strong>, tu vas pouvoir ajouter des utilisateurs, gérer les permissions, créer des <em>Virtual Hosts</em>
 (oui, c'est bien le même concept que pour Apache), effacer des utilisateurs, etc...</p>
 <div class="highlight"><pre><span></span><span class="c1"># Add rabbitmq user</span>
-rabbitmqctl add_user myuser mypassword
+rabbitmqctl<span class="w"> </span>add_user<span class="w"> </span>myuser<span class="w"> </span>mypassword
 <span class="c1"># Add rabbitmq vhost</span>
-rabbitmqctl add_vhost myproject
+rabbitmqctl<span class="w"> </span>add_vhost<span class="w"> </span>myproject
 <span class="c1"># Add a tag to the user</span>
-rabbitmqctl set_user_tags myuser management
+rabbitmqctl<span class="w"> </span>set_user_tags<span class="w"> </span>myuser<span class="w"> </span>management
 <span class="c1"># Add vhost all permissions (conf, read, write) to the user</span>
-rabbitmqctl set_permissions -p myproject myuser <span class="s2">&quot;.*&quot;</span> <span class="s2">&quot;.*&quot;</span> <span class="s2">&quot;.*&quot;</span>
+rabbitmqctl<span class="w"> </span>set_permissions<span class="w"> </span>-p<span class="w"> </span>myproject<span class="w"> </span>myuser<span class="w"> </span><span class="s2">&quot;.*&quot;</span><span class="w"> </span><span class="s2">&quot;.*&quot;</span><span class="w"> </span><span class="s2">&quot;.*&quot;</span>
 <span class="c1"># Delete the guest user</span>
-rabbitmqctl delete_user guest
+rabbitmqctl<span class="w"> </span>delete_user<span class="w"> </span>guest
 <span class="c1"># Check user authentication</span>
-rabbitmqctl authenticate_user myuser mypassword
+rabbitmqctl<span class="w"> </span>authenticate_user<span class="w"> </span>myuser<span class="w"> </span>mypassword
 </pre></div>
 <p>Ici, j'ai volontairement effacé l'utilisateur <em>guest</em> qui est activé par défaut.</p>
 </div>
@@ -182,31 +182,31 @@ rabbitmqctl authenticate_user myuser mypassword
 <ul class="simple">
 <li>Via une interface web disponible sur <em>http://server-name:15672/</em> en activant le plugin <em>management</em>:</li>
 </ul>
-<div class="highlight"><pre><span></span>rabbitmq-plugins <span class="nb">enable</span> rabbitmq_management
+<div class="highlight"><pre><span></span>rabbitmq-plugins<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>rabbitmq_management
 </pre></div>
 <ul class="simple">
 <li>ou en ligne de commande via <strong>rabbitmqctl</strong>:</li>
 </ul>
 <div class="highlight"><pre><span></span><span class="c1"># users</span>
-rabbitmqctl list_users
-rabbitmqctl delete_user &lt;username&gt;
-rabbitmqctl change_password &lt;username&gt; &lt;newpassword&gt;
+rabbitmqctl<span class="w"> </span>list_users
+rabbitmqctl<span class="w"> </span>delete_user<span class="w"> </span>&lt;username&gt;
+rabbitmqctl<span class="w"> </span>change_password<span class="w"> </span>&lt;username&gt;<span class="w"> </span>&lt;newpassword&gt;
 <span class="c1"># queue</span>
-rabbitmqctl list_queues -p myproject
-rabbitmqctl purge_queue queue
-rabbitmqctl list_connections
-rabbitmqctl list_channels
-rabbitmqctl list_consumers
-rabbitmqctl list_exchanges
+rabbitmqctl<span class="w"> </span>list_queues<span class="w"> </span>-p<span class="w"> </span>myproject
+rabbitmqctl<span class="w"> </span>purge_queue<span class="w"> </span>queue
+rabbitmqctl<span class="w"> </span>list_connections
+rabbitmqctl<span class="w"> </span>list_channels
+rabbitmqctl<span class="w"> </span>list_consumers
+rabbitmqctl<span class="w"> </span>list_exchanges
 <span class="c1"># vhost</span>
-rabbitmqctl list_vhosts
-rabbitmqctl list_permissions -p myproject
+rabbitmqctl<span class="w"> </span>list_vhosts
+rabbitmqctl<span class="w"> </span>list_permissions<span class="w"> </span>-p<span class="w"> </span>myproject
 </pre></div>
 </div>
 <div class="section" id="installation-du-client-python">
 <h2>Installation du client Python</h2>
 <p>Pour installer le client Python Pika, tu utilises pip comme d'hab':</p>
-<div class="highlight"><pre><span></span>pip install pika
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pika
 </pre></div>
 </div>
 <div class="section" id="scenarios">
@@ -254,11 +254,11 @@ rabbitmqctl list_permissions -p myproject
 <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
 </pre></div>
 <p>Et au final, tu as comme résultat:</p>
-<div class="highlight"><pre><span></span>python receive.py
+<div class="highlight"><pre><span></span>python<span class="w"> </span>receive.py
 <span class="c1"># =&gt; [*] Waiting for messages. To exit press CTRL+C</span>
 <span class="c1"># =&gt; [x] Received &#39;Hello World!&#39;</span>
 </pre></div>
-<div class="highlight"><pre><span></span>python send.py
+<div class="highlight"><pre><span></span>python<span class="w"> </span>send.py
 <span class="c1"># =&gt; [x] Sent &#39;Hello World!&#39;</span>
 </pre></div>
 </div>
@@ -433,11 +433,11 @@ rabbitmqctl list_permissions -p myproject
 <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
 </pre></div>
 <p>Tu t'attends alors à reçevoir des messages de type <em>info</em>, <em>warning</em> et <em>error</em>:</p>
-<div class="highlight"><pre><span></span>python receive_logs_direct.py info warning error
+<div class="highlight"><pre><span></span>python<span class="w"> </span>receive_logs_direct.py<span class="w"> </span>info<span class="w"> </span>warning<span class="w"> </span>error
 <span class="c1"># =&gt; [*] Waiting for logs. To exit press CTRL+C</span>
 </pre></div>
 <p>Par exemple, pour émettre un message de type <em>error</em>:</p>
-<div class="highlight"><pre><span></span>python emit_log_direct.py error <span class="s2">&quot;Run. Run. Or it will explode.&quot;</span>
+<div class="highlight"><pre><span></span>python<span class="w"> </span>emit_log_direct.py<span class="w"> </span>error<span class="w"> </span><span class="s2">&quot;Run. Run. Or it will explode.&quot;</span>
 <span class="c1"># =&gt; [x] Sent &#39;error&#39;:&#39;Run. Run. Or it will explode.&#39;</span>
 </pre></div>
 </div>
@@ -504,19 +504,19 @@ rabbitmqctl list_permissions -p myproject
 </pre></div>
 <p>Tu peux maintenant utiliser les topics de différentes manières :</p>
 <div class="highlight"><pre><span></span><span class="c1"># To receive all the logs run:</span>
-python receive_logs_topic.py <span class="s2">&quot;#&quot;</span>
+python<span class="w"> </span>receive_logs_topic.py<span class="w"> </span><span class="s2">&quot;#&quot;</span>
 
 <span class="c1"># To receive all logs from the facility &quot;kern&quot;:</span>
-python receive_logs_topic.py <span class="s2">&quot;kern.*&quot;</span>
+python<span class="w"> </span>receive_logs_topic.py<span class="w"> </span><span class="s2">&quot;kern.*&quot;</span>
 
 <span class="c1"># Or if you want to hear only about &quot;critical&quot; logs:</span>
-python receive_logs_topic.py <span class="s2">&quot;*.critical&quot;</span>
+python<span class="w"> </span>receive_logs_topic.py<span class="w"> </span><span class="s2">&quot;*.critical&quot;</span>
 
 <span class="c1"># You can create multiple bindings:</span>
-python receive_logs_topic.py <span class="s2">&quot;kern.*&quot;</span> <span class="s2">&quot;*.critical&quot;</span>
+python<span class="w"> </span>receive_logs_topic.py<span class="w"> </span><span class="s2">&quot;kern.*&quot;</span><span class="w"> </span><span class="s2">&quot;*.critical&quot;</span>
 
 <span class="c1"># And to emit a log with a routing key &quot;kern.critical&quot; type:</span>
-python emit_log_topic.py <span class="s2">&quot;kern.critical&quot;</span> <span class="s2">&quot;A critical kernel error&quot;</span>
+python<span class="w"> </span>emit_log_topic.py<span class="w"> </span><span class="s2">&quot;kern.critical&quot;</span><span class="w"> </span><span class="s2">&quot;A critical kernel error&quot;</span>
 </pre></div>
 </div>
 <div class="section" id="rpc">
@@ -606,10 +606,10 @@ python emit_log_topic.py <span class="s2">&quot;kern.critical&quot;</span> <span
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; [.] Got </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">response</span><span class="p">)</span>
 </pre></div>
 <p>Et pour tester ça :</p>
-<div class="highlight"><pre><span></span>python rpc_server.py
+<div class="highlight"><pre><span></span>python<span class="w"> </span>rpc_server.py
 <span class="c1"># =&gt; [x] Awaiting RPC requests</span>
 </pre></div>
-<div class="highlight"><pre><span></span>python rpc_client.py
+<div class="highlight"><pre><span></span>python<span class="w"> </span>rpc_client.py
 <span class="c1"># =&gt; [x] Requesting fib(30)</span>
 </pre></div>
 </div>

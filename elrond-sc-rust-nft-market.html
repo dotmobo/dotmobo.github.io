@@ -151,129 +151,129 @@ du Smart Contract, soit déployer un autre Smart Contract.</p>
 <div class="section" id="smart-contract">
 <h2>Smart Contract</h2>
 <p>Comme d'habitude, on crée un SC vide à l'aide de <strong>erdpy</strong>.</p>
-<div class="highlight"><pre><span></span>erdpy contract new market --template empty
+<div class="highlight"><pre><span></span>erdpy<span class="w"> </span>contract<span class="w"> </span>new<span class="w"> </span>market<span class="w"> </span>--template<span class="w"> </span>empty
 </pre></div>
 <p>Et on passe directement à l'écriture du SC dans <strong>src/empty.rs</strong>. Notre fonction d'initialisation
 va prendre en paramètre l'identifiant du token à utiliser pour les paiements, le prix d'un NFT ainsi
 que l'identifiant de la collection de NFT que l'on souhaite vendre.</p>
-<div class="highlight"><pre><span></span><span class="cp">#![no_std]</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="cp">#![no_std]</span>
 
-<span class="n">elrond_wasm</span>::<span class="n">imports</span><span class="o">!</span><span class="p">();</span><span class="w"></span>
+<span class="n">elrond_wasm</span><span class="p">::</span><span class="n">imports</span><span class="o">!</span><span class="p">();</span>
 
 <span class="sd">/// An empty contract. To be used as a template when starting a new contract from scratch.</span>
-<span class="cp">#[elrond_wasm::contract]</span><span class="w"></span>
-<span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">EmptyContract</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="cp">#[init]</span><span class="w"></span>
-<span class="w">    </span><span class="k">fn</span> <span class="nf">init</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">token_id</span>: <span class="nc">TokenIdentifier</span><span class="p">,</span><span class="w"> </span><span class="n">price</span>: <span class="nc">BigUint</span><span class="p">,</span><span class="w"> </span><span class="n">nft_identifier</span>: <span class="nc">TokenIdentifier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">token_id</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">token_id</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">price</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">price</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">nft_identifier</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">nft_identifier</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">bank</span><span class="p">().</span><span class="n">is_empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="bp">self</span><span class="p">.</span><span class="n">bank</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="n">BigUint</span>::<span class="n">from</span><span class="p">(</span><span class="mi">0</span><span class="k">u32</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="cp">#[elrond_wasm::contract]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">EmptyContract</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cp">#[init]</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">token_id</span><span class="p">:</span><span class="w"> </span><span class="nc">TokenIdentifier</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">:</span><span class="w"> </span><span class="nc">BigUint</span><span class="p">,</span><span class="w"> </span><span class="n">nft_identifier</span><span class="p">:</span><span class="w"> </span><span class="nc">TokenIdentifier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">token_id</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">token_id</span><span class="p">);</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">price</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">price</span><span class="p">);</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">nft_identifier</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">nft_identifier</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">bank</span><span class="p">().</span><span class="n">is_empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="bp">self</span><span class="p">.</span><span class="n">bank</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="n">BigUint</span><span class="p">::</span><span class="n">from</span><span class="p">(</span><span class="mi">0</span><span class="k">u32</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 <p>On ajoute dans notre <strong>trait</strong> les <strong>storage_mapper</strong> et <strong>view</strong> des différentes variables que l'on va stocker dans le SC.
 L'élément <strong>bank</strong> correspond au montant total de $DEAD que l'on a dans notre SC suite aux divers paiements réalisés.</p>
-<div class="highlight"><pre><span></span><span class="cp">#[view(getBank)]</span><span class="w"></span>
-<span class="cp">#[storage_mapper(</span><span class="s">&quot;bank&quot;</span><span class="cp">)]</span><span class="w"></span>
-<span class="k">fn</span> <span class="nf">bank</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">BigUint</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="cp">#[view(getBank)]</span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;bank&quot;</span><span class="cp">)]</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">bank</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">BigUint</span><span class="o">&gt;</span><span class="p">;</span>
 
-<span class="cp">#[view(getTokenId)]</span><span class="w"></span>
-<span class="cp">#[storage_mapper(</span><span class="s">&quot;token_id&quot;</span><span class="cp">)]</span><span class="w"></span>
-<span class="k">fn</span> <span class="nf">token_id</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">TokenIdentifier</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+<span class="cp">#[view(getTokenId)]</span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;token_id&quot;</span><span class="cp">)]</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">token_id</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">TokenIdentifier</span><span class="o">&gt;</span><span class="p">;</span>
 
-<span class="cp">#[view(getNftIdentifier)]</span><span class="w"></span>
-<span class="cp">#[storage_mapper(</span><span class="s">&quot;nft_identifier&quot;</span><span class="cp">)]</span><span class="w"></span>
-<span class="k">fn</span> <span class="nf">nft_identifier</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">TokenIdentifier</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+<span class="cp">#[view(getNftIdentifier)]</span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;nft_identifier&quot;</span><span class="cp">)]</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">nft_identifier</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">TokenIdentifier</span><span class="o">&gt;</span><span class="p">;</span>
 
-<span class="cp">#[view(getPrice)]</span><span class="w"></span>
-<span class="cp">#[storage_mapper(</span><span class="s">&quot;price&quot;</span><span class="cp">)]</span><span class="w"></span>
-<span class="k">fn</span> <span class="nf">price</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">BigUint</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+<span class="cp">#[view(getPrice)]</span>
+<span class="cp">#[storage_mapper(</span><span class="s">&quot;price&quot;</span><span class="cp">)]</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">price</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">SingleValueMapper</span><span class="o">&lt;</span><span class="n">BigUint</span><span class="o">&gt;</span><span class="p">;</span>
 </pre></div>
 <p>Ensuite, on ajoute quelques petites fonctions utilitaires pour l'administrateur du SC.
 On lui donne la possibilité de récupérer tous les fonds de la banque, de changer le prix de vente des NFTs
 ou de changer l'identifiant de la collection de NFT que l'on souhaite vendre. Attention à ne pas oublier le
 <strong>only_owner</strong>, sinon n'importe qui pourrait appeler ces fonctions !</p>
-<div class="highlight"><pre><span></span><span class="cp">#[only_owner]</span><span class="w"></span>
-<span class="cp">#[endpoint]</span><span class="w"></span>
-<span class="k">fn</span> <span class="nf">withdraw</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="cp">#[only_owner]</span>
+<span class="cp">#[endpoint]</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">withdraw</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">caller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">token_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">token_id</span><span class="p">().</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">bank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">bank</span><span class="p">().</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">caller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">token_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">token_id</span><span class="p">().</span><span class="n">get</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">bank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">bank</span><span class="p">().</span><span class="n">get</span><span class="p">();</span>
 
-<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">send</span><span class="p">()</span><span class="w"></span>
-<span class="w">        </span><span class="p">.</span><span class="n">direct</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">token_id</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bank</span><span class="p">,</span><span class="w"> </span><span class="s">b&quot;withdraw successful&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">send</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">direct</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">token_id</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bank</span><span class="p">,</span><span class="w"> </span><span class="s">b&quot;withdraw successful&quot;</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// reset the bank</span>
-<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">bank</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="n">BigUint</span>::<span class="n">from</span><span class="p">(</span><span class="mi">0</span><span class="k">u32</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">bank</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="n">BigUint</span><span class="p">::</span><span class="n">from</span><span class="p">(</span><span class="mi">0</span><span class="k">u32</span><span class="p">));</span>
 
-<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
 
-<span class="cp">#[only_owner]</span><span class="w"></span>
-<span class="cp">#[endpoint]</span><span class="w"></span>
-<span class="k">fn</span> <span class="nf">change_price</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">price</span>: <span class="nc">BigUint</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cp">#[only_owner]</span>
+<span class="cp">#[endpoint]</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">change_price</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">:</span><span class="w"> </span><span class="nc">BigUint</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">price</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">price</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">price</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">price</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
 
-<span class="cp">#[only_owner]</span><span class="w"></span>
-<span class="cp">#[endpoint]</span><span class="w"></span>
-<span class="k">fn</span> <span class="nf">change_nft_identifier</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">nft_identifier</span>: <span class="nc">TokenIdentifier</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cp">#[only_owner]</span>
+<span class="cp">#[endpoint]</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">change_nft_identifier</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">nft_identifier</span><span class="p">:</span><span class="w"> </span><span class="nc">TokenIdentifier</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">nft_identifier</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">nft_identifier</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">nft_identifier</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">nft_identifier</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
 </pre></div>
 <p>Enfin, on a la fonction principale de notre SC qui permet d'acheter des NFTs.
 On vérifie ici le type du token, le montant envoyé et l'identifiant de la collection de NFT.
 Le <strong>nonce</strong> envoyé en paramètre correspond au numéro du NFT que l'utilisateur veut acheter.
 Si tout est bon, on lui envoie le NFT via la fonction <strong>self.send().direct()</strong> et on incrémente la banque.</p>
-<div class="highlight"><pre><span></span><span class="cp">#[payable(</span><span class="s">&quot;*&quot;</span><span class="cp">)]</span><span class="w"></span>
-<span class="cp">#[endpoint]</span><span class="w"></span>
-<span class="k">fn</span> <span class="nf">buy</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="cp">#[payment_token]</span><span class="w"> </span><span class="n">payment_token</span>: <span class="nc">TokenIdentifier</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="cp">#[payment_amount]</span><span class="w"> </span><span class="n">payment_amount</span>: <span class="nc">BigUint</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">nft_identifier</span>: <span class="nc">TokenIdentifier</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">nft_nonce</span>: <span class="kt">u64</span><span class="p">,</span><span class="w"></span>
-<span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="n">payment_token</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">token_id</span><span class="p">().</span><span class="n">get</span><span class="p">(),</span><span class="w"></span>
-<span class="w">        </span><span class="s">&quot;Invalid payment token&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">);</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="cp">#[payable(</span><span class="s">&quot;*&quot;</span><span class="cp">)]</span>
+<span class="cp">#[endpoint]</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">buy</span><span class="p">(</span>
+<span class="w">    </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span>
+<span class="w">    </span><span class="cp">#[payment_token]</span><span class="w"> </span><span class="n">payment_token</span><span class="p">:</span><span class="w"> </span><span class="nc">TokenIdentifier</span><span class="p">,</span>
+<span class="w">    </span><span class="cp">#[payment_amount]</span><span class="w"> </span><span class="n">payment_amount</span><span class="p">:</span><span class="w"> </span><span class="nc">BigUint</span><span class="p">,</span>
+<span class="w">    </span><span class="n">nft_identifier</span><span class="p">:</span><span class="w"> </span><span class="nc">TokenIdentifier</span><span class="p">,</span>
+<span class="w">    </span><span class="n">nft_nonce</span><span class="p">:</span><span class="w"> </span><span class="kt">u64</span><span class="p">,</span>
+<span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">SCResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span>
+<span class="w">        </span><span class="n">payment_token</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">token_id</span><span class="p">().</span><span class="n">get</span><span class="p">(),</span>
+<span class="w">        </span><span class="s">&quot;Invalid payment token&quot;</span>
+<span class="w">    </span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="n">payment_amount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">price</span><span class="p">().</span><span class="n">get</span><span class="p">(),</span><span class="w"></span>
-<span class="w">        </span><span class="s">&quot;Invalid payment amount&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span>
+<span class="w">        </span><span class="n">payment_amount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">price</span><span class="p">().</span><span class="n">get</span><span class="p">(),</span>
+<span class="w">        </span><span class="s">&quot;Invalid payment amount&quot;</span>
+<span class="w">    </span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="n">nft_identifier</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">nft_identifier</span><span class="p">().</span><span class="n">get</span><span class="p">(),</span><span class="w"></span>
-<span class="w">        </span><span class="s">&quot;Invalid nft identifier&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">require</span><span class="o">!</span><span class="p">(</span>
+<span class="w">        </span><span class="n">nft_identifier</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">nft_identifier</span><span class="p">().</span><span class="n">get</span><span class="p">(),</span>
+<span class="w">        </span><span class="s">&quot;Invalid nft identifier&quot;</span>
+<span class="w">    </span><span class="p">);</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">caller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">caller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">blockchain</span><span class="p">().</span><span class="n">get_caller</span><span class="p">();</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BigUint</span>::<span class="n">from</span><span class="p">(</span><span class="mi">1</span><span class="k">u32</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">send</span><span class="p">().</span><span class="n">direct</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nft_identifier</span><span class="p">,</span><span class="w"> </span><span class="n">nft_nonce</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amount</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">b&quot;purchase successful&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BigUint</span><span class="p">::</span><span class="n">from</span><span class="p">(</span><span class="mi">1</span><span class="k">u32</span><span class="p">);</span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">send</span><span class="p">().</span><span class="n">direct</span><span class="p">(</span><span class="o">&amp;</span><span class="n">caller</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nft_identifier</span><span class="p">,</span><span class="w"> </span><span class="n">nft_nonce</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amount</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">b&quot;purchase successful&quot;</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// Add the amount to the bank</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">bank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">bank</span><span class="p">().</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">bank</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&amp;</span><span class="n">payment_amount</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">bank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">bank</span><span class="p">().</span><span class="n">get</span><span class="p">();</span>
+<span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">bank</span><span class="p">().</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&amp;</span><span class="n">payment_amount</span><span class="p">);</span>
 
 
-<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
 </pre></div>
 <p>Tu compiles ton SC avec <strong>erdpy</strong> pour vérifier que tout est ok :</p>
-<div class="highlight"><pre><span></span>erdpy contract build
+<div class="highlight"><pre><span></span>erdpy<span class="w"> </span>contract<span class="w"> </span>build
 </pre></div>
 <p>Tu peux trouver le résultat final <a class="reference external" href="https://github.com/dotmobo/dbc-dashboard/blob/master/contract/buy_serum/src/empty.rs">ici</a>.</p>
 </div>
@@ -284,50 +284,50 @@ sur devnet en lui passant les bons arguments. Le SC doit être payable via <stro
 le <strong>pem</strong> de ton <strong>wallet</strong> doit se trouver sur <strong>../../wallet/wallet-owner.pem</strong>.</p>
 <p>Concernant les arguments, <strong>DEADBROS-fa8f0f</strong> correspond à l'identifiant du token, <strong>100000000000000000000</strong>
 au prix d'un NFT avec 18 decimals et <strong>DEAD1-2d86a5</strong> est l'id de la collection de NFT à vendre.</p>
-<div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;configurations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;proxy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://devnet-api.elrond.com&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;chainID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;D&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;contract&quot;</span><span class="p">:{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;deploy&quot;</span><span class="p">:{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;bytecode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;output/buy_serum.wasm&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;recall-nonce&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;metadata-payable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;pem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;../../wallet/wallet-owner.pem&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;gas-limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">59999999</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;arguments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                </span><span class="s2">&quot;str:DEADBROS-fa8f0f&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="s2">&quot;100000000000000000000&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="s2">&quot;str:DEAD1-2d86a5&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">],</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;send&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;outfile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;deploy-testnet.interaction.json&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">},</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;upgrade&quot;</span><span class="p">:{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;bytecode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;output/buy_serum.wasm&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;recall-nonce&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;metadata-payable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;pem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;../../wallet/wallet-owner.pem&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;gas-limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">59999999</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;arguments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                </span><span class="s2">&quot;str:DEADBROS-fa8f0f&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="s2">&quot;100000000000000000000&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="s2">&quot;str:DEAD1-2d86a5&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">],</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;send&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;outfile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;deploy-testnet.interaction.json&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;configurations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;proxy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://devnet-api.elrond.com&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;chainID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;D&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;contract&quot;</span><span class="p">:{</span>
+<span class="w">        </span><span class="nt">&quot;deploy&quot;</span><span class="p">:{</span>
+<span class="w">            </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;bytecode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;output/buy_serum.wasm&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;recall-nonce&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;metadata-payable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;pem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;../../wallet/wallet-owner.pem&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;gas-limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">59999999</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;arguments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;str:DEADBROS-fa8f0f&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;100000000000000000000&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;str:DEAD1-2d86a5&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;send&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;outfile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;deploy-testnet.interaction.json&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;upgrade&quot;</span><span class="p">:{</span>
+<span class="w">            </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;bytecode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;output/buy_serum.wasm&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;recall-nonce&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;metadata-payable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;pem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;../../wallet/wallet-owner.pem&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;gas-limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">59999999</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;arguments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;str:DEADBROS-fa8f0f&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;100000000000000000000&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;str:DEAD1-2d86a5&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;send&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;outfile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;deploy-testnet.interaction.json&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 <p>Tu peux alors déployer ton SC et tester les transactions avec <strong>erdpy</strong>.</p>
-<div class="highlight"><pre><span></span>erdpy contract deploy
-erdpy tx new --help
+<div class="highlight"><pre><span></span>erdpy<span class="w"> </span>contract<span class="w"> </span>deploy
+erdpy<span class="w"> </span>tx<span class="w"> </span>new<span class="w"> </span>--help
 </pre></div>
 <p>N'oublie pas d'envoyer les NFTs que tu souhaites vendre à l'adresse de ton SC !</p>
 </div>

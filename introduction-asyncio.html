@@ -164,7 +164,7 @@ L'idée n'est pas de faire le code le plus simple et performant possible, mais p
 en revue l'ensemble des concepts et mots-clés utiles.</p>
 <p>Pour Asyncio, il n'y a rien à installer à part python 3.5. Par contre, il va te
 falloir <a class="reference external" href="https://github.com/KeepSafe/aiohttp">aiohttp</a> pour faire les requêtes http:</p>
-<div class="highlight"><pre><span></span>pip install aiohttp
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>aiohttp
 </pre></div>
 <p>Et c'est là où le bât blesse. Tu ne pourras pas utiliser <a class="reference external" href="http://docs.python-requests.org/en/latest/">requests</a> par exemple, car
 il faut utiliser des outils compatibles avec Asyncio, c'est-à-dire écrits sous forme
@@ -181,7 +181,7 @@ d'urls:</p>
 <p>Tu vas alors créer ta coroutine qui va récupérer les données renvoyées par une
 url et les insérer dans un objet <strong>Future</strong>:</p>
 <div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">call_url</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Coroutine récupérant les données provenant d&#39;une url &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Coroutine récupérant les données provenant d&#39;une url &quot;&quot;&quot;</span>
     <span class="k">async</span> <span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
         <span class="n">future</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -203,7 +203,7 @@ de tâches et ta liste de résultats:</p>
 </pre></div>
 <p>Tu ajoutes ton <em>callback</em> pour les objets <strong>Future</strong>:</p>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fill_results_list</span><span class="p">(</span><span class="n">future</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Callback de l&#39;objet future qui ajoute sa valeur dans une liste &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Callback de l&#39;objet future qui ajoute sa valeur dans une liste &quot;&quot;&quot;</span>
     <span class="n">list_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
 </pre></div>
 <p>Pour chaque url, tu vas:</p>
@@ -247,7 +247,7 @@ et quand tu la fermes.</p>
         <span class="s1">&#39;http://date.jsontest.com/&#39;</span><span class="p">]</span>
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">call_url</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">future</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Coroutine récupérant les données provenant d&#39;une url &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Coroutine récupérant les données provenant d&#39;une url &quot;&quot;&quot;</span>
     <span class="k">async</span> <span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
         <span class="n">future</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -259,7 +259,7 @@ et quand tu la fermes.</p>
     <span class="n">client</span> <span class="o">=</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientSession</span><span class="p">(</span><span class="n">loop</span><span class="o">=</span><span class="n">loop</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">fill_results_list</span><span class="p">(</span><span class="n">future</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Callback de l&#39;objet future qui ajoute sa valeur dans une liste &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Callback de l&#39;objet future qui ajoute sa valeur dans une liste &quot;&quot;&quot;</span>
         <span class="n">list_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
 
     <span class="c1"># On créé les objets Future et la liste des tâches</span>
@@ -277,14 +277,14 @@ et quand tu la fermes.</p>
     <span class="n">loop</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 <p>Et hop, tu exécutes tout ça:</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">time</span> python asyncio35.py
-<span class="o">[{</span><span class="s1">&#39;ip&#39;</span>: <span class="s1">&#39;109.221.53.120&#39;</span><span class="o">}</span>,
-<span class="o">{</span><span class="s1">&#39;Host&#39;</span>: <span class="s1">&#39;headers.jsontest.com&#39;</span>, <span class="s1">&#39;User-Agent&#39;</span>: <span class="s1">&#39;Python/3.5 aiohttp/0.18.4&#39;</span>, <span class="s1">&#39;Accept&#39;</span>: <span class="s1">&#39;*/*&#39;</span>, <span class="s1">&#39;Content-Length&#39;</span>: <span class="s1">&#39;0&#39;</span><span class="o">}</span>,
-<span class="o">{</span><span class="s1">&#39;date&#39;</span>: <span class="s1">&#39;11-14-2015&#39;</span>, <span class="s1">&#39;time&#39;</span>: <span class="s1">&#39;03:16:45 PM&#39;</span>, <span class="s1">&#39;milliseconds_since_epoch&#39;</span>: <span class="m">1447514205836</span><span class="o">}]</span>
+<div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">time</span><span class="w"> </span>python<span class="w"> </span>asyncio35.py
+<span class="o">[{</span><span class="s1">&#39;ip&#39;</span>:<span class="w"> </span><span class="s1">&#39;109.221.53.120&#39;</span><span class="o">}</span>,
+<span class="o">{</span><span class="s1">&#39;Host&#39;</span>:<span class="w"> </span><span class="s1">&#39;headers.jsontest.com&#39;</span>,<span class="w"> </span><span class="s1">&#39;User-Agent&#39;</span>:<span class="w"> </span><span class="s1">&#39;Python/3.5 aiohttp/0.18.4&#39;</span>,<span class="w"> </span><span class="s1">&#39;Accept&#39;</span>:<span class="w"> </span><span class="s1">&#39;*/*&#39;</span>,<span class="w"> </span><span class="s1">&#39;Content-Length&#39;</span>:<span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="o">}</span>,
+<span class="o">{</span><span class="s1">&#39;date&#39;</span>:<span class="w"> </span><span class="s1">&#39;11-14-2015&#39;</span>,<span class="w"> </span><span class="s1">&#39;time&#39;</span>:<span class="w"> </span><span class="s1">&#39;03:16:45 PM&#39;</span>,<span class="w"> </span><span class="s1">&#39;milliseconds_since_epoch&#39;</span>:<span class="w"> </span><span class="m">1447514205836</span><span class="o">}]</span>
 
-real        0m0.511s
-user        0m0.263s
-sys 0m0.033s
+real<span class="w">        </span>0m0.511s
+user<span class="w">        </span>0m0.263s
+sys<span class="w"> </span>0m0.033s
 </pre></div>
 <p><em>&quot;Ok c'est sympa mais est-ce que c'est vraiment plus rapide en asynchrone ?&quot;</em></p>
 <p>Tu veux une preuve ? En voici une; le même programme sans Asyncio:</p>
@@ -306,14 +306,14 @@ sys 0m0.033s
     <span class="nb">print</span><span class="p">(</span><span class="n">list_results</span><span class="p">)</span>
 </pre></div>
 <p>Tu l'exécutes:</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">time</span> python noasyncio35.py
-<span class="o">[{</span><span class="s1">&#39;ip&#39;</span>: <span class="s1">&#39;109.221.53.120&#39;</span><span class="o">}</span>,
-<span class="o">{</span><span class="s1">&#39;Host&#39;</span>: <span class="s1">&#39;headers.jsontest.com&#39;</span>, <span class="s1">&#39;User-Agent&#39;</span>: <span class="s1">&#39;python-requests/2.8.1&#39;</span>, <span class="s1">&#39;Accept&#39;</span>: <span class="s1">&#39;*/*&#39;</span><span class="o">}</span>,
-<span class="o">{</span><span class="s1">&#39;date&#39;</span>: <span class="s1">&#39;11-14-2015&#39;</span>, <span class="s1">&#39;time&#39;</span>: <span class="s1">&#39;11:57:03 AM&#39;</span>, <span class="s1">&#39;milliseconds_since_epoch&#39;</span>: <span class="m">1447502223337</span><span class="o">}]</span>
+<div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">time</span><span class="w"> </span>python<span class="w"> </span>noasyncio35.py
+<span class="o">[{</span><span class="s1">&#39;ip&#39;</span>:<span class="w"> </span><span class="s1">&#39;109.221.53.120&#39;</span><span class="o">}</span>,
+<span class="o">{</span><span class="s1">&#39;Host&#39;</span>:<span class="w"> </span><span class="s1">&#39;headers.jsontest.com&#39;</span>,<span class="w"> </span><span class="s1">&#39;User-Agent&#39;</span>:<span class="w"> </span><span class="s1">&#39;python-requests/2.8.1&#39;</span>,<span class="w"> </span><span class="s1">&#39;Accept&#39;</span>:<span class="w"> </span><span class="s1">&#39;*/*&#39;</span><span class="o">}</span>,
+<span class="o">{</span><span class="s1">&#39;date&#39;</span>:<span class="w"> </span><span class="s1">&#39;11-14-2015&#39;</span>,<span class="w"> </span><span class="s1">&#39;time&#39;</span>:<span class="w"> </span><span class="s1">&#39;11:57:03 AM&#39;</span>,<span class="w"> </span><span class="s1">&#39;milliseconds_since_epoch&#39;</span>:<span class="w"> </span><span class="m">1447502223337</span><span class="o">}]</span>
 
-real        0m1.188s
-user        0m0.247s
-sys 0m0.017s
+real<span class="w">        </span>0m1.188s
+user<span class="w">        </span>0m0.247s
+sys<span class="w"> </span>0m0.017s
 </pre></div>
 <p>Le double de temps ! Convaincu ?</p>
 <p>Alors évidemment, ce n'est qu'un simple cas d'usage. Il y a beaucoup, mais

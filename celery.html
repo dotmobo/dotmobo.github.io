@@ -183,17 +183,17 @@ données, par année de naissance.</p>
 <ul class="simple">
 <li>Soit sous Ubuntu (tu prends la dernière version ici):</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s1">&#39;deb http://www.rabbitmq.com/debian/ testing main&#39;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/rabbitmq.list
-wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc <span class="p">|</span> sudo apt-key add -
-sudo apt-get update <span class="o">&amp;&amp;</span> apt-get install rabbitmq-server
+<div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;deb http://www.rabbitmq.com/debian/ testing main&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/rabbitmq.list
+wget<span class="w"> </span>-O-<span class="w"> </span>https://www.rabbitmq.com/rabbitmq-release-signing-key.asc<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>apt-key<span class="w"> </span>add<span class="w"> </span>-
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>rabbitmq-server
 </pre></div>
 <ul class="simple">
 <li>Soit via Docker:</li>
 </ul>
-<div class="highlight"><pre><span></span>docker run -d --hostname myrabbitmq --name myrabbitmq -p <span class="m">5672</span>:5672 rabbitmq:3
+<div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--hostname<span class="w"> </span>myrabbitmq<span class="w"> </span>--name<span class="w"> </span>myrabbitmq<span class="w"> </span>-p<span class="w"> </span><span class="m">5672</span>:5672<span class="w"> </span>rabbitmq:3
 </pre></div>
 <p>Puis tu installes Celery avec pip:</p>
-<div class="highlight"><pre><span></span>pip install <span class="nv">celery</span><span class="o">==</span><span class="m">3</span>.1.25
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">celery</span><span class="o">==</span><span class="m">3</span>.1.25
 </pre></div>
 <p>Oui je sais, il y a la version 4.1 de Celery qui est sortie cet été. Mais je n'ai pas encore eu le temps de me pencher dessus, donc il
 faudra sûrement mettre à jour ce tuto à l'avenir ! Désolé mon vieux !</p>
@@ -230,7 +230,7 @@ faudra sûrement mettre à jour ce tuto à l'avenir ! Désolé mon vieux !</p>
 
 <span class="nd">@shared_task</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># utile pour les &quot;reusable apps&quot;</span>
 <span class="k">def</span> <span class="nf">task_generate_archive_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; generate pdf files &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; generate pdf files &quot;&quot;&quot;</span>
     <span class="n">get_persons_and_generate_pdfs</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
 
 <span class="nd">@task_prerun</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="n">task_generate_archive_files</span><span class="p">)</span>
@@ -268,34 +268,34 @@ faudra sûrement mettre à jour ce tuto à l'avenir ! Désolé mon vieux !</p>
 <p>À toi d'adapter le code pour que ça colle avec ton projet, tes urls, et autres. C'est qu'un exemple d'utilisation.</p>
 <p><strong>Django - Exécution</strong></p>
 <p>Pour exécuter celery, tu peux alors lancer la commande suivante:</p>
-<div class="highlight"><pre><span></span>celery -A myproject worker -l info
+<div class="highlight"><pre><span></span>celery<span class="w"> </span>-A<span class="w"> </span>myproject<span class="w"> </span>worker<span class="w"> </span>-l<span class="w"> </span>info
 </pre></div>
 <p>Tu peux même te faire un petit <strong>Makefile</strong> dans ce genre:</p>
-<div class="highlight"><pre><span></span>RABBITMQ :<span class="o">=</span> rabbitmq-myproject
-CELERY :<span class="o">=</span> myproject
+<div class="highlight"><pre><span></span>RABBITMQ<span class="w"> </span>:<span class="o">=</span><span class="w"> </span>rabbitmq-myproject
+CELERY<span class="w"> </span>:<span class="o">=</span><span class="w"> </span>myproject
 
 run-rabbitmq:
-    docker ps -aq --filter <span class="nv">name</span><span class="o">=</span><span class="k">$(</span>RABBITMQ<span class="k">)</span> <span class="p">|</span> xargs -r docker rm -f -v <span class="o">&amp;&amp;</span> <span class="se">\</span>
-    docker run -d --hostname <span class="k">$(</span>RABBITMQ<span class="k">)</span> --name <span class="k">$(</span>RABBITMQ<span class="k">)</span> -p <span class="m">5672</span>:5672 rabbitmq:3
+<span class="w">    </span>docker<span class="w"> </span>ps<span class="w"> </span>-aq<span class="w"> </span>--filter<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="k">$(</span>RABBITMQ<span class="k">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-r<span class="w"> </span>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>-v<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--hostname<span class="w"> </span><span class="k">$(</span>RABBITMQ<span class="k">)</span><span class="w"> </span>--name<span class="w"> </span><span class="k">$(</span>RABBITMQ<span class="k">)</span><span class="w"> </span>-p<span class="w"> </span><span class="m">5672</span>:5672<span class="w"> </span>rabbitmq:3
 
-run-celery: run-rabbitmq
-    celery -A <span class="k">$(</span>CELERY<span class="k">)</span> worker -l info
+run-celery:<span class="w"> </span>run-rabbitmq
+<span class="w">    </span>celery<span class="w"> </span>-A<span class="w"> </span><span class="k">$(</span>CELERY<span class="k">)</span><span class="w"> </span>worker<span class="w"> </span>-l<span class="w"> </span>info
 
-.PHONY: un-rabbitmq run-celery
+.PHONY:<span class="w"> </span>un-rabbitmq<span class="w"> </span>run-celery
 </pre></div>
 <p><strong>Debug</strong></p>
 <p>Tu vas alors avoir un écran de debug qui ressemble à ça:</p>
-<div class="highlight"><pre><span></span><span class="o">[</span><span class="m">2016</span>-10-21 <span class="m">16</span>:47:18,568: INFO/MainProcess<span class="o">]</span> Connected to amqp://guest:**@127.0.0.1:5672//
-<span class="o">[</span><span class="m">2016</span>-10-21 <span class="m">16</span>:47:18,615: INFO/MainProcess<span class="o">]</span> mingle: searching <span class="k">for</span> neighbors
-<span class="o">[</span><span class="m">2016</span>-10-21 <span class="m">16</span>:47:19,628: INFO/MainProcess<span class="o">]</span> mingle: all alone
-<span class="o">[</span><span class="m">2016</span>-10-21 <span class="m">16</span>:50:23,354: INFO/MainProcess<span class="o">]</span> Received task: myproject.apps.file.
+<div class="highlight"><pre><span></span><span class="o">[</span><span class="m">2016</span>-10-21<span class="w"> </span><span class="m">16</span>:47:18,568:<span class="w"> </span>INFO/MainProcess<span class="o">]</span><span class="w"> </span>Connected<span class="w"> </span>to<span class="w"> </span>amqp://guest:**@127.0.0.1:5672//
+<span class="o">[</span><span class="m">2016</span>-10-21<span class="w"> </span><span class="m">16</span>:47:18,615:<span class="w"> </span>INFO/MainProcess<span class="o">]</span><span class="w"> </span>mingle:<span class="w"> </span>searching<span class="w"> </span><span class="k">for</span><span class="w"> </span>neighbors
+<span class="o">[</span><span class="m">2016</span>-10-21<span class="w"> </span><span class="m">16</span>:47:19,628:<span class="w"> </span>INFO/MainProcess<span class="o">]</span><span class="w"> </span>mingle:<span class="w"> </span>all<span class="w"> </span>alone
+<span class="o">[</span><span class="m">2016</span>-10-21<span class="w"> </span><span class="m">16</span>:50:23,354:<span class="w"> </span>INFO/MainProcess<span class="o">]</span><span class="w"> </span>Received<span class="w"> </span>task:<span class="w"> </span>myproject.apps.file.
 tasks.task_generate_archive_files<span class="o">[</span>1755cd30-03f5-4d8a-8d92-fa5b1853a209<span class="o">]</span>
 ...
 ...
 ...
-<span class="o">[</span><span class="m">2016</span>-10-21 <span class="m">16</span>:50:26,944: INFO/MainProcess<span class="o">]</span> Task myproject.apps.file.
+<span class="o">[</span><span class="m">2016</span>-10-21<span class="w"> </span><span class="m">16</span>:50:26,944:<span class="w"> </span>INFO/MainProcess<span class="o">]</span><span class="w"> </span>Task<span class="w"> </span>myproject.apps.file.
 tasks.task_generate_archive_files<span class="o">[</span>1755cd30-03f5-4d8a-8d92-fa5b1853a209<span class="o">]</span>
-succeeded <span class="k">in</span> <span class="m">3</span>.588768539018929s: <span class="s1">&#39;1755cd30-03f5-4d8a-8d92-fa5b1853a209&#39;</span>
+succeeded<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">3</span>.588768539018929s:<span class="w"> </span><span class="s1">&#39;1755cd30-03f5-4d8a-8d92-fa5b1853a209&#39;</span>
 </pre></div>
 <p><strong>Tests unitaires</strong></p>
 <p>Pour lancer des tests unitaires sur tes tâches dans ton projet Django, tu peux utiliser le paramètre suivant dans tes <em>settings</em>:</p>
@@ -308,7 +308,7 @@ succeeded <span class="k">in</span> <span class="m">3</span>.588768539018929s: <
 <li>Mettre le fichier <em>celeryd</em> du dépôt d'<em>helpers</em> dans <em>/etc/init.d</em>.</li>
 <li>Mettre la configuration suivante dans /etc/default/celeryd:</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">DJANGO_SETTINGS_MODULE</span><span class="o">=</span><span class="s2">&quot;myproject.settings&quot;</span>
+<div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">DJANGO_SETTINGS_MODULE</span><span class="o">=</span><span class="s2">&quot;myproject.settings&quot;</span>
 
 <span class="nv">CELERYD_NODES</span><span class="o">=</span><span class="s2">&quot;worker1&quot;</span>
 <span class="nv">CELERY_BIN</span><span class="o">=</span><span class="s2">&quot;/home/myuser/.virtualenvs/myproject/bin/celery&quot;</span>
@@ -325,22 +325,22 @@ succeeded <span class="k">in</span> <span class="m">3</span>.588768539018929s: <
 <ul class="simple">
 <li>Voir le résultat d'une tâche :</li>
 </ul>
-<div class="highlight"><pre><span></span>celery -A myproject result -t tasks.add 4e196aa4-0141-4601-8138-7aa33db0f577
+<div class="highlight"><pre><span></span>celery<span class="w"> </span>-A<span class="w"> </span>myproject<span class="w"> </span>result<span class="w"> </span>-t<span class="w"> </span>tasks.add<span class="w"> </span>4e196aa4-0141-4601-8138-7aa33db0f577
 </pre></div>
 <ul class="simple">
 <li>Voir liste des workers actifs :</li>
 </ul>
-<div class="highlight"><pre><span></span>celery -A myproject status
+<div class="highlight"><pre><span></span>celery<span class="w"> </span>-A<span class="w"> </span>myproject<span class="w"> </span>status
 </pre></div>
 <ul class="simple">
 <li>Voir les tâches actives :</li>
 </ul>
-<div class="highlight"><pre><span></span>celery -A myproject inspect active
+<div class="highlight"><pre><span></span>celery<span class="w"> </span>-A<span class="w"> </span>myproject<span class="w"> </span>inspect<span class="w"> </span>active
 </pre></div>
 <ul class="simple">
 <li>Voir les statistiques des workers :</li>
 </ul>
-<div class="highlight"><pre><span></span>celery -A myproject inspect stats
+<div class="highlight"><pre><span></span>celery<span class="w"> </span>-A<span class="w"> </span>myproject<span class="w"> </span>inspect<span class="w"> </span>stats
 </pre></div>
 <ul class="simple">
 <li>Sinon, il existe le projet <a class="reference external" href="https://github.com/mher/flower">flower</a> pour monitorer et administrer les workers et les tâches via une appli web.</li>
@@ -350,41 +350,41 @@ succeeded <span class="k">in</span> <span class="m">3</span>.588768539018929s: <
 <ul class="simple">
 <li>Cron-like :</li>
 </ul>
-<div class="highlight"><pre><span></span>@periodic_task<span class="o">(</span><span class="nv">run_every</span><span class="o">=</span>crontab<span class="o">(</span><span class="nv">hour</span><span class="o">=</span><span class="s1">&#39;5,13,23&#39;</span>, <span class="nv">minute</span><span class="o">=</span><span class="m">30</span>, <span class="nv">day_of_week</span><span class="o">=</span><span class="s1">&#39;monday&#39;</span><span class="o">))</span>
-def mytask<span class="o">()</span>:
+<div class="highlight"><pre><span></span>@periodic_task<span class="o">(</span><span class="nv">run_every</span><span class="o">=</span>crontab<span class="o">(</span><span class="nv">hour</span><span class="o">=</span><span class="s1">&#39;5,13,23&#39;</span>,<span class="w"> </span><span class="nv">minute</span><span class="o">=</span><span class="m">30</span>,<span class="w"> </span><span class="nv">day_of_week</span><span class="o">=</span><span class="s1">&#39;monday&#39;</span><span class="o">))</span>
+def<span class="w"> </span>mytask<span class="o">()</span>:
 ...
 </pre></div>
 <ul class="simple">
 <li>Sqlite n'aime pas les accès concurrents</li>
 <li>Purger les tâches en attentes :</li>
 </ul>
-<div class="highlight"><pre><span></span>celery -A proj purge
+<div class="highlight"><pre><span></span>celery<span class="w"> </span>-A<span class="w"> </span>proj<span class="w"> </span>purge
 </pre></div>
 <ul class="simple">
 <li>Récupérer le statut d'une tâche :</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="nv">result</span> <span class="o">=</span> my_task.AsyncResult<span class="o">(</span>task_id<span class="o">)</span>
+<div class="highlight"><pre><span></span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>my_task.AsyncResult<span class="o">(</span>task_id<span class="o">)</span>
 result.state
 </pre></div>
 <ul class="simple">
 <li>Attendre le résultat d'une tâche :</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="nv">result</span> <span class="o">=</span> my_task.AsyncResult<span class="o">(</span>task_id<span class="o">)</span>
+<div class="highlight"><pre><span></span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>my_task.AsyncResult<span class="o">(</span>task_id<span class="o">)</span>
 result.get<span class="o">()</span>
 </pre></div>
 <ul class="simple">
 <li>Appeler une tâche par son nom depuis une autre machine :</li>
 </ul>
-<div class="highlight"><pre><span></span>from celery import Celery
-<span class="nv">celery</span> <span class="o">=</span> Celery<span class="o">()</span>
+<div class="highlight"><pre><span></span>from<span class="w"> </span>celery<span class="w"> </span>import<span class="w"> </span>Celery
+<span class="nv">celery</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Celery<span class="o">()</span>
 celery.config_from_object<span class="o">(</span><span class="s1">&#39;celeryconfig&#39;</span><span class="o">)</span>
-celery.send_task<span class="o">(</span><span class="s1">&#39;tasks.add&#39;</span>, <span class="o">(</span><span class="m">2</span>,2<span class="o">))</span>
+celery.send_task<span class="o">(</span><span class="s1">&#39;tasks.add&#39;</span>,<span class="w"> </span><span class="o">(</span><span class="m">2</span>,2<span class="o">))</span>
 </pre></div>
 <ul class="simple">
 <li>Appeler une tâches via HTTP :</li>
 </ul>
-<div class="highlight"><pre><span></span>from celery.task.http import URL
-<span class="nv">res</span> <span class="o">=</span> URL<span class="o">(</span><span class="s1">&#39;http://example.com/multiply&#39;</span><span class="o">)</span>.get_async<span class="o">(</span><span class="nv">x</span><span class="o">=</span><span class="m">10</span>, <span class="nv">y</span><span class="o">=</span><span class="m">10</span><span class="o">)</span>
+<div class="highlight"><pre><span></span>from<span class="w"> </span>celery.task.http<span class="w"> </span>import<span class="w"> </span>URL
+<span class="nv">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>URL<span class="o">(</span><span class="s1">&#39;http://example.com/multiply&#39;</span><span class="o">)</span>.get_async<span class="o">(</span><span class="nv">x</span><span class="o">=</span><span class="m">10</span>,<span class="w"> </span><span class="nv">y</span><span class="o">=</span><span class="m">10</span><span class="o">)</span>
 </pre></div>
 <ul class="simple">
 <li>On peut appeler une tâche dans une tâche !</li>

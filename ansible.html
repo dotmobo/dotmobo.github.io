@@ -147,50 +147,50 @@ d'administrer tes serveurs et d'y déployer automatiquement tes applications.</p
 <p>Pour tester Ansible, tu vas utiliser <a class="reference external" href="https://www.virtualbox.org/">Virtualbox</a> avec <a class="reference external" href="https://www.vagrantup.com/downloads.html">Vagrant</a>
 pour te monter deux petites VMs Ubuntu Xenial.</p>
 <p>Sous Ubuntu, tu peux installer tout ça via la commande suivante et redémarrer ta machine si besoin:</p>
-<div class="highlight"><pre><span></span>sudo apt-get install virtualbox virtualbox-dkms vagrant
+<div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>virtualbox<span class="w"> </span>virtualbox-dkms<span class="w"> </span>vagrant
 </pre></div>
 <p>Dans l'idéal, essaye d'avoir une version assez récente de Vagrant. Les fichiers de conf peuvent changer selon les versions.</p>
 <p>Ensuite, tu te crées le fichier <em>Vagrantfile</em> suivant dans <em>~/tuto_ansible/vagrant/Vagrantfile</em> par exemple:</p>
 <div class="highlight"><pre><span></span><span class="c1"># -*- mode: ruby -*-</span>
 <span class="c1"># vi: set ft=ruby :</span>
 
-<span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+<span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">config</span><span class="o">|</span>
 
-    <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">define</span> <span class="s2">&quot;vm1&quot;</span> <span class="k">do</span> <span class="o">|</span> <span class="n">vm1</span> <span class="o">|</span>
-        <span class="n">vm1</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="s2">&quot;ubuntu/xenial64&quot;</span>
-        <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="ss">:forwarded_port</span><span class="p">,</span> <span class="ss">guest</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="ss">host</span><span class="p">:</span> <span class="mi">2200</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="s2">&quot;ssh&quot;</span>
-        <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="ss">:forwarded_port</span><span class="p">,</span> <span class="ss">guest</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> <span class="ss">host</span><span class="p">:</span> <span class="mi">8010</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="s2">&quot;http&quot;</span>
-    <span class="k">end</span>
+<span class="w">    </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">define</span><span class="w"> </span><span class="s2">&quot;vm1&quot;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">vm1</span><span class="w"> </span><span class="o">|</span>
+<span class="w">        </span><span class="n">vm1</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ubuntu/xenial64&quot;</span>
+<span class="w">        </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="ss">:forwarded_port</span><span class="p">,</span><span class="w"> </span><span class="ss">guest</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="ss">host</span><span class="p">:</span><span class="w"> </span><span class="mi">2200</span><span class="p">,</span><span class="w"> </span><span class="nb">id</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ssh&quot;</span>
+<span class="w">        </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="ss">:forwarded_port</span><span class="p">,</span><span class="w"> </span><span class="ss">guest</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="ss">host</span><span class="p">:</span><span class="w"> </span><span class="mi">8010</span><span class="p">,</span><span class="w"> </span><span class="nb">id</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http&quot;</span>
+<span class="w">    </span><span class="k">end</span>
 
-    <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">define</span> <span class="s2">&quot;vm2&quot;</span> <span class="k">do</span> <span class="o">|</span> <span class="n">vm2</span> <span class="o">|</span>
-        <span class="n">vm2</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="s2">&quot;ubuntu/xenial64&quot;</span>
-        <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="ss">:forwarded_port</span><span class="p">,</span> <span class="ss">guest</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="ss">host</span><span class="p">:</span> <span class="mi">2201</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="s2">&quot;ssh&quot;</span>
-        <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="ss">:forwarded_port</span><span class="p">,</span> <span class="ss">guest</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> <span class="ss">host</span><span class="p">:</span> <span class="mi">8011</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="s2">&quot;http&quot;</span>
-    <span class="k">end</span>
+<span class="w">    </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">define</span><span class="w"> </span><span class="s2">&quot;vm2&quot;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">vm2</span><span class="w"> </span><span class="o">|</span>
+<span class="w">        </span><span class="n">vm2</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ubuntu/xenial64&quot;</span>
+<span class="w">        </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="ss">:forwarded_port</span><span class="p">,</span><span class="w"> </span><span class="ss">guest</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="ss">host</span><span class="p">:</span><span class="w"> </span><span class="mi">2201</span><span class="p">,</span><span class="w"> </span><span class="nb">id</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ssh&quot;</span>
+<span class="w">        </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="ss">:forwarded_port</span><span class="p">,</span><span class="w"> </span><span class="ss">guest</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="ss">host</span><span class="p">:</span><span class="w"> </span><span class="mi">8011</span><span class="p">,</span><span class="w"> </span><span class="nb">id</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http&quot;</span>
+<span class="w">    </span><span class="k">end</span>
 
 <span class="k">end</span>
 </pre></div>
 <p>Et tu démarres tes deux VMs via:</p>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ~/tuto_ansible/vagrant/
-vagrant up
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/tuto_ansible/vagrant/
+vagrant<span class="w"> </span>up
 </pre></div>
 </div>
 <div class="section" id="ansible-1">
 <h3>Ansible</h3>
 <p>Tu installes Ansible sous Ubuntu via :</p>
-<div class="highlight"><pre><span></span>sudo apt-get install software-properties-common
-sudo apt-add-repository ppa:ansible/ansible
-sudo apt-get update
-sudo apt-get install ansible
+<div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>software-properties-common
+sudo<span class="w"> </span>apt-add-repository<span class="w"> </span>ppa:ansible/ansible
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>ansible
 </pre></div>
 <p>Puis tu crées un fichier <em>hosts</em> à la racine du projet, dans <em>~/tuto_ansible/hosts</em>:</p>
 <div class="highlight"><pre><span></span><span class="o">[</span>ubuntu<span class="o">]</span>
-vm1 <span class="nv">ansible_host</span><span class="o">=</span><span class="m">127</span>.0.0.1 <span class="nv">ansible_port</span><span class="o">=</span><span class="m">2200</span> <span class="nv">ansible_user</span><span class="o">=</span>ubuntu <span class="nv">ansible_become</span><span class="o">=</span>yes <span class="nv">env</span><span class="o">=</span><span class="nb">test</span>
-vm2 <span class="nv">ansible_host</span><span class="o">=</span><span class="m">127</span>.0.0.1 <span class="nv">ansible_port</span><span class="o">=</span><span class="m">2201</span> <span class="nv">ansible_user</span><span class="o">=</span>ubuntu <span class="nv">ansible_become</span><span class="o">=</span>yes <span class="nv">env</span><span class="o">=</span>prod
+vm1<span class="w"> </span><span class="nv">ansible_host</span><span class="o">=</span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="nv">ansible_port</span><span class="o">=</span><span class="m">2200</span><span class="w"> </span><span class="nv">ansible_user</span><span class="o">=</span>ubuntu<span class="w"> </span><span class="nv">ansible_become</span><span class="o">=</span>yes<span class="w"> </span><span class="nv">env</span><span class="o">=</span><span class="nb">test</span>
+vm2<span class="w"> </span><span class="nv">ansible_host</span><span class="o">=</span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="nv">ansible_port</span><span class="o">=</span><span class="m">2201</span><span class="w"> </span><span class="nv">ansible_user</span><span class="o">=</span>ubuntu<span class="w"> </span><span class="nv">ansible_become</span><span class="o">=</span>yes<span class="w"> </span><span class="nv">env</span><span class="o">=</span>prod
 </pre></div>
 <p>Et tu édites un fichier <em>ansible.cfg</em> qui va contenir ta configuration Ansible, dans <em>~/tuto_ansible/ansible.cfg</em>:</p>
 <div class="highlight"><pre><span></span><span class="o">[</span>defaults<span class="o">]</span>
-<span class="nv">inventory</span>      <span class="o">=</span> hosts
+<span class="nv">inventory</span><span class="w">      </span><span class="o">=</span><span class="w"> </span>hosts
 </pre></div>
 <p>Tu as désormais indiqué à Ansible d'utiliser tes deux Vms précédemment créées.</p>
 <p>Tout est prêt !</p>
@@ -199,42 +199,42 @@ vm2 <span class="nv">ansible_host</span><span class="o">=</span><span class="m">
 <div class="section" id="la-commande-ansible">
 <h2>La commande ansible</h2>
 <p>Déjà, tu te places dans le répertoire <em>~/tuto_ansible</em> pour pouvoir lancer les commandes:</p>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ~/tuto_ansible
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/tuto_ansible
 </pre></div>
 <p>Ansible a besoin de python sur les machines clientes, donc si c'est pas installé par défaut:</p>
-<div class="highlight"><pre><span></span>ansible all -m raw -a <span class="s2">&quot;apt install -y python&quot;</span> --ask-sudo-pass
+<div class="highlight"><pre><span></span>ansible<span class="w"> </span>all<span class="w"> </span>-m<span class="w"> </span>raw<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;apt install -y python&quot;</span><span class="w"> </span>--ask-sudo-pass
 </pre></div>
 <p>L'astuce ici c'est que l'option <strong>-m raw</strong> permet d'exécuter directement une commande ssh sans Ansible.</p>
 <p>Et tu essayes maintenant de contacter tes deux VMs via:</p>
-<div class="highlight"><pre><span></span>ansible all -m ping
+<div class="highlight"><pre><span></span>ansible<span class="w"> </span>all<span class="w"> </span>-m<span class="w"> </span>ping
 </pre></div>
 <p>Si tout est ok à ce niveau-là, tu peux passer à la suite. Sinon c'est qu'il y a un souci quelque-part.</p>
 <p>Tu vas maintenant pouvoir utiliser la commande <strong>ansible</strong> pour faire des trucs sur les serveurs comme:</p>
 <ul class="simple">
 <li>Exécuter une commande pour afficher la liste des utilisateurs de la première machine:</li>
 </ul>
-<div class="highlight"><pre><span></span>ansible vm1 -m shell -a <span class="s2">&quot;cat /etc/passwd&quot;</span>
+<div class="highlight"><pre><span></span>ansible<span class="w"> </span>vm1<span class="w"> </span>-m<span class="w"> </span>shell<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;cat /etc/passwd&quot;</span>
 </pre></div>
 <ul class="simple">
 <li>S’assurer que <em>openssl</em> et <em>bash</em> sont à jour sur tous les serveurs ubuntu.</li>
 </ul>
-<div class="highlight"><pre><span></span>ansible ubuntu -m apt -a <span class="s2">&quot;name=openssl,bash state=latest&quot;</span>
+<div class="highlight"><pre><span></span>ansible<span class="w"> </span>ubuntu<span class="w"> </span>-m<span class="w"> </span>apt<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;name=openssl,bash state=latest&quot;</span>
 </pre></div>
 <ul class="simple">
 <li>Créer un utilisateur <em>ansible</em> avec un shell <em>/bin/bash</em>.</li>
 </ul>
-<div class="highlight"><pre><span></span>ansible ubuntu -m user -a <span class="s2">&quot;name=ansible shell=/bin/bash&quot;</span>
+<div class="highlight"><pre><span></span>ansible<span class="w"> </span>ubuntu<span class="w"> </span>-m<span class="w"> </span>user<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;name=ansible shell=/bin/bash&quot;</span>
 </pre></div>
 <ul class="simple">
 <li>Installer la clef publique SSH de notre utilisateur sur l’utilisateur <em>ansible</em>.</li>
 </ul>
-<div class="highlight"><pre><span></span>ansible ubuntu -m authorized_key -a <span class="s2">&quot;user=ansible state=present key={{ lookup(&#39;file&#39;, &#39;~/.ssh/id_rsa.pub&#39;) }}&quot;</span>
+<div class="highlight"><pre><span></span>ansible<span class="w"> </span>ubuntu<span class="w"> </span>-m<span class="w"> </span>authorized_key<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;user=ansible state=present key={{ lookup(&#39;file&#39;, &#39;~/.ssh/id_rsa.pub&#39;) }}&quot;</span>
 </pre></div>
 <ul class="simple">
 <li>S’assurer des bons droits sur <em>/etc/passwd (0644)</em> et <em>/etc/shadow (0400)</em>.</li>
 </ul>
-<div class="highlight"><pre><span></span>ansible ubuntu -m file -a <span class="s2">&quot;path=/etc/passwd mode=0664&quot;</span>
-ansible ubuntu -m file -a <span class="s2">&quot;path=/etc/shadow mode=0400&quot;</span>
+<div class="highlight"><pre><span></span>ansible<span class="w"> </span>ubuntu<span class="w"> </span>-m<span class="w"> </span>file<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;path=/etc/passwd mode=0664&quot;</span>
+ansible<span class="w"> </span>ubuntu<span class="w"> </span>-m<span class="w"> </span>file<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;path=/etc/shadow mode=0400&quot;</span>
 </pre></div>
 </div>
 <div class="section" id="playbooks">
@@ -250,51 +250,51 @@ ansible ubuntu -m file -a <span class="s2">&quot;path=/etc/shadow mode=0400&quot
 <li>installer Apache avec le support de PHP activé pour les distributions Ubuntu.</li>
 </ul>
 <p>Tu crées le fichier <em>~/tuto_ansible/myplaybook1.yml</em> :</p>
-<div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="nn">---</span>
 
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu</span><span class="w"></span>
-<span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span><span class="w"></span>
-<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Installation</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">sudo</span><span class="nv"> </span><span class="s">sur</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">ansible_distribution</span><span class="nv"> </span><span class="s">}}&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">apt</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sudo</span><span class="w"></span>
-<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">latest</span><span class="w"></span>
-<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible_distribution == &#39;Ubuntu&#39;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ajout d&#39;un user</span><span class="w"></span>
-<span class="w">    </span><span class="nt">user</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span><span class="w"></span>
-<span class="w">      </span><span class="nt">shell</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/bin/bash</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Clé ssh</span><span class="w"></span>
-<span class="w">    </span><span class="nt">authorized_key</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span><span class="w"></span>
-<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span><span class="w"></span>
-<span class="w">      </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">lookup(&#39;file&#39;,</span><span class="nv"> </span><span class="s">&#39;~/.ssh/id_rsa.pub&#39;)</span><span class="nv"> </span><span class="s">}}&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ajout du user dans les sudoers</span><span class="w"></span>
-<span class="w">    </span><span class="nt">lineinfile</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/sudoers</span><span class="w"></span>
-<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span><span class="w"></span>
-<span class="w">      </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;ansible</span><span class="nv"> </span><span class="s">ALL=(ALL)</span><span class="nv"> </span><span class="s">NOPASSWD:</span><span class="nv"> </span><span class="s">ALL&#39;</span><span class="w"></span>
-<span class="w">      </span><span class="nt">validate</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;visudo</span><span class="nv"> </span><span class="s">-cf</span><span class="nv"> </span><span class="s">%s&#39;</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Installation</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">apache</span><span class="nv"> </span><span class="s">sur</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">ansible_distribution</span><span class="nv"> </span><span class="s">}}&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">apt</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache2</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">php</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">libapache2-mod-php</span><span class="w"></span>
-<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">latest</span><span class="w"></span>
-<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible_distribution == &#39;Ubuntu&#39;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">tags</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">install_apache</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Apache php</span><span class="w"></span>
-<span class="w">    </span><span class="nt">apache2_module</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">php7.0</span><span class="w"></span>
-<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span><span class="w"></span>
-<span class="w">    </span><span class="nt">notify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Restart Apache</span><span class="w"></span>
-<span class="w">  </span><span class="nt">handlers</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Restart Apache</span><span class="w"></span>
-<span class="w">    </span><span class="nt">service</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache2</span><span class="w"></span>
-<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">restarted</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu</span>
+<span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Installation</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">sudo</span><span class="nv"> </span><span class="s">sur</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">ansible_distribution</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">    </span><span class="nt">apt</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sudo</span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">latest</span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible_distribution == &#39;Ubuntu&#39;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ajout d&#39;un user</span>
+<span class="w">    </span><span class="nt">user</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span>
+<span class="w">      </span><span class="nt">shell</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/bin/bash</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Clé ssh</span>
+<span class="w">    </span><span class="nt">authorized_key</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">      </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">lookup(&#39;file&#39;,</span><span class="nv"> </span><span class="s">&#39;~/.ssh/id_rsa.pub&#39;)</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ajout du user dans les sudoers</span>
+<span class="w">    </span><span class="nt">lineinfile</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/sudoers</span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">      </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;ansible</span><span class="nv"> </span><span class="s">ALL=(ALL)</span><span class="nv"> </span><span class="s">NOPASSWD:</span><span class="nv"> </span><span class="s">ALL&#39;</span>
+<span class="w">      </span><span class="nt">validate</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;visudo</span><span class="nv"> </span><span class="s">-cf</span><span class="nv"> </span><span class="s">%s&#39;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Installation</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">apache</span><span class="nv"> </span><span class="s">sur</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">ansible_distribution</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">    </span><span class="nt">apt</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache2</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">php</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">libapache2-mod-php</span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">latest</span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible_distribution == &#39;Ubuntu&#39;</span>
+<span class="w">    </span><span class="nt">tags</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">install_apache</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Apache php</span>
+<span class="w">    </span><span class="nt">apache2_module</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">php7.0</span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">    </span><span class="nt">notify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Restart Apache</span>
+<span class="w">  </span><span class="nt">handlers</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Restart Apache</span>
+<span class="w">    </span><span class="nt">service</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache2</span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">restarted</span>
 </pre></div>
 <p>Regarde bien en détail le playbook:</p>
 <ul class="simple">
@@ -305,15 +305,15 @@ ansible ubuntu -m file -a <span class="s2">&quot;path=/etc/shadow mode=0400&quot
 <li><em>when</em> permet d'utiliser de la conditionnalité pour l'exécution des tâches.</li>
 <li><em>name</em>, <em>state</em>, <em>key</em>, <em>shell</em>, <em>dest</em>, <em>line</em> et autres sont les paramètres des modules. Pour voir la doc d'un module, tu peux utiliser la commande:</li>
 </ul>
-<div class="highlight"><pre><span></span>ansible-doc apache2_module
+<div class="highlight"><pre><span></span>ansible-doc<span class="w"> </span>apache2_module
 </pre></div>
 <p>Tu exécutes ton <em>playbook</em>:</p>
-<div class="highlight"><pre><span></span>ansible-playbook myplaybook1.yml
+<div class="highlight"><pre><span></span>ansible-playbook<span class="w"> </span>myplaybook1.yml
 </pre></div>
 <p>Et si tu te rends sur <em>http://127.0.0.1:8010/</em> et <em>http://127.0.0.1:8011/</em>, tu obtiens bien la page
 par défaut de Apache:</p>
-<div class="highlight"><pre><span></span>wget http://127.0.0.1:8010/
-wget http://127.0.0.1:8011/
+<div class="highlight"><pre><span></span>wget<span class="w"> </span>http://127.0.0.1:8010/
+wget<span class="w"> </span>http://127.0.0.1:8011/
 </pre></div>
 <p>Tu peux relancer plusieurs fois de suite le playbook, Ansible ne fera rien de plus sur les serveurs car rien n'a changé.</p>
 </div>
@@ -323,45 +323,45 @@ wget http://127.0.0.1:8011/
 Si tu as l'habitude de Django ou Flask, ça tombe bien car c'est <a class="reference external" href="http://jinja.pocoo.org/">Jinja</a> qui est utilisé par Ansible !</p>
 <p>Tu vas maintenant mettre en place un <em>message du jour</em> (motd) sur les serveurs à l'aide d'un template.</p>
 <p>Tu crées le template <strong>motd</strong> suivant dans <em>~/tuto_ansible/motd</em>:</p>
-<div class="highlight"><pre><span></span><span class="nv">IP</span> <span class="o">=</span> <span class="o">{{</span> ansible_default_ipv4.address <span class="o">}}</span>
-<span class="nv">OS</span> <span class="o">=</span> <span class="o">{{</span> ansible_distribution <span class="o">}}</span>
-<span class="o">{</span>% <span class="k">if</span> <span class="nv">env</span> <span class="o">==</span> <span class="s1">&#39;prod&#39;</span> %<span class="o">}</span>
-<span class="nv">ENV</span> <span class="o">=</span> Production
-<span class="o">{</span>% <span class="k">elif</span> <span class="nv">env</span> <span class="o">==</span> <span class="s1">&#39;test&#39;</span> %<span class="o">}</span>
-<span class="nv">ENV</span> <span class="o">=</span> Test
-<span class="o">{</span>% endif %<span class="o">}</span>
+<div class="highlight"><pre><span></span><span class="nv">IP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>ansible_default_ipv4.address<span class="w"> </span><span class="o">}}</span>
+<span class="nv">OS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{{</span><span class="w"> </span>ansible_distribution<span class="w"> </span><span class="o">}}</span>
+<span class="o">{</span>%<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nv">env</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;prod&#39;</span><span class="w"> </span>%<span class="o">}</span>
+<span class="nv">ENV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Production
+<span class="o">{</span>%<span class="w"> </span><span class="k">elif</span><span class="w"> </span><span class="nv">env</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;test&#39;</span><span class="w"> </span>%<span class="o">}</span>
+<span class="nv">ENV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Test
+<span class="o">{</span>%<span class="w"> </span>endif<span class="w"> </span>%<span class="o">}</span>
 </pre></div>
 <p>Et le playbook associé dans <em>~/tuto_ansible/motd.yml</em>:</p>
-<div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu</span><span class="w"></span>
-<span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">template</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">motd</span><span class="w"></span>
-<span class="w">      </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/motd</span><span class="w"></span>
-<span class="w">      </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span><span class="w"></span>
-<span class="w">      </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span><span class="w"></span>
-<span class="w">      </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0640</span><span class="w"></span>
-<span class="w">      </span><span class="nt">backup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu</span>
+<span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">motd</span>
+<span class="w">      </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/motd</span>
+<span class="w">      </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span>
+<span class="w">      </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span>
+<span class="w">      </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0640</span>
+<span class="w">      </span><span class="nt">backup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
 </pre></div>
 <p>Tu lances ton playbook et tu testes tout ça:</p>
-<div class="highlight"><pre><span></span>ansible-playbook motd.yml
+<div class="highlight"><pre><span></span>ansible-playbook<span class="w"> </span>motd.yml
 </pre></div>
 <p>Tu devrais voir:</p>
-<div class="highlight"><pre><span></span>ssh -p <span class="m">2200</span> ubuntu@127.0.0.1
+<div class="highlight"><pre><span></span>ssh<span class="w"> </span>-p<span class="w"> </span><span class="m">2200</span><span class="w"> </span>ubuntu@127.0.0.1
 ...
-<span class="nv">IP</span> <span class="o">=</span> <span class="m">10</span>.0.2.15
-<span class="nv">OS</span> <span class="o">=</span> Ubuntu
-<span class="nv">ENV</span> <span class="o">=</span> Test
-Last login: Fri Sep <span class="m">29</span> <span class="m">06</span>:45:30 <span class="m">2017</span> from <span class="m">10</span>.0.2.2
+<span class="nv">IP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>.0.2.15
+<span class="nv">OS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Ubuntu
+<span class="nv">ENV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Test
+Last<span class="w"> </span>login:<span class="w"> </span>Fri<span class="w"> </span>Sep<span class="w"> </span><span class="m">29</span><span class="w"> </span><span class="m">06</span>:45:30<span class="w"> </span><span class="m">2017</span><span class="w"> </span>from<span class="w"> </span><span class="m">10</span>.0.2.2
 ubuntu@ubuntu-xenial:~$
 </pre></div>
 <p>Et:</p>
-<div class="highlight"><pre><span></span>ssh -p <span class="m">2201</span> ubuntu@127.0.0.1
+<div class="highlight"><pre><span></span>ssh<span class="w"> </span>-p<span class="w"> </span><span class="m">2201</span><span class="w"> </span>ubuntu@127.0.0.1
 ...
-<span class="nv">IP</span> <span class="o">=</span> <span class="m">10</span>.0.2.15
-<span class="nv">OS</span> <span class="o">=</span> Ubuntu
-<span class="nv">ENV</span> <span class="o">=</span> Production
-Last login: Fri Sep <span class="m">29</span> <span class="m">06</span>:45:30 <span class="m">2017</span> from <span class="m">10</span>.0.2.2
+<span class="nv">IP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>.0.2.15
+<span class="nv">OS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Ubuntu
+<span class="nv">ENV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Production
+Last<span class="w"> </span>login:<span class="w"> </span>Fri<span class="w"> </span>Sep<span class="w"> </span><span class="m">29</span><span class="w"> </span><span class="m">06</span>:45:30<span class="w"> </span><span class="m">2017</span><span class="w"> </span>from<span class="w"> </span><span class="m">10</span>.0.2.2
 ubuntu@ubuntu-xenial:~$
 </pre></div>
 </div>
@@ -371,72 +371,72 @@ ubuntu@ubuntu-xenial:~$
 Tu vas pour ce faire créer un rôle <strong>apache</strong> qui va installer Apache et le configurer à l'aide d'un template.</p>
 <p>C'est parti ! Tu crées un répertoire <em>~/tuto_ansible/roles</em> qui contient l'arborescence suivante:</p>
 <div class="highlight"><pre><span></span>roles
-└── apache
-    ├── handlers
-    │   └── main.yml
-    ├── tasks
-    │   └── main.yml
-    └── templates
-        └── mysite.j2
+└──<span class="w"> </span>apache
+<span class="w">    </span>├──<span class="w"> </span>handlers
+<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>main.yml
+<span class="w">    </span>├──<span class="w"> </span>tasks
+<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>main.yml
+<span class="w">    </span>└──<span class="w"> </span>templates
+<span class="w">        </span>└──<span class="w"> </span>mysite.j2
 </pre></div>
 <p>Ou alors tu peux utiliser la commande <strong>ansible-galaxy</strong> pour initialiser l'arborescence complète d'un rôle:</p>
-<div class="highlight"><pre><span></span>ansible-galaxy init --offline --init-path ~/tuto_ansible/roles apache
+<div class="highlight"><pre><span></span>ansible-galaxy<span class="w"> </span>init<span class="w"> </span>--offline<span class="w"> </span>--init-path<span class="w"> </span>~/tuto_ansible/roles<span class="w"> </span>apache
 </pre></div>
 <p>Le dossier <em>handlers</em> va te permettre d'y mettre des tâches qui vont être exécutées à chaque notification de changement.
 C'est utile pour redémarrer Apache dès que c'est nécessaire par exemple.</p>
 <p>Dans <em>~/tuto_ansible/roles/apache/handlers/main.yml</em>, tu mets:</p>
-<div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Restart Apache</span><span class="w"></span>
-<span class="w">  </span><span class="nt">service</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache2</span><span class="w"></span>
-<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">restarted</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Restart Apache</span>
+<span class="w">  </span><span class="nt">service</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache2</span>
+<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">restarted</span>
 </pre></div>
 <p>Le dossiers <em>tasks</em> va tout simplement contenir tes tâches.</p>
 <p>Dans <em>~/tuto_ansible/roles/apache/tasks/main.yml</em>, tu mets:</p>
-<div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install Apache</span><span class="w"></span>
-<span class="w">  </span><span class="nt">apt</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache2</span><span class="w"></span>
-<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span><span class="w"></span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check Apache</span><span class="w"></span>
-<span class="w">  </span><span class="nt">service</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache2</span><span class="w"></span>
-<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">started</span><span class="w"></span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Installation d&#39;un vhost</span><span class="w"></span>
-<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysite.j2</span><span class="w"></span>
-<span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/apache2/sites-available/mysite.conf</span><span class="w"></span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">a2ensite mysite</span><span class="w"></span>
-<span class="w">  </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">a2ensite mysite</span><span class="w"></span>
-<span class="w">  </span><span class="nt">notify</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Restart Apache</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install Apache</span>
+<span class="w">  </span><span class="nt">apt</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache2</span>
+<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check Apache</span>
+<span class="w">  </span><span class="nt">service</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache2</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">started</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Installation d&#39;un vhost</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysite.j2</span>
+<span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/apache2/sites-available/mysite.conf</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">a2ensite mysite</span>
+<span class="w">  </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">a2ensite mysite</span>
+<span class="w">  </span><span class="nt">notify</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Restart Apache</span>
 </pre></div>
 <p>Ça installe et démarre Apache, et ça déploie et active un site qui va utiliser la configuration du template <em>mysite.j2</em>.</p>
 <p>Pour finir, dans le dossier <em>templates</em> sous <em>~/tuto_ansible/roles/apache/templates/mysite.j2</em>, tu vas mettre la configuration de ton Virtual Host Apache:</p>
-<div class="highlight"><pre><span></span>&lt;VirtualHost *:<span class="o">{{</span> http_port <span class="o">}}</span>&gt;
-    ServerAdmin webmaster@<span class="o">{{</span> domain <span class="o">}}</span>
-    ServerName <span class="o">{{</span> domain <span class="o">}}</span>
-    DocumentRoot /var/www/
-    ErrorLog <span class="si">${</span><span class="nv">APACHE_LOG_DIR</span><span class="si">}</span>/error.log
-    CustomLog <span class="si">${</span><span class="nv">APACHE_LOG_DIR</span><span class="si">}</span>/access.log combined
+<div class="highlight"><pre><span></span>&lt;VirtualHost<span class="w"> </span>*:<span class="o">{{</span><span class="w"> </span>http_port<span class="w"> </span><span class="o">}}</span>&gt;
+<span class="w">    </span>ServerAdmin<span class="w"> </span>webmaster@<span class="o">{{</span><span class="w"> </span>domain<span class="w"> </span><span class="o">}}</span>
+<span class="w">    </span>ServerName<span class="w"> </span><span class="o">{{</span><span class="w"> </span>domain<span class="w"> </span><span class="o">}}</span>
+<span class="w">    </span>DocumentRoot<span class="w"> </span>/var/www/
+<span class="w">    </span>ErrorLog<span class="w"> </span><span class="si">${</span><span class="nv">APACHE_LOG_DIR</span><span class="si">}</span>/error.log
+<span class="w">    </span>CustomLog<span class="w"> </span><span class="si">${</span><span class="nv">APACHE_LOG_DIR</span><span class="si">}</span>/access.log<span class="w"> </span>combined
 &lt;/VirtualHost&gt;
 </pre></div>
 <p>Les variables <strong>http_port</strong> et <strong>domain</strong> seront à définir dans ton playbook principal.
 Tu édites donc un fichier <em>~/tuto_ansible/playbook-apache.yml</em> et tu y configures ton rôle <strong>apache</strong>:</p>
-<div class="highlight"><pre><span></span><span class="nn">---</span><span class="w"></span>
-<span class="c1"># role apache</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="c1"># role apache</span>
 
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu</span><span class="w"></span>
-<span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">  </span><span class="nt">vars</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">http_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span><span class="w"></span>
-<span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"></span>
-<span class="w">  </span><span class="nt">roles</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu</span>
+<span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">http_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+<span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">  </span><span class="nt">roles</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache</span>
 </pre></div>
 <p>Tu l'exécutes:</p>
-<div class="highlight"><pre><span></span>ansible-playbook playbook-apache.yml
+<div class="highlight"><pre><span></span>ansible-playbook<span class="w"> </span>playbook-apache.yml
 </pre></div>
 <p>Et voilà Apache est bien installé et configuré !</p>
 <p>Pour aller un peu plus loin, tu peux jeter un oeil aux rôles disponibles sur <a class="reference external" href="https://galaxy.ansible.com/">Galaxy</a>,

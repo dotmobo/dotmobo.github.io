@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.github.io/" rel="alternate"></link><link href="https://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.github.io/</id><updated>2024-07-12T00:00:00+02:00</updated><subtitle>Blog d'un Pythoniste Djangonaute</subtitle><entry><title>Arrêtons avec Agile SAFe Scrum !</title><link href="https://dotmobo.github.io/stop-agile-safe-scrum.html" rel="alternate"></link><published>2024-07-12T00:00:00+02:00</published><updated>2024-07-12T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2024-07-12:/stop-agile-safe-scrum.html</id><summary type="html">&lt;p class="first last"&gt;Arrêtons avec Agile SAFe Scrum !&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.github.io/" rel="alternate"></link><link href="https://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.github.io/</id><updated>2024-07-14T00:00:00+02:00</updated><subtitle>Blog d'un Pythoniste Djangonaute</subtitle><entry><title>L'éditeur Zed</title><link href="https://dotmobo.github.io/editeur-zed.html" rel="alternate"></link><published>2024-07-14T00:00:00+02:00</published><updated>2024-07-14T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2024-07-14:/editeur-zed.html</id><summary type="html">&lt;p class="first last"&gt;L'éditeur Zed&lt;/p&gt;
+</summary><content type="html">&lt;img alt="Zed" class="align-right" src="./images/zed.webp" /&gt;
+&lt;p&gt;Petit article rapide pour t'annoncer que ça y est ! L'éditeur &lt;a class="reference external" href="https://zed.dev/"&gt;Zed&lt;/a&gt; est enfin disponible sous Linux après avoir été pendant plusieurs mois uniquement réservé aux utilisateurs de Mac.&lt;/p&gt;
+&lt;p&gt;Pour l'installer, rien de plus simple :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;https://zed.dev/install.sh&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Zed se veut être un éditeur de texte de dernière génération qui regroupe le meilleur des mondes des éditeurs. Il se veut très performant, collaboratif et open source.&lt;/p&gt;
+&lt;p&gt;La team qui se cache derrière ce produit n'est autre que les anciens développeurs de l'éditeur Atom. Ils sont de retour et prennent leur revanche sur VS Code qui les avait grassement copiés.&lt;/p&gt;
+&lt;div class="section" id="performance"&gt;
+&lt;h2&gt;Performance&lt;/h2&gt;
+&lt;p&gt;Au niveau des performances, il se veut être le plus rapide sur le marché actuellement. Pour arriver à ce niveau, il utilise la puissance du GPU, comme s'il s'agissait d'un jeu vidéo.&lt;/p&gt;
+&lt;p&gt;Le langage de programmation derrière n'est autre que Rust, ce qui lui garantit une bonne gestion de la mémoire et une certaine rapidité d'exécution.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="intelligence-artificielle"&gt;
+&lt;h2&gt;Intelligence artificielle&lt;/h2&gt;
+&lt;p&gt;L'un des points majeurs de cet éditeur est l'intégration aux petits oignons de Github Copilot. La complétion de l'outil est au final une des meilleures qu'il m'a été donné de tester.&lt;/p&gt;
+&lt;p&gt;Il intègre également GPT-4 pour refactorer le code et utiliser le prompt directement dans l'éditeur.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="collaboratif"&gt;
+&lt;h2&gt;Collaboratif&lt;/h2&gt;
+&lt;p&gt;L'éditeur est également très axé sur le travail à plusieurs. Il est possible de discuter via des canaux, de modifier du code ensemble, de partager des notes et autres.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="autres-fonctionnalites"&gt;
+&lt;h2&gt;Autres fonctionnalités&lt;/h2&gt;
+&lt;p&gt;Enfin, la majorité des langages sont supportés par défaut et git est très bien intégré. Il possède un terminal interne comme VS Code et un mode Vim intégré.&lt;/p&gt;
+&lt;p&gt;Petit à petit, des extensions font leur apparition et je pense qu'il a toutes ses chances pour devenir l'un des éditeurs les plus populaires du marché.&lt;/p&gt;
+&lt;p&gt;Pour ma part, j'ai déjà switché de VS Code à Zed pour Python, Rust et Typescript.&lt;/p&gt;
+&lt;p&gt;À tester !&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Ide"></category><category term="zed"></category><category term="editor"></category><category term="ide"></category><category term="éditeur"></category><category term="vs code"></category><category term="atom"></category><category term="visual code"></category><category term="sublime text"></category></entry><entry><title>Arrêtons avec Agile SAFe Scrum !</title><link href="https://dotmobo.github.io/stop-agile-safe-scrum.html" rel="alternate"></link><published>2024-07-12T00:00:00+02:00</published><updated>2024-07-12T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2024-07-12:/stop-agile-safe-scrum.html</id><summary type="html">&lt;p class="first last"&gt;Arrêtons avec Agile SAFe Scrum !&lt;/p&gt;
 </summary><content type="html">&lt;img alt="SAFe" class="align-left" src="./images/safe.png" /&gt;
 &lt;p&gt;À mon tour d'ajouter ma pierre à l'édifice des articles à charge sur &lt;a class="reference external" href="https://www.atlassian.com/fr/agile/agile-at-scale/what-is-safe"&gt;Agile&lt;/a&gt; !
 Je tiens à préciser que c'est mon ressenti personnel au bout de plusieurs années de travail avec cette méthode dans le monde de

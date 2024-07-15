@@ -166,12 +166,12 @@ Petit debugger intégré avec le mot-clé **dbg** qui permet de debugger facilem
 .. code-block:: elm
 
     pluralize = \singular, plural, count ->
-    dbg count
+        dbg count
 
-    if count == 1 then
-        singular
-    else
-        plural
+        if count == 1 then
+            singular
+        else
+            plural
 
 Gestion des erreurs
 ===================
@@ -195,15 +195,15 @@ Bien évidemment, comme tout langage qui se respecte, on peut écrire des tests 
 .. code-block:: elm
 
     pluralize = \singular, plural, count ->
-    countStr = Num.toStr count
+        countStr = Num.toStr count
 
-    if count == 1 then
-        "$(countStr) $(singular)"
-    else
-        "$(countStr) $(plural)"
+        if count == 1 then
+            "$(countStr) $(singular)"
+        else
+            "$(countStr) $(plural)"
 
-    expect pluralize "cactus" "cacti" 1 == "1 cactus"
-    expect pluralize "cactus" "cacti" 2 == "2 cacti"
+        expect pluralize "cactus" "cacti" 1 == "1 cactus"
+        expect pluralize "cactus" "cacti" 2 == "2 cacti"
 
 
 Tasks

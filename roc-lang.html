@@ -247,12 +247,12 @@ Ce qui veut dire que l'écriture suivante est valide :</p>
 <h2>Debugger</h2>
 <p>Petit debugger intégré avec le mot-clé <strong>dbg</strong> qui permet de debugger facilement hors IDE à la manière d'un <em>print</em> avec des infos en plus :</p>
 <div class="highlight"><pre><span></span><span class="nv">pluralize</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nf">\</span><span class="nv">singular</span><span class="p">,</span><span class="w"> </span><span class="nv">plural</span><span class="p">,</span><span class="w"> </span><span class="nv">count</span><span class="w"> </span><span class="nf">-&gt;</span>
-<span class="nv">dbg</span><span class="w"> </span><span class="nv">count</span>
+<span class="w">    </span><span class="nv">dbg</span><span class="w"> </span><span class="nv">count</span>
 
-<span class="kr">if</span><span class="w"> </span><span class="nv">count</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">    </span><span class="nv">singular</span>
-<span class="kr">else</span>
-<span class="w">    </span><span class="nv">plural</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">count</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="nv">singular</span>
+<span class="w">    </span><span class="kr">else</span>
+<span class="w">        </span><span class="nv">plural</span>
 </pre></div>
 </div>
 <div class="section" id="gestion-des-erreurs">
@@ -269,15 +269,15 @@ Ce qui veut dire que l'écriture suivante est valide :</p>
 <h2>Testing</h2>
 <p>Bien évidemment, comme tout langage qui se respecte, on peut écrire des tests unitaires avec le mot-clé <strong>expect</strong> :</p>
 <div class="highlight"><pre><span></span><span class="nv">pluralize</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nf">\</span><span class="nv">singular</span><span class="p">,</span><span class="w"> </span><span class="nv">plural</span><span class="p">,</span><span class="w"> </span><span class="nv">count</span><span class="w"> </span><span class="nf">-&gt;</span>
-<span class="nv">countStr</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Num</span><span class="nf">.</span><span class="nv">toStr</span><span class="w"> </span><span class="nv">count</span>
+<span class="w">    </span><span class="nv">countStr</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Num</span><span class="nf">.</span><span class="nv">toStr</span><span class="w"> </span><span class="nv">count</span>
 
-<span class="kr">if</span><span class="w"> </span><span class="nv">count</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">    </span><span class="s">&quot;$(countStr) $(singular)&quot;</span>
-<span class="kr">else</span>
-<span class="w">    </span><span class="s">&quot;$(countStr) $(plural)&quot;</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">count</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="s">&quot;$(countStr) $(singular)&quot;</span>
+<span class="w">    </span><span class="kr">else</span>
+<span class="w">        </span><span class="s">&quot;$(countStr) $(plural)&quot;</span>
 
-<span class="nv">expect</span><span class="w"> </span><span class="nv">pluralize</span><span class="w"> </span><span class="s">&quot;cactus&quot;</span><span class="w"> </span><span class="s">&quot;cacti&quot;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="s">&quot;1 cactus&quot;</span>
-<span class="nv">expect</span><span class="w"> </span><span class="nv">pluralize</span><span class="w"> </span><span class="s">&quot;cactus&quot;</span><span class="w"> </span><span class="s">&quot;cacti&quot;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="s">&quot;2 cacti&quot;</span>
+<span class="w">    </span><span class="nv">expect</span><span class="w"> </span><span class="nv">pluralize</span><span class="w"> </span><span class="s">&quot;cactus&quot;</span><span class="w"> </span><span class="s">&quot;cacti&quot;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="s">&quot;1 cactus&quot;</span>
+<span class="w">    </span><span class="nv">expect</span><span class="w"> </span><span class="nv">pluralize</span><span class="w"> </span><span class="s">&quot;cactus&quot;</span><span class="w"> </span><span class="s">&quot;cacti&quot;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="s">&quot;2 cacti&quot;</span>
 </pre></div>
 </div>
 <div class="section" id="tasks">

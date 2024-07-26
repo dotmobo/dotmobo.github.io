@@ -54,7 +54,7 @@ roc&lt;span class="w"&gt; &lt;/span&gt;repl
 &lt;p&gt;Ici l'utilisation d'un &lt;strong&gt;map&lt;/strong&gt; :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;List&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;map&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;\&lt;/span&gt;&lt;span class="nv"&gt;num&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;num&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Je ne vais pas passer en revue tout le langage, pour ça tu peux lire le tutoriel &amp;lt;&lt;a class="reference external" href="https://www.roc-lang.org/tutorial"&gt;https://www.roc-lang.org/tutorial&lt;/a&gt;&amp;gt;_.
+&lt;p&gt;Je ne vais pas passer en revue tout le langage, pour ça tu peux lire &lt;a class="reference external" href="https://www.roc-lang.org/tutorial"&gt;le tutoriel&lt;/a&gt;.
 Mais on va voir les 2 ou 3 points intéressants.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="typage"&gt;

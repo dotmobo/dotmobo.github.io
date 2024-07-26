@@ -88,7 +88,7 @@ Ici l'utilisation d'un **map** :
 
     List.map [1, 2, 3] \num -> num * 2
 
-Je ne vais pas passer en revue tout le langage, pour ça tu peux lire le tutoriel <https://www.roc-lang.org/tutorial>_.
+Je ne vais pas passer en revue tout le langage, pour ça tu peux lire `le tutoriel <https://www.roc-lang.org/tutorial>`_.
 Mais on va voir les 2 ou 3 points intéressants.
 
 Typage

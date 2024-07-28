@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://dotmobo.github.io/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://dotmobo.github.io/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.github.io/theme/font-awesome/css/solid.css">
+
+    <link href="https://dotmobo.github.io/css/custom.css" rel="stylesheet">
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68852219-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Morgan" />
+<meta name="description" content="Shuttle.rs" />
+<meta name="keywords" content="shuttle, shuttle.rs, rust, devops, server, deploy, deployment, ci, cd, integration">
+
+
+<meta property="og:site_name" content=".mobo"/>
+<meta property="og:title" content="Shuttle.rs"/>
+<meta property="og:description" content="Shuttle.rs"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="https://dotmobo.github.io/shuttle-rs.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2024-07-28 00:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://dotmobo.github.io/author/morgan.html">
+<meta property="article:section" content="Rust"/>
+<meta property="article:tag" content="shuttle"/>
+<meta property="article:tag" content="shuttle.rs"/>
+<meta property="article:tag" content="rust"/>
+<meta property="article:tag" content="devops"/>
+<meta property="article:tag" content="server"/>
+<meta property="article:tag" content="deploy"/>
+<meta property="article:tag" content="deployment"/>
+<meta property="article:tag" content="ci"/>
+<meta property="article:tag" content="cd"/>
+<meta property="article:tag" content="integration"/>
+<meta property="og:image" content="//dotmobo.github.io/images/avatar700.jpg">
+
+  <title>.mobo &ndash; Shuttle.rs</title>
+
+</head>
+<body class="light-theme">
+  <aside>
+    <div>
+      <a href="https://dotmobo.github.io">
+        <img src="//dotmobo.github.io/images/avatar700.jpg" alt=".mobo" title=".mobo">
+      </a>
+
+      <h1>
+        <a href="https://dotmobo.github.io">.mobo</a>
+      </h1>
+
+<p>Blog d'un Pythoniste Djangonaute</p>
+
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.github.io/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://dotmobo.github.io">Accueil</a>
+
+      <a href="/categories.html">Catégories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/archives.html">Archives</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="shuttle-rs">Shuttle.rs</h1>
+    <p>
+      Posté le 28/07/2024 dans <a href="https://dotmobo.github.io/category/rust.html">Rust</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="Shuttle" class="align-right" src="./images/shuttle.png" />
+<p>Aujourd'hui, je vais te parler d'un service que je viens de découvrir et qui mérite le coup d'oeil.</p>
+<p>Si comme moi, tu as quelques projets perso que tu veux héberger mais que tu n'as pas forcément envie de débourser un abonnement pour un hébergeur,
+tu es au bon endroit.</p>
+<p>Pour héberger du front-end, c'est facile. On a au choix <a class="reference external" href="https://www.netlify.com/">Netlify</a> ou <a class="reference external" href="https://vercel.com/">Vercel</a> qui font très bien
+l'affaire.</p>
+<p>Mais si c'est pour un back-end avec une base de données, c'est tout de suite une autre affaire si tu ne veux pas utiliser de méthode <strong>serverless</strong>.</p>
+<p>Jusqu'à présent, j'utilisais <a class="reference external" href="https://www.pythonanywhere.com/">Pythonanywhere</a> qui est vraiment un super service pour déployer du Python, et de
+temps en temps <a class="reference external" href="https://render.com/">Render</a>, mais qui a de grosses latences pour son service gratuit.</p>
+<p>En cherchant une solution pour héberger du <a class="reference external" href="https://www.rust-lang.org/fr">Rust</a>, je suis alors tombé sur <a class="reference external" href="https://www.shuttle.rs/">Shuttle</a>.
+Shuttle se veut être le Vercel du backend en gros.</p>
+<p>Non seulement la version Community de l'outil est gratuite, mais elle permet d'avoir directement une base de données Postgres et n'a pas de grosses limitations
+de performances comme chez Render.</p>
+<p>De plus, le mot d'ordre de l'outil se veut la simplicité. Exit la complexité de déploiement
+d'une application. Pour ce faire, il utilise une méthode d'intégration de l'infrastructure
+dans le code.</p>
+<p>Alors certes, ça peut poser polémique dans le sens où le code source est alors fortement lié
+au service d'hébergement. Mais dans le cas de Shuttle, le lien entre code et infra se fait
+avec de simples annotations facilement remplaçables dans le cadre d'une migration.</p>
+<p>Ici, pas besoin de fichier de configuration pour Postgres ou Nginx, tout est automatiquement géré par le service.</p>
+<div class="section" id="installation">
+<h2>Installation</h2>
+<p>L'installation de l'environnement de Shuttle se fait directement avec Cargo.
+Après t'être connecté au site et avoir récupéré ta clé d'API, il te suffit d'exécuter
+les 3 commandes suivantes pour avoir un hello-world déployé en Rust.</p>
+<div class="highlight"><pre><span></span>cargo<span class="w"> </span>install<span class="w"> </span>cargo-shuttle
+cargo<span class="w"> </span>shuttle<span class="w"> </span>init<span class="w"> </span>--create-env
+cargo<span class="w"> </span>shuttle<span class="w"> </span>deploy
+</pre></div>
+<p>Tu peux alors choisir ton framework Rust préféré via le prompt, ici on va partir sur <a class="reference external" href="https://github.com/tokio-rs/axum">Axum</a>.</p>
+<p>Ultra simple !</p>
+</div>
+<div class="section" id="todos">
+<h2>Todos</h2>
+<p>On va passer à un exemple un peu plus poussé avec une API pour une gestion d'une <strong>TODO list</strong>
+avec une base de données <strong>Postgres</strong>.</p>
+<div class="section" id="cargo-toml">
+<h3>Cargo.toml</h3>
+<p>À partir du hello-world de base, on va ajouter la prise en charge de <strong>Postgres</strong> et de <strong>Sqlx</strong>
+dans <strong>Shuttle</strong> via le package <strong>shuttle-shared-db</strong>.</p>
+<div class="highlight"><pre><span></span><span class="k">[package]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;mon-app&quot;</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="n">edition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;2021&quot;</span>
+
+<span class="k">[dependencies]</span>
+<span class="n">axum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.7.3&quot;</span>
+<span class="n">serde</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;1.0.188&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;derive&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="n">shuttle-axum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.47.0&quot;</span>
+<span class="n">shuttle-runtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.47.0&quot;</span>
+<span class="n">shuttle-shared-db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.47.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;postgres&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sqlx&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="n">sqlx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.7.1&quot;</span>
+<span class="n">tokio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.28.2&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="migrations-0001-init-sql">
+<h3>migrations/0001_init.sql</h3>
+<p>On ajoute également un script de migration pour créer notre table dans la base de données :</p>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">todos</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">serial</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">note</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="src-models-rs">
+<h3>src/models.rs</h3>
+<p>Tu peux désormais créer tes structures pour gérer ta table de Todo.
+<strong>Todo</strong> correspond à l'objet de notre table, <strong>TodoNew</strong> sera utilisé pour la création d'un nouvel
+item et <strong>MyState</strong> est utilisé pour gérer le pool Postgres.</p>
+<div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">serde</span><span class="p">::{</span><span class="n">Deserialize</span><span class="p">,</span><span class="w"> </span><span class="n">Serialize</span><span class="p">};</span>
+<span class="k">use</span><span class="w"> </span><span class="n">sqlx</span><span class="p">::{</span><span class="n">FromRow</span><span class="p">,</span><span class="w"> </span><span class="n">PgPool</span><span class="p">};</span>
+
+<span class="cp">#[derive(Deserialize)]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">TodoNew</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">note</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="cp">#[derive(Serialize, FromRow)]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Todo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="p">,</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">note</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="cp">#[derive(Clone)]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">MyState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">pool</span><span class="p">:</span><span class="w"> </span><span class="nc">PgPool</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="src-main-rs">
+<h3>src/main.rs</h3>
+<p>Place à notre API.</p>
+<p>Tu remarqueras que l'intégration avec Shuttle se fait simplement via les annotations <strong>#[shuttle_runtime::main]</strong> pour déclarer notre application principale,
+<strong>#[shuttle_shared_db::Postgres] pool: PgPool</strong> pour la connexion à notre base de données Postgresql et <strong>shuttle_axum::ShuttleAxum</strong> pour indiquer qu'on utilise le framework Axum.</p>
+<div class="highlight"><pre><span></span><span class="cp">#[shuttle_runtime::main]</span>
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="cp">#[shuttle_shared_db::Postgres]</span><span class="w"> </span><span class="n">pool</span><span class="p">:</span><span class="w"> </span><span class="nc">PgPool</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">shuttle_axum</span><span class="p">::</span><span class="n">ShuttleAxum</span><span class="w"> </span><span class="p">{</span>
+<span class="o">..</span><span class="p">.</span>
+<span class="p">}</span>
+</pre></div>
+<p>Tu vois, quand je te disais que l'intégration à l'infrastructure était ultra simple !</p>
+<p>Et voilà, on passe enfin sur l'écriture de nos routes. On va pouvoir ajouter, lire, lister
+et supprimer nos TODOs.</p>
+<div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">axum</span><span class="p">::{</span>
+<span class="w">    </span><span class="n">extract</span><span class="p">::{</span><span class="n">Path</span><span class="p">,</span><span class="w"> </span><span class="n">State</span><span class="p">},</span>
+<span class="w">    </span><span class="n">http</span><span class="p">::</span><span class="n">StatusCode</span><span class="p">,</span>
+<span class="w">    </span><span class="n">response</span><span class="p">::</span><span class="n">IntoResponse</span><span class="p">,</span>
+<span class="w">    </span><span class="n">routing</span><span class="p">::{</span><span class="n">delete</span><span class="p">,</span><span class="w"> </span><span class="n">get</span><span class="p">,</span><span class="w"> </span><span class="n">post</span><span class="p">},</span>
+<span class="w">    </span><span class="n">Json</span><span class="p">,</span><span class="w"> </span><span class="n">Router</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="k">use</span><span class="w"> </span><span class="n">sqlx</span><span class="p">::</span><span class="n">PgPool</span><span class="p">;</span>
+
+<span class="k">mod</span><span class="w"> </span><span class="nn">models</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">models</span><span class="p">::{</span><span class="n">Todo</span><span class="p">,</span><span class="w"> </span><span class="n">TodoNew</span><span class="p">,</span><span class="w"> </span><span class="n">MyState</span><span class="p">};</span>
+
+<span class="c1">// Add a function to retrieve all todos</span>
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">retrieve_all</span><span class="p">(</span>
+<span class="w">    </span><span class="n">State</span><span class="p">(</span><span class="n">state</span><span class="p">):</span><span class="w"> </span><span class="nc">State</span><span class="o">&lt;</span><span class="n">MyState</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="k">impl</span><span class="w"> </span><span class="n">IntoResponse</span><span class="p">,</span><span class="w"> </span><span class="k">impl</span><span class="w"> </span><span class="n">IntoResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">sqlx</span><span class="p">::</span><span class="n">query_as</span><span class="p">::</span><span class="o">&lt;</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">Todo</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;SELECT * FROM todos&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">fetch_all</span><span class="p">(</span><span class="o">&amp;</span><span class="n">state</span><span class="p">.</span><span class="n">pool</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="k">await</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">todos</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Ok</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="n">Json</span><span class="p">(</span><span class="n">todos</span><span class="p">))),</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">BAD_REQUEST</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">toString</span><span class="p">())),</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">retrieve</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Path</span><span class="p">(</span><span class="n">id</span><span class="p">):</span><span class="w"> </span><span class="nc">Path</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">State</span><span class="p">(</span><span class="n">state</span><span class="p">):</span><span class="w"> </span><span class="nc">State</span><span class="o">&lt;</span><span class="n">MyState</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="k">impl</span><span class="w"> </span><span class="n">IntoResponse</span><span class="p">,</span><span class="w"> </span><span class="k">impl</span><span class="w"> </span><span class="n">IntoResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">sqlx</span><span class="p">::</span><span class="n">query_as</span><span class="p">::</span><span class="o">&lt;</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">Todo</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;SELECT * FROM todos WHERE id = $1&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">fetch_one</span><span class="p">(</span><span class="o">&amp;</span><span class="n">state</span><span class="p">.</span><span class="n">pool</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="k">await</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">todo</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Ok</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="n">Json</span><span class="p">(</span><span class="n">todo</span><span class="p">))),</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">BAD_REQUEST</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">toString</span><span class="p">())),</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span>
+<span class="w">    </span><span class="n">State</span><span class="p">(</span><span class="n">state</span><span class="p">):</span><span class="w"> </span><span class="nc">State</span><span class="o">&lt;</span><span class="n">MyState</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Json</span><span class="p">(</span><span class="n">data</span><span class="p">):</span><span class="w"> </span><span class="nc">Json</span><span class="o">&lt;</span><span class="n">TodoNew</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="k">impl</span><span class="w"> </span><span class="n">IntoResponse</span><span class="p">,</span><span class="w"> </span><span class="k">impl</span><span class="w"> </span><span class="n">IntoResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">sqlx</span><span class="p">::</span><span class="n">query_as</span><span class="p">::</span><span class="o">&lt;</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">Todo</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;INSERT INTO todos (note) VALUES ($1) RETURNING id, note&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">.</span><span class="n">note</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">fetch_one</span><span class="p">(</span><span class="o">&amp;</span><span class="n">state</span><span class="p">.</span><span class="n">pool</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="k">await</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">todo</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Ok</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">CREATED</span><span class="p">,</span><span class="w"> </span><span class="n">Json</span><span class="p">(</span><span class="n">todo</span><span class="p">))),</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">BAD_REQUEST</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">toString</span><span class="p">())),</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// function to remove a todo</span>
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Path</span><span class="p">(</span><span class="n">id</span><span class="p">):</span><span class="w"> </span><span class="nc">Path</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">State</span><span class="p">(</span><span class="n">state</span><span class="p">):</span><span class="w"> </span><span class="nc">State</span><span class="o">&lt;</span><span class="n">MyState</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="k">impl</span><span class="w"> </span><span class="n">IntoResponse</span><span class="p">,</span><span class="w"> </span><span class="k">impl</span><span class="w"> </span><span class="n">IntoResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">sqlx</span><span class="p">::</span><span class="n">query</span><span class="p">(</span><span class="s">&quot;DELETE FROM todos WHERE id = $1&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="o">&amp;</span><span class="n">state</span><span class="p">.</span><span class="n">pool</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="k">await</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">NO_CONTENT</span><span class="p">),</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">BAD_REQUEST</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">toString</span><span class="p">())),</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="cp">#[shuttle_runtime::main]</span>
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="cp">#[shuttle_shared_db::Postgres]</span><span class="w"> </span><span class="n">pool</span><span class="p">:</span><span class="w"> </span><span class="nc">PgPool</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">shuttle_axum</span><span class="p">::</span><span class="n">ShuttleAxum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">sqlx</span><span class="p">::</span><span class="n">migrate</span><span class="o">!</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pool</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="k">await</span>
+<span class="w">        </span><span class="p">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;Failed to run migrations&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyState</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">pool</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Router</span><span class="p">::</span><span class="n">new</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">&quot;/todos&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">get</span><span class="p">(</span><span class="n">retrieve_all</span><span class="p">))</span>
+<span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">&quot;/todos&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">post</span><span class="p">(</span><span class="n">add</span><span class="p">))</span>
+<span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">&quot;/todos/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">get</span><span class="p">(</span><span class="n">retrieve</span><span class="p">))</span>
+<span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">&quot;/todos/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">delete</span><span class="p">(</span><span class="n">remove</span><span class="p">))</span>
+<span class="w">        </span><span class="p">.</span><span class="n">with_state</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">router</span><span class="p">.</span><span class="n">into</span><span class="p">())</span>
+<span class="p">}</span>
+</pre></div>
+<p>Tu relances alors ta commande <strong>cargo shuttle deploy</strong> pour avoir ton service en ligne !</p>
+<p>Et si tu veux d'abord tester localement, tu lances <strong>cargo shuttle run</strong> et tu peux tester ton service avec <strong>curl</strong> directement :</p>
+<div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;content-type: application/json&#39;</span><span class="w"> </span>localhost:8000/todos<span class="w"> </span>--data<span class="w"> </span><span class="s1">&#39;{&quot;note&quot;:&quot;My todo&quot;}&#39;</span>
+<span class="c1"># {&quot;id&quot;:1,&quot;note&quot;:&quot;My todo&quot;}</span>
+
+curl<span class="w"> </span>localhost:8000/todos/1
+<span class="c1"># {&quot;id&quot;:1,&quot;note&quot;:&quot;My todo&quot;}</span>
+
+curl<span class="w"> </span>localhost:8000/todos
+<span class="c1"># [{&quot;id&quot;:1,&quot;note&quot;:&quot;My todo&quot;}]</span>
+
+curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>localhost:8000/todos/1
+<span class="c1"># []</span>
+</pre></div>
+<p>Tu peux alors appeler ton backend Shuttle depuis ton frontend hébergé sur Netlify ou Vercel sans aucun problème.</p>
+</div>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://dotmobo.github.io/tag/shuttle.html">shuttle</a>
+      <a href="https://dotmobo.github.io/tag/shuttlers.html">shuttle.rs</a>
+      <a href="https://dotmobo.github.io/tag/rust.html">rust</a>
+      <a href="https://dotmobo.github.io/tag/devops.html">devops</a>
+      <a href="https://dotmobo.github.io/tag/server.html">server</a>
+      <a href="https://dotmobo.github.io/tag/deploy.html">deploy</a>
+      <a href="https://dotmobo.github.io/tag/deployment.html">deployment</a>
+      <a href="https://dotmobo.github.io/tag/ci.html">ci</a>
+      <a href="https://dotmobo.github.io/tag/cd.html">cd</a>
+      <a href="https://dotmobo.github.io/tag/integration.html">integration</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dotmobo';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; 2018  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " .mobo ",
+  "url" : "https://dotmobo.github.io",
+  "image": "//dotmobo.github.io/images/avatar700.jpg",
+  "description": "DotMobo - Blog d'un Pythoniste Djangonaute"
+}
+</script>
+
+
+</body>
+</html>

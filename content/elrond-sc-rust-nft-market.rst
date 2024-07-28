@@ -3,7 +3,7 @@ Smart Contract Elrond en Rust : NFT market
 
 :date: 2022-07-07
 :tags: elrond,rust, nft, market
-:category: Elrond
+:category: Rust
 :slug: elrond-sc-rust-nft-market
 :authors: Morgan
 :summary: Smart Contract Elrond en Rust : NFT market

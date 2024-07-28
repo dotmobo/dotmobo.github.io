@@ -3,7 +3,7 @@ Smart Contract Elrond en Rust : DAO vote
 
 :date: 2022-07-06
 :tags: elrond,rust, dao, vote
-:category: Elrond
+:category: Rust
 :slug: elrond-sc-rust-dao-vote
 :authors: Morgan
 :summary: Smart Contract Elrond en Rust : DAO vote

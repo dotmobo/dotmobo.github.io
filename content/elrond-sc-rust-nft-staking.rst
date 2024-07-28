@@ -3,7 +3,7 @@ Smart Contract Elrond en Rust : NFT staking
 
 :date: 2022-07-07
 :tags: elrond,rust, nft, staking
-:category: Elrond
+:category: Rust
 :slug: elrond-sc-rust-nft-staking
 :authors: Morgan
 :summary: Smart Contract Elrond en Rust : NFT staking

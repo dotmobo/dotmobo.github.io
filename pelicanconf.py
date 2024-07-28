@@ -6,12 +6,18 @@ AUTHOR = 'dotmobo'
 SITEURL = ''
 SITENAME = ".mobo"
 SITETITLE = SITENAME
-SITESUBTITLE = "Blog d'un Pythoniste Djangonaute"
-SITEDESCRIPTION = "DotMobo - Blog d'un Pythoniste Djangonaute"
+SITESUBTITLE = "Explorations d'un développeur"
+SITEDESCRIPTION = ".mobo - explorations d'un développeur"
 SITELOGO = "//dotmobo.github.io/images/avatar700.jpg"
 FAVICON = None
 BROWSER_COLOR = '#333333'
-PYGMENTS_STYLE = 'monokai'
+
+THEME_COLOR = 'dark'
+THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE = True
+THEME_COLOR_ENABLE_USER_OVERRIDE = True
+
+PYGMENTS_STYLE = 'emacs'
+PYGMENTS_STYLE_DARK = 'monokai'
 
 ROBOTS = 'index, follow'
 

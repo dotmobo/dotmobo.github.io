@@ -5,35 +5,35 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.github.io/</loc>
-<lastmod>2024-07-28T13:56:36-00:00</lastmod>
+<lastmod>2024-07-28T14:14:22-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/tags.html</loc>
-<lastmod>2024-07-28T13:56:36-00:00</lastmod>
+<lastmod>2024-07-28T14:14:22-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/categories.html</loc>
-<lastmod>2024-07-28T13:56:36-00:00</lastmod>
+<lastmod>2024-07-28T14:14:22-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/authors.html</loc>
-<lastmod>2024-07-28T13:56:36-00:00</lastmod>
+<lastmod>2024-07-28T14:14:22-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/archives.html</loc>
-<lastmod>2024-07-28T13:56:36-00:00</lastmod>
+<lastmod>2024-07-28T14:14:22-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -335,13 +335,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://dotmobo.github.io/category/elixir.html</loc>
 <lastmod>2018-08-03T00:00:00+00:09</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://dotmobo.github.io/category/elrond.html</loc>
-<lastmod>2022-10-16T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>

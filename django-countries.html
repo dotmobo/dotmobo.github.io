@@ -12,9 +12,16 @@
 
     <link rel="stylesheet" type="text/css" href="https://dotmobo.github.io/theme/stylesheet/style.min.css">
 
+    <link id="dark-theme-style" rel="stylesheet" type="text/css"
+          media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+    href="https://dotmobo.github.io/theme/stylesheet/dark-theme.min.css">
 
-    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+    <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
           href="https://dotmobo.github.io/theme/pygments/monokai.min.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: light)"
+          href="https://dotmobo.github.io/theme/pygments/emacs.min.css">
 
 
   <link rel="stylesheet" type="text/css" href="https://dotmobo.github.io/theme/font-awesome/css/fontawesome.css">
@@ -72,7 +79,7 @@
   <title>.mobo &ndash; Gestion des pays dans django avec django-countries</title>
 
 </head>
-<body class="light-theme">
+<body >
   <aside>
     <div>
       <a href="https://dotmobo.github.io">
@@ -83,7 +90,7 @@
         <a href="https://dotmobo.github.io">.mobo</a>
       </h1>
 
-<p>Blog d'un Pythoniste Djangonaute</p>
+<p>Explorations d'un développeur</p>
 
 
       <ul class="social">
@@ -254,6 +261,14 @@ du champ, de l'affichage et du paramétrage.</p>
 </p>
 <p>
 Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script id="dark-theme-script"
+          src="https://dotmobo.github.io/theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
+          data-default-theme="dark"
+          type="text/javascript">
+  </script>
 </p><p>
   <a rel="license"
      href="http://creativecommons.org/licenses/by-sa/4.0/"
@@ -278,7 +293,7 @@ Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utili
   "name": " .mobo ",
   "url" : "https://dotmobo.github.io",
   "image": "//dotmobo.github.io/images/avatar700.jpg",
-  "description": "DotMobo - Blog d'un Pythoniste Djangonaute"
+  "description": ".mobo - explorations d'un développeur"
 }
 </script>
 

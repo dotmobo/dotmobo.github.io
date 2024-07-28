@@ -10,17 +10,17 @@ aside {
 }
 /* jaune python pour le lien principal */
 aside h1 a {
-    color: #FFD43B;
+    color: #FFE873;
 }
 aside h1 a:hover {
-    color: #FFE873;
+    color: #FFD43B;
 }
 /** bleu python pour les liens et boutons */
 a:hover {
-    color: #4B8BBE;
+    color: #306998;
 }
 a {
-    color: #306998;
+    color: #4B8BBE;
 }
 a.btn, .tag-cloud a {
     background-color: #306998;

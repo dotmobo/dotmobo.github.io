@@ -3,7 +3,7 @@ L'éditeur Zed
 
 :date: 2024-07-14
 :tags: zed, editor, ide, éditeur, vs code, atom, visual code, sublime text
-:category: Ide
+:category: Linux
 :slug: editeur-zed
 :authors: Morgan
 :summary: L'éditeur Zed

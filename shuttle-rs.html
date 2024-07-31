@@ -265,7 +265,7 @@ et supprimer nos TODOs.</p>
 <span class="w">        </span><span class="p">.</span><span class="k">await</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">todos</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Ok</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="n">Json</span><span class="p">(</span><span class="n">todos</span><span class="p">))),</span>
-<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">BAD_REQUEST</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">toString</span><span class="p">())),</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">BAD_REQUEST</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">to_string</span><span class="p">())),</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
@@ -279,7 +279,7 @@ et supprimer nos TODOs.</p>
 <span class="w">        </span><span class="p">.</span><span class="k">await</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">todo</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Ok</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="n">Json</span><span class="p">(</span><span class="n">todo</span><span class="p">))),</span>
-<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">BAD_REQUEST</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">toString</span><span class="p">())),</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">BAD_REQUEST</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">to_string</span><span class="p">())),</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
@@ -293,7 +293,7 @@ et supprimer nos TODOs.</p>
 <span class="w">        </span><span class="p">.</span><span class="k">await</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">todo</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Ok</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">CREATED</span><span class="p">,</span><span class="w"> </span><span class="n">Json</span><span class="p">(</span><span class="n">todo</span><span class="p">))),</span>
-<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">BAD_REQUEST</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">toString</span><span class="p">())),</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">BAD_REQUEST</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">to_string</span><span class="p">())),</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
@@ -308,7 +308,7 @@ et supprimer nos TODOs.</p>
 <span class="w">        </span><span class="p">.</span><span class="k">await</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">NO_CONTENT</span><span class="p">),</span>
-<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">BAD_REQUEST</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">toString</span><span class="p">())),</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">((</span><span class="n">StatusCode</span><span class="p">::</span><span class="n">BAD_REQUEST</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">to_string</span><span class="p">())),</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 

@@ -176,7 +176,7 @@ et supprimer nos TODOs.
             .await
         {
             Ok(todos) => Ok((StatusCode::OK, Json(todos))),
-            Err(e) => Err((StatusCode::BAD_REQUEST, e.toString())),
+            Err(e) => Err((StatusCode::BAD_REQUEST, e.to_string())),
         }
     }
 
@@ -190,7 +190,7 @@ et supprimer nos TODOs.
             .await
         {
             Ok(todo) => Ok((StatusCode::OK, Json(todo))),
-            Err(e) => Err((StatusCode::BAD_REQUEST, e.toString())),
+            Err(e) => Err((StatusCode::BAD_REQUEST, e.to_string())),
         }
     }
 
@@ -204,7 +204,7 @@ et supprimer nos TODOs.
             .await
         {
             Ok(todo) => Ok((StatusCode::CREATED, Json(todo))),
-            Err(e) => Err((StatusCode::BAD_REQUEST, e.toString())),
+            Err(e) => Err((StatusCode::BAD_REQUEST, e.to_string())),
         }
     }
 
@@ -219,7 +219,7 @@ et supprimer nos TODOs.
             .await
         {
             Ok(_) => Ok(StatusCode::NO_CONTENT),
-            Err(e) => Err((StatusCode::BAD_REQUEST, e.toString())),
+            Err(e) => Err((StatusCode::BAD_REQUEST, e.to_string())),
         }
     }
 

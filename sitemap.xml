@@ -5,36 +5,43 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.github.io/</loc>
-<lastmod>2024-07-31T18:21:44-00:00</lastmod>
+<lastmod>2024-08-01T12:50:01-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/tags.html</loc>
-<lastmod>2024-07-31T18:21:44-00:00</lastmod>
+<lastmod>2024-08-01T12:50:01-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/categories.html</loc>
-<lastmod>2024-07-31T18:21:44-00:00</lastmod>
+<lastmod>2024-08-01T12:50:01-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/authors.html</loc>
-<lastmod>2024-07-31T18:21:44-00:00</lastmod>
+<lastmod>2024-08-01T12:50:01-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/archives.html</loc>
-<lastmod>2024-07-31T18:21:44-00:00</lastmod>
+<lastmod>2024-08-01T12:50:01-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.github.io/shuttle-rs-frontend.html</loc>
+<lastmod>2024-08-01T00:00:00+02:00</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
@@ -390,77 +397,77 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.github.io/category/rust.html</loc>
-<lastmod>2024-07-28T00:00:00+00:09</lastmod>
+<lastmod>2024-08-01T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/tag/shuttle.html</loc>
-<lastmod>2024-07-28T00:00:00+00:09</lastmod>
+<lastmod>2024-08-01T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/tag/shuttlers.html</loc>
-<lastmod>2024-07-28T00:00:00+00:09</lastmod>
+<lastmod>2024-08-01T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/tag/rust.html</loc>
-<lastmod>2024-07-28T00:00:00+00:09</lastmod>
+<lastmod>2024-08-01T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/tag/devops.html</loc>
-<lastmod>2024-07-28T00:00:00+00:09</lastmod>
+<lastmod>2024-08-01T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/tag/server.html</loc>
-<lastmod>2024-07-28T00:00:00+00:09</lastmod>
+<lastmod>2024-08-01T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/tag/deploy.html</loc>
-<lastmod>2024-07-28T00:00:00+00:09</lastmod>
+<lastmod>2024-08-01T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/tag/deployment.html</loc>
-<lastmod>2024-07-28T00:00:00+00:09</lastmod>
+<lastmod>2024-08-01T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/tag/ci.html</loc>
-<lastmod>2024-07-28T00:00:00+00:09</lastmod>
+<lastmod>2024-08-01T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/tag/cd.html</loc>
-<lastmod>2024-07-28T00:00:00+00:09</lastmod>
+<lastmod>2024-08-01T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.github.io/tag/integration.html</loc>
-<lastmod>2024-07-28T00:00:00+00:09</lastmod>
+<lastmod>2024-08-01T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -1664,7 +1671,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.github.io/author/morgan.html</loc>
-<lastmod>2024-07-28T00:00:00+00:09</lastmod>
+<lastmod>2024-08-01T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>

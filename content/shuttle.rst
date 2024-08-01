@@ -1,12 +1,12 @@
-Shuttle.rs
-#############
+Shuttle.rs : Déploiement d'un backend
+#####################################
 
 :date: 2024-07-28
 :tags: shuttle, shuttle.rs, rust, devops, server, deploy, deployment, ci, cd, integration
 :category: Rust
 :slug: shuttle-rs
 :authors: Morgan
-:summary: Shuttle.rs
+:summary: Shuttle.rs : Déploiement d'un backend
 
 .. image:: ./images/shuttle.png
     :alt: Shuttle

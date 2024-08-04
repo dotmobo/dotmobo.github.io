@@ -126,3 +126,5 @@ Ensuite, on va modifier le fichier **src/main.rs** pour que Axum expose notre **
     }
 
 Et voilà ! Tu peux redéployer ton application en prod avec **cargo shuttle deploy** et profiter de ta petite interface graphique !
+
+Le résultat complet est disponible sur `mon dépôt github <https://github.com/dotmobo/todos-shuttle>`_.

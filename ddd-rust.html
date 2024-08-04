@@ -156,28 +156,20 @@
 
   <div>
     <img alt="Rust" class="align-right" src="./images/rust.png" />
-<div class="section" id="qu-est-ce-que-le-domain-driven-design">
-<h2>1) Qu'est-ce que le Domain Driven Design ?</h2>
-<p>Le Domain Driven Design (DDD) est un paradigme de développement de logiciels qui met l'accent sur la compréhension
-approfondie du domaine dans lequel ton application sera utilisée.</p>
-<p>En utilisant le DDD, tu peux donc imaginer des modèles de données et des algorithmes qui reflètent précisément les
-concepts et les relations qui existent dans le domaine d'application. Cela te permet de créer des logiciels plus clairs et plus
-faciles à comprendre. Le DDD est donc un outil très utile pour les développeurs de logiciels, en particulier pour
-ceux qui travaillent sur des projets complexes ou qui doivent collaborer avec des domaines experts.</p>
+<div class="section" id="domain-driven-design-quesaco">
+<h2>Domain Driven Design, quésaco ?</h2>
+<p>Le Domain Driven Design, communément appelé DDD, est un paradigme de développement qui met l'accent sur la compréhension approfondie du domaine dans lequel ton application sera utilisée.</p>
+<p>Tu peux donc imaginer des modèles de données et des algorithmes qui reflètent précisément les concepts et les relations qui existent dans ton domaine d'application.</p>
+<p>Cela te permet, en théorie, de créer des logiciels plus clairs et plus faciles à comprendre pour les personnes du projet non techniques.</p>
+<p>L'accent est alors mis sur la collaboration avec les experts du domaine pour obtenir leur avis et leur feedback, et permet donc de parler le même langage.</p>
 </div>
-<div class="section" id="comment-utiliser-le-ddd-dans-un-projet-en-rust">
-<h2>1) Comment utiliser le DDD dans un projet en Rust ?</h2>
-<p>Pour utiliser le DDD dans ton projet en <a class="reference external" href="https://rust-lang.org/">Rust</a>, tu dois d'abord comprendre les concepts et les relations qui existent
-dans le domaine d'application. Cette phase d'analyse et de compréhension est la plus importante.
-Cela peut t'aider à résoudre les problèmes de manière plus efficace pour maintenir et faire évoluer ton
-application.</p>
-<p>Ensuite, tu peux utiliser des structures en Rust pour représenter les concepts du domaine, ainsi que des fonctions
-pour manipuler ces structures. Par exemple, si tu développes une application de gestion de compte bancaire, tu peux
-créer des structures pour représenter les comptes bancaires, les transactions et les clients, ainsi que des fonctions
-pour effectuer des opérations sur ces structures (depôt, retrait, consultation du solde, etc.).</p>
+<div class="section" id="ddd-en-rust">
+<h2>DDD en Rust</h2>
+<p>Tu dois d'abord comprendre toute la partie métier de ton appli pour pouvoir définir le domaine. Cette phase d'analyse et de compréhension est la plus importante et peut t'aider à résoudre les problèmes de manière plus efficace pour maintenir et faire évoluer ton application.</p>
+<p>Ensuite, tu peux utiliser des structures en <a class="reference external" href="https://rust-lang.org/">Rust</a> pour représenter les concepts du domaine, ainsi que des fonctions pour manipuler ces structures.</p>
 </div>
-<div class="section" id="un-exemple-concret-de-ddd-en-rust-une-application-de-gestion-de-compte-bancaire">
-<h2>3) Un exemple concret de DDD en Rust : une application de gestion de compte bancaire.</h2>
+<div class="section" id="exemple-d-application-de-gestion-de-compte-bancaire">
+<h2>Exemple d'application de gestion de compte bancaire.</h2>
 <p>Voici un exemple de code en Rust qui utilise le DDD pour gérer un compte bancaire :</p>
 <div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">chrono</span><span class="p">::{</span><span class="n">DateTime</span><span class="p">,</span><span class="w"> </span><span class="n">Utc</span><span class="p">};</span>
 
@@ -233,37 +225,10 @@ pour effectuer des opérations sur ces structures (depôt, retrait, consultation
 <span class="w">    </span><span class="n">client</span><span class="p">.</span><span class="n">accounts</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">50</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
-<p>Ce code utilise des structures pour représenter les concepts du domaine (compte bancaire, transaction et client), ainsi que
-des fonctions pour manipuler ces structures (dépôt, retrait, etc.).</p>
+<p>Ce code utilise des structures pour représenter les concepts du domaine (compte bancaire, transaction et client), ainsi que des fonctions pour manipuler ces structures (dépôt, retrait, etc.).</p>
 </div>
-<div class="section" id="comment-le-ddd-peut-ameliorer-la-collaboration-avec-les-experts-du-domaine">
-<h2>4) Comment le DDD peut améliorer la collaboration avec les experts du domaine ?</h2>
-<p>En utilisant le DDD, tu peux également collaborer plus efficacement avec les experts du domaine pour obtenir des résultats
-plus précis. En comprenant les concepts et les relations qui existent dans le domaine d'application, tu peux facilement poser
-des questions aux experts pour obtenir des informations précises sur le fonctionnement du domaine et sur les besoins des
-utilisateurs.</p>
-<p>De plus, en utilisant des structures et des fonctions qui reflètent les concepts du domaine, tu peux facilement montrer ton
-travail aux experts pour obtenir leur avis et leur feedback. Cela peut t'aider à améliorer la qualité de ton application et à
-la rendre plus conforme aux exigences du domaine.</p>
-<p>En utilisant le DDD, tu peux donc créer des applications en Rust qui sont plus précises et plus adaptées aux besoins des
-utilisateurs, ce qui peut augmenter la satisfaction des clients et la réussite de ton projet.</p>
-</div>
-<div class="section" id="comment-integrer-le-ddd-dans-un-projet-en-rust-existant">
-<h2>5) Comment intégrer le DDD dans un projet en Rust existant ?</h2>
-<p>Si tu as déjà un projet en Rust qui ne suit pas le DDD, tu peux tout de même l'intégrer à ton processus de développement.
-Pour ce faire, tu peux commencer par analyser ton code pour identifier les concepts et les relations qui existent dans le
-domaine d'application. Cela te permettra de mieux comprendre le fonctionnement de ton application et de repérer les zones qui
-pourraient être améliorées en utilisant le DDD.</p>
-<p>Ensuite, tu peux créer des structures et des fonctions en Rust qui reflètent ces concepts et ces relations, et les intégrer
-dans ton code existant. Cela peut te permettre de rendre ton code plus clair et plus facile à comprendre, ainsi que de
-résoudre les problèmes de manière plus efficace.</p>
-<p>Il est important de noter que l'intégration du DDD dans un projet existant peut être un processus long et complexe, et il est
-recommandé de le faire étape par étape pour éviter de perturber le fonctionnement de ton application. En prenant le temps de
-comprendre le domaine d'application et en utilisant des structures et des fonctions adaptées, tu peux facilement intégrer le
-DDD dans ton projet en Rust.</p>
-</div>
-<div class="section" id="un-exemple-rust-plus-avance-utilisant-le-ddd-un-systeme-de-gestion-de-stock">
-<h2>6) Un exemple Rust plus avancé utilisant le DDD : un système de gestion de stock.</h2>
+<div class="section" id="exemple-plus-avance-un-systeme-de-gestion-de-stock">
+<h2>Exemple plus avancé : un système de gestion de stock.</h2>
 <p>Voici un exemple de code Rust plus avancé qui utilise le DDD pour gérer un système de gestion de stock :</p>
 <div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">chrono</span><span class="p">::{</span><span class="n">DateTime</span><span class="p">,</span><span class="w"> </span><span class="n">Utc</span><span class="p">};</span>
 <span class="k">use</span><span class="w"> </span><span class="n">std</span><span class="p">::</span><span class="n">collections</span><span class="p">::</span><span class="n">HashMap</span><span class="p">;</span>
@@ -320,8 +285,7 @@ DDD dans ton projet en Rust.</p>
 
 <span class="w">    </span><span class="c1">// Ajoute un client au système</span>
 <span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">add_customer</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">customer</span><span class="p">:</span><span class="w"> </span><span class="nc">Customer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">customers</span>
-<span class="w">            </span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">customer</span><span class="p">.</span><span class="n">email</span><span class="p">.</span><span class="n">clone</span><span class="p">(),</span><span class="w"> </span><span class="n">customer</span><span class="p">);</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">customers</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">customer</span><span class="p">.</span><span class="n">email</span><span class="p">.</span><span class="n">clone</span><span class="p">(),</span><span class="w"> </span><span class="n">customer</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Passe une commande pour un client donné</span>
@@ -361,8 +325,7 @@ DDD dans ton projet en Rust.</p>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-<p>Pour utiliser ce code, tu peux créer une instance de la structure StockSystem et ajouter des produits, des clients et passer
-des commandes :</p>
+<p>Pour utiliser ce code, tu peux créer une instance de la structure StockSystem et ajouter des produits, des clients et passer des commandes :</p>
 <div class="highlight"><pre><span></span><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Crée une instance du système de stock</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">stock_system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StockSystem</span><span class="w"> </span><span class="p">{</span>
@@ -415,9 +378,9 @@ des commandes :</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="section" id="avantages-et-defis-du-ddd-dans-un-projet-en-rust">
-<h2>1) Avantages et défis du DDD dans un projet en Rust.</h2>
-<p>En utilisant le DDD dans tes projets en Rust, tu peux bénéficier de nombreux avantages, tels que :</p>
+<div class="section" id="avantages-et-defis">
+<h2>Avantages et défis</h2>
+<p>En utilisant le DDD dans tes projets, tu peux bénéficier de nombreux avantages, tels que :</p>
 <ul class="simple">
 <li>Des logiciels plus clairs et plus faciles à comprendre, ce qui peut améliorer la collaboration avec les autres développeurs et les experts du domaine.</li>
 <li>Des modèles de données et des algorithmes qui reflètent les concepts et les relations du domaine d'application, ce qui peut améliorer la qualité de ton code et la précision de tes résultats.</li>
@@ -427,7 +390,7 @@ des commandes :</p>
 <ul class="simple">
 <li>La nécessité de comprendre en profondeur le domaine d'application, ce qui peut être difficile et prendre du temps pour les développeurs qui ne sont pas des experts du domaine.</li>
 <li>L'intégration du DDD dans un projet existant peut être complexe et perturbante pour le fonctionnement de l'application.</li>
-<li>La mise en place d'un processus de développement orienté domaines peut nécessiter des changements importants dans la façon dont les équipes de développement travaillent, ce qui peut être difficile à gérer.</li>
+<li>La mise en place d'un processus de développement orienté domaine peut nécessiter des changements importants dans la façon dont les équipes de développement travaillent, ce qui peut être difficile à gérer.</li>
 </ul>
 </div>
 

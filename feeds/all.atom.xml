@@ -672,28 +672,20 @@ via la revue de &lt;strong&gt;merge requests&lt;/strong&gt; et éventuellement l
 &lt;/div&gt;
 </content><category term="Agile"></category><category term="agile"></category><category term="safe"></category><category term="scrum"></category><category term="framework"></category><category term="management"></category><category term="sprint"></category><category term="daily"></category><category term="retrospective"></category><category term="planning"></category></entry><entry><title>Domain Driven Design en Rust</title><link href="https://dotmobo.github.io/ddd-rust.html" rel="alternate"></link><published>2022-12-04T00:00:00+01:00</published><updated>2022-12-04T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2022-12-04:/ddd-rust.html</id><summary type="html">&lt;p class="first last"&gt;Domain Driven Design en Rust&lt;/p&gt;
 </summary><content type="html">&lt;img alt="Rust" class="align-right" src="./images/rust.png" /&gt;
-&lt;div class="section" id="qu-est-ce-que-le-domain-driven-design"&gt;
-&lt;h2&gt;1) Qu'est-ce que le Domain Driven Design ?&lt;/h2&gt;
-&lt;p&gt;Le Domain Driven Design (DDD) est un paradigme de développement de logiciels qui met l'accent sur la compréhension
-approfondie du domaine dans lequel ton application sera utilisée.&lt;/p&gt;
-&lt;p&gt;En utilisant le DDD, tu peux donc imaginer des modèles de données et des algorithmes qui reflètent précisément les
-concepts et les relations qui existent dans le domaine d'application. Cela te permet de créer des logiciels plus clairs et plus
-faciles à comprendre. Le DDD est donc un outil très utile pour les développeurs de logiciels, en particulier pour
-ceux qui travaillent sur des projets complexes ou qui doivent collaborer avec des domaines experts.&lt;/p&gt;
+&lt;div class="section" id="domain-driven-design-quesaco"&gt;
+&lt;h2&gt;Domain Driven Design, quésaco ?&lt;/h2&gt;
+&lt;p&gt;Le Domain Driven Design, communément appelé DDD, est un paradigme de développement qui met l'accent sur la compréhension approfondie du domaine dans lequel ton application sera utilisée.&lt;/p&gt;
+&lt;p&gt;Tu peux donc imaginer des modèles de données et des algorithmes qui reflètent précisément les concepts et les relations qui existent dans ton domaine d'application.&lt;/p&gt;
+&lt;p&gt;Cela te permet, en théorie, de créer des logiciels plus clairs et plus faciles à comprendre pour les personnes du projet non techniques.&lt;/p&gt;
+&lt;p&gt;L'accent est alors mis sur la collaboration avec les experts du domaine pour obtenir leur avis et leur feedback, et permet donc de parler le même langage.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="comment-utiliser-le-ddd-dans-un-projet-en-rust"&gt;
-&lt;h2&gt;1) Comment utiliser le DDD dans un projet en Rust ?&lt;/h2&gt;
-&lt;p&gt;Pour utiliser le DDD dans ton projet en &lt;a class="reference external" href="https://rust-lang.org/"&gt;Rust&lt;/a&gt;, tu dois d'abord comprendre les concepts et les relations qui existent
-dans le domaine d'application. Cette phase d'analyse et de compréhension est la plus importante.
-Cela peut t'aider à résoudre les problèmes de manière plus efficace pour maintenir et faire évoluer ton
-application.&lt;/p&gt;
-&lt;p&gt;Ensuite, tu peux utiliser des structures en Rust pour représenter les concepts du domaine, ainsi que des fonctions
-pour manipuler ces structures. Par exemple, si tu développes une application de gestion de compte bancaire, tu peux
-créer des structures pour représenter les comptes bancaires, les transactions et les clients, ainsi que des fonctions
-pour effectuer des opérations sur ces structures (depôt, retrait, consultation du solde, etc.).&lt;/p&gt;
+&lt;div class="section" id="ddd-en-rust"&gt;
+&lt;h2&gt;DDD en Rust&lt;/h2&gt;
+&lt;p&gt;Tu dois d'abord comprendre toute la partie métier de ton appli pour pouvoir définir le domaine. Cette phase d'analyse et de compréhension est la plus importante et peut t'aider à résoudre les problèmes de manière plus efficace pour maintenir et faire évoluer ton application.&lt;/p&gt;
+&lt;p&gt;Ensuite, tu peux utiliser des structures en &lt;a class="reference external" href="https://rust-lang.org/"&gt;Rust&lt;/a&gt; pour représenter les concepts du domaine, ainsi que des fonctions pour manipuler ces structures.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="un-exemple-concret-de-ddd-en-rust-une-application-de-gestion-de-compte-bancaire"&gt;
-&lt;h2&gt;3) Un exemple concret de DDD en Rust : une application de gestion de compte bancaire.&lt;/h2&gt;
+&lt;div class="section" id="exemple-d-application-de-gestion-de-compte-bancaire"&gt;
+&lt;h2&gt;Exemple d'application de gestion de compte bancaire.&lt;/h2&gt;
 &lt;p&gt;Voici un exemple de code en Rust qui utilise le DDD pour gérer un compte bancaire :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;use&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;chrono&lt;/span&gt;&lt;span class="p"&gt;::{&lt;/span&gt;&lt;span class="n"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Utc&lt;/span&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 
@@ -749,37 +741,10 @@ pour effectuer des opérations sur ces structures (depôt, retrait, consultation
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;accounts&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;withdraw&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;unwrap&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Ce code utilise des structures pour représenter les concepts du domaine (compte bancaire, transaction et client), ainsi que
-des fonctions pour manipuler ces structures (dépôt, retrait, etc.).&lt;/p&gt;
+&lt;p&gt;Ce code utilise des structures pour représenter les concepts du domaine (compte bancaire, transaction et client), ainsi que des fonctions pour manipuler ces structures (dépôt, retrait, etc.).&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="comment-le-ddd-peut-ameliorer-la-collaboration-avec-les-experts-du-domaine"&gt;
-&lt;h2&gt;4) Comment le DDD peut améliorer la collaboration avec les experts du domaine ?&lt;/h2&gt;
-&lt;p&gt;En utilisant le DDD, tu peux également collaborer plus efficacement avec les experts du domaine pour obtenir des résultats
-plus précis. En comprenant les concepts et les relations qui existent dans le domaine d'application, tu peux facilement poser
-des questions aux experts pour obtenir des informations précises sur le fonctionnement du domaine et sur les besoins des
-utilisateurs.&lt;/p&gt;
-&lt;p&gt;De plus, en utilisant des structures et des fonctions qui reflètent les concepts du domaine, tu peux facilement montrer ton
-travail aux experts pour obtenir leur avis et leur feedback. Cela peut t'aider à améliorer la qualité de ton application et à
-la rendre plus conforme aux exigences du domaine.&lt;/p&gt;
-&lt;p&gt;En utilisant le DDD, tu peux donc créer des applications en Rust qui sont plus précises et plus adaptées aux besoins des
-utilisateurs, ce qui peut augmenter la satisfaction des clients et la réussite de ton projet.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="comment-integrer-le-ddd-dans-un-projet-en-rust-existant"&gt;
-&lt;h2&gt;5) Comment intégrer le DDD dans un projet en Rust existant ?&lt;/h2&gt;
-&lt;p&gt;Si tu as déjà un projet en Rust qui ne suit pas le DDD, tu peux tout de même l'intégrer à ton processus de développement.
-Pour ce faire, tu peux commencer par analyser ton code pour identifier les concepts et les relations qui existent dans le
-domaine d'application. Cela te permettra de mieux comprendre le fonctionnement de ton application et de repérer les zones qui
-pourraient être améliorées en utilisant le DDD.&lt;/p&gt;
-&lt;p&gt;Ensuite, tu peux créer des structures et des fonctions en Rust qui reflètent ces concepts et ces relations, et les intégrer
-dans ton code existant. Cela peut te permettre de rendre ton code plus clair et plus facile à comprendre, ainsi que de
-résoudre les problèmes de manière plus efficace.&lt;/p&gt;
-&lt;p&gt;Il est important de noter que l'intégration du DDD dans un projet existant peut être un processus long et complexe, et il est
-recommandé de le faire étape par étape pour éviter de perturber le fonctionnement de ton application. En prenant le temps de
-comprendre le domaine d'application et en utilisant des structures et des fonctions adaptées, tu peux facilement intégrer le
-DDD dans ton projet en Rust.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="un-exemple-rust-plus-avance-utilisant-le-ddd-un-systeme-de-gestion-de-stock"&gt;
-&lt;h2&gt;6) Un exemple Rust plus avancé utilisant le DDD : un système de gestion de stock.&lt;/h2&gt;
+&lt;div class="section" id="exemple-plus-avance-un-systeme-de-gestion-de-stock"&gt;
+&lt;h2&gt;Exemple plus avancé : un système de gestion de stock.&lt;/h2&gt;
 &lt;p&gt;Voici un exemple de code Rust plus avancé qui utilise le DDD pour gérer un système de gestion de stock :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;use&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;chrono&lt;/span&gt;&lt;span class="p"&gt;::{&lt;/span&gt;&lt;span class="n"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Utc&lt;/span&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;span class="k"&gt;use&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;collections&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;HashMap&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -836,8 +801,7 @@ DDD dans ton projet en Rust.&lt;/p&gt;
 
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="c1"&gt;// Ajoute un client au système&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;fn&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;add_customer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;mut&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Customer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customers&lt;/span&gt;
-&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customers&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="c1"&gt;// Passe une commande pour un client donné&lt;/span&gt;
@@ -877,8 +841,7 @@ DDD dans ton projet en Rust.&lt;/p&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Pour utiliser ce code, tu peux créer une instance de la structure StockSystem et ajouter des produits, des clients et passer
-des commandes :&lt;/p&gt;
+&lt;p&gt;Pour utiliser ce code, tu peux créer une instance de la structure StockSystem et ajouter des produits, des clients et passer des commandes :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;fn&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="c1"&gt;// Crée une instance du système de stock&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="kd"&gt;let&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;mut&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;stock_system&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;StockSystem&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
@@ -931,9 +894,9 @@ des commandes :&lt;/p&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="avantages-et-defis-du-ddd-dans-un-projet-en-rust"&gt;
-&lt;h2&gt;1) Avantages et défis du DDD dans un projet en Rust.&lt;/h2&gt;
-&lt;p&gt;En utilisant le DDD dans tes projets en Rust, tu peux bénéficier de nombreux avantages, tels que :&lt;/p&gt;
+&lt;div class="section" id="avantages-et-defis"&gt;
+&lt;h2&gt;Avantages et défis&lt;/h2&gt;
+&lt;p&gt;En utilisant le DDD dans tes projets, tu peux bénéficier de nombreux avantages, tels que :&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Des logiciels plus clairs et plus faciles à comprendre, ce qui peut améliorer la collaboration avec les autres développeurs et les experts du domaine.&lt;/li&gt;
 &lt;li&gt;Des modèles de données et des algorithmes qui reflètent les concepts et les relations du domaine d'application, ce qui peut améliorer la qualité de ton code et la précision de tes résultats.&lt;/li&gt;
@@ -943,7 +906,7 @@ des commandes :&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;La nécessité de comprendre en profondeur le domaine d'application, ce qui peut être difficile et prendre du temps pour les développeurs qui ne sont pas des experts du domaine.&lt;/li&gt;
 &lt;li&gt;L'intégration du DDD dans un projet existant peut être complexe et perturbante pour le fonctionnement de l'application.&lt;/li&gt;
-&lt;li&gt;La mise en place d'un processus de développement orienté domaines peut nécessiter des changements importants dans la façon dont les équipes de développement travaillent, ce qui peut être difficile à gérer.&lt;/li&gt;
+&lt;li&gt;La mise en place d'un processus de développement orienté domaine peut nécessiter des changements importants dans la façon dont les équipes de développement travaillent, ce qui peut être difficile à gérer.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 </content><category term="Rust"></category><category term="rust"></category><category term="ddd"></category><category term="domain"></category><category term="driven"></category><category term="design"></category></entry><entry><title>Smart Contract Elrond en Rust : Multiple NFTs staking</title><link href="https://dotmobo.github.io/elrond-sc-rust-multiple-nfts-staking.html" rel="alternate"></link><published>2022-10-16T00:00:00+02:00</published><updated>2022-10-16T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2022-10-16:/elrond-sc-rust-multiple-nfts-staking.html</id><summary type="html">&lt;p class="first last"&gt;Smart Contract Elrond en Rust : Multiple NFTs staking&lt;/p&gt;

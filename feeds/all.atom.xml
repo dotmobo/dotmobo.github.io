@@ -101,6 +101,7 @@ Pour rester ultra simple, tu peux partir sur &lt;a class="reference external" hr
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Et voilà ! Tu peux redéployer ton application en prod avec &lt;strong&gt;cargo shuttle deploy&lt;/strong&gt; et profiter de ta petite interface graphique !&lt;/p&gt;
+&lt;p&gt;Le résultat complet est disponible sur &lt;a class="reference external" href="https://github.com/dotmobo/todos-shuttle"&gt;mon dépôt github&lt;/a&gt;.&lt;/p&gt;
 </content><category term="Rust"></category><category term="shuttle"></category><category term="shuttle.rs"></category><category term="rust"></category><category term="devops"></category><category term="server"></category><category term="deploy"></category><category term="deployment"></category><category term="ci"></category><category term="cd"></category><category term="integration"></category></entry><entry><title>Shuttle.rs : Déploiement d'un backend</title><link href="https://dotmobo.github.io/shuttle-rs.html" rel="alternate"></link><published>2024-07-28T00:00:00+02:00</published><updated>2024-07-28T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2024-07-28:/shuttle-rs.html</id><summary type="html">&lt;p class="first last"&gt;Shuttle.rs : Déploiement d'un backend&lt;/p&gt;
 </summary><content type="html">&lt;img alt="Shuttle" class="align-right" src="./images/shuttle.png" /&gt;
 &lt;p&gt;Aujourd'hui, je vais te parler d'un service que je viens de découvrir et qui mérite le coup d'oeil.&lt;/p&gt;

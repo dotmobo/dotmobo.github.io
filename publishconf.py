@@ -10,7 +10,7 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
-SITEURL = 'https://dotmobo.github.io'
+SITEURL = 'https://dotmobo.xyz'
 RELATIVE_URLS = False
 
 FEED_ATOM = 'feeds/all.atom.xml'

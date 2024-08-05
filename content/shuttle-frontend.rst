@@ -12,7 +12,7 @@ Shuttle.rs : Déploiement d'un frontend
     :alt: Shuttle
     :align: right
 
-Petit article rapide qui fait suite au `déploiement d'un backend <https://dotmobo.github.io/shuttle-rs.html>`_ en Rust avec `Shuttle <https://www.shuttle.rs/>`_.
+Petit article rapide qui fait suite au `déploiement d'un backend <https://dotmobo.xyz/shuttle-rs.html>`_ en Rust avec `Shuttle <https://www.shuttle.rs/>`_.
 
 Après avoir créé ton API pour ton application de TODOs avec Axum, tu vas pouvoir y ajouter un petit frontend sympa également déployé sous Shuttle pour tester tout ça.
 

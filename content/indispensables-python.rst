@@ -25,7 +25,7 @@ Framework web
 * django_: framework le plus réputé, qui a l'avantage d'avoir une tonne de
   support et de documentation. Indispensable pour créer des applications web complexes.
 * bottle_: framework ultra minimaliste, idéal pour les applications web de petite taille.
-* pelican_: générateur de site statique utilisé par ce blog ! Tuto dispo `ici <http://dotmobo.github.io/pelican.html>`__.
+* pelican_: générateur de site statique utilisé par ce blog ! Tuto dispo `ici <http://dotmobo.xyz/pelican.html>`__.
 
 Base de données
 ===============
@@ -34,12 +34,12 @@ Base de données
 * peewee_: orm léger et simple, parfait pour des besoins pas trop complexes.
 * psycopg2_: driver postgresql
 * cx-oracle_: driver oracle
-* tinydb_: base de données ultra minimaliste. Tuto dispo `ici <http://dotmobo.github.io/tinydb.html>`__.
+* tinydb_: base de données ultra minimaliste. Tuto dispo `ici <http://dotmobo.xyz/tinydb.html>`__.
 
 Http
 ====
 
-* httpie_: client http en ligne de commande. Tuto dispo `ici <http://dotmobo.github.io/httpie.html>`__.
+* httpie_: client http en ligne de commande. Tuto dispo `ici <http://dotmobo.xyz/httpie.html>`__.
 * requests_: librairie http la plus simple et le plus efficace.
 * britney_ et britney-utils_: client SPORE_, qui est une spécification de description
   d'APIs REST.
@@ -49,7 +49,7 @@ Templating
 ==========
 
 * jinja2_: moteur de template le plus réputé, utilisé par django.
-* mako_: moteur de template ultra performant. Tuto dispo `ici <http://dotmobo.github.io/mako.html>`__.
+* mako_: moteur de template ultra performant. Tuto dispo `ici <http://dotmobo.xyz/mako.html>`__.
 * cookiecutter_: moteur de template de projet utilisant jinja2. Tu peux jeter un oeil à `l'article
   de Sam <http://sametmax.com/templates-de-projet-avec-cookiecutter/>`_ sur le sujet.
   Exemples d'utilisation: simple-python-drybones_ et bottle-drybones_.
@@ -76,12 +76,12 @@ Django
 * django-extensions_: extension des commandes de django.
 * django-static-precompiler_: librairie qui permet d'automatiser la précompilation des fichiers
   CoffeeScript, Livescript, Sass, Less et autres.
-* django-crispy_: outil formidable pour créer des formulaires compatibles bootstrap. Tuto dispo `ici <http://dotmobo.github.io/django-crispy-forms.html>`__.
+* django-crispy_: outil formidable pour créer des formulaires compatibles bootstrap. Tuto dispo `ici <http://dotmobo.xyz/django-crispy-forms.html>`__.
 * django-workflows_ et django-workflow-activity_: outils pour créer des worflows états/transitions.
 * django-drybones_: template de projet django.
 * django-autocomplete-light_: module d'autocomplétion pour les champs des formulaires.
-* django-countries_: gestion des pays dans django. Tuto dispo `ici <http://dotmobo.github.io/django-countries.html>`__.
-* django-simple-captcha_: utilisation de captchas. Tuto dispo `ici <http://dotmobo.github.io/django-simple-captcha.html>`__.
+* django-countries_: gestion des pays dans django. Tuto dispo `ici <http://dotmobo.xyz/django-countries.html>`__.
+* django-simple-captcha_: utilisation de captchas. Tuto dispo `ici <http://dotmobo.xyz/django-simple-captcha.html>`__.
 * django-rest-framework_ (drf): excellente librairie pour créer des APIs REST.
 * django-fine-permissions_: gestion des permissions fines, par champs et par utilisateur,
   pour drf.
@@ -96,7 +96,7 @@ Test
 ====
 
 * tox_: outil qui permet d'exécuter les tests unitaires sous plusieurs virtualenvs
-  avec des configurations différentes. Tuto dispo `ici <http://dotmobo.github.io/integration-continue.html>`__.
+  avec des configurations différentes. Tuto dispo `ici <http://dotmobo.xyz/integration-continue.html>`__.
 * coverage_: outil d'analyse de la couverture du code.
 * prospector_: outil utilisé par `landsacape.io <https://landscape.io/>`_
   qui utilise les meilleurs linters python pour vérifier la qualité du code.
@@ -117,7 +117,7 @@ Wsgi
 ====
 
 * circus_ + chaussette_ + waitress_: stack wsgi complète.
-  Tuto dispo `ici <http://dotmobo.github.io/chaussette-circus.html>`_.
+  Tuto dispo `ici <http://dotmobo.xyz/chaussette-circus.html>`_.
 
 Date
 ====
@@ -150,7 +150,7 @@ En vrac
 
 * six_: librairie pour la compatibilité python 2/python 3.
 * pytoolz_: extension d'itertools et functools.
-  Tuto dispo `ici <http://dotmobo.github.io/pytoolz.html>`__.
+  Tuto dispo `ici <http://dotmobo.xyz/pytoolz.html>`__.
 * unidecode_: libairie très pratique permet de remplacer des caractères unicode en ascii.
 
 Bonnes découvertes et bonnes vacances !

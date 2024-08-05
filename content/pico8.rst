@@ -89,7 +89,7 @@ Tu peux jeter un oeil aux jeux que j'ai codé pour des Game Jams avec *Pico-8*. 
 Le code
 --------
 
-Au niveau du code, tu pourras trouver de nombreuses similarités avec *Löve* qu'on a `étudié précédemment <http://dotmobo.github.io/plateformer-love2d.html>`_.
+Au niveau du code, tu pourras trouver de nombreuses similarités avec *Löve* qu'on a `étudié précédemment <http://dotmobo.xyz/plateformer-love2d.html>`_.
 
 Tu as aussi les trois fonctions **init**, **update** et **draw** dans lesquelles tout ce passe.
 De la même manière il te faudra gérer l'état de ton jeu et les différents écrans. Tu ne seras vraiment pas dépaysé !

@@ -13,7 +13,7 @@ Smart Contract Elrond en Rust : Multiple NFTs staking
     :align: right
 
 
-C'est parti pour un petit article faisant suite au premier dédié `au staking de NFT sur Elrond <https://dotmobo.github.io/elrond-sc-rust-nft-staking.html#elrond-sc-rust-nft-staking>`_.
+C'est parti pour un petit article faisant suite au premier dédié `au staking de NFT sur Elrond <https://dotmobo.xyz/elrond-sc-rust-nft-staking.html#elrond-sc-rust-nft-staking>`_.
 
 Contexte
 ---------

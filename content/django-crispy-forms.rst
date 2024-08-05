@@ -21,8 +21,8 @@ Par défaut, il supporte les frameworks CSS `bootstrap <http://getbootstrap.com/
 `foundation <http://foundation.zurb.com/>`_ et `uni-form <https://github.com/draganbabic/uni-form/>`_.
 
 On va voir comment tu peux créer un formulaire d'enregistrement compatible avec bootstrap en
-utilisant des onglets, `un captcha <http://dotmobo.github.io/django-simple-captcha.html>`_,
-`une liste de pays <http://dotmobo.github.io/django-countries.html>`_ et
+utilisant des onglets, `un captcha <http://dotmobo.xyz/django-simple-captcha.html>`_,
+`une liste de pays <http://dotmobo.xyz/django-countries.html>`_ et
 `un date picker <https://github.com/nkunihiko/django-bootstrap3-datetimepicker>`_.
 
 Pour simplifier ce tuto, on ne va pas s'occuper de l'internationalisation. Mais

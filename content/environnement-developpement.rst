@@ -139,7 +139,7 @@ est très active.
 
 Pour coder, tu auras besoin d'un éditeur de texte.
 Je te recommande fortement `atom <https://atom.io/>`_, que j'ai déjà présenté
-`ici <http://dotmobo.github.io/sublime-text-to-atom.html>`_.
+`ici <http://dotmobo.xyz/sublime-text-to-atom.html>`_.
 
 En plus d'atom, tu auras besoin d'un éditeur qui peut s'exécuter dans un terminal.
 Pas besoin de chercher bien loin, le plus avancé est `vim <http://www.vim.org/>`_.

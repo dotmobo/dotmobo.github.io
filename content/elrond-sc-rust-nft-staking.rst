@@ -17,7 +17,7 @@ en `Rust <https://rust-lang.org/>`_. On va parler ici d'un
 sujet qui intéresse pas mal de monde dans l'univers des NFTs : le **staking**.
 
 On suppose que tu as déjà tous les outils pour te lancer dans l'aventure. Si ce n'est pas le cas, jettes un oeil
-au `premier épisode <http://dotmobo.github.io/elrond-sc-rust-dao-vote.html#elrond-sc-rust-dao-vote>`_.
+au `premier épisode <http://dotmobo.xyz/elrond-sc-rust-dao-vote.html#elrond-sc-rust-dao-vote>`_.
 
 Contexte
 --------

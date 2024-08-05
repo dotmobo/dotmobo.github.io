@@ -12,7 +12,7 @@ Ajouter un captcha dans un formulaire django
     :alt: Django
     :align: right
 
-Suite à `l'article sur django-countries <http://dotmobo.github.io/django-countries.html>`_,
+Suite à `l'article sur django-countries <http://dotmobo.xyz/django-countries.html>`_,
 on va continuer notre parcours des petits outils simples et efficaces pour améliorer nos formulaires django.
 
 Avant d'aborder le gros morceau qu'est `django-cryspy <http://django-crispy-forms.readthedocs.org/en/latest/>`_

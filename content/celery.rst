@@ -37,7 +37,7 @@ La première notion à connaître est le **broker**. Il s'agit tout simplement d
 Tu vas pouvoir utiliser plusieurs technos pour gérer le *broker*, comme RabbitMq, Redis, Mongodb, Sqlalchemy, ou même l'orm de Django.
 
 C'est le *broker* qui va permettre la communication entre le(s) workers(s) et le(s) client(s). La techno recommandée par Celery est `RabbitMq <https://www.rabbitmq.com/>`_,
-qui utilise le protocole **AMQP**. Je t'en ai `déjà parlé précédemment <http://dotmobo.github.io/rabbitmq.html>`_.
+qui utilise le protocole **AMQP**. Je t'en ai `déjà parlé précédemment <http://dotmobo.xyz/rabbitmq.html>`_.
 
 **Backend, quésaco ?**
 

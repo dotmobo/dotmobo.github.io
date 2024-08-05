@@ -13,8 +13,8 @@ Smart Contract Elrond en Rust : NFT market
     :align: right
 
 C'est parti pour le troisième épisode de la série sur les Smart Contracts `Elrond <https://elrond.com/>`_
-en `Rust <https://rust-lang.org/>`_. Après avoir vu comment `staker un NFT <http://dotmobo.github.io/elrond-sc-rust-nft-staking.html#elrond-sc-rust-nft-staking>`_ pour gagner des $DEAD et comment
-utiliser ces $DEAD pour `voter dans notre DAO <http://dotmobo.github.io/elrond-sc-rust-dao-vote.html#elrond-sc-rust-dao-vote>`_, on va pouvoir désormais acheter des NFTs sur notre propre
+en `Rust <https://rust-lang.org/>`_. Après avoir vu comment `staker un NFT <http://dotmobo.xyz/elrond-sc-rust-nft-staking.html#elrond-sc-rust-nft-staking>`_ pour gagner des $DEAD et comment
+utiliser ces $DEAD pour `voter dans notre DAO <http://dotmobo.xyz/elrond-sc-rust-dao-vote.html#elrond-sc-rust-dao-vote>`_, on va pouvoir désormais acheter des NFTs sur notre propre
 *marketplace* avec des $DEAD.
 
 

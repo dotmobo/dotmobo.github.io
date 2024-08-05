@@ -8,7 +8,7 @@ SITENAME = ".mobo"
 SITETITLE = SITENAME
 SITESUBTITLE = "Explorations d'un développeur"
 SITEDESCRIPTION = ".mobo - explorations d'un développeur"
-SITELOGO = "//dotmobo.github.io/images/avatar700.jpg"
+SITELOGO = "//dotmobo.xyz/images/avatar700.jpg"
 FAVICON = None
 BROWSER_COLOR = '#333333'
 
@@ -50,7 +50,7 @@ LINKS = None
 
 SOCIAL = (('github', 'https://github.com/dotmobo'),
           ('twitter', 'https://twitter.com/dotmobo'),
-          ('rss', '//dotmobo.github.io/feeds/all.atom.xml'))
+          ('rss', '//dotmobo.xyz/feeds/all.atom.xml'))
 
 
 MENUITEMS = (('Categories', '/categories.html'),

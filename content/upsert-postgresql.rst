@@ -12,7 +12,7 @@ Upsert avec Postgresql
     :alt: Postgresql
     :align: right
 
-Lorsque l'on commence à `s'amuser avec asyncio <http://dotmobo.github.io/introduction-asyncio.html>`_
+Lorsque l'on commence à `s'amuser avec asyncio <http://dotmobo.xyz/introduction-asyncio.html>`_
 pour faire des traitements asynchrones sur une base `postgresql <http://www.postgresqlfr.org/>`_
 avec `aiopg <https://github.com/aio-libs/aiopg>`_, on rencontre assez vite le problème des accès concurrents
 à une ressource partagée.

@@ -12,7 +12,7 @@ Créer un petit jeu de plateforme avec Löve
     :alt: Löve
     :align: right
 
-On fait suite au `précédent article du blog <http://dotmobo.github.io/jeux-video-lua.html>`_ qui introduisait le développement de jeux vidéo en Lua avec `Löve <https://love2d.org/>`_.
+On fait suite au `précédent article du blog <http://dotmobo.xyz/jeux-video-lua.html>`_ qui introduisait le développement de jeux vidéo en Lua avec `Löve <https://love2d.org/>`_.
 Tu vas voir comment créer un petit jeu de plateforme inspiré de `Super Meat Boy <https://store.steampowered.com/app/40800/Super_Meat_Boy/>`_ et de `Disc Room <https://store.steampowered.com/app/1229580/Disc_Room/>`_ uniquement avec Löve.
 
 Disc Room Escape

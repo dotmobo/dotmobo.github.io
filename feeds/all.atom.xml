@@ -94,7 +94,7 @@ Autant garder la configuration par défaut pour rester dans l'idée d'origine de
 &lt;p&gt;Happy coding !&lt;/p&gt;
 </content><category term="Python"></category><category term="ruff"></category><category term="python"></category><category term="linter"></category><category term="format"></category><category term="black"></category><category term="isort"></category><category term="flake8"></category><category term="pep8"></category><category term="rust"></category><category term="pylint"></category></entry><entry><title>Shuttle.rs : Déploiement d'un frontend</title><link href="https://dotmobo.xyz/shuttle-rs-frontend.html" rel="alternate"></link><published>2024-08-01T00:00:00+02:00</published><updated>2024-08-01T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2024-08-01:/shuttle-rs-frontend.html</id><summary type="html">&lt;p class="first last"&gt;Shuttle.rs : Déploiement d'un frontend&lt;/p&gt;
 </summary><content type="html">&lt;img alt="Shuttle" class="align-right" src="./images/shuttle.png" /&gt;
-&lt;p&gt;Petit article rapide qui fait suite au &lt;a class="reference external" href="https://dotmobo.github.io/shuttle-rs.html"&gt;déploiement d'un backend&lt;/a&gt; en Rust avec &lt;a class="reference external" href="https://www.shuttle.rs/"&gt;Shuttle&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Petit article rapide qui fait suite au &lt;a class="reference external" href="https://dotmobo.xyz/shuttle-rs.html"&gt;déploiement d'un backend&lt;/a&gt; en Rust avec &lt;a class="reference external" href="https://www.shuttle.rs/"&gt;Shuttle&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Après avoir créé ton API pour ton application de TODOs avec Axum, tu vas pouvoir y ajouter un petit frontend sympa également déployé sous Shuttle pour tester tout ça.&lt;/p&gt;
 &lt;p&gt;J'hésitais entre partir sur une solution de création de frontend en Rust type &lt;a class="reference external" href="https://leptos.dev/"&gt;Leptos&lt;/a&gt; ou &lt;a class="reference external" href="https://yew.rs/"&gt;Yew&lt;/a&gt;, mais ces outils feront l'objet d'articles futurs.
 Pour rester ultra simple, tu peux partir sur &lt;a class="reference external" href="https://alpinejs.dev/"&gt;AlpineJS&lt;/a&gt; pour la gestion des composants JS et sur &lt;a class="reference external" href="https://picocss.com/"&gt;Picocss&lt;/a&gt; pour styliser un peu tout ça.&lt;/p&gt;
@@ -1004,7 +1004,7 @@ via la revue de &lt;strong&gt;merge requests&lt;/strong&gt; et éventuellement l
 &lt;/div&gt;
 </content><category term="Rust"></category><category term="rust"></category><category term="ddd"></category><category term="domain"></category><category term="driven"></category><category term="design"></category></entry><entry><title>Smart Contract Elrond en Rust : Multiple NFTs staking</title><link href="https://dotmobo.xyz/elrond-sc-rust-multiple-nfts-staking.html" rel="alternate"></link><published>2022-10-16T00:00:00+02:00</published><updated>2022-10-16T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2022-10-16:/elrond-sc-rust-multiple-nfts-staking.html</id><summary type="html">&lt;p class="first last"&gt;Smart Contract Elrond en Rust : Multiple NFTs staking&lt;/p&gt;
 </summary><content type="html">&lt;img alt="Elrond" class="align-right" src="./images/elrond.png" /&gt;
-&lt;p&gt;C'est parti pour un petit article faisant suite au premier dédié &lt;a class="reference external" href="https://dotmobo.github.io/elrond-sc-rust-nft-staking.html#elrond-sc-rust-nft-staking"&gt;au staking de NFT sur Elrond&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;C'est parti pour un petit article faisant suite au premier dédié &lt;a class="reference external" href="https://dotmobo.xyz/elrond-sc-rust-nft-staking.html#elrond-sc-rust-nft-staking"&gt;au staking de NFT sur Elrond&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="section" id="contexte"&gt;
 &lt;h2&gt;Contexte&lt;/h2&gt;
 &lt;p&gt;Afin d'avoir un premier jet fonctionnel, on a vu comment staker un NFT sur un smart contract avec quelques limitations :&lt;/p&gt;
@@ -1414,8 +1414,8 @@ je passe par Flatpak.&lt;/p&gt;
 </content><category term="Linux"></category><category term="debian"></category><category term="environnement"></category><category term="developpement"></category><category term="gnome"></category><category term="flatpak"></category><category term="fish"></category><category term="copilot"></category><category term="neovim"></category></entry><entry><title>Smart Contract Elrond en Rust : NFT market</title><link href="https://dotmobo.xyz/elrond-sc-rust-nft-market.html" rel="alternate"></link><published>2022-07-07T00:00:00+02:00</published><updated>2022-07-07T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2022-07-07:/elrond-sc-rust-nft-market.html</id><summary type="html">&lt;p class="first last"&gt;Smart Contract Elrond en Rust : NFT market&lt;/p&gt;
 </summary><content type="html">&lt;img alt="Elrond" class="align-right" src="./images/elrond.png" /&gt;
 &lt;p&gt;C'est parti pour le troisième épisode de la série sur les Smart Contracts &lt;a class="reference external" href="https://elrond.com/"&gt;Elrond&lt;/a&gt;
-en &lt;a class="reference external" href="https://rust-lang.org/"&gt;Rust&lt;/a&gt;. Après avoir vu comment &lt;a class="reference external" href="http://dotmobo.github.io/elrond-sc-rust-nft-staking.html#elrond-sc-rust-nft-staking"&gt;staker un NFT&lt;/a&gt; pour gagner des $DEAD et comment
-utiliser ces $DEAD pour &lt;a class="reference external" href="http://dotmobo.github.io/elrond-sc-rust-dao-vote.html#elrond-sc-rust-dao-vote"&gt;voter dans notre DAO&lt;/a&gt;, on va pouvoir désormais acheter des NFTs sur notre propre
+en &lt;a class="reference external" href="https://rust-lang.org/"&gt;Rust&lt;/a&gt;. Après avoir vu comment &lt;a class="reference external" href="http://dotmobo.xyz/elrond-sc-rust-nft-staking.html#elrond-sc-rust-nft-staking"&gt;staker un NFT&lt;/a&gt; pour gagner des $DEAD et comment
+utiliser ces $DEAD pour &lt;a class="reference external" href="http://dotmobo.xyz/elrond-sc-rust-dao-vote.html#elrond-sc-rust-dao-vote"&gt;voter dans notre DAO&lt;/a&gt;, on va pouvoir désormais acheter des NFTs sur notre propre
 &lt;em&gt;marketplace&lt;/em&gt; avec des $DEAD.&lt;/p&gt;
 &lt;div class="section" id="contexte"&gt;
 &lt;h2&gt;Contexte&lt;/h2&gt;
@@ -1620,7 +1620,7 @@ erdpy&lt;span class="w"&gt; &lt;/span&gt;tx&lt;span class="w"&gt; &lt;/span&gt;n
 en &lt;a class="reference external" href="https://rust-lang.org/"&gt;Rust&lt;/a&gt;. On va parler ici d'un
 sujet qui intéresse pas mal de monde dans l'univers des NFTs : le &lt;strong&gt;staking&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;On suppose que tu as déjà tous les outils pour te lancer dans l'aventure. Si ce n'est pas le cas, jettes un oeil
-au &lt;a class="reference external" href="http://dotmobo.github.io/elrond-sc-rust-dao-vote.html#elrond-sc-rust-dao-vote"&gt;premier épisode&lt;/a&gt;.&lt;/p&gt;
+au &lt;a class="reference external" href="http://dotmobo.xyz/elrond-sc-rust-dao-vote.html#elrond-sc-rust-dao-vote"&gt;premier épisode&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="section" id="contexte"&gt;
 &lt;h2&gt;Contexte&lt;/h2&gt;
 &lt;p&gt;C'est une version simple du staking qui est largement améliorable, mais ça permet d'avoir un premier jet
@@ -2600,7 +2600,7 @@ pensé que je pense que ça vaut réellement le coup. Si vraiment ça te bloque,
 &lt;/div&gt;
 &lt;div class="section" id="le-code"&gt;
 &lt;h2&gt;Le code&lt;/h2&gt;
-&lt;p&gt;Au niveau du code, tu pourras trouver de nombreuses similarités avec &lt;em&gt;Löve&lt;/em&gt; qu'on a &lt;a class="reference external" href="http://dotmobo.github.io/plateformer-love2d.html"&gt;étudié précédemment&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Au niveau du code, tu pourras trouver de nombreuses similarités avec &lt;em&gt;Löve&lt;/em&gt; qu'on a &lt;a class="reference external" href="http://dotmobo.xyz/plateformer-love2d.html"&gt;étudié précédemment&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Tu as aussi les trois fonctions &lt;strong&gt;init&lt;/strong&gt;, &lt;strong&gt;update&lt;/strong&gt; et &lt;strong&gt;draw&lt;/strong&gt; dans lesquelles tout ce passe.
 De la même manière il te faudra gérer l'état de ton jeu et les différents écrans. Tu ne seras vraiment pas dépaysé !&lt;/p&gt;
 &lt;p&gt;Voici un exemple complet d'une cartouche, celle de &lt;em&gt;Hellhound&lt;/em&gt;, pour te faire une idée !&lt;/p&gt;
@@ -3188,7 +3188,7 @@ De la même manière il te faudra gérer l'état de ton jeu et les différents �
 &lt;/div&gt;
 </content><category term="Lua"></category><category term="jeux"></category><category term="video"></category><category term="lua"></category><category term="pico8"></category><category term="pico-8"></category><category term="plateformer"></category><category term="arcade"></category><category term="shooter"></category><category term="itch"></category></entry><entry><title>Créer un petit jeu de plateforme avec Löve</title><link href="https://dotmobo.xyz/plateformer-love2d.html" rel="alternate"></link><published>2021-03-19T00:00:00+01:00</published><updated>2021-03-19T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2021-03-19:/plateformer-love2d.html</id><summary type="html">&lt;p class="first last"&gt;Créer un petit jeu de plateforme avec Löve&lt;/p&gt;
 </summary><content type="html">&lt;img alt="Löve" class="align-right" src="./images/love.png" /&gt;
-&lt;p&gt;On fait suite au &lt;a class="reference external" href="http://dotmobo.github.io/jeux-video-lua.html"&gt;précédent article du blog&lt;/a&gt; qui introduisait le développement de jeux vidéo en Lua avec &lt;a class="reference external" href="https://love2d.org/"&gt;Löve&lt;/a&gt;.
+&lt;p&gt;On fait suite au &lt;a class="reference external" href="http://dotmobo.xyz/jeux-video-lua.html"&gt;précédent article du blog&lt;/a&gt; qui introduisait le développement de jeux vidéo en Lua avec &lt;a class="reference external" href="https://love2d.org/"&gt;Löve&lt;/a&gt;.
 Tu vas voir comment créer un petit jeu de plateforme inspiré de &lt;a class="reference external" href="https://store.steampowered.com/app/40800/Super_Meat_Boy/"&gt;Super Meat Boy&lt;/a&gt; et de &lt;a class="reference external" href="https://store.steampowered.com/app/1229580/Disc_Room/"&gt;Disc Room&lt;/a&gt; uniquement avec Löve.&lt;/p&gt;
 &lt;div class="section" id="disc-room-escape"&gt;
 &lt;h2&gt;Disc Room Escape&lt;/h2&gt;
@@ -4577,7 +4577,7 @@ Grâce à lui, tu vas pouvoir automatiser tout un tas de trucs en répartissant 
 &lt;p&gt;La première notion à connaître est le &lt;strong&gt;broker&lt;/strong&gt;. Il s'agit tout simplement de la file d'attente.
 Tu vas pouvoir utiliser plusieurs technos pour gérer le &lt;em&gt;broker&lt;/em&gt;, comme RabbitMq, Redis, Mongodb, Sqlalchemy, ou même l'orm de Django.&lt;/p&gt;
 &lt;p&gt;C'est le &lt;em&gt;broker&lt;/em&gt; qui va permettre la communication entre le(s) workers(s) et le(s) client(s). La techno recommandée par Celery est &lt;a class="reference external" href="https://www.rabbitmq.com/"&gt;RabbitMq&lt;/a&gt;,
-qui utilise le protocole &lt;strong&gt;AMQP&lt;/strong&gt;. Je t'en ai &lt;a class="reference external" href="http://dotmobo.github.io/rabbitmq.html"&gt;déjà parlé précédemment&lt;/a&gt;.&lt;/p&gt;
+qui utilise le protocole &lt;strong&gt;AMQP&lt;/strong&gt;. Je t'en ai &lt;a class="reference external" href="http://dotmobo.xyz/rabbitmq.html"&gt;déjà parlé précédemment&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Backend, quésaco ?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;La seconde notion à connaître est le &lt;strong&gt;backend&lt;/strong&gt;. Celui-ci est optionnel et permet de monitorer et de garder une trace des états des tâches.
 Les options de stockage sont quasi-similaires à celle du broker (RabbitMq, Redis, etc ...)&lt;/p&gt;
@@ -5325,7 +5325,7 @@ quelque-chose d'utile !&lt;/p&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://www.djangoproject.com/"&gt;django&lt;/a&gt;: framework le plus réputé, qui a l'avantage d'avoir une tonne de
 support et de documentation. Indispensable pour créer des applications web complexes.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://bottlepy.org/docs/dev/index.html"&gt;bottle&lt;/a&gt;: framework ultra minimaliste, idéal pour les applications web de petite taille.&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://blog.getpelican.com/"&gt;pelican&lt;/a&gt;: générateur de site statique utilisé par ce blog ! Tuto dispo &lt;a class="reference external" href="http://dotmobo.github.io/pelican.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://blog.getpelican.com/"&gt;pelican&lt;/a&gt;: générateur de site statique utilisé par ce blog ! Tuto dispo &lt;a class="reference external" href="http://dotmobo.xyz/pelican.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="base-de-donnees"&gt;
@@ -5335,13 +5335,13 @@ support et de documentation. Indispensable pour créer des applications web comp
 &lt;li&gt;&lt;a class="reference external" href="http://docs.peewee-orm.com/"&gt;peewee&lt;/a&gt;: orm léger et simple, parfait pour des besoins pas trop complexes.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://initd.org/psycopg/"&gt;psycopg2&lt;/a&gt;: driver postgresql&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://cx-oracle.sourceforge.net/"&gt;cx-oracle&lt;/a&gt;: driver oracle&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://pypi.python.org/pypi/tinydb"&gt;tinydb&lt;/a&gt;: base de données ultra minimaliste. Tuto dispo &lt;a class="reference external" href="http://dotmobo.github.io/tinydb.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://pypi.python.org/pypi/tinydb"&gt;tinydb&lt;/a&gt;: base de données ultra minimaliste. Tuto dispo &lt;a class="reference external" href="http://dotmobo.xyz/tinydb.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="http"&gt;
 &lt;h2&gt;Http&lt;/h2&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://httpie.org"&gt;httpie&lt;/a&gt;: client http en ligne de commande. Tuto dispo &lt;a class="reference external" href="http://dotmobo.github.io/httpie.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://httpie.org"&gt;httpie&lt;/a&gt;: client http en ligne de commande. Tuto dispo &lt;a class="reference external" href="http://dotmobo.xyz/httpie.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://docs.python-requests.org/en/master/"&gt;requests&lt;/a&gt;: librairie http la plus simple et le plus efficace.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://github.com/agrausem/britney"&gt;britney&lt;/a&gt; et &lt;a class="reference external" href="https://github.com/unistra/britney-utils"&gt;britney-utils&lt;/a&gt;: client &lt;a class="reference external" href="http://spore.github.io/"&gt;SPORE&lt;/a&gt;, qui est une spécification de description
 d'APIs REST.&lt;/li&gt;
@@ -5352,7 +5352,7 @@ d'APIs REST.&lt;/li&gt;
 &lt;h2&gt;Templating&lt;/h2&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://jinja.pocoo.org/"&gt;jinja2&lt;/a&gt;: moteur de template le plus réputé, utilisé par django.&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.makotemplates.org/"&gt;mako&lt;/a&gt;: moteur de template ultra performant. Tuto dispo &lt;a class="reference external" href="http://dotmobo.github.io/mako.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.makotemplates.org/"&gt;mako&lt;/a&gt;: moteur de template ultra performant. Tuto dispo &lt;a class="reference external" href="http://dotmobo.xyz/mako.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://github.com/audreyr/cookiecutter"&gt;cookiecutter&lt;/a&gt;: moteur de template de projet utilisant jinja2. Tu peux jeter un oeil à &lt;a class="reference external" href="http://sametmax.com/templates-de-projet-avec-cookiecutter/"&gt;l'article
 de Sam&lt;/a&gt; sur le sujet.
 Exemples d'utilisation: &lt;a class="reference external" href="https://github.com/unistra/simple-python-drybones"&gt;simple-python-drybones&lt;/a&gt; et &lt;a class="reference external" href="https://github.com/unistra/bottle-drybones"&gt;bottle-drybones&lt;/a&gt;.&lt;/li&gt;
@@ -5382,12 +5382,12 @@ toute la stack python/virtualenv/circus/chaussette/nginx.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://github.com/django-extensions/django-extensions"&gt;django-extensions&lt;/a&gt;: extension des commandes de django.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://github.com/andreyfedoseev/django-static-precompiler"&gt;django-static-precompiler&lt;/a&gt;: librairie qui permet d'automatiser la précompilation des fichiers
 CoffeeScript, Livescript, Sass, Less et autres.&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://django-crispy-forms.readthedocs.io/"&gt;django-crispy&lt;/a&gt;: outil formidable pour créer des formulaires compatibles bootstrap. Tuto dispo &lt;a class="reference external" href="http://dotmobo.github.io/django-crispy-forms.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://django-crispy-forms.readthedocs.io/"&gt;django-crispy&lt;/a&gt;: outil formidable pour créer des formulaires compatibles bootstrap. Tuto dispo &lt;a class="reference external" href="http://dotmobo.xyz/django-crispy-forms.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://github.com/diefenbach/django-workflows"&gt;django-workflows&lt;/a&gt; et &lt;a class="reference external" href="https://github.com/unistra/django-workflow-activity"&gt;django-workflow-activity&lt;/a&gt;: outils pour créer des worflows états/transitions.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://github.com/unistra/django-drybones"&gt;django-drybones&lt;/a&gt;: template de projet django.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://github.com/yourlabs/django-autocomplete-light"&gt;django-autocomplete-light&lt;/a&gt;: module d'autocomplétion pour les champs des formulaires.&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://github.com/SmileyChris/django-countries"&gt;django-countries&lt;/a&gt;: gestion des pays dans django. Tuto dispo &lt;a class="reference external" href="http://dotmobo.github.io/django-countries.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://github.com/mbi/django-simple-captcha"&gt;django-simple-captcha&lt;/a&gt;: utilisation de captchas. Tuto dispo &lt;a class="reference external" href="http://dotmobo.github.io/django-simple-captcha.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/SmileyChris/django-countries"&gt;django-countries&lt;/a&gt;: gestion des pays dans django. Tuto dispo &lt;a class="reference external" href="http://dotmobo.xyz/django-countries.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/mbi/django-simple-captcha"&gt;django-simple-captcha&lt;/a&gt;: utilisation de captchas. Tuto dispo &lt;a class="reference external" href="http://dotmobo.xyz/django-simple-captcha.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.django-rest-framework.org/"&gt;django-rest-framework&lt;/a&gt; (drf): excellente librairie pour créer des APIs REST.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://github.com/unistra/django-rest-framework-fine-permissions"&gt;django-fine-permissions&lt;/a&gt;: gestion des permissions fines, par champs et par utilisateur,
 pour drf.&lt;/li&gt;
@@ -5403,7 +5403,7 @@ pour drf.&lt;/li&gt;
 &lt;h2&gt;Test&lt;/h2&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://tox.readthedocs.io/"&gt;tox&lt;/a&gt;: outil qui permet d'exécuter les tests unitaires sous plusieurs virtualenvs
-avec des configurations différentes. Tuto dispo &lt;a class="reference external" href="http://dotmobo.github.io/integration-continue.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
+avec des configurations différentes. Tuto dispo &lt;a class="reference external" href="http://dotmobo.xyz/integration-continue.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://coverage.readthedocs.io"&gt;coverage&lt;/a&gt;: outil d'analyse de la couverture du code.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://prospector.landscape.io/en/master/"&gt;prospector&lt;/a&gt;: outil utilisé par &lt;a class="reference external" href="https://landscape.io/"&gt;landsacape.io&lt;/a&gt;
 qui utilise les meilleurs linters python pour vérifier la qualité du code.&lt;/li&gt;
@@ -5427,7 +5427,7 @@ Il y a &lt;a class="reference external" href="http://sametmax.com/tag/wamp/"&gt;
 &lt;h2&gt;Wsgi&lt;/h2&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://circus.readthedocs.io"&gt;circus&lt;/a&gt; + &lt;a class="reference external" href="https://chaussette.readthedocs.io/"&gt;chaussette&lt;/a&gt; + &lt;a class="reference external" href="http://docs.pylonsproject.org/projects/waitress/"&gt;waitress&lt;/a&gt;: stack wsgi complète.
-Tuto dispo &lt;a class="reference external" href="http://dotmobo.github.io/chaussette-circus.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
+Tuto dispo &lt;a class="reference external" href="http://dotmobo.xyz/chaussette-circus.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="date"&gt;
@@ -5465,7 +5465,7 @@ Tuto dispo &lt;a class="reference external" href="http://dotmobo.github.io/chaus
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://pythonhosted.org/six/"&gt;six&lt;/a&gt;: librairie pour la compatibilité python 2/python 3.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://toolz.readthedocs.io/"&gt;pytoolz&lt;/a&gt;: extension d'itertools et functools.
-Tuto dispo &lt;a class="reference external" href="http://dotmobo.github.io/pytoolz.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
+Tuto dispo &lt;a class="reference external" href="http://dotmobo.xyz/pytoolz.html"&gt;ici&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://pypi.python.org/pypi/Unidecode"&gt;unidecode&lt;/a&gt;: libairie très pratique permet de remplacer des caractères unicode en ascii.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Bonnes découvertes et bonnes vacances !&lt;/p&gt;
@@ -5479,8 +5479,8 @@ philosophie &lt;a class="reference external" href="https://fr.wikipedia.org/wiki
 &lt;p&gt;Par défaut, il supporte les frameworks CSS &lt;a class="reference external" href="http://getbootstrap.com/"&gt;bootstrap&lt;/a&gt;,
 &lt;a class="reference external" href="http://foundation.zurb.com/"&gt;foundation&lt;/a&gt; et &lt;a class="reference external" href="https://github.com/draganbabic/uni-form/"&gt;uni-form&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;On va voir comment tu peux créer un formulaire d'enregistrement compatible avec bootstrap en
-utilisant des onglets, &lt;a class="reference external" href="http://dotmobo.github.io/django-simple-captcha.html"&gt;un captcha&lt;/a&gt;,
-&lt;a class="reference external" href="http://dotmobo.github.io/django-countries.html"&gt;une liste de pays&lt;/a&gt; et
+utilisant des onglets, &lt;a class="reference external" href="http://dotmobo.xyz/django-simple-captcha.html"&gt;un captcha&lt;/a&gt;,
+&lt;a class="reference external" href="http://dotmobo.xyz/django-countries.html"&gt;une liste de pays&lt;/a&gt; et
 &lt;a class="reference external" href="https://github.com/nkunihiko/django-bootstrap3-datetimepicker"&gt;un date picker&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Pour simplifier ce tuto, on ne va pas s'occuper de l'internationalisation. Mais
 rien ne t'empêches de la mettre en place de ton côté.&lt;/p&gt;
@@ -6034,7 +6034,7 @@ est très active.&lt;/p&gt;
 &lt;img alt="vim" class="align-right" src="./images/vim.png" /&gt;
 &lt;p&gt;Pour coder, tu auras besoin d'un éditeur de texte.
 Je te recommande fortement &lt;a class="reference external" href="https://atom.io/"&gt;atom&lt;/a&gt;, que j'ai déjà présenté
-&lt;a class="reference external" href="http://dotmobo.github.io/sublime-text-to-atom.html"&gt;ici&lt;/a&gt;.&lt;/p&gt;
+&lt;a class="reference external" href="http://dotmobo.xyz/sublime-text-to-atom.html"&gt;ici&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;En plus d'atom, tu auras besoin d'un éditeur qui peut s'exécuter dans un terminal.
 Pas besoin de chercher bien loin, le plus avancé est &lt;a class="reference external" href="http://www.vim.org/"&gt;vim&lt;/a&gt;.
 Mais tu peux également te tourner vers son successeur, &lt;a class="reference external" href="https://neovim.io/"&gt;neovim&lt;/a&gt;.&lt;/p&gt;
@@ -6820,7 +6820,7 @@ l'apprécie surtout pour son côté simple et facile d'accès.&lt;/p&gt;
 tête avec une documentation imbuvable!&lt;/p&gt;
 </content><category term="Python"></category><category term="httpie"></category><category term="http"></category><category term="python"></category><category term="curl"></category><category term="json"></category></entry><entry><title>Ajouter un captcha dans un formulaire django</title><link href="https://dotmobo.xyz/django-simple-captcha.html" rel="alternate"></link><published>2015-11-28T00:00:00+01:00</published><updated>2015-11-28T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2015-11-28:/django-simple-captcha.html</id><summary type="html">&lt;p class="first last"&gt;Ajouter un captcha dans un formulaire django&lt;/p&gt;
 </summary><content type="html">&lt;img alt="Django" class="align-right" src="./images/djangopony.png" /&gt;
-&lt;p&gt;Suite à &lt;a class="reference external" href="http://dotmobo.github.io/django-countries.html"&gt;l'article sur django-countries&lt;/a&gt;,
+&lt;p&gt;Suite à &lt;a class="reference external" href="http://dotmobo.xyz/django-countries.html"&gt;l'article sur django-countries&lt;/a&gt;,
 on va continuer notre parcours des petits outils simples et efficaces pour améliorer nos formulaires django.&lt;/p&gt;
 &lt;p&gt;Avant d'aborder le gros morceau qu'est &lt;a class="reference external" href="http://django-crispy-forms.readthedocs.org/en/latest/"&gt;django-cryspy&lt;/a&gt;
 (tu peux déjà y jeter un oeil si tu es curieux), on va parler de l'intégration de captchas sous django.&lt;/p&gt;
@@ -6936,7 +6936,7 @@ est renseignée comme valeur de réponse au captcha, le formulaire sera valide.
 &lt;img alt="Django" class="align-left" src="http://django-simple-captcha.readthedocs.org/en/latest/_images/captcha3.png" /&gt;
 </content><category term="Django"></category><category term="python"></category><category term="django"></category><category term="django-simple-captcha"></category><category term="captcha"></category><category term="crispy"></category><category term="django-crispy"></category><category term="recaptcha"></category></entry><entry><title>Upsert avec Postgresql</title><link href="https://dotmobo.xyz/upsert-postgresql.html" rel="alternate"></link><published>2015-11-22T00:00:00+01:00</published><updated>2015-11-22T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2015-11-22:/upsert-postgresql.html</id><summary type="html">&lt;p class="first last"&gt;Upsert avec Postgresql&lt;/p&gt;
 </summary><content type="html">&lt;img alt="Postgresql" class="align-right" src="./images/postgresql.png" /&gt;
-&lt;p&gt;Lorsque l'on commence à &lt;a class="reference external" href="http://dotmobo.github.io/introduction-asyncio.html"&gt;s'amuser avec asyncio&lt;/a&gt;
+&lt;p&gt;Lorsque l'on commence à &lt;a class="reference external" href="http://dotmobo.xyz/introduction-asyncio.html"&gt;s'amuser avec asyncio&lt;/a&gt;
 pour faire des traitements asynchrones sur une base &lt;a class="reference external" href="http://www.postgresqlfr.org/"&gt;postgresql&lt;/a&gt;
 avec &lt;a class="reference external" href="https://github.com/aio-libs/aiopg"&gt;aiopg&lt;/a&gt;, on rencontre assez vite le problème des accès concurrents
 à une ressource partagée.&lt;/p&gt;

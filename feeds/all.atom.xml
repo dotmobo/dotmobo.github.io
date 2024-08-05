@@ -1,5 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.github.io/" rel="alternate"></link><link href="https://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.github.io/</id><updated>2024-08-01T00:00:00+02:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Shuttle.rs : Déploiement d'un frontend</title><link href="https://dotmobo.github.io/shuttle-rs-frontend.html" rel="alternate"></link><published>2024-08-01T00:00:00+02:00</published><updated>2024-08-01T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2024-08-01:/shuttle-rs-frontend.html</id><summary type="html">&lt;p class="first last"&gt;Shuttle.rs : Déploiement d'un frontend&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.github.io/" rel="alternate"></link><link href="https://dotmobo.github.io/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.github.io/</id><updated>2024-08-05T00:00:00+02:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Ruff : le linter tout-en-un</title><link href="https://dotmobo.github.io/ruff.html" rel="alternate"></link><published>2024-08-05T00:00:00+02:00</published><updated>2024-08-05T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2024-08-05:/ruff.html</id><summary type="html">&lt;p class="first last"&gt;Ruff : le linter tout-en-un&lt;/p&gt;
+</summary><content type="html">&lt;img alt="Python" class="align-right" src="./images/python.png" /&gt;
+&lt;p&gt;La guerre a fait rage pendant de nombreuses années concernant les &lt;strong&gt;linters&lt;/strong&gt; et &lt;strong&gt;formatters&lt;/strong&gt; Python.&lt;/p&gt;
+&lt;p&gt;On a d'abord eu &lt;strong&gt;autopep8&lt;/strong&gt; qui faisait le taf mais qui était plutôt limité. Puis sont arrivés en vrac &lt;strong&gt;Flake8&lt;/strong&gt;, &lt;strong&gt;Pyflakes&lt;/strong&gt; ou encore &lt;strong&gt;Pylint&lt;/strong&gt;
+qui se sont battus pour devenir le meilleur linter de l'écosystème, mais en vain.&lt;/p&gt;
+&lt;p&gt;C'est alors qu'est venu &lt;a class="reference external" href="https://go.dev/"&gt;Go&lt;/a&gt; avec son excellent linter intégré &lt;strong&gt;gofmt&lt;/strong&gt; qui faisait magnifiquement le travail.
+Pas de configuration compliquée ici, juste une commande à taper et tout le monde obtient le même formatage. Il n'a pas fallu longtemps à la
+communauté Python pour copier l'idée (à raison) et sortir un équivalent, nommé &lt;a class="reference external" href="https://github.com/psf/black"&gt;Black&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Ouf, la guerre des linters est enfin finie et tout le monde a adopté &lt;strong&gt;black&lt;/strong&gt;, on peut donc passer à autre chose non ?&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Eh bien non !&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Un petit dernier est arrivé et enfonce le clou en faisant tout comme &lt;strong&gt;black&lt;/strong&gt;, mais en mieux.&lt;/p&gt;
+&lt;p&gt;Il s'appelle &lt;a class="reference external" href="https://astral.sh/ruff"&gt;Ruff&lt;/a&gt; et se veut ultra rapide et performant car il est écrit en Rust.&lt;/p&gt;
+&lt;p&gt;L'idée ici est vraiment d'avoir l'unique outil final tout-en-un. C'est une sorte de fusion de &lt;strong&gt;black&lt;/strong&gt; et de &lt;strong&gt;isort&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Tu peux l'installer directement en stand-alone via la commande suivante :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-LsSf&lt;span class="w"&gt; &lt;/span&gt;https://astral.sh/ruff/install.sh&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu as alors à ta disposition deux commandes que tu peux exécuter.&lt;/p&gt;
+&lt;p&gt;La première va vérifier ton code et t'afficher les erreurs :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ruff&lt;span class="w"&gt; &lt;/span&gt;check
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;La seconde va automatiquement formater ton code :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ruff&lt;span class="w"&gt; &lt;/span&gt;format
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et voilà, c'est tout ! Tu peux t'arrêter ici et utiliser l'outil de base de cette manière sans te prendre la tête avec une configuration ou autres.&lt;/p&gt;
+&lt;p&gt;Tu as même une &lt;a class="reference external" href="https://github.com/astral-sh/ruff-vscode"&gt;extension pour VS Code officielle&lt;/a&gt; si tu veux l'intégrer directement à ton éditeur.&lt;/p&gt;
+&lt;p&gt;Et si vraiment tu veux aller plus loin, tu peux configurer un &lt;a class="reference external" href="https://github.com/astral-sh/ruff-pre-commit"&gt;hook de pre-commit&lt;/a&gt; ou encore une
+&lt;a class="reference external" href="https://github.com/chartboost/ruff-action"&gt;GitHub action&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Enfin, pour overrider la &lt;a class="reference external" href="https://docs.astral.sh/ruff/configuration/"&gt;configuration&lt;/a&gt; par défaut, tu peux créer un fichier &lt;strong&gt;ruff.toml&lt;/strong&gt; et l'éditer :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Exclude a variety of commonly ignored directories.&lt;/span&gt;
+&lt;span class="n"&gt;exclude&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.bzr&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.direnv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.eggs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.git&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.git-rewrite&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.hg&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.ipynb_checkpoints&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.mypy_cache&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.nox&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.pants.d&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.pyenv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.pytest_cache&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.pytype&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.ruff_cache&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.svn&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.tox&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.venv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.vscode&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;__pypackages__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;_build&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;buck-out&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;build&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;dist&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;node_modules&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;site-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;venv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Same as Black.&lt;/span&gt;
+&lt;span class="n"&gt;line-length&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;88&lt;/span&gt;
+&lt;span class="n"&gt;indent-width&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Assume Python 3.8&lt;/span&gt;
+&lt;span class="n"&gt;target-version&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;py38&amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;[lint]&lt;/span&gt;
+&lt;span class="c1"&gt;# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`) codes by default.&lt;/span&gt;
+&lt;span class="n"&gt;select&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;E4&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;E7&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;E9&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;F&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;ignore&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Allow fix for all enabled rules (when `--fix`) is provided.&lt;/span&gt;
+&lt;span class="n"&gt;fixable&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ALL&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;unfixable&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Allow unused variables when underscore-prefixed.&lt;/span&gt;
+&lt;span class="n"&gt;dummy-variable-rgx&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$&amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;[format]&lt;/span&gt;
+&lt;span class="c1"&gt;# Like Black, use double quotes for strings.&lt;/span&gt;
+&lt;span class="n"&gt;quote-style&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;double&amp;quot;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Like Black, indent with spaces, rather than tabs.&lt;/span&gt;
+&lt;span class="n"&gt;indent-style&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;space&amp;quot;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Like Black, respect magic trailing commas.&lt;/span&gt;
+&lt;span class="n"&gt;skip-magic-trailing-comma&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Like Black, automatically detect the appropriate line ending.&lt;/span&gt;
+&lt;span class="n"&gt;line-ending&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;auto&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Mais franchement je ne le conseillerais pas, sauf raison vraiment majeure et indispensable.
+Autant garder la configuration par défaut pour rester dans l'idée d'origine de la simplicité de &lt;strong&gt;gofmt&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Happy coding !&lt;/p&gt;
+</content><category term="Python"></category><category term="ruff"></category><category term="python"></category><category term="linter"></category><category term="format"></category><category term="black"></category><category term="isort"></category><category term="flake8"></category><category term="pep8"></category><category term="rust"></category><category term="pylint"></category></entry><entry><title>Shuttle.rs : Déploiement d'un frontend</title><link href="https://dotmobo.github.io/shuttle-rs-frontend.html" rel="alternate"></link><published>2024-08-01T00:00:00+02:00</published><updated>2024-08-01T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.github.io,2024-08-01:/shuttle-rs-frontend.html</id><summary type="html">&lt;p class="first last"&gt;Shuttle.rs : Déploiement d'un frontend&lt;/p&gt;
 </summary><content type="html">&lt;img alt="Shuttle" class="align-right" src="./images/shuttle.png" /&gt;
 &lt;p&gt;Petit article rapide qui fait suite au &lt;a class="reference external" href="https://dotmobo.github.io/shuttle-rs.html"&gt;déploiement d'un backend&lt;/a&gt; en Rust avec &lt;a class="reference external" href="https://www.shuttle.rs/"&gt;Shuttle&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Après avoir créé ton API pour ton application de TODOs avec Axum, tu vas pouvoir y ajouter un petit frontend sympa également déployé sous Shuttle pour tester tout ça.&lt;/p&gt;

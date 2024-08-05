@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 AUTHOR = 'dotmobo'
-SITEURL = ''
+SITEURL = 'http://127.0.0.1:8000'
 SITENAME = ".mobo"
 SITETITLE = SITENAME
 SITESUBTITLE = "Explorations d'un développeur"
@@ -66,7 +66,7 @@ CC_LICENSE = {
 
 
 
-COPYRIGHT_YEAR = 2018
+COPYRIGHT_YEAR = 2024
 
 DEFAULT_PAGINATION = 10
 

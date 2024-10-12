@@ -1,5 +1,315 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2024-08-05T00:00:00+02:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Ruff : le linter tout-en-un</title><link href="https://dotmobo.xyz/ruff.html" rel="alternate"></link><published>2024-08-05T00:00:00+02:00</published><updated>2024-08-05T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2024-08-05:/ruff.html</id><summary type="html">&lt;p class="first last"&gt;Ruff : le linter tout-en-un&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2024-10-12T00:00:00+02:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Nix : Package manager et gestionnaire de configuration</title><link href="https://dotmobo.xyz/nix.html" rel="alternate"></link><published>2024-10-12T00:00:00+02:00</published><updated>2024-10-12T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2024-10-12:/nix.html</id><summary type="html">&lt;p class="first last"&gt;Nix : Package manager et gestionnaire de configuration&lt;/p&gt;
+</summary><content type="html">&lt;img alt="Nix" class="align-right" src="./images/nix.png" /&gt;
+&lt;p&gt;Bon, c'est parti pour un article pas du tout prévu, mais c'est tellement un banger que je me dois d'en parler.&lt;/p&gt;
+&lt;p&gt;Je viens de découvrir le package manager &lt;a class="reference external" href="https://nixos.org/"&gt;Nix&lt;/a&gt;, et quelle claque !&lt;/p&gt;
+&lt;p&gt;À une époque, j'avais jeté un œil à &lt;a class="reference external" href="https://guix.gnu.org"&gt;GNU Guix&lt;/a&gt; et à son langage &lt;a class="reference external" href="https://gnu.org/software/guile/"&gt;Guile&lt;/a&gt;, qui semblaient intéressants.
+Mais j'ai laissé tomber car la doc était imbuvable et ça ne semblait pas encore au point.&lt;/p&gt;
+&lt;p&gt;Puis j'ai appris récemment que Guix venait en fait de Nix et que, pour le coup, Nix était à nouveau en vogue à cause de NixOS.
+Un collègue m'a poussé à creuser et je n'ai pas été déçu.&lt;/p&gt;
+&lt;p&gt;Pour faire simple, Nix est un gestionnaire de paquets qui peut s'installer sur n'importe quelle distro et permet d'installer des paquets récents indépendamment de la distro.
+Tu peux donc rester sur Debian stable et utiliser la dernière version de Neovim grâce à Nix, par exemple.&lt;/p&gt;
+&lt;p&gt;Tout est géré dans un répertoire indépendant, &lt;strong&gt;/nix&lt;/strong&gt;, et son fonctionnement peut faire penser à Git dans le sens où tout est versionné.
+Tu peux donc faire des rollbacks si l'installation d'un paquet s'est mal passée.&lt;/p&gt;
+&lt;div class="section" id="nix-1"&gt;
+&lt;h2&gt;Nix&lt;/h2&gt;
+&lt;p&gt;Pour commencer, tu peux installer Nix sur ta machine avec la commande suivante :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sh&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;&lt;span class="o"&gt;(&lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-L&lt;span class="w"&gt; &lt;/span&gt;https://nixos.org/nix/install&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;--daemon
+nix&lt;span class="w"&gt; &lt;/span&gt;--version
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;On va y aller étape par étape en prenant des cas d'usage intéressants en allant du plus simple au plus compliqué.&lt;/p&gt;
+&lt;p&gt;Pour tester que tout marche bien, on va commencer par utiliser un environnement shell de nix pour installer
+et utiliser des paquets.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;nix-shell&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;cowsay&lt;span class="w"&gt; &lt;/span&gt;lolcat
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Après avoir exécuter cette commande, tu te retrouves dans un shell avec cowsay et lolcat d'installés.
+Tu peux les tester via :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;nix-shell:~&lt;span class="o"&gt;]&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;cowsay&lt;span class="w"&gt; &lt;/span&gt;Hello,&lt;span class="w"&gt; &lt;/span&gt;Nix!&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;lolcat
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu devrais voir un joli &lt;em&gt;Hello, Nix!&lt;/em&gt; en couleur. Une fois que tu quittes le shell, les paquets sont désinstallés.
+On est ici dans un cas d'environnement shell temporaire.&lt;/p&gt;
+&lt;p&gt;Il y a énormément de paquets disponibles, tu peux les chercher via le lien &lt;a class="reference external" href="https://search.nixos.org/"&gt;https://search.nixos.org/&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="script"&gt;
+&lt;h2&gt;Script&lt;/h2&gt;
+&lt;p&gt;Place aux cas d'usage.&lt;/p&gt;
+&lt;p&gt;Premier cas : tu veux balancer un script en prod, mais tu n'as pas les droits d'installer des paquets car tu n'es pas root.
+Ce genre de cas arrive très souvent en entreprise, surtout lorsque l'on est dev et pas admin sys ou devops.&lt;/p&gt;
+&lt;p&gt;Avec Nix, il y a moyen d'installer temporairement des paquets juste le temps d'exécution du script, de cette manière, dans un fichier type &lt;strong&gt;monscript.sh&lt;/strong&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env nix-shell&lt;/span&gt;
+&lt;span class="c1"&gt;#! nix-shell -i bash --pure&lt;/span&gt;
+&lt;span class="c1"&gt;#! nix-shell -p bash cacert curl jq python3Packages.xmljson&lt;/span&gt;
+&lt;span class="c1"&gt;#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz&lt;/span&gt;
+
+curl&lt;span class="w"&gt; &lt;/span&gt;https://github.com/NixOS/nixpkgs/releases.atom&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;xml2json&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;jq&lt;span class="w"&gt; &lt;/span&gt;.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu vas utiliser ici les shebangs pour préciser les paquets nécessaires à l'exécution du script et tu
+pointes vers une version précise de Nix pour être sûr de pouvoir reproduire le script à l'identique, peut
+importe la machine sur laquelle tu l'installes.&lt;/p&gt;
+&lt;p&gt;Et voilà, la magie va opérer. Tu vas pouvoir bénéficier de &lt;strong&gt;curl&lt;/strong&gt;, &lt;strong&gt;xml2json&lt;/strong&gt; et &lt;strong&gt;jq&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Une fois le script exécuté, les paquets installés et nix seront supprimés.&lt;/p&gt;
+&lt;p&gt;C'est beaucoup plus simple que de gérer des Dockerfile !&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="devenv"&gt;
+&lt;h2&gt;Devenv&lt;/h2&gt;
+&lt;p&gt;En parlant de Docker, tu peux utiliser la librairie &lt;a class="reference external" href="https://devenv.sh/"&gt;Devenv&lt;/a&gt; pour gérer des environnements de dev avec Nix directement, en te passant de Docker Compose !&lt;/p&gt;
+&lt;p&gt;Pour l'installer, rien de plus simple.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;nix-env&lt;span class="w"&gt; &lt;/span&gt;-iA&lt;span class="w"&gt; &lt;/span&gt;devenv&lt;span class="w"&gt; &lt;/span&gt;-f&lt;span class="w"&gt; &lt;/span&gt;https://github.com/NixOS/nixpkgs/tarball/nixpkgs-unstable
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Voici un cas simple pour un environnement Angular dans un fichier &lt;strong&gt;devenv.nix&lt;/strong&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; pkgs&lt;span class="p"&gt;,&lt;/span&gt; lib&lt;span class="p"&gt;,&lt;/span&gt; config&lt;span class="p"&gt;,&lt;/span&gt; inputs&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt; &lt;span class="p"&gt;}:&lt;/span&gt;
+
+&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="c1"&gt;# https://devenv.sh/basics/&lt;/span&gt;
+env&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;GREET&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;devenv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# https://devenv.sh/packages/&lt;/span&gt;
+&lt;span class="ss"&gt;packages&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    pkgs&lt;span class="o"&gt;.&lt;/span&gt;git
+    pkgs&lt;span class="o"&gt;.&lt;/span&gt;nodejs_20
+&lt;span class="p"&gt;];&lt;/span&gt;
+
+&lt;span class="c1"&gt;# https://devenv.sh/languages/&lt;/span&gt;
+&lt;span class="c1"&gt;# languages.rust.enable = true;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# https://devenv.sh/processes/&lt;/span&gt;
+processes&lt;span class="o"&gt;.&lt;/span&gt;angular&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;exec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;npm run start&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# https://devenv.sh/services/&lt;/span&gt;
+&lt;span class="c1"&gt;# services.postgres.enable = true;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# https://devenv.sh/scripts/&lt;/span&gt;
+scripts&lt;span class="o"&gt;.&lt;/span&gt;install-angular-cli&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;exec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Multiline"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    mkdir -p ~/.npm-global&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    npm config set prefix &amp;#39;~/.npm-global&amp;#39;&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    export PATH=~/.npm-global/bin:$PATH&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    if ! npm list -g @angular/cli | grep @angular/cli@17; then&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    npm install -g @angular/cli@17&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    fi&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+scripts&lt;span class="o"&gt;.&lt;/span&gt;build-api&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;exec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Multiline"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    ./gradlew assemble&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+scripts&lt;span class="o"&gt;.&lt;/span&gt;install-app&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;exec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Multiline"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    npm install&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="ss"&gt;enterShell&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Multiline"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    install-angular-cli&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    build-api&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    install-app&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# https://devenv.sh/tests/&lt;/span&gt;
+&lt;span class="ss"&gt;enterTest&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Multiline"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    echo &amp;quot;Running tests&amp;quot;&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    git --version | grep --color=auto &amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;pkgs&lt;span class="o"&gt;.&lt;/span&gt;git&lt;span class="o"&gt;.&lt;/span&gt;version&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s s-Multiline"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    node --version | grep --color=auto &amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;pkgs&lt;span class="o"&gt;.&lt;/span&gt;nodejs_20&lt;span class="o"&gt;.&lt;/span&gt;version&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s s-Multiline"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    ng version | grep &amp;quot;17&amp;quot;&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;    ./gradlew --version | grep &amp;quot;Gradle 7.4.2&amp;quot;&lt;/span&gt;
+&lt;span class="s s-Multiline"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# https://devenv.sh/pre-commit-hooks/&lt;/span&gt;
+&lt;span class="c1"&gt;# pre-commit.hooks.shellcheck.enable = true;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# See full reference at https://devenv.sh/reference/options/&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu peux ici gérer ta version de node, de npm et de angular et lancer des commande d'installation et de build
+à l'entrée dans le shell, comme des &lt;strong&gt;npm install&lt;/strong&gt; ou des &lt;strong&gt;./gradlew assemble&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Il y a même une petite partie permettant de faire des tests pour être sûr que tout est bien configuré.&lt;/p&gt;
+&lt;p&gt;Tu peux ensuite lancer ton environnement avec la commande :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;devenv&lt;span class="w"&gt; &lt;/span&gt;up
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Il va alors tout installer, tout builder et lancer automatiquement la commande &lt;strong&gt;npm run start&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Tu peux aussi faire un &lt;strong&gt;devenv shell&lt;/strong&gt; pour entrer directement dans l'environnement shell.&lt;/p&gt;
+&lt;p&gt;Mais il est également possible de gérer tes services de base de données et autres, comme pour Docker Compose !
+Sauf que tu n'es pas dans un container, mais dans un sous-shell directement.
+Tu peux voir la partie &lt;strong&gt;services&lt;/strong&gt; qui est commenté dans mon fichier.&lt;/p&gt;
+&lt;p&gt;Attention, ça signifie que ce sont donc bien les fichiers de ton système que tu manipules lorsque tu lances des commandes.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="home-manager"&gt;
+&lt;h2&gt;Home Manager&lt;/h2&gt;
+&lt;p&gt;Alors là, c'est mon préféré, la cerise sur le gâteau.&lt;/p&gt;
+&lt;p&gt;Tu vas pouvoir gérer tout ton home et en faire une description précise dans un fichier Nix pour le rendre reproductible.&lt;/p&gt;
+&lt;p&gt;Tu peux installer des paquets et gérer tes dotfiles au même endroit !&lt;/p&gt;
+&lt;p&gt;Je m'en sers &lt;a class="reference external" href="https://github.com/dotmobo/home-manager"&gt;ici&lt;/a&gt; pour installer mon terminal, VS Code, Neovim et toute la configuration qui va avec.&lt;/p&gt;
+&lt;p&gt;Commence par installer home-manager :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;nix-channel&lt;span class="w"&gt; &lt;/span&gt;--add&lt;span class="w"&gt; &lt;/span&gt;https://github.com/nix-community/home-manager/archive/master.tar.gz&lt;span class="w"&gt; &lt;/span&gt;home-manager
+nix-channel&lt;span class="w"&gt; &lt;/span&gt;--update
+nix-shell&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;home-manager&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-A&lt;span class="w"&gt; &lt;/span&gt;install
+.&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/.nix-profile/etc/profile.d/hm-session-vars.sh&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Puis tu créés un fichier &lt;strong&gt;~/.config/home-manager/home.nix&lt;/strong&gt; pour y décrire toute ta configuration :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; config&lt;span class="p"&gt;,&lt;/span&gt; pkgs&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt; &lt;span class="p"&gt;}:&lt;/span&gt;
+
+&lt;span class="k"&gt;let&lt;/span&gt;
+  &lt;span class="ss"&gt;secrets&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;builtins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;pathExists &lt;span class="s2"&gt;&amp;quot;/home/morgan/.config/home-manager/secrets.nix&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;then&lt;/span&gt; &lt;span class="nb"&gt;import&lt;/span&gt; &lt;span class="l"&gt;/home/morgan/.config/home-manager/secrets.nix&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;};&lt;/span&gt;
+&lt;span class="k"&gt;in&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="ss"&gt;nixpkgs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="ss"&gt;config&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="ss"&gt;allowUnfree&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="ss"&gt;allowUnfreePredicate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;_&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="no"&gt;true&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;};&lt;/span&gt;
+  &lt;span class="p"&gt;};&lt;/span&gt;
+
+  programs&lt;span class="o"&gt;.&lt;/span&gt;home-manager&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;enable&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+  home&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;morgan&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  home&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;homeDirectory&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/home/morgan&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+  home&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;stateVersion&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;24.05&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+  home&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;packages&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; pkgs&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    devenv
+    &lt;span class="c1"&gt;# Fonts&lt;/span&gt;
+    fira-code
+    fira-code-symbols
+    &lt;span class="p"&gt;(&lt;/span&gt;nerdfonts&lt;span class="o"&gt;.&lt;/span&gt;override &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;fonts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;FiraCode&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="c1"&gt;# Terminal&lt;/span&gt;
+    guake
+    tdrop
+    wmctrl
+    st
+    atuin
+    starship
+    &lt;span class="c1"&gt;# Programming languages&lt;/span&gt;
+    nodejs_20
+    go
+    python312
+    pipx
+    poetry
+    ruff
+    black
+    pyright
+    rustc
+    rustfmt
+    cargo
+    rust-analyzer
+    clippy
+    zig
+    lua
+    &lt;span class="c1"&gt;# Tools&lt;/span&gt;
+    httpie
+    wget
+    jq
+    curl
+    ffmpeg
+    htop
+    xclip
+    bats
+    ripgrep
+    tmux
+    eza
+    bat
+    fd
+    tree
+    peek
+    rsync
+    gh
+    zip
+    unzip
+    unrar
+    transmission
+    &lt;span class="c1"&gt;# Network&lt;/span&gt;
+    traceroute
+    tcpdump
+  &lt;span class="p"&gt;];&lt;/span&gt;
+
+  home&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;};&lt;/span&gt;
+
+  home&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;sessionVariables&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;# User configuration&lt;/span&gt;
+    &lt;span class="ss"&gt;EDITOR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;nvim&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="ss"&gt;LANG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;fr_FR.UTF-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;# Chrome&lt;/span&gt;
+    &lt;span class="ss"&gt;CHROME_BIN&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/usr/bin/chromium&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="ss"&gt;CHROME_EXECUTABLE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/usr/bin/chromium&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;# Node.js&lt;/span&gt;
+    &lt;span class="ss"&gt;NODE_OPTIONS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;--max-old-space-size=4096&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;# Rust&lt;/span&gt;
+    &lt;span class="ss"&gt;RUST_SRC_PATH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;pkgs&lt;span class="o"&gt;.&lt;/span&gt;rust&lt;span class="o"&gt;.&lt;/span&gt;packages&lt;span class="o"&gt;.&lt;/span&gt;stable&lt;span class="o"&gt;.&lt;/span&gt;rustPlatform&lt;span class="o"&gt;.&lt;/span&gt;rustLibSrc&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;# Jenkins&lt;/span&gt;
+    &lt;span class="ss"&gt;JENKINS_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;secrets&lt;span class="o"&gt;.&lt;/span&gt;JENKINS_URL&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="ss"&gt;JENKINS_USER_ID&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;secrets&lt;span class="o"&gt;.&lt;/span&gt;JENKINS_USER_ID&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="ss"&gt;JENKINS_API_TOKEN&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;secrets&lt;span class="o"&gt;.&lt;/span&gt;JENKINS_API_TOKEN&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;};&lt;/span&gt;
+
+  home&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;sessionPath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;$HOME/.local/bin&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;];&lt;/span&gt;
+
+  &lt;span class="ss"&gt;programs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="ss"&gt;git&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;import&lt;/span&gt; &lt;span class="l"&gt;./git.nix&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;inherit&lt;/span&gt; pkgs&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="ss"&gt;neovim&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;import&lt;/span&gt; &lt;span class="l"&gt;./neovim.nix&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;inherit&lt;/span&gt; pkgs&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="ss"&gt;fish&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;import&lt;/span&gt; &lt;span class="l"&gt;./fish.nix&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;inherit&lt;/span&gt; pkgs&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="ss"&gt;vscode&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;import&lt;/span&gt; &lt;span class="l"&gt;./vscode.nix&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;inherit&lt;/span&gt; pkgs&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="ss"&gt;zoxide&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="ss"&gt;enable&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="ss"&gt;enableFishIntegration&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="ss"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;--cmd cd&amp;quot;&lt;/span&gt;
+      &lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="p"&gt;};&lt;/span&gt;
+    &lt;span class="ss"&gt;zellij&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="ss"&gt;enable&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="ss"&gt;settings&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="ss"&gt;copy_command&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;xclip -selection clipboard&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+          &lt;span class="ss"&gt;paste_command&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;xclip -selection clipboard -o&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="p"&gt;};&lt;/span&gt;
+      &lt;span class="p"&gt;};&lt;/span&gt;
+  &lt;span class="p"&gt;};&lt;/span&gt;
+
+  fonts&lt;span class="o"&gt;.&lt;/span&gt;fontconfig&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;enable&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ici j'utilise nix pour installer mes paquets via &lt;strong&gt;home.packages&lt;/strong&gt;, gérer mes variables d'environnement via &lt;strong&gt;home.sessionVariables&lt;/strong&gt; et mes dotfiles via &lt;strong&gt;programs&lt;/strong&gt;.
+Tu peux noter que j'utiliser une fichier &lt;strong&gt;/home/morgan/.config/home-manager/secrets.nix&lt;/strong&gt; pour y mettre mes mots de passe et autres secrets.&lt;/p&gt;
+&lt;p&gt;Pour les programmes qui nécessitent une configuration spécifique, j'utilise des fichiers &lt;strong&gt;.nix&lt;/strong&gt; que j'importe dans mon fichier principal :&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/dotmobo/home-manager/blob/master/git.nix"&gt;git.nix&lt;/a&gt; pour gérer ton username, ton mail ou tes alias.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/dotmobo/home-manager/blob/master/neovim.nix"&gt;neovim.nix&lt;/a&gt; pour gérer tes plugins et ta configuration.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/dotmobo/home-manager/blob/master/fish.nix"&gt;fish.nix&lt;/a&gt; qui est mon shell par défaut.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/dotmobo/home-manager/blob/master/vscode.nix"&gt;vscode.nix&lt;/a&gt; pour gérer tes extensions et ta configuration.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tu peux ensuite appliquer ta configuration avec la commande :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;home-manager&lt;span class="w"&gt; &lt;/span&gt;switch
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et voilà, tu as tout ton home configuré à ta sauce, et tu peux le reproduire à l'identique sur n'importe quelle machine.&lt;/p&gt;
+&lt;p&gt;Note qu'il y a pas mal de nouveaux outils écrit en Rust que j'utilise. Ça pourra faire de futurs petits articles dessus si ça t'intéresse !&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="nixgl"&gt;
+&lt;h2&gt;NixGL&lt;/h2&gt;
+&lt;p&gt;On utilise principalement le home-manager pour gérer son terminal. Mais il est également possible de l'utiliser pour des applications qui
+utilise openGL. Par défaut, sans utiliser NixOS mais Debian par exemple, les applications openGL ne fonctionnent pas directement avec Nix.&lt;/p&gt;
+&lt;p&gt;Il existe alors un petit wrapper openGL appelé &lt;a class="reference external" href="https://github.com/nix-community/nixGL"&gt;NixGL&lt;/a&gt; qui permet de faire fonctionner les applications
+comme &lt;strong&gt;alacritty&lt;/strong&gt; par exemple.&lt;/p&gt;
+&lt;p&gt;Tu l'installes via :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;nix-channel&lt;span class="w"&gt; &lt;/span&gt;--add&lt;span class="w"&gt; &lt;/span&gt;https://github.com/nix-community/nixGL/archive/main.tar.gz&lt;span class="w"&gt; &lt;/span&gt;nixgl&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;nix-channel&lt;span class="w"&gt; &lt;/span&gt;--update
+nix-env&lt;span class="w"&gt; &lt;/span&gt;-iA&lt;span class="w"&gt; &lt;/span&gt;nixgl.auto.nixGLDefault
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu utilises alors ce wrapper pour exécuter alacritty si tu l'as installé via home-manager :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;nixGL&lt;span class="w"&gt; &lt;/span&gt;alacritty
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;C'est un petit point gênant qui me donne envie de réellement migrer sur NixOS.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="nixos"&gt;
+&lt;h2&gt;NixOS&lt;/h2&gt;
+&lt;p&gt;Pour finir, la dernière étape serait de virer ma Debian et de migrer intégralement sur NixOS, la distro intégralement gérée par Nix.
+Pour le moment, j'ai encore certains besoins de Debian à cause de mon taf, mais dès que possible, je migrerai sûrement dessus.&lt;/p&gt;
+&lt;p&gt;Jette un œil sur la partie &lt;strong&gt;NixOS : the Linux distribution&lt;/strong&gt; du &lt;a class="reference external" href="https://nixos.org/download/"&gt;site officiel&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Tu peux alors avoir l'intégralité de ton système géré par un fichier de configuration Nix, que ça soit pour les paquets, les services,
+la configuration réseau ou les utilisateurs.&lt;/p&gt;
+&lt;p&gt;Voilà, j'espère t'avoir donné envie de découvrir Nix ! Il y a beaucoup de choses, et le piège est de ne pas savoir par quel bout commencer !
+Je te conseille vraiment de faire comme moi, étape par étape, petit à petit.&lt;/p&gt;
+&lt;p&gt;Un fois pris au jeu, tu verras, tu ne pourras plus t'en passer !&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Linux"></category><category term="nix"></category><category term="nixos"></category><category term="linux"></category><category term="distro"></category><category term="package"></category><category term="manager"></category><category term="devops"></category><category term="sysadmin"></category></entry><entry><title>Ruff : le linter tout-en-un</title><link href="https://dotmobo.xyz/ruff.html" rel="alternate"></link><published>2024-08-05T00:00:00+02:00</published><updated>2024-08-05T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2024-08-05:/ruff.html</id><summary type="html">&lt;p class="first last"&gt;Ruff : le linter tout-en-un&lt;/p&gt;
 </summary><content type="html">&lt;img alt="Python" class="align-right" src="./images/python.png" /&gt;
 &lt;p&gt;La guerre a fait rage pendant de nombreuses années concernant les &lt;strong&gt;linters&lt;/strong&gt; et &lt;strong&gt;formatters&lt;/strong&gt; Python.&lt;/p&gt;
 &lt;p&gt;On a d'abord eu &lt;strong&gt;autopep8&lt;/strong&gt; qui faisait le taf mais qui était plutôt limité. Puis sont arrivés en vrac &lt;strong&gt;Flake8&lt;/strong&gt;, &lt;strong&gt;Pyflakes&lt;/strong&gt; ou encore &lt;strong&gt;Pylint&lt;/strong&gt;

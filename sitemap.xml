@@ -5,36 +5,43 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.xyz/</loc>
-<lastmod>2024-08-05T21:47:05-00:00</lastmod>
+<lastmod>2024-10-12T11:44:30-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.xyz/tags.html</loc>
-<lastmod>2024-08-05T21:47:05-00:00</lastmod>
+<lastmod>2024-10-12T11:44:30-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.xyz/categories.html</loc>
-<lastmod>2024-08-05T21:47:05-00:00</lastmod>
+<lastmod>2024-10-12T11:44:30-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.xyz/authors.html</loc>
-<lastmod>2024-08-05T21:47:05-00:00</lastmod>
+<lastmod>2024-10-12T11:44:30-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.xyz/archives.html</loc>
-<lastmod>2024-08-05T21:47:05-00:00</lastmod>
+<lastmod>2024-10-12T11:44:30-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/nix.html</loc>
+<lastmod>2024-10-12T00:00:00+02:00</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
@@ -369,7 +376,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.xyz/category/linux.html</loc>
-<lastmod>2024-07-14T00:00:00+00:09</lastmod>
+<lastmod>2024-10-12T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -405,6 +412,62 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://dotmobo.xyz/category/rust.html</loc>
 <lastmod>2024-08-01T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/nix.html</loc>
+<lastmod>2024-10-12T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/nixos.html</loc>
+<lastmod>2024-10-12T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/linux.html</loc>
+<lastmod>2024-10-12T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/distro.html</loc>
+<lastmod>2024-10-12T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/package.html</loc>
+<lastmod>2024-10-12T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/manager.html</loc>
+<lastmod>2024-10-12T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/devops.html</loc>
+<lastmod>2024-10-12T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/sysadmin.html</loc>
+<lastmod>2024-10-12T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -488,13 +551,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.xyz/tag/shuttlers.html</loc>
-<lastmod>2024-08-01T00:00:00+00:09</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://dotmobo.xyz/tag/devops.html</loc>
 <lastmod>2024-08-01T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
@@ -1062,13 +1118,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.xyz/tag/fabric.html</loc>
-<lastmod>2017-09-29T00:00:00+00:09</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://dotmobo.xyz/tag/linux.html</loc>
 <lastmod>2017-09-29T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
@@ -1720,7 +1769,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.xyz/author/morgan.html</loc>
-<lastmod>2024-08-05T00:00:00+00:09</lastmod>
+<lastmod>2024-10-12T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>

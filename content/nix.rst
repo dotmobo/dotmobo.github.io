@@ -164,7 +164,7 @@ Voici un cas simple pour un environnement Angular dans un fichier **devenv.nix**
     # See full reference at https://devenv.sh/reference/options/
     }
 
-Tu peux ici gérer ta version de node, de npm et de angular et lancer des commande d'installation et de build
+Tu peux ici gérer ta version de node, de npm et de angular et lancer des commandes d'installation et de build
 à l'entrée dans le shell, comme des **npm install** ou des **./gradlew assemble**.
 
 Il y a même une petite partie permettant de faire des tests pour être sûr que tout est bien configuré.

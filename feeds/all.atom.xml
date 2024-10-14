@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2024-10-12T00:00:00+02:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Nix : Package manager et gestionnaire de configuration</title><link href="https://dotmobo.xyz/nix.html" rel="alternate"></link><published>2024-10-12T00:00:00+02:00</published><updated>2024-10-12T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2024-10-12:/nix.html</id><summary type="html">&lt;p class="first last"&gt;Nix : Package manager et gestionnaire de configuration&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2024-10-14T00:00:00+02:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Outils "Blazing-Fast" pour Linux écrits en Rust</title><link href="https://dotmobo.xyz/linux-tools-rust.html" rel="alternate"></link><published>2024-10-14T00:00:00+02:00</published><updated>2024-10-14T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2024-10-14:/linux-tools-rust.html</id><summary type="html">&lt;p class="first last"&gt;Outils &amp;quot;Blazing-Fast&amp;quot; pour Linux écrits en Rust&lt;/p&gt;
+</summary><content type="html">&lt;img alt="Rust" class="align-right" src="./images/rust.png" /&gt;
+&lt;p&gt;Depuis l'avènement de Rust et du fameux adage &amp;quot;Rewrite it in Rust&amp;quot;, de nombreux outils système ont été réécrits en Rust pour bénéficier de meilleures performances dites &lt;strong&gt;blazing-fast&lt;/strong&gt;, ainsi que d'une fluidité et d'une ergonomie plus modernes.&lt;/p&gt;
+&lt;p&gt;Il est temps de remplacer les classiques &lt;strong&gt;ls&lt;/strong&gt;, &lt;strong&gt;cd&lt;/strong&gt;, &lt;strong&gt;tmux&lt;/strong&gt;, &lt;strong&gt;grep&lt;/strong&gt; ou encore &lt;strong&gt;find&lt;/strong&gt; par leurs jumeaux &lt;em&gt;Rustaceans&lt;/em&gt; !&lt;/p&gt;
+&lt;p&gt;C'est parti !&lt;/p&gt;
+&lt;div class="section" id="alacritty"&gt;
+&lt;h2&gt;alacritty&lt;/h2&gt;
+&lt;p&gt;On commence par le plus évident, le terminal. &lt;a class="reference external" href="https://alacritty.org/"&gt;Alacritty&lt;/a&gt; est un terminal moderne qui se veut très simple dans le sens où il ne va pas gérer les onglets et le split de fenêtres (on utilisera autre chose pour ça juste après). Il tourne sous OpenGL et bénéficie donc de la performance de ta carte graphique. Il supporte les couleurs, les polices et Wayland. Il a également un mode Vi et est hautement configurable via un fichier TOML.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="zellij"&gt;
+&lt;h2&gt;zellij&lt;/h2&gt;
+&lt;p&gt;Adieu &lt;strong&gt;tmux&lt;/strong&gt; et bonjour &lt;a class="reference external" href="https://zellij.dev/"&gt;Zellij&lt;/a&gt; ! C'est un gestionnaire de fenêtres pour terminal qui fonctionne parfaitement avec Alacritty. C'est tout comme tmux, mais en mieux. Il peut gérer les onglets, le split des fenêtres et les sessions. Tu pourras également l'étendre grâce à un système de plugins.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="starship"&gt;
+&lt;h2&gt;starship&lt;/h2&gt;
+&lt;p&gt;Maintenant qu'on a notre terminal et notre gestionnaire de fenêtres, il te faut un joli prompt.
+&lt;a class="reference external" href="https://starship.rs/"&gt;Starship&lt;/a&gt; est là pour ça ! La configuration par défaut est vraiment top, et si tu ne veux pas te prendre la tête, tu peux la conserver telle quelle. Tu auras directement les informations de tes branches git, des versions des langages du projet sur lequel tu travailles, et bien d'autres choses.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="atuin"&gt;
+&lt;h2&gt;atuin&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://atuin.sh/"&gt;Atuin&lt;/a&gt; se charge de gérer l'historique de ton shell. Tu pourras synchroniser ton historique de manière encryptée entre plusieurs machines. Ton historique sera donc accessible de partout ! Il sera stocké dans une base de données SQLite, ce qui te permettra d'effectuer des recherches avancées et rapides.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="zoxide"&gt;
+&lt;h2&gt;zoxide&lt;/h2&gt;
+&lt;p&gt;On va commencer par remplacer les outils GNU classiques. &lt;a class="reference external" href="https://github.com/ajeetdsouza/zoxide"&gt;Zoxide&lt;/a&gt; va remplacer ta commande &lt;strong&gt;cd&lt;/strong&gt;. Il te permettra de te déplacer dans tes dossiers en fonction de leur fréquence d'utilisation. Donc, imaginons que tu as un projet dans un répertoire &lt;strong&gt;/home/morgan/dev/emploi-du-temps&lt;/strong&gt; et que tu y vas souvent, il te suffira de faire un &lt;strong&gt;z emploi&lt;/strong&gt; pour y accéder depuis n'importe où. Une fois adopté, tu pourras même te créer un alias &lt;strong&gt;cd&lt;/strong&gt; pour &lt;strong&gt;z&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ripgrep"&gt;
+&lt;h2&gt;ripgrep&lt;/h2&gt;
+&lt;p&gt;Cette fois-ci, on va remplacer &lt;strong&gt;grep&lt;/strong&gt; par &lt;a class="reference external" href="https://github.com/BurntSushi/ripgrep"&gt;ripgrep&lt;/a&gt;. C'est un outil vraiment puissant qui te permet de chercher dans tes fichiers de manière récursive très rapidement. Franchement, la première fois que je l'ai lancé, j'ai été vraiment surpris. Une recherche dans beaucoup de dossiers a quasiment été instantanée.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="eza"&gt;
+&lt;h2&gt;eza&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/eza-community/eza"&gt;Eza&lt;/a&gt; quant à lui, va remplacer ton &lt;strong&gt;ls&lt;/strong&gt;. Comme pour Zoxide, tu pourras te créer un alias &lt;strong&gt;ls&lt;/strong&gt; pour &lt;strong&gt;eza&lt;/strong&gt;. L'affichage te fournira une jolie coloration syntaxique en fonction des types de fichiers.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="bat"&gt;
+&lt;h2&gt;bat&lt;/h2&gt;
+&lt;p&gt;Pour remplacer &lt;strong&gt;cat&lt;/strong&gt;, on va utiliser &lt;a class="reference external" href="https://github.com/sharkdp/bat"&gt;bat&lt;/a&gt;, qui, comme pour Eza, va te fournir une coloration syntaxique de tes fichiers.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fd"&gt;
+&lt;h2&gt;fd&lt;/h2&gt;
+&lt;p&gt;La commande &lt;strong&gt;find&lt;/strong&gt; n'est franchement pas la plus simple à utiliser. &lt;a class="reference external" href="https://github.com/sharkdp/fd"&gt;fd&lt;/a&gt; se veut beaucoup plus user-friendly. L'exécution de la recherche est réalisée de manière parallèle, donc c'est très rapide. Tu auras également les couleurs pour faciliter l'affichage.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;Et voilà, on a fait le tour ! N'hésite pas à commenter si tu en connais d'autres, ça me permettra d'agrandir ma besace !&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Rust"></category><category term="linux"></category><category term="rust"></category><category term="tools"></category><category term="outils"></category><category term="performance"></category><category term="blazing-fast"></category></entry><entry><title>Nix : Package manager et gestionnaire de configuration</title><link href="https://dotmobo.xyz/nix.html" rel="alternate"></link><published>2024-10-12T00:00:00+02:00</published><updated>2024-10-12T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2024-10-12:/nix.html</id><summary type="html">&lt;p class="first last"&gt;Nix : Package manager et gestionnaire de configuration&lt;/p&gt;
 </summary><content type="html">&lt;img alt="Nix" class="align-right" src="./images/nix.png" /&gt;
 &lt;p&gt;Bon, c'est parti pour un article pas du tout prévu, mais c'est tellement un banger que je me dois d'en parler.&lt;/p&gt;
 &lt;p&gt;Je viens de découvrir le package manager &lt;a class="reference external" href="https://nixos.org/"&gt;Nix&lt;/a&gt;, et quelle claque !&lt;/p&gt;
@@ -115,7 +159,7 @@ scripts&lt;span class="o"&gt;.&lt;/span&gt;install-app&lt;span class="o"&gt;.&lt
 &lt;span class="c1"&gt;# See full reference at https://devenv.sh/reference/options/&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Tu peux ici gérer ta version de node, de npm et de angular et lancer des commande d'installation et de build
+&lt;p&gt;Tu peux ici gérer ta version de node, de npm et de angular et lancer des commandes d'installation et de build
 à l'entrée dans le shell, comme des &lt;strong&gt;npm install&lt;/strong&gt; ou des &lt;strong&gt;./gradlew assemble&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Il y a même une petite partie permettant de faire des tests pour être sûr que tout est bien configuré.&lt;/p&gt;
 &lt;p&gt;Tu peux ensuite lancer ton environnement avec la commande :&lt;/p&gt;

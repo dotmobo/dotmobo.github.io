@@ -5,36 +5,43 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.xyz/</loc>
-<lastmod>2024-10-12T11:44:30-00:00</lastmod>
+<lastmod>2024-10-14T14:24:28-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.xyz/tags.html</loc>
-<lastmod>2024-10-12T11:44:30-00:00</lastmod>
+<lastmod>2024-10-14T14:24:28-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.xyz/categories.html</loc>
-<lastmod>2024-10-12T11:44:30-00:00</lastmod>
+<lastmod>2024-10-14T14:24:28-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.xyz/authors.html</loc>
-<lastmod>2024-10-12T11:44:30-00:00</lastmod>
+<lastmod>2024-10-14T14:24:28-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.xyz/archives.html</loc>
-<lastmod>2024-10-12T11:44:30-00:00</lastmod>
+<lastmod>2024-10-14T14:24:28-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/linux-tools-rust.html</loc>
+<lastmod>2024-10-14T00:00:00+02:00</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
@@ -411,7 +418,49 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.xyz/category/rust.html</loc>
-<lastmod>2024-08-01T00:00:00+00:09</lastmod>
+<lastmod>2024-10-14T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/linux.html</loc>
+<lastmod>2024-10-14T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/rust.html</loc>
+<lastmod>2024-10-14T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/tools.html</loc>
+<lastmod>2024-10-14T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/outils.html</loc>
+<lastmod>2024-10-14T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/performance.html</loc>
+<lastmod>2024-10-14T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/blazing-fast.html</loc>
+<lastmod>2024-10-14T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -425,13 +474,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.xyz/tag/nixos.html</loc>
-<lastmod>2024-10-12T00:00:00+00:09</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://dotmobo.xyz/tag/linux.html</loc>
 <lastmod>2024-10-12T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
@@ -523,13 +565,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.xyz/tag/pep8.html</loc>
-<lastmod>2024-08-05T00:00:00+00:09</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://dotmobo.xyz/tag/rust.html</loc>
 <lastmod>2024-08-05T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
@@ -1769,7 +1804,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.xyz/author/morgan.html</loc>
-<lastmod>2024-10-12T00:00:00+00:09</lastmod>
+<lastmod>2024-10-14T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>

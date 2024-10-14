@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+  <meta name="robots" content="index, follow" />
 
   <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 
@@ -24,16 +24,26 @@
           href="https://dotmobo.xyz/theme/pygments/emacs.min.css">
 
 
+
   <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/solid.css">
 
-    <link href="https://dotmobo.xyz/css/custom.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/custom.css">
+
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#333333">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#333333">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Microsoft EDGE -->
+  <meta name="msapplication-TileColor" content="#333333">
 
 
 
-
-<!-- Google Analytics -->
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -43,90 +53,91 @@
   ga('create', 'UA-68852219-1', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics -->
-    <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#333333">
-    <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#333333">
-    <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <!-- Microsoft EDGE -->
-    <meta name="msapplication-TileColor" content="#333333">
+
+ 
 
 <meta name="author" content="Morgan" />
 <meta name="description" content="Nix : Package manager et gestionnaire de configuration" />
 <meta name="keywords" content="nix, nixos, linux, distro, package, manager, devops, sysadmin">
 
 
-<meta property="og:site_name" content=".mobo"/>
-<meta property="og:title" content="Nix : Package manager et gestionnaire de configuration"/>
-<meta property="og:description" content="Nix : Package manager et gestionnaire de configuration"/>
-<meta property="og:locale" content="fr_FR"/>
-<meta property="og:url" content="https://dotmobo.xyz/nix.html"/>
-<meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2024-10-12 00:00:00+02:00"/>
-<meta property="article:modified_time" content=""/>
-<meta property="article:author" content="https://dotmobo.xyz/author/morgan.html">
-<meta property="article:section" content="Linux"/>
-<meta property="article:tag" content="nix"/>
-<meta property="article:tag" content="nixos"/>
-<meta property="article:tag" content="linux"/>
-<meta property="article:tag" content="distro"/>
-<meta property="article:tag" content="package"/>
-<meta property="article:tag" content="manager"/>
-<meta property="article:tag" content="devops"/>
-<meta property="article:tag" content="sysadmin"/>
-<meta property="og:image" content="//dotmobo.xyz/images/avatar700.jpg">
+  <meta property="og:site_name" content=".mobo"/>
+  <meta property="og:title" content="Nix : Package manager et gestionnaire de configuration"/>
+  <meta property="og:description" content="Nix : Package manager et gestionnaire de configuration"/>
+  <meta property="og:locale" content="fr_FR"/>
+  <meta property="og:url" content="https://dotmobo.xyz/nix.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2024-10-12 00:00:00+02:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://dotmobo.xyz/author/morgan.html">
+  <meta property="article:section" content="Linux"/>
+  <meta property="article:tag" content="nix"/>
+  <meta property="article:tag" content="nixos"/>
+  <meta property="article:tag" content="linux"/>
+  <meta property="article:tag" content="distro"/>
+  <meta property="article:tag" content="package"/>
+  <meta property="article:tag" content="manager"/>
+  <meta property="article:tag" content="devops"/>
+  <meta property="article:tag" content="sysadmin"/>
+  <meta property="og:image" content="//dotmobo.xyz/images/avatar700.jpg">
 
   <title>.mobo &ndash; Nix : Package manager et gestionnaire de configuration</title>
 
+
 </head>
 <body >
-  <aside>
-    <div>
-      <a href="https://dotmobo.xyz">
-        <img src="//dotmobo.xyz/images/avatar700.jpg" alt=".mobo" title=".mobo">
-      </a>
 
-      <h1>
-        <a href="https://dotmobo.xyz">.mobo</a>
-      </h1>
+<aside>
+  <div>
+    <a href="https://dotmobo.xyz/">
+      <img src="//dotmobo.xyz/images/avatar700.jpg" alt=".mobo" title=".mobo">
+    </a>
 
-<p>Explorations d'un développeur</p>
+    <h1>
+      <a href="https://dotmobo.xyz/">.mobo</a>
+    </h1>
+
+    <p>Explorations d'un développeur</p>
 
 
-      <ul class="social">
-          <li>
-            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
-              <i class="fab fa-github"></i>
-            </a>
-          </li>
-          <li>
-            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
-              <i class="fab fa-twitter"></i>
-            </a>
-          </li>
-          <li>
-            <a  class="sc-rss" href="//dotmobo.xyz/feeds/all.atom.xml" target="_blank">
-              <i class="fas fa-rss"></i>
-            </a>
-          </li>
-      </ul>
-    </div>
 
-  </aside>
+    <ul class="social">
+      <li>
+        <a class="sc-github"
+           href="https://github.com/dotmobo"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-twitter"
+           href="https://twitter.com/dotmobo"
+           target="_blank">
+          <i class="fa-brands fa-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="//dotmobo.xyz/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
   <main>
 
-    <nav>
-      <a href="https://dotmobo.xyz">Accueil</a>
+<nav>
+  <a href="https://dotmobo.xyz/">Accueil</a>
 
-      <a href="/categories.html">Catégories</a>
-      <a href="/tags.html">Tags</a>
-      <a href="/archives.html">Archives</a>
+  <a href="/categories.html">Catégories</a>
+  <a href="/tags.html">Tags</a>
+  <a href="/archives.html">Archives</a>
 
 
-    </nav>
+</nav>
 
 <article class="single">
   <header>
@@ -255,7 +266,7 @@ scripts<span class="o">.</span>install-app<span class="o">.</span><span class="s
 <span class="c1"># See full reference at https://devenv.sh/reference/options/</span>
 <span class="p">}</span>
 </pre></div>
-<p>Tu peux ici gérer ta version de node, de npm et de angular et lancer des commande d'installation et de build
+<p>Tu peux ici gérer ta version de node, de npm et de angular et lancer des commandes d'installation et de build
 à l'entrée dans le shell, comme des <strong>npm install</strong> ou des <strong>./gradlew assemble</strong>.</p>
 <p>Il y a même une petite partie permettant de faire des tests pour être sûr que tout est bien configuré.</p>
 <p>Tu peux ensuite lancer ton environnement avec la commande :</p>
@@ -468,6 +479,7 @@ Je te conseille vraiment de faire comme moi, étape par étape, petit à petit.<
 
 
 
+
 <!-- Disqus -->
 <div id="disqus_thread"></div>
 <script type="text/javascript">
@@ -484,9 +496,9 @@ Je te conseille vraiment de faire comme moi, étape par étape, petit à petit.<
 <!-- End Disqus -->
 </article>
 
-    <footer>
+<footer>
 <p>
-  &copy; 2024  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+  &copy; 2024  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" target="_blank">Creative Commons Attribution-ShareAlike</a>
 </p>
 <p>
 Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
@@ -509,11 +521,7 @@ Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utili
          width="80"
          height="15"/>
   </a>
-</p>    </footer>
-  </main>
-
-
-
+</p></footer>  </main>
 
 <script type="application/ld+json">
 {
@@ -525,7 +533,5 @@ Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utili
   "description": ".mobo - explorations d'un développeur"
 }
 </script>
-
-
 </body>
 </html>

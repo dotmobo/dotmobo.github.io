@@ -7,15 +7,18 @@
 &lt;div class="section" id="alacritty"&gt;
 &lt;h2&gt;alacritty&lt;/h2&gt;
 &lt;p&gt;On commence par le plus évident, le terminal. &lt;a class="reference external" href="https://alacritty.org/"&gt;Alacritty&lt;/a&gt; est un terminal moderne qui se veut très simple dans le sens où il ne va pas gérer les onglets et le split de fenêtres (on utilisera autre chose pour ça juste après). Il tourne sous OpenGL et bénéficie donc de la performance de ta carte graphique. Il supporte les couleurs, les polices et Wayland. Il a également un mode Vi et est hautement configurable via un fichier TOML.&lt;/p&gt;
+&lt;img alt="Alacritty" class="align-center" src="./images/linux-tools-rust/alacritty.png" /&gt;
 &lt;/div&gt;
 &lt;div class="section" id="zellij"&gt;
 &lt;h2&gt;zellij&lt;/h2&gt;
 &lt;p&gt;Adieu &lt;strong&gt;tmux&lt;/strong&gt; et bonjour &lt;a class="reference external" href="https://zellij.dev/"&gt;Zellij&lt;/a&gt; ! C'est un gestionnaire de fenêtres pour terminal qui fonctionne parfaitement avec Alacritty. C'est tout comme tmux, mais en mieux. Il peut gérer les onglets, le split des fenêtres et les sessions. Tu pourras également l'étendre grâce à un système de plugins.&lt;/p&gt;
+&lt;img alt="Zellij" class="align-center" src="./images/linux-tools-rust/zellij.png" /&gt;
 &lt;/div&gt;
 &lt;div class="section" id="starship"&gt;
 &lt;h2&gt;starship&lt;/h2&gt;
 &lt;p&gt;Maintenant qu'on a notre terminal et notre gestionnaire de fenêtres, il te faut un joli prompt.
 &lt;a class="reference external" href="https://starship.rs/"&gt;Starship&lt;/a&gt; est là pour ça ! La configuration par défaut est vraiment top, et si tu ne veux pas te prendre la tête, tu peux la conserver telle quelle. Tu auras directement les informations de tes branches git, des versions des langages du projet sur lequel tu travailles, et bien d'autres choses.&lt;/p&gt;
+&lt;img alt="Starship" class="align-center" src="./images/linux-tools-rust/starship.png" /&gt;
 &lt;/div&gt;
 &lt;div class="section" id="atuin"&gt;
 &lt;h2&gt;atuin&lt;/h2&gt;

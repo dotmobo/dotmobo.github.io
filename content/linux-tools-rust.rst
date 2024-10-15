@@ -23,16 +23,29 @@ alacritty
 
 On commence par le plus évident, le terminal. `Alacritty <https://alacritty.org/>`_ est un terminal moderne qui se veut très simple dans le sens où il ne va pas gérer les onglets et le split de fenêtres (on utilisera autre chose pour ça juste après). Il tourne sous OpenGL et bénéficie donc de la performance de ta carte graphique. Il supporte les couleurs, les polices et Wayland. Il a également un mode Vi et est hautement configurable via un fichier TOML.
 
+.. image:: ./images/linux-tools-rust/alacritty.png  
+    :alt: Alacritty  
+    :align: center
+
+
 zellij
 ======
 
 Adieu **tmux** et bonjour `Zellij <https://zellij.dev/>`_ ! C'est un gestionnaire de fenêtres pour terminal qui fonctionne parfaitement avec Alacritty. C'est tout comme tmux, mais en mieux. Il peut gérer les onglets, le split des fenêtres et les sessions. Tu pourras également l'étendre grâce à un système de plugins.
+
+.. image:: ./images/linux-tools-rust/zellij.png  
+    :alt: Zellij  
+    :align: center
 
 starship
 ========
 
 Maintenant qu'on a notre terminal et notre gestionnaire de fenêtres, il te faut un joli prompt.  
 `Starship <https://starship.rs/>`_ est là pour ça ! La configuration par défaut est vraiment top, et si tu ne veux pas te prendre la tête, tu peux la conserver telle quelle. Tu auras directement les informations de tes branches git, des versions des langages du projet sur lequel tu travailles, et bien d'autres choses.
+
+.. image:: ./images/linux-tools-rust/starship.png  
+    :alt: Starship  
+    :align: center
 
 atuin
 =====

@@ -8,7 +8,7 @@ Outils "Blazing-Fast" pour Linux écrits en Rust
 :authors: Morgan  
 :summary: Outils "Blazing-Fast" pour Linux écrits en Rust
 
-.. image:: ./images/rust.png  
+.. image:: ./images/ferris.png  
     :alt: Rust  
     :align: right  
 

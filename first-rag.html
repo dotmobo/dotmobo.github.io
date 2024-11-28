@@ -1,0 +1,474 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/stylesheet/style.min.css">
+
+    <link id="dark-theme-style" rel="stylesheet" type="text/css"
+          media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+    href="https://dotmobo.xyz/theme/stylesheet/dark-theme.min.css">
+
+    <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+          href="https://dotmobo.xyz/theme/pygments/monokai.min.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: light)"
+          href="https://dotmobo.xyz/theme/pygments/emacs.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/solid.css">
+
+    <link href="https://dotmobo.xyz/css/custom.css" rel="stylesheet">
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68852219-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Morgan" />
+<meta name="description" content="Développer son propre RAG local avec Ollama, ChromaDB et Streamlit" />
+<meta name="keywords" content="RAG, LLM, ChromaDB, Ollama, Python, Streamlit">
+
+
+<meta property="og:site_name" content=".mobo"/>
+<meta property="og:title" content="Développer son propre RAG local avec Ollama, ChromaDB et Streamlit"/>
+<meta property="og:description" content="Développer son propre RAG local avec Ollama, ChromaDB et Streamlit"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="https://dotmobo.xyz/first-rag.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2024-11-28 00:00:00+01:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://dotmobo.xyz/author/morgan.html">
+<meta property="article:section" content="IA"/>
+<meta property="article:tag" content="RAG"/>
+<meta property="article:tag" content="LLM"/>
+<meta property="article:tag" content="ChromaDB"/>
+<meta property="article:tag" content="Ollama"/>
+<meta property="article:tag" content="Python"/>
+<meta property="article:tag" content="Streamlit"/>
+<meta property="og:image" content="//dotmobo.xyz/images/avatar700.jpg">
+
+  <title>.mobo &ndash; Développer son propre RAG local avec Ollama, ChromaDB et Streamlit</title>
+
+</head>
+<body >
+  <aside>
+    <div>
+      <a href="https://dotmobo.xyz">
+        <img src="//dotmobo.xyz/images/avatar700.jpg" alt=".mobo" title=".mobo">
+      </a>
+
+      <h1>
+        <a href="https://dotmobo.xyz">.mobo</a>
+      </h1>
+
+<p>Explorations d'un développeur</p>
+
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.xyz/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://dotmobo.xyz">Accueil</a>
+
+      <a href="/categories.html">Catégories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/archives.html">Archives</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="first-rag">Développer son propre RAG local avec Ollama, ChromaDB et Streamlit</h1>
+    <p>
+      Posté le 28/11/2024 dans <a href="https://dotmobo.xyz/category/ia.html">IA</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="Recommandations de films" class="align-right" src="./images/ollama.png" />
+<p>Bon, il est temps de se mettre à l'intelligence artificielle et aux LLMs.
+Ça fait un moment que j'utilise des outils comme GitHub Copilot et ChatGPT, mais sans vraiment savoir comment ça marche sous le capot.</p>
+<p>On va commencer une série d'articles d'initiation aux LLMs pour un développeur, en découvrant petit à petit et en s'autorisant à faire des erreurs.
+Donc ne prenez pas ces articles comme le pinacle du développement IA, c'est juste une synthèse de mes explorations !</p>
+<p>L'idée sera d'avoir nos propres LLMs locaux et de développer des outils dessus.
+Comme ça, on est sûr que nos données restent confidentielles et ne partent pas dans le cloud.</p>
+<div class="section" id="prerequis">
+<h2>Prérequis</h2>
+<p>L'outil qui semble faire consensus pour avoir son LLM local est <a class="reference external" href="https://ollama.com">Ollama</a>.
+Tu l'installes avec la commande suivante :</p>
+<div class="highlight"><pre><span></span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://ollama.com/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</pre></div>
+<p>Puis, tu peux tester le LLM de Facebook <strong>Llama3</strong> via :</p>
+<div class="highlight"><pre><span></span>ollama<span class="w"> </span>run<span class="w"> </span>llama3.2
+</pre></div>
+<p>On ne va pas rentrer dans le détail de Ollama, car il y a déjà suffisamment de contenu que tu peux trouver un peu partout sur Internet.
+Sache que tu peux récupérer d'autres modèles comme Mistral, par exemple, et que tu peux même créer ton propre modèle à l'aide
+d'un fichier <strong>modelfile</strong> qui se veut être une sorte de <strong>Dockerfile</strong>, mais pour les LLMs.</p>
+</div>
+<div class="section" id="projet-de-rag">
+<h2>Projet de RAG</h2>
+<p>De ce que j'ai compris, il existe deux manières d'améliorer un LLM :</p>
+<ul class="simple">
+<li>Soit via du <strong>fine-tuning</strong>, où on apprend des choses en profondeur au LLM pour en modifier le comportement, mais qui nécessite des GPUs puissants.</li>
+<li>Soit via du <strong>Retrieval-Augmented Generation (RAG)</strong>, qui consiste à utiliser des bases de données vectorielles pour que le LLM puisse y puiser des informations.</li>
+</ul>
+<p>On va commencer par la 2ème solution, qui semble plus simple et permet déjà des cas d'usage plutôt sympas.</p>
+<p>Tu vas pouvoir créer un premier programme, qui consistera en une application de recommandations de films disponible dans une médiathèque.</p>
+<p>Côté technos, on va utiliser <strong>ChromaDB</strong> pour stocker et indexer les films, <strong>Sentence-Transformers</strong> pour générer des embeddings, et <strong>Ollama</strong> pour faire les recommandations. Je te laisse gérer ton virtualenv comme tu l'entends.</p>
+<div class="highlight"><pre><span></span><span class="nv">python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;^3.12&quot;</span>
+<span class="nv">chromadb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;^0.5.20&quot;</span>
+<span class="nv">ollama</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;^0.4.1&quot;</span>
+sentence-transformers<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;^3.3.1&quot;</span>
+<span class="nv">streamlit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;^1.40.2&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="charger-les-donnees-des-films">
+<h2>Charger les Données des Films</h2>
+<p>On commence par préparer les données des films. Imaginons que tu aies un fichier <cite>data/data.json</cite> qui contient des informations comme le titre du film, le synopsis, l'ID IMDb, etc.</p>
+<div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;Title&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Interstellar&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Year&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2014&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Rated&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;PG-13&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Released&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;07 Nov 2014&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Runtime&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;169 min&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Genre&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Adventure, Drama, Sci-Fi&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Director&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Christopher Nolan&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Writer&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Jonathan Nolan, Christopher Nolan&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Actors&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Plot&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;A team of explorers travel through a wormhole in space in an attempt to ensure humanity&#39;s survival.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Language&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;English&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Country&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;USA, UK&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Awards&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Won 1 Oscar. Another 39 wins &amp; 134 nominations.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Poster&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Metascore&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;74&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;imdbRating&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;8.6&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;imdbVotes&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;937,412&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;imdbID&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;tt0816692&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;movie&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Response&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;True&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Images&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;https://images-na.ssl-images-amazon.com/images/M/MV5BMjA3NTEwOTMxMV5BMl5BanBnXkFtZTgwMjMyODgxMzE@._V1_SX1500_CR0,0,1500,999_AL_.jpg&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;https://images-na.ssl-images-amazon.com/images/M/MV5BMzQ5ODE2MzEwM15BMl5BanBnXkFtZTgwMTMyODgxMzE@._V1_SX1500_CR0,0,1500,999_AL_.jpg&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;https://images-na.ssl-images-amazon.com/images/M/MV5BMTg4Njk4MzY0Nl5BMl5BanBnXkFtZTgwMzIyODgxMzE@._V1_SX1500_CR0,0,1500,999_AL_.jpg&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;https://images-na.ssl-images-amazon.com/images/M/MV5BMzE3MTM0MTc3Ml5BMl5BanBnXkFtZTgwMDIyODgxMzE@._V1_SX1500_CR0,0,1500,999_AL_.jpg&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;https://images-na.ssl-images-amazon.com/images/M/MV5BNjYzNjE2NDk3N15BMl5BanBnXkFtZTgwNzEyODgxMzE@._V1_SX1500_CR0,0,1500,999_AL_.jpg&quot;</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+<p>Tu crées ton fichier de script Python et c'est parti.</p>
+<p>Cette fonction va simplement charger les films depuis le fichier JSON et te permettra d’ajouter ces films dans ChromaDB.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">ollama</span>
+<span class="kn">from</span> <span class="nn">sentence_transformers</span> <span class="kn">import</span> <span class="n">SentenceTransformer</span>
+<span class="kn">import</span> <span class="nn">chromadb</span>
+<span class="kn">from</span> <span class="nn">chromadb.config</span> <span class="kn">import</span> <span class="n">Settings</span>
+<span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
+
+<span class="k">def</span> <span class="nf">load_movies</span><span class="p">(</span><span class="n">file_path</span><span class="o">=</span><span class="s2">&quot;data/data.json&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Loads movie data from the JSON file.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="initialiser-chromadb">
+<h2>Initialiser ChromaDB</h2>
+<p>Ensuite, on initialise <strong>ChromaDB</strong>, une base de données qui te permettra de stocker les embeddings des films.</p>
+<p>Hein ? Des embeddings ?</p>
+<p>Concrètement, chaque mot de tes documents est converti en nombres (tokens), puis est inséré dans un vecteur qui sera stocké dans la base.
+Ensuite, la requête de l'utilisateur est également convertie en vecteur.
+Puis, il compare le vecteur de la requête avec les vecteurs en base pour donner les résultats les plus proches.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initialize_chromadb</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes and returns a ChromaDB client with a movie collection.&quot;&quot;&quot;</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">chromadb</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">Settings</span><span class="p">(</span><span class="n">is_persistent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">anonymized_telemetry</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">client</span>
+</pre></div>
+</div>
+<div class="section" id="generer-les-embeddings">
+<h2>Générer les Embeddings</h2>
+<p>On utilise <strong>Sentence-Transformer</strong> pour transformer chaque film en un vecteur d'embedding.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_embeddings</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates embeddings for a given content.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="indexer-les-films">
+<h2>Indexer les Films</h2>
+<p>Une fois qu'on a les embeddings, on va les ajouter dans <strong>ChromaDB</strong> et on va indexer chaque film en utilisant son titre et son synopsis.
+Si un film est déjà dans l'index, on ne le réajoute pas. Si tu veux refaire complètement l'index, il te suffit d'effacer le dossier <strong>chroma</strong>.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">index_movies</span><span class="p">(</span><span class="n">movies</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">collection</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Indexes movies in ChromaDB only if the index doesn&#39;t exist already.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">movie</span> <span class="ow">in</span> <span class="n">movies</span><span class="p">:</span>
+        <span class="n">doc_id</span> <span class="o">=</span> <span class="n">movie</span><span class="p">[</span><span class="s2">&quot;imdbID&quot;</span><span class="p">]</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">movie</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span>
+        <span class="n">plot</span> <span class="o">=</span> <span class="n">movie</span><span class="p">[</span><span class="s2">&quot;Plot&quot;</span><span class="p">]</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">plot</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># Check if the document already exists</span>
+        <span class="n">existing_document</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="n">doc_id</span><span class="p">])</span>
+
+        <span class="c1"># If the document exists, skip it</span>
+        <span class="k">if</span> <span class="n">existing_document</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The document with ID </span><span class="si">{</span><span class="n">doc_id</span><span class="si">}</span><span class="s2"> already exists. It will not be added.&quot;</span>
+            <span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Generate the embedding</span>
+        <span class="n">embedding</span> <span class="o">=</span> <span class="n">generate_embeddings</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+
+        <span class="c1"># Add to the collection</span>
+        <span class="n">collection</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+            <span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="n">doc_id</span><span class="p">],</span>
+            <span class="n">metadatas</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="n">movie</span><span class="p">[</span><span class="s2">&quot;Year&quot;</span><span class="p">]}],</span>
+            <span class="n">documents</span><span class="o">=</span><span class="p">[</span><span class="n">content</span><span class="p">],</span>
+            <span class="n">embeddings</span><span class="o">=</span><span class="p">[</span><span class="n">embedding</span><span class="p">],</span>
+        <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data indexed in ChromaDB.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="rechercher-dans-chromadb">
+<h2>Rechercher dans ChromaDB</h2>
+<p>Maintenant, on va créer une fonction qui va effectuer la recherche dans ChromaDB en fonction de la requête de l'utilisateur.
+On va utiliser les embeddings de la requête pour chercher les films les plus pertinents dans la base de données. Ici, on récupère
+les 3 résultats les plus proches.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">perform_query</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Performs a search in ChromaDB and returns the results.&quot;&quot;&quot;</span>
+    <span class="n">query_embedding</span> <span class="o">=</span> <span class="n">generate_embeddings</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="n">query_embeddings</span><span class="o">=</span><span class="p">[</span><span class="n">query_embedding</span><span class="p">],</span>
+        <span class="n">n_results</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+<div class="section" id="generer-un-prompt-pour-ollama">
+<h2>Générer un Prompt pour Ollama</h2>
+<p>Une fois que nous avons trouvé les films pertinents, on va générer un prompt pour <strong>Ollama</strong> afin qu’il nous recommande des films à partir des résultats de la recherche.
+Toute l'intelligence se situe au niveau de ce prompt. On donne un rôle de vendeur de DVD à Ollama, puis on lui donne en contexte la liste des films qui ont été récupérés dans ChromaDB. Enfin, on lui donne la requête de l'utilisateur et on le laisse générer le texte complet de la recommandation.</p>
+<p>On insiste bien ici sur le fait qu'il ne peut pas proposer des films en dehors du contexte fourni.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_prompt</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a prompt for Ollama where the model acts as a DVD salesperson.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">You are a knowledgeable DVD salesperson with expertise in movies. Your task is to recommend movies to customers, but you can only suggest films that are available in the store&#39;s inventory. Make sure your recommendations are based solely on the list of movies provided.</span>
+
+<span class="s2">Context: Below is a list of movies currently available in the store:</span>
+<span class="si">{</span><span class="n">context</span><span class="si">}</span>
+
+<span class="s2">Customer&#39;s Question: Ask for a movie about </span><span class="si">{</span><span class="n">query</span><span class="si">}</span>
+
+<span class="s2">Your Movie Recommendations (only from the available list):</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="interroger-ollama">
+<h2>Interroger Ollama</h2>
+<p>Ensuite, on passe le prompt à <strong>Ollama</strong> pour obtenir ses recommandations.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">query_ollama</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;myllama&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Queries Ollama with the given prompt.&quot;&quot;&quot;</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">ollama</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">prompt</span><span class="p">}])</span>
+    <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">][</span><span class="s2">&quot;content&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="creer-une-interface-utilisateur-avec-streamlit">
+<h2>Créer une Interface Utilisateur avec Streamlit</h2>
+<p>Enfin, on va utiliser <strong>Streamlit</strong> pour créer une interface utilisateur simple.
+J'ai découvert récemment cet outil et franchement, c'est magique. Ça te permet de générer très rapidement une interface web pour ton script
+sans faire d'HTML, de CSS ou de JavaScript.</p>
+<p>L'utilisateur peut entrer une requête, et l'application va afficher les films pertinents, le prompt passé à Ollama et la réponse qu'il a générée.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Load the movies</span>
+    <span class="n">movies</span> <span class="o">=</span> <span class="n">load_movies</span><span class="p">()</span>
+
+    <span class="c1"># Initialize SentenceTransformer to generate embeddings</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">SentenceTransformer</span><span class="p">(</span><span class="s2">&quot;all-MiniLM-L6-v2&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Initialize ChromaDB</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">initialize_chromadb</span><span class="p">()</span>
+
+    <span class="c1"># Check if the collection exists already</span>
+    <span class="n">collection</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_or_create_collection</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;movies&quot;</span><span class="p">)</span>
+
+    <span class="c1"># If the collection is empty (does not exist), index the movies</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">collection</span><span class="o">.</span><span class="n">count</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Indexing movies in ChromaDB...&quot;</span><span class="p">)</span>
+        <span class="n">index_movies</span><span class="p">(</span><span class="n">movies</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">collection</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The movie index already exists. It was not regenerated.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Streamlit user interface</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Movie Recommendations&quot;</span><span class="p">)</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">text_input</span><span class="p">(</span><span class="s2">&quot;Ask for a movie about...&quot;</span><span class="p">,</span> <span class="s2">&quot;a wormhole in space&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">&quot;Ask&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">query</span><span class="p">:</span>
+            <span class="c1"># Perform the search</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="n">perform_query</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+
+            <span class="c1"># Prepare the prompt for Ollama as the DVD salesperson</span>
+            <span class="n">documents</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;documents&quot;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="k">if</span> <span class="n">documents</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">documents</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># Display the results in the UI</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">subheader</span><span class="p">(</span><span class="s2">&quot;Movies Found&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">:</span>
+                <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+
+            <span class="n">context</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">doc</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">documents</span> <span class="k">if</span> <span class="n">result</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">prompt</span> <span class="o">=</span> <span class="n">generate_prompt</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+
+            <span class="c1"># Display the prompt in the UI</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">subheader</span><span class="p">(</span><span class="s2">&quot;Prompt Sent to Ollama&quot;</span><span class="p">)</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">text_area</span><span class="p">(</span><span class="s2">&quot;Here is the prompt sent to Ollama&quot;</span><span class="p">,</span> <span class="n">prompt</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+            <span class="c1"># Show the loading spinner while the request is being processed</span>
+            <span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">spinner</span><span class="p">(</span><span class="s2">&quot;Searching...&quot;</span><span class="p">):</span>
+                <span class="c1"># Query Ollama</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="n">query_ollama</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;llama3.2&quot;</span><span class="p">)</span>
+
+            <span class="n">st</span><span class="o">.</span><span class="n">subheader</span><span class="p">(</span><span class="s2">&quot;Ollama&#39;s Recommendation&quot;</span><span class="p">)</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+<p>Il te suffit d'exécuter tout ça et de tester pour voir le résultat. Pour te simplifier la vie si tu veux juste tester ça, tu peux récupérer
+mon projet sur <a class="reference external" href="https://github.com/dotmobo/movie-recommendation-rag">mon dépôt git</a>.</p>
+<p>Have fun !</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://dotmobo.xyz/tag/rag.html">RAG</a>
+      <a href="https://dotmobo.xyz/tag/llm.html">LLM</a>
+      <a href="https://dotmobo.xyz/tag/chromadb.html">ChromaDB</a>
+      <a href="https://dotmobo.xyz/tag/ollama.html">Ollama</a>
+      <a href="https://dotmobo.xyz/tag/python.html">Python</a>
+      <a href="https://dotmobo.xyz/tag/streamlit.html">Streamlit</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dotmobo';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; 2024  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script id="dark-theme-script"
+          src="https://dotmobo.xyz/theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
+          data-default-theme="dark"
+          type="text/javascript">
+  </script>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " .mobo ",
+  "url" : "https://dotmobo.xyz",
+  "image": "//dotmobo.xyz/images/avatar700.jpg",
+  "description": ".mobo - explorations d'un développeur"
+}
+</script>
+
+
+</body>
+</html>

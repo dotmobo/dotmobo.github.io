@@ -254,6 +254,15 @@ sans faire d'HTML, de CSS ou de JavaScript.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Il te suffit d'exécuter tout ça et de tester pour voir le résultat. Pour te simplifier la vie si tu veux juste tester ça, tu peux récupérer
 mon projet sur &lt;a class="reference external" href="https://github.com/dotmobo/movie-recommendation-rag"&gt;mon dépôt git&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Quelques pistes d'amélioration:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Utiliser le modèle &lt;strong&gt;LaBSE&lt;/strong&gt; de Sentence-Transformers pour des embeddings multilingues.&lt;/li&gt;
+&lt;li&gt;Utiliser un framework du type &lt;strong&gt;LlamaIndex&lt;/strong&gt; ou &lt;strong&gt;LangChain&lt;/strong&gt; pour gérer les embeddings et les requêtes.&lt;/li&gt;
+&lt;li&gt;Optimiser la recherche avec des filtres tels que le genre, l'année ou le réalisateur.&lt;/li&gt;
+&lt;li&gt;Enrichir les données des films avec une API externe (IMDb, TMDb).&lt;/li&gt;
+&lt;li&gt;Ajouter un mécanisme de feedback utilisateur pour affiner les recommandations.&lt;/li&gt;
+&lt;li&gt;Jouer avec le paramètre de &lt;strong&gt;temperature&lt;/strong&gt; dans le prompt pour obtenir des recommandations plus ou moins originales.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Have fun !&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="IA"></category><category term="RAG"></category><category term="LLM"></category><category term="ChromaDB"></category><category term="Ollama"></category><category term="Python"></category><category term="Streamlit"></category></entry><entry><title>Outils "Blazing-Fast" pour Linux écrits en Rust</title><link href="https://dotmobo.xyz/linux-tools-rust.html" rel="alternate"></link><published>2024-10-14T00:00:00+02:00</published><updated>2024-10-14T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2024-10-14:/linux-tools-rust.html</id><summary type="html">&lt;p class="first last"&gt;Outils &amp;quot;Blazing-Fast&amp;quot; pour Linux écrits en Rust&lt;/p&gt;

@@ -314,7 +314,13 @@ L'utilisateur peut entrer une requête, et l'application va afficher les films p
     if __name__ == "__main__":
         main()
 
-Il te suffit d'exécuter tout ça et de tester pour voir le résultat. Ici un aperçu sans les infos de debug :
+Il te suffit d'exécuter tout ça et de tester pour voir le résultat via la commande :
+
+.. code-block:: bash
+
+    streamlit run tonscript.py
+
+Ici un aperçu sans les infos de debug :
 
 .. image:: ./images/ollama-app.png
     :alt: Application

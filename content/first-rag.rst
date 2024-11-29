@@ -317,4 +317,12 @@ L'utilisateur peut entrer une requête, et l'application va afficher les films p
 Il te suffit d'exécuter tout ça et de tester pour voir le résultat. Pour te simplifier la vie si tu veux juste tester ça, tu peux récupérer
 mon projet sur `mon dépôt git <https://github.com/dotmobo/movie-recommendation-rag>`_.
 
+Quelques pistes d'amélioration:
+- Utiliser le modèle **LaBSE** de Sentence-Transformers pour des embeddings multilingues.
+- Utiliser un framework du type **LlamaIndex** ou **LangChain** pour gérer les embeddings et les requêtes.
+- Optimiser la recherche avec des filtres tels que le genre, l'année ou le réalisateur.
+- Enrichir les données des films avec une API externe (IMDb, TMDb).
+- Ajouter un mécanisme de feedback utilisateur pour affiner les recommandations.
+- Jouer avec le paramètre de **temperature** dans le prompt pour obtenir des recommandations plus ou moins originales.
+
 Have fun !

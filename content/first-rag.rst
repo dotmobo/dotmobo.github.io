@@ -318,6 +318,7 @@ Il te suffit d'exécuter tout ça et de tester pour voir le résultat. Pour te s
 mon projet sur `mon dépôt git <https://github.com/dotmobo/movie-recommendation-rag>`_.
 
 Quelques pistes d'amélioration:
+
 - Utiliser le modèle **LaBSE** de Sentence-Transformers pour des embeddings multilingues.
 - Utiliser un framework du type **LlamaIndex** ou **LangChain** pour gérer les embeddings et les requêtes.
 - Optimiser la recherche avec des filtres tels que le genre, l'année ou le réalisateur.

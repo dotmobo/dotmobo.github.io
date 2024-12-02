@@ -327,6 +327,7 @@ Ici un aperçu sans les infos de debug :
     :align: center
 
 Pour te simplifier la vie si tu veux juste tester ça, tu peux récupérer mon projet sur `mon dépôt git <https://github.com/dotmobo/movie-recommendation-rag>`_.
+Tu y trouveras même une version alternative du script avec `Qdrant <https://qdrant.tech/>`_ à la place de ChromaDB pour l'indexation des films.
 
 Quelques pistes d'amélioration:
 

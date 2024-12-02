@@ -257,7 +257,8 @@ sans faire d'HTML, de CSS ou de JavaScript.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Ici un aperçu sans les infos de debug :&lt;/p&gt;
 &lt;img alt="Application" class="align-center" src="./images/ollama-app.png" /&gt;
-&lt;p&gt;Pour te simplifier la vie si tu veux juste tester ça, tu peux récupérer mon projet sur &lt;a class="reference external" href="https://github.com/dotmobo/movie-recommendation-rag"&gt;mon dépôt git&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Pour te simplifier la vie si tu veux juste tester ça, tu peux récupérer mon projet sur &lt;a class="reference external" href="https://github.com/dotmobo/movie-recommendation-rag"&gt;mon dépôt git&lt;/a&gt;.
+Tu y trouveras même une version alternative du script avec &lt;a class="reference external" href="https://qdrant.tech/"&gt;Qdrant&lt;/a&gt; à la place de ChromaDB pour l'indexation des films.&lt;/p&gt;
 &lt;p&gt;Quelques pistes d'amélioration:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Utiliser le modèle &lt;strong&gt;LaBSE&lt;/strong&gt; de Sentence-Transformers pour des embeddings multilingues.&lt;/li&gt;

@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2024-11-28T00:00:00+01:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Développer son propre RAG local avec Ollama, ChromaDB et Streamlit</title><link href="https://dotmobo.xyz/first-rag.html" rel="alternate"></link><published>2024-11-28T00:00:00+01:00</published><updated>2024-11-28T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2024-11-28:/first-rag.html</id><summary type="html">&lt;p class="first last"&gt;Développer son propre RAG local avec Ollama, ChromaDB et Streamlit&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2024-12-12T00:00:00+01:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Booster les performances de son RAG avec la quantification</title><link href="https://dotmobo.xyz/quantification.html" rel="alternate"></link><published>2024-12-12T00:00:00+01:00</published><updated>2024-12-12T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2024-12-12:/quantification.html</id><summary type="html">&lt;p class="first last"&gt;Booster les performances de son RAG avec la quantification&lt;/p&gt;
+</summary><content type="html">&lt;img alt="SentenceTransformer de films" class="align-right" src="./images/sentencetransformers.png" /&gt;
+&lt;p&gt;Dans &lt;a class="reference external" href="https://dotmobo.xyz/first-rag.html"&gt;mon article précédent&lt;/a&gt;, tu as découvert comment mettre en place un RAG pour recommander des films.
+On avait utilisé un petit fichier JSON pour stocker les films, mais imagine maintenant que ton RAG doive parcourir des
+millions de documents. Là, tu vas vite voir que les requêtes deviennent de plus en plus longues et que la mémoire explose.&lt;/p&gt;
+&lt;p&gt;La bonne nouvelle, c’est qu’avec la quantification, tu peux réduire significativement la taille des embeddings,
+ce qui améliore la performance.&lt;/p&gt;
+&lt;div class="section" id="tweaking-de-sentencetransformer-avec-la-quantification"&gt;
+&lt;h2&gt;Tweaking de SentenceTransformer avec la quantification&lt;/h2&gt;
+&lt;p&gt;Reprends ton projet de RAG et tweake &lt;a class="reference external" href="https://sbert.net/"&gt;SentenceTransformers&lt;/a&gt; pour intégrer la quantification binaire.
+La modification est simple et se résume à une ligne :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_embeddings&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Génère des embeddings pour un contenu donné avec quantification binaire.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;precision&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;binary&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;On ajoute &lt;strong&gt;precision=&amp;quot;binary&amp;quot;&lt;/strong&gt; lors de l'encodage du contenu. Mais concrètement, qu’est-ce que ça signifie ?&lt;/p&gt;
+&lt;p&gt;La précision &amp;quot;binary&amp;quot; implique qu’au lieu de stocker chaque valeur de l’embedding comme un nombre flottant
+(qui utilise 4 octets par valeur), chaque dimension est convertie en une valeur binaire (0 ou 1).
+Cela réduit la taille des embeddings d’un facteur 32 et accélère les recherches.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="gain-de-performance-a-quel-prix"&gt;
+&lt;h2&gt;Gain de performance à quel prix ?&lt;/h2&gt;
+&lt;p&gt;Grâce à cette méthode, tu réduis considérablement l’espace disque et la mémoire nécessaires pour stocker tes embeddings.
+Tu peux maintenant effectuer des recherches sur des millions de documents sans souci.&lt;/p&gt;
+&lt;p&gt;Un aperçu des différences entre les embeddings flottants et binaires en terme de taille :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;embeddings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;embeddings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;nbytes&lt;/span&gt;
+&lt;span class="mi"&gt;8192&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;embeddings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dtype&lt;/span&gt;
+&lt;span class="n"&gt;float32&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;binary_embeddings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;128&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;binary_embeddings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;nbytes&lt;/span&gt;
+&lt;span class="mi"&gt;256&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;binary_embeddings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dtype&lt;/span&gt;
+&lt;span class="n"&gt;int8&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Mais il y a un &lt;strong&gt;mais&lt;/strong&gt; : la perte de précision est l’un des inconvénients majeurs.
+La quantification est une méthode de compression, et donc les valeurs binaires ne peuvent pas contenir autant
+d’informations que les valeurs flottantes. Selon l’application, cela peut ne pas être adapté.&lt;/p&gt;
+&lt;p&gt;Pour un système de recherche de films, cette approche reste largement suffisante. En revanche, si tes embeddings doivent capter des nuances très fines,
+la quantification peut affecter la qualité des résultats.&lt;/p&gt;
+&lt;p&gt;À toi de décider si cette solution est adaptée à ton cas, mais c’est une technique intéressante à garder en tête.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="IA"></category><category term="RAG"></category><category term="LLM"></category><category term="ChromaDB"></category><category term="Ollama"></category><category term="Python"></category><category term="Streamlit"></category></entry><entry><title>Développer son propre RAG local avec Ollama, ChromaDB et Streamlit</title><link href="https://dotmobo.xyz/first-rag.html" rel="alternate"></link><published>2024-11-28T00:00:00+01:00</published><updated>2024-11-28T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2024-11-28:/first-rag.html</id><summary type="html">&lt;p class="first last"&gt;Développer son propre RAG local avec Ollama, ChromaDB et Streamlit&lt;/p&gt;
 </summary><content type="html">&lt;img alt="Recommandations de films" class="align-right" src="./images/ollama.png" /&gt;
 &lt;p&gt;Bon, il est temps de se mettre à l'intelligence artificielle et aux LLMs.
 Ça fait un moment que j'utilise des outils comme GitHub Copilot et ChatGPT, mais sans vraiment savoir comment ça marche sous le capot.&lt;/p&gt;

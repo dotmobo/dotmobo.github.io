@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/stylesheet/style.min.css">
+
+    <link id="dark-theme-style" rel="stylesheet" type="text/css"
+          media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+    href="https://dotmobo.xyz/theme/stylesheet/dark-theme.min.css">
+
+    <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+          href="https://dotmobo.xyz/theme/pygments/monokai.min.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: light)"
+          href="https://dotmobo.xyz/theme/pygments/emacs.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/solid.css">
+
+    <link href="https://dotmobo.xyz/css/custom.css" rel="stylesheet">
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68852219-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Morgan" />
+<meta name="description" content="Développer une UI pour Whisper avec Streamlit" />
+<meta name="keywords" content="Python, Streamlit, LLM, Whisper">
+
+
+<meta property="og:site_name" content=".mobo"/>
+<meta property="og:title" content="Développer une UI pour Whisper avec Streamlit"/>
+<meta property="og:description" content="Développer une UI pour Whisper avec Streamlit"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="https://dotmobo.xyz/whisper.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2025-04-03 00:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://dotmobo.xyz/author/morgan.html">
+<meta property="article:section" content="IA"/>
+<meta property="article:tag" content="Python"/>
+<meta property="article:tag" content="Streamlit"/>
+<meta property="article:tag" content="LLM"/>
+<meta property="article:tag" content="Whisper"/>
+<meta property="og:image" content="//dotmobo.xyz/images/avatar700.jpg">
+
+  <title>.mobo &ndash; Développer une UI pour Whisper avec Streamlit</title>
+
+</head>
+<body >
+  <aside>
+    <div>
+      <a href="https://dotmobo.xyz">
+        <img src="//dotmobo.xyz/images/avatar700.jpg" alt=".mobo" title=".mobo">
+      </a>
+
+      <h1>
+        <a href="https://dotmobo.xyz">.mobo</a>
+      </h1>
+
+<p>Explorations d'un développeur</p>
+
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.xyz/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://dotmobo.xyz">Accueil</a>
+
+      <a href="/categories.html">Catégories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/archives.html">Archives</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="whisper">Développer une UI pour Whisper avec Streamlit</h1>
+    <p>
+      Posté le 03/04/2025 dans <a href="https://dotmobo.xyz/category/ia.html">IA</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="Whisper" class="align-right" src="./images/openai.png" />
+<p><a class="reference external" href="https://github.com/openai/whisper">Whisper</a> est un modèle IA de <strong>speech-to-text</strong> créé par OpenAI et qui marche plutôt pas mal.
+L'outil est open source et s'utilise en ligne de commande directement. Il te permet de transcrire
+de l'audio en texte, de faire des traductions directes en anglais, de traduire des vidéos pour en
+générer des sous-titres, etc.</p>
+<p>Mais pourquoi ne pas se faire une petite app avec <a class="reference external" href="https://streamlit.io/">streamlit</a>, histoire de l'utiliser plus facilement
+et d'avoir une UI sympathique pour les utilisateurs ?</p>
+<div class="section" id="prerequis">
+<h2>Prérequis</h2>
+<p>Bon, forcément, il te faut <strong>python</strong>. Pour cet article, j'ai utilisé la version 3.9 mais ça devrait
+marcher avec les versions plus récentes.</p>
+<p>Tu te fais un environnement virtuel et tu installes les dépendances suivantes :</p>
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>openai-whisper
+pip<span class="w"> </span>install<span class="w"> </span>streamlit
+pip<span class="w"> </span>install<span class="w"> </span>pyannote.audio
+pip<span class="w"> </span>install<span class="w"> </span>sumy
+</pre></div>
+<p>En gros, l'idée ici sera de permettre à l'utilisateur de faire une transcription d'un audio avec whisper,
+puis d'identifier automatiquement les personnes qui parlent avec <a class="reference external" href="https://github.com/pyannote/pyannote-audio">pyannote</a> (diarization), et enfin de sortir les phrases les plus
+importantes de la transcription pour en faire un résumé avec <a class="reference external" href="https://github.com/miso-belica/sumy">sumy</a>.</p>
+</div>
+<div class="section" id="developpement">
+<h2>Développement</h2>
+<p>Tu peux te créer un fichier <cite>main.py</cite> pour ton app streamlit et on va attaquer le code.</p>
+<p>On commence par télécharger <a class="reference external" href="https://www.nltk.org/">nltk</a> qui sera nécessaire pour sumy, pour la tokenisation des phrases.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;punkt&quot;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;punkt_tab&quot;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+<p>Ensuite on met un titre et on affiche un selectbox pour choisir le modèle whisper ainsi qu'une checkbox pour activer la diarization.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Compte-rendu de réunion&quot;</span><span class="p">)</span>
+
+<span class="n">WHISPER_MODEL_OPTIONS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;tiny&quot;</span><span class="p">,</span> <span class="s2">&quot;base&quot;</span><span class="p">,</span> <span class="s2">&quot;small&quot;</span><span class="p">,</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span> <span class="s2">&quot;large&quot;</span><span class="p">,</span> <span class="s2">&quot;turbo&quot;</span><span class="p">]</span>
+<span class="n">selected_model</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s2">&quot;Choisissez la précision de l&#39;analyse :&quot;</span><span class="p">,</span> <span class="n">WHISPER_MODEL_OPTIONS</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">diarization_enabled</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="s2">&quot;🔍 Identifier les différents intervenants&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+<p>On charge alors le modèle whisper et le modèle pyannote en cache pour améliorer les performances.
+Note qu'il te faut un token <a class="reference external" href="https://huggingface.co/">Hugging Face</a> pour pyannote.
+On prend également en compte <a class="reference external" href="https://developer.nvidia.com/cuda-toolkit">CUDA</a> pour utiliser le GPU si tu en as un. Pour installer CUDA, je te laisse voir
+directement avec la documentation officielle.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">whisper</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">pyannote.audio</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+
+<span class="nd">@st</span><span class="o">.</span><span class="n">cache_resource</span>
+<span class="k">def</span> <span class="nf">load_whisper_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">whisper</span><span class="o">.</span><span class="n">Whisper</span><span class="p">:</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+    <span class="k">return</span> <span class="n">whisper</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+
+
+<span class="nd">@st</span><span class="o">.</span><span class="n">cache_resource</span>
+<span class="k">def</span> <span class="nf">load_diarization_model</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Pipeline</span><span class="p">:</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="s2">&quot;ton-token-huggingface&quot;</span>
+    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;pyannote/speaker-diarization-3.1&quot;</span><span class="p">,</span> <span class="n">use_auth_token</span><span class="o">=</span><span class="n">access_token</span><span class="p">)</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+    <span class="n">pipeline</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pipeline</span>
+
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">load_whisper_model</span><span class="p">(</span><span class="n">selected_model</span><span class="p">)</span>
+<span class="n">diarization_model</span> <span class="o">=</span> <span class="n">load_diarization_model</span><span class="p">()</span> <span class="k">if</span> <span class="n">diarization_enabled</span> <span class="k">else</span> <span class="kc">None</span>
+</pre></div>
+<p>Ensuite, on propose à l'utilisateur s'il veut utiliser son micro ou uploader un fichier audio.</p>
+<div class="highlight"><pre><span></span><span class="n">input_option</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">radio</span><span class="p">(</span>
+    <span class="s2">&quot;Comment souhaitez-vous ajouter l&#39;audio ?&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;📂 Télécharger un fichier&quot;</span><span class="p">,</span> <span class="s2">&quot;🎤 Utiliser le micro&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+<p>On gère également la transcription et le résumé en session pour éviter que streamlit ne relance
+les fonctions à chaque fois qu'il est rafraîchi par un clic sur un bouton.</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="s2">&quot;transcription_result&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">transcription_result</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">if</span> <span class="s2">&quot;previous_input_option&quot;</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span> <span class="ow">and</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">previous_input_option</span> <span class="o">!=</span> <span class="n">input_option</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">transcription_result</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">previous_input_option</span> <span class="o">=</span> <span class="n">input_option</span>
+</pre></div>
+<p>On attaque maintenant du lourd, la fonction de transcription.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+
+<span class="nd">@st</span><span class="o">.</span><span class="n">cache_data</span>
+<span class="k">def</span> <span class="nf">transcribe_audio</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">transcribe</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="nd">@st</span><span class="o">.</span><span class="n">cache_data</span>
+<span class="k">def</span> <span class="nf">diarize_audio</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">diarization_model</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">diarization_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="kn">import</span> <span class="nn">torchaudio</span>
+<span class="kn">import</span> <span class="nn">torchaudio.transforms</span> <span class="k">as</span> <span class="nn">T</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">cache</span>
+
+<span class="nd">@cache</span>
+<span class="k">def</span> <span class="nf">get_random_name</span><span class="p">(</span><span class="n">speaker</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a random name for the speaker.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;Alice&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Bob&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Charlie&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;David&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Emma&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Fanny&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Gaston&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Hugo&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Isabelle&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Jules&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">speaker</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">names</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;Locuteur </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="k">def</span> <span class="nf">assign_speakers</span><span class="p">(</span><span class="n">transcription</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">diarization</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="n">new_transcription</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">transcription</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">seg</span> <span class="ow">in</span> <span class="n">new_transcription</span><span class="p">[</span><span class="s2">&quot;segments&quot;</span><span class="p">]:</span>
+        <span class="n">max_overlap</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">assigned_speaker</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">for</span> <span class="n">turn</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">speaker</span> <span class="ow">in</span> <span class="n">diarization</span><span class="o">.</span><span class="n">itertracks</span><span class="p">(</span><span class="n">yield_label</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="n">overlap_start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">seg</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">],</span> <span class="n">turn</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+            <span class="n">overlap_end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">seg</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">],</span> <span class="n">turn</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+            <span class="n">overlap_duration</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">overlap_end</span> <span class="o">-</span> <span class="n">overlap_start</span><span class="p">)</span>
+            <span class="n">seg_duration</span> <span class="o">=</span> <span class="n">seg</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">seg</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">]</span>
+
+            <span class="n">overlap_ratio</span> <span class="o">=</span> <span class="n">overlap_duration</span> <span class="o">/</span> <span class="n">seg_duration</span>
+
+            <span class="k">if</span> <span class="n">overlap_ratio</span> <span class="o">&gt;</span> <span class="n">max_overlap</span><span class="p">:</span>
+                <span class="n">max_overlap</span> <span class="o">=</span> <span class="n">overlap_ratio</span>
+                <span class="n">assigned_speaker</span> <span class="o">=</span> <span class="n">speaker</span>
+
+        <span class="k">if</span> <span class="n">assigned_speaker</span><span class="p">:</span>
+            <span class="n">seg</span><span class="p">[</span><span class="s2">&quot;speaker&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_random_name</span><span class="p">(</span><span class="n">assigned_speaker</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">new_transcription</span>
+
+<span class="k">def</span> <span class="nf">convert_and_resample_audio</span><span class="p">(</span><span class="n">input_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_sr</span><span class="o">=</span><span class="mi">16000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">waveform</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">torchaudio</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">input_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sr</span> <span class="o">!=</span> <span class="n">target_sr</span><span class="p">:</span>
+        <span class="n">resampler</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">Resample</span><span class="p">(</span><span class="n">orig_freq</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">new_freq</span><span class="o">=</span><span class="n">target_sr</span><span class="p">)</span>
+        <span class="n">waveform</span> <span class="o">=</span> <span class="n">resampler</span><span class="p">(</span><span class="n">waveform</span><span class="p">)</span>
+    <span class="n">torchaudio</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">waveform</span><span class="p">,</span> <span class="n">target_sr</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">process_transcription</span><span class="p">(</span><span class="n">tmp_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">resampled_audio</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;⏳ Analyse en cours... Prenez un café ☕&quot;</span><span class="p">)</span>
+
+        <span class="n">transcription</span> <span class="o">=</span> <span class="n">transcribe_audio</span><span class="p">(</span><span class="n">tmp_filename</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">diarization_enabled</span><span class="p">:</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;🔍 Identification des intervenants en cours...&quot;</span><span class="p">)</span>
+            <span class="n">resampled_audio</span> <span class="o">=</span> <span class="n">tmp_filename</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_resampled.wav&quot;</span>
+            <span class="n">convert_and_resample_audio</span><span class="p">(</span><span class="n">tmp_filename</span><span class="p">,</span> <span class="n">resampled_audio</span><span class="p">)</span>
+            <span class="n">diarization</span> <span class="o">=</span> <span class="n">diarize_audio</span><span class="p">(</span><span class="n">resampled_audio</span><span class="p">)</span>
+            <span class="n">transcription</span> <span class="o">=</span> <span class="n">assign_speakers</span><span class="p">(</span><span class="n">transcription</span><span class="p">,</span> <span class="n">diarization</span><span class="p">)</span>
+
+        <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">transcription_result</span> <span class="o">=</span> <span class="n">transcription</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Erreur pendant la transcription/diarisation : </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">tmp_filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">diarization_enabled</span> <span class="ow">and</span> <span class="n">resampled_audio</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">resampled_audio</span><span class="p">)</span>
+</pre></div>
+<p>Bon, avant de passer à la suite, on va prendre du temps pour détailler tout ça.</p>
+<p>La fonction <cite>process_transcription</cite> commence par transcrire l'audio avec whisper.</p>
+<p>Puis, si on a la diarization d'activée, il nous faut d'abord resampler l'audio à 16kHz pour que
+pyannote puisse le traiter. Pyannote va alors analyser l'audio pour nous envoyer les différents segments
+avec les intervenants identifiés.</p>
+<p>Enfin, on assigne les intervenants aux segments audio de whisper.</p>
+<p>On essaye de gérer le chevauchement des segments de pyannote avec les segments de whisper pour assigner
+le bon intervenant à chaque phrase.</p>
+<p>On n'oublie pas de supprimer les fichiers temporaires à la fin et on met les résultats en session.</p>
+<p>Maintenant qu'on a nos fonctions prêtes, on va pouvoir les appeler en fonction des 2 cas d'usages : micro ou upload de fichier.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">mimetypes</span>
+
+<span class="k">if</span> <span class="n">input_option</span> <span class="o">==</span> <span class="s2">&quot;📂 Télécharger un fichier&quot;</span><span class="p">:</span>
+    <span class="n">uploaded_file</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">file_uploader</span><span class="p">(</span><span class="s2">&quot;Déposez votre fichier audio ici&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mp3&quot;</span><span class="p">,</span> <span class="s2">&quot;wav&quot;</span><span class="p">,</span> <span class="s2">&quot;m4a&quot;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">uploaded_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">&quot;📝 Transformer l&#39;audio en texte&quot;</span><span class="p">):</span>
+            <span class="n">file_extension</span> <span class="o">=</span> <span class="n">uploaded_file</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">mime_type</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">mimetypes</span><span class="o">.</span><span class="n">guess_type</span><span class="p">(</span><span class="n">uploaded_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mime_type</span> <span class="ow">and</span> <span class="n">mime_type</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;audio&quot;</span><span class="p">):</span>
+                <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;.</span><span class="si">{</span><span class="n">file_extension</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tmp_file</span><span class="p">:</span>
+                    <span class="n">tmp_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">uploaded_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+                    <span class="n">tmp_filename</span> <span class="o">=</span> <span class="n">tmp_file</span><span class="o">.</span><span class="n">name</span>
+                <span class="n">process_transcription</span><span class="p">(</span><span class="n">tmp_filename</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;❌ Format non reconnu ! Merci d&#39;ajouter un fichier audio valide.&quot;</span><span class="p">)</span>
+
+<span class="k">elif</span> <span class="n">input_option</span> <span class="o">==</span> <span class="s2">&quot;🎤 Utiliser le micro&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s2">&quot;audio_data&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">:</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">audio_data</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;🎤 Cliquez pour enregistrer votre réunion&quot;</span><span class="p">)</span>
+
+    <span class="n">audio_data</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">audio_input</span><span class="p">(</span><span class="s2">&quot;Enregistrez votre message vocal&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">audio_data</span><span class="p">:</span>
+        <span class="n">audio_bytes</span> <span class="o">=</span> <span class="n">audio_data</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">audio_data</span> <span class="o">=</span> <span class="n">audio_bytes</span>
+
+        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;✅ Enregistrement terminé.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;audio_data&quot;</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span> <span class="ow">and</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">audio_data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">&quot;📝 Transformer l&#39;audio en texte&quot;</span><span class="p">):</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">transcription_result</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;.wav&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tmp_file</span><span class="p">:</span>
+                <span class="n">tmp_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">audio_data</span><span class="p">)</span>
+                <span class="n">tmp_filename</span> <span class="o">=</span> <span class="n">tmp_file</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">process_transcription</span><span class="p">(</span><span class="n">tmp_filename</span><span class="p">)</span>
+</pre></div>
+<p>Et voilà ! On peut alors afficher la transcription brute :</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">if</span> <span class="s2">&quot;transcription_result&quot;</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span> <span class="ow">and</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">transcription_result</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">transcription_result</span>
+    <span class="n">detected_language</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;language&quot;</span><span class="p">]</span>
+    <span class="n">text_transcription</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+
+    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🌍 Langue détectée : **</span><span class="si">{</span><span class="n">detected_language</span><span class="si">}</span><span class="s2">**&quot;</span><span class="p">)</span>
+
+    <span class="n">transcript</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">seg</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">seg</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">transcription_result</span><span class="p">[</span><span class="s2">&quot;segments&quot;</span><span class="p">])</span>
+
+    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;🗒️ Voici votre compte-rendu brut :&quot;</span><span class="p">)</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">code</span><span class="p">(</span><span class="n">transcript</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;plaintext&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">wrap_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">json_content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+<p>A partir de maintenant, tout le reste du code se trouvera dans le bloc du <cite>if &quot;transcription_result&quot; in st.session_state</cite>.</p>
+<p>On propose également de la télécharger en JSON et en TXT :</p>
+<div class="highlight"><pre><span></span><span class="n">col1</span><span class="p">,</span> <span class="n">col2</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">columns</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">col1</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">download_button</span><span class="p">(</span><span class="s2">&quot;📄 Télécharger la transcription (TXT)&quot;</span><span class="p">,</span> <span class="n">transcript</span><span class="p">,</span> <span class="s2">&quot;transcription.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;text/plain&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">col2</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">download_button</span><span class="p">(</span>
+        <span class="s2">&quot;📝 Télécharger la version détaillée (JSON)&quot;</span><span class="p">,</span> <span class="n">json_content</span><span class="p">,</span> <span class="s2">&quot;transcription.json&quot;</span><span class="p">,</span> <span class="s2">&quot;application/json&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+<p>Et même chose si on a la diarization activée :</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">diarization_enabled</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;🗣️ Transcription avec intervenants&quot;</span><span class="p">)</span>
+
+    <span class="n">transcript_with_speakers</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">seg</span><span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">s - </span><span class="si">{</span><span class="n">seg</span><span class="p">[</span><span class="s1">&#39;end&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">s] </span><span class="si">{</span><span class="n">seg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;speaker&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Speaker ?&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">seg</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">seg</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">transcription_result</span><span class="p">[</span><span class="s2">&quot;segments&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">st</span><span class="o">.</span><span class="n">code</span><span class="p">(</span><span class="n">transcript_with_speakers</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">wrap_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">st</span><span class="o">.</span><span class="n">download_button</span><span class="p">(</span>
+        <span class="s2">&quot;📑 Télécharger la version annotée avec les intervenants&quot;</span><span class="p">,</span>
+        <span class="n">transcript_with_speakers</span><span class="p">,</span>
+        <span class="s2">&quot;transcript_with_speakers.txt&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;text/plain&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+<p>Le plus gros est fait ! On peut maintenant passer à la génération du résumé. Pour se faire, on va utiliser
+sumy avec LexRank.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sumy.parsers.plaintext</span> <span class="kn">import</span> <span class="n">PlaintextParser</span>
+<span class="kn">from</span> <span class="nn">sumy.nlp.tokenizers</span> <span class="kn">import</span> <span class="n">Tokenizer</span>
+<span class="kn">from</span> <span class="nn">sumy.summarizers.lex_rank</span> <span class="kn">import</span> <span class="n">LexRankSummarizer</span>
+
+<span class="k">def</span> <span class="nf">summarize_text</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">num_sentences</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;french&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">language</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Langue non supportée par le tokenizer : </span><span class="si">{</span><span class="n">language</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">PlaintextParser</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+    <span class="n">summarizer</span> <span class="o">=</span> <span class="n">LexRankSummarizer</span><span class="p">()</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">summarizer</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">document</span><span class="p">,</span> <span class="n">num_sentences</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">summary</span><span class="p">)</span>
+
+<span class="nd">@st</span><span class="o">.</span><span class="n">cache_data</span>
+<span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">num_sentences</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">language</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">summarize_text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">num_sentences</span><span class="o">=</span><span class="n">num_sentences</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="n">language</span><span class="p">)</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">subheader</span><span class="p">(</span><span class="s2">&quot;Synthèse du compte-rendu&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="s2">&quot;summary&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">num_sentences</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span>
+    <span class="s2">&quot;Choisissez le nombre de lignes pertinentes à extraire&quot;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">&quot;✨ Générer une synthèse&quot;</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;⏳ Analyse en cours... Prenez un café ☕&quot;</span><span class="p">)</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="n">summarize</span><span class="p">(</span><span class="n">text_transcription</span><span class="p">,</span> <span class="n">num_sentences</span><span class="o">=</span><span class="n">num_sentences</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="n">detected_language</span><span class="p">)</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="n">summary</span>
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">summary</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">code</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">summary</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;plaintext&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">wrap_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">st</span><span class="o">.</span><span class="n">download_button</span><span class="p">(</span>
+        <span class="s2">&quot;📥 Télécharger la synthèse (Markdown)&quot;</span><span class="p">,</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">summary</span><span class="p">,</span>
+        <span class="s2">&quot;synthese.md&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;text/markdown&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+<p>Et voilà ! On a une UI sympathique pour faire de la transcription et de la synthèse de texte.</p>
+<p>Tu peux lancer ton app via :</p>
+<div class="highlight"><pre><span></span>streamlit<span class="w"> </span>run<span class="w"> </span>main.py
+</pre></div>
+<p>Le rendu final ressemble à ça :</p>
+<img alt="Whisper app" class="align-center" src="./images/whisper-app.png" />
+<p>En piste d'amélioration qu'on verra plus tard, on pourra utiliser les phrases extraites par sumy
+pour les passer à un LLM afin de générer un compte-rendu stylisé en Markdown.</p>
+<hr class="docutils" />
+<p>Et voilà ! Plus besoin de prendre des notes pendant tes réunions, laisse whisper s'en charger !</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://dotmobo.xyz/tag/python.html">Python</a>
+      <a href="https://dotmobo.xyz/tag/streamlit.html">Streamlit</a>
+      <a href="https://dotmobo.xyz/tag/llm.html">LLM</a>
+      <a href="https://dotmobo.xyz/tag/whisper.html">Whisper</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dotmobo';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; 2024  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script id="dark-theme-script"
+          src="https://dotmobo.xyz/theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
+          data-default-theme="dark"
+          type="text/javascript">
+  </script>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " .mobo ",
+  "url" : "https://dotmobo.xyz",
+  "image": "//dotmobo.xyz/images/avatar700.jpg",
+  "description": ".mobo - explorations d'un développeur"
+}
+</script>
+
+
+</body>
+</html>

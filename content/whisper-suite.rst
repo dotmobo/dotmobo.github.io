@@ -12,7 +12,7 @@ Utiliser un LLM pour générer un compte-rendu stylisé en Markdown
     :alt: Whisper
     :align: right
 
-On enchaîne sur la suite de l'article sur `Whisper <https://dotmobo.xyz/whisper.html>`_ et on va utiliser un LLM pour générer un compte-rendu stylisé en Markdown.
+On enchaîne avec la suite de l'article sur `Whisper <https://dotmobo.xyz/whisper.html>`_ et on va utiliser un LLM pour générer un compte-rendu stylisé en Markdown.
 
 Précédemment, on avait utilisé Ollama pour faire tourner notre LLM. Histoire de changer, on va utiliser cette fois-ci
 `vLLM <https://vllm.ai/>`_, qui est une alternative qui se veut plus performante pour la production.
@@ -42,7 +42,7 @@ Tu peux tester qu'il tourne correctement en testant l'url :
 
     curl http://localhost:8000/v1/models
 
-Ok, on va pouvoir modifier le code de notre application whisper pour améliorer le compte-rendu généré.
+Ok, notre LLM est prêt ! On va pouvoir modifier le code de notre application whisper pour améliorer le compte-rendu généré.
 
 Il te faudra installer dans ton environnement virtuel la librairie `openai` :
 
@@ -121,9 +121,13 @@ La température plutôt basse ici renforce l'idée de ne pas inventer d'informat
 Au début, sans ces recommandations, il m'inventait des dates de réunion, des noms de personnes, etc.
 
 Certains LLMs sont plus performants que d'autres pour ce genre de tâche. Ici, Daredevil-8B fait le taf, mais j'imagine
-qu'il existe sûrement sur Hugging Face des modèles plus performants !
+qu'il existe sûrement sur Hugging Face des modèles encore plus performants ! A toi de voir.
 
 Tu relances streamlit et tu peux voir le résultat.
+
+.. code-block:: bash
+
+    streamlit run main.py
 
 Pour exemple, à partir de cette transcription :
 

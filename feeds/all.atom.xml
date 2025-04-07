@@ -1,5 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2025-04-03T00:00:00+02:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Développer une UI pour Whisper avec Streamlit</title><link href="https://dotmobo.xyz/whisper.html" rel="alternate"></link><published>2025-04-03T00:00:00+02:00</published><updated>2025-04-03T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2025-04-03:/whisper.html</id><summary type="html">&lt;p class="first last"&gt;Développer une UI pour Whisper avec Streamlit&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2025-04-04T00:00:00+02:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Utiliser un LLM pour générer un compte-rendu stylisé en Markdown</title><link href="https://dotmobo.xyz/whisper-suite.html" rel="alternate"></link><published>2025-04-04T00:00:00+02:00</published><updated>2025-04-04T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2025-04-04:/whisper-suite.html</id><summary type="html">&lt;p class="first last"&gt;Utiliser un LLM pour générer un compte-rendu stylisé en Markdown&lt;/p&gt;
+</summary><content type="html">&lt;img alt="Whisper" class="align-right" src="./images/openai.png" /&gt;
+&lt;p&gt;On enchaîne avec la suite de l'article sur &lt;a class="reference external" href="https://dotmobo.xyz/whisper.html"&gt;Whisper&lt;/a&gt; et on va utiliser un LLM pour générer un compte-rendu stylisé en Markdown.&lt;/p&gt;
+&lt;p&gt;Précédemment, on avait utilisé Ollama pour faire tourner notre LLM. Histoire de changer, on va utiliser cette fois-ci
+&lt;a class="reference external" href="https://vllm.ai/"&gt;vLLM&lt;/a&gt;, qui est une alternative qui se veut plus performante pour la production.&lt;/p&gt;
+&lt;p&gt;Par contre, il ne tourne que sous GPU, donc si tu n'as qu'un CPU, il te faudra rester sur &lt;a class="reference external" href="https://ollama.ai/"&gt;Ollama&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="section" id="vllm-1"&gt;
+&lt;h2&gt;vLLM&lt;/h2&gt;
+&lt;p&gt;En amont, il te faudra avoir installé &lt;a class="reference external" href="https://developer.nvidia.com/cuda-toolkit"&gt;CUDA&lt;/a&gt; sur ton système. Ensuite, pour exécuter vLLM, on va utiliser le container Docker officiel.
+Il te faudra un token &lt;a class="reference external" href="https://huggingface.co/"&gt;Hugging Face&lt;/a&gt; et définir une clé API pour vLLM.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;--runtime&lt;span class="w"&gt; &lt;/span&gt;nvidia&lt;span class="w"&gt; &lt;/span&gt;--gpus&lt;span class="w"&gt; &lt;/span&gt;all&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;~/.cache/huggingface:/root/.cache/huggingface&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;-e&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;HUGGING_FACE_HUB_TOKEN=S3CR3T&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;-e&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;VLLM_API_KEY=S3CR3T&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;8000&lt;/span&gt;:8000&lt;span class="w"&gt; &lt;/span&gt;--ipc&lt;span class="o"&gt;=&lt;/span&gt;host&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;vllm/vllm-openai:latest&lt;span class="w"&gt; &lt;/span&gt;--model&lt;span class="w"&gt; &lt;/span&gt;mlabonne/Daredevil-8B
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;On le lance ici avec le modèle &lt;a class="reference external" href="https://huggingface.co/mlabonne/Daredevil-8B"&gt;Daredevil-8B&lt;/a&gt;, qui est un llama 3.1 Instruct amélioré et qui marche plutôt bien pour ce qu'on veut faire.&lt;/p&gt;
+&lt;p&gt;Tu peux tester qu'il tourne correctement en testant l'url :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8000/v1/models
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ok, notre LLM est prêt ! On va pouvoir modifier le code de notre application whisper pour améliorer le compte-rendu généré.&lt;/p&gt;
+&lt;p&gt;Il te faudra installer dans ton environnement virtuel la librairie &lt;cite&gt;openai&lt;/cite&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;openai
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;En effet, l'api de vLLM est directement compatible avec l'api de OpenAI, donc tu peux utiliser la même librairie !&lt;/p&gt;
+&lt;p&gt;Tu reprends le fichier &lt;cite&gt;main.py&lt;/cite&gt; du &lt;a class="reference external" href="https://dotmobo.xyz/whisper.html"&gt;précédent article&lt;/a&gt; et tu vas modifier la fonction &lt;cite&gt;summarize&lt;/cite&gt; pour y ajouter une
+étape de formatage des phrases récupérées par sumy en Markdown.&lt;/p&gt;
+&lt;p&gt;On prévoit donc l'utilisation d'une fonction &lt;cite&gt;format_summary&lt;/cite&gt; pour le faire.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@st&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cache_data&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;summarize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;num_sentences&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;summarize&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;summarize_text&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;num_sentences&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;num_sentences&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;format&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;format_summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;http://localhost:8000&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;S3CR3T&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;mlabonne/Daredevil-8B&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;summarize&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;format&lt;/span&gt;
+
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;openai&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;OpenAI&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;format_summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;base_url&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;authtoken&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OpenAI&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;api_key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;authtoken&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;base_url&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;base_url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;prompt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;    You are an advanced assistant specialized in summarizing meetings.&lt;/span&gt;
+&lt;span class="s2"&gt;    Reformat the following summary into a structured meeting report **without changing or adding any information**.&lt;/span&gt;
+&lt;span class="s2"&gt;    You must **only use the sentences provided**. Do not invent, modify, or infer any details.&lt;/span&gt;
+
+&lt;span class="s2"&gt;    The output **should be in the following language**: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.&lt;/span&gt;
+
+&lt;span class="s2"&gt;    Structure:&lt;/span&gt;
+&lt;span class="s2"&gt;    - **Introduction**&lt;/span&gt;
+&lt;span class="s2"&gt;    - **Points**&lt;/span&gt;
+&lt;span class="s2"&gt;    - **Decisions**&lt;/span&gt;
+&lt;span class="s2"&gt;    - **Actions**&lt;/span&gt;
+
+&lt;span class="s2"&gt;    Ensure that all section titles are also in the same language as the output.&lt;/span&gt;
+
+&lt;span class="s2"&gt;    **Raw Summary (Use only these sentences):**&lt;/span&gt;
+&lt;span class="s2"&gt;    &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+
+&lt;span class="s2"&gt;    **Structured Meeting Report in Markdown:**&lt;/span&gt;
+&lt;span class="s2"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;chat&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;completions&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;messages&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;role&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;user&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;prompt&lt;/span&gt;&lt;span class="p"&gt;}],&lt;/span&gt;
+        &lt;span class="n"&gt;max_tokens&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4096&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;temperature&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;choices&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;  &lt;span class="c1"&gt;# type: ignore&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Toute l'intelligence de l'assistant est dans le prompt. Tu peux le modifier pour changer le style de ton compte-rendu.&lt;/p&gt;
+&lt;p&gt;Ici, on s'assure qu'il ne va utiliser que les phrases récupérées par sumy et qu'il ne va pas en inventer de nouvelles.&lt;/p&gt;
+&lt;p&gt;Lui spécifier la structure permet d'avoir des résultats homogènes lors de chaque génération.&lt;/p&gt;
+&lt;p&gt;On lui précise bien qu'on veut du Markdown en sortie et qu'il conserve la langue du résumé.&lt;/p&gt;
+&lt;p&gt;La température plutôt basse ici renforce l'idée de ne pas inventer d'informations.&lt;/p&gt;
+&lt;p&gt;Au début, sans ces recommandations, il m'inventait des dates de réunion, des noms de personnes, etc.&lt;/p&gt;
+&lt;p&gt;Certains LLMs sont plus performants que d'autres pour ce genre de tâche. Ici, Daredevil-8B fait le taf, mais j'imagine
+qu'il existe sûrement sur Hugging Face des modèles encore plus performants ! A toi de voir.&lt;/p&gt;
+&lt;p&gt;Tu relances streamlit et tu peux voir le résultat.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;streamlit&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;main.py
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pour exemple, à partir de cette transcription :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Bonjour à tous, nous allons commencer la réunion pour savoir si nous allons changer notre parc de voiture ou pas.
+Il faut savoir qu&amp;#39;il y a 5 voitures et il y en a 2 qui sont actuellement cassés.
+Qu&amp;#39;est-ce qu&amp;#39;on fait ?
+On va vendre les 2 voitures cassés et on va en acheter de nouvelles.
+Jim, tu vas aller chez Renault et tu vas t&amp;#39;occuper de l&amp;#39;avance.
+Jim, tu vas aller chez Mercedes et on va acheter de nouveaux véhicules pour compléter le parc.
+C&amp;#39;est ok pour tout le monde.
+Bien, je vous remets fin à la réunion.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;On obtient le résumé stylisé suivant :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gs"&gt;**Introduction**&lt;/span&gt;
+Bonjour à tous, nous allons commencer la réunion pour savoir si nous allons changer notre parc de voitures ou pas.
+
+&lt;span class="gs"&gt;**Points**&lt;/span&gt;
+Il faut savoir qu&amp;#39;il y a cinq voitures et il y en a deux qui sont actuellement cassées.
+
+&lt;span class="gs"&gt;**Decisions**&lt;/span&gt;
+On va vendre les deux voitures cassées et on va en acheter deux nouvelles.
+
+&lt;span class="gs"&gt;**Actions**&lt;/span&gt;
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Jim, tu vas aller chez Renault et tu vas t&amp;#39;occuper de la vente.
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;John, tu vas aller chez Mercedes et on va acheter de nouveaux véhicules pour compléter le parc.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pas si mal non ?&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="IA"></category><category term="Python"></category><category term="Streamlit"></category><category term="LLM"></category><category term="Whisper"></category></entry><entry><title>Développer une UI pour Whisper avec Streamlit</title><link href="https://dotmobo.xyz/whisper.html" rel="alternate"></link><published>2025-04-03T00:00:00+02:00</published><updated>2025-04-03T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2025-04-03:/whisper.html</id><summary type="html">&lt;p class="first last"&gt;Développer une UI pour Whisper avec Streamlit&lt;/p&gt;
 </summary><content type="html">&lt;img alt="Whisper" class="align-right" src="./images/openai.png" /&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://github.com/openai/whisper"&gt;Whisper&lt;/a&gt; est un modèle IA de &lt;strong&gt;speech-to-text&lt;/strong&gt; créé par OpenAI et qui marche plutôt pas mal.
 L'outil est open source et s'utilise en ligne de commande directement. Il te permet de transcrire

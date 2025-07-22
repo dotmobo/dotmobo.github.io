@@ -209,7 +209,7 @@ vllm
 </pre></div>
 <p>Au niveau des options de vLLM :</p>
 <ul class="simple">
-<li>on désactive les logs pour éviter de polluer les logs</li>
+<li>on désactive les logs des requêtes pour éviter de polluer les logs</li>
 <li>on utilise le max de la taille de contexte du modèle à l'aide de <strong>rope</strong></li>
 <li>on active le <strong>reasoning</strong> et le <strong>tooling</strong></li>
 <li>on utilise 80% du GPU pour laisser de la place pour les autres services tout en lui donnant assez de mémoire pour être tranquille</li>
@@ -375,59 +375,59 @@ limites en <strong>rpm</strong> et en <strong>tpm</strong>. Si tu as plusieurs c
 de faire la répartition de charge en fonction de la stratégie de <strong>routing</strong> que tu auras choisie.</p>
 <p>On ajoute le service dans notre <cite>docker-compose.yml</cite>. Note qu'il nous faut un <strong>postgresql</strong> et un <strong>redis</strong> pour stocker les données de LiteLLM :</p>
 <div class="highlight"><pre><span></span><span class="nt">redis</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis:8</span>
-<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
-<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vllm</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis:8</span>
+<span class="w">  </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
+<span class="w">  </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vllm</span>
+<span class="w">  </span><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis_data:/data</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">REDIS_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your_redis_password&quot;</span>
-<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;redis-server&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;--appendonly&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;yes&quot;</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;redis-server&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;--appendonly&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;yes&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">healthcheck</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;redis-cli&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;ping&quot;</span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60s</span>
 <span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
 <span class="w">    </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 
 <span class="nt">postgres</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:17</span>
-<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
-<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vllm</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:17</span>
+<span class="w">  </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
+<span class="w">  </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vllm</span>
+<span class="w">  </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your_postgres_user&quot;</span>
 <span class="w">    </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your_postgres_password&quot;</span>
 <span class="w">    </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your_postgres_db&quot;</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgresql_data:/var/lib/postgresql/data</span>
-<span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">healthcheck</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;pg_isready&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-U&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;your_postgres_user&quot;</span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60s</span>
 <span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
 <span class="w">    </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 
 <span class="nt">litellm</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/berriai/litellm:main-v1.74.0-stable</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">litellm</span>
-<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
-<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/berriai/litellm:main-v1.74.0-stable</span>
+<span class="w">  </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">litellm</span>
+<span class="w">  </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
+<span class="w">  </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis</span>
+<span class="w">  </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LITELLM_MODE=PRODUCTION</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LITELLM_LOG=ERROR</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LITELLM_SALT_KEY=your_salt_key</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DATABASE_URL=postgresql://your_postgres_user:your_postgres_password@postgres:5432/your_postgres_db</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REDIS_URL=redis://redis:6379/0</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;4000:4000&quot;</span>
-<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--config /app/config.yaml --telemetry False</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--config /app/config.yaml --telemetry False</span>
+<span class="w">  </span><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/root/litellm/config.yaml:/app/config.yaml</span>
-<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vllm</span>
-<span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vllm</span>
+<span class="w">  </span><span class="nt">healthcheck</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD-SHELL&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;wget</span><span class="nv"> </span><span class="s">--quiet</span><span class="nv"> </span><span class="s">--tries=1</span><span class="nv"> </span><span class="s">http://localhost:4000/health/liveliness</span><span class="nv"> </span><span class="s">||</span><span class="nv"> </span><span class="s">exit</span><span class="nv"> </span><span class="s">1&quot;</span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60s</span>
 <span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>

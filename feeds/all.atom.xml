@@ -43,8 +43,8 @@ vllm
 &lt;h2&gt;LLM principal&lt;/h2&gt;
 &lt;p&gt;On attaque avec le déploiement de notre &lt;strong&gt;LLM principal&lt;/strong&gt; :&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;&lt;strong&gt;Qwen 3 30B-AB&lt;/strong&gt; est un modèle plutôt intéressant actuellement avec son mode de &lt;strong&gt;reasoning&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://vllm.ai/"&gt;vLLM&lt;/a&gt; est le serveur d'inférence le plus populaire et le plus simple à mettre en place pour de la production&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Qwen 3 30B A3B&lt;/strong&gt; est un modèle plutôt intéressant actuellement avec son mode de &lt;strong&gt;reasoning&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://docs.vllm.ai/en/latest/"&gt;vLLM&lt;/a&gt; est le serveur d'inférence le plus populaire et le plus simple à mettre en place pour de la production&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;On ajoute le service dans notre &lt;cite&gt;docker-compose.yml&lt;/cite&gt; :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;vllm&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -112,7 +112,7 @@ beaucoup d'utilisateurs en parallèle, mais il va permettre de faire des tests a
 &lt;h2&gt;Embedding et reranking&lt;/h2&gt;
 &lt;p&gt;Pour faire du &lt;strong&gt;RAG&lt;/strong&gt;, tu vas avoir besoin d'un modèle d'&lt;strong&gt;embedding&lt;/strong&gt; afin d'alimenter ta base de données vectorielle type &lt;a class="reference external" href="https://qdrant.tech/"&gt;Qdrant&lt;/a&gt; ainsi
 qu'un modèle de &lt;strong&gt;reranking&lt;/strong&gt; pour améliorer la pertinence des résultats.&lt;/p&gt;
-&lt;p&gt;Personnellement j'utilise &lt;a class="reference external" href="https://github.com/michaelf34/infinity"&gt;Infinity&lt;/a&gt; qui est un petit service dédié à ces modèles. Certains partent sur &lt;a class="reference external" href="https://huggingface.co/docs/text-generation-inference"&gt;TGI de Hugging Face&lt;/a&gt; qui peut aussi faire l'affaire.&lt;/p&gt;
+&lt;p&gt;Personnellement j'utilise &lt;a class="reference external" href="https://github.com/michaelfeil/infinity"&gt;Infinity&lt;/a&gt; qui est un petit service dédié à ces modèles. Certains partent sur &lt;a class="reference external" href="https://huggingface.co/docs/text-generation-inference"&gt;TGI de Hugging Face&lt;/a&gt; qui peut aussi faire l'affaire.&lt;/p&gt;
 &lt;p&gt;On ajoute le service dans notre &lt;cite&gt;docker-compose.yml&lt;/cite&gt; :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;infinity&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 &lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;michaelf34/infinity:0.0.76&lt;/span&gt;
@@ -219,16 +219,16 @@ Il te permettra d'utiliser les routes &lt;strong&gt;/audio/transcriptions&lt;/st
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;mode&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;audio_speech&lt;/span&gt;
 
 &lt;span class="nt"&gt;litellm_settings&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;span class="nt"&gt;num_retries&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;3&lt;/span&gt;
-&lt;span class="nt"&gt;request_timeout&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;3600&lt;/span&gt;
-&lt;span class="nt"&gt;fallbacks&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p p-Indicator"&gt;[]&lt;/span&gt;
-&lt;span class="nt"&gt;allowed_fails&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;5&lt;/span&gt;
-&lt;span class="nt"&gt;cooldown_time&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;30&lt;/span&gt;
-&lt;span class="nt"&gt;set_verbose&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;False&lt;/span&gt;
-&lt;span class="nt"&gt;json_logs&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;True&lt;/span&gt;
-&lt;span class="nt"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;False&lt;/span&gt;
-&lt;span class="nt"&gt;drop_params&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;True&lt;/span&gt;
-&lt;span class="nt"&gt;telemetry&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;False&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;num_retries&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;3&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;request_timeout&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;3600&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;fallbacks&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p p-Indicator"&gt;[]&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;allowed_fails&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;5&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;cooldown_time&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;30&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;set_verbose&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;False&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;json_logs&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;True&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;False&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;drop_params&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;True&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;telemetry&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;False&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;On a ici une configuration de base pour servir nos modèles. En amélioration, tu pourrais gérer des modèles de &lt;strong&gt;fallbacks&lt;/strong&gt; et des
 limites en &lt;strong&gt;rpm&lt;/strong&gt; et en &lt;strong&gt;tpm&lt;/strong&gt;. Si tu as plusieurs cartes graphiques, tu peux dupliquer tes modèles dessus et liteLLM se chargera

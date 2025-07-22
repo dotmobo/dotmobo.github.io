@@ -183,8 +183,8 @@ vllm
 <h2>LLM principal</h2>
 <p>On attaque avec le déploiement de notre <strong>LLM principal</strong> :</p>
 <ul class="simple">
-<li><strong>Qwen 3 30B-AB</strong> est un modèle plutôt intéressant actuellement avec son mode de <strong>reasoning</strong></li>
-<li><a class="reference external" href="https://vllm.ai/">vLLM</a> est le serveur d'inférence le plus populaire et le plus simple à mettre en place pour de la production</li>
+<li><strong>Qwen 3 30B A3B</strong> est un modèle plutôt intéressant actuellement avec son mode de <strong>reasoning</strong></li>
+<li><a class="reference external" href="https://docs.vllm.ai/en/latest/">vLLM</a> est le serveur d'inférence le plus populaire et le plus simple à mettre en place pour de la production</li>
 </ul>
 <p>On ajoute le service dans notre <cite>docker-compose.yml</cite> :</p>
 <div class="highlight"><pre><span></span><span class="nt">vllm</span><span class="p">:</span>
@@ -252,7 +252,7 @@ beaucoup d'utilisateurs en parallèle, mais il va permettre de faire des tests a
 <h2>Embedding et reranking</h2>
 <p>Pour faire du <strong>RAG</strong>, tu vas avoir besoin d'un modèle d'<strong>embedding</strong> afin d'alimenter ta base de données vectorielle type <a class="reference external" href="https://qdrant.tech/">Qdrant</a> ainsi
 qu'un modèle de <strong>reranking</strong> pour améliorer la pertinence des résultats.</p>
-<p>Personnellement j'utilise <a class="reference external" href="https://github.com/michaelf34/infinity">Infinity</a> qui est un petit service dédié à ces modèles. Certains partent sur <a class="reference external" href="https://huggingface.co/docs/text-generation-inference">TGI de Hugging Face</a> qui peut aussi faire l'affaire.</p>
+<p>Personnellement j'utilise <a class="reference external" href="https://github.com/michaelfeil/infinity">Infinity</a> qui est un petit service dédié à ces modèles. Certains partent sur <a class="reference external" href="https://huggingface.co/docs/text-generation-inference">TGI de Hugging Face</a> qui peut aussi faire l'affaire.</p>
 <p>On ajoute le service dans notre <cite>docker-compose.yml</cite> :</p>
 <div class="highlight"><pre><span></span><span class="nt">infinity</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">michaelf34/infinity:0.0.76</span>
@@ -359,16 +359,16 @@ Il te permettra d'utiliser les routes <strong>/audio/transcriptions</strong> et 
 <span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">audio_speech</span>
 
 <span class="nt">litellm_settings</span><span class="p">:</span>
-<span class="nt">num_retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
-<span class="nt">request_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3600</span>
-<span class="nt">fallbacks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
-<span class="nt">allowed_fails</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
-<span class="nt">cooldown_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
-<span class="nt">set_verbose</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
-<span class="nt">json_logs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="nt">cache</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
-<span class="nt">drop_params</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="nt">telemetry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="w">  </span><span class="nt">num_retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="nt">request_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3600</span>
+<span class="w">  </span><span class="nt">fallbacks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">  </span><span class="nt">allowed_fails</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">  </span><span class="nt">cooldown_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="w">  </span><span class="nt">set_verbose</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="w">  </span><span class="nt">json_logs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">  </span><span class="nt">cache</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="w">  </span><span class="nt">drop_params</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">  </span><span class="nt">telemetry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </pre></div>
 <p>On a ici une configuration de base pour servir nos modèles. En amélioration, tu pourrais gérer des modèles de <strong>fallbacks</strong> et des
 limites en <strong>rpm</strong> et en <strong>tpm</strong>. Si tu as plusieurs cartes graphiques, tu peux dupliquer tes modèles dessus et liteLLM se chargera

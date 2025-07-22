@@ -159,7 +159,7 @@ Il te permettra d'utiliser les routes &lt;strong&gt;/audio/transcriptions&lt;/st
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;timeout&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;30s&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;retries&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;5&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Depuis le container, tu pourras récupéerer fast-whisper pour le STT et Piper pour le TTS via :&lt;/p&gt;
+&lt;p&gt;Depuis le container, tu pourras récupérer &lt;strong&gt;faster-whisper&lt;/strong&gt; pour le STT et &lt;strong&gt;piper&lt;/strong&gt; pour le TTS via :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;huggingface-cli&lt;span class="w"&gt; &lt;/span&gt;download&lt;span class="w"&gt; &lt;/span&gt;speaches-ai/piper-fr_FR-siwis-medium
 huggingface-cli&lt;span class="w"&gt; &lt;/span&gt;download&lt;span class="w"&gt; &lt;/span&gt;Systran/faster-whisper-small
 &lt;/pre&gt;&lt;/div&gt;

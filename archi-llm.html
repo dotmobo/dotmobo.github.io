@@ -299,6 +299,10 @@ Il te permettra d'utiliser les routes <strong>/audio/transcriptions</strong> et 
 <span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
 <span class="w">    </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 </pre></div>
+<p>Depuis le container, tu pourras récupéerer fast-whisper pour le STT et Piper pour le TTS via :</p>
+<div class="highlight"><pre><span></span>huggingface-cli<span class="w"> </span>download<span class="w"> </span>speaches-ai/piper-fr_FR-siwis-medium
+huggingface-cli<span class="w"> </span>download<span class="w"> </span>Systran/faster-whisper-small
+</pre></div>
 </div>
 <div class="section" id="orchestration-avec-litellm">
 <h2>Orchestration avec LiteLLM</h2>
@@ -312,51 +316,51 @@ Il te permettra d'utiliser les routes <strong>/audio/transcriptions</strong> et 
 <span class="w">  </span><span class="nt">database_connection_pool_limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
 
 <span class="nt">model_list</span><span class="p">:</span>
-<span class="c1"># Notre LLM principal</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qwen3</span>
-<span class="w">  </span><span class="nt">model_info</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">max_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">65536</span>
-<span class="w">    </span><span class="nt">max_input_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">65536</span>
-<span class="w">    </span><span class="nt">max_output_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">65536</span>
-<span class="w">  </span><span class="nt">litellm_params</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hosted_vllm/Qwen/Qwen3-30B-A3B-FP8</span>
-<span class="w">    </span><span class="nt">api_base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://vllm:8000</span>
-<span class="w">    </span><span class="nt">api_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your_vllm_api_key</span>
-<span class="c1"># Notre LLM secondaire</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qwen2.5-vl</span>
-<span class="w">  </span><span class="nt">model_info</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">max_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16384</span>
-<span class="w">    </span><span class="nt">max_input_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16384</span>
-<span class="w">    </span><span class="nt">max_output_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16384</span>
-<span class="w">  </span><span class="nt">litellm_params</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ollama/qwen2.5vl:7b-q4_K_M</span>
-<span class="w">    </span><span class="nt">api_base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://ollama:11434</span>
-<span class="c1"># Embedding et reranking</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomic</span>
-<span class="w">  </span><span class="nt">litellm_params</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">infinity/nomic-ai/nomic-embed-text-v1.5</span>
-<span class="w">    </span><span class="nt">api_base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://infinity:7997</span>
-<span class="w">  </span><span class="nt">model_info</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">embedding</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bge-reranker</span>
-<span class="w">  </span><span class="nt">litellm_params</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">infinity/BAAI/bge-reranker-v2-m3</span>
-<span class="w">    </span><span class="nt">api_base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://infinity:7997</span>
-<span class="w">  </span><span class="nt">model_info</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rerank</span>
-<span class="c1"># TTS et STT</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">whisper</span>
-<span class="w">  </span><span class="nt">litellm_params</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openai/Systran/faster-whisper-small</span>
-<span class="w">    </span><span class="nt">api_base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://speaches:8000</span>
-<span class="w">  </span><span class="nt">model_info</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">audio_transcription</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">piper</span>
-<span class="w">  </span><span class="nt">litellm_params</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openai/speaches-ai/piper-fr_FR-siwis-medium</span>
-<span class="w">    </span><span class="nt">api_base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://speaches:8000</span>
-<span class="w">  </span><span class="nt">model_info</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">audio_speech</span>
+<span class="w">  </span><span class="c1"># Notre LLM principal</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qwen3</span>
+<span class="w">    </span><span class="nt">model_info</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">max_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">65536</span>
+<span class="w">      </span><span class="nt">max_input_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">65536</span>
+<span class="w">      </span><span class="nt">max_output_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">65536</span>
+<span class="w">    </span><span class="nt">litellm_params</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hosted_vllm/Qwen/Qwen3-30B-A3B-FP8</span>
+<span class="w">      </span><span class="nt">api_base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://vllm:8000</span>
+<span class="w">      </span><span class="nt">api_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your_vllm_api_key</span>
+<span class="w">  </span><span class="c1"># Notre LLM secondaire</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qwen2.5-vl</span>
+<span class="w">    </span><span class="nt">model_info</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">max_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16384</span>
+<span class="w">      </span><span class="nt">max_input_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16384</span>
+<span class="w">      </span><span class="nt">max_output_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16384</span>
+<span class="w">    </span><span class="nt">litellm_params</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ollama/qwen2.5vl:7b-q4_K_M</span>
+<span class="w">      </span><span class="nt">api_base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://ollama:11434</span>
+<span class="w">  </span><span class="c1"># Embedding et reranking</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomic</span>
+<span class="w">    </span><span class="nt">litellm_params</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">infinity/nomic-ai/nomic-embed-text-v1.5</span>
+<span class="w">      </span><span class="nt">api_base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://infinity:7997</span>
+<span class="w">    </span><span class="nt">model_info</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">embedding</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bge-reranker</span>
+<span class="w">    </span><span class="nt">litellm_params</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">infinity/BAAI/bge-reranker-v2-m3</span>
+<span class="w">      </span><span class="nt">api_base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://infinity:7997</span>
+<span class="w">    </span><span class="nt">model_info</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rerank</span>
+<span class="w">  </span><span class="c1"># TTS et STT</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">whisper</span>
+<span class="w">    </span><span class="nt">litellm_params</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openai/Systran/faster-whisper-small</span>
+<span class="w">      </span><span class="nt">api_base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://speaches:8000</span>
+<span class="w">    </span><span class="nt">model_info</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">audio_transcription</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">piper</span>
+<span class="w">    </span><span class="nt">litellm_params</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openai/speaches-ai/piper-fr_FR-siwis-medium</span>
+<span class="w">      </span><span class="nt">api_base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://speaches:8000</span>
+<span class="w">    </span><span class="nt">model_info</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">audio_speech</span>
 
 <span class="nt">litellm_settings</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">num_retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>

@@ -41,9 +41,7 @@ vllm
 &lt;/div&gt;
 &lt;div class="section" id="llm-principal"&gt;
 &lt;h2&gt;LLM principal&lt;/h2&gt;
-&lt;p&gt;On attaque avec le déploiement de notre &lt;strong&gt;LLM principal&lt;/strong&gt;. On va en déployer une instance sur chaque carte graphique pour faire
-de la &lt;strong&gt;répartition de charge&lt;/strong&gt; par la suite pour supporter plusieurs utilisateurs en parallèle.&lt;/p&gt;
-&lt;p&gt;Niveau techno :&lt;/p&gt;
+&lt;p&gt;On attaque avec le déploiement de notre &lt;strong&gt;LLM principal&lt;/strong&gt; :&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;strong&gt;Qwen 3 30B-AB&lt;/strong&gt; est un modèle plutôt intéressant actuellement avec son mode de &lt;strong&gt;reasoning&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://vllm.ai/"&gt;vLLM&lt;/a&gt; est le serveur d'inférence le plus populaire et le plus simple à mettre en place pour de la production&lt;/li&gt;

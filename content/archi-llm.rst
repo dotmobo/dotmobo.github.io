@@ -208,7 +208,7 @@ On ajoute le service dans notre `docker-compose.yml` :
       timeout: 30s
       retries: 5
 
-Depuis le container, tu pourras récupéerer fast-whisper pour le STT et Piper pour le TTS via :
+Depuis le container, tu pourras récupérer **faster-whisper** pour le STT et **piper** pour le TTS via :
 
 .. code-block:: bash
 

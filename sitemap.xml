@@ -5,36 +5,43 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.xyz/</loc>
-<lastmod>2025-04-07T18:17:16-00:00</lastmod>
+<lastmod>2025-07-22T11:31:10-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.xyz/tags.html</loc>
-<lastmod>2025-04-07T18:17:16-00:00</lastmod>
+<lastmod>2025-07-22T11:31:10-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.xyz/categories.html</loc>
-<lastmod>2025-04-07T18:17:16-00:00</lastmod>
+<lastmod>2025-07-22T11:31:10-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.xyz/authors.html</loc>
-<lastmod>2025-04-07T18:17:16-00:00</lastmod>
+<lastmod>2025-07-22T11:31:10-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.xyz/archives.html</loc>
-<lastmod>2025-04-07T18:17:16-00:00</lastmod>
+<lastmod>2025-07-22T11:31:10-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/archi-llm.html</loc>
+<lastmod>2025-07-22T00:00:00+02:00</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
@@ -411,7 +418,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.xyz/category/ia.html</loc>
-<lastmod>2025-04-04T00:00:00+00:09</lastmod>
+<lastmod>2025-07-22T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -460,20 +467,62 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.xyz/tag/python.html</loc>
-<lastmod>2025-04-04T00:00:00+00:09</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://dotmobo.xyz/tag/streamlit.html</loc>
-<lastmod>2025-04-04T00:00:00+00:09</lastmod>
+<lastmod>2025-07-22T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://dotmobo.xyz/tag/llm.html</loc>
+<lastmod>2025-07-22T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/vllm.html</loc>
+<lastmod>2025-07-22T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/ollama.html</loc>
+<lastmod>2025-07-22T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/infinity.html</loc>
+<lastmod>2025-07-22T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/speaches.html</loc>
+<lastmod>2025-07-22T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/litellm.html</loc>
+<lastmod>2025-07-22T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/open-webui.html</loc>
+<lastmod>2025-07-22T00:00:00+00:09</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://dotmobo.xyz/tag/streamlit.html</loc>
 <lastmod>2025-04-04T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
@@ -495,13 +544,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.xyz/tag/chromadb.html</loc>
-<lastmod>2024-12-12T00:00:00+00:09</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://dotmobo.xyz/tag/ollama.html</loc>
 <lastmod>2024-12-12T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
@@ -1881,7 +1923,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dotmobo.xyz/author/morgan.html</loc>
-<lastmod>2025-04-04T00:00:00+00:09</lastmod>
+<lastmod>2025-07-22T00:00:00+00:09</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>

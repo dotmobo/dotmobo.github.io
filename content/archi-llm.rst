@@ -96,7 +96,7 @@ On ajoute le service dans notre `docker-compose.yml` :
 
 Au niveau des options de vLLM :
 
-- on désactive les logs pour éviter de polluer les logs
+- on désactive les logs des requêtes pour éviter de polluer les logs
 - on utilise le max de la taille de contexte du modèle à l'aide de **rope**
 - on active le **reasoning** et le **tooling**
 - on utilise 80% du GPU pour laisser de la place pour les autres services tout en lui donnant assez de mémoire pour être tranquille
@@ -296,59 +296,59 @@ On ajoute le service dans notre `docker-compose.yml`. Note qu'il nous faut un **
 .. code-block:: yaml
 
     redis:
-        image: redis:8
-        restart: always
-        networks:
-          - vllm
-        volumes:
+      image: redis:8
+      restart: always
+      networks:
+        - vllm
+      volumes:
         - redis_data:/data
-        environment:
+      environment:
         REDIS_PASSWORD: "your_redis_password"
-        command: ["redis-server", "--appendonly", "yes"]
-        healthcheck:
+      command: ["redis-server", "--appendonly", "yes"]
+      healthcheck:
         test: ["CMD", "redis-cli", "ping"]
         interval: 60s
         timeout: 30s
         retries: 5
 
     postgres:
-        image: postgres:17
-        restart: always
-        networks:
-          - vllm
-        environment:
+      image: postgres:17
+      restart: always
+      networks:
+        - vllm
+      environment:
         POSTGRES_USER: "your_postgres_user"
         POSTGRES_PASSWORD: "your_postgres_password"
         POSTGRES_DB: "your_postgres_db"
-        volumes:
+      volumes:
         - postgresql_data:/var/lib/postgresql/data
-        healthcheck:
+      healthcheck:
         test: ["CMD", "pg_isready", "-U", "your_postgres_user"]
         interval: 60s
         timeout: 30s
         retries: 5
 
     litellm:
-        image: ghcr.io/berriai/litellm:main-v1.74.0-stable
-        container_name: litellm
-        restart: always
-        depends_on:
-          - postgres
-          - redis
-        environment:
+      image: ghcr.io/berriai/litellm:main-v1.74.0-stable
+      container_name: litellm
+      restart: always
+      depends_on:
+        - postgres
+        - redis
+      environment:
         - LITELLM_MODE=PRODUCTION
         - LITELLM_LOG=ERROR
         - LITELLM_SALT_KEY=your_salt_key
         - DATABASE_URL=postgresql://your_postgres_user:your_postgres_password@postgres:5432/your_postgres_db
         - REDIS_URL=redis://redis:6379/0
-        ports:
+      ports:
         - "4000:4000"
-        command: --config /app/config.yaml --telemetry False
-        volumes:
+      command: --config /app/config.yaml --telemetry False
+      volumes:
         - /root/litellm/config.yaml:/app/config.yaml
-        networks:
-          - vllm
-        healthcheck:
+      networks:
+        - vllm
+      healthcheck:
         test: ["CMD-SHELL", "wget --quiet --tries=1 http://localhost:4000/health/liveliness || exit 1"]
         interval: 60s
         timeout: 30s

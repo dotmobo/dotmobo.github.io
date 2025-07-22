@@ -65,13 +65,10 @@ Tu le crées via :
 LLM principal
 ===============
 
-On attaque avec le déploiement de notre **LLM principal**. On va en déployer une instance sur chaque carte graphique pour faire
-de la **répartition de charge** par la suite pour supporter plusieurs utilisateurs en parallèle.
+On attaque avec le déploiement de notre **LLM principal** :
 
-Niveau techno :
-
-- **Qwen 3 30B-AB** est un modèle plutôt intéressant actuellement avec son mode de **reasoning**
-- `vLLM <https://vllm.ai/>`_ est le serveur d'inférence le plus populaire et le plus simple à mettre en place pour de la production
+- **Qwen 3 30B A3B** est un modèle plutôt intéressant actuellement avec son mode de **reasoning**
+- `vLLM <https://docs.vllm.ai/en/latest/>`_ est le serveur d'inférence le plus populaire et le plus simple à mettre en place pour de la production
 
 On ajoute le service dans notre `docker-compose.yml` :
 
@@ -154,7 +151,7 @@ Embedding et reranking
 Pour faire du **RAG**, tu vas avoir besoin d'un modèle d'**embedding** afin d'alimenter ta base de données vectorielle type `Qdrant <https://qdrant.tech/>`_ ainsi
 qu'un modèle de **reranking** pour améliorer la pertinence des résultats.
 
-Personnellement j'utilise `Infinity <https://github.com/michaelf34/infinity>`_ qui est un petit service dédié à ces modèles. Certains partent sur `TGI de Hugging Face <https://huggingface.co/docs/text-generation-inference>`_ qui peut aussi faire l'affaire.
+Personnellement j'utilise `Infinity <https://github.com/michaelfeil/infinity>`_ qui est un petit service dédié à ces modèles. Certains partent sur `TGI de Hugging Face <https://huggingface.co/docs/text-generation-inference>`_ qui peut aussi faire l'affaire.
 
 On ajoute le service dans notre `docker-compose.yml` :
 
@@ -277,16 +274,16 @@ On imagine que tu crées le fichier de configuration suivant dans `/root/litellm
         mode: audio_speech
 
     litellm_settings:
-    num_retries: 3
-    request_timeout: 3600
-    fallbacks: []
-    allowed_fails: 5
-    cooldown_time: 30
-    set_verbose: False
-    json_logs: True
-    cache: False
-    drop_params: True
-    telemetry: False
+      num_retries: 3
+      request_timeout: 3600
+      fallbacks: []
+      allowed_fails: 5
+      cooldown_time: 30
+      set_verbose: False
+      json_logs: True
+      cache: False
+      drop_params: True
+      telemetry: False
 
 
 On a ici une configuration de base pour servir nos modèles. En amélioration, tu pourrais gérer des modèles de **fallbacks** et des

@@ -13,7 +13,7 @@ Mettre en place une architecture LLM OpenAI-compatible
     :align: right
 
 
-On va voir comment mettre en place une architecture de LLMs compatible avec l'API d'`OpenAI <https://openai.com/>`_, en utilisant des outils comme **vLLM**, **Ollama**, **Infinity**, **Speaches** et **LiteLLM**.
+On va voir comment mettre en place une architecture de LLMs compatible avec l'API d'`OpenAI <https://platform.openai.com/docs/overview>`_, en utilisant des outils comme **vLLM**, **Ollama**, **Infinity**, **Speaches** et **LiteLLM**.
 De ce faire, ton service sera utilisable avec n'importe quelle application ou librairie qui se base sur l'API d'OpenAI.
 
 Je ne vais pas rentrer dans le détail concernant l'installation de chaque brique, car tu trouveras facilement les informations

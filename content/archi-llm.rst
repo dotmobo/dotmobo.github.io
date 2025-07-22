@@ -208,6 +208,13 @@ On ajoute le service dans notre `docker-compose.yml` :
       timeout: 30s
       retries: 5
 
+Depuis le container, tu pourras récupéerer fast-whisper pour le STT et Piper pour le TTS via :
+
+.. code-block:: bash
+
+    huggingface-cli download speaches-ai/piper-fr_FR-siwis-medium
+    huggingface-cli download Systran/faster-whisper-small
+
 Orchestration avec LiteLLM
 ============================
 
@@ -227,51 +234,51 @@ On imagine que tu crées le fichier de configuration suivant dans `/root/litellm
       database_connection_pool_limit: 10
 
     model_list:
-    # Notre LLM principal
-    - model_name: qwen3
-      model_info:
-        max_tokens: 65536
-        max_input_tokens: 65536
-        max_output_tokens: 65536
-      litellm_params:
-        model: hosted_vllm/Qwen/Qwen3-30B-A3B-FP8
-        api_base: http://vllm:8000
-        api_key: your_vllm_api_key
-    # Notre LLM secondaire
-    - model_name: qwen2.5-vl
-      model_info:
-        max_tokens: 16384
-        max_input_tokens: 16384
-        max_output_tokens: 16384
-      litellm_params:
-        model: ollama/qwen2.5vl:7b-q4_K_M
-        api_base: http://ollama:11434
-    # Embedding et reranking
-    - model_name: nomic
-      litellm_params:
-        model: infinity/nomic-ai/nomic-embed-text-v1.5
-        api_base: http://infinity:7997
-      model_info:
-        mode: embedding
-    - model_name: bge-reranker
-      litellm_params:
-        model: infinity/BAAI/bge-reranker-v2-m3
-        api_base: http://infinity:7997
-      model_info:
-        mode: rerank
-    # TTS et STT
-    - model_name: whisper
-      litellm_params:
-        model: openai/Systran/faster-whisper-small
-        api_base: http://speaches:8000
-      model_info:
-        mode: audio_transcription
-    - model_name: piper
-      litellm_params:
-        model: openai/speaches-ai/piper-fr_FR-siwis-medium
-        api_base: http://speaches:8000
-      model_info:
-        mode: audio_speech
+      # Notre LLM principal
+      - model_name: qwen3
+        model_info:
+          max_tokens: 65536
+          max_input_tokens: 65536
+          max_output_tokens: 65536
+        litellm_params:
+          model: hosted_vllm/Qwen/Qwen3-30B-A3B-FP8
+          api_base: http://vllm:8000
+          api_key: your_vllm_api_key
+      # Notre LLM secondaire
+      - model_name: qwen2.5-vl
+        model_info:
+          max_tokens: 16384
+          max_input_tokens: 16384
+          max_output_tokens: 16384
+        litellm_params:
+          model: ollama/qwen2.5vl:7b-q4_K_M
+          api_base: http://ollama:11434
+      # Embedding et reranking
+      - model_name: nomic
+        litellm_params:
+          model: infinity/nomic-ai/nomic-embed-text-v1.5
+          api_base: http://infinity:7997
+        model_info:
+          mode: embedding
+      - model_name: bge-reranker
+        litellm_params:
+          model: infinity/BAAI/bge-reranker-v2-m3
+          api_base: http://infinity:7997
+        model_info:
+          mode: rerank
+      # TTS et STT
+      - model_name: whisper
+        litellm_params:
+          model: openai/Systran/faster-whisper-small
+          api_base: http://speaches:8000
+        model_info:
+          mode: audio_transcription
+      - model_name: piper
+        litellm_params:
+          model: openai/speaches-ai/piper-fr_FR-siwis-medium
+          api_base: http://speaches:8000
+        model_info:
+          mode: audio_speech
 
     litellm_settings:
       num_retries: 3

@@ -1,5 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2025-07-22T00:00:00+02:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Mettre en place une architecture LLM OpenAI-compatible</title><link href="https://dotmobo.xyz/archi-llm.html" rel="alternate"></link><published>2025-07-22T00:00:00+02:00</published><updated>2025-07-22T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2025-07-22:/archi-llm.html</id><summary type="html">&lt;p class="first last"&gt;Mettre en place une architecture LLM OpenAI-compatible&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2025-08-25T00:00:00+02:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Mon environnement python en 2025</title><link href="https://dotmobo.xyz/environnement-python-2025.html" rel="alternate"></link><published>2025-08-25T00:00:00+02:00</published><updated>2025-08-25T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2025-08-25:/environnement-python-2025.html</id><summary type="html">&lt;p class="first last"&gt;Mon environnement python en 2025&lt;/p&gt;
+</summary><content type="html">&lt;img alt="Python" class="align-right" src="./images/python.png" /&gt;
+&lt;p&gt;Après trois ans sans toucher à Python, il est temps de faire une mise à jour sur les outils pratiques pour un environnement de développement.
+Pas mal de choses ont changé depuis &lt;a class="reference external" href="https://dotmobo.xyz/environnement-developpement-2022.html#environnement-developpement-2022"&gt;l'article de 2022&lt;/a&gt;, et un
+nouveau venu, &lt;a class="reference external" href="https://astral.sh/"&gt;Astral&lt;/a&gt; a tout chamboulé en proposant des outils ultra-performants écrits en &lt;strong&gt;Rust&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="section" id="versions-de-python-environnement-virtuel-et-packaging"&gt;
+&lt;h2&gt;Versions de python, environnement virtuel et packaging&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/astral-sh/uv"&gt;uv&lt;/a&gt; est un formidable outil tout-en-un qui remplace &lt;strong&gt;pyenv&lt;/strong&gt; et &lt;strong&gt;poetry&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Tu l'installes via :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-LsSf&lt;span class="w"&gt; &lt;/span&gt;https://astral.sh/uv/install.sh&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pour installer une version de python, rien de plus simple avec la commande suivante :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uv&lt;span class="w"&gt; &lt;/span&gt;python&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.13
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et pour ensuite créer un projet avec un environnement virtuel spécifique avec :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uv&lt;span class="w"&gt; &lt;/span&gt;init&lt;span class="w"&gt; &lt;/span&gt;myapp&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.13
+&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;myapp
+uv&lt;span class="w"&gt; &lt;/span&gt;venv&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.13
+&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;.venv/bin/activate
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu peux alors ajouter des librairies, exécuter des scripts, builder et publier ton projet sur PyPI avec :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uv&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;requests
+&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;print(&amp;quot;Hello World!&amp;quot;)&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;main.py
+uv&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;python&lt;span class="w"&gt; &lt;/span&gt;main.py
+uv&lt;span class="w"&gt; &lt;/span&gt;build
+uv&lt;span class="w"&gt; &lt;/span&gt;publish
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;L'outil utilise par défaut &lt;cite&gt;pyproject.toml&lt;/cite&gt; pour les dépendances, s'inscrivant dans la lignée de &lt;strong&gt;poetry&lt;/strong&gt; qui a popularisé ce format.&lt;/p&gt;
+&lt;p&gt;L'outil permet également d'installer les dépendances à la main avec un bon vieux &lt;strong&gt;requirements.txt&lt;/strong&gt; via la commande :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uv&lt;span class="w"&gt; &lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;requirements.txt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Il permet de gérer un lockfile comme pour npm, de gérer du cache et d'autres petites choses plutôt cool.
+En plus niveau performance c'est vraiment très rapide.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="formatage-du-code"&gt;
+&lt;h2&gt;Formatage du code&lt;/h2&gt;
+&lt;p&gt;On utilisait &lt;strong&gt;black&lt;/strong&gt; et &lt;strong&gt;isort&lt;/strong&gt;, mais &lt;a class="reference external" href="https://github.com/astral-sh/ruff"&gt;ruff&lt;/a&gt; fusionne maintenant le meilleur des deux mondes pour devenir le couteau suisse du linting et du formatage.&lt;/p&gt;
+&lt;p&gt;Tu l'ajoutes en dépendances dans ton projet avec uv :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uv&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;ruff&lt;span class="w"&gt; &lt;/span&gt;--dev
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pour faire du linting, c'est :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uv&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;ruff&lt;span class="w"&gt; &lt;/span&gt;check
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et pour formatter, c'est :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uv&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;ruff&lt;span class="w"&gt; &lt;/span&gt;format
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;On garde la configuration par défaut qui est très bien, pas besoin de se prendre la tête.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="typage-statique"&gt;
+&lt;h2&gt;Typage statique&lt;/h2&gt;
+&lt;p&gt;Pour le typage, j'utilisais &lt;strong&gt;mypy&lt;/strong&gt;, que j'ai ensuite délaissé pour &lt;strong&gt;pyright&lt;/strong&gt;, mieux intégré aux éditeurs comme VS Code.&lt;/p&gt;
+&lt;p&gt;Mais Astral planche actuellement sur un concurrent appelé &lt;a class="reference external" href="https://github.com/astral-sh/ty"&gt;ty&lt;/a&gt; qui est encore en version
+beta mais qui est très prometteur. J'ai déjà sauté le pas : mon usage du typage est assez simple et, pour l'instant, l'outil fait parfaitement l'affaire.
+En tout cas niveau performance, par rapport aux deux autres, il n'y a pas photo.&lt;/p&gt;
+&lt;p&gt;Comme pour ruff, tu l'ajoutes à ton projet avec uv :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uv&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;ty&lt;span class="w"&gt; &lt;/span&gt;--dev
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et tu lances la vérification du typage avec :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uv&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;ty&lt;span class="w"&gt; &lt;/span&gt;check
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Les trois outils &lt;strong&gt;ruff&lt;/strong&gt;, &lt;strong&gt;ty&lt;/strong&gt; et &lt;strong&gt;uv&lt;/strong&gt; sont très bien intégrés dans &lt;strong&gt;vscode&lt;/strong&gt; via les extensions officielles.&lt;/p&gt;
+&lt;p&gt;Franchement, merci Astral ! J'ai hâte de voir vos prochaines sorties.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="tests-unitaires"&gt;
+&lt;h2&gt;Tests unitaires&lt;/h2&gt;
+&lt;p&gt;Encore rien de neuf sous le soleil, on utilise toujours &lt;a class="reference external" href="https://docs.pytest.org"&gt;pytest&lt;/a&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uv&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;pytest&lt;span class="w"&gt; &lt;/span&gt;--dev
+uv&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;pytest
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="developpement-web"&gt;
+&lt;h2&gt;Développement web&lt;/h2&gt;
+&lt;p&gt;Ces dernières années, un poids lourd a fait son apparition : &lt;a class="reference external" href="https://fastapi.tiangolo.com/"&gt;fastapi&lt;/a&gt;. Il a détrôné &lt;strong&gt;django&lt;/strong&gt;, &lt;strong&gt;flask&lt;/strong&gt; et &lt;strong&gt;bottle&lt;/strong&gt; en termes d'usage et de performance.&lt;/p&gt;
+&lt;p&gt;C'est devenu également mon choix par défaut. Il est simple et efficace comme on veut, permet de faire du sync et de l'async,
+et surtout génère automatiquement la documentation openapi ! Il se base sur &lt;a class="reference external" href="https://docs.pydantic.dev/latest/"&gt;pydantic&lt;/a&gt;
+pour la validation des données, qui est aussi une petite librairie intéressante à connaitre.&lt;/p&gt;
+&lt;p&gt;Au niveau du code ça ressemble à ça, ultra clean :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;typing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Union&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;fastapi&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;FastAPI&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pydantic&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;BaseModel&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FastAPI&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Item&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BaseModel&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;
+    &lt;span class="n"&gt;price&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;float&lt;/span&gt;
+    &lt;span class="n"&gt;is_offer&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Union&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+
+
+&lt;span class="nd"&gt;@app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;read_root&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;World&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+
+
+&lt;span class="nd"&gt;@app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/items/&lt;/span&gt;&lt;span class="si"&gt;{item_id}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;read_item&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item_id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Union&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;item_id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;item_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;q&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+
+
+&lt;span class="nd"&gt;@app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/items/&lt;/span&gt;&lt;span class="si"&gt;{item_id}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update_item&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item_id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Item&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;item_name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;item_id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;item_id&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="jit"&gt;
+&lt;h2&gt;JIT&lt;/h2&gt;
+&lt;p&gt;Python 3.13 introduit un compilateur JIT pour pallier l'un de ses gros points faibles : les performances. Pour le moment, ce n'est pas encore complètement au point, mais il faut
+savoir que &lt;a class="reference external" href="https://numba.pydata.org/numba-doc/dev/user/jit.html"&gt;numba&lt;/a&gt; propose déjà un compilateur JIT plutôt
+efficace pour améliorer les performances de certaines fonctions.&lt;/p&gt;
+&lt;p&gt;Ça s'utilise de cette façon :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;numba&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;jit&lt;/span&gt;
+
+&lt;span class="nd"&gt;@jit&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;somme&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;total&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;total&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;total&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;somme&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10000000&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ça permet d'améliorer les performances de certaines fonctions de manière significative, sans pour autant devoir réécrire
+tout le code en C ou Rust.&lt;/p&gt;
+&lt;p&gt;Au final, les outils convergent et l'écosystème Python se simplifie autour d'un consensus. C'est une excellente nouvelle.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Python"></category><category term="python"></category><category term="librairies"></category><category term="uv"></category><category term="ty"></category><category term="pytest"></category><category term="ruff"></category><category term="fastapi"></category></entry><entry><title>Mettre en place une architecture LLM OpenAI-compatible</title><link href="https://dotmobo.xyz/archi-llm.html" rel="alternate"></link><published>2025-07-22T00:00:00+02:00</published><updated>2025-07-22T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2025-07-22:/archi-llm.html</id><summary type="html">&lt;p class="first last"&gt;Mettre en place une architecture LLM OpenAI-compatible&lt;/p&gt;
 </summary><content type="html">&lt;img alt="OpenAI" class="align-right" src="./images/openai.png" /&gt;
 &lt;p&gt;On va voir comment mettre en place une architecture de LLMs compatible avec l'API d'&lt;a class="reference external" href="https://platform.openai.com/docs/overview"&gt;OpenAI&lt;/a&gt;, en utilisant des outils comme &lt;strong&gt;vLLM&lt;/strong&gt;, &lt;strong&gt;Ollama&lt;/strong&gt;, &lt;strong&gt;Infinity&lt;/strong&gt;, &lt;strong&gt;Speaches&lt;/strong&gt; et &lt;strong&gt;LiteLLM&lt;/strong&gt;.
 De ce faire, ton service sera utilisable avec n'importe quelle application ou librairie qui se base sur l'API d'OpenAI.&lt;/p&gt;

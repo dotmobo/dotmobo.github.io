@@ -166,5 +166,50 @@ niveau vitesse, tu pourras coder la partie critique en Rust.
 Typiquement, toute opération de filtrage, de transformation, d'agrégation, ou de calcul sur des milliers de données
 vont pouvoir être profondément accélérées. Tu vas passer de plusieurs secondes à quelques millisecondes.
 
+Par exemple, je l'ai utilisé un un projet perso pour compter le nombre de mots clés dans des milliers de notes en excluant 
+des  :
+
+.. code-block:: python
+
+    #[pyfunction]
+    fn extract_keywords(notes_json: &str, top_n: usize) -> PyResult<String> {
+        const STOP_WORDS: &[&str] = &["le", "la", "les", "un", "une", "de", "des", "et", "à", "en"];
+
+        let notes: Vec<Note> = serde_json::from_str(notes_json).map_err(|e| {
+            PyErr::new::<pyo3::exceptions::PyValueError, _>(format!("Failed to parse JSON: {}", e))
+        })?;
+
+        let mut word_counts: HashMap<String, usize> = HashMap::new();
+        let re = Regex::new(r"[^a-zA-ZÀ-ÿ\s]").map_err(|e| {
+            PyErr::new::<pyo3::exceptions::PyValueError, _>(format!("Failed to compile regex: {}", e))
+        })?;
+
+        let stop_words_set: HashSet<&str> = stop_words::STOP_WORDS.iter().cloned().collect();
+
+        for note in notes {
+            let lowercased_content = note.content.to_lowercase();
+            let contraction_re = Regex::new(r"\b[dlcjntsqu]'").unwrap();
+            let without_contractions = contraction_re.replace_all(&lowercased_content, "");
+            let cleaned_content = re.replace_all(&without_contractions, "");
+            for word in cleaned_content.split_whitespace() {
+                if !stop_words_set.contains(word) && word.len() > 1 {
+                    // Ignore single-character words
+                    *word_counts.entry(word.to_string()).or_insert(0) += 1;
+                }
+            }
+        }
+
+        let mut sorted_keywords: Vec<(&String, &usize)> = word_counts.iter().collect();
+        sorted_keywords.sort_by(|a, b| b.1.cmp(a.1)); // Sort by count, descending
+
+        let top_keywords: Vec<String> = sorted_keywords
+            .into_iter()
+            .take(top_n)
+            .map(|(word, count)| format!("\"{}\": {}", word, count))
+            .collect();
+
+        Ok(format!("{{{}}}", top_keywords.join(", ")))
+    }
+
 À garder dans un coin de sa tête pour les projets futurs !
 

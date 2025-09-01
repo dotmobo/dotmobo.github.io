@@ -82,28 +82,28 @@ Ok maintenant qu'on a notre workflow opérationnel, on va jeter un oeil au code 
     /// A Python module implemented in Rust.
     #[pymodule]
     fn myrustlib(m: &Bound<'_, PyModule>) -> PyResult<()> {
-        m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
+        m.add_function(wrap_pyfunction!(sum_as_string, m)?)
         Ok(())
     }
 
-On va rapidement détailler comme ça tu pourras le modifier et l'étendre de toi-même.
+On va rapidement détailler le code afin que tu puisses le modifier et l'étendre.
 
 Les deux macros **#[pyfunction]** et **#[pymodule]** sont fournies par PyO3 pour faire le lien entre Rust et Python.
 
-Pour toutes les fonctions que tu veux exposer à python, tu utiliseras **#[pyfunction]**.
+Pour toutes les fonctions que tu veux exposer à Python, tu utiliseras **#[pyfunction]**.
 Si tes paramètres de fonctions sont des types natifs Python (int, str, list, dict...) tu n'as rien de plus à faire.
 
-Il te suffit alors d'ajouter les fonctions au module python via **m.add_function** dans la macro **#[pymodule]**.
+Il te suffit alors d'ajouter les fonctions au module Python via **m.add_function** dans la macro **#[pymodule]**.
 
 Si tu veux utiliser des types Rust plus complexes, tu peux utiliser les types fournis par PyO3 comme **PyList** ou **PyDict**.
 
 Et voilà, tu peux maintenant utiliser n'importe quel code Rust dans ton projet Python.
 N'oublie pas de recompiler avec `maturin develop -r` à chaque modification.
 
-Accélérer numpy
+Accélérer NumPy
 ===============
 
-Pour le ML, tu peux utiliser `rust-numpy <https://github.com/PyO3/rust-numpy/>`_ qui fait le lien entre les arrays numpy et les arrays Rust.
+Pour le ML, tu peux utiliser `rust-numpy <https://github.com/PyO3/rust-numpy/>`_ qui fait le lien entre les tableaux NumPy et les tableaux Rust.
 
 
 .. code-block:: rust
@@ -150,7 +150,7 @@ Pour le ML, tu peux utiliser `rust-numpy <https://github.com/PyO3/rust-numpy/>`_
         Ok(())
     }
 
-Dans la plupart des cas, numpy est suffisamment performant. Mais tu n'es jamais à l'abri de tomber sur un cas critique
+Dans la plupart des cas, NumPy est suffisamment performant. Mais tu n'es jamais à l'abri de tomber sur un cas critique
 où une petite partie de l'application nécessite un boost de performance.
 
 Avec maturin, tu t'évites de devoir réécrire tout le projet en Rust pour te concentrer uniquement sur la partie concernée.
@@ -160,14 +160,14 @@ Quand utiliser Rust dans Python ?
 
 Dans la plupart des cas classiques, tu n'auras pas besoin de coder en Rust.
 
-Mais dès que tu vas devoir manipuler des milliers ou millions de données, et que tu te rends compte que **pandas** ne suffit plus
+Mais dès que tu vas devoir manipuler des milliers ou millions de données, et que tu te rends compte que **Pandas** ne suffit plus
 niveau vitesse, tu pourras coder la partie critique en Rust.
 
 Typiquement, toute opération de filtrage, de transformation, d'agrégation, ou de calcul sur des milliers de données
-vont pouvoir être profondément accélérées. Tu vas passer de plusieurs secondes à quelques millisecondes.
+pourra être profondément accélérée. Tu vas passer de plusieurs secondes à quelques millisecondes.
 
-Par exemple, je l'ai utilisé pour un projet perso pour analyser et compter le nombre de mots clés dans des milliers de
-notes en excluant des stop words. 
+Par exemple, je l'ai utilisé pour un projet personnel pour analyser et compter le nombre de mots clés dans des milliers de
+notes en excluant des stop words.
 
 Le module **mod stop_words** ne contient qu'une liste de stop words dans différentes langues du type :
 
@@ -265,6 +265,22 @@ Et notre fichier **lib.rs** complet est le suivant :
         Ok(())
     }
 
+L'important ici c'est que la structure **Note** est commune entre Python et Rust et désérialisée avec **serde**.
+
+Côté Python, j'ai juste alors récupéré mes notes au format JSON et appelé les deux fonctions de cette manière :
+
+.. code-block:: python
+
+    import json
+    from notia_analyzer import analyze_notes_content, extract_keywords
+
+    with open("notes.json", "r") as f:
+        notes_json = f.read()
+
+    analysis = analyze_notes_content(notes_json)
+    print(analysis)
+
+    top_keywords = extract_keywords(notes_json, top_n=10)
+    print(top_keywords)
 
 À garder dans un coin de sa tête pour les projets futurs !
-

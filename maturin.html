@@ -186,22 +186,22 @@ pour de meilleures performances.</p>
 <span class="sd">/// A Python module implemented in Rust.</span>
 <span class="cp">#[pymodule]</span>
 <span class="k">fn</span><span class="w"> </span><span class="nf">myrustlib</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">Bound</span><span class="o">&lt;&#39;</span><span class="nb">_</span><span class="p">,</span><span class="w"> </span><span class="n">PyModule</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">PyResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">add_function</span><span class="p">(</span><span class="n">wrap_pyfunction</span><span class="o">!</span><span class="p">(</span><span class="n">sum_as_string</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="o">?</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">add_function</span><span class="p">(</span><span class="n">wrap_pyfunction</span><span class="o">!</span><span class="p">(</span><span class="n">sum_as_string</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="o">?</span><span class="p">)</span>
 <span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span>
 <span class="p">}</span>
 </pre></div>
-<p>On va rapidement détailler comme ça tu pourras le modifier et l'étendre de toi-même.</p>
+<p>On va rapidement détailler le code afin que tu puisses le modifier et l'étendre.</p>
 <p>Les deux macros <strong>#[pyfunction]</strong> et <strong>#[pymodule]</strong> sont fournies par PyO3 pour faire le lien entre Rust et Python.</p>
-<p>Pour toutes les fonctions que tu veux exposer à python, tu utiliseras <strong>#[pyfunction]</strong>.
+<p>Pour toutes les fonctions que tu veux exposer à Python, tu utiliseras <strong>#[pyfunction]</strong>.
 Si tes paramètres de fonctions sont des types natifs Python (int, str, list, dict...) tu n'as rien de plus à faire.</p>
-<p>Il te suffit alors d'ajouter les fonctions au module python via <strong>m.add_function</strong> dans la macro <strong>#[pymodule]</strong>.</p>
+<p>Il te suffit alors d'ajouter les fonctions au module Python via <strong>m.add_function</strong> dans la macro <strong>#[pymodule]</strong>.</p>
 <p>Si tu veux utiliser des types Rust plus complexes, tu peux utiliser les types fournis par PyO3 comme <strong>PyList</strong> ou <strong>PyDict</strong>.</p>
 <p>Et voilà, tu peux maintenant utiliser n'importe quel code Rust dans ton projet Python.
 N'oublie pas de recompiler avec <cite>maturin develop -r</cite> à chaque modification.</p>
 </div>
 <div class="section" id="accelerer-numpy">
-<h2>Accélérer numpy</h2>
-<p>Pour le ML, tu peux utiliser <a class="reference external" href="https://github.com/PyO3/rust-numpy/">rust-numpy</a> qui fait le lien entre les arrays numpy et les arrays Rust.</p>
+<h2>Accélérer NumPy</h2>
+<p>Pour le ML, tu peux utiliser <a class="reference external" href="https://github.com/PyO3/rust-numpy/">rust-numpy</a> qui fait le lien entre les tableaux NumPy et les tableaux Rust.</p>
 <div class="highlight"><pre><span></span><span class="w">    </span><span class="k">use</span><span class="w"> </span><span class="n">numpy</span><span class="p">::</span><span class="n">ndarray</span><span class="p">::{</span><span class="n">ArrayD</span><span class="p">,</span><span class="w"> </span><span class="n">ArrayViewD</span><span class="p">,</span><span class="w"> </span><span class="n">ArrayViewMutD</span><span class="p">};</span>
 <span class="k">use</span><span class="w"> </span><span class="n">numpy</span><span class="p">::{</span><span class="n">IntoPyArray</span><span class="p">,</span><span class="w"> </span><span class="n">PyArrayDyn</span><span class="p">,</span><span class="w"> </span><span class="n">PyReadonlyArrayDyn</span><span class="p">,</span><span class="w"> </span><span class="n">PyArrayMethods</span><span class="p">};</span>
 <span class="k">use</span><span class="w"> </span><span class="n">pyo3</span><span class="p">::{</span><span class="n">pymodule</span><span class="p">,</span><span class="w"> </span><span class="n">types</span><span class="p">::</span><span class="n">PyModule</span><span class="p">,</span><span class="w"> </span><span class="n">PyResult</span><span class="p">,</span><span class="w"> </span><span class="n">Python</span><span class="p">,</span><span class="w"> </span><span class="n">Bound</span><span class="p">};</span>
@@ -244,18 +244,18 @@ N'oublie pas de recompiler avec <cite>maturin develop -r</cite> à chaque modifi
 <span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span>
 <span class="p">}</span>
 </pre></div>
-<p>Dans la plupart des cas, numpy est suffisamment performant. Mais tu n'es jamais à l'abri de tomber sur un cas critique
+<p>Dans la plupart des cas, NumPy est suffisamment performant. Mais tu n'es jamais à l'abri de tomber sur un cas critique
 où une petite partie de l'application nécessite un boost de performance.</p>
 <p>Avec maturin, tu t'évites de devoir réécrire tout le projet en Rust pour te concentrer uniquement sur la partie concernée.</p>
 </div>
 <div class="section" id="quand-utiliser-rust-dans-python">
 <h2>Quand utiliser Rust dans Python ?</h2>
 <p>Dans la plupart des cas classiques, tu n'auras pas besoin de coder en Rust.</p>
-<p>Mais dès que tu vas devoir manipuler des milliers ou millions de données, et que tu te rends compte que <strong>pandas</strong> ne suffit plus
+<p>Mais dès que tu vas devoir manipuler des milliers ou millions de données, et que tu te rends compte que <strong>Pandas</strong> ne suffit plus
 niveau vitesse, tu pourras coder la partie critique en Rust.</p>
 <p>Typiquement, toute opération de filtrage, de transformation, d'agrégation, ou de calcul sur des milliers de données
-vont pouvoir être profondément accélérées. Tu vas passer de plusieurs secondes à quelques millisecondes.</p>
-<p>Par exemple, je l'ai utilisé pour un projet perso pour analyser et compter le nombre de mots clés dans des milliers de
+pourra être profondément accélérée. Tu vas passer de plusieurs secondes à quelques millisecondes.</p>
+<p>Par exemple, je l'ai utilisé pour un projet personnel pour analyser et compter le nombre de mots clés dans des milliers de
 notes en excluant des stop words.</p>
 <p>Le module <strong>mod stop_words</strong> ne contient qu'une liste de stop words dans différentes langues du type :</p>
 <div class="highlight"><pre><span></span><span class="k">pub</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">STOP_WORDS</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="o">&amp;</span><span class="kt">str</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="p">[</span><span class="s">&quot;le&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;la&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;les&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;un&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;une&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;de&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;des&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;et&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;à&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p">];</span>
@@ -346,6 +346,20 @@ notes en excluant des stop words.</p>
 <span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">add_function</span><span class="p">(</span><span class="n">wrap_pyfunction</span><span class="o">!</span><span class="p">(</span><span class="n">extract_keywords</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="o">?</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
 <span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span>
 <span class="p">}</span>
+</pre></div>
+<p>L'important ici c'est que la structure <strong>Note</strong> est commune entre Python et Rust et désérialisée avec <strong>serde</strong>.</p>
+<p>Côté Python, j'ai juste alors récupéré mes notes au format JSON et appelé les deux fonctions de cette manière :</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">notia_analyzer</span> <span class="kn">import</span> <span class="n">analyze_notes_content</span><span class="p">,</span> <span class="n">extract_keywords</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;notes.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">notes_json</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="n">analysis</span> <span class="o">=</span> <span class="n">analyze_notes_content</span><span class="p">(</span><span class="n">notes_json</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">analysis</span><span class="p">)</span>
+
+<span class="n">top_keywords</span> <span class="o">=</span> <span class="n">extract_keywords</span><span class="p">(</span><span class="n">notes_json</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">top_keywords</span><span class="p">)</span>
 </pre></div>
 <p>À garder dans un coin de sa tête pour les projets futurs !</p>
 </div>

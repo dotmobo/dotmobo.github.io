@@ -50,22 +50,22 @@ pour de meilleures performances.&lt;/p&gt;
 &lt;span class="sd"&gt;/// A Python module implemented in Rust.&lt;/span&gt;
 &lt;span class="cp"&gt;#[pymodule]&lt;/span&gt;
 &lt;span class="k"&gt;fn&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;myrustlib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kp"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nc"&gt;Bound&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;#39;&lt;/span&gt;&lt;span class="nb"&gt;_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;PyModule&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;PyResult&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;wrap_pyfunction&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sum_as_string&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;wrap_pyfunction&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sum_as_string&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;Ok&lt;/span&gt;&lt;span class="p"&gt;(())&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;On va rapidement détailler comme ça tu pourras le modifier et l'étendre de toi-même.&lt;/p&gt;
+&lt;p&gt;On va rapidement détailler le code afin que tu puisses le modifier et l'étendre.&lt;/p&gt;
 &lt;p&gt;Les deux macros &lt;strong&gt;#[pyfunction]&lt;/strong&gt; et &lt;strong&gt;#[pymodule]&lt;/strong&gt; sont fournies par PyO3 pour faire le lien entre Rust et Python.&lt;/p&gt;
-&lt;p&gt;Pour toutes les fonctions que tu veux exposer à python, tu utiliseras &lt;strong&gt;#[pyfunction]&lt;/strong&gt;.
+&lt;p&gt;Pour toutes les fonctions que tu veux exposer à Python, tu utiliseras &lt;strong&gt;#[pyfunction]&lt;/strong&gt;.
 Si tes paramètres de fonctions sont des types natifs Python (int, str, list, dict...) tu n'as rien de plus à faire.&lt;/p&gt;
-&lt;p&gt;Il te suffit alors d'ajouter les fonctions au module python via &lt;strong&gt;m.add_function&lt;/strong&gt; dans la macro &lt;strong&gt;#[pymodule]&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Il te suffit alors d'ajouter les fonctions au module Python via &lt;strong&gt;m.add_function&lt;/strong&gt; dans la macro &lt;strong&gt;#[pymodule]&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Si tu veux utiliser des types Rust plus complexes, tu peux utiliser les types fournis par PyO3 comme &lt;strong&gt;PyList&lt;/strong&gt; ou &lt;strong&gt;PyDict&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Et voilà, tu peux maintenant utiliser n'importe quel code Rust dans ton projet Python.
 N'oublie pas de recompiler avec &lt;cite&gt;maturin develop -r&lt;/cite&gt; à chaque modification.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="accelerer-numpy"&gt;
-&lt;h2&gt;Accélérer numpy&lt;/h2&gt;
-&lt;p&gt;Pour le ML, tu peux utiliser &lt;a class="reference external" href="https://github.com/PyO3/rust-numpy/"&gt;rust-numpy&lt;/a&gt; qui fait le lien entre les arrays numpy et les arrays Rust.&lt;/p&gt;
+&lt;h2&gt;Accélérer NumPy&lt;/h2&gt;
+&lt;p&gt;Pour le ML, tu peux utiliser &lt;a class="reference external" href="https://github.com/PyO3/rust-numpy/"&gt;rust-numpy&lt;/a&gt; qui fait le lien entre les tableaux NumPy et les tableaux Rust.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;use&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;numpy&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;ndarray&lt;/span&gt;&lt;span class="p"&gt;::{&lt;/span&gt;&lt;span class="n"&gt;ArrayD&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ArrayViewD&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ArrayViewMutD&lt;/span&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;span class="k"&gt;use&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;numpy&lt;/span&gt;&lt;span class="p"&gt;::{&lt;/span&gt;&lt;span class="n"&gt;IntoPyArray&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;PyArrayDyn&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;PyReadonlyArrayDyn&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;PyArrayMethods&lt;/span&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;span class="k"&gt;use&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;pyo3&lt;/span&gt;&lt;span class="p"&gt;::{&lt;/span&gt;&lt;span class="n"&gt;pymodule&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;types&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;PyModule&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;PyResult&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Python&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Bound&lt;/span&gt;&lt;span class="p"&gt;};&lt;/span&gt;
@@ -108,18 +108,18 @@ N'oublie pas de recompiler avec &lt;cite&gt;maturin develop -r&lt;/cite&gt; à c
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;Ok&lt;/span&gt;&lt;span class="p"&gt;(())&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Dans la plupart des cas, numpy est suffisamment performant. Mais tu n'es jamais à l'abri de tomber sur un cas critique
+&lt;p&gt;Dans la plupart des cas, NumPy est suffisamment performant. Mais tu n'es jamais à l'abri de tomber sur un cas critique
 où une petite partie de l'application nécessite un boost de performance.&lt;/p&gt;
 &lt;p&gt;Avec maturin, tu t'évites de devoir réécrire tout le projet en Rust pour te concentrer uniquement sur la partie concernée.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="quand-utiliser-rust-dans-python"&gt;
 &lt;h2&gt;Quand utiliser Rust dans Python ?&lt;/h2&gt;
 &lt;p&gt;Dans la plupart des cas classiques, tu n'auras pas besoin de coder en Rust.&lt;/p&gt;
-&lt;p&gt;Mais dès que tu vas devoir manipuler des milliers ou millions de données, et que tu te rends compte que &lt;strong&gt;pandas&lt;/strong&gt; ne suffit plus
+&lt;p&gt;Mais dès que tu vas devoir manipuler des milliers ou millions de données, et que tu te rends compte que &lt;strong&gt;Pandas&lt;/strong&gt; ne suffit plus
 niveau vitesse, tu pourras coder la partie critique en Rust.&lt;/p&gt;
 &lt;p&gt;Typiquement, toute opération de filtrage, de transformation, d'agrégation, ou de calcul sur des milliers de données
-vont pouvoir être profondément accélérées. Tu vas passer de plusieurs secondes à quelques millisecondes.&lt;/p&gt;
-&lt;p&gt;Par exemple, je l'ai utilisé pour un projet perso pour analyser et compter le nombre de mots clés dans des milliers de
+pourra être profondément accélérée. Tu vas passer de plusieurs secondes à quelques millisecondes.&lt;/p&gt;
+&lt;p&gt;Par exemple, je l'ai utilisé pour un projet personnel pour analyser et compter le nombre de mots clés dans des milliers de
 notes en excluant des stop words.&lt;/p&gt;
 &lt;p&gt;Le module &lt;strong&gt;mod stop_words&lt;/strong&gt; ne contient qu'une liste de stop words dans différentes langues du type :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;pub&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;STOP_WORDS&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kp"&gt;&amp;amp;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="kt"&gt;str&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;le&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;la&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;les&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;un&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;une&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;de&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;des&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;et&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;à&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;en&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
@@ -210,6 +210,20 @@ notes en excluant des stop words.&lt;/p&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;wrap_pyfunction&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;extract_keywords&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;Ok&lt;/span&gt;&lt;span class="p"&gt;(())&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;L'important ici c'est que la structure &lt;strong&gt;Note&lt;/strong&gt; est commune entre Python et Rust et désérialisée avec &lt;strong&gt;serde&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Côté Python, j'ai juste alors récupéré mes notes au format JSON et appelé les deux fonctions de cette manière :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;notia_analyzer&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;analyze_notes_content&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;extract_keywords&lt;/span&gt;
+
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;notes.json&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;r&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;notes_json&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;analysis&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;analyze_notes_content&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;notes_json&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;analysis&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;top_keywords&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;extract_keywords&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;notes_json&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;top_n&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;top_keywords&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;À garder dans un coin de sa tête pour les projets futurs !&lt;/p&gt;
 &lt;/div&gt;

@@ -166,14 +166,62 @@ niveau vitesse, tu pourras coder la partie critique en Rust.
 Typiquement, toute opération de filtrage, de transformation, d'agrégation, ou de calcul sur des milliers de données
 vont pouvoir être profondément accélérées. Tu vas passer de plusieurs secondes à quelques millisecondes.
 
-Par exemple, je l'ai utilisé pour un projet perso pour compter le nombre de mots clés dans des milliers de notes en excluant des stop words :
+Par exemple, je l'ai utilisé pour un projet perso pour analyser et compter le nombre de mots clés dans des milliers de
+notes en excluant des stop words. 
 
-.. code-block:: python
+Le module **mod stop_words** ne contient qu'une liste de stop words dans différentes langues du type :
+
+.. code-block:: rust
+
+    pub const STOP_WORDS: &[&str] = &["le", "la", "les", "un", "une", "de", "des", "et", "à", "en"];
+
+Et notre fichier **lib.rs** complet est le suivant :
+
+.. code-block:: rust
+
+    use pyo3::prelude::*;
+    use regex::Regex;
+    use serde::Deserialize;
+    use std::collections::{HashMap, HashSet};
+
+    mod stop_words;
+
+    #[derive(Deserialize, Debug)]
+    struct Note {
+        id: String,
+        content: String,
+        project: String,
+    }
+
+    #[pyfunction]
+    fn analyze_notes_content(notes_json: &str) -> PyResult<String> {
+        let notes: Vec<Note> = serde_json::from_str(notes_json).map_err(|e| {
+            PyErr::new::<pyo3::exceptions::PyValueError, _>(format!("Failed to parse JSON: {}", e))
+        })?;
+
+        let mut total_words = 0;
+        let mut unique_projects = HashSet::new();
+
+        for note in &notes {
+            total_words += note.content.split_whitespace().count();
+            if !note.project.is_empty() {
+                unique_projects.insert(&note.project);
+            }
+            let _ = &note.id;
+        }
+
+        let analysis_result = format!(
+            "Analyzed {} notes. Total word count: {}. Found {} unique projects.",
+            notes.len(),
+            total_words,
+            unique_projects.len()
+        );
+
+        Ok(analysis_result)
+    }
 
     #[pyfunction]
     fn extract_keywords(notes_json: &str, top_n: usize) -> PyResult<String> {
-        const STOP_WORDS: &[&str] = &["le", "la", "les", "un", "une", "de", "des", "et", "à", "en"];
-
         let notes: Vec<Note> = serde_json::from_str(notes_json).map_err(|e| {
             PyErr::new::<pyo3::exceptions::PyValueError, _>(format!("Failed to parse JSON: {}", e))
         })?;
@@ -209,6 +257,14 @@ Par exemple, je l'ai utilisé pour un projet perso pour compter le nombre de mot
 
         Ok(format!("{{{}}}", top_keywords.join(", ")))
     }
+
+    #[pymodule]
+    fn notia_analyzer(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
+        m.add_function(wrap_pyfunction!(analyze_notes_content, m)?)?;
+        m.add_function(wrap_pyfunction!(extract_keywords, m)?)?;
+        Ok(())
+    }
+
 
 À garder dans un coin de sa tête pour les projets futurs !
 

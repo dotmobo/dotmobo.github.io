@@ -103,7 +103,7 @@ N'oublie pas de recompiler avec `maturin develop -r` à chaque modification.
 Accélérer numpy
 ===============
 
-Pour le ML, tu peux utiliser `numpy <https://github.com/PyO3/rust-numpy/>`_ qui fait le lien entre les arrays numpy et les arrays Rust.
+Pour le ML, tu peux utiliser `rust-numpy <https://github.com/PyO3/rust-numpy/>`_ qui fait le lien entre les arrays numpy et les arrays Rust.
 
 
 .. code-block:: rust

@@ -57,9 +57,9 @@ dans le **Cargo.toml** pour faire le lien avec Python.
     cd myrustlib
     maturin develop
 
-Avec **maturin develop**, on compile la librairie et on l'installe directement dans notre environnement virtuel.
+Avec `maturin develop`, on compile la librairie et on l'installe directement dans notre environnement virtuel.
 
-Une fois le développement terminé, il vaut mieux utiliser **maturin develop -r** pour créer la librairie en mode release
+Une fois le développement terminé, il vaut mieux utiliser `maturin develop -r` pour créer la librairie en mode release
 pour de meilleures performances.
 
 Il est également possible de builder et de déployer sur PyPI la librairie avec `maturin build -r` et `maturin publish`.
@@ -98,11 +98,7 @@ Il te suffit alors d'ajouter les fonctions au module python via **m.add_function
 Si tu veux utiliser des types Rust plus complexes, tu peux utiliser les types fournis par PyO3 comme **PyList** ou **PyDict**.
 
 Et voilà, tu peux maintenant utiliser n'importe quel code Rust dans ton projet Python.
-Dans la plupart des cas classiques, tu n'auras pas besoin de coder en Rust.
-
-Mais dès que tu vas devoir manipuler des milliers ou millions de données, et que tu te rends compte que pandas ne suffit plus
-niveau vitesse, tu pourras coder la partie critique en Rust.
-
+N'oublie pas de recompiler avec `maturin develop -r` à chaque modification.
 
 Accélérer numpy
 ===============
@@ -159,12 +155,16 @@ où une petite partie de l'application nécessite un boost de performance.
 
 Avec maturin, tu t'évites de devoir réécrire tout le projet en Rust pour te concentrer uniquement sur la partie concernée.
 
-Cas d'usage
-============
+Quand utiliser Rust dans Python ?
+===============================
 
-On peut trouver pas mal de cas d'usage pour utiliser Rust dans Python.
+Dans la plupart des cas classiques, tu n'auras pas besoin de coder en Rust.
+
+Mais dès que tu vas devoir manipuler des milliers ou millions de données, et que tu te rends compte que **pandas** ne suffit plus
+niveau vitesse, tu pourras coder la partie critique en Rust.
 
 Typiquement, toute opération de filtrage, de transformation, d'agrégation, ou de calcul sur des milliers de données
 vont pouvoir être profondément accélérées. Tu vas passer de plusieurs secondes à quelques millisecondes.
 
 À garder dans un coin de sa tête pour les projets futurs !
+

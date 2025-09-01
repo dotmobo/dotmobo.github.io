@@ -108,7 +108,7 @@ Pour le ML, tu peux utiliser `rust-numpy <https://github.com/PyO3/rust-numpy/>`_
 
 .. code-block:: rust
 
-        use numpy::ndarray::{ArrayD, ArrayViewD, ArrayViewMutD};
+    use numpy::ndarray::{ArrayD, ArrayViewD, ArrayViewMutD};
     use numpy::{IntoPyArray, PyArrayDyn, PyReadonlyArrayDyn, PyArrayMethods};
     use pyo3::{pymodule, types::PyModule, PyResult, Python, Bound};
 

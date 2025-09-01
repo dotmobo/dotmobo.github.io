@@ -166,8 +166,7 @@ niveau vitesse, tu pourras coder la partie critique en Rust.
 Typiquement, toute opération de filtrage, de transformation, d'agrégation, ou de calcul sur des milliers de données
 vont pouvoir être profondément accélérées. Tu vas passer de plusieurs secondes à quelques millisecondes.
 
-Par exemple, je l'ai utilisé un un projet perso pour compter le nombre de mots clés dans des milliers de notes en excluant 
-des  :
+Par exemple, je l'ai utilisé pour un projet perso pour compter le nombre de mots clés dans des milliers de notes en excluant des stop words :
 
 .. code-block:: python
 

@@ -156,7 +156,7 @@ où une petite partie de l'application nécessite un boost de performance.
 Avec maturin, tu t'évites de devoir réécrire tout le projet en Rust pour te concentrer uniquement sur la partie concernée.
 
 Quand utiliser Rust dans Python ?
-===============================
+=================================
 
 Dans la plupart des cas classiques, tu n'auras pas besoin de coder en Rust.
 

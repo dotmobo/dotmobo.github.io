@@ -1,0 +1,477 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/stylesheet/style.min.css">
+
+    <link id="dark-theme-style" rel="stylesheet" type="text/css"
+          media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+    href="https://dotmobo.xyz/theme/stylesheet/dark-theme.min.css">
+
+    <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+          href="https://dotmobo.xyz/theme/pygments/monokai.min.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: light)"
+          href="https://dotmobo.xyz/theme/pygments/emacs.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/solid.css">
+
+    <link href="https://dotmobo.xyz/css/custom.css" rel="stylesheet">
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68852219-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Morgan" />
+<meta name="description" content="Développement d&#39;agents IA" />
+<meta name="keywords" content="python, agents, openai, sdk, agno">
+
+
+<meta property="og:site_name" content=".mobo"/>
+<meta property="og:title" content="Développement d&#39;agents IA"/>
+<meta property="og:description" content="Développement d&#39;agents IA"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="https://dotmobo.xyz/agents-ia.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2025-09-05 00:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://dotmobo.xyz/author/morgan.html">
+<meta property="article:section" content="IA"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="agents"/>
+<meta property="article:tag" content="openai"/>
+<meta property="article:tag" content="sdk"/>
+<meta property="article:tag" content="agno"/>
+<meta property="og:image" content="//dotmobo.xyz/images/avatar700.jpg">
+
+  <title>.mobo &ndash; Développement d&#39;agents IA</title>
+
+</head>
+<body >
+  <aside>
+    <div>
+      <a href="https://dotmobo.xyz">
+        <img src="//dotmobo.xyz/images/avatar700.jpg" alt=".mobo" title=".mobo">
+      </a>
+
+      <h1>
+        <a href="https://dotmobo.xyz">.mobo</a>
+      </h1>
+
+<p>Explorations d'un développeur</p>
+
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.xyz/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://dotmobo.xyz">Accueil</a>
+
+      <a href="/categories.html">Catégories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/archives.html">Archives</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="agents-ia">Développement d'agents IA</h1>
+    <p>
+      Posté le 05/09/2025 dans <a href="https://dotmobo.xyz/category/ia.html">IA</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="OpenAI" class="align-right" src="./images/openai.png" />
+<p>Après avoir passé en revue l'architecture de base des LLMs avec <a class="reference external" href="https://dotmobo.xyz/archi-llm.html">les moteurs d'inférence et l'orchestration de base</a>,
+on va faire une petite introduction aux agents IA avec un outil ultra léger qui nous vient d'OpenAI appelé <strong>OpenAI Agents SDK</strong>.</p>
+<div class="section" id="qu-est-ce-qu-un-agent-ia">
+<h2>Qu'est ce qu'un agent IA ?</h2>
+<p>Déjà pour commencer, démystifions le terme agent. On l'entend à toutes les sauces et ça veut tout et rien dire au premier abord.</p>
+<p>Donc déjà, <strong>un agent c'est quoi ?</strong></p>
+<p>Un agent, c'est juste une fonction qui va prendre ton prompt d'entrée, faire l'appel au LLM et te restituer la réponse.</p>
+<p>La spécificité d'un agent réside dans ce qu'il peut utiliser autour de ça :</p>
+<ul class="simple">
+<li>des <strong>instructions</strong> : pour indiquer le comportement de l'agent. Il s'agit du <strong>prompt système</strong> en réalité.</li>
+<li>un <strong>historique</strong> : pour garder le contexte de la conversation en cours. On pourra le stocker dans une <strong>base de données ou en mémoire</strong>.</li>
+<li>une <strong>mémoire</strong> : pour se souvenir des préférences de l'utilisateur, de ses habitudes, du style de réponse et autres.</li>
+<li>des <strong>outils</strong> : pour appeler des fonctions personnalisées comme l'appel à des API externes, l'exécution de calculs ou autres.</li>
+<li>des <strong>connaissances</strong> : pour enrichir le contexte de l'agent et lui permettre de mieux comprendre et répondre aux requêtes. En général, c'est couplé à une <strong>base de données vectorielle</strong>. C'est la technique qu'on appelle communément <strong>RAG</strong>.</li>
+<li>du <strong>raisonnement</strong> : pour réfléchir en amont et décider de la stratégie à adopter sur les appels d'outils par exemple.</li>
+</ul>
+<p>Un agent peut également déléguer des tâches à d'autres agents spécialisés, c'est ce qu'on appelle un <strong>workflow</strong> d'agents.</p>
+</div>
+<div class="section" id="agno">
+<h2>Agno</h2>
+<p>Il existe plusieurs bibliothèques d'agents, plus ou moins complexes et complètes. La première que j'ai découverte qui m'avait tapé dans l'œil était
+<a class="reference external" href="https://docs.agno.com/">Agno</a> qui est vraiment complet et qui permet de faire beaucoup de choses. C'est elle qui m'a permis de comprendre le
+concept d'agent.</p>
+<p>Elle définit plusieurs niveaux d'agents, ce qui permet de se lancer progressivement en fonction des besoins.
+Tu l'installes déjà avec pip par exemple :</p>
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>agno
+</pre></div>
+<div class="section" id="niveau-1-agents-avec-des-outils-et-des-instructions">
+<h3>Niveau 1 : Agents avec des outils et des instructions</h3>
+<p>Ici, on a notre premier agent qui va utiliser le modèle <strong>Claude</strong> pour récupérer des données
+sous forme de tableau via une recherche web avec un outil permettant d'interroger <strong>DuckDuckGo</strong>.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">agno.agent</span> <span class="kn">import</span> <span class="n">Agent</span>
+<span class="kn">from</span> <span class="nn">agno.models.anthropic</span> <span class="kn">import</span> <span class="n">Claude</span>
+<span class="kn">from</span> <span class="nn">agno.tools.duckduckgo</span> <span class="kn">import</span> <span class="n">DuckDuckGoTools</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">Claude</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;claude-sonnet-4-20250514&quot;</span><span class="p">),</span>
+    <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">DuckDuckGoTools</span><span class="p">()],</span>
+    <span class="n">instructions</span><span class="o">=</span><span class="s2">&quot;Use tables to display data. Don&#39;t include any other text.&quot;</span><span class="p">,</span>
+    <span class="n">markdown</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">agent</span><span class="o">.</span><span class="n">print_response</span><span class="p">(</span><span class="s2">&quot;What is the stock price of Apple?&quot;</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="niveau-2-agents-avec-un-historique-et-des-connaissances">
+<h3>Niveau 2 : Agents avec un historique et des connaissances</h3>
+<p>Cet agent stocke la conversation dans une base de données <strong>SQLite</strong> pour pouvoir par la suite la passer en contexte.</p>
+<p>Il utilise également une base de données vectorielle <strong>LanceDB</strong> pour stocker des connaissances issues de fichiers Markdown.</p>
+<p>Avant de répondre à la question, l'agent va automatiquement chercher les infos dans la base de connaissances pour enrichir le contexte.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">agno.agent</span> <span class="kn">import</span> <span class="n">Agent</span>
+<span class="kn">from</span> <span class="nn">agno.embedder.openai</span> <span class="kn">import</span> <span class="n">OpenAIEmbedder</span>
+<span class="kn">from</span> <span class="nn">agno.knowledge.url</span> <span class="kn">import</span> <span class="n">UrlKnowledge</span>
+<span class="kn">from</span> <span class="nn">agno.models.anthropic</span> <span class="kn">import</span> <span class="n">Claude</span>
+<span class="kn">from</span> <span class="nn">agno.storage.sqlite</span> <span class="kn">import</span> <span class="n">SqliteStorage</span>
+<span class="kn">from</span> <span class="nn">agno.vectordb.lancedb</span> <span class="kn">import</span> <span class="n">LanceDb</span><span class="p">,</span> <span class="n">SearchType</span>
+
+<span class="n">knowledge</span> <span class="o">=</span> <span class="n">UrlKnowledge</span><span class="p">(</span>
+    <span class="n">urls</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;https://docs.agno.com/introduction.md&quot;</span><span class="p">],</span>
+    <span class="n">vector_db</span><span class="o">=</span><span class="n">LanceDb</span><span class="p">(</span>
+        <span class="n">uri</span><span class="o">=</span><span class="s2">&quot;tmp/lancedb&quot;</span><span class="p">,</span>
+        <span class="n">table_name</span><span class="o">=</span><span class="s2">&quot;agno_docs&quot;</span><span class="p">,</span>
+        <span class="n">search_type</span><span class="o">=</span><span class="n">SearchType</span><span class="o">.</span><span class="n">hybrid</span><span class="p">,</span>
+        <span class="n">embedder</span><span class="o">=</span><span class="n">OpenAIEmbedder</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;text-embedding-3-small&quot;</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="mi">1536</span><span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">storage</span> <span class="o">=</span> <span class="n">SqliteStorage</span><span class="p">(</span><span class="n">table_name</span><span class="o">=</span><span class="s2">&quot;agent_sessions&quot;</span><span class="p">,</span> <span class="n">db_file</span><span class="o">=</span><span class="s2">&quot;tmp/agent.db&quot;</span><span class="p">)</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Agno Assist&quot;</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">Claude</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;claude-sonnet-4-20250514&quot;</span><span class="p">),</span>
+    <span class="n">instructions</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;Search your knowledge before answering the question.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Only include the output in your response. No other text.&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">knowledge</span><span class="o">=</span><span class="n">knowledge</span><span class="p">,</span>
+    <span class="n">storage</span><span class="o">=</span><span class="n">storage</span><span class="p">,</span>
+    <span class="n">add_datetime_to_instructions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">add_history_to_messages</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">num_history_runs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">markdown</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">agent</span><span class="o">.</span><span class="n">knowledge</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">recreate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">agent</span><span class="o">.</span><span class="n">print_response</span><span class="p">(</span><span class="s2">&quot;What is Agno?&quot;</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="niveau-3-agents-avec-une-memoire-et-du-raisonnement">
+<h3>Niveau 3 : Agents avec une mémoire et du raisonnement</h3>
+<p>La mémoire est stockée dans une base SQLite et on laisse le modèle la gérer comme il l'entend.</p>
+<p>Le raisonnement est ici géré par un outil appelé <strong>ReasoningTools</strong> et tu peux voir l'intégralité du
+raisonnement grâce à <strong>show_full_reasoning=True</strong>.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">agno.agent</span> <span class="kn">import</span> <span class="n">Agent</span>
+<span class="kn">from</span> <span class="nn">agno.memory.v2.db.sqlite</span> <span class="kn">import</span> <span class="n">SqliteMemoryDb</span>
+<span class="kn">from</span> <span class="nn">agno.memory.v2.memory</span> <span class="kn">import</span> <span class="n">Memory</span>
+<span class="kn">from</span> <span class="nn">agno.models.anthropic</span> <span class="kn">import</span> <span class="n">Claude</span>
+<span class="kn">from</span> <span class="nn">agno.tools.reasoning</span> <span class="kn">import</span> <span class="n">ReasoningTools</span>
+<span class="kn">from</span> <span class="nn">agno.tools.duckduckgo</span> <span class="kn">import</span> <span class="n">DuckDuckGoTools</span>
+
+<span class="n">memory</span> <span class="o">=</span> <span class="n">Memory</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">Claude</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;claude-sonnet-4-20250514&quot;</span><span class="p">),</span>
+    <span class="n">db</span><span class="o">=</span><span class="n">SqliteMemoryDb</span><span class="p">(</span><span class="n">table_name</span><span class="o">=</span><span class="s2">&quot;user_memories&quot;</span><span class="p">,</span> <span class="n">db_file</span><span class="o">=</span><span class="s2">&quot;tmp/agent.db&quot;</span><span class="p">),</span>
+    <span class="n">delete_memories</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">clear_memories</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">Claude</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;claude-sonnet-4-20250514&quot;</span><span class="p">),</span>
+    <span class="n">tools</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">ReasoningTools</span><span class="p">(</span><span class="n">add_instructions</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="n">DuckDuckGoTools</span><span class="p">(</span><span class="n">search</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">news</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="n">user_id</span><span class="o">=</span><span class="s2">&quot;ava&quot;</span><span class="p">,</span>
+    <span class="n">instructions</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;Use tables to display data.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Include sources in your response.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Only include the report in your response. No other text.&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">memory</span><span class="o">=</span><span class="n">memory</span><span class="p">,</span>
+    <span class="n">enable_agentic_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">markdown</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">agent</span><span class="o">.</span><span class="n">print_response</span><span class="p">(</span>
+        <span class="s2">&quot;My favorite stocks are NVIDIA and TSLA&quot;</span><span class="p">,</span>
+        <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">show_full_reasoning</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">stream_intermediate_steps</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">agent</span><span class="o">.</span><span class="n">print_response</span><span class="p">(</span>
+        <span class="s2">&quot;Can you compare my favorite stocks?&quot;</span><span class="p">,</span>
+        <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">show_full_reasoning</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">stream_intermediate_steps</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="openai-agents-sdk">
+<h2>OpenAI Agents SDK</h2>
+<p>Une autre bibliothèque minimaliste sortie récemment est <a class="reference external" href="https://github.com/openai/openai-agents-python">OpenAI Agents SDK</a>.</p>
+<p>Elle est assez proche du fonctionnement d'Agno mais plus légère et plus simple à prendre en main.
+Si tu utilises l'API d'OpenAI ou que tu as une architecture locale avec <strong>LiteLLM</strong>, ça s'intègre parfaitement bien.</p>
+<p>Tu l'installes avec pip :</p>
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;openai-agents[litellm]&quot;</span>
+</pre></div>
+<p>Tu crées un agent qui va utiliser un modèle exposé par LiteLLM et un outil personnalisé, ici une fonction Python
+qui retourne la météo.</p>
+<p>N'importe quelle fonction avec le décorateur <strong>&#64;function_tool</strong> peut être utilisée.</p>
+<p>L'important pour que l'agent s'en sorte facilement est d'utiliser le typage optionnel avec <strong>mypy</strong>, <strong>ty</strong> ou <strong>pyright</strong>.
+Et de bien documenter la fonction avec une <strong>docstring</strong> valide.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">agents</span> <span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">Runner</span><span class="p">,</span> <span class="n">function_tool</span><span class="p">,</span> <span class="n">set_tracing_disabled</span>
+<span class="kn">from</span> <span class="nn">agents.extensions.models.litellm_model</span> <span class="kn">import</span> <span class="n">LitellmModel</span>
+
+<span class="nd">@function_tool</span>
+<span class="k">def</span> <span class="nf">get_weather</span><span class="p">(</span><span class="n">city</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the weather for a city.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        city (str): The city to get the weather for.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The weather in the city.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;The weather in </span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2"> is sunny.&quot;</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Assistant&quot;</span><span class="p">,</span>
+        <span class="n">instructions</span><span class="o">=</span><span class="s2">&quot;You only respond in haikus.&quot;</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">LitellmModel</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://mylitellm&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;qwen3&quot;</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;S3CRET&quot;</span><span class="p">),</span>
+        <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">get_weather</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Runner</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="s2">&quot;What&#39;s the weather in Tokyo?&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">final_output</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+<p>Si tu veux gérer plusieurs agents, tu peux utiliser le paramètre <strong>handoffs</strong>.</p>
+<p>Par exemple, on a un agent de booking, un agent de remboursement et un agent de triage qui va rediriger
+les questions vers le bon agent en fonction du sujet.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">agents</span> <span class="kn">import</span> <span class="n">Agent</span>
+
+<span class="n">booking_agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">refund_agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="n">triage_agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Triage agent&quot;</span><span class="p">,</span>
+    <span class="n">instructions</span><span class="o">=</span><span class="p">(</span>
+        <span class="s2">&quot;Help the user with their questions. &quot;</span>
+        <span class="s2">&quot;If they ask about booking, hand off to the booking agent. &quot;</span>
+        <span class="s2">&quot;If they ask about refunds, hand off to the refund agent.&quot;</span>
+    <span class="p">),</span>
+    <span class="n">handoffs</span><span class="o">=</span><span class="p">[</span><span class="n">booking_agent</span><span class="p">,</span> <span class="n">refund_agent</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+<p>Et voilà, tu as un bon premier aperçu des agents avec ces deux bibliothèques sympas.</p>
+<p>Si ça t'intéresse, on pourra aller plus loin dans un prochain article avec la gestion de workflows complets.</p>
+</div>
+<div class="section" id="notia">
+<h2>Notia</h2>
+<p>Pour appréhender un peu tout ça, je me suis amusé à créer un outil appelé <a class="reference external" href="https://github.com/dotmobo/notia">Notia</a>,
+qui est un assistant de prise de notes basé sur un agent avec des outils.</p>
+<p>J'y ai défini un certain nombre de fonctions que l'agent est capable d'utiliser pour gérer les notes de l'utilisateur,
+ainsi qu'un prompt système qui permet à l'agent de les utiliser convenablement.</p>
+<div class="highlight"><pre><span></span><span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Notia&quot;</span><span class="p">,</span>
+    <span class="n">instructions</span><span class="o">=</span><span class="n">dedent</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        /no_think</span>
+
+<span class="s2">        You are Notia, a powerful AI assistant designed to be a developer&#39;s second brain.</span>
+
+<span class="s2">        Your purpose is to help manage project-related notes, ideas, tasks, and code snippets.</span>
+
+<span class="s2">        You have access to a set of tools to add, list, delete, and search notes in a vector database.</span>
+
+<span class="s2">        Be helpful, concise, and proactive. When a user asks a question, use your search tool to find</span>
+<span class="s2">        the most relevant notes to answer it.</span>
+
+<span class="s2">        Pay close attention to the &#39;Rerank Score&#39; provided by the search tool;</span>
+<span class="s2">        a higher score indicates greater relevance to the query.</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">),</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">LitellmModel</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://mylitellm&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;qwen3&quot;</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;S3CRET&quot;</span><span class="p">),</span>
+    <span class="n">tools</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">add_note</span><span class="p">,</span>
+        <span class="n">list_all_notes</span><span class="p">,</span>
+        <span class="n">delete_note</span><span class="p">,</span>
+        <span class="n">search_notes</span><span class="p">,</span>
+        <span class="n">edit_note</span><span class="p">,</span>
+        <span class="n">get_note_by_id</span><span class="p">,</span>
+        <span class="n">search_notes_by_project</span><span class="p">,</span>
+        <span class="n">list_all_projects</span><span class="p">,</span>
+        <span class="n">export_notes_by_project_to_csv</span><span class="p">,</span>
+        <span class="n">analyze_all_notes</span><span class="p">,</span>
+        <span class="n">extract_top_keywords</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>On gère une session SQLite qui permet de conserver l'historique de la conversation et de la passer dans le contexte à l'exécution de la requête.</p>
+<div class="highlight"><pre><span></span><span class="n">session</span> <span class="o">=</span> <span class="n">SQLiteSession</span><span class="p">(</span><span class="s2">&quot;notia&quot;</span><span class="p">)</span>
+</pre></div>
+<p>Avec ça, je lui envoie des messages (query) du type</p>
+<ul class="simple">
+<li><em>&quot;Ajoute une note pour mon projet X avec comme contenu Y&quot;</em></li>
+<li><em>&quot;Liste moi toutes les notes que j'ai sur le projet X&quot;</em></li>
+<li><em>&quot;Supprime la note avec l'ID X&quot;</em></li>
+<li><em>&quot;Cherche dans mes notes tout ce qui parle de X&quot;</em></li>
+<li><em>&quot;Extrait les mots-clés de mes notes&quot;</em></li>
+</ul>
+<p>On l'exécute et ça marche tout seul :</p>
+<div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Runner</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+<p>Certaines des fonctions sont même <a class="reference external" href="https://dotmobo.xyz/maturin.html">écrites en Rust à l'aide de Maturin</a> pour le fun et la performance.</p>
+<p>Have fun !</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://dotmobo.xyz/tag/python.html">python</a>
+      <a href="https://dotmobo.xyz/tag/agents.html">agents</a>
+      <a href="https://dotmobo.xyz/tag/openai.html">openai</a>
+      <a href="https://dotmobo.xyz/tag/sdk.html">sdk</a>
+      <a href="https://dotmobo.xyz/tag/agno.html">agno</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dotmobo';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; 2024  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script id="dark-theme-script"
+          src="https://dotmobo.xyz/theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
+          data-default-theme="dark"
+          type="text/javascript">
+  </script>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " .mobo ",
+  "url" : "https://dotmobo.xyz",
+  "image": "//dotmobo.xyz/images/avatar700.jpg",
+  "description": ".mobo - explorations d'un développeur"
+}
+</script>
+
+
+</body>
+</html>

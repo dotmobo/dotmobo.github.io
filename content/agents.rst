@@ -13,7 +13,7 @@ Développement d'agents IA
     :align: right
 
 Après avoir passé en revue l'architecture de base des LLMs avec `les moteurs d'inférence et l'orchestration de base <https://dotmobo.xyz/archi-llm.html>`_,
-on va faire une petite introduction aux agents IA avec un outil ultra léger qui nous vient d'OpenAI appelé **OpenAI Agents SDK**.
+on va faire une petite introduction aux agents IA avec un outil ultra léger qui nous vient d'OpenAI appelé **OpenAI Agents SDK** et une petite librairie sympa appelée **Agno**.
 
 Qu'est ce qu'un agent IA ?
 ==========================

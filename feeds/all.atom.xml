@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2025-09-05T00:00:00+02:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Développement d'agents IA</title><link href="https://dotmobo.xyz/agents-ia.html" rel="alternate"></link><published>2025-09-05T00:00:00+02:00</published><updated>2025-09-05T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2025-09-05:/agents-ia.html</id><summary type="html">&lt;p class="first last"&gt;Développement d'agents IA&lt;/p&gt;
 </summary><content type="html">&lt;img alt="OpenAI" class="align-right" src="./images/openai.png" /&gt;
 &lt;p&gt;Après avoir passé en revue l'architecture de base des LLMs avec &lt;a class="reference external" href="https://dotmobo.xyz/archi-llm.html"&gt;les moteurs d'inférence et l'orchestration de base&lt;/a&gt;,
-on va faire une petite introduction aux agents IA avec un outil ultra léger qui nous vient d'OpenAI appelé &lt;strong&gt;OpenAI Agents SDK&lt;/strong&gt;.&lt;/p&gt;
+on va faire une petite introduction aux agents IA avec un outil ultra léger qui nous vient d'OpenAI appelé &lt;strong&gt;OpenAI Agents SDK&lt;/strong&gt; et une petite librairie sympa appelée &lt;strong&gt;Agno&lt;/strong&gt;.&lt;/p&gt;
 &lt;div class="section" id="qu-est-ce-qu-un-agent-ia"&gt;
 &lt;h2&gt;Qu'est ce qu'un agent IA ?&lt;/h2&gt;
 &lt;p&gt;Déjà pour commencer, démystifions le terme agent. On l'entend à toutes les sauces et ça veut tout et rien dire au premier abord.&lt;/p&gt;

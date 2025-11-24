@@ -47,7 +47,7 @@ exactement ce qu'on va exploiter.
 Ollama : ton premier moteur d'inférence
 =======================================
 
-**Ollama**, c'est un petit bijou : un moteur d'inférence ultra simple à
+`Ollama <https://ollama.com/>`_, c'est un petit bijou : un moteur d'inférence ultra simple à
 installer, compatible Linux/macOS/Windows, et surtout très efficace pour
 gérer et exécuter des modèles LLM localement.
 
@@ -69,6 +69,12 @@ Et tu lances le moteur:
 
    ollama serve
 
+Pour être sûr que c'est ok, tu peux vérifier le port via telnet:
+
+.. code-block:: bash
+
+   telnet localhost 11434
+
 Maintenant, le plus sympa : télécharger un modèle.
 
 Par exemple un **qwen3:0.6b**, petit mais très rapide:
@@ -77,7 +83,9 @@ Par exemple un **qwen3:0.6b**, petit mais très rapide:
 
    ollama pull qwen3:0.6b
 
-Tu listes tes modèles:
+L'avantage de ce modèle, c'est que tu peux le faire tourner sur un CPU. Pas besoin de carte graphique.
+
+Tu listes alors tes modèles:
 
 .. code-block:: bash
 
@@ -113,6 +121,9 @@ Puis tu modifies:
 
    /set parameter temperature 0
 
+Des paramètres plus bas donnent des réponses plus précises et conservatrices, tandis que des valeurs plus élevées
+rendent les réponses plus variées et créatives. Tout dépend de ton usage !
+
 Créer ton propre modèle : le Modelfile
 ======================================
 
@@ -139,11 +150,16 @@ Compilation:
 
    ollama create chat -f ./Modelfile
 
+Tu peux alors discuter avec ton modèle personnalisé de la même façon que précédemment:
+
+.. code-block:: bash
+
+   ollama run chat
+
 Utiliser Ollama avec Python
 ===========================
 
-
-Créer l'environnement:
+Créer l'environnement virtuel:
 
 .. code-block:: bash
 
@@ -151,7 +167,7 @@ Créer l'environnement:
    source .env/bin/activate
    pip install ollama
 
-Script ``main.py``:
+Script ``main.py`` pour chatter avec le modèle ``chat:latest``:
 
 .. code-block:: bash
 
@@ -169,14 +185,21 @@ Script ``main.py``:
    for part in client.chat('chat:latest', messages=messages, stream=True):
      print(part['message']['content'], end='', flush=True)
 
-Exécution:
+Exécution du code:
 
 .. code-block:: bash
 
    python main.py
 
+Tu remarqueras qu'on a utilisé ici le mode streaming pour afficher la
+réponse au fur et à mesure. Pratique pour les interfaces web !
+
 OpenWebUI : une interface web pour ton LLM
 ==========================================
+
+`OpenWebUI <https://github.com/open-webui/open-webui>`_ est une interface web open-source qui te permet de chatter
+avec tes modèles locaux (Ollama, LocalAI, etc.) via une interface
+moderne. C'est l'outil le plus suivi dans le monde des LLM locaux avec LibreChat.
 
 Installation Python:
 

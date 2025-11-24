@@ -1,5 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2025-09-05T00:00:00+02:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Développement d'agents IA</title><link href="https://dotmobo.xyz/agents-ia.html" rel="alternate"></link><published>2025-09-05T00:00:00+02:00</published><updated>2025-09-05T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2025-09-05:/agents-ia.html</id><summary type="html">&lt;p class="first last"&gt;Développement d'agents IA&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2025-11-24T00:00:00+01:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Ma première IA locale avec Ollama et OpenWebUI</title><link href="https://dotmobo.xyz/ollama.html" rel="alternate"></link><published>2025-11-24T00:00:00+01:00</published><updated>2025-11-24T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2025-11-24:/ollama.html</id><summary type="html">&lt;p class="first last"&gt;Ma première IA locale avec Ollama et OpenWebUI&lt;/p&gt;
+</summary><content type="html">&lt;img alt="Ollama" class="align-right" src="./images/ollama.png" /&gt;
+&lt;p&gt;Après avoir parlé d'architecture LLM et d'agents, on va revenir à la
+base de la base : &lt;strong&gt;installer une IA sur son poste et la faire parler&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;L'objectif ? Démystifier ce qu'est un moteur d'inférence, manipuler un
+premier modèle, jouer avec les paramètres, et monter une petite
+interface web pour chatter avec ton LLM. Le tout &lt;strong&gt;en local&lt;/strong&gt;, sans
+cloud, sans clé API, juste avec ton Linux et deux outils : &lt;strong&gt;Ollama&lt;/strong&gt; et
+&lt;strong&gt;OpenWebUI&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="section" id="c-est-quoi-un-llm-deja"&gt;
+&lt;h2&gt;C'est quoi un LLM, déjà ?&lt;/h2&gt;
+&lt;p&gt;Avant de lancer des commandes dans le terminal, petit rappel rapide.&lt;/p&gt;
+&lt;p&gt;Un &lt;strong&gt;LLM&lt;/strong&gt; (&lt;em&gt;Large Language Model&lt;/em&gt;), c'est un gros réseau de neurones
+entraîné à un niveau indécent sur des montagnes de texte. Son job est
+simple : &lt;strong&gt;prédire le mot suivant&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Mais derrière ce côté simpliste, tu as tout un pipeline :&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;des &lt;strong&gt;tokens&lt;/strong&gt; (morceaux de mots),&lt;/li&gt;
+&lt;li&gt;une &lt;strong&gt;vectorisation&lt;/strong&gt; (représentation mathématique des idées),&lt;/li&gt;
+&lt;li&gt;un mécanisme &lt;strong&gt;Transformer&lt;/strong&gt; qui pige le contexte d'une phrase,&lt;/li&gt;
+&lt;li&gt;et un modèle qui sort une probabilité pour chaque mot possible.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tu lui donnes une phrase, il complète. Tu lui poses une question, il
+infère. Tu lui fournis un contexte, il adapte sa réponse.&lt;/p&gt;
+&lt;p&gt;Les modèles modernes comme Qwen, Llama 3 ou Mistral tournent aujourd'hui
+très bien &lt;strong&gt;en local&lt;/strong&gt;, même sur de petites machines. Et c'est
+exactement ce qu'on va exploiter.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ollama-ton-premier-moteur-d-inference"&gt;
+&lt;h2&gt;Ollama : ton premier moteur d'inférence&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://ollama.com/"&gt;Ollama&lt;/a&gt;, c'est un petit bijou : un moteur d'inférence ultra simple à
+installer, compatible Linux/macOS/Windows, et surtout très efficace pour
+gérer et exécuter des modèles LLM localement.&lt;/p&gt;
+&lt;p&gt;Tu l'installes en une commande:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-fsSL&lt;span class="w"&gt; &lt;/span&gt;https://ollama.com/install.sh&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu vérifies:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ollama&lt;span class="w"&gt; &lt;/span&gt;-v
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et tu lances le moteur:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ollama&lt;span class="w"&gt; &lt;/span&gt;serve
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pour être sûr que c'est ok, tu peux vérifier le port via telnet:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;telnet&lt;span class="w"&gt; &lt;/span&gt;localhost&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;11434&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Maintenant, le plus sympa : télécharger un modèle.&lt;/p&gt;
+&lt;p&gt;Par exemple un &lt;strong&gt;qwen3:0.6b&lt;/strong&gt;, petit mais très rapide:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ollama&lt;span class="w"&gt; &lt;/span&gt;pull&lt;span class="w"&gt; &lt;/span&gt;qwen3:0.6b
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;L'avantage de ce modèle, c'est que tu peux le faire tourner sur un CPU. Pas besoin de carte graphique.&lt;/p&gt;
+&lt;p&gt;Tu listes alors tes modèles:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ollama&lt;span class="w"&gt; &lt;/span&gt;list
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et tu discutes avec lui:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ollama&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;qwen3:0.6b
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="jouer-avec-les-parametres-creativite-et-controle"&gt;
+&lt;h2&gt;Jouer avec les paramètres : créativité et contrôle&lt;/h2&gt;
+&lt;p&gt;Une des forces d'Ollama, c'est la possibilité de régler très simplement
+les paramètres:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;température&lt;/strong&gt; : créativité / chaos&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;top-k&lt;/strong&gt; : combien de candidats on garde avant de choisir&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;top-p&lt;/strong&gt; : probabilité cumulée à couvrir&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;repeat-penalty&lt;/strong&gt; : éviter que le modèle te fasse un copier-coller de lui-même&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tu lances:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/show&lt;span class="w"&gt; &lt;/span&gt;parameters
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Puis tu modifies:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/set&lt;span class="w"&gt; &lt;/span&gt;parameter&lt;span class="w"&gt; &lt;/span&gt;temperature&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Des paramètres plus bas donnent des réponses plus précises et conservatrices, tandis que des valeurs plus élevées
+rendent les réponses plus variées et créatives. Tout dépend de ton usage !&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="creer-ton-propre-modele-le-modelfile"&gt;
+&lt;h2&gt;Créer ton propre modèle : le Modelfile&lt;/h2&gt;
+&lt;p&gt;Ollama te permet d'ajouter un &lt;strong&gt;comportement système&lt;/strong&gt; directement dans un fichier &lt;tt class="docutils literal"&gt;Modelfile&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FROM&lt;span class="w"&gt; &lt;/span&gt;qwen3:0.6b
+
+PARAMETER&lt;span class="w"&gt; &lt;/span&gt;temperature&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.7
+PARAMETER&lt;span class="w"&gt; &lt;/span&gt;top_k&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;30&lt;/span&gt;
+PARAMETER&lt;span class="w"&gt; &lt;/span&gt;top_p&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.9
+PARAMETER&lt;span class="w"&gt; &lt;/span&gt;repeat_penalty&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+
+SYSTEM&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;Rôle : Tu es un chat qui découvre un objet mystérieux dans son jardin.&lt;/span&gt;
+&lt;span class="s2"&gt;Langue : Tu parles un français soutenu.&lt;/span&gt;
+&lt;span class="s2"&gt;Personnalité : Tu es farceur.&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Compilation:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ollama&lt;span class="w"&gt; &lt;/span&gt;create&lt;span class="w"&gt; &lt;/span&gt;chat&lt;span class="w"&gt; &lt;/span&gt;-f&lt;span class="w"&gt; &lt;/span&gt;./Modelfile
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu peux alors discuter avec ton modèle personnalisé de la même façon que précédemment:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ollama&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;chat
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="utiliser-ollama-avec-python"&gt;
+&lt;h2&gt;Utiliser Ollama avec Python&lt;/h2&gt;
+&lt;p&gt;Créer l'environnement virtuel:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;venv&lt;span class="w"&gt; &lt;/span&gt;.env
+&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;.env/bin/activate
+pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;ollama
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Script &lt;tt class="docutils literal"&gt;main.py&lt;/tt&gt; pour chatter avec le modèle &lt;tt class="docutils literal"&gt;chat:latest&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;from&lt;span class="w"&gt; &lt;/span&gt;ollama&lt;span class="w"&gt; &lt;/span&gt;import&lt;span class="w"&gt; &lt;/span&gt;Client
+
+&lt;span class="nv"&gt;client&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Client&lt;span class="o"&gt;()&lt;/span&gt;
+
+&lt;span class="nv"&gt;messages&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;role&amp;#39;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;user&amp;#39;&lt;/span&gt;,
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;content&amp;#39;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Qui es-tu et que fais-tu aujourd&amp;#39;hui?&amp;quot;&lt;/span&gt;,
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;,
+&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;part&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;client.chat&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;chat:latest&amp;#39;&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;messages&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;messages,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;stream&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;True&lt;span class="o"&gt;)&lt;/span&gt;:
+&lt;span class="w"&gt;  &lt;/span&gt;print&lt;span class="o"&gt;(&lt;/span&gt;part&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;message&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;content&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;end&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;flush&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;True&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Exécution du code:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python&lt;span class="w"&gt; &lt;/span&gt;main.py
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu remarqueras qu'on a utilisé ici le mode streaming pour afficher la
+réponse au fur et à mesure. Pratique pour les interfaces web !&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="openwebui-une-interface-web-pour-ton-llm"&gt;
+&lt;h2&gt;OpenWebUI : une interface web pour ton LLM&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/open-webui/open-webui"&gt;OpenWebUI&lt;/a&gt; est une interface web open-source qui te permet de chatter
+avec tes modèles locaux (Ollama, LocalAI, etc.) via une interface
+moderne. C'est l'outil le plus suivi dans le monde des LLM locaux avec LibreChat.&lt;/p&gt;
+&lt;p&gt;Installation Python:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;open-webui
+open-webui&lt;span class="w"&gt; &lt;/span&gt;serve
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ou via Docker:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;-d&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3000&lt;/span&gt;:8080&lt;span class="w"&gt; &lt;/span&gt;--add-host&lt;span class="o"&gt;=&lt;/span&gt;host.docker.internal:host-gateway&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+-v&lt;span class="w"&gt; &lt;/span&gt;open-webui:/app/backend/data&lt;span class="w"&gt; &lt;/span&gt;--name&lt;span class="w"&gt; &lt;/span&gt;open-webui&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+--restart&lt;span class="w"&gt; &lt;/span&gt;always&lt;span class="w"&gt; &lt;/span&gt;ghcr.io/open-webui/open-webui:main
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu ouvres:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;http://localhost:8080/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tu y retrouveras :&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;chat multi-modèles&lt;/li&gt;
+&lt;li&gt;historique&lt;/li&gt;
+&lt;li&gt;RAG intégré&lt;/li&gt;
+&lt;li&gt;administration&lt;/li&gt;
+&lt;li&gt;API&lt;/li&gt;
+&lt;li&gt;paramètres avancés&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="premiere-experience-rag"&gt;
+&lt;h2&gt;Première expérience RAG&lt;/h2&gt;
+&lt;p&gt;OpenWebUI permet de créer un petit RAG local : uploader un PDF, notes,
+markdown. On peut poser des questions comme :&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;em&gt;Explique la page 12 du PDF&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Fais-moi un résumé&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Trouve tous les passages sur Kubernetes&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conclusion"&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Avec Ollama et OpenWebUI tu as :&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;un moteur d'inférence local,&lt;/li&gt;
+&lt;li&gt;une interface moderne,&lt;/li&gt;
+&lt;li&gt;la possibilité d'ajouter une personnalité (Modelfile),&lt;/li&gt;
+&lt;li&gt;une API Python,&lt;/li&gt;
+&lt;li&gt;un premier RAG,&lt;/li&gt;
+&lt;li&gt;bref : &lt;strong&gt;ta première IA personnelle&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bonne exploration !&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="IA"></category><category term="python"></category><category term="ollama"></category><category term="openwebui"></category><category term="openai"></category></entry><entry><title>Développement d'agents IA</title><link href="https://dotmobo.xyz/agents-ia.html" rel="alternate"></link><published>2025-09-05T00:00:00+02:00</published><updated>2025-09-05T00:00:00+02:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2025-09-05:/agents-ia.html</id><summary type="html">&lt;p class="first last"&gt;Développement d'agents IA&lt;/p&gt;
 </summary><content type="html">&lt;img alt="OpenAI" class="align-right" src="./images/openai.png" /&gt;
 &lt;p&gt;Après avoir passé en revue l'architecture de base des LLMs avec &lt;a class="reference external" href="https://dotmobo.xyz/archi-llm.html"&gt;les moteurs d'inférence et l'orchestration de base&lt;/a&gt;,
 on va faire une petite introduction aux agents IA avec un outil ultra léger qui nous vient d'OpenAI appelé &lt;strong&gt;OpenAI Agents SDK&lt;/strong&gt; et une petite librairie sympa appelée &lt;strong&gt;Agno&lt;/strong&gt;.&lt;/p&gt;

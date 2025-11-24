@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/stylesheet/style.min.css">
+
+    <link id="dark-theme-style" rel="stylesheet" type="text/css"
+          media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+    href="https://dotmobo.xyz/theme/stylesheet/dark-theme.min.css">
+
+    <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+          href="https://dotmobo.xyz/theme/pygments/monokai.min.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: light)"
+          href="https://dotmobo.xyz/theme/pygments/emacs.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/solid.css">
+
+    <link href="https://dotmobo.xyz/css/custom.css" rel="stylesheet">
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68852219-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Morgan" />
+<meta name="description" content="Ma première IA locale avec Ollama et OpenWebUI" />
+<meta name="keywords" content="python, ollama, openwebui, openai">
+
+
+<meta property="og:site_name" content=".mobo"/>
+<meta property="og:title" content="Ma première IA locale avec Ollama et OpenWebUI"/>
+<meta property="og:description" content="Ma première IA locale avec Ollama et OpenWebUI"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="https://dotmobo.xyz/ollama.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2025-11-24 00:00:00+01:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://dotmobo.xyz/author/morgan.html">
+<meta property="article:section" content="IA"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="ollama"/>
+<meta property="article:tag" content="openwebui"/>
+<meta property="article:tag" content="openai"/>
+<meta property="og:image" content="//dotmobo.xyz/images/avatar700.jpg">
+
+  <title>.mobo &ndash; Ma première IA locale avec Ollama et OpenWebUI</title>
+
+</head>
+<body >
+  <aside>
+    <div>
+      <a href="https://dotmobo.xyz">
+        <img src="//dotmobo.xyz/images/avatar700.jpg" alt=".mobo" title=".mobo">
+      </a>
+
+      <h1>
+        <a href="https://dotmobo.xyz">.mobo</a>
+      </h1>
+
+<p>Explorations d'un développeur</p>
+
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.xyz/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://dotmobo.xyz">Accueil</a>
+
+      <a href="/categories.html">Catégories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/archives.html">Archives</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="ollama">Ma première IA locale avec Ollama et OpenWebUI</h1>
+    <p>
+      Posté le 24/11/2025 dans <a href="https://dotmobo.xyz/category/ia.html">IA</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="Ollama" class="align-right" src="./images/ollama.png" />
+<p>Après avoir parlé d'architecture LLM et d'agents, on va revenir à la
+base de la base : <strong>installer une IA sur son poste et la faire parler</strong>.</p>
+<p>L'objectif ? Démystifier ce qu'est un moteur d'inférence, manipuler un
+premier modèle, jouer avec les paramètres, et monter une petite
+interface web pour chatter avec ton LLM. Le tout <strong>en local</strong>, sans
+cloud, sans clé API, juste avec ton Linux et deux outils : <strong>Ollama</strong> et
+<strong>OpenWebUI</strong>.</p>
+<div class="section" id="c-est-quoi-un-llm-deja">
+<h2>C'est quoi un LLM, déjà ?</h2>
+<p>Avant de lancer des commandes dans le terminal, petit rappel rapide.</p>
+<p>Un <strong>LLM</strong> (<em>Large Language Model</em>), c'est un gros réseau de neurones
+entraîné à un niveau indécent sur des montagnes de texte. Son job est
+simple : <strong>prédire le mot suivant</strong>.</p>
+<p>Mais derrière ce côté simpliste, tu as tout un pipeline :</p>
+<ul class="simple">
+<li>des <strong>tokens</strong> (morceaux de mots),</li>
+<li>une <strong>vectorisation</strong> (représentation mathématique des idées),</li>
+<li>un mécanisme <strong>Transformer</strong> qui pige le contexte d'une phrase,</li>
+<li>et un modèle qui sort une probabilité pour chaque mot possible.</li>
+</ul>
+<p>Tu lui donnes une phrase, il complète. Tu lui poses une question, il
+infère. Tu lui fournis un contexte, il adapte sa réponse.</p>
+<p>Les modèles modernes comme Qwen, Llama 3 ou Mistral tournent aujourd'hui
+très bien <strong>en local</strong>, même sur de petites machines. Et c'est
+exactement ce qu'on va exploiter.</p>
+</div>
+<div class="section" id="ollama-ton-premier-moteur-d-inference">
+<h2>Ollama : ton premier moteur d'inférence</h2>
+<p><a class="reference external" href="https://ollama.com/">Ollama</a>, c'est un petit bijou : un moteur d'inférence ultra simple à
+installer, compatible Linux/macOS/Windows, et surtout très efficace pour
+gérer et exécuter des modèles LLM localement.</p>
+<p>Tu l'installes en une commande:</p>
+<div class="highlight"><pre><span></span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://ollama.com/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</pre></div>
+<p>Tu vérifies:</p>
+<div class="highlight"><pre><span></span>ollama<span class="w"> </span>-v
+</pre></div>
+<p>Et tu lances le moteur:</p>
+<div class="highlight"><pre><span></span>ollama<span class="w"> </span>serve
+</pre></div>
+<p>Pour être sûr que c'est ok, tu peux vérifier le port via telnet:</p>
+<div class="highlight"><pre><span></span>telnet<span class="w"> </span>localhost<span class="w"> </span><span class="m">11434</span>
+</pre></div>
+<p>Maintenant, le plus sympa : télécharger un modèle.</p>
+<p>Par exemple un <strong>qwen3:0.6b</strong>, petit mais très rapide:</p>
+<div class="highlight"><pre><span></span>ollama<span class="w"> </span>pull<span class="w"> </span>qwen3:0.6b
+</pre></div>
+<p>L'avantage de ce modèle, c'est que tu peux le faire tourner sur un CPU. Pas besoin de carte graphique.</p>
+<p>Tu listes alors tes modèles:</p>
+<div class="highlight"><pre><span></span>ollama<span class="w"> </span>list
+</pre></div>
+<p>Et tu discutes avec lui:</p>
+<div class="highlight"><pre><span></span>ollama<span class="w"> </span>run<span class="w"> </span>qwen3:0.6b
+</pre></div>
+</div>
+<div class="section" id="jouer-avec-les-parametres-creativite-et-controle">
+<h2>Jouer avec les paramètres : créativité et contrôle</h2>
+<p>Une des forces d'Ollama, c'est la possibilité de régler très simplement
+les paramètres:</p>
+<ul class="simple">
+<li><strong>température</strong> : créativité / chaos</li>
+<li><strong>top-k</strong> : combien de candidats on garde avant de choisir</li>
+<li><strong>top-p</strong> : probabilité cumulée à couvrir</li>
+<li><strong>repeat-penalty</strong> : éviter que le modèle te fasse un copier-coller de lui-même</li>
+</ul>
+<p>Tu lances:</p>
+<div class="highlight"><pre><span></span>/show<span class="w"> </span>parameters
+</pre></div>
+<p>Puis tu modifies:</p>
+<div class="highlight"><pre><span></span>/set<span class="w"> </span>parameter<span class="w"> </span>temperature<span class="w"> </span><span class="m">0</span>
+</pre></div>
+<p>Des paramètres plus bas donnent des réponses plus précises et conservatrices, tandis que des valeurs plus élevées
+rendent les réponses plus variées et créatives. Tout dépend de ton usage !</p>
+</div>
+<div class="section" id="creer-ton-propre-modele-le-modelfile">
+<h2>Créer ton propre modèle : le Modelfile</h2>
+<p>Ollama te permet d'ajouter un <strong>comportement système</strong> directement dans un fichier <tt class="docutils literal">Modelfile</tt>:</p>
+<div class="highlight"><pre><span></span>FROM<span class="w"> </span>qwen3:0.6b
+
+PARAMETER<span class="w"> </span>temperature<span class="w"> </span><span class="m">0</span>.7
+PARAMETER<span class="w"> </span>top_k<span class="w"> </span><span class="m">30</span>
+PARAMETER<span class="w"> </span>top_p<span class="w"> </span><span class="m">0</span>.9
+PARAMETER<span class="w"> </span>repeat_penalty<span class="w"> </span><span class="m">1</span>
+
+SYSTEM<span class="w"> </span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Rôle : Tu es un chat qui découvre un objet mystérieux dans son jardin.</span>
+<span class="s2">Langue : Tu parles un français soutenu.</span>
+<span class="s2">Personnalité : Tu es farceur.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+<p>Compilation:</p>
+<div class="highlight"><pre><span></span>ollama<span class="w"> </span>create<span class="w"> </span>chat<span class="w"> </span>-f<span class="w"> </span>./Modelfile
+</pre></div>
+<p>Tu peux alors discuter avec ton modèle personnalisé de la même façon que précédemment:</p>
+<div class="highlight"><pre><span></span>ollama<span class="w"> </span>run<span class="w"> </span>chat
+</pre></div>
+</div>
+<div class="section" id="utiliser-ollama-avec-python">
+<h2>Utiliser Ollama avec Python</h2>
+<p>Créer l'environnement virtuel:</p>
+<div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.env
+<span class="nb">source</span><span class="w"> </span>.env/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>ollama
+</pre></div>
+<p>Script <tt class="docutils literal">main.py</tt> pour chatter avec le modèle <tt class="docutils literal">chat:latest</tt>:</p>
+<div class="highlight"><pre><span></span>from<span class="w"> </span>ollama<span class="w"> </span>import<span class="w"> </span>Client
+
+<span class="nv">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Client<span class="o">()</span>
+
+<span class="nv">messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<span class="w">  </span><span class="o">{</span>
+<span class="w">    </span><span class="s1">&#39;role&#39;</span>:<span class="w"> </span><span class="s1">&#39;user&#39;</span>,
+<span class="w">    </span><span class="s1">&#39;content&#39;</span>:<span class="w"> </span><span class="s2">&quot;Qui es-tu et que fais-tu aujourd&#39;hui?&quot;</span>,
+<span class="w">  </span><span class="o">}</span>,
+<span class="o">]</span>
+
+<span class="k">for</span><span class="w"> </span>part<span class="w"> </span><span class="k">in</span><span class="w"> </span>client.chat<span class="o">(</span><span class="s1">&#39;chat:latest&#39;</span>,<span class="w"> </span><span class="nv">messages</span><span class="o">=</span>messages,<span class="w"> </span><span class="nv">stream</span><span class="o">=</span>True<span class="o">)</span>:
+<span class="w">  </span>print<span class="o">(</span>part<span class="o">[</span><span class="s1">&#39;message&#39;</span><span class="o">][</span><span class="s1">&#39;content&#39;</span><span class="o">]</span>,<span class="w"> </span><span class="nv">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span>,<span class="w"> </span><span class="nv">flush</span><span class="o">=</span>True<span class="o">)</span>
+</pre></div>
+<p>Exécution du code:</p>
+<div class="highlight"><pre><span></span>python<span class="w"> </span>main.py
+</pre></div>
+<p>Tu remarqueras qu'on a utilisé ici le mode streaming pour afficher la
+réponse au fur et à mesure. Pratique pour les interfaces web !</p>
+</div>
+<div class="section" id="openwebui-une-interface-web-pour-ton-llm">
+<h2>OpenWebUI : une interface web pour ton LLM</h2>
+<p><a class="reference external" href="https://github.com/open-webui/open-webui">OpenWebUI</a> est une interface web open-source qui te permet de chatter
+avec tes modèles locaux (Ollama, LocalAI, etc.) via une interface
+moderne. C'est l'outil le plus suivi dans le monde des LLM locaux avec LibreChat.</p>
+<p>Installation Python:</p>
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>open-webui
+open-webui<span class="w"> </span>serve
+</pre></div>
+<p>Ou via Docker:</p>
+<div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">3000</span>:8080<span class="w"> </span>--add-host<span class="o">=</span>host.docker.internal:host-gateway<span class="w"> </span><span class="se">\</span>
+-v<span class="w"> </span>open-webui:/app/backend/data<span class="w"> </span>--name<span class="w"> </span>open-webui<span class="w"> </span><span class="se">\</span>
+--restart<span class="w"> </span>always<span class="w"> </span>ghcr.io/open-webui/open-webui:main
+</pre></div>
+<p>Tu ouvres:</p>
+<div class="highlight"><pre><span></span>http://localhost:8080/
+</pre></div>
+<p>Tu y retrouveras :</p>
+<ul class="simple">
+<li>chat multi-modèles</li>
+<li>historique</li>
+<li>RAG intégré</li>
+<li>administration</li>
+<li>API</li>
+<li>paramètres avancés</li>
+</ul>
+</div>
+<div class="section" id="premiere-experience-rag">
+<h2>Première expérience RAG</h2>
+<p>OpenWebUI permet de créer un petit RAG local : uploader un PDF, notes,
+markdown. On peut poser des questions comme :</p>
+<ul class="simple">
+<li><em>Explique la page 12 du PDF</em></li>
+<li><em>Fais-moi un résumé</em></li>
+<li><em>Trouve tous les passages sur Kubernetes</em></li>
+</ul>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion</h2>
+<p>Avec Ollama et OpenWebUI tu as :</p>
+<ul class="simple">
+<li>un moteur d'inférence local,</li>
+<li>une interface moderne,</li>
+<li>la possibilité d'ajouter une personnalité (Modelfile),</li>
+<li>une API Python,</li>
+<li>un premier RAG,</li>
+<li>bref : <strong>ta première IA personnelle</strong>.</li>
+</ul>
+<p>Bonne exploration !</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://dotmobo.xyz/tag/python.html">python</a>
+      <a href="https://dotmobo.xyz/tag/ollama.html">ollama</a>
+      <a href="https://dotmobo.xyz/tag/openwebui.html">openwebui</a>
+      <a href="https://dotmobo.xyz/tag/openai.html">openai</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dotmobo';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; 2024  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script id="dark-theme-script"
+          src="https://dotmobo.xyz/theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
+          data-default-theme="dark"
+          type="text/javascript">
+  </script>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " .mobo ",
+  "url" : "https://dotmobo.xyz",
+  "image": "//dotmobo.xyz/images/avatar700.jpg",
+  "description": ".mobo - explorations d'un développeur"
+}
+</script>
+
+
+</body>
+</html>

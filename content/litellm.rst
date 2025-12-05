@@ -5,7 +5,7 @@ Moteurs d'inférence et passerelle LiteLLM
 :tags: python, llm, litellm, vllm, IA
 :category: IA
 :slug: moteurs-inference-litellm
-:authors: Morgan, Nicolas
+:authors: Morgan
 :summary: Moteurs d'inférence et passerelle LiteLLM
 
 .. image:: ./images/litellm.png
@@ -13,8 +13,7 @@ Moteurs d'inférence et passerelle LiteLLM
     :align: right
 
 Après avoir exploré la création d'une première IA locale avec Ollama et OpenWebUI, nous passons à l'étape suivante:
-déployer des modèles sur des moteurs d'inférence de production et les servir avec **LiteLLM**.
-Cet article reprend les éléments clés de l'**Atelier 2 Esup IA**.
+déployer des modèles sur des moteurs d'inférence de production et les servir avec `LiteLLM <https://www.litellm.ai/>`_.
 
 Qu'est-ce qu'un moteur d'inférence ?
 ====================================
@@ -38,14 +37,13 @@ Il offre :
 Installation et configuration
 =============================
 
-On commence par créer un projet et activer un environnement virtuel Python :
+On commence par créer un projet, activer un environnement virtuel Python et installer litellm :
 
 .. code-block:: bash
 
     mkdir monprojet && cd monprojet
     python -m venv .env && source .env/bin/activate
     pip install litellm[proxy]
-    litellm
 
 Ensuite, un fichier **config.yaml** définit les modèles et paramètres :
 
@@ -76,15 +74,17 @@ Ensuite, un fichier **config.yaml** définit les modèles et paramètres :
     allowed_fails: 5
     cooldown_time: 30
 
+Ici, on sert le modèle "qwen3" via LiteLLM qu'on a configuré lors de `l'article précédent <https://dotmobo.xyz/ollama.html>`_.
+On peut ajuster les paramètres de génération comme la température, top_p, ou les pénalités de fréquence.
+
 Exécution et requêtes
 =====================
 
-Démarrage du serveur LiteLLM :
+On démarre litellm avec cette configuration :
 
 .. code-block:: bash
 
     litellm --config config.yaml
-
 
 L'API est disponible sur `http://localhost:4000/ <http://localhost:4000/>`_.
 On peut vérifier l'état du serveur avec :
@@ -94,7 +94,7 @@ On peut vérifier l'état du serveur avec :
     curl -H "Authorization: Bearer sk-secret" http://localhost:4000/health
 
 
-Pour interroger le modèle :
+Et pour interroger le modèle, tu peux faire un appel POST comme suit :
 
 .. code-block:: bash
 
@@ -110,13 +110,35 @@ Pour interroger le modèle :
 Support multi-modèles et fallback
 =================================
 
-LiteLLM permet d’ajouter un second modèle (ex. qwen2.5) et de configurer le fallback ou le load-balancing.
-Les requêtes sont alors réparties selon la configuration des poids et priorités.
+LiteLLM permet d’ajouter un second modèle (ex. qwen2.5) et de configurer le fallback.
+
+.. code-block:: yaml
+
+    model_list:
+    - model_name: qwen2.5
+        model_info:
+        max_tokens: 32768
+        max_input_tokens: 16384
+        max_output_tokens: 16384
+        litellm_params:
+        model: ollama/qwen2.5:0.5b
+        api_base: http://localhost:11434
+
+    litellm_settings:
+    fallbacks:
+        [
+        {"qwen3": ["qwen2.5"]}
+        ]
+
+Pour faire du load-balancing, il suffit de donner le même *model_name* à plusieurs moteurs.
+
+Les requêtes sont alors réparties selon la configuration des poids et priorités avec les paramètres *weight*,
+*rpm* (requests per minute) et *tpm* (tokens per minute).
 
 Utilisation avec Python
 =======================
 
-Installer le client OpenAI :
+L'api de litellm étant openai compatible, tu peux utiliser le client OpenAI pour faire des requêtes :
 
 .. code-block:: bash
 
@@ -150,19 +172,16 @@ Pour des usages plus lourds, **vLLM** offre :
 * Intégration Kubernetes avancée
 * Métriques exposées pour Prometheus
 
-Installation et démarrage d’un modèle Qwen 3 FP8 :
+Tu peux l'installer et démarrer un modèle Qwen 3 FP8 avec :
 
 .. code-block:: bash
-
 
     pip install vllm
     vllm serve Qwen/Qwen3-0.6B-FP8
 
-
-Paramétrage avancé :
+Et tu peux faire du paramétrage avancé sur deux GPUs avec :
 
 .. code-block:: bash
-
 
     vllm serve --model Qwen/Qwen3-0.6B-FP8 \
     --max-model-len 40960 \

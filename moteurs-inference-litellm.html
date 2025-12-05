@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/stylesheet/style.min.css">
+
+    <link id="dark-theme-style" rel="stylesheet" type="text/css"
+          media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+    href="https://dotmobo.xyz/theme/stylesheet/dark-theme.min.css">
+
+    <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+          href="https://dotmobo.xyz/theme/pygments/monokai.min.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: light)"
+          href="https://dotmobo.xyz/theme/pygments/emacs.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://dotmobo.xyz/theme/font-awesome/css/solid.css">
+
+    <link href="https://dotmobo.xyz/css/custom.css" rel="stylesheet">
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68852219-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Morgan" />
+<meta name="description" content="Moteurs d&#39;inférence et passerelle LiteLLM" />
+<meta name="keywords" content="python, llm, litellm, vllm, IA">
+
+
+<meta property="og:site_name" content=".mobo"/>
+<meta property="og:title" content="Moteurs d&#39;inférence et passerelle LiteLLM"/>
+<meta property="og:description" content="Moteurs d&#39;inférence et passerelle LiteLLM"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="https://dotmobo.xyz/moteurs-inference-litellm.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2025-11-24 00:00:00+01:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://dotmobo.xyz/author/morgan.html">
+<meta property="article:section" content="IA"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="llm"/>
+<meta property="article:tag" content="litellm"/>
+<meta property="article:tag" content="vllm"/>
+<meta property="article:tag" content="IA"/>
+<meta property="og:image" content="//dotmobo.xyz/images/avatar700.jpg">
+
+  <title>.mobo &ndash; Moteurs d&#39;inférence et passerelle LiteLLM</title>
+
+</head>
+<body >
+  <aside>
+    <div>
+      <a href="https://dotmobo.xyz">
+        <img src="//dotmobo.xyz/images/avatar700.jpg" alt=".mobo" title=".mobo">
+      </a>
+
+      <h1>
+        <a href="https://dotmobo.xyz">.mobo</a>
+      </h1>
+
+<p>Explorations d'un développeur</p>
+
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/dotmobo" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/dotmobo" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="//dotmobo.xyz/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://dotmobo.xyz">Accueil</a>
+
+      <a href="/categories.html">Catégories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/archives.html">Archives</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="moteurs-inference-litellm">Moteurs d'inférence et passerelle LiteLLM</h1>
+    <p>
+      Posté le 24/11/2025 dans <a href="https://dotmobo.xyz/category/ia.html">IA</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <img alt="LiteLLM" class="align-right" src="./images/litellm.png" />
+<p>Après avoir exploré la création d'une première IA locale avec Ollama et OpenWebUI, nous passons à l'étape suivante:
+déployer des modèles sur des moteurs d'inférence de production et les servir avec <strong>LiteLLM</strong>.
+Cet article reprend les éléments clés de l'<strong>Atelier 2 Esup IA</strong>.</p>
+<div class="section" id="qu-est-ce-qu-un-moteur-d-inference">
+<h2>Qu'est-ce qu'un moteur d'inférence ?</h2>
+<p>Un moteur d'inférence charge un modèle de LLM en mémoire et exécute les requêtes entrantes.
+Il peut gérer différents types de modèles, appliquer des paramètres d'exécution et servir les réponses via une API.
+Dans l'atelier précédent, nous avons utilisé <strong>Ollama</strong>, simple et efficace pour un usage local.</p>
+</div>
+<div class="section" id="litellm">
+<h2>LiteLLM</h2>
+<p><strong>LiteLLM</strong> est une passerelle entre les moteurs d'inférence (Ollama, vLLM, etc.) et des clients comme OpenWebUI.
+Il offre :</p>
+<ul class="simple">
+<li>Une API compatible OpenAI</li>
+<li>L'agrégation de modèles</li>
+<li>Le load-balancing et fallback</li>
+<li>La gestion du budget et des utilisateurs</li>
+<li>Des contrôles de santé (health checks)</li>
+</ul>
+</div>
+<div class="section" id="installation-et-configuration">
+<h2>Installation et configuration</h2>
+<p>On commence par créer un projet et activer un environnement virtuel Python :</p>
+<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>monprojet<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>monprojet
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.env<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>.env/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>litellm<span class="o">[</span>proxy<span class="o">]</span>
+litellm
+</pre></div>
+<p>Ensuite, un fichier <strong>config.yaml</strong> définit les modèles et paramètres :</p>
+<div class="highlight"><pre><span></span><span class="nt">general_settings</span><span class="p">:</span>
+<span class="nt">master_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sk-secret</span>
+
+<span class="nt">model_list</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qwen3</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">model_info</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="nt">max_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">32768</span>
+<span class="w">    </span><span class="nt">max_input_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16384</span>
+<span class="w">    </span><span class="nt">max_output_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16384</span>
+<span class="w">    </span><span class="nt">litellm_params</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ollama/qwen3:0.6b</span>
+<span class="w">    </span><span class="nt">api_base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://localhost:11434</span>
+<span class="w">    </span><span class="nt">temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.7</span>
+<span class="w">    </span><span class="nt">max_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4096</span>
+<span class="w">    </span><span class="nt">top_p</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.9</span>
+<span class="w">    </span><span class="nt">frequency_penalty</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">tpm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300000</span>
+<span class="w">    </span><span class="nt">rpm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+
+<span class="nt">litellm_settings</span><span class="p">:</span>
+<span class="nt">num_retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="nt">request_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3600</span>
+<span class="nt">allowed_fails</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="nt">cooldown_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+</pre></div>
+</div>
+<div class="section" id="execution-et-requetes">
+<h2>Exécution et requêtes</h2>
+<p>Démarrage du serveur LiteLLM :</p>
+<div class="highlight"><pre><span></span>litellm<span class="w"> </span>--config<span class="w"> </span>config.yaml
+</pre></div>
+<p>L'API est disponible sur <a class="reference external" href="http://localhost:4000/">http://localhost:4000/</a>.
+On peut vérifier l'état du serveur avec :</p>
+<div class="highlight"><pre><span></span>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer sk-secret&quot;</span><span class="w"> </span>http://localhost:4000/health
+</pre></div>
+<p>Pour interroger le modèle :</p>
+<div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:4000/chat/completions<span class="w"> </span><span class="se">\</span>
+-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer sk-secret&quot;</span><span class="w"> </span><span class="se">\</span>
+-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;model&quot;: &quot;qwen3&quot;,</span>
+<span class="s1">    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}]</span>
+<span class="s1">}&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="support-multi-modeles-et-fallback">
+<h2>Support multi-modèles et fallback</h2>
+<p>LiteLLM permet d’ajouter un second modèle (ex. qwen2.5) et de configurer le fallback ou le load-balancing.
+Les requêtes sont alors réparties selon la configuration des poids et priorités.</p>
+</div>
+<div class="section" id="utilisation-avec-python">
+<h2>Utilisation avec Python</h2>
+<p>Installer le client OpenAI :</p>
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>openai
+</pre></div>
+<p>Exemple d'appel depuis Python :</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openai</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">OpenAI</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;sk-secret&quot;</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;http://localhost:4000&quot;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;qwen&quot;</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Écris un court poème&quot;</span><span class="p">}]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="vllm-moteurs-pour-production">
+<h2>vLLM : moteurs pour production</h2>
+<p>Pour des usages plus lourds, <strong>vLLM</strong> offre :</p>
+<ul class="simple">
+<li>Optimisation mémoire GPU avec PagedAttention</li>
+<li>Exécution simultanée de plusieurs requêtes</li>
+<li>Tensor Parallelism pour multi-GPU</li>
+<li>API OpenAI compatible</li>
+<li>Support LoRA et quantification</li>
+<li>Intégration Kubernetes avancée</li>
+<li>Métriques exposées pour Prometheus</li>
+</ul>
+<p>Installation et démarrage d’un modèle Qwen 3 FP8 :</p>
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>vllm
+vllm<span class="w"> </span>serve<span class="w"> </span>Qwen/Qwen3-0.6B-FP8
+</pre></div>
+<p>Paramétrage avancé :</p>
+<div class="highlight"><pre><span></span>vllm<span class="w"> </span>serve<span class="w"> </span>--model<span class="w"> </span>Qwen/Qwen3-0.6B-FP8<span class="w"> </span><span class="se">\</span>
+--max-model-len<span class="w"> </span><span class="m">40960</span><span class="w"> </span><span class="se">\</span>
+--gpu-memory-utilization<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
+--swap-space<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+--dtype<span class="w"> </span>bfloat16<span class="w"> </span><span class="se">\</span>
+--kv-cache-dtype<span class="w"> </span>fp8<span class="w"> </span><span class="se">\</span>
+--tensor-parallel-size<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+--enable-auto-tool-choice<span class="w"> </span>--tool-call-parser<span class="w"> </span>hermes<span class="w"> </span><span class="se">\</span>
+--enable-reasoning<span class="w"> </span>--reasoning-parser<span class="w"> </span>deepseek_r1<span class="w"> </span><span class="se">\</span>
+--disable-log-stats<span class="w"> </span>--disable-log-requests
+</pre></div>
+</div>
+<div class="section" id="metriques-prometheus-et-tableau-de-bord-grafana">
+<h2>Métriques Prometheus et tableau de bord Grafana</h2>
+<p>Les métriques sont exposées sur <a class="reference external" href="http://localhost:8000/metrics">http://localhost:8000/metrics</a>, permettant le suivi de l’utilisation GPU, des requêtes et des performances.</p>
+</div>
+<div class="section" id="autres-moteurs">
+<h2>Autres moteurs</h2>
+<ul class="simple">
+<li><strong>SGLang</strong> : concurrent direct de vLLM (<a class="reference external" href="http://sglang.ai/">http://sglang.ai/</a>)</li>
+<li><strong>MAX</strong> : alternative sans CUDA (<a class="reference external" href="https://www.modular.com/max">https://www.modular.com/max</a>)</li>
+<li><strong>Speaches</strong> : spécialisé en TTS et STT (<a class="reference external" href="https://speaches.ai/">https://speaches.ai/</a>)</li>
+<li><strong>Infinity</strong> : embeddings et reranking (<a class="reference external" href="https://github.com/michaelfeil/infinity">https://github.com/michaelfeil/infinity</a>)</li>
+</ul>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion</h2>
+<p>Avec LiteLLM et vLLM, tu peux passer d’un prototype local à un déploiement de modèles LLM en production, avec gestion des utilisateurs, load-balancing, métriques et intégration multi-GPU.
+Ces outils constituent la passerelle idéale entre la facilité d’Ollama et la robustesse des moteurs professionnels.</p>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://dotmobo.xyz/tag/python.html">python</a>
+      <a href="https://dotmobo.xyz/tag/llm.html">llm</a>
+      <a href="https://dotmobo.xyz/tag/litellm.html">litellm</a>
+      <a href="https://dotmobo.xyz/tag/vllm.html">vllm</a>
+      <a href="https://dotmobo.xyz/tag/ia.html">IA</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dotmobo';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; 2024  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Construit avec <a href="http://getpelican.com" target="_blank">Pelican</a> utilisant le thème <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a>
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script id="dark-theme-script"
+          src="https://dotmobo.xyz/theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
+          data-default-theme="dark"
+          type="text/javascript">
+  </script>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " .mobo ",
+  "url" : "https://dotmobo.xyz",
+  "image": "//dotmobo.xyz/images/avatar700.jpg",
+  "description": ".mobo - explorations d'un développeur"
+}
+</script>
+
+
+</body>
+</html>

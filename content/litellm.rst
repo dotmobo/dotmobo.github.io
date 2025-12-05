@@ -50,29 +50,29 @@ Ensuite, un fichier **config.yaml** définit les modèles et paramètres :
 .. code-block:: yaml
 
     general_settings:
-    master_key: sk-secret
+        master_key: sk-secret
 
     model_list:
     - model_name: qwen3
         model_info:
-        max_tokens: 32768
-        max_input_tokens: 16384
-        max_output_tokens: 16384
+            max_tokens: 32768
+            max_input_tokens: 16384
+            max_output_tokens: 16384
         litellm_params:
-        model: ollama/qwen3:0.6b
-        api_base: http://localhost:11434
-        temperature: 0.7
-        max_tokens: 4096
-        top_p: 0.9
-        frequency_penalty: 1
-        tpm: 300000
-        rpm: 300
+            model: ollama/qwen3:0.6b
+            api_base: http://localhost:11434
+            temperature: 0.7
+            max_tokens: 4096
+            top_p: 0.9
+            frequency_penalty: 1
+            tpm: 300000
+            rpm: 300
 
     litellm_settings:
-    num_retries: 3
-    request_timeout: 3600
-    allowed_fails: 5
-    cooldown_time: 30
+        num_retries: 3
+        request_timeout: 3600
+        allowed_fails: 5
+        cooldown_time: 30
 
 Ici, on sert le modèle "qwen3" via LiteLLM qu'on a configuré lors de `l'article précédent <https://dotmobo.xyz/ollama.html>`_.
 On peut ajuster les paramètres de génération comme la température, top_p, ou les pénalités de fréquence.
@@ -117,18 +117,18 @@ LiteLLM permet d’ajouter un second modèle (ex. qwen2.5) et de configurer le f
     model_list:
     - model_name: qwen2.5
         model_info:
-        max_tokens: 32768
-        max_input_tokens: 16384
-        max_output_tokens: 16384
+            max_tokens: 32768
+            max_input_tokens: 16384
+            max_output_tokens: 16384
         litellm_params:
-        model: ollama/qwen2.5:0.5b
-        api_base: http://localhost:11434
+            model: ollama/qwen2.5:0.5b
+            api_base: http://localhost:11434
 
     litellm_settings:
-    fallbacks:
-        [
-        {"qwen3": ["qwen2.5"]}
-        ]
+        fallbacks:
+            [
+                {"qwen3": ["qwen2.5"]}
+            ]
 
 Pour faire du load-balancing, il suffit de donner le même *model_name* à plusieurs moteurs.
 
@@ -159,7 +159,7 @@ Exemple d'appel depuis Python :
     print(response.choices[0].message.content)
 
 
-vLLM : moteurs pour production
+vLLM : moteur pour de la production
 ==============================
 
 Pour des usages plus lourds, **vLLM** offre :

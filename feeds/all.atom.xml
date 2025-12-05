@@ -2,15 +2,14 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2025-11-24T00:00:00+01:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Moteurs d'inférence et passerelle LiteLLM</title><link href="https://dotmobo.xyz/moteurs-inference-litellm.html" rel="alternate"></link><published>2025-11-24T00:00:00+01:00</published><updated>2025-11-24T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2025-11-24:/moteurs-inference-litellm.html</id><summary type="html">&lt;p class="first last"&gt;Moteurs d'inférence et passerelle LiteLLM&lt;/p&gt;
 </summary><content type="html">&lt;img alt="LiteLLM" class="align-right" src="./images/litellm.png" /&gt;
 &lt;p&gt;Après avoir exploré la création d'une première IA locale avec Ollama et OpenWebUI, nous passons à l'étape suivante:
-déployer des modèles sur des moteurs d'inférence de production et les servir avec &lt;strong&gt;LiteLLM&lt;/strong&gt;.
-Cet article reprend les éléments clés de l'&lt;strong&gt;Atelier 2 Esup IA&lt;/strong&gt;.&lt;/p&gt;
+déployer des modèles sur des moteurs d'inférence de production et les servir avec &lt;a class="reference external" href="https://www.litellm.ai/"&gt;LiteLLM&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="section" id="qu-est-ce-qu-un-moteur-d-inference"&gt;
 &lt;h2&gt;Qu'est-ce qu'un moteur d'inférence ?&lt;/h2&gt;
 &lt;p&gt;Un moteur d'inférence charge un modèle de LLM en mémoire et exécute les requêtes entrantes.
 Il peut gérer différents types de modèles, appliquer des paramètres d'exécution et servir les réponses via une API.
 Dans l'atelier précédent, nous avons utilisé &lt;strong&gt;Ollama&lt;/strong&gt;, simple et efficace pour un usage local.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="litellm"&gt;
+&lt;div class="section" id="litellm-1"&gt;
 &lt;h2&gt;LiteLLM&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;LiteLLM&lt;/strong&gt; est une passerelle entre les moteurs d'inférence (Ollama, vLLM, etc.) et des clients comme OpenWebUI.
 Il offre :&lt;/p&gt;
@@ -24,11 +23,10 @@ Il offre :&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="installation-et-configuration"&gt;
 &lt;h2&gt;Installation et configuration&lt;/h2&gt;
-&lt;p&gt;On commence par créer un projet et activer un environnement virtuel Python :&lt;/p&gt;
+&lt;p&gt;On commence par créer un projet, activer un environnement virtuel Python et installer litellm :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir&lt;span class="w"&gt; &lt;/span&gt;monprojet&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;monprojet
 python&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;venv&lt;span class="w"&gt; &lt;/span&gt;.env&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;.env/bin/activate
 pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;litellm&lt;span class="o"&gt;[&lt;/span&gt;proxy&lt;span class="o"&gt;]&lt;/span&gt;
-litellm
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Ensuite, un fichier &lt;strong&gt;config.yaml&lt;/strong&gt; définit les modèles et paramètres :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;general_settings&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -56,17 +54,19 @@ litellm
 &lt;span class="nt"&gt;allowed_fails&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;5&lt;/span&gt;
 &lt;span class="nt"&gt;cooldown_time&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;30&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ici, on sert le modèle &amp;quot;qwen3&amp;quot; via LiteLLM qu'on a configuré lors de &lt;a class="reference external" href="https://dotmobo.xyz/ollama.html"&gt;l'article précédent&lt;/a&gt;.
+On peut ajuster les paramètres de génération comme la température, top_p, ou les pénalités de fréquence.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="execution-et-requetes"&gt;
 &lt;h2&gt;Exécution et requêtes&lt;/h2&gt;
-&lt;p&gt;Démarrage du serveur LiteLLM :&lt;/p&gt;
+&lt;p&gt;On démarre litellm avec cette configuration :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;litellm&lt;span class="w"&gt; &lt;/span&gt;--config&lt;span class="w"&gt; &lt;/span&gt;config.yaml
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;L'API est disponible sur &lt;a class="reference external" href="http://localhost:4000/"&gt;http://localhost:4000/&lt;/a&gt;.
 On peut vérifier l'état du serveur avec :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-H&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Authorization: Bearer sk-secret&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;http://localhost:4000/health
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Pour interroger le modèle :&lt;/p&gt;
+&lt;p&gt;Et pour interroger le modèle, tu peux faire un appel POST comme suit :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-X&lt;span class="w"&gt; &lt;/span&gt;POST&lt;span class="w"&gt; &lt;/span&gt;http://localhost:4000/chat/completions&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
 -H&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Content-Type: application/json&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
 -H&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Authorization: Bearer sk-secret&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
@@ -78,12 +78,30 @@ On peut vérifier l'état du serveur avec :&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="support-multi-modeles-et-fallback"&gt;
 &lt;h2&gt;Support multi-modèles et fallback&lt;/h2&gt;
-&lt;p&gt;LiteLLM permet d’ajouter un second modèle (ex. qwen2.5) et de configurer le fallback ou le load-balancing.
-Les requêtes sont alors réparties selon la configuration des poids et priorités.&lt;/p&gt;
+&lt;p&gt;LiteLLM permet d’ajouter un second modèle (ex. qwen2.5) et de configurer le fallback.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;model_list&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;model_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;qwen2.5&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;model_info&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;max_tokens&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;32768&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;max_input_tokens&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;16384&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;max_output_tokens&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;16384&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;litellm_params&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;model&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;ollama/qwen2.5:0.5b&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;api_base&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;http://localhost:11434&lt;/span&gt;
+
+&lt;span class="nt"&gt;litellm_settings&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="nt"&gt;fallbacks&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p p-Indicator"&gt;[&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p p-Indicator"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;qwen3&amp;quot;&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p p-Indicator"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;qwen2.5&amp;quot;&lt;/span&gt;&lt;span class="p p-Indicator"&gt;]}&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p p-Indicator"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pour faire du load-balancing, il suffit de donner le même &lt;em&gt;model_name&lt;/em&gt; à plusieurs moteurs.&lt;/p&gt;
+&lt;p&gt;Les requêtes sont alors réparties selon la configuration des poids et priorités avec les paramètres &lt;em&gt;weight&lt;/em&gt;,
+&lt;em&gt;rpm&lt;/em&gt; (requests per minute) et &lt;em&gt;tpm&lt;/em&gt; (tokens per minute).&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="utilisation-avec-python"&gt;
 &lt;h2&gt;Utilisation avec Python&lt;/h2&gt;
-&lt;p&gt;Installer le client OpenAI :&lt;/p&gt;
+&lt;p&gt;L'api de litellm étant openai compatible, tu peux utiliser le client OpenAI pour faire des requêtes :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;openai
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Exemple d'appel depuis Python :&lt;/p&gt;
@@ -109,11 +127,11 @@ Les requêtes sont alors réparties selon la configuration des poids et priorit�
 &lt;li&gt;Intégration Kubernetes avancée&lt;/li&gt;
 &lt;li&gt;Métriques exposées pour Prometheus&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Installation et démarrage d’un modèle Qwen 3 FP8 :&lt;/p&gt;
+&lt;p&gt;Tu peux l'installer et démarrer un modèle Qwen 3 FP8 avec :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;vllm
 vllm&lt;span class="w"&gt; &lt;/span&gt;serve&lt;span class="w"&gt; &lt;/span&gt;Qwen/Qwen3-0.6B-FP8
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Paramétrage avancé :&lt;/p&gt;
+&lt;p&gt;Et tu peux faire du paramétrage avancé sur deux GPUs avec :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vllm&lt;span class="w"&gt; &lt;/span&gt;serve&lt;span class="w"&gt; &lt;/span&gt;--model&lt;span class="w"&gt; &lt;/span&gt;Qwen/Qwen3-0.6B-FP8&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
 --max-model-len&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;40960&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
 --gpu-memory-utilization&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.8&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;

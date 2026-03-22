@@ -1,5 +1,297 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2025-11-24T00:00:00+01:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>Moteurs d'inférence et passerelle LiteLLM</title><link href="https://dotmobo.xyz/moteurs-inference-litellm.html" rel="alternate"></link><published>2025-11-24T00:00:00+01:00</published><updated>2025-11-24T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2025-11-24:/moteurs-inference-litellm.html</id><summary type="html">&lt;p class="first last"&gt;Moteurs d'inférence et passerelle LiteLLM&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>.mobo</title><link href="https://dotmobo.xyz/" rel="alternate"></link><link href="https://dotmobo.xyz/feeds/all.atom.xml" rel="self"></link><id>https://dotmobo.xyz/</id><updated>2026-03-22T00:00:00+01:00</updated><subtitle>Explorations d'un développeur</subtitle><entry><title>DSPy : le banger qui booste tes prompts et ton RAG</title><link href="https://dotmobo.xyz/dspy-gepa.html" rel="alternate"></link><published>2026-03-22T00:00:00+01:00</published><updated>2026-03-22T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2026-03-22:/dspy-gepa.html</id><summary type="html">&lt;p class="first last"&gt;DSPy : le banger qui booste tes prompts et ton RAG&lt;/p&gt;
+</summary><content type="html">&lt;img alt="Recommandations de films" class="align-right" src="./images/ollama.png" /&gt;
+&lt;p&gt;Ok, alors aujourd'hui on va parler d'un banger qui m'a complètement retourné le cerveau sur la manière de
+faire des prompts et d'imaginer mes workflows RAG et compagnie.&lt;/p&gt;
+&lt;p&gt;Et même si ça commence à être connu, je trouve qu'on en parle pas assez parce que c'est vraiment fou.&lt;/p&gt;
+&lt;div class="section" id="cest-quoi-dspy"&gt;
+&lt;h2&gt;C’est quoi DSPy ?&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/stanfordnlp/dspy"&gt;DSPy&lt;/a&gt; est une librairie Python pour transformer
+le &lt;em&gt;prompt engineering&lt;/em&gt; manuel en &lt;strong&gt;programmation de prompts&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;À la base, ça part d’un &lt;a class="reference external" href="https://arxiv.org/abs/2310.03714"&gt;papier de recherche&lt;/a&gt; de l'Université de Stanford,
+et qui te permet de définir les entrées et sorties de ton LLMs via une classe &lt;strong&gt;Signature&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Concrètement, ça veut dire quoi ?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Et ben, plus besoin d’écrire un long prompt fragile à la main. C'est le code qui s’occupe de générer
+le prompt système directement.&lt;/p&gt;
+&lt;p&gt;Tu définis juste une classe qui décrit tes entrées et sorties, et DSPy s’occupe du reste.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="le-duo-gagnant-dspy-gepa"&gt;
+&lt;h2&gt;Le duo gagnant : DSPy + GEPA&lt;/h2&gt;
+&lt;p&gt;Il existe plusieurs implémentations de DSPy pour améliorer tes prompts mais le récent &lt;a class="reference external" href="https://github.com/gepa-ai/gepa"&gt;GEPA&lt;/a&gt; sort du lot.&lt;/p&gt;
+&lt;p&gt;Ça vient également d'un autre &lt;a class="reference external" href="https://arxiv.org/abs/2507.19457"&gt;papier&lt;/a&gt;, et il se présente comme un &lt;strong&gt;optimiseur de prompts automatique&lt;/strong&gt;
+compatible avec DSPy.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Comment ça marche&lt;/strong&gt;&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Tu fournis un dataset &lt;em&gt;question/réponse&lt;/em&gt; par exemple.&lt;/li&gt;
+&lt;li&gt;GEPA teste des variantes de prompts et évalue chaque sortie via ta metric.&lt;/li&gt;
+&lt;li&gt;Il améliore progressivement le prompt pour ton modèle et ton use-case.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;GEPA va alors lancer plusieurs flots de questions/réponses, analyser les réponses, puis améliorer le prompt pas à pas.
+Il va voir ce qui marche, ce qui ne marche pas et itérer sur le prompt jusqu’à trouver la version parfaite.&lt;/p&gt;
+&lt;p&gt;Tu peux jeter un premier coup d'oeil à la &lt;a class="reference external" href="https://dspy.ai/tutorials/gepa_ai_program/"&gt;Doc officielle DSPy + GEPA&lt;/a&gt;
+mais ce n’est pas forcément simple à appréhender au début.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="exemple-concret-analyseur-de-sentiment"&gt;
+&lt;h2&gt;Exemple concret : analyseur de sentiment&lt;/h2&gt;
+&lt;p&gt;Ok, assez parlé. Passons à un vrai exemple qui fonctionne.
+On va travailler sur le prompt d'un simple analyseur de sentiment pour commencer et comprendre comment ça marche.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Principe&lt;/strong&gt;&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Définir une &lt;strong&gt;Signature&lt;/strong&gt; DSPy (inputs / outputs)&lt;/li&gt;
+&lt;li&gt;Créer un &lt;strong&gt;Module&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Fournir un &lt;strong&gt;dataset&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Laisser &lt;strong&gt;GEPA&lt;/strong&gt; optimiser le prompt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Je vais te mettre le complet fonctionnel directement pour que tu puisses tester de ton côté.&lt;/p&gt;
+&lt;p&gt;Tu as juste à installer DSPy via :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;dspy
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Puis tu exécutes le code ci-dessous. Il te suffit juste de remplacer la partie &lt;em&gt;model/api_base/api_key&lt;/em&gt; par ton propre LLM.
+Le plus simple c'est d'utiliser une API OpenAI compatible type vLLM, LiteLLM ou OpenWeb UI par exemple.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;dspy&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;dspy&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;LM&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Module&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Prediction&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ChainOfThought&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Signature&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;InputField&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;OutputField&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;dspy.teleprompt&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;GEPA&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Ici tu déclare ton LLM et les paramètres d&amp;#39;appel&lt;/span&gt;
+&lt;span class="n"&gt;lm&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;LM&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;openai/gpt-oss&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;api_base&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://api-openai-compatible&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;api_key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sk-S3CR3T&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;api_version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;v1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;temperature&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;max_tokens&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1800&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;cache&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;# le cache ici peut être utile pour accélérer les tests&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;dspy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;configure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;lm&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Ensuite on va définir notre signature, avec une phrase en entrée et un sentiment en sortie.&lt;/span&gt;
+&lt;span class="c1"&gt;# La docstring peut aider à guider le modèle sur la tâche.&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SentimentSignature&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Signature&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Classify the sentiment of the sentence into one word: positive, negative, or neutral.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;InputField&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;sentiment&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OutputField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;desc&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;positive | negative | neutral&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# On fait notre module avec une chaine de pensée basé sur la signature.&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SimpleSentiment&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Module&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="nb"&gt;super&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;classify&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ChainOfThought&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SentimentSignature&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;forward&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;classify&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# On définit les jeux de données d&amp;#39;entraînement et de validation.&lt;/span&gt;
+&lt;span class="c1"&gt;# Ici on a juste quelques exemples pour montrer le principe, mais tu peux en mettre beaucoup plus pour de meilleurs résultats.&lt;/span&gt;
+&lt;span class="n"&gt;trainset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;J&amp;#39;adore ce film !&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;                 &lt;span class="n"&gt;sentiment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;positive&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;with_inputs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;phrase&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Vraiment nul, à fuir.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;             &lt;span class="n"&gt;sentiment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;negative&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;with_inputs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;phrase&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;C&amp;#39;est correct.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;                    &lt;span class="n"&gt;sentiment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;neutral&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;with_inputs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;phrase&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Incroyable, je recommande !&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;      &lt;span class="n"&gt;sentiment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;positive&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;with_inputs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;phrase&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Déçu, je m&amp;#39;attendais à mieux.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;    &lt;span class="n"&gt;sentiment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;negative&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;with_inputs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;phrase&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Pas mal du tout.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;                  &lt;span class="n"&gt;sentiment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;positive&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;with_inputs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;phrase&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Rien de spécial.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;                  &lt;span class="n"&gt;sentiment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;neutral&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;with_inputs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;phrase&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Magnifique paysage !&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;              &lt;span class="n"&gt;sentiment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;positive&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;with_inputs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;phrase&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Un petit jeu de validation pour que GEPA puisse évaluer les différentes versions du prompt.&lt;/span&gt;
+&lt;span class="n"&gt;valset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Service horrible.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;                 &lt;span class="n"&gt;sentiment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;negative&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;with_inputs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;phrase&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Bof...&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;                            &lt;span class="n"&gt;sentiment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;neutral&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;with_inputs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;phrase&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Un pur chef-d&amp;#39;œuvre !&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;             &lt;span class="n"&gt;sentiment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;positive&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;with_inputs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;phrase&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Franchement décevant.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;             &lt;span class="n"&gt;sentiment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;negative&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;with_inputs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;phrase&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# Ici on définit la métrique d&amp;#39;évaluation qui va permettre à GEPA de juger les différentes versions du prompt.&lt;/span&gt;
+&lt;span class="c1"&gt;# On compare simplement le sentiment prédit avec le sentiment attendu, et on donne un feedback détaillé en cas d&amp;#39;erreur&lt;/span&gt;
+&lt;span class="c1"&gt;# pour aider GEPA à comprendre ce qui ne va pas.&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sentiment_metric&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;gold&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;pred&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Prediction&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;trace&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;pred_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;pred_trace&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Prediction&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;gold_label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;gold&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sentiment&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;pred_label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;getattr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pred&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;sentiment&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;pred&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="n"&gt;is_correct&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;gold_label&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;pred_label&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;is_correct&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;feedback&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Correct ✓&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;feedback&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Error: expected &amp;#39;&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;gold_label&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#39;, got &amp;#39;&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;pred_label&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#39;.&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+            &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;→ Model likely missed tone, irony, negation, or strong sentiment words.&amp;quot;&lt;/span&gt;
+        &lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.0&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Prediction&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;feedback&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;feedback&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# On crée notre optimiseur GEPA en lui fournissant la metric d&amp;#39;évaluation, le LM, et quelques paramètres pour guider l&amp;#39;optimisation.&lt;/span&gt;
+&lt;span class="c1"&gt;# Ici on est parti sur du light pour tester rapidement.&lt;/span&gt;
+&lt;span class="n"&gt;optimizer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;GEPA&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;metric&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sentiment_metric&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;auto&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;light&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;reflection_lm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;lm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;reflection_minibatch_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;num_threads&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;track_stats&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;add_format_failure_as_feedback&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="c1"&gt;# seed=42, # tu peux fixer une seed pour la reproductibilité, mais c&amp;#39;est pas obligatoire&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# On lance l&amp;#39;optimisation de GEPA sur notre module et nos datasets d&amp;#39;entraînement et de validation.&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Starting GEPA optimization (may take 2–15 minutes depending on gateway load)...&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;optimized&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;optimizer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;SimpleSentiment&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+    &lt;span class="n"&gt;trainset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;trainset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;valset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;valset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;Optimization finished.&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# On évalue les performances du modèle optimisé sur un ensemble de phrases de test.&lt;/span&gt;
+&lt;span class="c1"&gt;# Ici on utilise quelques phrases de test pour voir comment le modèle généralise.&lt;/span&gt;
+&lt;span class="n"&gt;test_phrases&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;C&amp;#39;est génial, je suis fan !&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;Franchement bof, décevant.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;Ça va, rien à dire.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;Le pire film de l&amp;#39;année.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;Absolument sublime, un chef-d&amp;#39;œuvre.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;Niveau zéro, honteux.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;Plutôt sympa en fait.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;Je ne m&amp;#39;attendais pas à autant aimer.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# On affiche les résultats des prédictions pour chaque phrase de test.&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Test results:&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;phrase&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;test_phrases&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;prediction&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;optimized&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;sentiment&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;getattr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prediction&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;sentiment&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;—&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="si"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;50&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; → &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;sentiment&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# Enfin, on peut aussi jeter un œil au prompt optimisé que GEPA a trouvé pour notre tâche.&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;Optimized instruction found by GEPA:&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pred&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;optimized&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;named_predictors&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;================================&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Predictor: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;================================&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;signature&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;instructions&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Résultats des tests&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Voici un prompt que GEPA a trouvé après optimisation pour notre analyseur de sentiment.
+Tu verras que c'est franchement pas mal !&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Task: Sentiment classification of a single short sentence or phrase.
+
+&lt;span class="gs"&gt;**Input format**&lt;/span&gt;
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;The user will provide a block labeled &lt;span class="sb"&gt;`### phrase`&lt;/span&gt; containing the sentence to analyze.
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;The sentence may be in any language (e.g., French, English, etc.). You may translate it internally if that helps you judge the sentiment, but you must keep the original wording in your explanation.
+
+&lt;span class="gs"&gt;**Output format**&lt;/span&gt;
+Your response must contain two markdown sections, exactly as shown below:
+
+&lt;span class="sb"&gt;```&lt;/span&gt;
+&lt;span class="sb"&gt;### reasoning&lt;/span&gt;
+&lt;span class="sb"&gt;&amp;lt;brief explanation (1‑2 sentences) of why the sentence is positive, negative, or neutral&amp;gt;&lt;/span&gt;
+
+&lt;span class="sb"&gt;### sentiment&lt;/span&gt;
+&lt;span class="sb"&gt;&amp;lt;one word: positive, negative, or neutral&amp;gt;&lt;/span&gt;
+&lt;span class="sb"&gt;```&lt;/span&gt;
+
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;The word in the &lt;span class="sb"&gt;`### sentiment`&lt;/span&gt; line must be &lt;span class="gs"&gt;**lower‑case**&lt;/span&gt; and one of the three allowed labels.
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;No additional text, emojis, or formatting may appear after the sentiment word.
+
+&lt;span class="gs"&gt;**How to decide the label**&lt;/span&gt;
+
+&lt;span class="k"&gt;1.&lt;/span&gt; &lt;span class="gs"&gt;**Positive**&lt;/span&gt; – The sentence expresses a clear favorable attitude, pleasure, admiration, approval, excitement, or any other overtly upbeat emotion. Typical cues include:
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Positive adjectives or adverbs (e.g., &lt;span class="ge"&gt;*magnifique, great, wonderful, happy*&lt;/span&gt;).
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Exclamation marks that reinforce enthusiasm.
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Explicit statements of liking, love, gratitude, or endorsement.
+
+&lt;span class="k"&gt;2.&lt;/span&gt; &lt;span class="gs"&gt;**Negative**&lt;/span&gt; – The sentence conveys dissatisfaction, dislike, anger, sadness, criticism, disappointment, or any other unfavorable feeling. Look for:
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Negative adjectives or adverbs (e.g., &lt;span class="ge"&gt;*terrible, awful, horrible, sad*&lt;/span&gt;).
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Words of complaint, rejection, or condemnation.
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Expressions of frustration, hurt, or hostility.
+
+&lt;span class="k"&gt;3.&lt;/span&gt; &lt;span class="gs"&gt;**Neutral**&lt;/span&gt; – The sentence is factual, descriptive, or merely acknowledges something without showing strong affect. It includes:
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Simple statements of fact or correctness (e.g., &lt;span class="ge"&gt;*C’est correct.*&lt;/span&gt;, &lt;span class="ge"&gt;*Il fait 20 °C.*&lt;/span&gt;).
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Mild assessments that are neither clearly approving nor disapproving.
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Sentences where any sentiment is ambiguous, mixed, or overridden by sarcasm/irony that neutralizes the literal meaning.
+
+&lt;span class="gs"&gt;**Special considerations**&lt;/span&gt;
+
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="gs"&gt;**Negation**&lt;/span&gt;: Phrases like “not good”, “no thanks”, “nothing special” flip the sentiment of the word they negate. Treat the overall sentiment as negative if the negation creates an unfavorable meaning, or neutral if it merely softens a positive statement.
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="gs"&gt;**Sarcasm / Irony**&lt;/span&gt;: Detect when a positive‑looking word is used sarcastically (e.g., “Great, another meeting”). In such cases, label the sentiment as &lt;span class="gs"&gt;**negative**&lt;/span&gt;. If sarcasm merely dampens enthusiasm without a clear negative tone, choose &lt;span class="gs"&gt;**neutral**&lt;/span&gt;.
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="gs"&gt;**Mild positivity/negativity**&lt;/span&gt;: If the emotional intensity is very weak (e.g., “It’s okay”, “Not bad”), treat it as &lt;span class="gs"&gt;**neutral**&lt;/span&gt; unless the context clearly leans toward a positive or negative judgment.
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="gs"&gt;**Exclamation marks**&lt;/span&gt;: They amplify sentiment but do not alone determine it. Combine them with the lexical content.
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="gs"&gt;**Language‑specific cues**&lt;/span&gt;: Be aware of idiomatic expressions in the source language that carry sentiment (e.g., French &lt;span class="ge"&gt;*super*&lt;/span&gt;, &lt;span class="ge"&gt;*nul*&lt;/span&gt;, &lt;span class="ge"&gt;*pas mal*&lt;/span&gt;). Translate mentally if needed, but keep the original wording in the reasoning.
+
+&lt;span class="gs"&gt;**General strategy**&lt;/span&gt;
+&lt;span class="k"&gt;1.&lt;/span&gt; Read the sentence carefully.
+&lt;span class="k"&gt;2.&lt;/span&gt; Identify sentiment‑bearing words, punctuation, and any negation or sarcasm.
+&lt;span class="k"&gt;3.&lt;/span&gt; Decide whether the overall affect is clearly positive, clearly negative, or otherwise neutral.
+&lt;span class="k"&gt;4.&lt;/span&gt; Write a concise reasoning sentence explaining the key cue(s) you used.
+&lt;span class="k"&gt;5.&lt;/span&gt; Output the sentiment label in the required format.
+
+Follow these rules strictly to ensure consistent, reproducible classifications.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ce qui est intéressant c'est de voir qu'il a pensé à de nombreuses règles intéressantes, comme la gestion du sarcasme et autres.
+Je n'y aurait pas forcément pensé au départ !&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pourquoi-cest-une-aubaine-pour-le-rag"&gt;
+&lt;h2&gt;Pourquoi c’est une aubaine pour le RAG&lt;/h2&gt;
+&lt;p&gt;Tu peux alors aussi utiliser cette technique pour évaluer un workflow RAG. Il te suffit de faire une signature
+qui prend une question, un contexte, et une réponse.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;RAGSignature&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Signature&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Answer the question based on the provided context.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="n"&gt;question&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;InputField&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;InputField&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;answer&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OutputField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;desc&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;quality score or feedback&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Là, le plus compliqué sera de produire un dataset avec &lt;em&gt;question/context/answer&lt;/em&gt; suffisamment riche pour que GEPA puisse
+l'optimiser au maximum. Tu peux également détailler ton cas d'usage dans la docstring pour guider GEPA dans la bonne direction.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prompt-vs-fine-tuning-le-constat"&gt;
+&lt;h2&gt;Prompt vs fine-tuning : le constat&lt;/h2&gt;
+&lt;p&gt;Les modèles actuels sont déjà très performants, je pense notamment aux récents modèles MoE en 120B type GPT-OSS, Qwen 3.5 ou Nemotron Super.
+Dans la plupart des cas, un prompt optimisé sera plus efficace qu'un modèle fine-tuné, et c’est moins coûteux à mettre en place.&lt;/p&gt;
+&lt;p&gt;L'idée est donc de partir sur des modèles généralistes suffisamment performants et d'optimiser les prompts pour éventuellement
+se passer de fine‑tuning.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="une-approche-hybride-a-tester"&gt;
+&lt;h2&gt;Une approche hybride à tester&lt;/h2&gt;
+&lt;p&gt;Ce qui peut être intéressant c'est de fusionner les prompts optimisés avec du fine‑tuning léger type LoRA.&lt;/p&gt;
+&lt;p&gt;Vu que de base, tu dois construire un dataset pour faire optimiser ton prompt, autant réutiliser ce même dataset
+pour faire un fine-tuning léger de ton modèle.&lt;/p&gt;
+&lt;p&gt;Le plan c'est :&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Construis un dataset solide (questions + contexte + réponses)&lt;/li&gt;
+&lt;li&gt;Optimise avec DSPy + GEPA&lt;/li&gt;
+&lt;li&gt;Réutilise-le pour faire du &lt;strong&gt;LoRA&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conclusion-appel-a-laction"&gt;
+&lt;h2&gt;Conclusion &amp;amp; appel à l’action&lt;/h2&gt;
+&lt;p&gt;DSPy + GEPA, c’est un &lt;strong&gt;game-changer&lt;/strong&gt; si tu veux :&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;automatiser la création de prompts&lt;/li&gt;
+&lt;li&gt;maximiser les performances d’un modèle existant&lt;/li&gt;
+&lt;li&gt;éviter un fine-tuning massif&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;On ne fait plus du prompt engineering… on fait du prompt training.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bon hacking, et que les prompts soient avec vous !&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="IA"></category><category term="DSPy"></category><category term="GEPA"></category><category term="prompt engineering"></category><category term="RAG"></category><category term="NLP"></category></entry><entry><title>Moteurs d'inférence et passerelle LiteLLM</title><link href="https://dotmobo.xyz/moteurs-inference-litellm.html" rel="alternate"></link><published>2025-11-24T00:00:00+01:00</published><updated>2025-11-24T00:00:00+01:00</updated><author><name>Morgan</name></author><id>tag:dotmobo.xyz,2025-11-24:/moteurs-inference-litellm.html</id><summary type="html">&lt;p class="first last"&gt;Moteurs d'inférence et passerelle LiteLLM&lt;/p&gt;
 </summary><content type="html">&lt;img alt="LiteLLM" class="align-right" src="./images/litellm.png" /&gt;
 &lt;p&gt;Après avoir exploré la création d'une première IA locale avec Ollama et OpenWebUI, nous passons à l'étape suivante:
 déployer des modèles sur des moteurs d'inférence de production et les servir avec &lt;a class="reference external" href="https://www.litellm.ai/"&gt;LiteLLM&lt;/a&gt;.&lt;/p&gt;

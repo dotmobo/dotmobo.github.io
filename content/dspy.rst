@@ -68,7 +68,7 @@ On va travailler sur le prompt d'un simple analyseur de sentiment pour commencer
 - Fournir un **dataset**  
 - Laisser **GEPA** optimiser le prompt  
 
-Je vais te mettre le complet fonctionnel directement pour que tu puisses tester de ton côté.
+Je vais te mettre le code complet fonctionnel directement pour que tu puisses tester de ton côté.
 
 Tu as juste à installer DSPy via :
 
@@ -330,8 +330,8 @@ Le plan c'est :
 
 
 
-Conclusion & appel à l’action
-------------------------------
+Conclusion
+----------
 
 DSPy + GEPA, c’est un **game-changer** si tu veux :  
 

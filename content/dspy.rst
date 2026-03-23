@@ -282,7 +282,7 @@ Tu verras que c'est franchement pas mal !
 
     Follow these rules strictly to ensure consistent, reproducible classifications.
 
-Ce qui est intéressant c'est de voir qu'il a pensé à de nombreuses règles intéressantes, comme la gestion du sarcasme et autres.
+Ce qui est intéressant c'est de voir qu'il a pensé à de nombreuses règles spécifiques, comme la gestion du sarcasme et autres.
 Je n'y aurait pas forcément pensé au départ !
 
 Pourquoi c’est une aubaine pour le RAG

@@ -42,7 +42,7 @@ On va travailler sur le prompt d'un simple analyseur de sentiment pour commencer
 &lt;li&gt;Fournir un &lt;strong&gt;dataset&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;Laisser &lt;strong&gt;GEPA&lt;/strong&gt; optimiser le prompt&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Je vais te mettre le complet fonctionnel directement pour que tu puisses tester de ton côté.&lt;/p&gt;
+&lt;p&gt;Je vais te mettre le code complet fonctionnel directement pour que tu puisses tester de ton côté.&lt;/p&gt;
 &lt;p&gt;Tu as juste à installer DSPy via :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;dspy
 &lt;/pre&gt;&lt;/div&gt;
@@ -244,7 +244,7 @@ Your response must contain two markdown sections, exactly as shown below:
 
 Follow these rules strictly to ensure consistent, reproducible classifications.
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Ce qui est intéressant c'est de voir qu'il a pensé à de nombreuses règles intéressantes, comme la gestion du sarcasme et autres.
+&lt;p&gt;Ce qui est intéressant c'est de voir qu'il a pensé à de nombreuses règles spécifiques, comme la gestion du sarcasme et autres.
 Je n'y aurait pas forcément pensé au départ !&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="pourquoi-cest-une-aubaine-pour-le-rag"&gt;
@@ -280,8 +280,8 @@ pour faire un fine-tuning léger de ton modèle.&lt;/p&gt;
 &lt;li&gt;Réutilise-le pour faire du &lt;strong&gt;LoRA&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-&lt;div class="section" id="conclusion-appel-a-laction"&gt;
-&lt;h2&gt;Conclusion &amp;amp; appel à l’action&lt;/h2&gt;
+&lt;div class="section" id="conclusion"&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;DSPy + GEPA, c’est un &lt;strong&gt;game-changer&lt;/strong&gt; si tu veux :&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;automatiser la création de prompts&lt;/li&gt;
